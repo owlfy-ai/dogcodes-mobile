@@ -1,0 +1,8 @@
+Use case: ui-mockup, precise-object-edit.
+Input image: the provided board is the edit target.
+Primary request: change ONLY artboard 11, titled “电脑”, in the LOWER MIDDLE of this six-screen DogCodes mobile board. Remote desktop belongs to the PC device and is completely independent of any coding Agent.
+Inside the MacBook Pro device card, directly below its device-name / online-status header, place exactly ONE device-level full-width outlined “远程桌面” button with a monitor icon. It opens and controls the entire computer screen.
+Below that device action, show the Claude and Codex Agent rows with their existing logos, installed status and quota status. Each Agent may keep a compact “进入会话” action, but MUST NOT have a “远程桌面” action, monitor button, or remote-control icon of its own. Do not repeat remote-desktop access under the Agents. Make the device action visually part of the MacBook Pro header area, separated from Agent rows by spacing or a thin separator. Keep the card compact.
+For the offline Windows device, preserve its offline and last-seen status; any device-level desktop action shown must be visibly disabled.
+Constraints: preserve all other five artboards exactly, including screen 10 remote desktop and screen 12 preferences. Preserve the overall six-screen 3-column by 2-row board, captions, language, typography, colors, theme, pure main background, screen sizes, device list, pairing area, navigation bar, and existing content. No redesign, no added dialogs or explanatory callout, no remote entry tied to an Agent. Use sharp readable Chinese text.
+Theme invariant: preserve the pure black #000000 dark theme and lime green #B7F34C of the reference.

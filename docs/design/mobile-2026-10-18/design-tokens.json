@@ -1,0 +1,62 @@
+{
+  "name": "DogCodes Mobile",
+  "version": 1,
+  "status": "concept",
+  "source": "PC theme accents with user-requested pure white / pure black main canvases",
+  "themes": {
+    "light": {
+      "canvas": "#FFFFFF",
+      "text": "#171717",
+      "secondary": "#777777",
+      "surface": "#F6F6F6",
+      "line": "#E8E8E8",
+      "accent": "#78A91F",
+      "onAccent": "#101010"
+    },
+    "dark": {
+      "canvas": "#000000",
+      "text": "#F5F5F5",
+      "secondary": "#969696",
+      "surface": "#101010",
+      "code": "#0A0A0A",
+      "line": "#242424",
+      "accent": "#B7F34C",
+      "onAccent": "#101010"
+    }
+  },
+  "typography": {
+    "family": "System UI / PingFang SC / Noto Sans CJK",
+    "mono": "SF Mono / Menlo / monospace",
+    "body": 16,
+    "secondary": 13,
+    "title": 26,
+    "detailTitle": 18,
+    "code": 13
+  },
+  "spacing": {
+    "page": 20,
+    "unit": 4,
+    "section": 24,
+    "rowGap": 12,
+    "minTouch": 44
+  },
+  "radii": {
+    "control": 10,
+    "composer": 20,
+    "sheet": 24
+  },
+  "navigation": [
+    "会话",
+    "工作区",
+    "待处理",
+    "电脑"
+  ],
+  "principles": [
+    "No tinted main canvas",
+    "Open assistant messages",
+    "Never use green chat bubbles",
+    "Color never conveys status alone",
+    "Only one primary action per region",
+    "Read-only project file UI; edits via Agent or remote desktop"
+  ]
+}

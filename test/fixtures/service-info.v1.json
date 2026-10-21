@@ -1,0 +1,1 @@
+{"protocolVersion":1,"service":"dogcodes-access","stage":"integration","capabilities":{"relayProbe":true,"pairing":true,"business":false,"remoteDesktop":false},"maxFrameBytes":262144}

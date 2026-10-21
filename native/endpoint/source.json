@@ -1,0 +1,13 @@
+{
+  "source": "DogCodes/crates/remote-endpoint",
+  "version": "0.1.0",
+  "files": {
+    "Cargo.toml": "ea261de8d09de64167599e2cb9c5e845dc2d17cfaa1f324d0cd3a5ad408311c0",
+    "src/lib.rs": "cbfef99a7f8e2c68ee88705f2dacf62158062a2d7cb1d89a844cadcefd7a18e3",
+    "src/ffi.rs": "8165e82f7830e905eb8158a25aa18d4b03488d928a9e5e58160d5290ae2619b3",
+    "src/pairing.rs": "9757fa1d0aeca049b939593b1d761627b4782270c9ed69f12e3d8b81daa38f84",
+    "tests/security.rs": "72d156f4d566406711d8561e8c368a4c14d14b52aa66198acbfbf69191115d81",
+    "tests/vectors.rs": "2140ec73b165648a5d1213c0b2dd38b85852a71444c7aca3d5984f334364f15f",
+    "tests/fixtures/noise-vectors.json": "c9846d7c997cf38f568b180dd3139db58aee8f3fef1d71f42bfaa77189c2eecf"
+  }
+}

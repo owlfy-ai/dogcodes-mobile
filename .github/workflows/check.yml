@@ -1,0 +1,56 @@
+name: Check
+on: [push, pull_request]
+jobs:
+  flutter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.7'
+          channel: stable
+          cache: true
+      - run: flutter pub get --enforce-lockfile
+      - run: dart format --output=none --set-exit-if-changed lib test tool integration_test
+      - run: flutter analyze
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - run: cargo fmt --manifest-path native/endpoint/Cargo.toml --check
+      - run: cargo test --manifest-path native/endpoint/Cargo.toml --locked
+      - run: cargo clippy --manifest-path native/endpoint/Cargo.toml --locked --all-targets -- -D warnings
+      - run: cargo build --manifest-path native/endpoint/Cargo.toml --locked
+      - run: flutter test
+        env:
+          DOGCODES_ENDPOINT_LIBRARY: ${{ github.workspace }}/native/endpoint/target/debug/libdogcodes_endpoint.so
+  native:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            command: flutter build apk --debug --target-platform android-arm64
+            targets: aarch64-linux-android
+          - os: macos-latest
+            command: flutter build ios --simulator --debug
+            targets: aarch64-apple-ios-sim,x86_64-apple-ios,aarch64-apple-ios
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        if: runner.os == 'Linux'
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.7'
+          channel: stable
+          cache: true
+      - run: flutter pub get --enforce-lockfile
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.targets }}
+      - name: Prepare pinned Android NDK
+        if: runner.os == 'Linux'
+        run: '"$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "ndk;28.2.13676358"'
+      - run: ${{ matrix.command }}

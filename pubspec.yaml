@@ -1,0 +1,28 @@
+name: dogcodes_app
+description: DogCodes mobile companion for personal coding workstations.
+publish_to: none
+version: 0.1.0+1
+environment:
+  sdk: '>=3.10.0 <4.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+  mobile_scanner: ^7.2.0
+  crypto: ^3.0.7
+  ffi: ^2.1.4
+  flutter_secure_storage: ^10.0.0
+  flutter_markdown_plus: ^1.0.12
+  flutter_webrtc: ^1.6.2+hotfix.4
+  xterm: ^4.0.0
+  webview_flutter: ^4.14.1
+dev_dependencies:
+  integration_test:
+    sdk: flutter
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  fake_async: ^1.3.3
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/agents/
