@@ -128,6 +128,10 @@ class _HistorySearchPageState extends State<HistorySearchPage> {
               child: Text('在电脑上检索已保存的对话正文，不包含思考过程或附件内容。'),
             ),
             if (error != null) InlineNotice(error!, danger: true),
+            if (search.query.isNotEmpty && search.offlineHosts.isNotEmpty)
+              InlineNotice(
+                '${search.offlineHosts.join('、')} 离线，未搜索其中的会话；连接后重新搜索。',
+              ),
             if (search.searching) const LinearProgressIndicator(minHeight: 2),
             Expanded(
               child: ListView(
@@ -182,6 +186,14 @@ class _HistorySearchPageState extends State<HistorySearchPage> {
                         ),
                       ),
                   ],
+                  if (!search.searching && search.remaining > 0)
+                    Padding(
+                      padding: const EdgeInsets.all(DcSpace.page),
+                      child: OutlinedButton(
+                        onPressed: search.searchMore,
+                        child: Text('继续搜索更早的 ${search.remaining} 个会话'),
+                      ),
+                    ),
                 ],
               ),
             ),

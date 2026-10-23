@@ -9,11 +9,23 @@ import '../conversation/conversation_page.dart';
 /// A write whose result is unknown. The original content is kept, and the
 /// user explicitly verifies, retries the same operation, or abandons it.
 class PendingOperationCard extends StatefulWidget {
-  const PendingOperationCard({super.key, required this.host, this.onSubmitted});
+  const PendingOperationCard({
+    super.key,
+    required this.host,
+    this.operation,
+    this.onSubmitted,
+    this.onProjectRegistered,
+    this.onDraftSubmitted,
+    this.onWorkspaceRecovered,
+  });
   final HostState host;
+  final Map<String, dynamic>? operation;
 
   /// Called with the task ID once a send is confirmed submitted.
   final ValueChanged<String>? onSubmitted;
+  final VoidCallback? onWorkspaceRecovered;
+  final ValueChanged<String>? onProjectRegistered;
+  final Future<void> Function(Map<String, dynamic>)? onDraftSubmitted;
   @override
   State<PendingOperationCard> createState() => _PendingOperationCardState();
 }
@@ -22,28 +34,95 @@ class _PendingOperationCardState extends State<PendingOperationCard> {
   bool busy = false;
   String? note;
 
-  Future<void> recover(String action) async {
+  Future<void> recover(String action, {Map<String, dynamic>? original}) async {
     final hub = AppScope.of(context).hub;
     final h = widget.host;
     final link = h.link;
-    if (link == null) return;
+    final operation = original ?? widget.operation ?? h.pendingOperation;
+    final draft = operation?['draft'];
+    if (link == null || operation == null) return;
     setState(() {
       busy = true;
       note = null;
     });
     try {
       final result = switch (action) {
-        'retry' => await h.operations.retry(link),
+        'retry' =>
+          operation['kind'] == 'cancel'
+              ? await h.operations.retryCancel(link, operation)
+              : operation['kind'] == 'terminal_stop'
+              ? await h.operations.retryTerminalStop(link, operation)
+              : await h.operations.retry(link, operation),
         'abandon' => await h.operations.abandon(link),
-        _ => await h.operations.verify(link),
+        'finish_cancel' => await h.operations.finishCancelTracking(
+          link,
+          operation,
+        ),
+        'finish_stop' => await h.operations.finishTerminalStopTracking(
+          link,
+          operation,
+        ),
+        'finish_session' => await h.operations.finishSessionCommandTracking(
+          link,
+          operation,
+        ),
+        _ =>
+          operation['kind'] == 'cancel'
+              ? await h.operations.verifyCancel(link, operation)
+              : operation['kind'] == 'terminal_stop'
+              ? await h.operations.verifyTerminalStop(link, operation)
+              : await h.operations.verify(link, operation),
       };
       if (result is Map &&
           result['state'] == 'closed' &&
           result['resolution']?['status'] == 'submitted') {
+        if (draft is Map) {
+          await widget.onDraftSubmitted?.call(Map<String, dynamic>.from(draft));
+        }
         final id = result['resolution']['taskId'];
         if (id is String) widget.onSubmitted?.call(id);
+      } else if (result is Map && result['sessionReceipt'] is Map) {
+        await hub.refresh(h);
+        note = result['state'] == 'abandoned'
+            ? '已不再等待。如果电脑收到了这项操作，它仍会生效。'
+            : result['action'] == 'delete'
+            ? '会话已经删除。'
+            : '新名称已经生效。';
+      } else if (result is Map && result['projectId'] is String) {
+        await hub.refresh(h);
+        note = '项目已在电脑上添加，可在工作区查看。';
+        if (mounted) {
+          widget.onProjectRegistered?.call(result['projectId'] as String);
+        }
+      } else if (result is Map && result['cancelReceipt'] is Map) {
+        note = cancelResultMessage(result);
+      } else if (result is Map && result['stopRequest'] is Map) {
+        widget.onWorkspaceRecovered?.call();
+        note = terminalStopMessage(result);
+      } else if (result is Map && result['terminal'] is Map) {
+        widget.onWorkspaceRecovered?.call();
+        note = '已找到电脑上的原终端，可在终端或运行页面继续查看；未重新运行命令。';
+      } else if (result is Map && result['runReceipt'] is Map) {
+        widget.onWorkspaceRecovered?.call();
+        note = switch (result['state']) {
+          'running' => '分析已经开始，可在运行页面查看进度。',
+          'succeeded' => '原运行配置操作已完成。',
+          _ => '原运行配置操作已结束：${result['runReceipt']['error'] ?? result['state']}',
+        };
+      } else if (result is Map && result['state'] == 'retired') {
+        note = '原启动已取消，未重新运行命令。';
+      } else if (result is Map && result['intent'] is Map) {
+        note = switch (result['state']) {
+          'submitted' => '修复已提交给主 Agent。',
+          'abandoned' => '原修复已放弃。',
+          _ => '修复尚未提交，可继续原操作。${result['lastError'] ?? ''}',
+        };
+      } else if (result is Map && result['receipt'] is Map) {
+        note = gitResultMessage(result);
+      } else if (result is Map && result['request']?['runId'] is String) {
+        note = '已找到原审查，可在对应轮次的「本轮审查」中查看。';
       } else if (result == null) {
-        note = '尚未查到原操作回执；可使用原操作重试，内容不会更换。';
+        note = '电脑上还查不到这项操作，可能没收到。可以重新发送，不会重复执行。';
       } else if (result is Map && result['request'] is Map) {
         if (result['completed'] == true && result['taskAvailable'] == true) {
           await hub.refresh(h);
@@ -73,10 +152,16 @@ class _PendingOperationCardState extends State<PendingOperationCard> {
   @override
   Widget build(BuildContext context) {
     final hub = AppScope.of(context).hub;
-    final op = widget.host.pendingOperation;
+    final op = widget.operation ?? widget.host.pendingOperation;
     if (op == null) return const SizedBox.shrink();
     final send = op['kind'] == 'send';
-    final session = op['kind'] == 'history' || op['kind'] == 'fork';
+    final session = [
+      'history',
+      'fork',
+      'project',
+      'review',
+      'repair',
+    ].contains(op['kind']);
     final prompt = send
         ? (op['request']?['input']?['prompt'] as String?)
         : null;
@@ -93,31 +178,54 @@ class _PendingOperationCardState extends State<PendingOperationCard> {
           Row(
             children: [
               Expanded(
-                child: Text(switch (op['kind']) {
-                  'send' => '发送结果待核实',
-                  'fork' => 'Fork 结果待核实',
-                  'history' => '会话设置结果待核实',
-                  _ => '审批结果待核实',
-                }, style: Theme.of(context).textTheme.titleMedium),
+                child: Text(
+                  '${pendingLabel(op)}：还没收到电脑确认',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
               ),
-              const Tag('待核实', tone: Tone.warning),
+              const Tag('待确认', tone: Tone.warning),
             ],
           ),
           const SizedBox(height: 4),
           Text(
-            '${widget.host.name} · 原始内容已保留，不会自动重发。',
+            widget.host.online
+                ? '${widget.host.name} · 网络中断时手机没收到电脑的回复。点「重新确认」查看结果；重新发送也不会重复执行。'
+                : '${widget.host.name} · 网络中断时手机没收到电脑的回复。连上电脑后会自动确认。',
             style: Theme.of(context).textTheme.bodySmall,
           ),
           if (prompt != null) ...[
             const SizedBox(height: 10),
             CodeBlock(prompt, maxLines: 6),
           ],
+          if (op['kind'] == 'session') ...[
+            const SizedBox(height: 8),
+            SelectableText('${op['taskTitle'] ?? op['taskId']}'),
+            if (op['action'] == 'rename')
+              SelectableText(
+                '新名称：${op['envelope']?['payload']?['data']?['title'] ?? ''}',
+              ),
+            if (op['action'] == 'delete') const Text('重新发送会继续你之前确认过的删除。'),
+          ],
+          if (op['kind'] == 'terminal_stop') ...[
+            const SizedBox(height: 8),
+            Text('${op['label'] ?? '原终端'}'),
+          ],
+          if (op['kind'] == 'cancel') ...[
+            const SizedBox(height: 8),
+            Text('${op['taskTitle'] ?? '原任务'}'),
+            const Text('只会停止当时那次运行，不影响之后新开始的任务。'),
+          ],
+          if (op['kind'] == 'project')
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: SelectableText('${op['request']?['path'] ?? ''}'),
+            ),
           if (note != null) InlineNotice(note!, danger: true),
           if (!widget.host.online)
             Padding(
               padding: const EdgeInsets.only(top: 8),
               child: Text(
-                '电脑离线，重新连接后再核实。',
+                '电脑离线，连上后会自动确认。',
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             ),
@@ -128,16 +236,46 @@ class _PendingOperationCardState extends State<PendingOperationCard> {
             children: [
               FilledButton(
                 onPressed: enabled ? () => recover('verify') : null,
-                child: const Text('核实结果'),
+                child: const Text('重新确认'),
               ),
               OutlinedButton(
                 onPressed: enabled ? () => recover('retry') : null,
-                child: const Text('使用原操作重试'),
+                child: const Text('重新发送'),
               ),
               if (send)
                 TextButton(
                   onPressed: enabled ? () => recover('abandon') : null,
-                  child: const Text('放弃原发送'),
+                  child: const Text('不再发送'),
+                ),
+              if (op['kind'] == 'session')
+                TextButton(
+                  onPressed: enabled
+                      ? () async {
+                          final ok = await showDialog<bool>(
+                            context: context,
+                            builder: (d) => AlertDialog(
+                              title: const Text('不再等待这项操作？'),
+                              content: const Text(
+                                '只是不再在手机上等待结果。如果电脑已经收到，改名或删除仍会生效。',
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(d, false),
+                                  child: const Text('继续等待'),
+                                ),
+                                TextButton(
+                                  onPressed: () => Navigator.pop(d, true),
+                                  child: const Text('确定'),
+                                ),
+                              ],
+                            ),
+                          );
+                          if (ok == true && mounted) {
+                            await recover('finish_session', original: op);
+                          }
+                        }
+                      : null,
+                  child: const Text('不再等待'),
                 ),
               if (session)
                 TextButton(
@@ -146,30 +284,176 @@ class _PendingOperationCardState extends State<PendingOperationCard> {
                           final ok = await showDialog<bool>(
                             context: context,
                             builder: (d) => AlertDialog(
-                              title: const Text('结束原操作跟踪？'),
+                              title: const Text('不再等待这项操作？'),
                               content: const Text(
-                                '这不会取消电脑上已受理的操作，也不会删除 Fork 或 Worktree。请先核实电脑上的实际结果。',
+                                '只是不再在手机上等待结果。电脑上已经完成的操作会保留。',
                               ),
                               actions: [
                                 TextButton(
                                   onPressed: () => Navigator.pop(d, false),
-                                  child: const Text('继续保留'),
+                                  child: const Text('继续等待'),
                                 ),
                                 TextButton(
                                   onPressed: () => Navigator.pop(d, true),
-                                  child: const Text('已核实，结束跟踪'),
+                                  child: const Text('确定'),
                                 ),
                               ],
                             ),
                           );
                           if (ok == true) {
-                            await widget.host.operations
-                                .finishSessionTracking();
-                            await hub.refreshOperation(widget.host);
+                            try {
+                              await widget.host.operations
+                                  .finishSessionTracking(op);
+                              await hub.refreshOperation(widget.host);
+                            } catch (e) {
+                              if (mounted) setState(() => note = '$e');
+                            }
                           }
                         }
                       : null,
-                  child: const Text('结束跟踪'),
+                  child: const Text('不再等待'),
+                ),
+              if (op['kind'] == 'cancel')
+                TextButton(
+                  onPressed: !enabled
+                      ? null
+                      : () async {
+                          final ok = await showDialog<bool>(
+                            context: context,
+                            builder: (d) => AlertDialog(
+                              title: const Text('不再等待这项操作？'),
+                              content: const Text(
+                                '只是不再在手机上等待结果。如果电脑已经收到，任务仍会停下。',
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(d, false),
+                                  child: const Text('继续等待'),
+                                ),
+                                TextButton(
+                                  onPressed: () => Navigator.pop(d, true),
+                                  child: const Text('确定'),
+                                ),
+                              ],
+                            ),
+                          );
+                          if (ok == true && mounted) {
+                            await recover('finish_cancel', original: op);
+                          }
+                        },
+                  child: const Text('不再等待'),
+                ),
+              if (op['kind'] == 'terminal_stop')
+                TextButton(
+                  onPressed: !enabled
+                      ? null
+                      : () async {
+                          final ok = await showDialog<bool>(
+                            context: context,
+                            builder: (d) => AlertDialog(
+                              title: const Text('不再等待这项操作？'),
+                              content: const Text(
+                                '只是不再在手机上等待结果。如果电脑已经收到，终端仍会关闭。终端是否还在运行，请在终端页查看。',
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(d, false),
+                                  child: const Text('继续等待'),
+                                ),
+                                TextButton(
+                                  onPressed: () => Navigator.pop(d, true),
+                                  child: const Text('确定'),
+                                ),
+                              ],
+                            ),
+                          );
+                          if (ok == true && mounted) {
+                            await recover('finish_stop', original: op);
+                          }
+                        },
+                  child: const Text('不再等待'),
+                ),
+              if (op['kind'] == 'terminal')
+                TextButton(
+                  onPressed: !enabled
+                      ? null
+                      : () async {
+                          final ok = await showDialog<bool>(
+                            context: context,
+                            builder: (d) => AlertDialog(
+                              title: const Text('不再等待这项操作？'),
+                              content: const Text(
+                                '如果终端还没启动，就不会再启动；已经启动的会保留，里面的命令照常运行。',
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(d, false),
+                                  child: const Text('继续等待'),
+                                ),
+                                TextButton(
+                                  onPressed: () => Navigator.pop(d, true),
+                                  child: const Text('确定'),
+                                ),
+                              ],
+                            ),
+                          );
+                          if (ok != true ||
+                              !mounted ||
+                              widget.host.link == null) {
+                            return;
+                          }
+                          try {
+                            await widget.host.operations.finishLaunchTracking(
+                              widget.host.link!,
+                              op,
+                            );
+                            await hub.refreshOperation(widget.host);
+                          } catch (e) {
+                            if (mounted) setState(() => note = '$e');
+                          }
+                        },
+                  child: const Text('不再等待'),
+                ),
+              if (['git', 'index'].contains(op['kind']))
+                TextButton(
+                  onPressed: !enabled
+                      ? null
+                      : () async {
+                          final ok = await showDialog<bool>(
+                            context: context,
+                            builder: (d) => AlertDialog(
+                              title: const Text('不再等待这项操作？'),
+                              content: const Text(
+                                '如果还没执行，就不会再提交或推送；已经完成的不会撤销。建议先在「变更」里看一下结果。',
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(d, false),
+                                  child: const Text('继续等待'),
+                                ),
+                                TextButton(
+                                  onPressed: () => Navigator.pop(d, true),
+                                  child: const Text('确定'),
+                                ),
+                              ],
+                            ),
+                          );
+                          if (ok != true ||
+                              !mounted ||
+                              widget.host.link == null) {
+                            return;
+                          }
+                          try {
+                            await widget.host.operations.finishGitTracking(
+                              widget.host.link!,
+                              op,
+                            );
+                            await hub.refreshOperation(widget.host);
+                          } catch (e) {
+                            if (mounted) setState(() => note = '$e');
+                          }
+                        },
+                  child: const Text('不再等待'),
                 ),
             ],
           ),
@@ -178,3 +462,21 @@ class _PendingOperationCardState extends State<PendingOperationCard> {
     );
   }
 }
+
+/// What the user did, in their words.
+String pendingLabel(Map<String, dynamic> op) => switch (op['kind']) {
+  'send' => '发送消息',
+  'fork' => 'Fork 会话',
+  'history' => '置顶或归档',
+  'session' => op['action'] == 'delete' ? '删除会话' : '重命名会话',
+  'project' => '添加项目',
+  'review' => '本轮审查',
+  'repair' => '修复',
+  'git' => 'Git 操作',
+  'index' => '暂存文件',
+  'cancel' => '停止任务',
+  'terminal' => '启动终端',
+  'terminal_stop' => '关闭终端',
+  'run_config' => '运行配置',
+  _ => '审批',
+};

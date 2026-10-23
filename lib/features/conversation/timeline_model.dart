@@ -281,6 +281,14 @@ class ProcessEntry extends Entry {
   int get steps => entries.length;
 }
 
+/// One action row after the answer and file changes of a finished turn.
+class TurnActionsEntry extends Entry {
+  TurnActionsEntry(this.turnId, this.items, this.completion);
+  final String turnId;
+  final List<Item> items;
+  final Map<String, dynamic> completion;
+}
+
 /// Kinds the desktop does not show in the conversation.
 const _hiddenKinds = {'review_result', 'handoff', 'reconciliation'};
 
@@ -362,6 +370,11 @@ List<Entry> buildEntries(
     }
     if (!done.add(turn)) continue;
     final turnGroups = byTurn[turn]!;
+    final actions = TurnActionsEntry(
+      turn,
+      turnGroups.expand((g) => g).toList(),
+      Map<String, dynamic>.from(completion),
+    );
     var finalIndex = -1;
     for (var k = turnGroups.length - 1; k >= 0; k--) {
       if (turnGroups[k].any(_isAnswer)) {
@@ -377,6 +390,7 @@ List<Entry> buildEntries(
         .toList();
     if (process.isEmpty) {
       out.addAll(turnGroups.map(entry));
+      out.add(actions);
       continue;
     }
     out.addAll(
@@ -395,6 +409,7 @@ List<Entry> buildEntries(
     out.addAll(
       turnGroups.where((e) => e.first['kind'] == 'turn_files').map(entry),
     );
+    out.add(actions);
   }
   return out;
 }
@@ -411,4 +426,26 @@ String durationLabel(Duration d) {
   final m = d.inMinutes;
   if (m < 60) return '$m 分 ${s % 60} 秒';
   return '${d.inHours} 小时 ${m % 60} 分';
+}
+
+/// The end of a failed step's output: why it stopped. The PC sends only this
+/// (`outputPreview`); a step streamed live still carries its full output.
+String? failurePreview(Activity a) {
+  if (!['failed', 'error'].contains(a.status)) return null;
+  final sent = a.data['outputPreview'];
+  final text = sent is String
+      ? sent
+      : terminalOutput(a.output).isNotEmpty
+      ? terminalOutput(a.output)
+      : outputText(a.output);
+  final lines = text.trimRight().split('\n');
+  final tail = lines.skip(lines.length > 20 ? lines.length - 20 : 0).join('\n');
+  return tail.trim().isEmpty ? null : tail;
+}
+
+/// A subagent's result, as the PC summarised it or as streamed.
+String? subagentResult(Activity a) {
+  final sent = a.data['outputPreview'];
+  final text = sent is String ? sent : outputText(a.output);
+  return text.trim().isEmpty ? null : text;
 }

@@ -5,6 +5,7 @@ import 'adaptive_host_link.dart';
 export 'host_api.dart' show HostLink;
 import 'mobile_operations.dart';
 import 'security/secret_storage.dart';
+import '../data/local_workspace.dart';
 
 typedef HostConnector = Future<HostLink> Function(Map<String, dynamic> host);
 typedef HostLister = Future<List<Map<String, dynamic>>> Function();
@@ -15,8 +16,12 @@ enum LinkStatus { connecting, online, offline }
 /// Live state of one paired PC. The PC remains the source of truth; a
 /// snapshot kept after a disconnect is shown as cached with its sync time.
 class HostState {
-  HostState(this.record, SecretStorage storage)
-    : operations = MobileOperations(storage, record['hostId'] as String);
+  HostState(this.record, SecretStorage storage, [LocalWorkspace? local])
+    : operations = MobileOperations(
+        storage,
+        record['hostId'] as String,
+        onDraftSubmitted: local?.clearSubmittedDraft,
+      );
   Map<String, dynamic> record;
   final MobileOperations operations;
   String get id => record['hostId'] as String;
@@ -39,7 +44,16 @@ class HostState {
 
   List<Map<String, dynamic>> executors = [];
   Map<String, List<Map<String, dynamic>>> approvals = {};
+
+  /// Unconfirmed message, approval or conversation operation; while set,
+  /// sending and answering approvals wait.
   Map<String, dynamic>? pendingOperation;
+
+  /// Unconfirmed setting or workspace operation (keep awake, Git, terminal
+  /// start, pin/archive). It never blocks conversations.
+  Map<String, dynamic>? sideOperation;
+  List<Map<String, dynamic>> pendingCancellations = [];
+  List<Map<String, dynamic>> pendingTerminalStops = [];
 
   /// Latest read-only quota per installation; empty when the PC withholds it.
   Map<String, Map<String, dynamic>> quotas = {};
@@ -49,6 +63,14 @@ class HostState {
   /// Bumped on every successful refresh so open pages can reload detail.
   int revision = 0;
   int _transportGeneration = 0;
+  // Refreshes overlap (poll, debounce, pull-to-refresh, transport change);
+  // a slower, earlier one must never overwrite a newer one's results.
+  int _refreshStarted = 0, _refreshApplied = 0;
+  // Unconfirmed operations are re-checked once per connection, unasked.
+  int _autoVerified = -1;
+  // Computer-wide events arrive once per subscribed project stream; their
+  // global sequence identifies repeats. Insertion-ordered, oldest dropped.
+  final _recentSequences = <String>{};
   int get connectionEpoch => _transportGeneration;
   ConnectionRoute? get route =>
       link is RoutedHostLink ? (link as RoutedHostLink).route : null;
@@ -190,7 +212,14 @@ String agentLabel(String? providerId) => switch (providerId?.toLowerCase()) {
 /// Holds one connection per paired PC so sessions and pending work can be
 /// aggregated across computers. Leaving a page never stops a PC task.
 class HostHub extends ChangeNotifier {
-  HostHub({required this.storage, this.connector, this.lister, this.forgetter});
+  HostHub({
+    required this.storage,
+    this.connector,
+    this.lister,
+    this.forgetter,
+    LocalWorkspace? local,
+  }) : local = local ?? LocalWorkspace.memory();
+  final LocalWorkspace local;
   final SecretStorage storage;
   final HostConnector? connector;
   final HostLister? lister;
@@ -204,6 +233,7 @@ class HostHub extends ChangeNotifier {
   bool loaded = false;
   bool _disposed = false;
   static const pollInterval = Duration(seconds: 20);
+  static const resubscribeDelay = Duration(seconds: 2);
 
   bool get canConnect => connector != null;
 
@@ -220,7 +250,36 @@ class HostHub extends ChangeNotifier {
       for (final record in records) {
         final existing = host(record['hostId'] as String);
         if (existing == null) {
-          hosts.add(HostState(record, storage));
+          final h = HostState(record, storage, local);
+          hosts.add(h);
+          try {
+            final cached = await local.cachedHost(h.id);
+            if (cached != null) {
+              h.snapshot = Map<String, dynamic>.from(cached['snapshot'] as Map);
+              h.history = cached['history'] is Map
+                  ? Map<String, dynamic>.from(cached['history'] as Map)
+                  : null;
+              h.executors = [
+                for (final e in cached['executors'] as List? ?? [])
+                  Map<String, dynamic>.from(e as Map),
+              ];
+              h.syncedAt = DateTime.tryParse('${cached['syncedAt']}');
+            }
+            h.pendingOperation = await h.operations.pending();
+            h.sideOperation = await h.operations.sidePending();
+          } catch (_) {
+            h.error = '部分离线数据暂时无法读取，联网后可重新同步。';
+          }
+          try {
+            h.pendingCancellations = await h.operations.pendingCancellations();
+          } catch (_) {
+            h.error = '停止请求暂时无法读取，请检查系统安全存储。';
+          }
+          try {
+            h.pendingTerminalStops = await h.operations.pendingTerminalStops();
+          } catch (_) {
+            h.error = '终端关闭记录暂时无法读取，请检查系统安全存储。';
+          }
         } else {
           existing.record = record;
         }
@@ -308,10 +367,21 @@ class HostHub extends ChangeNotifier {
         if (h.link == link) _lost(h);
         return;
       }
+      if (event['type'] == 'subscription_ended') {
+        _subscriptionEnded(h, link, event['subscriptionId']);
+        return;
+      }
       // Workspace/terminal stream notifications are handled by their pages.
       if (event['type'] != 'event') return;
       final envelope = event['event'];
       if (envelope is Map) {
+        final sequence = '${envelope['sequence'] ?? ''}';
+        if (sequence.isNotEmpty) {
+          if (!h._recentSequences.add(sequence)) return;
+          if (h._recentSequences.length > 2048) {
+            h._recentSequences.remove(h._recentSequences.first);
+          }
+        }
         if (envelope['eventType'] == 'preferences.history.updated' &&
             envelope['payload'] is Map) {
           h.acceptHistory({
@@ -366,42 +436,66 @@ class HostHub extends ChangeNotifier {
 
   Future<void> _drop(HostState h) async {
     final link = h.link;
+    final events = h._events;
+    h.link = null;
+    h._events = null;
     h._transportGeneration++;
     h._debounce?.cancel();
     h._poll?.cancel();
-    await h._events?.cancel();
+    await events?.cancel();
     h._subscribed.clear();
     h._subscriptionIds.clear();
-    h.link = null;
     await link?.close();
   }
 
   Future<void> disconnect(HostState h) async {
-    await _drop(h);
+    final dropping = _drop(h);
     h.status = LinkStatus.offline;
     h.error = null;
     _notify();
+    await dropping;
   }
 
   /// Removes a computer from this phone. Tasks on the computer are unaffected.
   Future<void> forget(HostState h) async {
     await forgetter?.call(h.id);
+    await h.operations.forgetRecoveryJournals();
     hosts.remove(h);
     _notify();
     await _drop(h);
+    await local.forgetHost(h.id);
+  }
+
+  Future<void> clearOfflineCache() async {
+    await local.clearCache();
+    for (final h in hosts) {
+      if (!h.online) {
+        h.snapshot = null;
+        h.history = null;
+        h.executors = [];
+        h.approvals.clear();
+        h.syncedAt = null;
+        h.revision++;
+      }
+    }
+    _notify();
   }
 
   Future<void> refresh(HostState h, {bool executors = false}) async {
     final link = h.link;
     if (link == null || !h.online) return;
-    final generation = h._transportGeneration;
+    final generation = h._transportGeneration, order = ++h._refreshStarted;
     bool current() =>
-        h.link == link && h._transportGeneration == generation && h.online;
+        h.link == link &&
+        h._transportGeneration == generation &&
+        h.online &&
+        order >= h._refreshApplied;
     try {
       final snapshot = Map<String, dynamic>.from(
         await link.call('bootstrap', null) as Map,
       );
       if (!current()) return;
+      h._refreshApplied = order;
       h.snapshot = snapshot;
       try {
         final preferences = await link.call('history_preferences', null);
@@ -439,17 +533,87 @@ class HostHub extends ChangeNotifier {
       h.error = null;
       h.revision++;
       _syncSubscriptions(h, link);
+      final recentTasks = h.tasks.toList()
+        ..sort(
+          (a, b) =>
+              '${b['updatedAt'] ?? ''}'.compareTo('${a['updatedAt'] ?? ''}'),
+        );
+      unawaited(
+        local
+            .cacheHost(h.id, {
+              'snapshot': {
+                ...snapshot,
+                'tasks': recentTasks.take(100).toList(),
+              },
+              'history': h.history,
+              'executors': h.executors,
+              'syncedAt': h.syncedAt!.toUtc().toIso8601String(),
+            }, local.cacheEpoch)
+            .catchError((Object e) {
+              local.cacheError = '离线缓存未能保存：$e';
+            }),
+      );
     } catch (e) {
       if (current()) h.error = '$e';
     }
     await refreshOperation(h);
+    if (current() && h._autoVerified != generation) {
+      h._autoVerified = generation;
+      unawaited(_autoVerify(h, link));
+    }
+  }
+
+  /// After a reconnect most "unconfirmed" operations simply completed while
+  /// the reply was lost. Ask the PC (read-only) so they clear without the
+  /// user having to understand or press anything; only what is still truly
+  /// unknown is left as a card.
+  Future<void> _autoVerify(HostState h, HostLink link) async {
+    final ops = h.operations, generation = h._transportGeneration;
+    bool current() =>
+        !_disposed &&
+        h.link == link &&
+        h._transportGeneration == generation &&
+        h.online;
+    Future<void> check(Future<dynamic> Function() verify) async {
+      if (!current()) return;
+      try {
+        await verify();
+      } catch (_) {
+        // Still unknown: the card stays and the user can retry.
+      }
+    }
+
+    final main = h.pendingOperation, side = h.sideOperation;
+    if (main != null) await check(() => ops.verify(link, main));
+    if (side != null) await check(() => ops.verify(link, side));
+    for (final stop in [...h.pendingCancellations]) {
+      await check(() => ops.verifyCancel(link, stop));
+    }
+    for (final stop in [...h.pendingTerminalStops]) {
+      await check(() => ops.verifyTerminalStop(link, stop));
+    }
+    if (!current()) return;
+    await refreshOperation(h);
+    _notify();
   }
 
   Future<void> refreshOperation(HostState h) async {
+    if (_disposed) return;
     try {
       h.pendingOperation = await h.operations.pending();
+      h.sideOperation = await h.operations.sidePending();
     } catch (_) {
-      h.error = '待核实操作暂时无法读取，请检查系统安全存储。';
+      h.error = '待确认的操作暂时无法读取，请检查系统安全存储。';
+    }
+    try {
+      h.pendingCancellations = await h.operations.pendingCancellations();
+    } catch (_) {
+      h.error = '停止请求暂时无法读取，请检查系统安全存储。';
+    }
+    try {
+      h.pendingTerminalStops = await h.operations.pendingTerminalStops();
+    } catch (_) {
+      h.error = '终端关闭记录暂时无法读取，请检查系统安全存储。';
     }
     _notify();
   }
@@ -479,6 +643,24 @@ class HostHub extends ChangeNotifier {
     for (final project in desired) {
       _subscribe(h, link, project);
     }
+  }
+
+  /// The PC ended a project stream on its own (event bus lag or closure).
+  /// Forget it, then refresh: that re-reads the cursor and resubscribes. The
+  /// short delay keeps a PC that keeps ending streams from being hammered.
+  void _subscriptionEnded(HostState h, HostLink link, Object? id) {
+    final entry = h._subscriptionIds.entries
+        .where((e) => e.value == id)
+        .firstOrNull;
+    if (entry == null) return;
+    h._subscriptionIds.remove(entry.key);
+    h._subscribed.remove(entry.key);
+    final generation = h._transportGeneration;
+    Timer(resubscribeDelay, () {
+      if (h.link == link && h._transportGeneration == generation) {
+        unawaited(refresh(h));
+      }
+    });
   }
 
   void _subscribe(HostState h, HostLink link, String project) {
@@ -594,10 +776,24 @@ class HostHub extends ChangeNotifier {
 
   List<HostState> get hostsWithPendingOperation => [
     for (final h in hosts)
-      if (h.pendingOperation != null) h,
+      if (h.pendingOperation != null ||
+          h.sideOperation != null ||
+          h.pendingCancellations.isNotEmpty ||
+          h.pendingTerminalStops.isNotEmpty)
+        h,
   ];
 
-  int get pendingCount => approvals.length + hostsWithPendingOperation.length;
+  int get pendingCount =>
+      approvals.length +
+      hostsWithPendingOperation.fold<int>(
+        0,
+        (n, h) =>
+            n +
+            (h.pendingOperation == null ? 0 : 1) +
+            (h.sideOperation == null ? 0 : 1) +
+            h.pendingCancellations.length +
+            h.pendingTerminalStops.length,
+      );
 
   void _notify() {
     if (!_disposed) notifyListeners();

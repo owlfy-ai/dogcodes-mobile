@@ -1,0 +1,18 @@
+name: dogcodes_clipboard
+description: Manual image clipboard access for the DogCodes mobile companion.
+publish_to: none
+version: 0.1.0
+environment:
+  sdk: '>=3.10.0 <4.0.0'
+  flutter: '>=3.38.0'
+dependencies:
+  flutter:
+    sdk: flutter
+flutter:
+  plugin:
+    platforms:
+      ios:
+        pluginClass: DogcodesClipboardPlugin
+      android:
+        package: ai.owlfy.dogcodes_clipboard
+        pluginClass: DogcodesClipboardPlugin

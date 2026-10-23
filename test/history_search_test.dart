@@ -116,4 +116,44 @@ void main() {
       search.dispose();
     },
   );
+
+  test(
+    'offline computers get one notice and sessions are searched in batches',
+    () async {
+      final asked = <String>[];
+      final link = SearchLink((request) async {
+        asked.add(request['taskId'] as String);
+        return {'items': [], 'throughSequence': '1', 'nextCursor': null};
+      });
+      final online = HostState({'hostId': 'pc'}, MemorySecretStorage())
+        ..link = link
+        ..status = LinkStatus.online;
+      final offline = HostState({
+        'hostId': 'old',
+        'displayName': 'Old Mac',
+      }, MemorySecretStorage());
+      final sessions = [
+        for (var i = 0; i < 5; i++)
+          SessionRef(online, {
+            'taskId': 'task$i',
+            'projectId': 'p',
+            'updatedAt': '2026-10-0${i + 1}T00:00:00Z',
+          }),
+        for (var i = 0; i < 3; i++)
+          SessionRef(offline, {'taskId': 'gone$i', 'projectId': 'p'}),
+      ];
+      final search = HistorySearch(sessions, batch: 2);
+      await search.search('正文');
+      expect(asked, ['task4', 'task3']);
+      expect(search.offlineHosts, [offline.name]);
+      expect(search.groups.length, 2);
+      expect(search.remaining, 3);
+      await search.searchMore();
+      await search.searchMore();
+      expect(asked, ['task4', 'task3', 'task2', 'task1', 'task0']);
+      expect(search.remaining, 0);
+      expect(search.groups.every((g) => g.error == null), isTrue);
+      search.dispose();
+    },
+  );
 }

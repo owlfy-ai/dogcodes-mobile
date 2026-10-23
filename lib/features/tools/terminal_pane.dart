@@ -4,14 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:xterm/xterm.dart';
 import '../../core/host_api.dart';
 import '../../core/pc_api.dart';
+import '../../core/terminal_input.dart';
 import '../../ui/theme.dart';
 
 /// Attaches to one PC terminal: reads its output by offset (the PC keeps the
 /// buffer, so reopening resumes), forwards keystrokes as bytes, and shares
 /// one PTY size with every other attached client.
 class TerminalSession {
-  TerminalSession(this.link, this.id) {
-    terminal.onOutput = (data) => send(data);
+  TerminalSession(this.link, this.id) : input = TerminalInput(link, id) {
+    input.addListener(_inputChanged);
+    // Merely rendering output must not claim input control or answer a DSR
+    // on behalf of another attachment. The host handles initial PTY setup.
+    terminal.onOutput = (data) {
+      if (input.attached) send(data);
+    };
     terminal.onResize = (w, h, _, _) {
       _resize?.cancel();
       _resize = Timer(const Duration(milliseconds: 300), () {
@@ -21,6 +27,12 @@ class TerminalSession {
   }
   final HostLink link;
   final String id;
+  final TerminalInput input;
+  String? _readError;
+  void _inputChanged() {
+    if (!_closed) error.value = input.message ?? _readError;
+  }
+
   final terminal = Terminal(maxLines: 5000);
   final info = ValueNotifier<Map<String, dynamic>?>(null);
   final error = ValueNotifier<String?>(null);
@@ -80,33 +92,35 @@ class TerminalSession {
       }
       _after = '${batch['next'] ?? _after}';
       info.value = Map<String, dynamic>.from(batch['info'] as Map? ?? {});
-      error.value = null;
+      _readError = null;
+      _inputChanged();
     } catch (e) {
-      error.value = '$e';
+      if (!_closed) {
+        _readError = '$e';
+        _inputChanged();
+      }
     } finally {
       _reading = false;
     }
   }
 
-  Future<void> send(String data) async {
-    if (data.isEmpty) return;
+  Future<bool> send(String data) async {
+    if (_closed || data.isEmpty) return false;
     var text = data;
     if (ctrl && text.length == 1) {
       final code = text.toUpperCase().codeUnitAt(0);
       if (code >= 64 && code < 96) text = String.fromCharCode(code - 64);
       ctrl = false;
     }
-    try {
-      await link.terminalWrite(id, utf8.encode(text));
-    } catch (e) {
-      error.value = '$e';
-    }
+    return input.send(utf8.encode(text));
   }
 
   void dispose() {
     _closed = true;
     _poll?.cancel();
     _resize?.cancel();
+    input.removeListener(_inputChanged);
+    input.dispose();
     info.dispose();
     error.dispose();
   }
@@ -136,6 +150,8 @@ class _TerminalPaneState extends State<TerminalPane> {
   final focus = FocusNode();
   final line = TextEditingController();
   final _lineFocus = FocusNode();
+  bool _submitting = false;
+  String? _unconfirmedLine;
 
   @override
   void dispose() {
@@ -146,10 +162,15 @@ class _TerminalPaneState extends State<TerminalPane> {
   }
 
   /// Sends the typed line once, followed by Enter, and keeps the keyboard up.
-  void _submit() {
+  Future<void> _submit() async {
+    if (_submitting || widget.session.input.paused) return;
+    setState(() => _submitting = true);
     final text = line.text;
-    line.clear();
-    widget.session.send('$text\r');
+    final sent = await widget.session.send('$text\r');
+    if (!mounted) return;
+    setState(() => _submitting = false);
+    if (sent && line.text == text) line.clear();
+    _unconfirmedLine = sent ? null : text;
     // Keep typing without re-opening the keyboard.
     FocusScope.of(context).requestFocus(_lineFocus);
   }
@@ -221,6 +242,53 @@ class _TerminalPaneState extends State<TerminalPane> {
                   ),
                 ),
         ),
+        ListenableBuilder(
+          listenable: s.input,
+          builder: (context, _) => s.input.paused
+              ? Wrap(
+                  children: [
+                    if (s.input.hasUnknown)
+                      TextButton(
+                        onPressed: () async {
+                          if (await s.input.verify() && mounted) {
+                            if (line.text == _unconfirmedLine) line.clear();
+                            _unconfirmedLine = null;
+                          }
+                        },
+                        child: const Text('核实输入结果'),
+                      ),
+                    if (s.input.canResume)
+                      TextButton(
+                        onPressed: () async {
+                          final ok = await showDialog<bool>(
+                            context: context,
+                            builder: (d) => AlertDialog(
+                              title: const Text('继续输入？'),
+                              content: const Text(
+                                '请先检查终端当前状态；未确认的输入可能已部分生效。继续会清空当前输入框并丢弃未发送内容，不会重新发送原输入。',
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(d, false),
+                                  child: const Text('取消'),
+                                ),
+                                TextButton(
+                                  onPressed: () => Navigator.pop(d, true),
+                                  child: const Text('已检查，继续'),
+                                ),
+                              ],
+                            ),
+                          );
+                          if (ok == true && await s.input.resume() && mounted) {
+                            line.clear();
+                          }
+                        },
+                        child: const Text('继续输入'),
+                      ),
+                  ],
+                )
+              : const SizedBox.shrink(),
+        ),
         if (widget.keys)
           Padding(
             padding: const EdgeInsets.fromLTRB(8, 6, 8, 0),
@@ -240,7 +308,7 @@ class _TerminalPaneState extends State<TerminalPane> {
                 suffixIcon: IconButton(
                   tooltip: '发送',
                   icon: const Icon(Icons.keyboard_return),
-                  onPressed: _submit,
+                  onPressed: _submitting ? null : _submit,
                 ),
               ),
               onSubmitted: (_) => _submit(),

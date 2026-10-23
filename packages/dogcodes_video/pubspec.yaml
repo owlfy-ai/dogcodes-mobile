@@ -1,0 +1,18 @@
+name: dogcodes_video
+description: Hardware H.264 decoding into a Flutter texture (VideoToolbox / MediaCodec) for DogCodes remote desktop over the relay.
+publish_to: none
+version: 0.1.0
+environment:
+  sdk: '>=3.10.0 <4.0.0'
+  flutter: '>=3.38.0'
+dependencies:
+  flutter:
+    sdk: flutter
+flutter:
+  plugin:
+    platforms:
+      ios:
+        pluginClass: DogcodesVideoPlugin
+      android:
+        package: ai.owlfy.dogcodes_video
+        pluginClass: DogcodesVideoPlugin

@@ -33,7 +33,15 @@ class ServiceInfo {
 
 /// QR contents are untrusted until an authenticated endpoint handshake succeeds.
 /// Parsing this value never creates a trusted device or sends its secret anywhere.
-class PairingInvitation {
+/// Pins from a scanned invitation, also used when verifying its original grant.
+abstract interface class PairingPins {
+  String get hostId;
+  String get hostKey;
+  String get invitationId;
+  Uri get service;
+}
+
+class PairingInvitation implements PairingPins {
   PairingInvitation._(
     this.hostId,
     this.hostKey,
@@ -114,10 +122,14 @@ class PairingInvitation {
       throw const ProtocolException('无法读取配对二维码。');
     }
   }
+  @override
   final String hostId;
+  @override
   final String hostKey;
+  @override
   final String invitationId;
   final String secret;
+  @override
   final Uri service;
   final DateTime expiresAt;
   final String? phoneTicket;

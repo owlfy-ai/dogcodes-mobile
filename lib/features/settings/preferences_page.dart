@@ -3,6 +3,7 @@ import '../../app.dart';
 import '../../ui/theme.dart';
 import '../../ui/widgets.dart';
 import 'service_status.dart';
+import 'offline_cache.dart';
 
 /// 12 偏好设置. Appearance swatches are fixed white / black and do not invert
 /// with the current theme.
@@ -65,9 +66,11 @@ class PreferencesPage extends StatelessWidget {
               onTap: () => Navigator.of(context).maybePop(),
             ),
             const SizedBox(height: 16),
+            const SectionLabel('本机数据'),
+            OfflineCacheSettings(hub: scope.hub),
             const InlineNotice(
               '无需注册账号：通过电脑上的配对二维码建立信任，可随时在电脑上撤销。'
-              '通知、离线缓存与保持唤醒尚未接入。',
+              '草稿和离线缓存保存在这部手机；通知尚未接入。',
             ),
           ],
         ),

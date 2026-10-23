@@ -18,7 +18,7 @@ class SessionsPage extends StatefulWidget {
 
 class _SessionsPageState extends State<SessionsPage> {
   final search = TextEditingController();
-  bool archived = false;
+  bool showArchived = false;
 
   @override
   void dispose() {
@@ -52,12 +52,13 @@ class _SessionsPageState extends State<SessionsPage> {
           return true;
         }).toList();
         final sessions = scope.where((s) {
-          if (s.archived != archived) return false;
           if (query.isEmpty) return true;
           return s.title.toLowerCase().contains(query) ||
               s.projectName.toLowerCase().contains(query);
         }).toList();
-        final canCreate = hub.hosts.any((h) => h.online);
+        final canCreate = hub.hosts.any(
+          (h) => h.online || h.projects.isNotEmpty,
+        );
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -111,24 +112,6 @@ class _SessionsPageState extends State<SessionsPage> {
                   onChanged: (h, p) => hub.sessionScope.value = (h, p),
                 ),
               ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: DcSpace.page),
-              child: Row(
-                children: [
-                  ChoiceChip(
-                    label: const Text('当前会话'),
-                    selected: !archived,
-                    onSelected: (_) => setState(() => archived = false),
-                  ),
-                  const SizedBox(width: 8),
-                  ChoiceChip(
-                    label: const Text('已归档'),
-                    selected: archived,
-                    onSelected: (_) => setState(() => archived = true),
-                  ),
-                ],
-              ),
-            ),
             Expanded(
               child: _body(
                 context,
@@ -167,6 +150,14 @@ class _SessionsPageState extends State<SessionsPage> {
     final pending = hub.pendingCount;
     final offline = hub.hosts.where((h) => !h.online).toList();
     final small = Theme.of(context).textTheme.bodySmall;
+    // Archived sessions leave the main list but stay reachable: collapsed at
+    // the bottom, and still matched by search (where their row says 已归档).
+    final archived = query.isEmpty
+        ? sessions.where((s) => s.archived).toList()
+        : <SessionRef>[];
+    final listed = query.isEmpty
+        ? sessions.where((s) => !s.archived).toList()
+        : sessions;
     final children = <Widget>[
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: DcSpace.page),
@@ -203,17 +194,17 @@ class _SessionsPageState extends State<SessionsPage> {
               : '${h.name} 离线 · 显示 ${shortTime(h.syncedAt)} 同步的内容',
         ),
     ];
-    if (sessions.isEmpty) {
+    if (listed.isEmpty) {
       children.add(
         Padding(
           padding: const EdgeInsets.all(40),
           child: Text(
             query.isNotEmpty
                 ? '没有匹配的会话'
+                : archived.isNotEmpty
+                ? '没有未归档的会话'
                 : hub.hosts.any((h) => h.snapshot != null)
-                ? archived
-                      ? '暂无已归档会话'
-                      : '还没有会话，点右上角 + 开始新任务'
+                ? '还没有会话，点右上角 + 开始新任务'
                 : '正在从电脑同步会话…',
             textAlign: TextAlign.center,
             style: TextStyle(color: context.dc.secondary),
@@ -221,14 +212,14 @@ class _SessionsPageState extends State<SessionsPage> {
         ),
       );
     } else {
-      final pinned = sessions.where((s) => s.pinned).toList();
+      final pinned = listed.where((s) => s.pinned).toList();
       if (pinned.isNotEmpty) {
         children.add(const SectionLabel('置顶'));
         children.addAll(pinned.map((s) => SessionRow(session: s)));
       }
       // Day → computer → project; each level ordered by its newest session.
       final days = <String, List<SessionRef>>{};
-      for (final s in sessions) {
+      for (final s in listed) {
         if (s.pinned) continue;
         days.putIfAbsent(dayGroup(s.updatedAt), () => []).add(s);
       }
@@ -300,6 +291,21 @@ class _SessionsPageState extends State<SessionsPage> {
         }
       }
     }
+    if (archived.isNotEmpty) {
+      children.add(
+        ListTile(
+          key: const ValueKey('archived-sessions'),
+          contentPadding: const EdgeInsets.symmetric(horizontal: DcSpace.page),
+          leading: const Icon(Icons.archive_outlined, size: 20),
+          title: Text('已归档 (${archived.length})'),
+          trailing: Icon(showArchived ? Icons.expand_less : Icons.expand_more),
+          onTap: () => setState(() => showArchived = !showArchived),
+        ),
+      );
+      if (showArchived) {
+        children.addAll(archived.map((s) => SessionRow(session: s)));
+      }
+    }
     return RefreshIndicator(
       onRefresh: () => Future.wait([
         for (final h in hub.hosts) h.online ? hub.refresh(h) : hub.connect(h),
@@ -368,6 +374,8 @@ class SessionRow extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 status,
+                if (s.archived)
+                  Text('已归档', style: Theme.of(context).textTheme.bodySmall),
               ],
             ),
             SessionMenu(session: s),

@@ -12,6 +12,7 @@ import '../tools/files_page.dart';
 import '../tools/run_page.dart';
 import '../tools/terminal_page.dart';
 import '../tools/tool_context.dart';
+import 'add_project_page.dart';
 
 /// 05 工作区: always bound to one PC and one of its projects.
 class WorkspacePage extends StatefulWidget {
@@ -22,6 +23,15 @@ class WorkspacePage extends StatefulWidget {
 
 class _WorkspacePageState extends State<WorkspacePage> {
   String? hostId, projectId;
+  Future<void> _addProject() async {
+    final result = await showAddProject(context, hostId: hostId);
+    if (result != null && mounted) {
+      setState(() {
+        hostId = result.hostId;
+        projectId = result.projectId;
+      });
+    }
+  }
 
   /// Keeps the chosen computer and project; falls back only when they
   /// disappear (unpaired / project removed), never on page switches.
@@ -50,7 +60,18 @@ class _WorkspacePageState extends State<WorkspacePage> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const RootHeader(title: '工作区'),
+            RootHeader(
+              title: '工作区',
+              actions: [
+                TextButton.icon(
+                  onPressed: hub.hosts.any((h) => h.online)
+                      ? _addProject
+                      : null,
+                  icon: const Icon(Icons.create_new_folder_outlined, size: 20),
+                  label: const Text('添加项目'),
+                ),
+              ],
+            ),
             Expanded(
               child: selected == null
                   ? EmptyNote(
@@ -96,7 +117,7 @@ class _WorkspacePageState extends State<WorkspacePage> {
           InlineNotice(
             h.snapshot == null
                 ? '${h.name} 尚未同步项目；电脑在线时会自动同步。'
-                : '${h.name} 上还没有项目。请先在电脑上添加项目目录。',
+                : '${h.name} 上还没有项目，点右上角「添加项目」选择电脑上的已有目录。',
           ),
         ],
       );

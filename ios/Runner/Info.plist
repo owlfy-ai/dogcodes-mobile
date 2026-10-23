@@ -13,7 +13,9 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>扫描电脑上的 DogCodes 配对二维码。</string>
+	<string>扫描电脑配对二维码，或拍摄照片作为任务附件。</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>选择照片作为任务附件发送到自己的电脑。</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

@@ -3,16 +3,22 @@ import '../../app.dart';
 import '../../core/host_hub.dart';
 import '../../core/mobile_operations.dart';
 import '../tools/tool_context.dart' show showError;
-import 'fork_page.dart';
 import 'history_search_page.dart';
 
+/// A session is pinned or archived, never both: an archived one is unarchived
+/// before it can be pinned, and archiving a pinned one says it unpins it.
 List<PopupMenuEntry<String>> sessionMenuItems(SessionRef s) => [
-  PopupMenuItem(value: 'pin', child: Text(s.pinned ? '取消置顶' : '置顶会话')),
-  PopupMenuItem(value: 'archive', child: Text(s.archived ? '取消归档' : '归档会话')),
+  if (!s.archived)
+    PopupMenuItem(value: 'pin', child: Text(s.pinned ? '取消置顶' : '置顶会话')),
   PopupMenuItem(
-    value: 'fork',
-    enabled: !s.running,
-    child: const Text('Fork 会话'),
+    value: 'archive',
+    child: Text(
+      s.archived
+          ? '取消归档'
+          : s.pinned
+          ? '归档会话（将取消置顶）'
+          : '归档会话',
+    ),
   ),
   const PopupMenuItem(value: 'history', child: Text('搜索历史正文')),
 ];
@@ -26,12 +32,6 @@ Future<void> sessionAction(
     await Navigator.of(context).push(
       MaterialPageRoute<void>(builder: (_) => HistorySearchPage(sessions: [s])),
     );
-    return;
-  }
-  if (action == 'fork') {
-    await Navigator.of(
-      context,
-    ).push(MaterialPageRoute<void>(builder: (_) => ForkPage(session: s)));
     return;
   }
   final hub = AppScope.of(context).hub, h = s.host, link = s.host.link;

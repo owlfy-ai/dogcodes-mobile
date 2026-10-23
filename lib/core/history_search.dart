@@ -15,10 +15,18 @@ class HistoryMatches {
 
 /// The PC query is task-scoped. Fan out within the selected computer/project,
 /// with bounded concurrency and one frozen upper bound per paginated query.
+/// Only online computers are queried, most recent sessions first, [batch] at
+/// a time; [searchMore] continues with the next batch.
 class HistorySearch extends ChangeNotifier {
-  HistorySearch(this.sessions);
+  HistorySearch(this.sessions, {this.batch = 40});
   final List<SessionRef> sessions;
+  final int batch;
   List<HistoryMatches> groups = [];
+
+  /// Computers in scope that were offline when the search started.
+  List<String> offlineHosts = [];
+  List<SessionRef> _queue = [];
+  int get remaining => _queue.length - groups.length;
   String query = '';
   bool searching = false, _disposed = false;
   int _generation = 0;
@@ -43,6 +51,10 @@ class HistorySearch extends ChangeNotifier {
     final generation = ++_generation;
     query = text.trim();
     groups = [];
+    _queue = [];
+    offlineHosts = [];
+    // Workers of an earlier query stop on the generation change.
+    searching = false;
     if (query.isEmpty) {
       searching = false;
       notifyListeners();
@@ -53,8 +65,29 @@ class HistorySearch extends ChangeNotifier {
       notifyListeners();
       throw const ProtocolException('关键词过长，请缩短后再搜索。');
     }
-    final pending = [for (final s in sessions) HistoryMatches(s)];
-    groups = pending;
+    final online = sessions.where((s) => s.host.online).toList()
+      ..sort((a, b) {
+        final x = a.updatedAt, y = b.updatedAt;
+        return x == null || y == null
+            ? (y == null ? 0 : 1) - (x == null ? 0 : 1)
+            : y.compareTo(x);
+      });
+    offlineHosts = {
+      for (final s in sessions)
+        if (!s.host.online) s.host.name,
+    }.toList();
+    _queue = online;
+    await _searchBatch(generation);
+  }
+
+  Future<void> searchMore() => _searchBatch(_generation);
+
+  Future<void> _searchBatch(int generation) async {
+    if (searching || remaining <= 0) return;
+    final pending = [
+      for (final s in _queue.skip(groups.length).take(batch)) HistoryMatches(s),
+    ];
+    groups = [...groups, ...pending];
     searching = true;
     notifyListeners();
     var next = 0;

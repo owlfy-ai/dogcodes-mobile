@@ -33,7 +33,17 @@ class _PendingPageState extends State<PendingPage> {
         final operations = filter == 0
             ? hub.hostsWithPendingOperation
             : const <HostState>[];
-        final count = items.length + operations.length;
+        final count =
+            items.length +
+            operations.fold<int>(
+              0,
+              (n, h) =>
+                  n +
+                  (h.pendingOperation == null ? 0 : 1) +
+                  (h.sideOperation == null ? 0 : 1) +
+                  h.pendingCancellations.length +
+                  h.pendingTerminalStops.length,
+            );
         final offline = hub.hosts.where((h) => !h.online).length;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -67,14 +77,46 @@ class _PendingPageState extends State<PendingPage> {
                         '$offline 台电脑离线，其待处理事项将在重新连接后显示。',
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
-                    for (final h in operations)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 12),
-                        child: PendingOperationCard(
-                          host: h,
-                          onSubmitted: (task) => _open(context, h.id, task),
+                    for (final h in operations) ...[
+                      for (final cancellation in h.pendingCancellations)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 12),
+                          child: PendingOperationCard(
+                            key: ValueKey(
+                              cancellation['envelope']['commandId'],
+                            ),
+                            host: h,
+                            operation: cancellation,
+                          ),
                         ),
-                      ),
+                      for (final stop in h.pendingTerminalStops)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 12),
+                          child: PendingOperationCard(
+                            key: ValueKey(
+                              'stop:${stop['request']['operationId']}',
+                            ),
+                            host: h,
+                            operation: stop,
+                          ),
+                        ),
+                      if (h.pendingOperation != null)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 12),
+                          child: PendingOperationCard(
+                            host: h,
+                            onSubmitted: (task) => _open(context, h.id, task),
+                          ),
+                        ),
+                      if (h.sideOperation != null)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 12),
+                          child: PendingOperationCard(
+                            host: h,
+                            operation: h.sideOperation,
+                          ),
+                        ),
+                    ],
                     for (final a in items)
                       Padding(
                         padding: const EdgeInsets.only(top: 12),

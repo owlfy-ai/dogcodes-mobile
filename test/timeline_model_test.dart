@@ -86,7 +86,7 @@ void main() {
       item('f', 'turn_files', {'artifactId': 'art_2'}),
     ];
     final entries = buildEntries(items, agentName: (p) => 'Cursor');
-    expect(entries.length, 4);
+    expect(entries.length, 5);
     expect((entries[0] as ItemEntry).item['kind'], 'user_message');
     final process = entries[1] as ProcessEntry;
     expect(process.steps, 2);
@@ -97,6 +97,7 @@ void main() {
     );
     expect((entries[2] as ItemEntry).item['itemId'], 'm');
     expect((entries[3] as ItemEntry).item['kind'], 'turn_files');
+    expect((entries[4] as TurnActionsEntry).turnId, 't1');
   });
 
   test('an active turn stays expanded and subagent steps nest under it', () {

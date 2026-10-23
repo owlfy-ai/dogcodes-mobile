@@ -5,16 +5,19 @@ import 'package:crypto/crypto.dart';
 import 'dart:typed_data';
 import 'host_channel.dart';
 import 'binary_transport.dart';
+import 'frame_reader.dart';
 import 'host_api.dart';
 import 'network_address.dart';
 import 'protocol.dart';
 import 'security/noise_endpoint.dart';
+import 'security/pairing_recovery.dart';
 
 Future<Map<String, dynamic>> routeRequest(
   Uri service,
   String path,
   String token, {
   String method = 'POST',
+  Map<String, dynamic>? body,
 }) async {
   final client = HttpClient()..connectionTimeout = const Duration(seconds: 8);
   try {
@@ -23,6 +26,10 @@ Future<Map<String, dynamic>> routeRequest(
         .timeout(const Duration(seconds: 8));
     request.followRedirects = false;
     request.headers.set('Authorization', 'Bearer $token');
+    if (body != null) {
+      request.headers.contentType = ContentType.json;
+      request.write(jsonEncode(body));
+    }
     final response = await request.close().timeout(const Duration(seconds: 8));
     if (response.statusCode != 200) {
       throw ProtocolException(
@@ -74,7 +81,9 @@ class SecureHostClient implements AuthenticatedHostChannel, HostLink {
   final _events = StreamController<Map<String, dynamic>>.broadcast();
   final _waiting = <String, Completer<Map<String, dynamic>>>{};
   final _handshake = Completer<Map<String, dynamic>>();
-  final _buffer = <int>[];
+  late final _frames = FrameReader(onFragment: _ackFragment);
+  final _fragmentAcks = <String, int>{};
+  bool _flushingFragments = false;
   bool _closed = false;
   int _next = 0;
   @override
@@ -165,6 +174,65 @@ class SecureHostClient implements AuthenticatedHostChannel, HostLink {
     }
   }
 
+  /// The old invitation ticket grants transport only. A new IK session must
+  /// prove both original endpoint identities before the PC returns its receipt.
+  static Future<(SecureHostClient, Map<String, dynamic>)> recoverPairing(
+    PairingRecovery original,
+    EndpointIdentity phone,
+    NoiseEndpoint endpoint,
+  ) async {
+    if (phone.publicHex != original.phonePublicKey) {
+      throw const ProtocolException('手机身份与原配对不一致，未重新申请授权。');
+    }
+    if (!original.recoverUntil.isAfter(DateTime.now().toUtc())) {
+      throw const ProtocolException('原配对恢复期限已过，请在电脑核实授权后重新扫码。');
+    }
+    final route = await routeRequest(
+      original.service,
+      '/v1/hosts/${original.hostId}/pairing-recovery',
+      original.phoneTicket,
+      body: {'invitationId': original.invitationId},
+    );
+    final session = route['sessionId'] as String;
+    final peer = hexBytes(
+      base64Url.decode(base64Url.normalize(original.hostKey)),
+    );
+    final noise = endpoint.session(
+      identity: phone,
+      initiator: true,
+      context: jsonEncode(['dogcodes-reconnect', 1, original.hostId, session]),
+      peerHex: peer,
+    );
+    final client = await _connect(
+      original.service,
+      original.hostId,
+      session,
+      route['phoneTicket'] as String,
+      noise,
+    );
+    try {
+      final connected = await client._handshake.future.timeout(
+        const Duration(seconds: 20),
+      );
+      if (connected['type'] != 'connected' ||
+          connected['hostId'] != original.hostId ||
+          connected['binding'] != noise.binding ||
+          noise.authenticatedPeer != peer) {
+        throw const ProtocolException('电脑连接身份与原配对不一致。');
+      }
+      final receipt = await client.call(
+        'pairing_receipt',
+        original.invitationId,
+      );
+      if (receipt is! Map) throw const ProtocolException('电脑未返回原配对回执。');
+      client.hostName = displayHostName(receipt['hostName']);
+      return (client, Map<String, dynamic>.from(receipt));
+    } catch (_) {
+      await client.close();
+      rethrow;
+    }
+  }
+
   static Future<SecureHostClient> _connect(
     Uri service,
     String hostId,
@@ -248,19 +316,10 @@ class SecureHostClient implements AuthenticatedHostChannel, HostLink {
         _noiseReady = true;
         return;
       }
-      _buffer.addAll(_noise.open(Uint8List.fromList(message)));
-      while (_buffer.length >= 4) {
-        final length = ByteData.sublistView(
-          Uint8List.fromList(_buffer.take(4).toList()),
-        ).getUint32(0);
-        if (length == 0 || length > 8 * 1024 * 1024) {
-          throw const ProtocolException('消息大小超出范围。');
-        }
-        if (_buffer.length < length + 4) return;
-        final value =
-            jsonDecode(utf8.decode(_buffer.sublist(4, 4 + length)))
-                as Map<String, dynamic>;
-        _buffer.removeRange(0, 4 + length);
+      _frames.add(_noise.open(Uint8List.fromList(message)));
+      while (true) {
+        final value = _frames.next();
+        if (value == null) return;
         if (!_handshake.isCompleted) {
           _handshake.complete(value);
         } else if (value['type'] == 'response') {
@@ -309,6 +368,20 @@ class SecureHostClient implements AuthenticatedHostChannel, HostLink {
       onTimeout: () => throw const RemoteOutcomeUnknown(),
     );
     unawaited(reply.then<void>((_) {}, onError: (Object _, StackTrace _) {}));
+    final send = _sendFrame(framed);
+    try {
+      await send;
+      return await reply;
+    } catch (error) {
+      if (error is ProtocolException && !_closed) rethrow;
+      _fail();
+      throw const RemoteOutcomeUnknown();
+    } finally {
+      _waiting.remove(id);
+    }
+  }
+
+  Future<void> _sendFrame(Uint8List framed) {
     final send = _sendTail.then((_) async {
       if (_closed) throw const RemoteOutcomeUnknown();
       for (var i = 0; i < framed.length; i += 16000) {
@@ -330,15 +403,46 @@ class SecureHostClient implements AuthenticatedHostChannel, HostLink {
         _fail();
       },
     );
+    return send;
+  }
+
+  void _ackFragment(String id, int offset) {
+    if (_closed) return;
+    _fragmentAcks[id] = offset;
+    if (_flushingFragments) return;
+    _flushingFragments = true;
+    scheduleMicrotask(() {
+      unawaited(_flushFragmentAcks());
+    });
+  }
+
+  Future<void> _flushFragmentAcks() async {
     try {
-      await send;
-      return await reply;
-    } catch (error) {
-      if (error is ProtocolException && !_closed) rethrow;
+      while (!_closed && _fragmentAcks.isNotEmpty) {
+        final entries = _fragmentAcks.entries.take(16).toList();
+        for (final entry in entries) {
+          _fragmentAcks.remove(entry.key);
+        }
+        final bytes = utf8.encode(
+          jsonEncode({
+            'type': 'fragment_ack',
+            'version': 1,
+            'hostId': hostId,
+            'acks': [
+              for (final entry in entries)
+                {'id': entry.key, 'offset': entry.value},
+            ],
+          }),
+        );
+        final framed = Uint8List(bytes.length + 4);
+        ByteData.sublistView(framed).setUint32(0, bytes.length);
+        framed.setRange(4, framed.length, bytes);
+        await _sendFrame(framed);
+      }
+    } catch (_) {
       _fail();
-      throw const RemoteOutcomeUnknown();
     } finally {
-      _waiting.remove(id);
+      _flushingFragments = false;
     }
   }
 
@@ -351,6 +455,8 @@ class SecureHostClient implements AuthenticatedHostChannel, HostLink {
     _closed = true;
     unawaited(_transport.close().catchError((Object _) {}));
     _noise.close();
+    _frames.clear();
+    _fragmentAcks.clear();
     if (!_handshake.isCompleted) {
       _handshake.completeError(const ProtocolException('配对连接中断，结果需要核实。'));
     }

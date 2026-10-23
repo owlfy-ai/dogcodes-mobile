@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:math';
 import 'host_api.dart';
-import 'mobile_operations.dart' show operationId;
 
 /// Random RFC 4122 v4 identifier for operation/idempotency IDs.
 String uuid() {
@@ -24,7 +23,41 @@ List<Map<String, dynamic>> _list(Object? v) => [
 /// Typed wrappers over the paired-device gateway. The PC remains the source
 /// of truth; every write carries an operation identity where the PC asks for
 /// one, so a retry after a lost reply never repeats the effect.
+class DesktopAuthorizationEnded implements Exception {
+  const DesktopAuthorizationEnded(this.message);
+  final String message;
+  @override
+  String toString() => message;
+}
+
+void checkDesktopAuthorization(dynamic response) {
+  if (response is Map && response['authorizationEnded'] == true) {
+    throw DesktopAuthorizationEnded(
+      response['error'] as String? ?? '电脑已结束屏幕共享，请重新连接并授权',
+    );
+  }
+}
+
 extension PcApi on HostApi {
+  Future<dynamic> _desktopCall(String method, dynamic args) async {
+    final response = await call(method, args);
+    checkDesktopAuthorization(response);
+    return response;
+  }
+
+  /// `showHidden` is sent only when set, so older PCs keep answering.
+  Future<Map<String, dynamic>> hostDirectories(
+    String? path, {
+    int offset = 0,
+    bool showHidden = false,
+  }) async => _map(
+    await call('host_directories', {
+      'path': path,
+      'offset': offset,
+      if (showHidden) 'showHidden': true,
+    }),
+  );
+
   // ── Files (read-only, task scoped) ──────────────────────────────────────
   Future<List<String>> workspaceRoots(String taskId) async => [
     for (final r
@@ -183,11 +216,8 @@ extension PcApi on HostApi {
   );
   Future<Map<String, dynamic>> terminalRead(String id, String after) async =>
       _map(await call('terminal_read', [id, after]));
-  Future<dynamic> terminalWrite(String id, List<int> bytes) =>
-      call('terminal_write', [id, bytes]);
   Future<dynamic> terminalResize(String id, int cols, int rows) =>
       call('terminal_resize', [id, cols, rows]);
-  Future<dynamic> terminalStop(String id) => call('terminal_stop', id);
 
   // ── Project runs & preview ──────────────────────────────────────────────
   Future<Map<String, dynamic>> projectRuns(String taskId) async =>
@@ -234,25 +264,47 @@ extension PcApi on HostApi {
   Future<Map<String, dynamic>> deviceStatus() async =>
       _map(await call('device_status', null));
   Future<List<Map<String, dynamic>>> displays() async =>
-      _list(await call('remote_desktop_displays', null));
-  Future<Map<String, dynamic>> desktopOpen(int monitorId) async => _map(
-    await call('remote_desktop_open', {
+      _list(await _desktopCall('remote_desktop_displays', null));
+
+  /// With [video] the PC also streams the screen as H.264, encoded
+  /// [videoMaxWidth] wide: on the connection's WebRTC track (direct desktop
+  /// connections), or with [videoTransport] `binary` as binary messages on
+  /// this link, for a phone that decodes them itself.
+  Future<Map<String, dynamic>> desktopOpen(
+    int monitorId, {
+    bool video = false,
+    int videoMaxWidth = 1920,
+    String? videoTransport,
+  }) async => _map(
+    await _desktopCall('remote_desktop_open', {
       'monitorId': monitorId,
       'control': true,
+      'chunkedMessages': true,
+      if (video) ...{
+        'video': true,
+        'deferVideo': true,
+        'videoMaxWidth': videoMaxWidth,
+        'videoTransport': ?videoTransport,
+      },
     }),
   );
+
+  /// With [knownFrameId] a PC that supports it may answer `unchanged`
+  /// without image bytes when the screen still matches that frame.
   Future<Map<String, dynamic>> desktopFrame(
     String leaseId, {
     int maxWidth = 1280,
     int quality = 60,
+    String? knownFrameId,
   }) async => _map(
-    await call('remote_desktop_frame', {
+    await _desktopCall('remote_desktop_frame', {
       'leaseId': leaseId,
       'maxWidth': maxWidth,
       'quality': quality,
+      'knownFrameId': ?knownFrameId,
     }),
   );
-  Future<dynamic> desktopSelect(String leaseId, int monitorId) => call(
+  Future<dynamic> desktopSelect(String leaseId, int monitorId) => _desktopCall(
     'remote_desktop_select',
     {'leaseId': leaseId, 'monitorId': monitorId},
   );
@@ -260,57 +312,27 @@ extension PcApi on HostApi {
     String leaseId,
     int sequence,
     Map<String, dynamic> event,
-  ) => call('remote_desktop_input', {
+  ) => _desktopCall('remote_desktop_input', {
     'leaseId': leaseId,
     'sequence': '$sequence',
     'event': event,
   });
+
+  /// An ordered batch under one sequence number (PCs whose open reply
+  /// carries `inputBatch`).
+  Future<dynamic> desktopInputBatch(
+    String leaseId,
+    int sequence,
+    List<Map<String, dynamic>> events,
+  ) => _desktopCall('remote_desktop_input', {
+    'leaseId': leaseId,
+    'sequence': '$sequence',
+    'events': events,
+  });
   Future<dynamic> desktopClose(String leaseId) =>
       call('remote_desktop_close', {'leaseId': leaseId});
-  Future<Map<String, dynamic>> clipboardGet(String kind) async =>
-      _map(await call('clipboard_get', {'kind': kind}));
-  Future<dynamic> clipboardSet(Map<String, dynamic> value) =>
-      call('clipboard_set', value);
 
   // ── Power & task lifecycle ──────────────────────────────────────────────
   Future<Map<String, dynamic>> powerPreferences() async =>
       _map(await call('power_preferences', null));
-  Future<Map<String, dynamic>> setKeepAwake(
-    bool enabled,
-    String expectedRevision,
-  ) async => _map(
-    await call('power_preferences_set', {
-      'operationId': uuid(),
-      'expectedRevision': expectedRevision,
-      'enabled': enabled,
-    }),
-  );
-
-  Future<dynamic> executeCommand(
-    Map<String, dynamic> payload, {
-    Object? expectedStreamVersion,
-  }) {
-    final id = operationId();
-    return call('execute', [
-      {
-        'schemaVersion': 1,
-        'commandId': id,
-        'idempotencyKey': id,
-        'actor': {'kind': 'local_user'},
-        'expectedStreamVersion': expectedStreamVersion,
-        'issuedAt': DateTime.now().toUtc().toIso8601String(),
-        'payload': payload,
-      },
-    ]);
-  }
-
-  Future<dynamic> renameTask(Map<String, dynamic> task, String title) =>
-      executeCommand({
-        'type': 'rename_task',
-        'data': {'taskId': task['taskId'], 'title': title},
-      }, expectedStreamVersion: task['streamVersion']);
-  Future<dynamic> deleteTask(Map<String, dynamic> task) => executeCommand({
-    'type': 'delete_task',
-    'data': {'taskId': task['taskId']},
-  }, expectedStreamVersion: task['streamVersion']);
 }

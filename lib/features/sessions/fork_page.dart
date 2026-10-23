@@ -8,61 +8,31 @@ import '../conversation/conversation_page.dart';
 import '../inbox/pending_operation.dart';
 
 class ForkPage extends StatefulWidget {
-  const ForkPage({super.key, required this.session});
+  const ForkPage({
+    super.key,
+    required this.session,
+    required this.turnId,
+    this.prompt,
+  });
   final SessionRef session;
+  final String turnId;
+  final String? prompt;
   @override
   State<ForkPage> createState() => _ForkPageState();
 }
 
 class _ForkPageState extends State<ForkPage> {
-  List<Map<String, dynamic>> turns = [];
-  String? turnId, error;
+  String? error;
   String environment = 'workspace';
-  bool loading = true, busy = false;
-  @override
-  void initState() {
-    super.initState();
-    _load();
-  }
-
-  Future<void> _load() async {
-    final s = widget.session, link = widget.session.host.link;
-    if (link == null) {
-      setState(() {
-        loading = false;
-        error = '电脑离线';
-      });
-      return;
-    }
-    try {
-      final value = await link.call('timeline_snapshot', [s.taskId]);
-      final seen = <String>{};
-      final list = <Map<String, dynamic>>[
-        for (final i in value['items'] as List)
-          if (i['kind'] == 'user_message' &&
-              i['turnId'] is String &&
-              seen.add(i['turnId'] as String))
-            Map<String, dynamic>.from(i as Map),
-      ];
-      if (mounted) {
-        setState(() {
-          turns = list;
-          turnId = list.lastOrNull?['turnId'] as String?;
-        });
-      }
-    } catch (e) {
-      if (mounted) setState(() => error = '$e');
-    } finally {
-      if (mounted) setState(() => loading = false);
-    }
-  }
+  bool busy = false;
 
   Future<void> _fork() async {
     final s = widget.session,
         h = widget.session.host,
         hub = AppScope.of(context).hub;
-    final link = h.link, turn = turnId;
-    if (link == null || turn == null || busy) return;
+    final link = h.link;
+    final turn = widget.turnId;
+    if (link == null || !h.online || busy) return;
     if (h.task(s.taskId)?['activePrimaryRun'] != null) {
       setState(() => error = '请等待当前任务结束后再 Fork。');
       return;
@@ -105,74 +75,52 @@ class _ForkPageState extends State<ForkPage> {
       ),
       body: ListenableBuilder(
         listenable: hub,
-        builder: (context, _) => loading
-            ? const Center(child: CircularProgressIndicator())
-            : ListView(
-                padding: const EdgeInsets.all(DcSpace.page),
-                children: [
-                  const Text('从选中轮次结束时的历史创建独立会话。'),
-                  const SizedBox(height: 16),
-                  if (turns.isEmpty) const InlineNotice('没有可 Fork 的对话轮次。'),
-                  for (var i = 0; i < turns.length; i++)
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      leading: Icon(
-                        turnId == turns[i]['turnId']
-                            ? Icons.radio_button_checked
-                            : Icons.radio_button_off,
-                      ),
-                      title: Text(
-                        '第 ${i + 1} 轮 · ${turns[i]['text']}',
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      onTap: busy
-                          ? null
-                          : () => setState(
-                              () => turnId = turns[i]['turnId'] as String,
-                            ),
-                    ),
-                  const Divider(),
-                  for (final (id, title, detail) in const [
-                    ('workspace', '当前工作区', '共享当前项目文件，仅复制对话历史。'),
-                    (
-                      'worktree',
-                      '新 Worktree',
-                      '在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照。',
-                    ),
-                  ])
-                    ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      leading: Icon(
-                        environment == id
-                            ? Icons.radio_button_checked
-                            : Icons.radio_button_off,
-                      ),
-                      title: Text(title),
-                      subtitle: Text(detail),
-                      onTap: busy
-                          ? null
-                          : () => setState(() => environment = id),
-                    ),
-                  if (error != null) InlineNotice(error!, danger: true),
-                  if (s.host.pendingOperation != null)
-                    PendingOperationCard(host: s.host),
-                  const SizedBox(height: 16),
-                  FilledButton(
-                    onPressed:
-                        busy ||
-                            turnId == null ||
-                            !s.host.online ||
-                            s.host.pendingOperation != null ||
-                            s.host.task(s.taskId)?['activePrimaryRun'] != null
-                        ? null
-                        : _fork,
-                    child: Text(busy ? '正在创建…' : '创建 Fork'),
-                  ),
-                  if (s.host.task(s.taskId)?['activePrimaryRun'] != null)
-                    const InlineNotice('请等待当前任务结束后再 Fork。'),
-                ],
+        builder: (context, _) => ListView(
+          padding: const EdgeInsets.all(DcSpace.page),
+          children: [
+            const Text('从本轮结束时的历史创建独立会话。'),
+            if (widget.prompt != null) ...[
+              const SizedBox(height: 12),
+              Text(
+                widget.prompt!,
+                maxLines: 4,
+                overflow: TextOverflow.ellipsis,
               ),
+            ],
+            const Divider(),
+            for (final (id, title, detail) in const [
+              ('workspace', '当前工作区', '共享当前项目文件，仅复制对话历史。'),
+              ('worktree', '新 Worktree', '在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照。'),
+            ])
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: Icon(
+                  environment == id
+                      ? Icons.radio_button_checked
+                      : Icons.radio_button_off,
+                ),
+                title: Text(title),
+                subtitle: Text(detail),
+                onTap: busy ? null : () => setState(() => environment = id),
+              ),
+            if (error != null) InlineNotice(error!, danger: true),
+            if (s.host.pendingOperation != null)
+              PendingOperationCard(host: s.host),
+            const SizedBox(height: 16),
+            FilledButton(
+              onPressed:
+                  busy ||
+                      !s.host.online ||
+                      s.host.pendingOperation != null ||
+                      s.host.task(s.taskId)?['activePrimaryRun'] != null
+                  ? null
+                  : _fork,
+              child: Text(busy ? '正在创建…' : '创建 Fork'),
+            ),
+            if (s.host.task(s.taskId)?['activePrimaryRun'] != null)
+              const InlineNotice('请等待当前任务结束后再 Fork。'),
+          ],
+        ),
       ),
     );
   }

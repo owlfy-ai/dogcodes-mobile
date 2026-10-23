@@ -8,6 +8,9 @@ import '../../ui/widgets.dart';
 import '../inbox/pending_operation.dart';
 import 'agent_picker.dart';
 import 'conversation_page.dart';
+import '../workspace/add_project_page.dart';
+import 'composer_state.dart';
+import 'composer_attachments.dart';
 
 /// 03 新会话: project, computer, task text and Agent / model / thinking.
 class NewSessionPage extends StatefulWidget {
@@ -19,13 +22,22 @@ class NewSessionPage extends StatefulWidget {
 }
 
 class _NewSessionPageState extends State<NewSessionPage> {
-  final prompt = TextEditingController();
+  late ComposerState draft;
+  TextEditingController get prompt => draft.prompt;
   late HostHub hub;
   bool _ready = false, sending = false;
   String? hostId, projectId, error;
-  AgentChoice? choice;
+  AgentChoice? get choice => draft.choice;
+  set choice(AgentChoice? value) => draft.choice = value;
 
   HostState? get host => hostId == null ? null : hub.host(hostId!);
+  Future<void> _addProject() async {
+    final result = await showAddProject(context, hostId: hostId);
+    if (result == null || !mounted) return;
+    setState(() {
+      _selectHost(result.hostId, project: result.projectId, carry: true);
+    });
+  }
 
   @override
   void didChangeDependencies() {
@@ -33,37 +45,29 @@ class _NewSessionPageState extends State<NewSessionPage> {
     if (_ready) return;
     _ready = true;
     hub = AppScope.of(context).hub;
+    draft = ComposerState(hub)..addListener(_draftChanged);
     final online = hub.hosts.where((h) => h.online).toList();
-    hostId = widget.hostId != null && hub.host(widget.hostId!)?.online == true
+    hostId = widget.hostId != null && hub.host(widget.hostId!) != null
         ? widget.hostId
-        : online.isEmpty
-        ? null
-        : online.first.id;
+        : online.firstOrNull?.id ?? hub.hosts.firstOrNull?.id;
     _selectHost(hostId, project: widget.projectId);
   }
 
-  void _selectHost(String? id, {String? project}) {
+  void _draftChanged() {
+    if (mounted) setState(() {});
+  }
+
+  void _selectHost(String? id, {String? project, bool carry = false}) {
     hostId = id;
-    final h = host;
-    final projects = h?.projects ?? const [];
+    final h = host, projects = host?.projects ?? const [];
     projectId = projects.any((p) => p['projectId'] == project)
         ? project
-        : projects.isEmpty
-        ? null
-        : projects.first['projectId'] as String;
-    choice = null;
-    final e = h == null ? null : defaultExecutor(h, null);
-    final link = h?.link;
-    if (e != null && link != null) {
-      choice = AgentChoice(e);
-      unawaited(
-        loadChoice(link, e, null)
-            .then((v) {
-              if (mounted && hostId == h!.id) setState(() => choice = v);
-            })
-            .catchError((Object _) {}),
-      );
-    }
+        : projects.firstOrNull?['projectId'] as String?;
+    unawaited(
+      draft.bind(h, projectId, null, carry: carry).catchError((Object e) {
+        if (mounted) setState(() => error = '$e');
+      }),
+    );
   }
 
   Future<void> start() async {
@@ -72,12 +76,25 @@ class _NewSessionPageState extends State<NewSessionPage> {
     final c = choice;
     final text = prompt.text;
     if (h == null || link == null || projectId == null || c == null) return;
-    if (text.trim().isEmpty) return;
+    if (!draft.hasContent ||
+        sending ||
+        !h.online ||
+        !draft.choiceValid ||
+        draft.host != h ||
+        draft.projectId != projectId ||
+        draft.restoring) {
+      return;
+    }
     setState(() {
       sending = true;
       error = null;
     });
     try {
+      await draft.flush();
+      final attachments = draft.attachments.isEmpty
+          ? <Map<String, dynamic>>[]
+          : await draft.prepareAttachments();
+      final identity = draft.identity;
       final value = await h.operations.send(link, {
         'scope': 'mobile:${h.id}:$projectId:new',
         'taskId': null,
@@ -88,13 +105,14 @@ class _NewSessionPageState extends State<NewSessionPage> {
           'model': c.model,
           'thinking': c.thinking,
           'permissionMode': null,
-          'attachments': [],
+          'attachments': attachments,
         },
-      });
+      }, draft: identity);
       await hub.refresh(h);
       if (value is Map &&
           value['state'] == 'closed' &&
           value['resolution']?['status'] == 'submitted') {
+        await draft.submitted(identity);
         _open(h.id, value['resolution']['taskId'] as String);
         return;
       }
@@ -119,7 +137,8 @@ class _NewSessionPageState extends State<NewSessionPage> {
 
   @override
   void dispose() {
-    prompt.dispose();
+    draft.removeListener(_draftChanged);
+    draft.dispose();
     super.dispose();
   }
 
@@ -135,10 +154,30 @@ class _NewSessionPageState extends State<NewSessionPage> {
           h.online &&
           h.pendingOperation == null &&
           project != null &&
-          choice != null &&
+          draft.choiceValid &&
+          draft.host == h &&
+          draft.projectId == projectId &&
+          !draft.restoring &&
+          !draft.uploading &&
+          !draft.picking &&
           !sending;
       return Scaffold(
-        appBar: const DetailBar(title: '新会话'),
+        appBar: DetailBar(
+          title: '新会话',
+          actions: [
+            IconButton(
+              tooltip: '添加项目',
+              onPressed:
+                  !sending &&
+                      !draft.uploading &&
+                      !draft.restoring &&
+                      hub.hosts.any((h) => h.online)
+                  ? _addProject
+                  : null,
+              icon: const Icon(Icons.create_new_folder_outlined),
+            ),
+          ],
+        ),
         body: SafeArea(
           top: false,
           child: Column(
@@ -150,14 +189,20 @@ class _NewSessionPageState extends State<NewSessionPage> {
                     _Picker<String>(
                       icon: Icons.folder_outlined,
                       label: projectLabel(project) ?? '选择项目',
-                      enabled: h != null && h.projects.isNotEmpty,
+                      enabled:
+                          !sending &&
+                          !draft.restoring &&
+                          !draft.uploading &&
+                          h != null &&
+                          h.projects.isNotEmpty,
                       values: {
                         for (final p in h?.projects ?? const [])
                           p['projectId'] as String: projectLabel(
                             Map<String, dynamic>.from(p),
                           )!,
                       },
-                      onSelected: (v) => setState(() => projectId = v),
+                      onSelected: (v) =>
+                          setState(() => _selectHost(hostId, project: v)),
                     ),
                     if (project != null)
                       Padding(
@@ -170,38 +215,56 @@ class _NewSessionPageState extends State<NewSessionPage> {
                     const SizedBox(height: 8),
                     _Picker<String>(
                       icon: Icons.computer_outlined,
-                      label: h?.name ?? '没有在线的电脑',
+                      label: h?.name ?? '没有已绑定的电脑',
                       trailing: h == null
                           ? null
                           : StatusLabel(
                               h.online ? '在线' : '离线',
                               tone: h.online ? Tone.accent : Tone.muted,
                             ),
-                      enabled: hub.hosts.where((x) => x.online).length > 1,
+                      enabled:
+                          !sending &&
+                          !draft.restoring &&
+                          !draft.uploading &&
+                          hub.hosts.length > 1,
                       values: {
                         for (final x in hub.hosts)
-                          if (x.online) x.id: x.name,
+                          x.id: '${x.name}${x.online ? '' : ' · 离线'}',
                       },
                       onSelected: (v) => setState(() => _selectHost(v)),
                     ),
                     if (h != null && h.projects.isEmpty)
-                      const InlineNotice('这台电脑还没有项目。请先在电脑上添加项目目录。'),
+                      const InlineNotice('这台电脑还没有项目，点右上角「添加项目」选择电脑上的已有目录。'),
                     const SizedBox(height: 20),
                     Text(
                       '你想完成什么？',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(height: 8),
+                    if (h != null && !h.online)
+                      const InlineNotice('电脑离线，任务和附件会保留为本机草稿。重连后请点击发送。'),
+                    if (draft.restoring) const LinearProgressIndicator(),
                     TextField(
                       controller: prompt,
+                      enabled:
+                          !sending &&
+                          !draft.restoring &&
+                          !draft.restoreFailed &&
+                          !draft.uploading,
                       minLines: 5,
                       maxLines: 12,
                       decoration: const InputDecoration(hintText: '描述你的任务…'),
                     ),
-                    const SizedBox(height: 20),
+                    ComposerAttachments(draft: draft, enabled: !sending),
+                    const SizedBox(height: 12),
                     Panel(
                       outlined: true,
-                      onTap: h?.online == true
+                      onTap:
+                          h?.online == true &&
+                              !sending &&
+                              !draft.uploading &&
+                              !draft.restoring &&
+                              !draft.picking
                           ? () async {
                               final value = await showAgentSheet(
                                 context,
@@ -259,9 +322,12 @@ class _NewSessionPageState extends State<NewSessionPage> {
                         padding: const EdgeInsets.only(top: 16),
                         child: PendingOperationCard(
                           host: h!,
+                          onDraftSubmitted: draft.submitted,
                           onSubmitted: (task) => _open(h.id, task),
                         ),
                       ),
+                    if (draft.error != null)
+                      InlineNotice(draft.error!, danger: true),
                     if (error != null)
                       Padding(
                         padding: const EdgeInsets.only(top: 12),
@@ -282,9 +348,7 @@ class _NewSessionPageState extends State<NewSessionPage> {
                   builder: (context, _) => SizedBox(
                     width: double.infinity,
                     child: FilledButton(
-                      onPressed: canStart && prompt.text.trim().isNotEmpty
-                          ? start
-                          : null,
+                      onPressed: canStart && draft.hasContent ? start : null,
                       child: sending
                           ? const SizedBox.square(
                               dimension: 18,

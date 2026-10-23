@@ -55,8 +55,17 @@ class _DogCodesAppState extends State<DogCodesApp> {
           connector: runtime?.reconnect,
           lister: runtime == null ? null : () => runtime.hosts.list(),
           forgetter: runtime?.hosts.forget,
+          local: runtime?.local,
         );
-    if (!hub.loaded) hub.load();
+    if (!hub.loaded) {
+      if (runtime == null) {
+        hub.load();
+      } else {
+        runtime.initialize().then((_) {
+          if (mounted) hub.load();
+        });
+      }
+    }
   }
 
   @override

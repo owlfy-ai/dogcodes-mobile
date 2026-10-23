@@ -6,7 +6,8 @@ import 'package:dogcodes_app/features/sessions/sessions_page.dart';
 import 'widget_test.dart' show FakeLink, fakeHub;
 
 class SessionLink extends FakeLink {
-  SessionLink() : super('macbook-pro-host');
+  SessionLink({this.twoTurns = false}) : super('macbook-pro-host');
+  final bool twoTurns;
   Map<String, dynamic> preferences = {
     'tasks': <String, dynamic>{},
     'projects': {},
@@ -95,7 +96,29 @@ class SessionLink extends FakeLink {
           'kind': 'assistant_message',
           'text': '匹配历史正文',
           'occurredAt': FakeLink.now,
+          'turnCompletion': {
+            'startedAt': '2026-10-21T10:00:00Z',
+            'completedAt': '2026-10-21T10:01:00Z',
+          },
         },
+        if (twoTurns) ...[
+          {
+            'itemId': 'u3',
+            'turnId': 'turn3',
+            'kind': 'user_message',
+            'text': '后续问题',
+          },
+          {
+            'itemId': 'a3',
+            'turnId': 'turn3',
+            'kind': 'assistant_message',
+            'text': '后续回答',
+            'turnCompletion': {
+              'startedAt': '2026-10-21T10:01:00Z',
+              'completedAt': '2026-10-21T10:02:00Z',
+            },
+          },
+        ],
       ];
     }
     return value;
@@ -113,51 +136,81 @@ Future<void> menu(WidgetTester tester) async {
 }
 
 void main() {
-  testWidgets(
-    'pin/archive/unarchive update shared preferences and list sections',
-    (tester) async {
-      final link = SessionLink(), hub = fakeHub();
-      await hub.load(connect: false);
-      await hub.attach(hub.hosts.single, link);
-      await tester.pumpWidget(DogCodesApp(hub: hub));
-      await tester.pumpAndSettle();
-      await menu(tester);
-      await tester.tap(find.text('置顶会话'));
-      await tester.pumpAndSettle();
-      expect(link.preferences['tasks']['t2'], 'pinned');
-      expect(find.text('置顶'), findsOneWidget);
-      await menu(tester);
-      await tester.tap(find.text('归档会话'));
-      await tester.pumpAndSettle();
-      expect(find.text('修复移动端布局'), findsNothing);
-      await tester.tap(find.text('已归档'));
-      await tester.pumpAndSettle();
-      expect(find.text('修复移动端布局'), findsOneWidget);
-      await menu(tester);
-      await tester.tap(find.text('取消归档'));
-      await tester.pumpAndSettle();
-      expect(link.preferences['tasks']['t2'], isNull);
-      expect(find.text('暂无已归档会话'), findsOneWidget);
-      await tester.tap(find.text('当前会话'));
-      await tester.pumpAndSettle();
-      expect(find.text('修复移动端布局'), findsOneWidget);
-      await tester.pumpWidget(const SizedBox());
-      hub.dispose();
-    },
-  );
+  testWidgets('archived sessions collapse to the bottom and stay searchable', (
+    tester,
+  ) async {
+    final link = SessionLink(), hub = fakeHub();
+    await hub.load(connect: false);
+    await hub.attach(hub.hosts.single, link);
+    await tester.pumpWidget(DogCodesApp(hub: hub));
+    await tester.pumpAndSettle();
+    await menu(tester);
+    await tester.tap(find.text('置顶会话'));
+    await tester.pumpAndSettle();
+    expect(link.preferences['tasks']['t2'], 'pinned');
+    expect(find.text('置顶'), findsOneWidget);
+    await menu(tester);
+    await tester.tap(find.text('归档会话（将取消置顶）'));
+    await tester.pumpAndSettle();
+    expect(find.text('修复移动端布局'), findsNothing);
+    expect(find.byType(ChoiceChip), findsNothing);
+    expect(find.text('已归档 (1)'), findsOneWidget);
+
+    await tester.enterText(find.widgetWithText(TextField, '搜索会话'), '移动端');
+    await tester.pumpAndSettle();
+    expect(find.text('修复移动端布局'), findsOneWidget);
+    expect(find.text('已归档'), findsOneWidget);
+    expect(find.text('已归档 (1)'), findsNothing);
+    await tester.enterText(find.widgetWithText(TextField, '搜索会话'), '');
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('已归档 (1)'));
+    await tester.pumpAndSettle();
+    expect(find.text('修复移动端布局'), findsOneWidget);
+    await menu(tester);
+    expect(find.text('置顶会话'), findsNothing);
+    await tester.tap(find.text('取消归档'));
+    await tester.pumpAndSettle();
+    expect(link.preferences['tasks']['t2'], isNull);
+    expect(find.text('已归档'), findsNothing);
+    expect(find.textContaining('已归档 ('), findsNothing);
+    expect(find.text('修复移动端布局'), findsOneWidget);
+    await tester.pumpWidget(const SizedBox());
+    hub.dispose();
+  });
 
   testWidgets(
     'Fork selects a historical turn and environment and opens the returned task',
     (tester) async {
-      final link = SessionLink(), hub = fakeHub();
+      final link = SessionLink(twoTurns: true), hub = fakeHub();
       await hub.load(connect: false);
       await hub.attach(hub.hosts.single, link);
       await tester.pumpWidget(DogCodesApp(hub: hub));
       await tester.pumpAndSettle();
       await menu(tester);
-      await tester.tap(find.text('Fork 会话'));
+      expect(find.text('Fork 会话'), findsNothing);
+      await tester.tapAt(const Offset(10, 10));
       await tester.pumpAndSettle();
-      expect(find.text('第 1 轮 · 原始历史问题'), findsOneWidget);
+      await tester.tap(find.text('修复移动端布局'));
+      await tester.pumpAndSettle();
+      final fork = find.descendant(
+        of: find.byKey(const ValueKey('turn-actions:turn2')),
+        matching: find.byTooltip('从本轮 Fork'),
+      );
+      await tester.scrollUntilVisible(
+        fork,
+        -300,
+        scrollable: find
+            .descendant(
+              of: find.byKey(const ValueKey('conversation-timeline')),
+              matching: find.byType(Scrollable),
+            )
+            .first,
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(fork);
+      await tester.pumpAndSettle();
+      expect(find.text('原始历史问题'), findsWidgets);
       await tester.tap(find.text('新 Worktree'));
       await tester.tap(find.text('创建 Fork'));
       await tester.pumpAndSettle();

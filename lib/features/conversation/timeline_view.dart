@@ -6,6 +6,8 @@ import '../../ui/theme.dart';
 import '../../ui/widgets.dart';
 import 'timeline_model.dart';
 import 'turn_files.dart';
+import 'turn_actions.dart';
+import 'attachment_preview.dart';
 
 /// Renders a task timeline the way the desktop does: open Agent answers,
 /// compact tool rows, and finished turns folded behind their answer.
@@ -16,52 +18,100 @@ class TimelineView extends StatelessWidget {
     this.activeTurnId,
     this.focusTurnId,
     this.focusKey,
+    this.session,
   });
   final List<Item> items;
   final String? activeTurnId;
   final String? focusTurnId;
   final GlobalKey? focusKey;
+  final SessionRef? session;
   @override
-  Widget build(BuildContext context) {
-    final entries = buildEntries(
-      items,
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: timelineEntries(
+      context,
+      items: items,
       activeTurnId: activeTurnId,
-      agentName: (p) => agentLabel(p),
-    );
-    var focused = false;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        ...entries.map((e) {
-          final target =
-              !focused &&
-              focusTurnId != null &&
-              e is ItemEntry &&
-              e.item['turnId'] == focusTurnId;
-          if (target) focused = true;
-          return Container(
-            key: target ? focusKey : null,
-            decoration: target
-                ? BoxDecoration(
-                    border: Border(
-                      left: BorderSide(color: context.dc.accent, width: 2),
-                    ),
-                  )
-                : null,
-            child: EntryView(entry: e, activeTurnId: activeTurnId),
-          );
-        }),
-      ],
-    );
-  }
+      focusTurnId: focusTurnId,
+      focusKey: focusKey,
+      session: session,
+    ).widgets,
+  );
 }
 
+/// One widget per timeline entry, keyed by the entry's identity so expanded
+/// state survives streamed updates. A lazy list builds only the visible ones;
+/// `focusIndex` is the entry of [focusTurnId], for scrolling to it.
+({List<Widget> widgets, int? focusIndex}) timelineEntries(
+  BuildContext context, {
+  required List<Item> items,
+  String? activeTurnId,
+  String? focusTurnId,
+  GlobalKey? focusKey,
+  SessionRef? session,
+}) {
+  final entries = buildEntries(
+    items,
+    activeTurnId: activeTurnId,
+    agentName: (p) => agentLabel(p),
+  );
+  final seen = <String>{};
+  int? focusIndex;
+  final widgets = <Widget>[];
+  for (final e in entries) {
+    final target =
+        focusIndex == null &&
+        focusTurnId != null &&
+        e is ItemEntry &&
+        e.item['turnId'] == focusTurnId;
+    if (target) focusIndex = widgets.length;
+    var key = _entryKey(e);
+    if (!seen.add(key)) key = '$key#${widgets.length}';
+    widgets.add(
+      KeyedSubtree(
+        key: ValueKey(key),
+        child: Container(
+          key: target ? focusKey : null,
+          decoration: target
+              ? BoxDecoration(
+                  border: Border(
+                    left: BorderSide(color: context.dc.accent, width: 2),
+                  ),
+                )
+              : null,
+          child: EntryView(
+            entry: e,
+            activeTurnId: activeTurnId,
+            session: session,
+          ),
+        ),
+      ),
+    );
+  }
+  return (widgets: widgets, focusIndex: focusIndex);
+}
+
+String _entryKey(Entry e) => switch (e) {
+  ItemEntry(:final item) => 'item:${item['itemId']}',
+  LookupEntry(:final items) => 'lookup:${items.first['itemId']}',
+  ProcessEntry(:final entries) =>
+    'process:${entries.isEmpty ? '' : _entryKey(entries.first)}',
+  TurnActionsEntry(:final turnId) => 'actions:$turnId',
+};
+
 class EntryView extends StatelessWidget {
-  const EntryView({super.key, required this.entry, this.activeTurnId});
+  const EntryView({
+    super.key,
+    required this.entry,
+    this.activeTurnId,
+    this.session,
+  });
   final Entry entry;
   final String? activeTurnId;
+  final SessionRef? session;
   @override
   Widget build(BuildContext context) => switch (entry) {
+    TurnActionsEntry e => TurnActions(entry: e, session: session),
     ItemEntry e => _ItemView(entry: e, activeTurnId: activeTurnId),
     LookupEntry e => _Expandable(
       icon: Icons.manage_search,
@@ -93,6 +143,56 @@ class EntryView extends StatelessWidget {
   };
 }
 
+/// The PC shortened this item to keep the page under the transfer limit.
+class _FullItemButton extends StatefulWidget {
+  const _FullItemButton({required this.item});
+  final Item item;
+  @override
+  State<_FullItemButton> createState() => _FullItemButtonState();
+}
+
+class _FullItemButtonState extends State<_FullItemButton> {
+  bool busy = false;
+  String? error;
+  @override
+  Widget build(BuildContext context) {
+    final load = TurnScope.of(context)?.loadFullItem;
+    final id = widget.item['itemId'];
+    final bytes = widget.item['fullBytes'];
+    final size = bytes is num ? '（${(bytes / 1024).ceil()} KB）' : '';
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TextButton.icon(
+          icon: busy
+              ? const SizedBox.square(
+                  dimension: 14,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                )
+              : const Icon(Icons.unfold_more, size: 18),
+          label: Text('内容较长已截断，显示完整内容$size'),
+          onPressed: busy || load == null || id is! String
+              ? null
+              : () async {
+                  setState(() {
+                    busy = true;
+                    error = null;
+                  });
+                  try {
+                    await load(id);
+                  } catch (e) {
+                    if (mounted) setState(() => error = '$e');
+                  } finally {
+                    if (mounted) setState(() => busy = false);
+                  }
+                },
+        ),
+        if (error != null) InlineNotice(error!, danger: true),
+      ],
+    );
+  }
+}
+
 class _ItemView extends StatelessWidget {
   const _ItemView({required this.entry, this.activeTurnId});
   final ItemEntry entry;
@@ -102,7 +202,16 @@ class _ItemView extends StatelessWidget {
   Widget build(BuildContext context) {
     final item = entry.item;
     final active = activeTurnId != null && item['turnId'] == activeTurnId;
-    final body = _body(context, item, active);
+    final content = _body(context, item, active);
+    final body = item['truncated'] == true
+        ? Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              content,
+              _FullItemButton(item: item),
+            ],
+          )
+        : content;
     if (entry.agent == null) return body;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -270,6 +379,15 @@ class _UserBubble extends StatelessWidget {
               style: Theme.of(context).textTheme.bodySmall,
             ),
           ),
+          if (attachments is List && (attachments as List).isNotEmpty)
+            Wrap(
+              spacing: 8,
+              runSpacing: 4,
+              children: [
+                for (final a in attachments as List)
+                  if (a is Map) AttachmentButton(attachment: a),
+              ],
+            ),
         ],
       ),
     );
@@ -334,86 +452,62 @@ class _ActivityView extends StatelessWidget {
             '委派任务',
         status: status,
         running: running,
-        child: children.isEmpty
-            ? Text('暂无子任务记录', style: Theme.of(context).textTheme.bodySmall)
-            : TimelineView(items: children),
+        // Only its result: the subagent's own steps stay on the PC.
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            if (subagentResult(a) case final result?)
+              AgentMarkdown(result)
+            else
+              const _Muted('暂无子任务结论'),
+            _Muted(
+              children.isEmpty
+                  ? '执行过程请在电脑上查看'
+                  : '共 ${children.length} 步，执行过程请在电脑上查看',
+            ),
+          ],
+        ),
       );
     }
     if (category == '修改' && (a.changes.isNotEmpty || inputPath(a).isNotEmpty)) {
       final files = a.changes.isNotEmpty
-          ? [
-              for (final c in a.changes)
-                (path: '${c['path'] ?? ''}', diff: c['diff'] as String?),
-            ]
-          : [
-              (
-                path: inputPath(a),
-                diff:
-                    a.input is Map &&
-                        (a.input as Map)['old_string'] is String &&
-                        (a.input as Map)['new_string'] is String
-                    ? editPatch(
-                        (a.input as Map)['old_string'] as String,
-                        (a.input as Map)['new_string'] as String,
-                      )
-                    : null,
-              ),
-            ];
+          ? [for (final c in a.changes) '${c['path'] ?? ''}']
+          : [inputPath(a)];
       return Column(
         children: [
           for (final f in files)
             _Expandable(
               icon: Icons.edit_outlined,
               label: '修改',
-              title: f.path.split('/').last,
+              title: f.split('/').last,
               status: status,
               running: running,
-              child: f.diff == null || f.diff!.isEmpty
-                  ? Text(f.path, style: Theme.of(context).textTheme.bodySmall)
-                  : Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Text(
-                          f.path,
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                        const SizedBox(height: 6),
-                        DiffBlock(f.diff!),
-                      ],
-                    ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(f, style: Theme.of(context).textTheme.bodySmall),
+                  const _Muted('改动内容见本轮文件变更，或在电脑上查看'),
+                ],
+              ),
             ),
         ],
       );
     }
-    final terminal = category == '终端';
-    final Widget detail;
-    if (terminal) {
-      final command = terminalCommand(a.input);
-      final preview = truncateOutput(terminalOutput(a.output));
-      detail = Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          if (a.partial) const _Muted('仅展示部分内容'),
-          if (command.isNotEmpty) CodeBlock('\$ $command'),
-          const SizedBox(height: 6),
-          preview.text.isNotEmpty
-              ? CodeBlock(preview.text)
-              : const _Muted('暂无命令输出'),
-          if (preview.truncated) const _Muted('… 输出过长，已截断'),
-        ],
-      );
-    } else {
-      final out = a.output == null ? '' : outputText(a.output);
-      detail = Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          if (a.partial) const _Muted('仅展示部分内容'),
-          if (a.input != null) CodeBlock(_clip(printable(a.input))),
-          const SizedBox(height: 6),
-          out.isNotEmpty ? CodeBlock(_clip(out)) : const _Muted('暂无工具输出'),
-        ],
-      );
-    }
+    // What was run and, for a failed step, why it stopped; outputs stay on
+    // the PC (it no longer sends them to the phone).
+    final command = category == '终端' ? terminalCommand(a.input) : '';
+    final failure = failurePreview(a);
+    final detail = Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        if (command.isNotEmpty)
+          CodeBlock('\$ $command')
+        else if (a.input != null)
+          CodeBlock(_clip(printable(a.input))),
+        if (failure != null) ...[const SizedBox(height: 6), CodeBlock(failure)],
+        const _Muted('完整输出请在电脑上查看'),
+      ],
+    );
     return _Expandable(
       icon: _categoryIcon(category),
       label: category,

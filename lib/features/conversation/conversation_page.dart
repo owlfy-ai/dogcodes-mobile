@@ -4,7 +4,8 @@ import '../../app.dart';
 import '../../core/host_hub.dart';
 import '../../core/live_timeline.dart';
 import '../../core/mobile_operations.dart';
-import '../../core/pc_api.dart';
+import '../../core/protocol.dart';
+import '../../data/local_workspace.dart';
 import '../../ui/quota_ring.dart';
 import '../../ui/theme.dart';
 import '../../ui/widgets.dart';
@@ -13,6 +14,8 @@ import '../inbox/pending_operation.dart';
 import 'agent_picker.dart';
 import 'timeline_view.dart';
 import 'turn_files.dart';
+import 'composer_state.dart';
+import 'composer_attachments.dart';
 import '../sessions/session_menu.dart';
 
 /// 02 对话: streamed timeline, tool activity, approvals and the composer.
@@ -32,20 +35,37 @@ class ConversationPage extends StatefulWidget {
 }
 
 class _ConversationPageState extends State<ConversationPage> {
-  final prompt = TextEditingController();
+  late ComposerState draft;
+  TextEditingController get prompt => draft.prompt;
   final scroll = ScrollController();
   late HostHub hub;
-  late final live = LiveTimeline(widget.taskId);
-  List<Map<String, dynamic>> get timeline => live.items;
+  late var live = LiveTimeline(widget.taskId);
+  List<Map<String, dynamic>> _cachedItems = [];
+  bool _cacheLoaded = false,
+      _cachedTimeline = false,
+      _freshTimeline = false,
+      _cacheTruncated = false;
+  DateTime? _timelineSyncedAt;
+  Timer? _cacheTimer;
+  int _timelineCacheEpoch = 0;
+  List<Map<String, dynamic>> get timeline =>
+      live.loaded ? live.items : _cachedItems;
   StreamSubscription<Map<String, dynamic>>? _stream;
-  AgentChoice? choice;
+  AgentChoice? get choice => draft.choice;
+  set choice(AgentChoice? value) => draft.choice = value;
   bool loading = true, sending = false, stopping = false;
   String? error;
-  int _revision = -1;
+  int _epoch = -1;
+  bool _tailUnsupported = false, _loadingEarlier = false;
+  bool _locating = false, _locateCancelled = false;
+  int _locatePages = 0;
+  int? _focusIndex;
+  int _focusOffset = 0, _entryCount = 0;
   Object? _streamVersion;
   bool _readingTimeline = false, _timelineDirty = false;
   final _focusKey = GlobalKey();
   bool _focused = false;
+  bool _ready = false;
 
   HostState? get host => hub.host(widget.hostId);
   Map<String, dynamic>? get task => host?.task(widget.taskId);
@@ -54,8 +74,14 @@ class _ConversationPageState extends State<ConversationPage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final next = AppScope.of(context).hub;
-    if (_revision == -1) {
-      hub = next..addListener(_changed);
+    if (!_ready) {
+      _ready = true;
+      hub = next;
+      draft = ComposerState(hub)..addListener(_draftChanged);
+      hub.addListener(_changed);
+      hub.local.addListener(_cacheCleared);
+      _timelineCacheEpoch = hub.local.cacheEpoch;
+      unawaited(_readCachedTimeline());
       _changed();
     }
   }
@@ -64,11 +90,23 @@ class _ConversationPageState extends State<ConversationPage> {
     final h = host;
     if (h == null || !mounted) return;
     final project = task?['projectId'];
-    if (project is String) hub.followProject(h, project);
+    if (project is String) {
+      hub.followProject(h, project);
+      if (draft.key != draftKey(h.id, project, widget.taskId)) {
+        unawaited(
+          draft.bind(h, project, widget.taskId).catchError((Object e) {
+            if (mounted) setState(() => error = '$e');
+          }),
+        );
+      }
+    }
     _stream ??= h.events.listen(_streamed);
     final version = task?['streamVersion'];
-    if (h.online && (h.revision != _revision || version != _streamVersion)) {
-      _revision = h.revision;
+    // Only this task's version (or a new connection) needs a re-read; streamed
+    // deltas already keep the view current between them.
+    if (h.online &&
+        (h.connectionEpoch != _epoch || version != _streamVersion)) {
+      _epoch = h.connectionEpoch;
       _streamVersion = version;
       unawaited(loadTimeline());
       if (choice == null) unawaited(_initChoice());
@@ -83,6 +121,7 @@ class _ConversationPageState extends State<ConversationPage> {
     final changed = live.apply(event);
     if (live.needsSnapshot) unawaited(loadTimeline());
     if (!changed) return;
+    if (_freshTimeline) _scheduleCache();
     setState(() {});
     if (atEnd) _toEnd();
   }
@@ -90,6 +129,72 @@ class _ConversationPageState extends State<ConversationPage> {
   bool get _atEnd =>
       !scroll.hasClients ||
       scroll.position.pixels >= scroll.position.maxScrollExtent - 80;
+
+  Future<void> _readCachedTimeline() async {
+    if (_cacheLoaded) return;
+    _cacheLoaded = true;
+    final epoch = hub.local.cacheEpoch;
+    try {
+      final cached = await hub.local.cachedTimeline(
+        widget.hostId,
+        widget.taskId,
+      );
+      if (!mounted ||
+          _freshTimeline ||
+          hub.local.cacheEpoch != epoch ||
+          cached == null) {
+        return;
+      }
+      setState(() {
+        _cachedItems = [
+          for (final item in cached['snapshot']['items'] as List)
+            Map<String, dynamic>.from(item as Map),
+        ];
+        _cachedTimeline = true;
+        _cacheTruncated = cached['truncated'] == true;
+        _timelineSyncedAt = DateTime.tryParse('${cached['syncedAt']}');
+        loading = false;
+      });
+      _toEnd();
+    } catch (_) {
+      /* An unavailable cache never prevents a live PC read. */
+    }
+  }
+
+  void _cacheCleared() {
+    if (!mounted || !_cachedTimeline || host?.online == true) return;
+    setState(() {
+      live = LiveTimeline(widget.taskId);
+      _cachedItems = [];
+      _cachedTimeline = false;
+      _freshTimeline = false;
+      _timelineSyncedAt = null;
+    });
+  }
+
+  void _scheduleCache() {
+    _timelineSyncedAt = DateTime.now();
+    _timelineCacheEpoch = hub.local.cacheEpoch;
+    _cacheTimer?.cancel();
+    _cacheTimer = Timer(const Duration(milliseconds: 400), _saveTimeline);
+  }
+
+  void _saveTimeline() {
+    if (!_freshTimeline || !live.loaded || _timelineSyncedAt == null) return;
+    unawaited(
+      hub.local
+          .cacheTimeline(
+            widget.hostId,
+            widget.taskId,
+            {'items': timeline, 'lastSequence': live.cursor},
+            _timelineSyncedAt!,
+            _timelineCacheEpoch,
+          )
+          .catchError((Object e) {
+            hub.local.cacheError = '离线会话未能保存：$e';
+          }),
+    );
+  }
 
   Future<void> loadTimeline() async {
     if (_readingTimeline) {
@@ -100,8 +205,9 @@ class _ConversationPageState extends State<ConversationPage> {
     if (link == null) return;
     final epoch = h!.connectionEpoch;
     _readingTimeline = true;
+    live.beginRead();
     try {
-      final value = await link.call('timeline_snapshot', [widget.taskId]);
+      final value = await _readTail(link);
       if (!mounted ||
           h.link != link ||
           h.connectionEpoch != epoch ||
@@ -110,19 +216,19 @@ class _ConversationPageState extends State<ConversationPage> {
       }
       final atEnd = _atEnd;
       setState(() {
-        live.reset(Map<String, dynamic>.from(value as Map));
+        if (live.reset(Map<String, dynamic>.from(value as Map))) {
+          _freshTimeline = true;
+          _cachedTimeline = false;
+          _cacheTruncated = false;
+          _scheduleCache();
+        }
         loading = false;
         error = null;
       });
       if (atEnd) _toEnd();
       if (!_focused && widget.focusTurnId != null) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          final target = _focusKey.currentContext;
-          if (mounted && target != null) {
-            _focused = true;
-            Scrollable.ensureVisible(target, alignment: .1);
-          }
-        });
+        await _pageToFocus();
+        _revealFocus(0);
       }
     } catch (e) {
       if (mounted && h.link == link && h.connectionEpoch == epoch) {
@@ -133,6 +239,7 @@ class _ConversationPageState extends State<ConversationPage> {
       }
     } finally {
       _readingTimeline = false;
+      live.endRead();
       if (_timelineDirty && mounted) {
         _timelineDirty = false;
         unawaited(loadTimeline());
@@ -140,48 +247,143 @@ class _ConversationPageState extends State<ConversationPage> {
     }
   }
 
-  bool _loadingExecutors = false;
-
-  Future<void> _initChoice() async {
-    final h = host;
-    final link = h?.link;
-    // Opened before the background refresh delivered the PC's Agents.
-    if (h != null && link != null && h.executors.isEmpty) {
-      if (_loadingExecutors) return;
-      _loadingExecutors = true;
-      await hub.loadExecutors(h);
-      _loadingExecutors = false;
-      if (!mounted || choice != null) return;
+  /// The newest turns only; a PC without `timeline_tail` sends everything.
+  Future<dynamic> _readTail(HostLink link) async {
+    if (!_tailUnsupported) {
+      try {
+        return await link.call('timeline_tail', {'taskId': widget.taskId});
+      } on ProtocolException catch (e) {
+        if (!e.message.contains('remote method unavailable')) rethrow;
+        _tailUnsupported = true;
+      }
     }
-    final e = h == null ? null : defaultExecutor(h, task);
-    if (link == null || e == null) return;
-    // Show the Agent (and its quota) while the model catalog loads.
-    if (mounted) setState(() => choice = AgentChoice(e));
-    try {
-      final value = await loadChoice(link, e, widget.taskId);
-      if (mounted) setState(() => choice = value);
-    } catch (_) {}
+    return link.call('timeline_snapshot', [widget.taskId]);
   }
 
-  void _toEnd() {
-    if (widget.focusTurnId != null && !_focused) return;
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (scroll.hasClients) {
-        scroll.jumpTo(scroll.position.maxScrollExtent);
+  /// Prepends the next older page; with [untilTurn] the PC extends that page
+  /// back to the turn. False when nothing was added.
+  Future<bool> loadEarlier({String? untilTurn}) async {
+    final h = host, link = host?.link, before = live.earlierBefore;
+    if (_loadingEarlier || link == null || before == null) return false;
+    final epoch = h!.connectionEpoch;
+    setState(() => _loadingEarlier = true);
+    try {
+      final page = await link.call('timeline_tail', {
+        'taskId': widget.taskId,
+        'beforeTurn': before,
+        'untilTurn': ?untilTurn,
+      });
+      if (!mounted || h.connectionEpoch != epoch) return false;
+      if (live.earlierBefore != before) return false;
+      setState(() => live.prependEarlier(Map<String, dynamic>.from(page)));
+      return true;
+    } catch (e) {
+      if (mounted) setState(() => error = '$e');
+      return false;
+    } finally {
+      if (mounted) setState(() => _loadingEarlier = false);
+    }
+  }
+
+  /// A turn opened from history search may sit far before the first page.
+  /// The PC reads back to it in as few pages as fit; the user sees progress
+  /// and can stop, and a turn that no longer exists is reported.
+  Future<void> _pageToFocus() async {
+    final turn = widget.focusTurnId;
+    if (turn == null) return;
+    bool present() => live.items.any((i) => i['turnId'] == turn);
+    if (present()) return;
+    setState(() {
+      _locating = true;
+      _locateCancelled = false;
+      _locatePages = 0;
+    });
+    try {
+      while (mounted &&
+          !present() &&
+          !_locateCancelled &&
+          live.earlierBefore != null) {
+        if (!await loadEarlier(untilTurn: 'turn:$turn')) break;
+        if (mounted) setState(() => _locatePages++);
       }
+    } finally {
+      if (mounted) setState(() => _locating = false);
+    }
+    if (mounted && !present() && !_locateCancelled && error == null) {
+      setState(() => error = '没有找到要打开的这一轮，它可能已被删除。');
+    }
+  }
+
+  Future<void> _loadFullItem(String itemId) async {
+    final link = host?.link;
+    if (link == null) throw const ProtocolException('电脑离线，连接后再查看完整内容。');
+    final item = await link.call('timeline_item', {
+      'taskId': widget.taskId,
+      'itemId': itemId,
+    });
+    if (!mounted || item is! Map) return;
+    setState(() => live.replaceItem(Map<String, dynamic>.from(item)));
+  }
+
+  /// The focused turn may be outside the lazily built range: jump near its
+  /// estimated position until it is built, then align it. A turn that never
+  /// appears stops the search, so following new output works again.
+  void _revealFocus(int attempt) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted || _focused) return;
+      final target = _focusKey.currentContext;
+      if (target != null) {
+        _focused = true;
+        Scrollable.ensureVisible(target, alignment: .1);
+        return;
+      }
+      final index = _focusIndex;
+      if (index == null || attempt >= 4 || !scroll.hasClients) {
+        _focused = true;
+        return;
+      }
+      final position = scroll.position;
+      position.jumpTo(
+        position.maxScrollExtent *
+            ((index + _focusOffset) / (_entryCount == 0 ? 1 : _entryCount)),
+      );
+      _revealFocus(attempt + 1);
     });
   }
 
+  void _draftChanged() {
+    if (mounted) setState(() {});
+  }
+
+  Future<void> _initChoice() => draft.ensureChoice();
+
+  void _toEnd() {
+    if (widget.focusTurnId != null && !_focused) return;
+    void jump([int left = 3]) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!scroll.hasClients) return;
+        final end = scroll.position.maxScrollExtent;
+        scroll.jumpTo(end);
+        // Building the last rows refines the estimated extent.
+        if (left > 0 && scroll.position.maxScrollExtent != end) jump(left - 1);
+      });
+    }
+
+    jump();
+  }
+
   Future<void> _rename() async {
-    final t = task, link = host?.link;
-    if (t == null || link == null) return;
-    final controller = TextEditingController(text: t['title'] as String? ?? '');
+    final t = task, h = host, link = host?.link;
+    final currentHub = hub;
+    if (t == null || h == null || link == null) return;
+    var inputTitle = t['title'] as String? ?? '';
     final title = await showDialog<String>(
       context: context,
       builder: (d) => AlertDialog(
         title: const Text('重命名会话'),
-        content: TextField(
-          controller: controller,
+        content: TextFormField(
+          initialValue: inputTitle,
+          onChanged: (value) => inputTitle = value,
           autofocus: true,
           maxLength: 120,
         ),
@@ -191,16 +393,17 @@ class _ConversationPageState extends State<ConversationPage> {
             child: const Text('取消'),
           ),
           TextButton(
-            onPressed: () => Navigator.pop(d, controller.text.trim()),
+            onPressed: () => Navigator.pop(d, inputTitle.trim()),
             child: const Text('保存'),
           ),
         ],
       ),
     );
-    controller.dispose();
-    if (title == null || title.isEmpty || title == t['title']) return;
+    if (!mounted || title == null || title.isEmpty || title == t['title']) {
+      return;
+    }
     try {
-      await link.renameTask(t, title);
+      await h.operations.renameSession(link, t, title);
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(
@@ -208,11 +411,12 @@ class _ConversationPageState extends State<ConversationPage> {
         ).showSnackBar(SnackBar(content: Text('$e')));
       }
     }
-    await hub.refresh(host!);
+    await currentHub.refresh(h);
   }
 
   Future<void> _delete() async {
     final t = task, h = host, link = host?.link;
+    final currentHub = hub;
     if (t == null || h == null || link == null) return;
     final ok = await showDialog<bool>(
       context: context,
@@ -231,11 +435,11 @@ class _ConversationPageState extends State<ConversationPage> {
         ],
       ),
     );
-    if (ok != true) return;
+    if (ok != true || !mounted) return;
+    var accepted = false;
     try {
-      await link.deleteTask(t);
-      await hub.refresh(h);
-      if (mounted) Navigator.of(context).pop();
+      final result = await h.operations.deleteSession(link, t);
+      accepted = result is Map && result['state'] == 'accepted';
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(
@@ -243,6 +447,8 @@ class _ConversationPageState extends State<ConversationPage> {
         ).showSnackBar(SnackBar(content: Text('$e')));
       }
     }
+    await currentHub.refresh(h);
+    if (accepted && mounted) Navigator.of(context).pop();
   }
 
   Future<void> stop() async {
@@ -272,12 +478,17 @@ class _ConversationPageState extends State<ConversationPage> {
     final c = choice;
     final text = prompt.text;
     if (h == null || link == null || t == null || c == null) return;
-    if (text.trim().isEmpty || sending) return;
+    if (!draft.hasContent || sending || !h.online || !draft.choiceValid) return;
     setState(() {
       sending = true;
       error = null;
     });
     try {
+      await draft.flush();
+      final attachments = draft.attachments.isEmpty
+          ? <Map<String, dynamic>>[]
+          : await draft.prepareAttachments();
+      final identity = draft.identity;
       final value = await h.operations.send(link, {
         'scope': 'mobile:${h.id}:${t['projectId']}:${widget.taskId}',
         'taskId': widget.taskId,
@@ -288,13 +499,13 @@ class _ConversationPageState extends State<ConversationPage> {
           'model': c.model,
           'thinking': c.thinking,
           'permissionMode': null,
-          'attachments': [],
+          'attachments': attachments,
         },
-      });
+      }, draft: identity);
       if (value is Map &&
           value['state'] == 'closed' &&
           value['resolution']?['status'] == 'submitted') {
-        if (prompt.text == text) prompt.clear();
+        await draft.submitted(identity);
         _toEnd();
       } else if (value is Map && value['state'] == 'closed') {
         error = '电脑未受理这次发送，内容已保留。';
@@ -309,9 +520,13 @@ class _ConversationPageState extends State<ConversationPage> {
 
   @override
   void dispose() {
+    _cacheTimer?.cancel();
+    _saveTimeline();
+    hub.local.removeListener(_cacheCleared);
     hub.removeListener(_changed);
     _stream?.cancel();
-    prompt.dispose();
+    draft.removeListener(_draftChanged);
+    draft.dispose();
     scroll.dispose();
     super.dispose();
   }
@@ -336,6 +551,28 @@ class _ConversationPageState extends State<ConversationPage> {
         if (t != null) ApprovalRef(h, t, a),
     ];
     final running = t?['activePrimaryRun'] != null;
+    final recoveryCards = <Widget>[
+      for (final cancellation in h.pendingCancellations.where(
+        (c) => c['taskId'] == widget.taskId,
+      ))
+        Padding(
+          padding: const EdgeInsets.fromLTRB(DcSpace.page, 0, DcSpace.page, 8),
+          child: PendingOperationCard(
+            key: ValueKey(cancellation['envelope']['commandId']),
+            host: h,
+            operation: cancellation,
+          ),
+        ),
+      if (h.pendingOperation != null)
+        Padding(
+          padding: const EdgeInsets.fromLTRB(DcSpace.page, 0, DcSpace.page, 8),
+          child: PendingOperationCard(
+            key: const ValueKey('main-pending-operation'),
+            host: h,
+            onDraftSubmitted: draft.submitted,
+          ),
+        ),
+    ];
     return Scaffold(
       appBar: DetailBar(
         title: t?['title'] as String? ?? '会话',
@@ -370,7 +607,12 @@ class _ConversationPageState extends State<ConversationPage> {
       body: Column(
         children: [
           if (!h.online) _OfflineBar(host: h, onRetry: () => hub.connect(h)),
+          if (_cachedTimeline)
+            InlineNotice(
+              '${h.online ? '正在同步，先显示本机缓存' : '离线缓存'} · 内容同步于 ${_timelineSyncedAt?.toLocal().toString().substring(0, 16) ?? '未知时间'}${_cacheTruncated ? ' · 仅缓存最近部分内容' : ''}。附件原文需电脑在线。',
+            ),
           if (error != null) InlineNotice(error!, danger: true),
+          if (draft.error != null) InlineNotice(draft.error!, danger: true),
           Expanded(
             child: loading && timeline.isEmpty
                 ? Center(
@@ -381,33 +623,22 @@ class _ConversationPageState extends State<ConversationPage> {
                             style: TextStyle(color: context.dc.secondary),
                           ),
                   )
-                : ListView(
-                    controller: scroll,
-                    padding: const EdgeInsets.fromLTRB(
-                      DcSpace.page,
-                      8,
-                      DcSpace.page,
-                      16,
-                    ),
-                    children: [
-                      TurnScope(
-                        link: h.link,
-                        taskId: widget.taskId,
-                        executor: defaultExecutor(h, t),
-                        executors: h.executors,
-                        child: TimelineView(
-                          items: timeline,
-                          focusTurnId: widget.focusTurnId,
-                          focusKey: _focusKey,
-                          activeTurnId:
-                              (t?['activePrimaryRun'] as Map?)?['turnId']
-                                  as String?,
-                        ),
-                      ),
-                      if (running)
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: Row(
+                : Builder(
+                    builder: (context) {
+                      final entries = timelineEntries(
+                        context,
+                        session: t == null ? null : SessionRef(h, t),
+                        items: timeline,
+                        focusTurnId: widget.focusTurnId,
+                        focusKey: _focusKey,
+                        activeTurnId:
+                            (t?['activePrimaryRun'] as Map?)?['turnId']
+                                as String?,
+                      );
+                      _focusIndex = entries.focusIndex;
+                      final head = <Widget>[
+                        if (_locating)
+                          Row(
                             children: [
                               const SizedBox.square(
                                 dimension: 14,
@@ -416,45 +647,146 @@ class _ConversationPageState extends State<ConversationPage> {
                                 ),
                               ),
                               const SizedBox(width: 10),
-                              Text(
-                                'Agent 正在电脑上工作…',
-                                style: Theme.of(context).textTheme.bodySmall,
+                              Expanded(
+                                child: Text(
+                                  _locatePages == 0
+                                      ? '正在定位到该轮…'
+                                      : '正在定位到该轮…已加载 $_locatePages 页',
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () => setState(() {
+                                  _locateCancelled = true;
+                                  _focused = true;
+                                }),
+                                child: const Text('取消'),
                               ),
                             ],
                           ),
+                        if (live.loaded && live.earlierBefore != null)
+                          Center(
+                            child: TextButton.icon(
+                              onPressed: _loadingEarlier || !h.online
+                                  ? null
+                                  : loadEarlier,
+                              icon: _loadingEarlier
+                                  ? const SizedBox.square(
+                                      dimension: 14,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                      ),
+                                    )
+                                  : const Icon(Icons.history, size: 18),
+                              label: const Text('加载更早的消息'),
+                            ),
+                          ),
+                      ];
+                      _focusOffset = head.length;
+                      final children = <Widget>[
+                        ...head,
+                        ...entries.widgets,
+                        if (running && h.online)
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8),
+                            child: Row(
+                              children: [
+                                const SizedBox.square(
+                                  dimension: 14,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                  ),
+                                ),
+                                const SizedBox(width: 10),
+                                Text(
+                                  'Agent 正在电脑上工作…',
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
+                              ],
+                            ),
+                          ),
+                        for (final a in approvals)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 12),
+                            child: ApprovalCard(item: a, showContext: false),
+                          ),
+                      ];
+                      _entryCount = children.length;
+                      // Inserting earlier pages shifts indexes; keyed rows must
+                      // keep their element (and expanded state) at the new one.
+                      final indexOf = <Key, int>{
+                        for (var i = 0; i < children.length; i++)
+                          if (children[i].key != null) children[i].key!: i,
+                      };
+                      // Lazily built: a streamed token rebuilds only what is on screen.
+                      return TurnScope(
+                        link: h.link,
+                        operations: h.operations,
+                        onOperationChanged: () => hub.refreshOperation(h),
+                        taskId: widget.taskId,
+                        executor: defaultExecutor(h, t),
+                        executors: h.executors,
+                        loadFullItem: _loadFullItem,
+                        child: ListView.builder(
+                          key: const ValueKey('conversation-timeline'),
+                          controller: scroll,
+                          padding: const EdgeInsets.fromLTRB(
+                            DcSpace.page,
+                            8,
+                            DcSpace.page,
+                            16,
+                          ),
+                          itemCount: children.length,
+                          itemBuilder: (_, i) => children[i],
+                          findChildIndexCallback: (key) => indexOf[key],
                         ),
-                      for (final a in approvals)
-                        Padding(
-                          padding: const EdgeInsets.only(top: 12),
-                          child: ApprovalCard(item: a, showContext: false),
-                        ),
-                    ],
+                      );
+                    },
                   ),
           ),
-          if (h.pendingOperation != null)
-            Padding(
-              padding: const EdgeInsets.fromLTRB(
-                DcSpace.page,
-                0,
-                DcSpace.page,
-                8,
+          if (recoveryCards.length == 1) recoveryCards.single,
+          if (recoveryCards.length > 1)
+            Flexible(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxHeight: 280),
+                child: SingleChildScrollView(
+                  child: Column(children: recoveryCards),
+                ),
               ),
-              child: PendingOperationCard(host: h),
             ),
           _Composer(
             controller: prompt,
             choice: choice,
+            attachments: ComposerAttachments(draft: draft, enabled: !sending),
+            hasAttachments: draft.attachments.isNotEmpty,
+            canSend:
+                h.online &&
+                t != null &&
+                h.pendingOperation == null &&
+                !sending &&
+                !draft.restoring &&
+                !draft.uploading &&
+                !draft.picking &&
+                draft.choiceValid,
             quota: QuotaReading.from(
               h.quotas[choice?.executor['installationId']],
             ),
             loading: choice == null && h.online,
             sending: sending,
             enabled:
-                h.online && t != null && h.pendingOperation == null && !sending,
+                t != null &&
+                !sending &&
+                !draft.restoring &&
+                !draft.restoreFailed &&
+                !draft.uploading,
             onSend: send,
             onStop: running && h.online && !stopping ? stop : null,
             running: running,
-            onPick: h.online
+            onPick:
+                h.online &&
+                    !sending &&
+                    !draft.uploading &&
+                    !draft.restoring &&
+                    !draft.picking
                 ? () async {
                     final value = await showAgentSheet(
                       context,
@@ -503,6 +835,9 @@ class _Composer extends StatelessWidget {
   const _Composer({
     required this.controller,
     required this.choice,
+    required this.attachments,
+    required this.hasAttachments,
+    required this.canSend,
     this.quota,
     this.loading = false,
     required this.sending,
@@ -514,6 +849,8 @@ class _Composer extends StatelessWidget {
   });
   final TextEditingController controller;
   final AgentChoice? choice;
+  final Widget attachments;
+  final bool hasAttachments, canSend;
   final QuotaReading? quota;
   final bool loading;
   final bool sending, enabled;
@@ -543,8 +880,10 @@ class _Composer extends StatelessWidget {
                   child: TextField(
                     controller: controller,
                     minLines: 1,
-                    maxLines: 6,
-                    enabled: enabled || sending,
+                    maxLines: MediaQuery.viewInsetsOf(context).bottom > 0
+                        ? 3
+                        : 6,
+                    enabled: enabled,
                     decoration: const InputDecoration(
                       hintText: '继续交给 Agent…',
                       filled: false,
@@ -568,9 +907,10 @@ class _Composer extends StatelessWidget {
                     style: accentIconButton(context),
                     tooltip: '发送',
                     onPressed:
-                        enabled &&
+                        canSend &&
                             choice != null &&
-                            controller.text.trim().isNotEmpty
+                            (controller.text.trim().isNotEmpty ||
+                                hasAttachments)
                         ? onSend
                         : null,
                     icon: sending
@@ -583,6 +923,7 @@ class _Composer extends StatelessWidget {
                 ),
               ],
             ),
+            attachments,
             const SizedBox(height: 4),
             Align(
               alignment: Alignment.centerLeft,

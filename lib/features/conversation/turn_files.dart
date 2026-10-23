@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../core/host_api.dart';
 import '../../core/host_hub.dart' show agentLabel;
 import '../../core/pc_api.dart';
-import '../../core/secure_host_client.dart';
+import '../../core/mobile_operations.dart';
 import '../../core/turn_changes.dart';
 import '../../ui/theme.dart';
 import '../tools/changes_page.dart' show UnifiedDiff;
@@ -19,14 +19,22 @@ class TurnScope extends InheritedWidget {
     required this.taskId,
     required this.executor,
     this.executors = const [],
+    this.loadFullItem,
+    this.operations,
+    this.onOperationChanged,
     required super.child,
   });
   final HostApi? link;
+  final MobileOperations? operations;
+  final Future<void> Function()? onOperationChanged;
   final String taskId;
   final Map<String, dynamic>? executor;
 
   /// The PC's ready Agents, any of which can write the commit message.
   final List<Map<String, dynamic>> executors;
+
+  /// Reads one item the PC trimmed to fit a page, and shows it in full.
+  final Future<void> Function(String itemId)? loadFullItem;
   static TurnScope? of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<TurnScope>();
   @override
@@ -34,7 +42,8 @@ class TurnScope extends InheritedWidget {
       old.link != link ||
       old.taskId != taskId ||
       old.executor != executor ||
-      old.executors != executors;
+      old.executors != executors ||
+      old.loadFullItem != loadFullItem;
 }
 
 /// 本轮文件变更: the files a turn changed with their line counts and saved
@@ -65,6 +74,7 @@ class _TurnFilesCardState extends State<TurnFilesCard> {
 
   Future<void> _commit(TurnChanges changes) async {
     final scope = TurnScope.of(context)!;
+    if (scope.operations == null) return;
     final result = await showModalBottomSheet<String>(
       context: context,
       isScrollControlled: true,
@@ -72,6 +82,8 @@ class _TurnFilesCardState extends State<TurnFilesCard> {
       showDragHandle: true,
       builder: (_) => TurnCommitSheet(
         link: scope.link!,
+        operations: scope.operations!,
+        onOperationChanged: scope.onOperationChanged,
         taskId: scope.taskId,
         changes: changes,
         executor: scope.executor,
@@ -306,12 +318,16 @@ class TurnCommitSheet extends StatefulWidget {
     required this.link,
     required this.taskId,
     required this.changes,
+    required this.operations,
+    this.onOperationChanged,
     required this.executor,
     this.executors = const [],
   });
   final HostApi link;
   final String taskId;
   final TurnChanges changes;
+  final MobileOperations operations;
+  final Future<void> Function()? onOperationChanged;
   final Map<String, dynamic>? executor;
   final List<Map<String, dynamic>> executors;
   @override
@@ -380,6 +396,8 @@ class _TurnCommitSheetState extends State<TurnCommitSheet> {
       await _prepare(list.first, id);
     } catch (e) {
       _fail(id, e, empty: targets.isEmpty);
+    } finally {
+      await widget.onOperationChanged?.call();
     }
   }
 
@@ -402,7 +420,13 @@ class _TurnCommitSheetState extends State<TurnCommitSheet> {
     final missing = t.paths.where((p) => !before.contains(p)).toList();
     if (missing.isNotEmpty) {
       final current = await _query('uncommitted', t.rootId);
-      await link.stage(task, current['id'] as String, t.rootId, missing);
+      await widget.operations.indexWrite(
+        link,
+        taskId: task,
+        snapshotId: current['id'] as String,
+        rootId: t.rootId,
+        paths: missing,
+      );
       _added = (rootId: t.rootId, paths: missing);
     }
     final staged = await _query('staged', t.rootId);
@@ -430,15 +454,18 @@ class _TurnCommitSheetState extends State<TurnCommitSheet> {
     if (added == null) return;
     try {
       final staged = await _query('staged', added.rootId);
-      await link.stage(
-        task,
-        staged['id'] as String,
-        added.rootId,
-        added.paths,
+      await widget.operations.indexWrite(
+        link,
+        taskId: task,
+        snapshotId: staged['id'] as String,
+        rootId: added.rootId,
+        paths: added.paths,
         unstage: true,
       );
     } catch (_) {
       // Still visible as staged in 变更; nothing is lost.
+    } finally {
+      await widget.onOperationChanged?.call();
     }
   }
 
@@ -472,61 +499,29 @@ class _TurnCommitSheetState extends State<TurnCommitSheet> {
       phase = _Phase.committing;
       error = null;
     });
-    String? opId;
-    var committed = false;
     try {
-      var snapshot = snapshotId!;
-      for (var attempt = 0; ; attempt++) {
-        try {
-          final result = await link.commit(
-            taskId: task,
-            rootId: t.rootId,
-            snapshotId: snapshot,
-            message: text,
-            stageAll: false,
-            push: push,
-          );
-          opId = result.operationId;
-          committed = result.completed;
-          break;
-        } on RemoteOutcomeUnknown {
-          rethrow;
-        } catch (e) {
-          // Rejected before Git ran: re-read the staged state once.
-          if (attempt > 0 || !'$e'.contains('REVIEW_STALE_COMMIT')) rethrow;
-          snapshot = (await _query('staged', t.rootId))['id'] as String;
-        }
-      }
-      if (!committed) throw StateError('没有可提交的更改');
-      _added = null;
-      if (push) await link.gitAdvance(task, opId);
-      _finish(push ? '已提交并推送' : '已提交');
-    } on RemoteOutcomeUnknown {
-      final receipt = opId == null ? null : await _receipt(opId);
-      if (receipt == true) {
+      final result = await widget.operations.gitWrite(
+        link,
+        taskId: task,
+        rootId: t.rootId,
+        action: 'commit',
+        snapshotId: snapshotId!,
+        message: text,
+        push: push,
+      );
+      if (result?['state'] == 'succeeded') {
         _added = null;
-        _finish('已提交');
+        _finish(push ? '已提交并推送' : '已提交');
       } else {
-        _fail(_run, '提交结果待核实，请在「变更」中查看，不要重复提交');
+        _fail(
+          _run,
+          result == null ? '提交结果待核实，请到待处理页面核实原操作' : gitResultMessage(result),
+        );
       }
     } catch (e) {
-      if (committed) {
-        _added = null;
-        _finish('已提交');
-        if (mounted) setState(() => error = '提交已完成，推送失败：$e');
-      } else {
-        _fail(_run, e);
-      }
-    }
-  }
-
-  Future<bool?> _receipt(String opId) async {
-    try {
-      final r = await link.gitReceipt(task, opId);
-      final status = ((r as Map?)?['outcome'] as Map?)?['status'];
-      return status == 'succeeded' ? true : null;
-    } catch (_) {
-      return null;
+      _fail(_run, e);
+    } finally {
+      await widget.onOperationChanged?.call();
     }
   }
 

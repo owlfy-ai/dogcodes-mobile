@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:dogcodes_app/core/mobile_operations.dart';
+import 'package:dogcodes_app/core/protocol.dart';
 import 'package:dogcodes_app/core/host_hub.dart';
 import 'package:dogcodes_app/core/security/secret_storage.dart';
 import 'package:dogcodes_app/core/secure_host_client.dart';
@@ -46,7 +47,7 @@ void main() {
           return receipt ? {'lastSequence': '88'} : null;
         }
         if (method == 'execute') {
-          expect(await ops.pending(), isNotNull);
+          expect(await ops.sidePending(), isNotNull);
           sent.add(jsonDecode(jsonEncode(args[0])));
           if (reject) throw const RemoteOutcomeUnknown();
           receipt = true;
@@ -65,17 +66,14 @@ void main() {
       });
       expect(preferences['tasks'], {'other': 'pinned'});
       ops = MobileOperations(storage, 'pc');
-      await expectLater(
-        ops.send(api, {
-          'input': {'prompt': 'blocked'},
-        }),
-        throwsException,
-      );
-      expect(await ops.verify(api), isNull);
-      reject = false;
-      await ops.retry(api);
-      expect(sent, [sent.first, sent.first]);
+      // An unconfirmed archive waits in its own slot: messages are not blocked.
       expect(await ops.pending(), isNull);
+      final archive = (await ops.sidePending())!;
+      expect(await ops.verify(api, archive), isNull);
+      reject = false;
+      await ops.retry(api, archive);
+      expect(sent, [sent.first, sent.first]);
+      expect(await ops.sidePending(), isNull);
     },
   );
 
@@ -172,4 +170,53 @@ void main() {
       expect((await ops.pending())!['request']['turnId'], 'a');
     },
   );
+  test(
+    'a pin refused for a stale revision frees the slot for other writes',
+    () async {
+      final ops = MobileOperations(MemorySecretStorage(), 'pc');
+      var receipts = 0;
+      final api = Api((method, args) async {
+        if (method == 'history_preferences') {
+          return {
+            'revision': '5',
+            'preferences': {'tasks': {}},
+          };
+        }
+        if (method == 'execute') {
+          throw const ProtocolException('会话设置已在电脑上更新，请重试。');
+        }
+        if (method == 'command_receipt') {
+          receipts++;
+          return null;
+        }
+        throw StateError(method);
+      });
+      await expectLater(
+        ops.setHistoryState(api, 'a', 'pinned'),
+        throwsA(isA<ProtocolException>()),
+      );
+      expect(receipts, 1);
+      expect(await ops.sidePending(), isNull);
+    },
+  );
+
+  test('a refused pin that the PC did apply stays verifiable', () async {
+    final ops = MobileOperations(MemorySecretStorage(), 'pc');
+    final api = Api((method, args) async {
+      if (method == 'history_preferences') {
+        return {
+          'revision': '5',
+          'preferences': {'tasks': {}},
+        };
+      }
+      if (method == 'execute') throw const ProtocolException('拒绝');
+      if (method == 'command_receipt') return {'lastSequence': '9'};
+      throw StateError(method);
+    });
+    await expectLater(
+      ops.setHistoryState(api, 'a', 'pinned'),
+      throwsA(isA<ProtocolException>()),
+    );
+    expect(await ops.sidePending(), isNotNull);
+  });
 }

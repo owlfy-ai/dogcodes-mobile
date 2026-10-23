@@ -1,6 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import '../../core/pc_api.dart';
+import '../../core/host_hub.dart';
+import '../../core/mobile_operations.dart';
+import '../../core/protocol.dart';
+import 'workspace_recovery.dart';
+import 'workspace_connection.dart';
 import '../../ui/theme.dart';
 import '../../ui/widgets.dart';
 import 'preview_page.dart';
@@ -16,7 +21,20 @@ class RunPage extends StatefulWidget {
   State<RunPage> createState() => _RunPageState();
 }
 
-class _RunPageState extends State<RunPage> {
+class _RunPageState extends State<RunPage> with WorkspaceConnection<RunPage> {
+  @override
+  HostState get workspaceHost => tool.host;
+  int _loadOrder = 0;
+  int? directoryIndex;
+  @override
+  void onWorkspaceConnectionChanged() {
+    _loadOrder++;
+    session?.dispose();
+    session = null;
+    port = null;
+    if (tool.host.online) _load();
+  }
+
   Map<String, dynamic>? catalog;
   List<Map<String, dynamic>> runs = [];
   String? commandId;
@@ -25,6 +43,7 @@ class _RunPageState extends State<RunPage> {
   String? error;
   int? port;
   Timer? _portScan;
+  bool _pollLoading = false;
 
   ToolContext get tool => widget.tool;
 
@@ -34,20 +53,33 @@ class _RunPageState extends State<RunPage> {
       for (final c in ((d as Map)['commands'] as List? ?? const []))
         (dir: i, cmd: Map<String, dynamic>.from(c as Map)),
   ];
-  ({int dir, Map<String, dynamic> cmd})? get selected =>
-      commands.where((c) => c.cmd['id'] == commandId).firstOrNull;
+  ({int dir, Map<String, dynamic> cmd})? get selected => commands
+      .where(
+        (c) =>
+            c.cmd['id'] == commandId &&
+            (directoryIndex == null || c.dir == directoryIndex),
+      )
+      .firstOrNull;
   Map<String, dynamic>? get running => runs
-      .where((r) => r['commandId'] == commandId && terminalActive(r))
+      .where(
+        (r) =>
+            r['commandId'] == commandId &&
+            r['directoryIndex'] == selected?.dir &&
+            terminalActive(r),
+      )
       .firstOrNull;
 
   @override
   void initState() {
     super.initState();
     _load();
-    _portScan = Timer.periodic(
-      const Duration(seconds: 1),
-      (_) => _detectPort(),
-    );
+    _portScan = Timer.periodic(const Duration(seconds: 1), (timer) {
+      _detectPort();
+      if (timer.tick % 2 == 0 && tool.host.online && !busy && !_pollLoading) {
+        _pollLoading = true;
+        _load().whenComplete(() => _pollLoading = false);
+      }
+    });
   }
 
   @override
@@ -59,13 +91,21 @@ class _RunPageState extends State<RunPage> {
 
   Future<void> _load() async {
     final link = tool.link, task = tool.taskId;
-    if (link == null || task == null) return setState(() => loading = false);
+    final order = ++_loadOrder, epoch = tool.host.connectionEpoch;
+    if (link == null || task == null || !tool.host.online) {
+      return setState(() => loading = false);
+    }
     try {
       final results = await Future.wait([
         link.projectRuns(task),
         link.terminals(tool.projectId),
       ]);
-      if (!mounted) return;
+      if (!mounted ||
+          order != _loadOrder ||
+          epoch != tool.host.connectionEpoch ||
+          link != tool.link) {
+        return;
+      }
       final cat = results[0] as Map<String, dynamic>;
       final terms = results[1] as List<Map<String, dynamic>>;
       setState(() {
@@ -77,27 +117,40 @@ class _RunPageState extends State<RunPage> {
             ),
           );
         error = null;
-        commandId ??=
-            runs.where(terminalActive).firstOrNull?['commandId'] as String? ??
-            commands
-                    .where((c) => c.cmd['pinned'] == true)
-                    .firstOrNull
-                    ?.cmd['id']
-                as String? ??
-            commands.firstOrNull?.cmd['id'] as String?;
+        if (selected == null) {
+          final active = runs.where(terminalActive).firstOrNull;
+          final next =
+              commands
+                  .where(
+                    (c) =>
+                        c.cmd['id'] == active?['commandId'] &&
+                        c.dir == active?['directoryIndex'],
+                  )
+                  .firstOrNull ??
+              commands.where((c) => c.cmd['pinned'] == true).firstOrNull ??
+              commands.firstOrNull;
+          commandId = next?.cmd['id'] as String?;
+          directoryIndex = next?.dir;
+        }
       });
       _attach();
     } catch (e) {
-      if (mounted) setState(() => error = '$e');
+      if (mounted && order == _loadOrder) setState(() => error = '$e');
     } finally {
-      if (mounted) setState(() => loading = false);
+      if (mounted && order == _loadOrder) setState(() => loading = false);
     }
   }
 
   /// Shows the latest run of the selected command (running or finished).
   void _attach() {
     final link = tool.link;
-    final latest = runs.where((r) => r['commandId'] == commandId).firstOrNull;
+    final latest = runs
+        .where(
+          (r) =>
+              r['commandId'] == commandId &&
+              r['directoryIndex'] == selected?.dir,
+        )
+        .firstOrNull;
     final id = latest?['id'] as String?;
     if (link == null || id == session?.id) return;
     session?.dispose();
@@ -123,48 +176,223 @@ class _RunPageState extends State<RunPage> {
 
   Future<void> _start() async {
     final link = tool.link, task = tool.taskId, sel = selected;
-    if (link == null || task == null || sel == null) return;
+    if (busy ||
+        !tool.host.online ||
+        link == null ||
+        task == null ||
+        sel == null) {
+      return;
+    }
     setState(() => busy = true);
     try {
-      await link.projectRunStart(
+      final result = await tool.host.operations.runStart(
+        link,
+        projectId: tool.projectId,
         taskId: task,
         generation: '${catalog!['generation']}',
         directoryIndex: sel.dir,
         commandId: sel.cmd['id'] as String,
       );
-      await _load();
+      if (result == null) throw const ProtocolException('启动结果待核实，请使用原操作恢复。');
+      if (mounted) await _load();
     } catch (e) {
       if (mounted) showError(context, e);
+    } finally {
+      await workspaceHub?.refreshOperation(tool.host);
+      if (mounted) setState(() => busy = false);
     }
-    if (mounted) setState(() => busy = false);
   }
 
-  Future<void> _stop() async {
-    final r = running;
-    if (r == null) return;
+  Future<bool> _stop() async {
+    final r = running, link = tool.link;
+    if (r == null || link == null || busy || !tool.host.online) return false;
     setState(() => busy = true);
     try {
-      await tool.link?.terminalStop(r['id'] as String);
-      await _load();
+      final result = await tool.host.operations.terminalStop(
+        link,
+        Map<String, dynamic>.from(r),
+      );
+      if (result['state'] != 'stopped') {
+        throw ProtocolException(terminalStopMessage(result));
+      }
+      if (mounted) await _load();
+      return true;
     } catch (e) {
       if (mounted) showError(context, e);
+      return false;
+    } finally {
+      await workspaceHub?.refreshOperation(tool.host);
+      if (mounted) setState(() => busy = false);
     }
-    if (mounted) setState(() => busy = false);
   }
 
   Future<void> _restart() async {
-    await _stop();
-    await _start();
+    final original = selected, generation = catalog?['generation'];
+    if (await _stop() && mounted && running == null) {
+      if (original?.dir != selected?.dir ||
+          original?.cmd['id'] != selected?.cmd['id'] ||
+          generation != catalog?['generation']) {
+        showError(context, '运行配置已改变，请确认后再启动。');
+        return;
+      }
+      await _start();
+    }
+  }
+
+  Future<bool> _confirm(String title, String message) async =>
+      await showDialog<bool>(
+        context: context,
+        builder: (d) => AlertDialog(
+          title: Text(title),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(d, false),
+              child: const Text('取消'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(d, true),
+              child: const Text('继续'),
+            ),
+          ],
+        ),
+      ) ==
+      true;
+
+  Future<void> _edit(String action) async {
+    final sel = selected,
+        task = tool.taskId,
+        link = tool.link,
+        generation = catalog?['generation'];
+    if (busy ||
+        sel == null ||
+        task == null ||
+        link == null ||
+        generation == null) {
+      return;
+    }
+    Map<String, dynamic> edit = {'action': action};
+    if (action == 'rename') {
+      var labelText = '${sel.cmd['label']}';
+      final label = await showDialog<String>(
+        context: context,
+        builder: (d) => AlertDialog(
+          title: const Text('重命名运行配置'),
+          content: TextFormField(
+            initialValue: labelText,
+            onChanged: (value) => labelText = value,
+            autofocus: true,
+            maxLength: 60,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(d),
+              child: const Text('取消'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(d, labelText.trim()),
+              child: const Text('保存'),
+            ),
+          ],
+        ),
+      );
+      if (label == null || label.isEmpty || !mounted) return;
+      edit['label'] = label;
+    } else if (action == 'pin') {
+      edit['pinned'] = sel.cmd['pinned'] != true;
+    } else if (action == 'delete') {
+      if (!await _confirm(
+            '删除运行配置？',
+            '移除“${sel.cmd['label']}”的启动配置，已运行的进程不会停止。',
+          ) ||
+          !mounted) {
+        return;
+      }
+    }
+    if (!mounted || busy || !tool.host.online) return;
+    setState(() => busy = true);
+    try {
+      await tool.host.operations.runEdit(
+        link,
+        taskId: task,
+        generation: '$generation',
+        directoryIndex: sel.dir,
+        commandId: sel.cmd['id'] as String,
+        edit: edit,
+      );
+      if (mounted) await _load();
+    } catch (e) {
+      if (mounted) showError(context, e);
+    } finally {
+      await workspaceHub?.refreshOperation(tool.host);
+      if (mounted) setState(() => busy = false);
+    }
+  }
+
+  Future<void> _analyze() async {
+    final link = tool.link,
+        task = tool.taskId,
+        generation = catalog?['generation'];
+    if (busy || link == null || task == null || generation == null) return;
+    final overwrite = (catalog?['directories'] as List? ?? []).any(
+      (d) =>
+          d['userModified'] == true ||
+          (d['commands'] as List? ?? []).any(
+            (c) => c['pinned'] == true || c['userRenamed'] == true,
+          ),
+    );
+    if (overwrite &&
+        (!await _confirm('重新分析项目？', '将重新生成运行配置，覆盖未固定的自定义修改，固定项会保留。') ||
+            !mounted)) {
+      return;
+    }
+    if (!mounted) return;
+    final agent = await showModalBottomSheet<Map<String, dynamic>>(
+      context: context,
+      builder: (d) => SafeArea(
+        child: ListView(
+          shrinkWrap: true,
+          children: [
+            const ListTile(title: Text('选择分析项目的 Agent')),
+            for (final e in tool.host.executors)
+              ListTile(
+                title: Text(agentLabel(e['providerId'] as String?)),
+                onTap: () => Navigator.pop(d, Map<String, dynamic>.from(e)),
+              ),
+            if (tool.host.executors.isEmpty)
+              const ListTile(title: Text('没有可用 Agent，请先在电脑上连接。')),
+          ],
+        ),
+      ),
+    );
+    if (agent == null || !mounted || busy || !tool.host.online) return;
+    setState(() => busy = true);
+    try {
+      await tool.host.operations.runAnalyze(
+        link,
+        taskId: task,
+        generation: '$generation',
+        executor: agent,
+        overwrite: overwrite,
+      );
+      if (mounted) await _load();
+    } catch (e) {
+      if (mounted) showError(context, e);
+    } finally {
+      await workspaceHub?.refreshOperation(tool.host);
+      if (mounted) setState(() => busy = false);
+    }
   }
 
   Future<void> _askPort() async {
-    final controller = TextEditingController(text: port?.toString() ?? '');
+    var portText = port?.toString() ?? '';
     final value = await showDialog<int>(
       context: context,
       builder: (d) => AlertDialog(
         title: const Text('预览端口'),
-        content: TextField(
-          controller: controller,
+        content: TextFormField(
+          initialValue: portText,
+          onChanged: (value) => portText = value,
           keyboardType: TextInputType.number,
           decoration: const InputDecoration(hintText: '例如 5173'),
           autofocus: true,
@@ -175,14 +403,12 @@ class _RunPageState extends State<RunPage> {
             child: const Text('取消'),
           ),
           TextButton(
-            onPressed: () =>
-                Navigator.pop(d, int.tryParse(controller.text.trim())),
+            onPressed: () => Navigator.pop(d, int.tryParse(portText.trim())),
             child: const Text('打开'),
           ),
         ],
       ),
     );
-    controller.dispose();
     if (value != null && mounted) _preview(value);
   }
 
@@ -206,16 +432,40 @@ class _RunPageState extends State<RunPage> {
         title: '运行与预览',
         subtitle: '${tool.host.name} · ${tool.projectName}',
       ),
-      body: tool.link == null || tool.taskId == null
+      body: !tool.host.online || tool.taskId == null
           ? ToolUnavailable(tool: tool)
           : loading
           ? const Center(child: CircularProgressIndicator())
           : Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                WorkspaceRecoveryCards(
+                  host: tool.host,
+                  projectId: tool.projectId,
+                  onRecovered: () => _load(),
+                ),
                 if (error != null) InlineNotice(error!, danger: true),
+                Row(
+                  children: [
+                    TextButton.icon(
+                      onPressed: busy || catalog == null ? null : _analyze,
+                      icon: const Icon(Icons.auto_awesome_outlined, size: 18),
+                      label: const Text('分析项目'),
+                    ),
+                    const Spacer(),
+                    IconButton(
+                      tooltip: '刷新运行配置',
+                      onPressed: busy ? null : _load,
+                      icon: const Icon(Icons.refresh),
+                    ),
+                  ],
+                ),
+                if ((catalog?['directories'] as List? ?? []).any(
+                  (d) => d['status'] == 'analyzing',
+                ))
+                  const InlineNotice('Agent 正在分析项目，可稍后刷新查看。'),
                 if (commands.isEmpty)
-                  const InlineNotice('这个项目还没有运行配置。可在电脑上分析项目或添加运行方式。')
+                  const InlineNotice('这个项目还没有运行配置，点击「分析项目」生成启动方式。')
                 else
                   Padding(
                     padding: const EdgeInsets.fromLTRB(DcSpace.page, 4, 12, 4),
@@ -224,16 +474,21 @@ class _RunPageState extends State<RunPage> {
                         const Icon(Icons.play_circle_outline, size: 20),
                         const SizedBox(width: 8),
                         Expanded(
-                          child: PopupMenuButton<String>(
+                          child: PopupMenuButton<({int dir, String id})>(
+                            enabled: !busy,
                             tooltip: '选择运行配置',
-                            onSelected: (id) {
-                              commandId = id;
+                            onSelected: (value) {
+                              commandId = value.id;
+                              directoryIndex = value.dir;
                               _attach();
                             },
                             itemBuilder: (_) => [
                               for (final x in commands)
                                 PopupMenuItem(
-                                  value: x.cmd['id'] as String,
+                                  value: (
+                                    dir: x.dir,
+                                    id: x.cmd['id'] as String,
+                                  ),
                                   child: Text('${x.cmd['label']}'),
                                 ),
                             ],
@@ -257,6 +512,28 @@ class _RunPageState extends State<RunPage> {
                           active ? '运行中' : '未运行',
                           tone: active ? Tone.accent : Tone.muted,
                         ),
+                        if (sel != null)
+                          PopupMenuButton<String>(
+                            tooltip: '管理运行配置',
+                            enabled: !busy,
+                            onSelected: _edit,
+                            itemBuilder: (_) => [
+                              const PopupMenuItem(
+                                value: 'rename',
+                                child: Text('重命名'),
+                              ),
+                              PopupMenuItem(
+                                value: 'pin',
+                                child: Text(
+                                  sel.cmd['pinned'] == true ? '取消固定' : '固定配置',
+                                ),
+                              ),
+                              const PopupMenuItem(
+                                value: 'delete',
+                                child: Text('删除配置'),
+                              ),
+                            ],
+                          ),
                         IconButton(
                           tooltip: active ? '停止' : '启动',
                           onPressed: busy || sel == null

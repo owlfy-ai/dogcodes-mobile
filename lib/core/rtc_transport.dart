@@ -134,6 +134,110 @@ Future<DirectConnection> connectRtc({
   required EndpointIdentity phone,
   required NoiseEndpoint endpoint,
 }) async {
+  final dial = await _dial(
+    relay: relay,
+    host: host,
+    phone: phone,
+    endpoint: endpoint,
+    purpose: 'business',
+    video: false,
+  );
+  try {
+    final status = await dial.client.call('transport_status', null) as Map;
+    final hasTurn = (dial.ice['iceServers'] as List).any(
+      (server) => (server['urls'] as List).any(
+        (url) =>
+            (url as String).startsWith('turn:') || url.startsWith('turns:'),
+      ),
+    );
+    return DirectConnection(
+      dial.client,
+      ConnectionRoute.fromStatus(status),
+      expiresAt: hasTurn
+          ? DateTime.fromMillisecondsSinceEpoch(
+              int.parse(dial.ice['expiresAt'] as String) * 1000,
+              isUtc: true,
+            )
+          : null,
+    );
+  } catch (_) {
+    await dial.client.close();
+    rethrow;
+  }
+}
+
+/// A connection of its own for 远程桌面: desktop RPCs go over its data
+/// channel (so the PC's control lease ends with it), and when the PC can,
+/// the screen arrives as an H.264 track on the same peer connection,
+/// decoded in hardware by WebRTC instead of as JPEG pulls.
+class DesktopConnection {
+  DesktopConnection(
+    this.link,
+    this.peer,
+    this.stream, {
+    required this.video,
+    this.expiresAt,
+  });
+  final HostLink link;
+  final RTCPeerConnection peer;
+
+  /// Completes when the screen track arrives (only if [video]).
+  final Future<MediaStream> stream;
+
+  /// The PC negotiated the screen track.
+  final bool video;
+  final DateTime? expiresAt;
+  Future<void> close() => link.close();
+}
+
+typedef DesktopConnector =
+    Future<DesktopConnection> Function(HostLink signalling);
+
+Future<DesktopConnection> connectDesktopRtc({
+  required HostLink relay,
+  required Map<String, dynamic> host,
+  required EndpointIdentity phone,
+  required NoiseEndpoint endpoint,
+}) async {
+  final dial = await _dial(
+    relay: relay,
+    host: host,
+    phone: phone,
+    endpoint: endpoint,
+    purpose: 'desktop',
+    video: true,
+  );
+  return DesktopConnection(
+    dial.client,
+    dial.peer,
+    dial.stream,
+    video: dial.video,
+    expiresAt: (dial.ice['expiresAt'] is String)
+        ? DateTime.fromMillisecondsSinceEpoch(
+            int.parse(dial.ice['expiresAt']) * 1000,
+            isUtc: true,
+          )
+        : null,
+  );
+}
+
+Future<
+  ({
+    SecureHostClient client,
+    RTCPeerConnection peer,
+    Map<String, dynamic> ice,
+    Future<MediaStream> stream,
+    bool video,
+  })
+>
+_dial({
+  required HostLink relay,
+  required Map<String, dynamic> host,
+  required EndpointIdentity phone,
+  required NoiseEndpoint endpoint,
+  required String purpose,
+  required bool video,
+}) async {
   final id = host['hostId'] as String;
   final ice = await routeRequest(
     Uri.parse(host['service'] as String),
@@ -148,6 +252,8 @@ Future<DirectConnection> connectRtc({
   });
   RtcBinaryTransport? transport;
   SecureHostClient? client;
+  final stream = Completer<MediaStream>();
+  unawaited(stream.future.then<void>((_) {}, onError: (Object _) {}));
   try {
     final gathered = Completer<void>();
     peer.onIceGatheringState = (state) {
@@ -156,6 +262,24 @@ Future<DirectConnection> connectRtc({
         gathered.complete();
       }
     };
+    if (video) {
+      peer.onTrack = (event) {
+        if (event.track.kind != 'video' || stream.isCompleted) return;
+        if (event.streams.isNotEmpty) {
+          stream.complete(event.streams.first);
+        } else {
+          createLocalMediaStream('dogcodes-screen').then((s) async {
+            await s.addTrack(event.track);
+            if (!stream.isCompleted) stream.complete(s);
+          });
+        }
+      };
+      // Receive-only: no camera, microphone or capture permission involved.
+      await peer.addTransceiver(
+        kind: RTCRtpMediaType.RTCRtpMediaTypeVideo,
+        init: RTCRtpTransceiverInit(direction: TransceiverDirection.RecvOnly),
+      );
+    }
     final channel = await peer.createDataChannel(
       'dogcodes-v1',
       RTCDataChannelInit()..ordered = true,
@@ -165,7 +289,7 @@ Future<DirectConnection> connectRtc({
       await peer.createOffer({
         'mandatory': {
           'OfferToReceiveAudio': false,
-          'OfferToReceiveVideo': false,
+          'OfferToReceiveVideo': video,
         },
         'optional': [],
       }),
@@ -175,7 +299,6 @@ Future<DirectConnection> connectRtc({
       await gathered.future.timeout(const Duration(seconds: 10));
     }
     final offer = await peer.getLocalDescription();
-    const purpose = 'business';
     final answer =
         await relay.call('direct_open', {
               'offer': {'type': 'offer', 'sdp': offer!.sdp},
@@ -211,22 +334,12 @@ Future<DirectConnection> connectRtc({
       noise: noise,
       peerHex: host['publicKey'] as String,
     );
-    final status = await client.call('transport_status', null) as Map;
-    final hasTurn = (ice['iceServers'] as List).any(
-      (server) => (server['urls'] as List).any(
-        (url) =>
-            (url as String).startsWith('turn:') || url.startsWith('turns:'),
-      ),
-    );
-    return DirectConnection(
-      client,
-      ConnectionRoute.fromStatus(status),
-      expiresAt: hasTurn
-          ? DateTime.fromMillisecondsSinceEpoch(
-              int.parse(ice['expiresAt'] as String) * 1000,
-              isUtc: true,
-            )
-          : null,
+    return (
+      client: client,
+      peer: peer,
+      ice: ice,
+      stream: stream.future,
+      video: video && answer['video'] == true,
     );
   } catch (_) {
     if (client != null) {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../core/pc_api.dart';
-import '../../core/secure_host_client.dart' show RemoteOutcomeUnknown;
+import '../../app.dart';
+import '../../core/mobile_operations.dart';
+import '../inbox/pending_operation.dart';
 import '../../ui/theme.dart';
 import '../../ui/widgets.dart';
 import '../conversation/agent_picker.dart' show defaultExecutor;
@@ -92,18 +94,20 @@ class _ChangesPageState extends State<ChangesPage> {
     if (link == null || task == null || id == null || selected.isEmpty) return;
     setState(() => busy = true);
     try {
-      await link.stage(
-        task,
-        snapshot!['id'] as String,
-        id,
-        selected.toList(),
+      await tool.host.operations.indexWrite(
+        link,
+        taskId: task,
+        snapshotId: snapshot!['id'] as String,
+        rootId: id,
+        paths: selected.toList(),
         unstage: unstage,
       );
     } catch (e) {
       if (mounted) showError(context, e);
     }
+    if (mounted) await AppScope.of(context).hub.refreshOperation(tool.host);
     if (mounted) setState(() => busy = false);
-    await _load();
+    if (mounted) await _load();
   }
 
   Future<void> _commit({required bool push}) async {
@@ -133,43 +137,34 @@ class _ChangesPageState extends State<ChangesPage> {
       if (ok != true) return;
       stageAll = true;
     }
+    if (!mounted) return;
     setState(() => busy = true);
-    String? opId;
+    final hub = AppScope.of(context).hub;
     try {
-      final result = await link.commit(
+      final result = await tool.host.operations.gitWrite(
+        link,
         taskId: task,
         rootId: id,
+        action: 'commit',
         snapshotId: snapshot!['id'] as String,
         message: text,
         stageAll: stageAll,
         push: push,
       );
-      opId = result.operationId;
-      if (push && result.completed) await link.gitAdvance(task, opId);
-      message.clear();
-      if (mounted) showError(context, push ? '已提交并推送' : '已提交');
-    } on RemoteOutcomeUnknown {
-      final receipt = opId == null ? null : await _receipt(task, opId);
-      if (mounted) showError(context, receipt ?? 'Git 操作结果待核实，请刷新查看，不要重复提交');
+      if (mounted) {
+        if (result?['state'] == 'succeeded') message.clear();
+        showError(
+          context,
+          result == null ? 'Git 操作结果待核实' : gitResultMessage(result),
+        );
+      }
     } catch (e) {
       if (mounted) showError(context, e);
+    } finally {
+      await hub.refreshOperation(tool.host);
+      if (mounted) setState(() => busy = false);
     }
-    if (mounted) setState(() => busy = false);
-    await _load();
-  }
-
-  Future<String?> _receipt(String task, String opId) async {
-    try {
-      final r = await tool.link!.gitReceipt(task, opId);
-      final outcome = (r as Map?)?['outcome'] as Map?;
-      return switch (outcome?['status']) {
-        'succeeded' => '电脑已完成该 Git 操作',
-        'failed' => '电脑执行失败：${outcome?['message']}',
-        _ => null,
-      };
-    } catch (_) {
-      return null;
-    }
+    if (mounted) await _load();
   }
 
   Future<void> _summary() async {
@@ -188,15 +183,29 @@ class _ChangesPageState extends State<ChangesPage> {
   Future<void> _plain(String action) async {
     final link = tool.link, task = tool.taskId, id = rootId;
     if (link == null || task == null || id == null) return;
+    if (!mounted) return;
     setState(() => busy = true);
+    final hub = AppScope.of(context).hub;
     try {
-      await link.gitPlain(task, id, action);
-      if (mounted) showError(context, '已完成');
+      final result = await tool.host.operations.gitWrite(
+        link,
+        taskId: task,
+        rootId: id,
+        action: action,
+      );
+      if (mounted) {
+        showError(
+          context,
+          result == null ? 'Git 操作结果待核实' : gitResultMessage(result),
+        );
+      }
     } catch (e) {
       if (mounted) showError(context, e);
+    } finally {
+      await hub.refreshOperation(tool.host);
+      if (mounted) setState(() => busy = false);
     }
-    if (mounted) setState(() => busy = false);
-    await _load();
+    if (mounted) await _load();
   }
 
   @override
@@ -228,6 +237,19 @@ class _ChangesPageState extends State<ChangesPage> {
           : Column(
               children: [
                 if (busy) const LinearProgressIndicator(minHeight: 2),
+                if (tool.host.sideOperation != null)
+                  Padding(
+                    padding: const EdgeInsets.all(DcSpace.page),
+                    child: PendingOperationCard(
+                      host: tool.host,
+                      operation: tool.host.sideOperation,
+                    ),
+                  ),
+                if (tool.host.pendingOperation != null)
+                  Padding(
+                    padding: const EdgeInsets.all(DcSpace.page),
+                    child: PendingOperationCard(host: tool.host),
+                  ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(
                     DcSpace.page,

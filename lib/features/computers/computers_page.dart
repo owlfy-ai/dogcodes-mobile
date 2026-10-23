@@ -5,8 +5,8 @@ import '../../ui/theme.dart';
 import '../../ui/quota_ring.dart';
 import '../../ui/widgets.dart';
 import '../devices/pairing_page.dart';
-import '../../core/pc_api.dart';
 import 'remote_desktop_page.dart';
+import 'keep_awake.dart';
 import '../settings/preferences_page.dart';
 
 /// 11 电脑: paired computers, their status, device-level remote desktop and
@@ -275,7 +275,7 @@ class _HostCard extends StatelessWidget {
                   label: Text(h.online ? '远程桌面' : '远程桌面 · 电脑离线'),
                 ),
                 if (h.online)
-                  _KeepAwake(key: ValueKey('awake-${h.id}'), host: h),
+                  KeepAwake(key: ValueKey('awake-${h.id}'), host: h),
                 if (agents.isNotEmpty) ...[
                   const SizedBox(height: 12),
                   Divider(color: c.line),
@@ -345,63 +345,4 @@ class _AgentStatus extends StatelessWidget {
     'broken' => '异常',
     _ => '不可用',
   };
-}
-
-/// PC-side policy: prevent idle sleep while Agent tasks run. Never blocks
-/// locking or an explicit sleep on the PC.
-class _KeepAwake extends StatefulWidget {
-  const _KeepAwake({super.key, required this.host});
-  final HostState host;
-  @override
-  State<_KeepAwake> createState() => _KeepAwakeState();
-}
-
-class _KeepAwakeState extends State<_KeepAwake> {
-  Map<String, dynamic>? policy;
-  bool busy = false;
-
-  @override
-  void initState() {
-    super.initState();
-    widget.host.link
-        ?.powerPreferences()
-        .then((v) => mounted ? setState(() => policy = v) : null)
-        .catchError((Object _) => null);
-  }
-
-  Future<void> _set(bool enabled) async {
-    final link = widget.host.link;
-    if (link == null || policy == null) return;
-    setState(() => busy = true);
-    try {
-      final v = await link.setKeepAwake(
-        enabled,
-        '${policy!['revision'] ?? '0'}',
-      );
-      if (mounted) setState(() => policy = v);
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('$e')));
-      }
-    }
-    if (mounted) setState(() => busy = false);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (policy == null) return const SizedBox.shrink();
-    return SwitchListTile(
-      contentPadding: EdgeInsets.zero,
-      dense: true,
-      title: const Text('执行任务时保持唤醒'),
-      subtitle: Text(
-        '任务运行期间阻止电脑进入空闲睡眠',
-        style: Theme.of(context).textTheme.bodySmall,
-      ),
-      value: policy!['enabled'] == true,
-      onChanged: busy ? null : _set,
-    );
-  }
 }

@@ -35,6 +35,9 @@ class DirectConnection {
 typedef RelayDialer = Future<HostLink> Function();
 typedef DirectDialer = Future<DirectConnection> Function(HostLink relay);
 
+/// Opens a dedicated 远程桌面 connection, signalled over [signalling].
+typedef DesktopDialer<T> = Future<T> Function(HostLink signalling);
+
 /// A stable logical connection. A failed RPC is NEVER replayed on a new path.
 /// The caller retains its original operation identity and verifies its receipt.
 class AdaptiveHostLink implements RoutedHostLink {
@@ -42,6 +45,7 @@ class AdaptiveHostLink implements RoutedHostLink {
     required HostLink relay,
     required this.relayDialer,
     required this.directDialer,
+    this.desktopDialer,
     this.retryDelay = const Duration(minutes: 2),
   }) : _active = relay,
        hostId = relay.hostId {
@@ -52,6 +56,10 @@ class AdaptiveHostLink implements RoutedHostLink {
   }
   final RelayDialer relayDialer;
   final DirectDialer directDialer;
+
+  /// Returns a `DesktopConnection` (rtc_transport.dart); typed loosely so
+  /// this file stays free of WebRTC types.
+  final DesktopDialer<Object>? desktopDialer;
   final Duration retryDelay;
   @override
   final String hostId;

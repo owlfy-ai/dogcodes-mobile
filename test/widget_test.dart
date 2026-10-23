@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:dogcodes_app/app.dart';
 import 'package:dogcodes_app/core/host_hub.dart';
+import 'package:dogcodes_app/core/protocol.dart';
 import 'package:dogcodes_app/features/inbox/pending_page.dart';
 import 'package:dogcodes_app/core/security/secret_storage.dart';
 
@@ -12,6 +13,7 @@ class FakeLink implements HostLink {
   @override
   final String hostId;
   final calls = <String>[];
+  bool tailPaging = false;
   final executed = <Map<String, dynamic>>[];
   @override
   String? get hostName => name;
@@ -32,6 +34,17 @@ class FakeLink implements HostLink {
   @override
   Future<dynamic> call(String method, dynamic params) async {
     calls.add(method);
+    // Behaves like a PC from before tail paging: the page falls back.
+    if (method == 'timeline_tail' && !tailPaging) {
+      throw const ProtocolException('remote method unavailable');
+    }
+    if (method == 'command_receipt' &&
+        params[0]['payload']['type'] == 'cancel_turn') {
+      final id = (params[0] as Map)['commandId'];
+      return executed.any((e) => e['commandId'] == id)
+          ? {'commandId': id, 'accepted': true}
+          : null;
+    }
     if (method == 'execute') {
       executed.add(Map<String, dynamic>.from(params[0] as Map));
     }
@@ -291,6 +304,18 @@ void main() {
     for (var i = 0; i < 10; i++) {
       await tester.pump(const Duration(milliseconds: 100));
     }
+    // The timeline is built lazily and opens at its end.
+    final timeline = find
+        .descendant(
+          of: find.byKey(const ValueKey('conversation-timeline')),
+          matching: find.byType(Scrollable),
+        )
+        .first;
+    await tester.scrollUntilVisible(
+      find.text('完善登录流程，并补上错误提示。'),
+      -300,
+      scrollable: timeline,
+    );
     expect(find.text('完善登录流程，并补上错误提示。'), findsOneWidget);
     expect(find.text('我会先检查登录逻辑，再处理错误状态。'), findsOneWidget);
     expect(find.text('读取 auth.ts'), findsOneWidget);
@@ -320,6 +345,11 @@ void main() {
     expect(link.calls.sublist(reads), isNot(contains('timeline_snapshot')));
     expect(link.calls.sublist(reads), isNot(contains('bootstrap')));
 
+    await tester.scrollUntilVisible(
+      find.text('Agent 正在电脑上工作…'),
+      300,
+      scrollable: timeline,
+    );
     expect(find.text('Agent 正在电脑上工作…'), findsOneWidget);
     await tester.tap(find.byTooltip('停止'));
     for (var i = 0; i < 5; i++) {

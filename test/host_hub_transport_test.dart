@@ -147,4 +147,64 @@ void main() {
     expect(link.source.isClosed, true);
     hub.dispose();
   });
+
+  test(
+    'a project stream the PC ends is resubscribed after a refresh',
+    () async {
+      final hub = HostHub(storage: MemorySecretStorage());
+      final host = HostState({'hostId': 'pc'}, hub.storage);
+      hub.hosts.add(host);
+      final link = ManyProjectsLink();
+      await hub.attach(host, link);
+      for (var i = 0; i < 20; i++) {
+        await Future<void>.delayed(Duration.zero);
+      }
+      final first = link.active.entries.firstWhere((e) => e.value == 'p0').key;
+      final before = link.nextId;
+
+      // An unknown id is ignored.
+      link.source.add({'type': 'subscription_ended', 'subscriptionId': 'nope'});
+      link.source.add({'type': 'subscription_ended', 'subscriptionId': first});
+      link.active.remove(first);
+      await Future<void>.delayed(
+        HostHub.resubscribeDelay + const Duration(milliseconds: 100),
+      );
+      for (var i = 0; i < 20; i++) {
+        await Future<void>.delayed(Duration.zero);
+      }
+      expect(link.nextId, before + 1);
+      expect(link.active.values.where((p) => p == 'p0').length, 1);
+      hub.dispose();
+    },
+  );
+
+  test(
+    'a computer-wide event repeated by each project stream is seen once',
+    () async {
+      final hub = HostHub(storage: MemorySecretStorage());
+      final host = HostState({'hostId': 'pc'}, hub.storage);
+      hub.hosts.add(host);
+      final link = ManyProjectsLink();
+      await hub.attach(host, link);
+      final seen = <Map<String, dynamic>>[];
+      final listening = host.events.listen(seen.add);
+      Map<String, dynamic> event(int sequence) => {
+        'type': 'event',
+        'event': {
+          'sequence': '$sequence',
+          'eventType': 'preferences.history.updated',
+          'streamVersion': '$sequence',
+          'payload': {'tasks': {}},
+        },
+      };
+      for (var i = 0; i < 3; i++) {
+        link.source.add(event(100));
+      }
+      link.source.add(event(101));
+      await Future<void>.delayed(Duration.zero);
+      expect(seen.map((e) => e['sequence']), ['100', '101']);
+      await listening.cancel();
+      hub.dispose();
+    },
+  );
 }

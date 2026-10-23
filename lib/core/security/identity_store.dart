@@ -69,7 +69,7 @@ class TrustedHostStore {
   /// Call only for an acknowledgement decrypted on this exact Noise session.
   /// Persist before displaying paired or sending the first business operation.
   Future<void> confirm({
-    required PairingInvitation invitation,
+    required PairingPins invitation,
     required NoiseSession session,
     required EndpointIdentity phone,
     required Map<String, dynamic> acknowledgement,
@@ -138,6 +138,8 @@ class TrustedHostStore {
       if (store is ErasableSecretStorage) {
         await store.delete(_key(hostId));
         await store.delete('dogcodes.pending.v1.$hostId');
+        await store.delete('dogcodes.cancel.v1.$hostId');
+        await store.delete('dogcodes.terminal-stops.v1.$hostId');
       }
     });
     _pending = pending.then((_) {}, onError: (Object _, StackTrace _) {});

@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:dogcodes_app/core/mobile_operations.dart';
+import 'package:dogcodes_app/core/security/secret_storage.dart';
 import 'package:crypto/crypto.dart';
 import 'package:dogcodes_app/core/host_api.dart';
 import 'package:dogcodes_app/core/turn_changes.dart';
@@ -25,6 +27,7 @@ class FakePc implements HostApi {
   final index = <String>{'already.txt'};
   final calls = <String>[];
   Map<String, dynamic>? committed;
+  final receipts = <String, Map>{};
 
   List<int> get bytes => utf8.encode(jsonEncode(artifact));
   Map<String, dynamic> get meta => {
@@ -68,7 +71,30 @@ class FakePc implements HostApi {
                   ]),
                 ],
               };
+      case 'file_operation':
+        return receipts[a['operationId']];
+      case 'git_operation':
+        return committed == null
+            ? null
+            : {
+                'request': committed,
+                'outcome': {'status': 'succeeded', 'completed': true},
+                'closed': false,
+              };
       case 'index':
+        receipts[a['operationId'] as String] = {
+          'request': {
+            'operationId': a['operationId'],
+            'taskId': a['taskId'],
+            'command': 'core_review_index',
+            'arguments': {
+              for (final e in a.entries)
+                if (e.key != 'operationId') e.key: e.value,
+            },
+          },
+          'outcome': {'status': 'succeeded', 'result': null},
+          'closed': false,
+        };
         for (final p in a['paths'] as List) {
           a['action'] == 'stage' ? index.add('$p') : index.remove('$p');
         }
@@ -106,6 +132,7 @@ Widget host(FakePc pc, Widget child) => MaterialApp(
   theme: dcTheme(Brightness.light),
   home: Scaffold(
     body: TurnScope(
+      operations: MobileOperations(MemorySecretStorage(), 'pc'),
       link: pc,
       taskId: 't1',
       executor: const {'providerId': 'claude-code', 'installationId': 'i1'},

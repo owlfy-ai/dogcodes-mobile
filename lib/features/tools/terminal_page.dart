@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../core/pc_api.dart';
+import '../../core/host_hub.dart';
+import '../../core/mobile_operations.dart';
+import '../../core/protocol.dart';
+import 'workspace_recovery.dart';
+import 'workspace_connection.dart';
 import '../../ui/theme.dart';
 import '../../ui/widgets.dart';
 import 'terminal_pane.dart';
@@ -14,7 +19,22 @@ class TerminalPage extends StatefulWidget {
   State<TerminalPage> createState() => _TerminalPageState();
 }
 
-class _TerminalPageState extends State<TerminalPage> {
+class _TerminalPageState extends State<TerminalPage>
+    with WorkspaceConnection<TerminalPage> {
+  @override
+  HostState get workspaceHost => tool.host;
+  int _loadOrder = 0;
+  bool busy = false;
+  @override
+  void onWorkspaceConnectionChanged() {
+    _loadOrder++;
+    for (final s in sessions.values) {
+      s.dispose();
+    }
+    sessions.clear();
+    if (tool.host.online) _load();
+  }
+
   List<Map<String, dynamic>> terminals = [];
   final sessions = <String, TerminalSession>{};
   String? current;
@@ -39,18 +59,30 @@ class _TerminalPageState extends State<TerminalPage> {
 
   Future<void> _load({String? select}) async {
     final link = tool.link;
-    if (link == null) return setState(() => loading = false);
+    final order = ++_loadOrder, epoch = tool.host.connectionEpoch;
+    if (link == null || !tool.host.online) {
+      return setState(() => loading = false);
+    }
     try {
       final list =
           (await link.terminals(tool.projectId))
-              .where((t) => t['commandId'] == null && terminalActive(t))
+              .where(
+                (t) =>
+                    t['commandId'] == null &&
+                    (terminalActive(t) || t['status'] == 'unknown'),
+              )
               .toList()
             ..sort(
               (a, b) => ((a['createdAt'] as num?) ?? 0).compareTo(
                 (b['createdAt'] as num?) ?? 0,
               ),
             );
-      if (!mounted) return;
+      if (!mounted ||
+          order != _loadOrder ||
+          epoch != tool.host.connectionEpoch ||
+          link != tool.link) {
+        return;
+      }
       setState(() {
         terminals = list;
         error = null;
@@ -61,9 +93,9 @@ class _TerminalPageState extends State<TerminalPage> {
                 : list.lastOrNull?['id'] as String?);
       });
     } catch (e) {
-      if (mounted) setState(() => error = '$e');
+      if (mounted && order == _loadOrder) setState(() => error = '$e');
     } finally {
-      if (mounted) setState(() => loading = false);
+      if (mounted && order == _loadOrder) setState(() => loading = false);
     }
   }
 
@@ -75,19 +107,29 @@ class _TerminalPageState extends State<TerminalPage> {
 
   Future<void> _new() async {
     final link = tool.link;
-    if (link == null) return;
+    if (link == null || busy || !tool.host.online) return;
+    setState(() => busy = true);
     try {
-      final info = await link.terminalStart(
+      final result = await tool.host.operations.terminalStart(
+        link,
         projectId: tool.projectId,
         cwd: tool.path,
       );
-      await _load(select: info['id'] as String?);
+      if (result == null) throw const ProtocolException('启动结果待核实，请使用原操作恢复。');
+      if (mounted) await _load(select: result['terminal']?['id'] as String?);
     } catch (e) {
       if (mounted) showError(context, e);
+    } finally {
+      await workspaceHub?.refreshOperation(tool.host);
+      if (mounted) setState(() => busy = false);
     }
   }
 
   Future<void> _close(String id) async {
+    final link = tool.link, epoch = tool.host.connectionEpoch;
+    final target = terminals.where((t) => t['id'] == id).firstOrNull;
+    if (link == null || target == null || busy || !tool.host.online) return;
+    final terminal = Map<String, dynamic>.from(target);
     final ok = await showDialog<bool>(
       context: context,
       builder: (d) => AlertDialog(
@@ -105,14 +147,29 @@ class _TerminalPageState extends State<TerminalPage> {
         ],
       ),
     );
-    if (ok != true) return;
+    if (ok != true || !mounted) return;
+    if (link != tool.link || epoch != tool.host.connectionEpoch) {
+      showError(context, '连接已改变，请刷新后重新确认关闭。');
+      return;
+    }
+    setState(() => busy = true);
     try {
-      await tool.link?.terminalStop(id);
-      sessions.remove(id)?.dispose();
-      if (current == id) current = null;
+      final result = await tool.host.operations.terminalStop(link, terminal);
+      if (!mounted || link != tool.link || epoch != tool.host.connectionEpoch) {
+        return;
+      }
+      if (result['state'] == 'stopped') {
+        sessions.remove(id)?.dispose();
+        if (current == id) current = null;
+      } else {
+        showError(context, terminalStopMessage(result));
+      }
       await _load();
     } catch (e) {
       if (mounted) showError(context, e);
+    } finally {
+      await workspaceHub?.refreshOperation(tool.host);
+      if (mounted) setState(() => busy = false);
     }
   }
 
@@ -125,7 +182,7 @@ class _TerminalPageState extends State<TerminalPage> {
         title: '终端',
         subtitle: '${tool.host.name} · ${tool.projectName}',
       ),
-      body: tool.link == null
+      body: !tool.host.online
           ? ToolUnavailable(tool: tool)
           : Column(
               children: [
@@ -146,13 +203,18 @@ class _TerminalPageState extends State<TerminalPage> {
                         ),
                       IconButton(
                         tooltip: '新建终端',
-                        onPressed: _new,
+                        onPressed: busy ? null : _new,
                         icon: const Icon(Icons.add),
                       ),
                     ],
                   ),
                 ),
                 Divider(color: c.line),
+                WorkspaceRecoveryCards(
+                  host: tool.host,
+                  projectId: tool.projectId,
+                  onRecovered: () => _load(),
+                ),
                 if (error != null) InlineNotice(error!, danger: true),
                 Expanded(
                   child: loading
@@ -160,7 +222,7 @@ class _TerminalPageState extends State<TerminalPage> {
                       : session == null
                       ? Center(
                           child: OutlinedButton.icon(
-                            onPressed: _new,
+                            onPressed: busy ? null : _new,
                             icon: const Icon(Icons.terminal),
                             label: const Text('新建终端'),
                           ),
@@ -213,7 +275,7 @@ class _Tab extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  tooltip: '关闭终端',
+                  tooltip: '关闭当前终端',
                   visualDensity: VisualDensity.compact,
                   iconSize: 16,
                   onPressed: onClose,

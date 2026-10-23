@@ -9,8 +9,13 @@ import 'tool_context.dart';
 /// 07 文件: read-only browsing of the PC project; edits go through an Agent
 /// or remote desktop.
 class FilesPage extends StatefulWidget {
-  const FilesPage({super.key, required this.tool});
+  const FilesPage({
+    super.key,
+    required this.tool,
+    this.selectAttachment = false,
+  });
   final ToolContext tool;
+  final bool selectAttachment;
   @override
   State<FilesPage> createState() => _FilesPageState();
 }
@@ -96,11 +101,17 @@ class _FilesPageState extends State<FilesPage> {
     _load();
   });
 
-  void _preview(int r, String p) => Navigator.of(context).push(
-    MaterialPageRoute<void>(
-      builder: (_) => FilePreviewPage(tool: tool, root: r, path: p),
-    ),
-  );
+  void _preview(int r, String p) {
+    if (widget.selectAttachment) {
+      Navigator.of(context).pop({'taskId': tool.taskId, 'root': r, 'path': p});
+      return;
+    }
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => FilePreviewPage(tool: tool, root: r, path: p),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +130,11 @@ class _FilesPageState extends State<FilesPage> {
       },
       child: Scaffold(
         appBar: DetailBar(
-          title: segments.isEmpty ? tool.projectName : segments.last,
+          title: widget.selectAttachment
+              ? '选择项目文件'
+              : segments.isEmpty
+              ? tool.projectName
+              : segments.last,
           subtitle: tool.subtitle,
           actions: [
             if (roots.length > 1)
