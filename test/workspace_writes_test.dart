@@ -158,6 +158,28 @@ void main() {
     },
   );
   test(
+    'an additional-directory launch keeps its original recipe after a lost reply',
+    () async {
+      pc.drop = true;
+      await expectLater(
+        ops.terminalStart(
+          pc,
+          projectId: 'project',
+          directoryIndex: 2,
+          cwd: '/project/extra',
+        ),
+        throwsA(isA<RemoteOutcomeUnknown>()),
+      );
+      final saved = await ops.sidePending();
+      expect(saved!['request']['directoryIndex'], 2);
+      expect(saved['request']['cwd'], '/project/extra');
+      final recovered = await MobileOperations(storage, 'pc').retry(pc);
+      expect(recovered?['terminal']['id'], saved['request']['operationId']);
+      expect(pc.writes, hasLength(1));
+      expect(await ops.sidePending(), isNull);
+    },
+  );
+  test(
     'an unaccepted launch retries the same ID and recipe after restart',
     () async {
       pc.notAccepted = true;

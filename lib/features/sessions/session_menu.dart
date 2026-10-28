@@ -4,14 +4,23 @@ import '../../core/host_hub.dart';
 import '../../core/mobile_operations.dart';
 import '../tools/tool_context.dart' show showError;
 import 'history_search_page.dart';
+import '../settings/notification_settings_page.dart';
 
 /// A session is pinned or archived, never both: an archived one is unarchived
 /// before it can be pinned, and archiving a pinned one says it unpins it.
-List<PopupMenuEntry<String>> sessionMenuItems(SessionRef s) => [
+List<PopupMenuEntry<String>> sessionMenuItems(
+  SessionRef s, {
+  bool notifications = false,
+}) => [
   if (!s.archived)
-    PopupMenuItem(value: 'pin', child: Text(s.pinned ? '取消置顶' : '置顶会话')),
+    PopupMenuItem(
+      value: 'pin',
+      enabled: s.host.online,
+      child: Text(s.pinned ? '取消置顶' : '置顶会话'),
+    ),
   PopupMenuItem(
     value: 'archive',
+    enabled: s.host.online,
     child: Text(
       s.archived
           ? '取消归档'
@@ -20,7 +29,13 @@ List<PopupMenuEntry<String>> sessionMenuItems(SessionRef s) => [
           : '归档会话',
     ),
   ),
-  const PopupMenuItem(value: 'history', child: Text('搜索历史正文')),
+  PopupMenuItem(
+    value: 'history',
+    enabled: s.host.online,
+    child: const Text('搜索历史正文'),
+  ),
+  if (notifications)
+    const PopupMenuItem(value: 'notifications', child: Text('通知设置')),
 ];
 
 Future<void> sessionAction(
@@ -28,6 +43,15 @@ Future<void> sessionAction(
   SessionRef s,
   String action,
 ) async {
+  if (action == 'notifications') {
+    await Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) =>
+            NotificationSettingsPage(host: s.host, taskId: s.taskId),
+      ),
+    );
+    return;
+  }
   if (action == 'history') {
     await Navigator.of(context).push(
       MaterialPageRoute<void>(builder: (_) => HistorySearchPage(sessions: [s])),
@@ -61,9 +85,14 @@ class _SessionMenuState extends State<SessionMenu> {
   @override
   Widget build(BuildContext context) => PopupMenuButton<String>(
     tooltip: '会话操作',
-    enabled: widget.session.host.online && !busy,
+    enabled:
+        !busy &&
+        (widget.session.host.online || AppScope.of(context).runtime != null),
     icon: const Icon(Icons.more_horiz, size: 20),
-    itemBuilder: (_) => sessionMenuItems(widget.session),
+    itemBuilder: (_) => sessionMenuItems(
+      widget.session,
+      notifications: AppScope.of(context).runtime != null,
+    ),
     onSelected: (action) async {
       setState(() => busy = true);
       await sessionAction(context, widget.session, action);

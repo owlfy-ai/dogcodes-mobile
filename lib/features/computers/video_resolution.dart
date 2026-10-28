@@ -7,6 +7,7 @@ import 'remote_view.dart';
 class VideoResolution {
   String? instance;
   int applied = 0, _next = 0, target = 0, limit = 1920;
+  int? _generation;
   Map<String, dynamic>? _pending;
   int? _desired;
   Duration? _lastSent;
@@ -19,6 +20,7 @@ class VideoResolution {
     _pending = null;
     _desired = null;
     _lastSent = null;
+    _generation = null;
     limit = 1920;
   }
 
@@ -27,6 +29,7 @@ class VideoResolution {
     final resize = video['resize'];
     if (resize is! Map || resize['instanceId'] is! String) return;
     instance = resize['instanceId'] as String;
+    _generation = (video['generation'] as num?)?.toInt();
     applied = int.tryParse('${resize['applied']}') ?? 0;
     _next = math.max(applied, int.tryParse('${resize['requested']}') ?? 0);
     target =
@@ -66,14 +69,24 @@ class VideoResolution {
     final resize = video['resize'];
     return resize is Map &&
         resize['instanceId'] == instance &&
-        (int.tryParse('${resize['applied']}') ?? -1) > applied;
+        resize['state'] != 'updating' &&
+        (int.tryParse('${resize['applied']}') ?? -1) >= applied &&
+        (_generation == null ||
+            video['generation'] == null ||
+            (video['generation'] as num).toInt() >= _generation!) &&
+        ((int.tryParse('${resize['applied']}') ?? -1) > applied ||
+            (_generation != null &&
+                video['generation'] is num &&
+                (video['generation'] as num).toInt() > _generation!));
   }
 
   void accept(Map video) {
     if (!newer(video)) return;
     final resize = video['resize'] as Map;
     applied = int.parse('${resize['applied']}');
+    _generation = (video['generation'] as num?)?.toInt();
     target = (resize['targetWidth'] as num).toInt();
+    limit = ((resize['maxWidth'] as num?)?.toInt() ?? limit).clamp(320, 1920);
     if (_pending != null &&
         applied >= int.parse(_pending!['viewRequest'] as String)) {
       _pending = null;

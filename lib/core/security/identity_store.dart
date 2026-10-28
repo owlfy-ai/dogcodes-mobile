@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:crypto/crypto.dart';
+import 'host_lifecycle.dart';
 import '../protocol.dart';
 import 'noise_endpoint.dart';
 import '../secure_host_client.dart' show displayHostName;
@@ -60,122 +60,172 @@ class DeviceIdentityStore {
 }
 
 class TrustedHostStore {
-  TrustedHostStore(this.storage);
+  TrustedHostStore(this.storage) : _registry = HostRegistry(storage);
   final SecretStorage storage;
-  Future<void> _pending = Future.value();
-  String _key(String hostId) =>
-      'dogcodes.host.v1.${sha256.convert(utf8.encode(hostId))}';
+  final HostRegistry _registry;
 
-  /// Call only for an acknowledgement decrypted on this exact Noise session.
-  /// Persist before displaying paired or sending the first business operation.
-  Future<void> confirm({
-    required PairingPins invitation,
-    required NoiseSession session,
-    required EndpointIdentity phone,
-    required Map<String, dynamic> acknowledgement,
-  }) {
-    final pending = _pending.then((_) async {
-      final hostHex = hexBytes(
-        base64Url.decode(base64Url.normalize(invitation.hostKey)),
-      );
-      if (session.authenticatedPeer != hostHex ||
-          acknowledgement['type'] != 'paired' ||
-          acknowledgement['hostId'] != invitation.hostId ||
-          acknowledgement['invitationId'] != invitation.invitationId ||
-          acknowledgement['phonePublicKey'] != phone.publicHex ||
-          acknowledgement['hostPublicKey'] != hostHex ||
-          acknowledgement['binding'] != session.binding ||
-          acknowledgement['routeToken'] is! String ||
-          !RegExp(
-            r'^[0-9a-f]{64}$',
-          ).hasMatch(acknowledgement['routeToken'] as String) ||
-          acknowledgement['grantRevision'] is! String ||
-          parseSequence(acknowledgement['grantRevision'] as String) ==
-              BigInt.zero) {
-        throw const ProtocolException('配对回执与当前连接不一致。');
-      }
-      final old = await read(invitation.hostId);
-      if (old != null &&
-          (old['publicKey'] != hostHex ||
-              old['service'] != invitation.service.toString())) {
-        throw const ProtocolException('电脑身份已发生变化，需要先解除旧配对。');
-      }
-      final value = jsonEncode({
-        'version': 1,
-        'hostId': invitation.hostId,
-        'service': invitation.service.toString(),
-        'publicKey': hostHex,
-        'grantRevision': acknowledgement['grantRevision'],
-        'routeToken': acknowledgement['routeToken'],
-        'displayName': ?displayHostName(acknowledgement['hostName']),
-      });
-      await storage.write(_key(invitation.hostId), value);
-      final ids =
-          jsonDecode(await storage.read('dogcodes.host.index.v1') ?? '[]')
-              as List;
-      if (!ids.contains(invitation.hostId)) {
-        ids.add(invitation.hostId);
-        await storage.write('dogcodes.host.index.v1', jsonEncode(ids));
-      }
-      if (await storage.read(_key(invitation.hostId)) != value) {
-        throw const ProtocolException('配对身份未能安全保存，请核实原配对结果。');
-      }
-    });
-    _pending = pending.then((_) {}, onError: (Object _, StackTrace _) {});
-    return pending;
-  }
+  Future<List<dynamic>> _ids() async =>
+      jsonDecode(await storage.read('dogcodes.host.index.v1') ?? '[]') as List;
 
-  /// Forgets a computer on this phone only: its pinned key and route token are
-  /// erased. Revoking this phone's access is done on the computer.
-  Future<void> forget(String hostId) {
-    final pending = _pending.then((_) async {
-      final ids =
-          jsonDecode(await storage.read('dogcodes.host.index.v1') ?? '[]')
-              as List;
-      ids.remove(hostId);
-      await storage.write('dogcodes.host.index.v1', jsonEncode(ids));
-      final store = storage;
-      if (store is ErasableSecretStorage) {
-        await store.delete(_key(hostId));
-        await store.delete('dogcodes.pending.v1.$hostId');
-        await store.delete('dogcodes.cancel.v1.$hostId');
-        await store.delete('dogcodes.terminal-stops.v1.$hostId');
-      }
-    });
-    _pending = pending.then((_) {}, onError: (Object _, StackTrace _) {});
-    return pending;
-  }
-
-  Future<List<Map<String, dynamic>>> list() async {
-    final ids =
-        jsonDecode(await storage.read('dogcodes.host.index.v1') ?? '[]')
-            as List;
-    final hosts = <Map<String, dynamic>>[];
-    for (final id in ids) {
-      final host = await read(id as String);
-      if (host != null) hosts.add(host);
-    }
-    return hosts;
-  }
-
-  Future<Map<String, dynamic>?> read(String hostId) async {
-    final value = await storage.read(_key(hostId));
-    if (value == null) return null;
+  Future<Map<String, dynamic>?> _read(HostLifecycle host) async {
+    var data = await host.record();
+    if (data == null || data['unpaired'] == true) return null;
     try {
-      final data = jsonDecode(value) as Map<String, dynamic>;
-      if (data['version'] != 1 ||
-          data['hostId'] != hostId ||
-          data['publicKey'] is! String ||
+      if (data['publicKey'] is! String ||
           !RegExp(r'^[0-9a-f]{64}$').hasMatch(data['publicKey'] as String) ||
           !validSavedService(data['service'] as String)) {
         throw const FormatException();
       }
       parseSequence(data['grantRevision'] as String);
-      return data;
     } catch (_) {
       throw const ProtocolException('已保存的电脑身份无法读取，请先核实配对。');
     }
+    if (!validBindingEpoch(data['bindingEpoch'])) {
+      throw const ProtocolException('已保存的电脑身份无法读取，请先核实配对。');
+    }
+    return data;
   }
+
+  /// Capture before contacting the PC; late acknowledgements may not recreate
+  /// a computer removed while its handshake or recovery was in flight.
+  Future<String> beginPairing(String hostId) => _registry.serial(
+    () => _registry.host(hostId).serial(() async {
+      final host = _registry.host(hostId);
+      var current = await host.record();
+      if (current != null && current['unpaired'] != true) {
+        current = await _read(host);
+      }
+      if (current == null) {
+        current = {
+          'version': 1,
+          'hostId': hostId,
+          'bindingEpoch': newBindingEpoch(),
+          'unpaired': true,
+        };
+        await host.persist(current);
+      }
+      return current['bindingEpoch'] as String;
+    }),
+  );
+
+  /// Call only for an acknowledgement decrypted on this exact Noise session.
+  /// The binding epoch was captured before the request, not after its reply.
+  Future<void> confirm({
+    required PairingPins invitation,
+    required NoiseSession session,
+    required EndpointIdentity phone,
+    required Map<String, dynamic> acknowledgement,
+    required String bindingEpoch,
+  }) async {
+    final hostHex = hexBytes(
+      base64Url.decode(base64Url.normalize(invitation.hostKey)),
+    );
+    if (session.authenticatedPeer != hostHex ||
+        acknowledgement['type'] != 'paired' ||
+        acknowledgement['hostId'] != invitation.hostId ||
+        acknowledgement['invitationId'] != invitation.invitationId ||
+        acknowledgement['phonePublicKey'] != phone.publicHex ||
+        acknowledgement['hostPublicKey'] != hostHex ||
+        acknowledgement['binding'] != session.binding ||
+        acknowledgement['routeToken'] is! String ||
+        !RegExp(
+          r'^[0-9a-f]{64}$',
+        ).hasMatch(acknowledgement['routeToken'] as String) ||
+        acknowledgement['grantRevision'] is! String ||
+        parseSequence(acknowledgement['grantRevision'] as String) ==
+            BigInt.zero) {
+      throw const ProtocolException('配对回执与当前连接不一致。');
+    }
+    await _registry.serial(
+      () => _registry.host(invitation.hostId).serial(() async {
+        final host = _registry.host(invitation.hostId);
+        var current = await host.record();
+        if (current == null || current['bindingEpoch'] != bindingEpoch) {
+          throw const ProtocolException('这项配对已因移除电脑而失效，请重新扫码。');
+        }
+        if (current['unpaired'] != true) {
+          final ready = await _read(host);
+          if (ready == null) throw const ProtocolException('电脑绑定已变化，请重新扫码。');
+          current = ready;
+        }
+        if (current['unpaired'] != true &&
+            (current['publicKey'] != hostHex ||
+                current['service'] != invitation.service.toString())) {
+          throw const ProtocolException('电脑身份已发生变化，需要先解除旧配对。');
+        }
+        if (current['unpaired'] == true) {
+          host.generation++;
+          host.cleanupPending = true;
+          await host.clearJournals();
+        }
+        final ids = await _ids();
+        if (!ids.contains(invitation.hostId)) {
+          ids.add(invitation.hostId);
+          await storage.write('dogcodes.host.index.v1', jsonEncode(ids));
+        }
+        // Publish the active binding last. A crash before this write leaves an
+        // unpaired tombstone; retries repeat cleanup before exposing any host.
+        await host.persist({
+          'version': 1,
+          'hostId': invitation.hostId,
+          'service': invitation.service.toString(),
+          'publicKey': hostHex,
+          'bindingEpoch': bindingEpoch,
+          'grantRevision': acknowledgement['grantRevision'],
+          'routeToken': acknowledgement['routeToken'],
+          'displayName': ?displayHostName(acknowledgement['hostName']),
+        });
+        host.cleanupPending = false;
+      }),
+    );
+  }
+
+  /// A tombstone replaces all credentials before clearing logs or the index.
+  /// Keep its epoch: a crash or late pairing reply cannot resurrect the binding.
+  Future<void> forget(String hostId, [String? expectedBinding]) =>
+      _registry.serial(
+        () => _registry.host(hostId).serial(() async {
+          final host = _registry.host(hostId), current = await host.record();
+          if (expectedBinding != null &&
+              current?['bindingEpoch'] != expectedBinding &&
+              !(current?['unpaired'] == true &&
+                  current?['previousEpoch'] == expectedBinding)) {
+            throw const ProtocolException('电脑绑定已变化，未移除新的绑定，请刷新后确认。');
+          }
+          host.generation++;
+          host.cleanupPending = true;
+          final tombstone =
+              current?['unpaired'] == true && current?['removed'] == true
+              ? current!
+              : <String, dynamic>{
+                  'version': 1,
+                  'hostId': hostId,
+                  'bindingEpoch': newBindingEpoch(),
+                  'previousEpoch': ?current?['bindingEpoch'],
+                  'unpaired': true,
+                  'removed': true,
+                };
+          await host.persist(tombstone);
+          await host.clearJournals();
+          final ids = await _ids();
+          ids.remove(hostId);
+          await storage.write('dogcodes.host.index.v1', jsonEncode(ids));
+          host.cleanupPending = false;
+        }),
+      );
+
+  Future<List<Map<String, dynamic>>> list() => _registry.serial(() async {
+    final hosts = <Map<String, dynamic>>[];
+    for (final id in await _ids()) {
+      final scope = _registry.host(id as String);
+      final host = await scope.serial(() => _read(scope));
+      if (host != null) hosts.add(host);
+    }
+    return hosts;
+  });
+  Future<Map<String, dynamic>?> read(String hostId) => _registry.serial(
+    () => _registry.host(hostId).serial(() => _read(_registry.host(hostId))),
+  );
 }
 
 bool validSavedService(String value) {

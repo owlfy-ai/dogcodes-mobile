@@ -138,6 +138,8 @@ void main() {
           host.readHandshake(phone.writeHandshake());
           final storage = MemorySecrets();
           final store = TrustedHostStore(storage);
+          final bindingEpoch = await store.beginPairing(invitation.hostId);
+          final before = Map<String, String>.from(storage.values);
           final ack = <String, dynamic>{
             'type': 'paired',
             'hostId': 'test-pc',
@@ -156,10 +158,11 @@ void main() {
               session: phone,
               phone: phoneId,
               acknowledgement: tampered,
+              bindingEpoch: bindingEpoch,
             ),
             throwsA(isA<ProtocolException>()),
           );
-          expect(storage.values, isEmpty);
+          expect(storage.values, before);
           final encrypted = host.seal(
             Uint8List.fromList(utf8.encode(jsonEncode(ack))),
           );
@@ -171,6 +174,7 @@ void main() {
             session: phone,
             phone: phoneId,
             acknowledgement: decoded,
+            bindingEpoch: bindingEpoch,
           );
           expect((await store.read('test-pc'))!['publicKey'], hostId.publicHex);
         },

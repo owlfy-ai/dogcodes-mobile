@@ -8,6 +8,7 @@ import '../devices/pairing_page.dart';
 import 'remote_desktop_page.dart';
 import 'keep_awake.dart';
 import '../settings/preferences_page.dart';
+import '../settings/notification_settings_page.dart';
 
 /// 11 电脑: paired computers, their status, device-level remote desktop and
 /// read-only Agent status, plus pairing.
@@ -166,6 +167,13 @@ class _HostCard extends StatelessWidget {
               PopupMenuButton<String>(
                 tooltip: '更多',
                 onSelected: (v) {
+                  if (v == 'notifications') {
+                    Navigator.of(context).push(
+                      MaterialPageRoute<void>(
+                        builder: (_) => NotificationSettingsPage(host: h),
+                      ),
+                    );
+                  }
                   if (v == 'connect') hub.connect(h);
                   if (v == 'disconnect') hub.disconnect(h);
                   if (v == 'forget') {
@@ -183,9 +191,19 @@ class _HostCard extends StatelessWidget {
                             child: const Text('取消'),
                           ),
                           TextButton(
-                            onPressed: () {
+                            onPressed: () async {
                               Navigator.of(dialog).pop();
-                              hub.forget(h);
+                              try {
+                                await hub.forget(h);
+                              } catch (_) {
+                                if (context.mounted) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('移除未完成，连接已关闭，请重试或核实安全存储。'),
+                                    ),
+                                  );
+                                }
+                              }
                             },
                             child: Text(
                               '移除',
@@ -216,6 +234,11 @@ class _HostCard extends StatelessWidget {
                   }
                 },
                 itemBuilder: (_) => [
+                  if (AppScope.of(context).runtime != null)
+                    const PopupMenuItem(
+                      value: 'notifications',
+                      child: Text('通知设置'),
+                    ),
                   if (h.status == LinkStatus.offline)
                     const PopupMenuItem(value: 'connect', child: Text('重新连接')),
                   if (h.link != null)

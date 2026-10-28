@@ -1,5 +1,146 @@
 # 手機端接續清單
 
+
+## 2026-10-27 默认附件分块与真实网关恢复补验
+
+- 将现有 gateway_acceptance.dart 的附件改为 524425 bytes，使用两块 256 KiB 加尾块，核对第一块后的续传位置、提交回执及读取内容 SHA-256；最终随任务发送并检查时间线保留附件。沿用真实手机 Dart 客户端、Noise FFI、当前 PC Core/附件服务和真实服务端 WSS 中继，Agent 为合成驱动，项目/运行命令/Git 仓库均为隔离夹具。
+- 当前终端/Git 待确认记录已在 sidePending 独立保存，旧网关夹具仍从 pending 读取终端而触发空值。修正四处相关读取/清除断言，并显式检查未知终端/Git 没占用消息记录；没有修改产品日志分流或重试策略。
+- 当前源码重新构建 PC remote-acceptance 与服务端后，完整现有网关流程 exit 0。除附件上传/续传/回执/读取/任务携带外，还包括配对丢 ACK 原身份恢复、任务/流式/审批/停止/额度/重连、置顶/归档/历史/Fork、会话命令和轮次审查、运行配置与终端丢回执恢复/迟到启动阻断、冻结 index/commit 丢回执/只读核实/原 push 续接、项目注册及撤销。Git 的接收仓库也只在同一临时目录内。
+- 外层 Python 独立读取 PC 夹具中实际保留的 524425 bytes 文件，SHA-256 为 `2a1cfba3de791895714cf23164f610bcfa5cd546c93e2e7d61af8562040b39ab`。使用独立空 PostgreSQL 数据库初始化当前格式 4，专用 Redis namespace；完成后结束本次进程、删除本次数据库和八个本次 Redis key，再清理临时项目。最初临时脚本的清理顺序错误也已纠正，不将它当作产品缺陷；原开发库及容器保持。
+- 对应文件 analyze/格式与差异检查通过，未重复无产品变化的普通全套。证据 `/tmp/dogcodes-attachment-gateway-{desktop-build,server-build,analyze,check}.log`、`/tmp/dogcodes-attachment-gateway-result.json`；服务端/PC 邀请和密钥原始输出只放临时 FD 并销毁，报告不保留其内容。之前已通过的三项本机 Noise 边界测试仍独立记录在下节。
+- 此处是本机 WSS/真实 Core/合成 Agent 验证，不证明真实供应商 CLI、手机系统安全存储/前后台、原生 WebRTC/P2P/TURN、公网/跨 NAT、用户屏幕或官方部署。未运行设备/模拟器或日常 Core，未提交推送，原八个工作包继续。
+
+
+## 2026-10-27 默认附件分块的加密传输边界
+
+- 核对现有上传和发送路径：默认 256 KiB 原始附件数据经 Base64 后超过中继单包上限，但业务请求由 SecureHostClient 再拆为 16000 bytes 的明文片段，然后分别加密；各条连接仍使用同一个发送器。保留当前分块大小和业务行为，没有新增协议或重试策略。
+- 将原有并发大帧回归扩展为默认附件尺寸的全部字节值数据，同时并发另一条 40 KB 请求。使用当前 PC 源码新编译的真实 Noise FFI，经受控二进制通道验证完整响应、顺序和所有加密包 <=16384 bytes；同组身份/purpose ACK 与密文篡改也通过，共 3 项，无跳过。它不是实际附件文件落盘、原生 DataChannel/WSS、手机或公网验收。
+- 指定 DOGCODES_ENDPOINT_LIBRARY 后显式运行 test/secure_transport_test.dart；对应文件 analyze、格式和差异检查通过。未重复无产品改动的完整普通测试或其余按需测试。日志 `/tmp/dogcodes-attachment-frame-{ffi-build,noise-tests,analyze}.log`，原八包范围保持，未运行设备/模拟器、用户桌面或真实 Agent，未提交推送。
+
+## 2026-10-27 本地解码恢复期间的输入
+
+- 二进制视频接收器已知解码失败/参考帧丢失时，立即冻结旧画面上的新输入，释放本端已发送/在途的按住状态；PC 正常状态轮询不会提前解冻。新接收器的首帧或恢复 IDR 实际输出后才放行，不重放恢复期间的点击。
+- 复用已有 RemoteInputQueue 的画面保护，当前 session/屏幕/接收器核对和关键帧代次规则；显示“画面正在恢复”。没有新增协议、迁移、租约或超时参数，独立 RTP 轨道保持原实现。
+- 新增页面回归验证拖拽释放、旧画面点击不发送、新 IDR 输出前继续阻止、恢复后只接受新操作；新增销毁接收器迟到输出回归。完整普通 Flutter 451 项通过、9 项原生按需未启用，全项目 analyze/格式/差异检查通过。
+- 证据 `/tmp/dogcodes-relay-picture-input-{before,current,suite-final,analyze-final,format}.log`。只使用可控页面/方法通道，不声称真实硬件解码或弱网验收；未运行设备/模拟器、用户桌面或 Agent，未提交推送。PC 当前工作清单的原八包范围保留。
+
+## 2026-10-27 Portal 独立光标来源
+
+- PC 在系统不提供内嵌光标而支持独立元数据时，读取同一授权 PipeWire 来源并合成到 JPEG/H.264；手机继续按 `cursorEmbedded: true` 处理，无新增协议或操作。静止画面的光标移动/隐藏和实际编解码已在私有 Linux 环境验证，只有 Hidden 模式的来源仍受系统能力限制。
+- 本轮手机产品代码未改、未重跑手机测试；真实 compositor、手机和网络验收保留。详见 PC `docs/implementation/native-cursor-2026-10-27.md` 最新记录。
+
+## 2026-10-27 DXGI 动态光标状态
+
+- `video.cursorEmbedded` 为 null 时保留未知判定，仅显示操作后的 400 ms 预测；true 同样不叠加永久箭头，false 才绘制 PC 的独立位置/形状。来源切换清理旧预测与形状确认。
+- PC 元数据随原画面经过采集/编码，只在当前代次帧被传输接纳后发布；状态轮询不等于手机已经解码对应 RTP 帧，真实 Windows/网络验收保留。
+- 新增未知状态与预测过期回归；完整普通测试 441 项通过，9 项原生 FFI 按需测试未启用，相关四文件 analyze/格式检查通过。未运行设备或提交推送。
+
+## 2026-10-27 原生光标形状
+
+- JPEG 与视频显示 PC 提供的 Windows/X11 原生形状和热点；位置读取支持 PC 只读连接。内嵌来源维持原画面与短时预测，正常 macOS/Wayland 视频无需再叠图。
+- 手机只保存一个当前形状，在现有请求中确认 shapeId，PC 不重复发送已持有图片；切屏/换来源清空确认，丢缓存时重新取得。高频视频 ACK 不额外获取图片；现有状态轮询接收新形状，不增加后台服务。
+- 热点在缩放/平移时保持对准目标，PNG/尺寸/热点/ID/大小在解码前检查。四项新状态回归、两个 JPEG/视频页面回归通过；完整普通测试 439 项通过、9 项原生 FFI 测试未启用，相关五文件 analyze 无问题。
+- PC 私有 Xvfb 对实际光标颜色、热点、位置、资源 ID 重用和缓存确认验证通过；DXGI 动态判定随后已按上节接通。Windows/macOS/X11 实机、macOS JPEG 原生形状及非嵌入 Portal 仍待。详见 PC `docs/implementation/native-cursor-2026-10-27.md`。未运行设备、真实桌面或提交推送。
+
+## 2026-10-27 JPEG 内嵌光标与重复箭头
+
+- 采用 PC 每次完整/unchanged JPEG 回复的 cursorEmbedded；不能再按 JPEG 一律显示独立箭头。来源变动清理旧位置和本地预测，内嵌画面操作后的 400 ms 预测按原定时器消失。
+- 删除未发布产品不需要的“缺字段当旧 Mac 视频”的判断。当前来源只有明确 true 才表示内嵌，不增加兼容或迁移。
+- 新增两个状态/页面用例，修改现有默认值用例；旧实现三个场景失败，修复后完整普通测试 433 项通过、9 项原生 FFI 按需用例未启用，三文件 analyze 无问题。PC 私有 Portal 同时验证完整与未变化图片的实际元数据。
+- 未运行模拟器/真机或真实桌面。原生光标形状、只读软件视频及真实设备仍待，详见 PC `docs/implementation/remote-desktop-video-2026-10-21.md` 最新记录；本轮未提交推送。
+
+## 2026-10-27 EMAS 设备登记与通知点击
+
+- 采用官方 aliyun_push 1.2.0；按平台私有构建配置启用，默认无凭据时不初始化。用户首次主动启用时申请权限；后续启动/前台恢复只核实既有权限。EMAS deviceId 按原绑定登记到服务端，保留静音/提醒类型；变化的设备 ID 会重新登记。
+- 接入原生点击入口与初始通知读取；普通接收不跳转，点击只按当前绑定打开会话并读取状态，不自动审批/执行。重复 SDK/初始回调按通知 ID 去重。Android 厂商辅助 Activity 不要求已有 Flutter 引擎，iOS 已配置 APNs entitlement、Pod 源和 -ObjC。
+- Android 官方插件 API 31 与当前 AndroidX 不兼容，项目用 finalizeDsl 对齐应用 SDK；未修改 pub 缓存或 fork SDK。厂商参数从已忽略的 private/android-push.properties 生成 Manifest，不配置的通道省略。
+- 新增 5 项注册/回调测试与 2 项路由页面测试，完整普通 Flutter 测试 431 项通过、9 项原生按需测试未启用；Android ARM64 调试包与 iOS 模拟器目标构建成功。配置见 [EMAS 通知](push-notifications.md)。凭据/真机收件、后台强退点击、地域网络仍待，没有发送真实通知或运行设备。
+
+## 2026-10-26 通知静音与提醒偏好
+
+- 渠道已确认：统一 EMAS，iOS 经 APNs，Android 接厂商/FCM。官方插件 aliyun_push 1.2.0 已下载到私有临时目录核对源码，尚未加入项目依赖。接续需补 SDK 初始化/设备 ID 注册/通知点击，以及服务端 Aliyun Provider 的 iOS 参数；不再等待渠道决策，凭据/真机仍按原约定随后验证。
+- 电脑的“更多”和会话菜单增加通知设置，支持电脑/会话静音及四类提醒开关。电脑离线时仍可调用原绑定服务；提醒仅影响这部手机，不影响任务/审批。
+- 使用安全存储内的服务地址与 routeToken，原 expectedRevision/operationId 防止并发覆盖；不提交 provider/token/clearTarget，保留已有推送注册。保存失败只读取最新值，不重发 PUT；未核实前停止编辑，替换/解除绑定后不发布迟到结果。通知读取按服务端 2048 项上限使用有界 2 MiB 响应，原路由请求默认 16 KiB 不变。
+- 新增 4 项 API/真实回环 HTTP 和 6 项页面测试；完整普通 Flutter 测试 424 项通过、9 项原生按需测试未启用；十文件 analyze/格式/差异检查通过。证据 `/tmp/dogcodes-notification-settings-all-tests.log`、`/tmp/dogcodes-notification-settings-analyze-final.log`。
+- 推送 SDK/token 注册、通知点击定位仍未接入，现按统一 EMAS 选择继续；不添加供应商依赖、配置凭据或发真实通知，界面明确提示后台提醒未启用。未改服务端/协议，未运行真实 Agent、桌面或设备，未提交推送。
+
+## 2026-10-26 历史提交与分支只读比较
+
+- 变更页复用 PC 既有 history/branches/query/file 接口：提交每页 50 项，支持继续读取；合并提交可选择父提交；分支比较为当前 HEAD 相对所选分支共同祖先的差异。
+- 查询明确携带原 rootId/reference/parent；历史视图隐藏文件选择、暂存和提交并禁用 Git 写操作。切换目录回到工作区，提交草稿按目录保留。取消/列表失败不替换原视图；连接变化关闭旧选择器并重读当前比较，忽略旧响应。
+- 新增 6 项页面测试，完整普通 Flutter 测试 414 项通过、9 项原生按需测试未启用；四文件 analyze/格式/差异检查通过。日志 `/tmp/dogcodes-git-history-all-tests.log`、`/tmp/dogcodes-git-history-analyze-final.log`。未新增依赖/协议，未运行真实 Git 写入、Agent 或设备，也未提交推送。
+- 通知 SDK/token、点击定位与电脑/会话静音 UI 仍缺代码，等待已询问的渠道选择；真实设备/凭据验证不算本轮完成。
+
+## 2026-10-26 首版范围核对
+
+- 对照已确认功能清单核对源码，记录在 PC `docs/implementation/mobile-capability-audit-2026-10-26.md`。已有日常入口及最近修复不重新列为未实现。
+- 核对时发现两项差异：历史提交/分支比较已在上节补齐；手机通知 SDK/token 注册、点击定位和电脑/会话静音 UI 仍未接入，服务端已完成不等于只待凭据。
+- 通知渠道已向用户询问，未选择/安装 SDK 或配置生产服务。只读 Git 比较已补齐；继续按原约定后续做凭据与实机验收，不扩展文件写入或原生 Agent 管理。
+
+## 2026-10-26 终端多目录与重新附着
+
+- 新建终端可选择项目的主目录/附加目录；使用当前 PC 项目数据，保存并发送原 directoryIndex/cwd。单目录项目保持直接创建。多目录终端标签显示目录名。
+- 选择期间连接或目录改变则要求重新选择，不发送旧目标。重连先读取真实终端列表，再按原 ID 附着，不启动新进程；启动回执丢失时仍核实同一份原请求。
+- 新增 4 项页面回归及 1 项原请求恢复回归通过；完整普通 Flutter 测试 408 项通过、9 项原生按需测试未启用；五文件 analyze 无问题。证据 `/tmp/dogcodes-terminal-directories-all-tests.log`、`/tmp/dogcodes-terminal-directories-analyze-final.log`。
+- 已核对运行页的 directoryIndex/commandId 选择、原停止确认与重连路径，沿用既有实现；本轮未改后端接口/协议，未运行实机、模拟器或真实终端，未提交推送。
+
+## 2026-10-26 变更页多 Git 目录
+
+- 使用 PC 已有比较快照中的稳定 rootId，增加目录选择；文件、Diff、暂存/取消暂存、提交、AI 说明及推送/拉取/同步均作用于所选仓库。暂存数按 rootId 关联，不依赖两份快照的目录顺序。
+- 页面内提交说明按目录分别保留，目录顺序变化和重连保持选择；所选目录移除时回到可用目录并恢复对应说明，不沿用另一仓库的草稿。主目录非 Git 时仍能选择附加 Git 仓库。
+- 新增 4 项手机页面回归（含小屏、同名文件、多目录回执与重连），最终专项通过；完整普通 Flutter 测试 403 项通过，9 项原生按需测试未启用。三文件 analyze 无问题。日志 `/tmp/dogcodes-git-roots-all-tests.log`、`/tmp/dogcodes-git-roots-final-targeted.log`、`/tmp/dogcodes-git-roots-analyze-final.log`。
+- 没有改 PC/服务端接口或协议，没有运行模拟器、实机或真实 Git 写入，也没有提交/推送。继续有限核对终端、运行等日常功能，不据假设增加功能范围。
+
+## 2026-10-26 文件/变更页重连与快照刷新
+
+- 文件列表、文件预览及变更页复用现有 `WorkspaceConnection`，离线时显示连接状态，重连自动读取。目录/搜索/比较范围请求按原连接和发起顺序接纳结果，迟到回复不覆盖当前页面。
+- Diff 行按快照、Git 根及路径标识，刷新已展开文件会读取新快照。提交确认冻结原快照/连接，连接或变更更新后需要重新确认；迟到 AI 提交说明不覆盖用户已编辑的文本。
+- 新增 7 项页面回归通过；手机完整普通测试 **399 项通过，9 项原生按需测试因未配置 DOGCODES_ENDPOINT_LIBRARY 跳过**；两个页面和新测试 analyze 无问题。日志 `/tmp/dogcodes-workspace-read-pages-all-tests.log`、`/tmp/dogcodes-workspace-read-pages-analyze-final.log`。
+- 没有改后端协议、运行模拟器/真机或实际 Git 写入，也没有提交/推送。下一处已确认的功能差异是：手机变更页只展示第一个 Git 根目录，仍需支持选择项目的其它 Git 目录。
+
+## 2026-10-26 恢复/几何变化期间的输入
+
+- 视频管线恢复和普通屏幕几何/编码器重建期间，停止新输入，丢弃尚未发出的旧画面操作；释放本队列已经发送/在途的按住状态。只释放本端跟踪的按键/按钮，不对未执行的点击或本机用户状态发送释放。
+- PC ready 不代表手机已解码；观察本机解码进展后才接受新输入。解码器替换期间保留旧纹理，不重放丢弃的点击/文字；未知输入结果与换路准入保持原语义。
+- 新增六项队列/一项几何等待回归，加强运行恢复和清晰度界面断言；完整 Flutter 401 项无跳过通过，六文件 analyze 通过。PC 已修复当前显示器范围、Windows 副屏和 X11 根像素换算，并补原 owner/期限校验，详见桌面 docs/implementation/input-geometry-2026-10-26.md；真实屏幕/手机/RTP/弱网仍待实机。
+
+## 2026-10-26 视频管线运行异常恢复
+
+- PC 可在原租约和原授权内有限重建已启动后失败的管线，回报 restarting/warming/ready。手机保留旧纹理、显示恢复提示，并按新 generation 准备解码器；RTP 也确认 ready，解码成功后才替换旧纹理。
+- 重复 warmup 状态不延长本地 20 秒等待；明确错误或等待超时回到图片模式。新会话/屏幕的状态独立，不恢复或迁移旧格式数据。
+- 新增三个回归，完整 Flutter 394 项通过、无跳过，修改的三个文件 analyze 通过；电脑实际原生编解码的合成专项已在 macOS/Linux 跑通。真实设备/驱动/手机后台/弱网换路不据此视为完成，详见桌面 docs/implementation/video-runtime-recovery-2026-10-26.md。
+
+## 当前约定：不兼容旧版或迁移旧数据（2026-10-26）
+
+应用未发布，桌面、手机与服务端共同使用当前格式。历史记录中的首次升级/迁移描述不再适用；凭据和操作记录要求完整绑定身份，不补写历史字段。草稿和缓存采用固定带绑定代次的 key，文件选择清理只认 pickerId。重新绑定清理、未知操作核实与迟到结果隔离继续保留。本轮修改后完整 Flutter 390 项通过，无跳过；追加格式回归后 local_workspace 10 项通过，两个库文件 analyze 通过。其余协议入口随功能对齐继续审计。
+
+## 2026-10-26 缓存/草稿/附件与迟到界面的绑定隔离
+
+- 本地数据按绑定代次命名并核对活动凭据；重新绑定不继承前一绑定的内容。迟到的清理及发送回执不得擦除新草稿；发送身份与当前草稿归属一致。
+- 同目录实例共享缓存清除代次、附件暂存引用与缓存版本；旧文件选择器返回不覆盖新选择。电脑列表按最新加载提交，移除使旧加载失效；会话页重置所属状态，拦住旧快照、分页、完整条目和缓存回读。
+- 三项旧源码反例已复现；新增 16 项回归，完整 Flutter 含本机原生加密 **399 项通过、无跳过**，九个本轮文件分析通过。实施记录在桌面 `docs/implementation/mobile-local-binding-scope-2026-10-26.md`。
+- 绑定生命周期工作包的代码与本地验证收口；真实 iOS/Android 安全存储、系统终止与重新绑定仍随实机验收执行。其余七包及整体目标保持，八包状态见桌面 CURRENT_WORK。
+
+## 2026-10-26 持久绑定与业务操作隔离
+
+- 原子凭据记录持久保存绑定代次/移除标记，先失效后清理主/工作区/取消/关闭四类日志；清理途中失败/退出后，旧电脑不会重新成为活动绑定。较早发出的配对确认不能恢复已移除的凭据。
+- 操作记录必须包含有效的本地绑定归属，不提供旧格式补写；绑定与 RPC 使用同一准入，恢复/写入只针对当前绑定。旧 HostState/连接不直接改用新凭据，移除开始关闭连接，失败可重试；真实重连读取当前绑定。
+- 新增 17 项回归，完整 Flutter 含本机真实 Rust Noise/FFI **383 项通过，无跳过**；14 个本轮文件分析通过。未操作用户设备或实际配对。
+- 同 hostId 重新绑定后的离线缓存、草稿、附件引用及迟到加载仍需收口。当前目标按桌面 `docs/CURRENT_WORK.md` 归并剩余八个工作包；本轮不将绑定生命周期整包标为完成。实现与证据见桌面 `docs/implementation/mobile-binding-lifecycle-2026-10-26.md`。
+
+## 2026-10-26 终端目标身份校验
+
+- 终端关闭改为 `{terminalId, expectedEpoch}`，电脑在受理锁内校验；代次不符不会停止替代进程。手机先检查 `terminalStopEpoch` 能力，旧电脑提示升级，不回退裸 ID；旧关闭记录继续通过只读查询确认，仍需发送时使用保存的原目标。
+- 桌面端关闭、运行进程恢复及终端输出都冻结并校验目标身份。启动回复迟到时的停止等待原确认，未知启动不会显示停止成功，关闭失败可按同一目标重试。
+- 手机完整 357 项通过、9 项跳过，本轮变更分析通过。桌面 macOS/Linux 完整后台各 338 项、前端 1008 项、严格/类型检查通过；真实手机/Windows/P2P-WSS 切换仍需实机联调。详细证据见桌面仓库 `docs/implementation/terminal-target-epoch-2026-10-26.md`。
+- 继续跨进程解绑/重绑定持久身份、ACP/Core 恢复及完整视频/PC/实机/网络/推送/部署范围。
+
+## 2026-10-26 操作跟踪并发与结束恢复
+
+- 主/工作区槽与取消、终端关闭记录按共享存储实例和电脑串行准入；移除使全部旧对象失效，旧卡片及迟到回执不能重发或擦除替代记录。同参数项目也有独立的本地跟踪身份。网络等待不占队列。
+- 消息/Git/启动的不再等待先保存 closing，回复丢失后只继续结束，不重发原任务、不自动推送或启动；已运行的终端仍反馈真实结果。清理失败允许重试，并阻止新对象带着未清理记录执行。
+- 新增 16 项受控时序回归；完整 Flutter 355 项通过、9 项跳过；12 个变更文件分析通过。当时未验收实际 PC/RPC、跨进程持久绑定隔离和终端关闭 expectedEpoch；其中终端关闭的 PC 校验已由后续记录补齐，跨进程绑定隔离继续。完整证据与后续范围见桌面仓库 `docs/implementation/mobile-operation-journal-scope-2026-10-26.md`，视频/PC 对齐/ACP/Core/实机/网络/推送/部署继续。
+
 ## 2026-10-18 已完成的首條鏈路
 
 - 原生 Rust Noise 與 Dart FFI 打包到 iOS/Android；Android 目前僅 ARM64。兩平台模擬器真實系統安全存儲/加密測試通過。
@@ -108,7 +249,7 @@
 
 - PC 增加 Windows/Linux X11 OpenH264 软件编码和有界采集：CB3.1 尺寸/速率预算、动态码率与帧率、关键帧恢复；Wayland 持续 portal 和原生硬件加速仍保留代码待办。详见 PC `docs/implementation/remote-desktop-video-2026-10-21.md`。
 - 手机原生解码测试新增真实 OpenH264 合成桌面输出，不含用户画面；iOS 27、Android API 37 隔离模拟器各 4 项通过，既验证 Mac VideoToolbox 输出，也验证 Windows/X11 软件输出。模拟器验证不等于真机硬解验收。
-- 手机按 `video.cursorEmbedded` 区分内嵌光标与独立箭头；旧 PC 缺字段时保持 Mac 视频的内嵌语义。内嵌光标只显示 400 ms 的本地预测并主动刷新移除，避免永久残影；软件/JPEG 继续用 PC 坐标更新独立箭头。切屏/退出清理旧预测；元数据、计时器和迟到帧均有回归测试。
+- 手机按 `video.cursorEmbedded` 区分内嵌光标与独立箭头；该阶段曾对旧 PC 缺字段保留 Mac 默认语义，10 月 27 日已按未发布约定删除。内嵌光标只显示 400 ms 的本地预测并主动刷新移除，避免永久残影；软件/JPEG 继续用 PC 坐标更新独立箭头。切屏/退出清理旧预测；元数据、计时器和迟到帧均有回归测试。
 - 用户已明确实机联调后续安排，现阶段继续代码和隔离本地验证。Windows GNU 交叉检查及 Linux Docker/Xvfb 真正采集→编码→解码已通过。Windows/Linux 实际键鼠/DPI/锁屏、Wayland 授权恢复、手机真机/公网弱网与大陆海外链路仍保留验收项。
 - 最终本地检查：PC 完整库 290 项通过/7 项跳过；原生桌面库 18 项通过；手机含原生身份/加密 FFI 的普通测试 271 项全部通过。PC/native all-targets 严格 Clippy、Flutter analyze 通过；重新构建正常入口的 iOS 模拟器包及 Android ARM64 调试包。两台测试专用模拟器已关闭并删除，未动用户原有 iOS 模拟器；没有提交或推送。
 
@@ -284,3 +425,148 @@ PC ACP 的 stdio 与临时 Kimi 用量 helper 已使用原生作用域及独立 
 Mac/Linux ACP 各 78 项（各 21 项真实/按需用例未启用）、Windows GNU all-targets 及严格检查、当前桌面 320 项/Core 92 项及严格检查通过。MSVC 缺本机 Windows C 头，未完成该环境检查，不等于实际 Windows 运行验收。没有切换日常 Core、调用真实 Agent 或操作模拟器/用户桌面。详见 PC `docs/implementation/acp-process-cleanup-2026-10-23.md`。
 
 ACP 停止真实终态、单会话退休、元数据取消/审批归属、跨物理代次仍待继续；当前连接级关闭不能当作单会话释放已完成。原视频/平台真机、TURN/弱网、地区网络、推送和部署范围保留。终端/取消/电源恢复的同期协议调整需按当前两端源码重新核对，旧阶段的实施记录仅作历史证据。
+
+
+## 2026-10-24 PC ACP 停止确认与审批隔离
+
+PC ACP 停止等待原轮次的真实 prompt 终态，同一次停止的重复/取消等待不重复发取消，尚未派发的任务可被取消；超时明确失败并继续原作用域清理。审批/问答回复检查当前活动会话、关闭/停止状态及原请求，错误答案不消耗 pending；独立随机身份避免连接重建后旧请求命中新审批。停止后到达的 native 审批取消而不进入当前 UI，正常问答/审批仍可完成。
+
+Mac ACP 89 项/Core 92 项/桌面 320 项及严格检查、Windows GNU all-targets 静态/严格检查通过；Linux ACP 89 项及严格检查于 10 月 25 日补验通过。详见 PC `docs/implementation/acp-stop-approval-2026-10-24.md`。手机/服务端生产代码本节未变，未重启日常 Core、调用真实 Agent 或操作模拟器/用户桌面。
+
+ACP 的真正逐会话关闭、metadata 取消与未知结果、通知/缺 sessionId 的迟到回调归属、辅助事务/背压与 Core 强退/跨物理代次仍保留。PC/手机功能恢复以当前协议继续核对；原视频加速/特殊来源/编码能力、实机、TURN/弱网、地区网络、推送凭据及官方部署验收范围不缩减。
+
+
+## 2026-10-25 PC ACP 共享会话退休与配置结算
+
+PC ACP 关闭一个业务会话不再直接结束其它开放 owner 的 CLI；等待原 Turn 结算及内部本机缓存清理，最后 owner 才结束原物理作用域。关闭/恢复的调用方取消仍保留后台结算，孤立配置结果退休，配置失败后旧 handle 不能继续发送；迟到文字和退休/重新配置后的旧 interrupt 不影响当前会话。
+
+Mac/Linux ACP 各 101 项、Mac Core 92 项/桌面 320 项及严格检查，Windows GNU all-targets 静态/严格检查通过，详见 PC `docs/implementation/acp-session-retirement-2026-10-25.md`。手机/服务端生产代码与协议未改，没有调用真实 Agent、切换日常 Core 或操作用户桌面/模拟器。
+
+共享 Agent 自有后台资源不是本机缓存，稳定 v1 没有通用 native session/close；metadata 超时副作用、缺 sessionId 的供应商回调/旧别名、其它辅助事务和 Core 强退/跨物理代次、当前两端全功能恢复仍需继续。视频加速/特殊来源/编码能力及全部实机、TURN/弱网、地区网络、推送与官方部署范围不缩减。
+
+
+## 2026-10-25 PC Windows 原生编码第一阶段
+
+Windows PC 新增硬件 Media Foundation 优先、OpenH264 软件接管路径。原生线程有界、没有网络 sink，超时迟到结果不进入软件画面；预热图不发送，真正首帧/帧率重建/软件接管都从独立 SPS/PPS/IDR 开始。仍为既有 CB3.1 预算与相同 Annex-B 协议，P2P/TURN RTP 与二进制中继共用输出。
+
+Mac 视频 27 项/Core 92 项/桌面 320 项、Linux 视频 31 项及严格检查通过；Windows GNU 严格检查、实际 PE 链接与 MF DLL 启动导入检查通过。新增真实 Windows MFT 合成测试为 opt-in，尚未执行。iOS/Android decoder 源码已有参数集内容变化时重建解码器的处理，本轮只核对；未运行手机原生解码、模拟器或用户桌面，没有切换日常 Core。手机/服务端生产代码无修改。
+
+详见 PC `docs/implementation/windows-native-video-2026-10-25.md`。Windows 显卡/驱动与原生采集/零拷贝、Linux 编码与 DMA-BUF/NV12-only 来源、更高编码能力、真实 MF→手机与其余实机/网络/通知/部署、PC 功能/操作恢复完整范围继续保留。
+
+
+## 2026-10-25 PC Wayland NV12 来源
+
+PC 已补连续/双平面的可映射 NV12、独立偏移/填充/负跨度、BT.601/709 full/limited 转换；未声明颜色元数据使用 BT.601 limited 默认。格式失败/撤销停止使用旧描述；只读映射、安全内存类型与完整边界检查已补。手机/服务端协议和生产代码未改，仍消费同一视频输出。
+
+Mac 34/Linux 39 项回归和严格检查、Windows GNU 静态检查、Linux 非测试 lib 编译通过；五种私有 PipeWire 来源验证像素、不同尺寸的 H.264 编码和实际解码，旧 capture 的 NV12-only 超时在隔离环境复现。见 PC `docs/implementation/wayland-nv12-sources-2026-10-25.md`。未操作用户屏幕/键鼠、运行模拟器或切换日常 Core。DMA-BUF/GPU 导入、Linux 加速、Windows 设备/零拷贝、色彩及更高编码能力、PC 操作恢复与 Core 强退/物理代次、全部实机/真实网络/通知/官方部署继续保留。
+
+## 2026-10-25 PC Wayland DMA-BUF/EGL 後續進展
+
+PC 已加入動態 EGL、實際 GPU 格式/modifier 協商、external image → RGBA readback、有界重新協商和共享 display/FD 生命週期保護。CPU MemFd 獨立唯讀映射，受限 portal 來源在連接前後核實身份；SPA 構建頭文件兼容 Ubuntu 22.04 原有 PipeWire 0.3.48，不升級其系統運行庫。舊/新 Linux 各 46 項回歸、嚴格檢查/生產編譯、五種合成 PipeWire 來源與離屏軟體 EGL 通過，Mac 34 項與嚴格檢查、Windows GNU 嚴格檢查通過。細節見 PC `docs/implementation/wayland-dmabuf-egl-2026-10-25.md`。
+
+本輪手機/服務端協議未變，未啟動模擬器或接觸實際桌面。真實 GPU DMA-BUF/NV12/多 GPU、原生掛起/設備恢復、Linux 硬體編碼、零拷貝/特殊色彩及更高編碼能力仍待繼續；全部 PC 功能/操作恢復、平台與手機真機、TURN/弱網/地區網路、推送憑據和正式部署驗收保留。
+
+## 2026-10-25 PC 視頻傳送前狀態複核與 RustDesk 對照
+
+PC 已對照本機 RustDesk 採集/硬編、靜態刷新、QoS/消費背壓、Wayland 幾何及會話狀態，接續順序見 PC `docs/implementation/rustdesk-video-reference-2026-10-25.md`。所有平台的實際編碼輸出與 JPEG 完成後會複核停止/鎖屏狀態；未知或鎖定結束舊流，解鎖不讓舊流復活。Linux 改為有界 login1 D-Bus 即時查詢，支持背景 Core 的本用戶活動圖形桌面核實，拒絕過期回覆。
+
+Mac 40 項、舊/新 Linux 各 55 項及嚴格檢查、Windows GNU 靜態檢查通過；私有 PipeWire/login1 驗證含五種來源、會話選擇/未知後重連及 JPEG/視頻鎖定邊界。未改手機/服務端協議或運行模擬器。裁剪/旋轉/輸入座標、原生加速/恢復、靜態文字清晰度與弱網優化、全部 PC 恢復/真機/通知/部署繼續保留。
+
+## 2026-10-25 Wayland 裁剪/方向與原授權
+
+PC 已支援固定最終佈局的可見區域裁剪、八種 buffer 旋轉/鏡像歸一化；連線初始聲明元資料，損壞/截斷/重複描述不當成正常內容。JPEG 與視頻在編碼後核實原 portal 來源，未鎖屏但授權已結束也不發布。Mac 43 項/新舊 Linux 各 62 項、嚴格檢查及七種私有來源通過，包含 JPEG/H.264 四角顏色及原 node 邏輯輸入端點；三個移除行為的反例均失敗。細節見 PC `docs/implementation/wayland-presentation-grants-2026-10-25.md`。
+
+運行中最終可見尺寸/邏輯幾何改變的自動接續、持續壞幀/停滯、desktop 跨模式的獨立 login1 復驗入口仍需繼續；全部 GPU/硬編/原生恢復、平台/手機真機、弱網/地區網路、PC 操作恢復與 Core 強退、推送/部署範圍保留。本輪手機/服務端協議無變動，未切換日常 Core 或操作實際設備。
+
+## 2026-10-25 PC 持续坏帧与跨编码验收
+
+PC 参考 RustDesk 的采集错误分类继续完善：Header/任一 plane chunk 明确损坏从首次开始保留 3 秒恢复期限，连续坏帧不延期，实际好帧清除；空更新和静止保持正常。旧/新 Linux 私有 NV12 来源已验证短暂恢复、持续 Header/UV chunk 损坏和 actor/worker 退出；两个行为移除对照失败。独立 login1 的 desktop 跨 Auto/CB3.1 默认启动器、实际解码/ready/IDR/来源释放通过并接入 CI。Mac 43、两套 Linux 各 63 项及严格检查、Windows GNU 静态检查和桌面视频 15 项通过。详见 PC `docs/implementation/video-corruption-codec-acceptance-2026-10-25.md`。
+
+手机和服务端生产协议本轮未变。动态最终布局、原生硬编/采集/设备恢复、静态质量、真实 P2P/TURN/WSS 弱网、平台/手机真机、全部 PC 功能/操作恢复/Core 异常退出和推送/部署继续；未切换日常 Core、启动模拟器或操作实际桌面。
+
+## 2026-10-25 PC 静态刷新与真实输出恢复
+
+PC 已按 RustDesk 的有界重复思路独立加入静态普通补编码与实际输出反馈，明确区分异步接受、实际画面和实际 IDR；无输出/IDR 期限不会被新运动或普通 P 帧延长。静态预算用尽不影响后续关键帧恢复，capture/ticker 同锁选帧。Mac 50、两套 Linux 各 70 项及严格检查、Windows GNU 静态检查、桌面跨模式与视频 15 项通过；原生/软件合成来源验证停止补编码和后续 IDR，真实 OpenH264 编解码量化样本质量与流量，两个行为移除对照失败。见 PC `docs/implementation/video-static-refresh-2026-10-25.md`。
+
+手机和服务器生产代码/协议未变。硬件/彩色文字校准、网络基线/ACK/拥塞/消费背压、动态几何、原生采集/硬编/设备恢复以及全部原 PC 操作恢复/Core/实机/网络/推送/部署继续，未操作实际桌面/模型或模拟器。
+
+## 2026-10-25 PC 二进制 ACK 与拥塞恢复
+
+PC 已区分新鲜 ACK/超时与迟到回复，原控制循环在静止画面下也检查未确认窗口；持续上涨的队列不再快速变为正常基线，ACK burst 不会立即撤销降速，部分迟到 ACK 不提前重置制动时钟。四个旧行为先复现失败，新增加八项回归。最终完整桌面回归/严格检查与边界见 PC `docs/implementation/video-relay-qos-2026-10-25.md`。手机和服务端生产代码/协议未改。
+
+下一步补满窗时的生产端余量/IDR 调度，已确认手机失败或丢弃仍累计 ACK，不能改成等待全部旧帧成功解码才恢复。真实弱网、恢复速度/震荡、链路争用/消费反馈、动态几何/原生设备恢复及全部原 PC 操作恢复/Core/实机/网络/推送/部署继续；未切换日常 Core 或操作实际桌面/模型/模拟器。
+
+## 2026-10-25 PC 编码前余量与恢复归属
+
+PC 二进制 ACK 窗口/字节/channel 和 RTP 本地队列余量已接入实际编码前，被拒时仅保留最新未提交画面；输入时间过滤暂停前迟到回调，当前 Output 持有恢复直到 IDR 被接受。Session/Relay 独立旧请求位已移除，显式请求与 ready/codec 切换在当前 Output 内结算，ready 重试幂等。Mac live 至多一项在途 VT 输入，回调完整结束再归还信用；冷启动与输出等待分别验证。
+
+Mac 视频 55、旧/新 Linux 各 74、transport 各 7、Mac/Linux 完整桌面各 331 项及严格检查、Windows GNU 静态检查通过；两项私有 desktop 验收覆盖跨编码接续、实际 Source→codec→RelayVideo→累计 ACK 的满窗/最新画面/IDR 收尾，含联调竞态复现与修复。详见 PC `docs/implementation/video-output-admission-2026-10-25.md`。手机/服务端生产协议未变，未启动模拟器或切换日常 Core。
+
+码率恢复偏慢/锯齿、实际弱网/链路争用/decoder 反馈、动态几何、原生阻塞调用隔离/设备恢复以及全部 PC 操作恢复/metadata/辅助事务/Core 强退/跨代次、实机/推送/部署继续，不把这些本地证据视为全部远控完成。
+
+## 2026-10-25 PC 受保护的码率恢复
+
+PC 二进制视频控制器继续参考 RustDesk 的新鲜反馈和恢复失败保护，新目标要有自己的 ACK，恢复不跳过最近失败水平；低排队目标允许加快恢复，接近拥塞时保持或小步试探。相同模型中恢复到原目标九成由 19.5 秒缩至 11.3 秒，稳定链路末段目标由 1.09–2.02Mbps 收窄到 1.44–1.78Mbps；永久低带宽样本仍有延迟折中，不能当作真实弱网验收。
+
+13 项控制器/模型回归、Mac/Linux 完整 desktop 各 336 项与严格检查、Windows GNU 模块静态检查通过。见 PC `docs/implementation/video-relay-recovery-2026-10-25.md`。手机/服务端生产代码和协议未改，未启动模拟器；动态几何、原生调用隔离/设备恢复、实际链路/decoder/争用、全部 PC 操作恢复/Core/实机/推送/部署继续。
+
+## 2026-10-25 PC macOS codec 调用隔离
+
+PC 的 VideoToolbox 创建/调参/编码/销毁移入有界原生线程，初始化与运行分别限五秒、两秒；回调仅交付结果，不持有发布 sink。超时旧输出丢弃，未退出原生对象仍占名额，避免重连无限增加线程。已结束流不会在启动就绪时再次初始化。
+
+Mac 原生 59、旧/新 Linux 原生各 75、两端完整 desktop 各 336 项与严格检查、Windows GNU 静态检查和 Linux 两项私有编解码/ACK 验收通过；实际 VideoToolbox 仅使用合成像素，四个保护移除对照失败。见 PC `docs/implementation/macos-codec-isolation-2026-10-25.md`。手机/服务端生产协议未改，未启动模拟器；ScreenCaptureKit 自身调用、真正设备/进程恢复、动态几何/原生采集硬编、真实链路/平台/手机及全部 PC 操作恢复/Core/推送/部署继续。
+
+## 2026-10-25 PC ScreenCaptureKit 控制与取消启动
+
+PC 采集控制和对象释放移入独立有界线程池；启动十秒、调参两秒，退出未确认仍保留名额。父租约取消阻止迟到初始化再启动录屏，局部流与父租约分离；系统停止录屏直接封住已经进入编码器的旧图，不等待轮询。
+
+Mac 原生 66、旧/新 Linux 各 82、Mac/较新 Linux desktop 各 336、严格检查与 Windows GNU 静态检查、Linux 私有编码/来源验收通过。共用构建缓存的旧反例不计最终证据，独立缓存逐次清理重编八个本轮/上轮副本均按预期失败，当前源码再清理重编通过。详见 PC `docs/implementation/macos-capture-isolation-2026-10-25.md`。手机/服务端生产协议未改，未运行模拟器；真实 ScreenCaptureKit/权限事件、退役配额等待/快速重建、动态几何/进程恢复与全部 PC 操作恢复/Core/实机/网络/推送/部署继续。
+
+## 2026-10-26 PC 原生退役配额等待
+
+PC 原生采集/codec 保持各两个名额，在原初始化绝对期限内最多等待两秒正常退役通知。这样一个上下文挂住时，另一个健康上下文的重建不再因为名额刚好尚未归还而立即失败；永久挂住不虚构名额释放。
+
+两个池各 24 次连续重建、实际 VideoToolbox 八次合成 IDR/独立解码、Mac 原生 71/较新 Linux 86、两端 desktop 各 336 与严格检查、Windows GNU 静态及 Linux 私有编码/ACK 验收通过。私有构建目录逐次清理重编三个保护移除副本后，对应测试均失败。见 PC `docs/implementation/native-retirement-grace-2026-10-26.md`。协议未改、未运行模拟器；动态几何/进程设备恢复、原生平台、真实网络与全部 PC 操作恢复/Core/实机/推送/部署继续。
+
+## 2026-10-26 电脑自行改变视频尺寸
+
+手机按同一实例的视频 generation 接纳配置，不再只依赖用户清晰度 applied 序号递增；更新中、旧代次、其它实例均不覆盖当前状态，未完成的清晰度请求保留原身份。页面回归验证：applied 仍为零时，电脑变更尺寸也创建对应新解码器，确认 ready、等新画面后再释放旧纹理。339 项普通测试通过、9 项跳过，改动文件静态分析通过。PC 私有 Source/OpenH264/RelayVideo 验证两次横竖尺寸接续，不依赖旧 ACK，原来源撤销后停止；仍未做真机或实际 Portal 动态生产源验收。Wayland 物理像素不能代替逻辑指针范围，尺寸变化后观看可继续，鼠标需要重新连接授权；可信动态区域、macOS 原生几何与设备恢复继续。详见 PC 仓库 `docs/implementation/video-dynamic-geometry-2026-10-26.md`。
+
+
+## 2026-10-27 二进制视频丢帧后的参考链恢复
+
+RelayVideoReceiver 在旧 IDR 解码期间丢弃队列中的参考帧，旧完成结果曾清除 needKey，让依赖已丢内容的 delta 继续解码。现按 receiver 的参考状态代次核实；丢帧后只有仍有效的 IDR 实际完成才能恢复 live，保留的最新 IDR 也必须等待，累计 ACK 继续释放窗口。没有新增协议、重连回放或旧版迁移。
+
+两个未修复源码的失败反例已确认，相关接收/恢复 17 项及完整手机 446 项通过，9 项原生 opt-in 未启用，全项目 analyze/格式/差异检查通过。日志 `/tmp/dogcodes-relay-key-recovery-{before,after,suite,analyze,format}.log`。WSS/DataChannel 二进制 video 共用此接收器；独立 RTP 不经过这里。没有运行真实手机/模拟器/桌面或实际模型，真机/弱网及原剩余范围继续，未提交推送。详细记录见 PC 仓库 `docs/implementation/video-runtime-recovery-2026-10-26.md` 的同日追加节。
+
+
+## 2026-10-27 RTP 统计等待与原 peer 归属
+
+稳态视频循环的 getStats 漏掉期限，原生插件不回复会卡住后续续租和停帧恢复。现与其它解码/配置统计入口一致限三秒，当前 peer 失败进入既有图片回退；成功/失败都核对原 DesktopConnection，迟到结果不作用于替代连接。私有原生桥/Peer 页面回归验证旧连接结束、图片租约继续、业务 RPC 保留与迟到错误隔离，未运行真实手机或系统视频。详细证据见 PC `docs/implementation/video-runtime-recovery-2026-10-26.md` 同日追加节。没有改协议、添加旧版兼容或提交推送，实机/网络与原范围继续。
+
+本轮手机完整 447 项通过、9 项原生按需未启用，全项目 analyze/格式/差异检查通过；日志 `/tmp/dogcodes-rtp-stats-{current,suite,analyze,format}.log`。
+
+
+## 2026-10-27 首次 RTP 渲染器与退出归属
+
+首次 RTP 视频创建复用候选路径已有的 ownedResource 和三秒期限；创建迟到或退出后返回的 renderer 只释放，等待屏幕流后绑定前也核实原连接。启动失败先结束原 PC 视频租约，再进入图片新租约，避免页面仍忙或电脑继续无用编码；业务 RPC 保留，不再尝试第二个 renderer。两个页面回归在旧源码失败，修复后确认图片继续、迟到 texture 仅销毁一次且没有绑定旧 stream。详见 PC `docs/implementation/video-runtime-recovery-2026-10-26.md` 同日追加节；当前仅本地方法通道测试，真实手机/原生 WebRTC、网络及原范围继续，未提交推送。
+
+本轮完整手机 449 项通过、9 项原生按需未启用，全项目 analyze/格式/差异检查通过。日志 `/tmp/dogcodes-rtp-startup-suite.log`、`/tmp/dogcodes-rtp-startup-analyze-final.log`、`/tmp/dogcodes-rtp-startup-format.log`。
+
+## 2026-10-27 推送改为原生直连优先
+
+按最新要求取代统一 EMAS 策略：iOS 使用 APNs 原生 token；Android 优先可注册的 FCM，华为且 HMS 可用时优先 HMS，直连注册失败再尝试其它可用直连通道／EMAS。主界面无需选择通道。Google/Huawei 服务状态和私有配置由原生桥接读取，登记时重新核对；直接通道成功不初始化 EMAS，FCM/HMS 消息服务也不再交给 EMAS。服务端既有三个直连接口沿用，HMS 补显式点击 Intent，手机补 APNs dogcodes 载荷解析；token 和 provider 作为一个登记结果保存，更新沿用原版本检查并保留静音。
+
+iOS 已接通申请权限、APNs 当前 token、限时注册、冷／热点击；Android 已接通 GMS/HMS 能力检查、限时注册、token 更新、独立消息服务、前台通知及系统通知点击。Firebase 配置生成资源，支持引擎未启动时的默认 App 初始化。HMS 同一原生调用未返回时不会无限增加线程；回调会唤醒当前读取，缓存旧 token 不作为本次空返回成功的证明。iOS 不向 EMAS 转发 APNs token。
+
+验证：普通完整手机回归 460 项通过，9 项原生按需测试未启用；另追加 APNs 独立点击与服务可用性变化回归，相关两文件共 15 项通过。全项目 analyze 无问题，格式／差异检查通过。iOS 模拟器目标、Android 无配置和带无效测试配置的 ARM64 debug 构建通过；带配置包核对两条直接消息服务、EMAS 对应服务移除、四项 Firebase 冷启动资源。最终 APK 已重新以空配置构建，未保留测试参数。服务端专项 4 项、独立空 PostgreSQL／Redis 的完整 lib 9 项及 all-targets 严格检查通过；默认开发库格式 3 的两个存储用例初次拒绝，未把它们视为通过，也未迁移或清空原库，独立测试库已删除。
+
+日志：`/tmp/dogcodes-direct-push-{suite,final-targeted,analyze-final,android-build,android-configured-build,ios-build}.log`；服务端 `/tmp/dogcodes-direct-push-server-{tests,lib,isolated,clippy}.log`。未启动模拟器／设备、注册真实推送、发送通知或提交推送代码。token 成功不等于真实网络送达，当前兜底针对注册失败，不依赖“未点击”或双发推测送达。APNs／FCM／HMS／EMAS 凭据、签名与国内外真机验收仍待，见 docs/push-notifications.md。
+
+纯原生鸿蒙本次不实施，后续另列阶段评估 Flutter 鸿蒙移植及 WebRTC／视频、Rust FFI、安全存储等插件；当前 Android HMS 不代表已支持鸿蒙原生应用。
+
+## 2026-10-28 手机应用标识统一
+
+iOS Runner 的 Debug／Release／Profile Bundle ID 与 Android applicationId／namespace 统一为 `codes.dog.mobile`，iOS 测试目标同步为 `codes.dog.mobile.RunnerTests`。五个 Android 原生入口迁到匹配的 Kotlin 包目录；服务端 APNs topic、HMS packageName 和 EMAS 辅助 Activity 示例／测试及当前推送文档同步更新。
+
+Android ARM64 debug 与 iOS 模拟器目标均编译通过；读取实际 APK 确认包名和 MainActivity，合并 Manifest 的五个入口均属于新包；读取实际 iOS Info.plist 确认 Bundle ID。服务端四项推送专项、Rust 格式及相关差异检查通过，没有新增或重复整套业务测试。日志 `/tmp/dogcodes-mobile-id-{android-build,ios-build,push-tests}.log`。Apple／Firebase／华为／EMAS 后台应用与签名授权须使用新标识，尚未进行真实推送／设备验收；未提交推送。

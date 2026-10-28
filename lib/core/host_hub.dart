@@ -5,11 +5,14 @@ import 'adaptive_host_link.dart';
 export 'host_api.dart' show HostLink;
 import 'mobile_operations.dart';
 import 'security/secret_storage.dart';
+import 'security/host_lifecycle.dart';
+import 'protocol.dart';
 import '../data/local_workspace.dart';
 
 typedef HostConnector = Future<HostLink> Function(Map<String, dynamic> host);
 typedef HostLister = Future<List<Map<String, dynamic>>> Function();
-typedef HostForgetter = Future<void> Function(String hostId);
+typedef HostForgetter =
+    Future<void> Function(String hostId, String? bindingEpoch);
 
 enum LinkStatus { connecting, online, offline }
 
@@ -20,11 +23,13 @@ class HostState {
     : operations = MobileOperations(
         storage,
         record['hostId'] as String,
+        bindingEpoch: record['bindingEpoch'] as String?,
         onDraftSubmitted: local?.clearSubmittedDraft,
       );
   Map<String, dynamic> record;
   final MobileOperations operations;
   String get id => record['hostId'] as String;
+  String? get bindingEpoch => record['bindingEpoch'] as String?;
   String get name {
     final label = record['displayName'];
     if (label is String && label.isNotEmpty) return label;
@@ -85,7 +90,9 @@ class HostState {
   final _subscriptionIds = <String, String>{};
   String? _focusedProject;
   Future<void> _subscriptionQueue = Future.value();
-  bool get online => status == LinkStatus.online && link != null;
+  bool _removing = false;
+  Future<void>? _forgetting;
+  bool get online => !_removing && status == LinkStatus.online && link != null;
 
   List<Map<String, dynamic>> get projects => [
     for (final p in (snapshot?['projects'] as List?) ?? const [])
@@ -218,7 +225,9 @@ class HostHub extends ChangeNotifier {
     this.lister,
     this.forgetter,
     LocalWorkspace? local,
-  }) : local = local ?? LocalWorkspace.memory();
+  }) : local = local ?? LocalWorkspace.memory() {
+    this.local.attachBindings(storage);
+  }
   final LocalWorkspace local;
   final SecretStorage storage;
   final HostConnector? connector;
@@ -232,6 +241,7 @@ class HostHub extends ChangeNotifier {
   String? loadError;
   bool loaded = false;
   bool _disposed = false;
+  int _loadOrder = 0;
   static const pollInterval = Duration(seconds: 20);
   static const resubscribeDelay = Duration(seconds: 2);
 
@@ -245,49 +255,82 @@ class HostHub extends ChangeNotifier {
   }
 
   Future<void> load({bool connect = true}) async {
+    final order = ++_loadOrder;
+    bool current() => !_disposed && order == _loadOrder;
     try {
       final records = await (lister?.call() ?? Future.value(const []));
+      if (!current()) return;
+      final next = <HostState>[], updates = <HostState, Map<String, dynamic>>{};
       for (final record in records) {
-        final existing = host(record['hostId'] as String);
-        if (existing == null) {
-          final h = HostState(record, storage, local);
-          hosts.add(h);
-          try {
-            final cached = await local.cachedHost(h.id);
-            if (cached != null) {
-              h.snapshot = Map<String, dynamic>.from(cached['snapshot'] as Map);
-              h.history = cached['history'] is Map
-                  ? Map<String, dynamic>.from(cached['history'] as Map)
-                  : null;
-              h.executors = [
-                for (final e in cached['executors'] as List? ?? [])
-                  Map<String, dynamic>.from(e as Map),
-              ];
-              h.syncedAt = DateTime.tryParse('${cached['syncedAt']}');
-            }
-            h.pendingOperation = await h.operations.pending();
-            h.sideOperation = await h.operations.sidePending();
-          } catch (_) {
-            h.error = '部分离线数据暂时无法读取，联网后可重新同步。';
-          }
-          try {
-            h.pendingCancellations = await h.operations.pendingCancellations();
-          } catch (_) {
-            h.error = '停止请求暂时无法读取，请检查系统安全存储。';
-          }
-          try {
-            h.pendingTerminalStops = await h.operations.pendingTerminalStops();
-          } catch (_) {
-            h.error = '终端关闭记录暂时无法读取，请检查系统安全存储。';
-          }
-        } else {
-          existing.record = record;
+        if (!current()) return;
+        var existing = host(record['hostId'] as String);
+        if (existing != null &&
+            (existing.operations.retired ||
+                existing.bindingEpoch != record['bindingEpoch'])) {
+          existing = null;
         }
+        if (existing != null) {
+          next.add(existing);
+          updates[existing] = record;
+          continue;
+        }
+        final h = HostState(record, storage, local);
+        try {
+          final cached = await local.cachedHost(
+            h.id,
+            bindingEpoch: h.bindingEpoch,
+          );
+          if (!current()) return;
+          if (cached != null) {
+            h.snapshot = Map<String, dynamic>.from(cached['snapshot'] as Map);
+            h.history = cached['history'] is Map
+                ? Map<String, dynamic>.from(cached['history'] as Map)
+                : null;
+            h.executors = [
+              for (final e in cached['executors'] as List? ?? [])
+                Map<String, dynamic>.from(e as Map),
+            ];
+            h.syncedAt = DateTime.tryParse('${cached['syncedAt']}');
+          }
+          h.pendingOperation = await h.operations.pending();
+          h.sideOperation = await h.operations.sidePending();
+        } catch (_) {
+          h.error = '部分离线数据暂时无法读取，联网后可重新同步。';
+        }
+        if (!current()) return;
+        try {
+          h.pendingCancellations = await h.operations.pendingCancellations();
+        } catch (_) {
+          h.error = '停止请求暂时无法读取，请检查系统安全存储。';
+        }
+        if (!current()) return;
+        try {
+          h.pendingTerminalStops = await h.operations.pendingTerminalStops();
+        } catch (_) {
+          h.error = '终端关闭记录暂时无法读取，请检查系统安全存储。';
+        }
+        if (!current()) return;
+        next.add(h);
+      }
+      if (!current()) return;
+      final removed = hosts.where((h) => !next.contains(h)).toList();
+      if (lister == null) next.addAll(removed);
+      for (final update in updates.entries) {
+        update.key.record = update.value;
+      }
+      hosts
+        ..clear()
+        ..addAll(next);
+      for (final old in removed) {
+        if (next.contains(old)) continue;
+        unawaited(_drop(old).catchError((Object _) {}));
       }
       loadError = null;
     } catch (_) {
+      if (!current()) return;
       loadError = '已配对电脑暂时无法读取，请检查系统安全存储。';
     }
+    if (!current()) return;
     loaded = true;
     _notify();
     if (connect) await connectAll();
@@ -307,7 +350,9 @@ class HostHub extends ChangeNotifier {
   ]);
 
   Future<void> connect(HostState h) async {
-    if (connector == null || h.status != LinkStatus.offline) return;
+    if (connector == null || h._removing || h.status != LinkStatus.offline) {
+      return;
+    }
     final generation = h._transportGeneration;
     h.status = LinkStatus.connecting;
     h.error = null;
@@ -331,14 +376,22 @@ class HostHub extends ChangeNotifier {
 
   /// Takes ownership of an already authenticated link (e.g. right after pairing).
   Future<void> attach(HostState h, HostLink link) async {
-    if (_disposed) {
+    if (_disposed || h._removing) {
       await link.close();
       return;
+    }
+    if (h.operations.retired ||
+        !await HostRegistry(storage).host(h.id).matches(h.bindingEpoch)) {
+      await link.close();
+      throw const ProtocolException('电脑绑定已变化，未使用旧页面接管新的连接。');
     }
     final dropping = _drop(h);
     final generation = h._transportGeneration;
     await dropping;
-    if (_disposed || generation != h._transportGeneration) {
+    if (_disposed ||
+        h._removing ||
+        h.operations.retired ||
+        generation != h._transportGeneration) {
       await link.close();
       return;
     }
@@ -442,10 +495,14 @@ class HostHub extends ChangeNotifier {
     h._transportGeneration++;
     h._debounce?.cancel();
     h._poll?.cancel();
-    await events?.cancel();
     h._subscribed.clear();
     h._subscriptionIds.clear();
-    await link?.close();
+    // Start closing before awaiting either cleanup. Paused event consumers
+    // cannot postpone the transport's immediate rejection of new calls.
+    await Future.wait<void>([
+      if (events != null) events.cancel(),
+      if (link != null) link.close(),
+    ]);
   }
 
   Future<void> disconnect(HostState h) async {
@@ -457,13 +514,37 @@ class HostHub extends ChangeNotifier {
   }
 
   /// Removes a computer from this phone. Tasks on the computer are unaffected.
-  Future<void> forget(HostState h) async {
-    await forgetter?.call(h.id);
-    await h.operations.forgetRecoveryJournals();
-    hosts.remove(h);
-    _notify();
-    await _drop(h);
-    await local.forgetHost(h.id);
+  Future<void> forget(HostState h) {
+    if (!hosts.contains(h)) return Future<void>.value();
+    return h._forgetting ??= _forget(
+      h,
+    ).whenComplete(() => h._forgetting = null);
+  }
+
+  Future<void> _forget(HostState h) async {
+    h._removing = true;
+    _loadOrder++;
+    try {
+      Object? cleanupError;
+      final dropping = _drop(h).catchError((Object error) {
+        cleanupError = error;
+      });
+      h.status = LinkStatus.offline;
+      _notify();
+      await forgetter?.call(h.id, h.record['bindingEpoch'] as String?);
+      await h.operations.forgetRecoveryJournals();
+      hosts.remove(h);
+      _notify();
+      await local.forgetHost(h.id, bindingEpoch: h.bindingEpoch);
+      await dropping;
+      if (cleanupError != null) throw cleanupError!;
+    } catch (_) {
+      h.error = '移除未完成，连接已关闭；请重试移除或核实安全存储。';
+      rethrow;
+    } finally {
+      h._removing = false;
+      _notify();
+    }
   }
 
   Future<void> clearOfflineCache() async {
@@ -540,15 +621,20 @@ class HostHub extends ChangeNotifier {
         );
       unawaited(
         local
-            .cacheHost(h.id, {
-              'snapshot': {
-                ...snapshot,
-                'tasks': recentTasks.take(100).toList(),
+            .cacheHost(
+              h.id,
+              {
+                'snapshot': {
+                  ...snapshot,
+                  'tasks': recentTasks.take(100).toList(),
+                },
+                'history': h.history,
+                'executors': h.executors,
+                'syncedAt': h.syncedAt!.toUtc().toIso8601String(),
               },
-              'history': h.history,
-              'executors': h.executors,
-              'syncedAt': h.syncedAt!.toUtc().toIso8601String(),
-            }, local.cacheEpoch)
+              local.cacheEpoch,
+              bindingEpoch: h.bindingEpoch,
+            )
             .catchError((Object e) {
               local.cacheError = '离线缓存未能保存：$e';
             }),

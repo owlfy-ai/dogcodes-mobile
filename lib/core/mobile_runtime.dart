@@ -8,6 +8,9 @@ import 'security/noise_endpoint.dart';
 import 'security/identity_store.dart';
 import '../data/local_workspace.dart';
 import 'task_attachments.dart';
+import 'notification_settings.dart';
+import 'push_notifications.dart';
+import 'adaptive_push_adapter.dart';
 import 'security/pairing_recovery.dart';
 import 'package:flutter/foundation.dart' show kReleaseMode;
 
@@ -16,13 +19,25 @@ class MobileRuntime {
     SecretStorage? storage,
     this.rtcConnector = connectRtc,
     NoiseEndpoint? noiseEndpoint,
+    PushAdapter? pushAdapter,
+    NotificationRequest? notificationRequest,
   }) : storage = storage ?? PlatformSecretStorage(),
-       _endpoint = noiseEndpoint;
+       _endpoint = noiseEndpoint,
+       _pushAdapter = pushAdapter,
+       _notificationRequest = notificationRequest;
+  final PushAdapter? _pushAdapter;
+  final NotificationRequest? _notificationRequest;
   final SecretStorage storage;
   final RtcConnector rtcConnector;
-  final local = LocalWorkspace.platform();
+  late final local = LocalWorkspace.platform()..attachBindings(storage);
   Future<void> initialize() async {
     try {
+      for (final record in await hosts.list()) {
+        await local.prepareBinding(
+          record['hostId'] as String,
+          record['bindingEpoch'] as String,
+        );
+      }
       await TaskAttachmentPicker.recover(local);
     } catch (e) {
       local.cacheError = '上次附件选择未能恢复：$e';
@@ -35,6 +50,16 @@ class MobileRuntime {
   DeviceIdentityStore get identity =>
       _identity ??= DeviceIdentityStore(storage, endpoint.createIdentity);
   late final TrustedHostStore hosts = TrustedHostStore(storage);
+  late final notifications = NotificationSettingsApi(
+    hosts,
+    request: _notificationRequest,
+  );
+  late final push = PushNotifications(
+    storage,
+    hosts,
+    notifications,
+    _pushAdapter ?? AdaptivePushAdapter(),
+  );
   late final PairingJournal pairingJournal = PairingJournal(
     storage,
     allowLocalDevelopment: !kReleaseMode,
@@ -52,6 +77,7 @@ class MobileRuntime {
   }
 
   Future<HostLink> _pair(PairingInvitation invitation) async {
+    final bindingEpoch = await hosts.beginPairing(invitation.hostId);
     final phone = await identity.get();
     final old = await hosts.read(invitation.hostId);
     final peer = hexBytes(
@@ -65,6 +91,7 @@ class MobileRuntime {
     final original = PairingRecovery.fromInvitation(
       invitation,
       phone.publicHex,
+      bindingEpoch: bindingEpoch,
     );
     final previous = (await pairingJournal.list())
         .where((p) => p.hostId == original.hostId)
@@ -84,6 +111,7 @@ class MobileRuntime {
         session: client.session,
         phone: phone,
         acknowledgement: ack,
+        bindingEpoch: original.bindingEpoch,
       );
       await pairingJournal.clear(original);
       return _routed(client, (await hosts.read(invitation.hostId))!, phone);
@@ -126,6 +154,7 @@ class MobileRuntime {
         session: client.session,
         phone: phone,
         acknowledgement: ack,
+        bindingEpoch: original.bindingEpoch,
       );
       await pairingJournal.clear(original);
       return _routed(client, (await hosts.read(original.hostId))!, phone);
@@ -136,6 +165,11 @@ class MobileRuntime {
   }
 
   Future<HostLink> reconnect(Map<String, dynamic> host) async {
+    final current = await hosts.read(host['hostId'] as String);
+    if (current == null || current['bindingEpoch'] != host['bindingEpoch']) {
+      throw const ProtocolException('电脑绑定已移除或变化，请重新配对后连接。');
+    }
+    host = current;
     final phone = await identity.get();
     return _routed(
       await SecureHostClient.reconnect(host, phone, endpoint),

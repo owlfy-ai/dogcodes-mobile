@@ -12,12 +12,18 @@ import 'protocol.dart';
 import 'security/noise_endpoint.dart';
 import 'security/pairing_recovery.dart';
 
+class RouteRequestRejected extends ProtocolException {
+  const RouteRequestRejected(this.statusCode, super.message);
+  final int statusCode;
+}
+
 Future<Map<String, dynamic>> routeRequest(
   Uri service,
   String path,
   String token, {
   String method = 'POST',
   Map<String, dynamic>? body,
+  int maxResponseBytes = 16384,
 }) async {
   final client = HttpClient()..connectionTimeout = const Duration(seconds: 8);
   try {
@@ -32,14 +38,17 @@ Future<Map<String, dynamic>> routeRequest(
     }
     final response = await request.close().timeout(const Duration(seconds: 8));
     if (response.statusCode != 200) {
-      throw ProtocolException(
+      throw RouteRequestRejected(
+        response.statusCode,
         response.statusCode == 503 ? '电脑暂时离线，请稍后重连。' : '连接请求未被接受，请核实设备授权。',
       );
     }
     final data = <int>[];
     await for (final part in response.timeout(const Duration(seconds: 8))) {
       data.addAll(part);
-      if (data.length > 16384) throw const ProtocolException('连接响应过大。');
+      if (data.length > maxResponseBytes) {
+        throw const ProtocolException('连接响应过大。');
+      }
     }
     return jsonDecode(utf8.decode(data)) as Map<String, dynamic>;
   } finally {

@@ -43,7 +43,11 @@ class TaskAttachment {
         : null,
   );
 
-  static Future<TaskAttachment> local(LocalWorkspace store, XFile file) async {
+  static Future<TaskAttachment> local(
+    LocalWorkspace store,
+    XFile file, {
+    String? owner,
+  }) async {
     if (await file.length() > LocalWorkspace.maxAttachmentBytes) {
       throw const ProtocolException('附件总大小不能超过 25 MB。');
     }
@@ -68,7 +72,7 @@ class TaskAttachment {
       throw const ProtocolException('图片请使用 PNG、JPEG、GIF 或 WebP 格式。');
     }
     final id = uuid();
-    await store.saveBlob(id, bytes);
+    await store.saveBlob(id, bytes, owner: owner);
     return TaskAttachment(
       blobId: id,
       request: {
@@ -198,7 +202,7 @@ class TaskAttachmentPicker {
     String key,
     String source,
   ) async {
-    await store.savePicker({'key': key});
+    final selection = await store.savePicker({'key': key});
     final created = <TaskAttachment>[];
     try {
       final List<XFile> files;
@@ -226,7 +230,7 @@ class TaskAttachmentPicker {
           TaskAttachment.fromJson(a as Map),
       ];
       for (final file in files) {
-        final item = await TaskAttachment.local(store, file);
+        final item = await TaskAttachment.local(store, file, owner: key);
         created.add(item);
         validateAttachmentSelection([...previous, ...created]);
       }
@@ -244,7 +248,7 @@ class TaskAttachmentPicker {
       );
       rethrow;
     } finally {
-      await store.savePicker(null);
+      if (selection != null) await store.clearPicker(selection);
     }
   }
 
@@ -254,7 +258,7 @@ class TaskAttachmentPicker {
   }) async {
     final pending = await store.picker();
     if (!Platform.isAndroid && retrieve == null) {
-      if (pending != null) await store.savePicker(null);
+      if (pending != null) await store.clearPicker(pending);
       return;
     }
     final lost = await (retrieve?.call() ?? ImagePicker().retrieveLostData());
@@ -262,7 +266,7 @@ class TaskAttachmentPicker {
     final key = pending!['key'] as String;
     final saved = await store.draft(key);
     if (saved == null) {
-      await store.savePicker(null);
+      await store.clearPicker(pending);
       return;
     }
     final created = <TaskAttachment>[];
@@ -274,7 +278,7 @@ class TaskAttachmentPicker {
           TaskAttachment.fromJson(a as Map),
       ];
       for (final file in lost.files ?? <XFile>[]) {
-        final item = await TaskAttachment.local(store, file);
+        final item = await TaskAttachment.local(store, file, owner: key);
         created.add(item);
         validateAttachmentSelection([...items, item]);
         items.add(item);
@@ -293,7 +297,7 @@ class TaskAttachmentPicker {
       await store.releaseUnusedAttachments(
         created.map((a) => a.blobId).whereType<String>(),
       );
-      await store.savePicker(null);
+      await store.clearPicker(pending);
     }
   }
 }

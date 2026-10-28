@@ -55,7 +55,11 @@ class ToolsLink extends FakeLink {
   @override
   Future<dynamic> call(String method, dynamic args) async {
     if (method == 'remote_capabilities') {
-      return {'terminalLaunchRecovery': true, 'runOperationRequest': true};
+      return {
+        'terminalLaunchRecovery': true,
+        'terminalStopEpoch': true,
+        'runOperationRequest': true,
+      };
     }
     if (method == 'project_runs') return jsonDecode(jsonEncode(catalog));
     if (method == 'terminal_list') {
@@ -74,10 +78,10 @@ class ToolsLink extends FakeLink {
     if (method == 'terminal_stop') {
       stopCalls.add({
         'type': 'execute',
-        'request': {'terminalId': args, 'expectedEpoch': 'epoch'},
+        'request': Map<String, dynamic>.from(args as Map),
       });
       if (stopFails) throw const ProtocolException('网络中断，停止结果待核实');
-      active = false;
+      if (args['expectedEpoch'] == terminal['epoch']) active = false;
       return terminal;
     }
     if (method == 'project_run_edit') {

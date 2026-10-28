@@ -51,6 +51,7 @@ class _ConversationPageState extends State<ConversationPage> {
   List<Map<String, dynamic>> get timeline =>
       live.loaded ? live.items : _cachedItems;
   StreamSubscription<Map<String, dynamic>>? _stream;
+  HostState? _owner;
   AgentChoice? get choice => draft.choice;
   set choice(AgentChoice? value) => draft.choice = value;
   bool loading = true, sending = false, stopping = false;
@@ -81,18 +82,58 @@ class _ConversationPageState extends State<ConversationPage> {
       hub.addListener(_changed);
       hub.local.addListener(_cacheCleared);
       _timelineCacheEpoch = hub.local.cacheEpoch;
-      unawaited(_readCachedTimeline());
       _changed();
     }
   }
 
   void _changed() {
+    if (!mounted) return;
     final h = host;
-    if (h == null || !mounted) return;
+    if (!identical(h, _owner)) {
+      _owner = h;
+      _cacheTimer?.cancel();
+      unawaited(_stream?.cancel());
+      _stream = null;
+      draft.pauseUploads();
+      if (h == null || draft.host?.bindingEpoch != h.bindingEpoch) {
+        unawaited(draft.bind(null, null, null).catchError((Object _) {}));
+      }
+      live = LiveTimeline(widget.taskId);
+      _cachedItems = [];
+      _cacheLoaded = false;
+      _cachedTimeline = false;
+      _freshTimeline = false;
+      _cacheTruncated = false;
+      _timelineSyncedAt = null;
+      _epoch = -1;
+      _streamVersion = null;
+      _tailUnsupported = false;
+      _readingTimeline = false;
+      _timelineDirty = false;
+      _loadingEarlier = false;
+      _locating = false;
+      _locateCancelled = true;
+      _focused = false;
+      _focusIndex = null;
+      loading = h != null;
+      error = null;
+      if (h != null) unawaited(_readCachedTimeline());
+    }
+    if (h == null) {
+      unawaited(draft.bind(null, null, null).catchError((Object _) {}));
+      setState(() {});
+      return;
+    }
     final project = task?['projectId'];
     if (project is String) {
       hub.followProject(h, project);
-      if (draft.key != draftKey(h.id, project, widget.taskId)) {
+      if (draft.key !=
+          draftKey(
+            h.id,
+            project,
+            widget.taskId,
+            bindingEpoch: h.bindingEpoch,
+          )) {
         unawaited(
           draft.bind(h, project, widget.taskId).catchError((Object e) {
             if (mounted) setState(() => error = '$e');
@@ -100,7 +141,9 @@ class _ConversationPageState extends State<ConversationPage> {
         );
       }
     }
-    _stream ??= h.events.listen(_streamed);
+    _stream ??= h.events.listen((event) {
+      if (identical(_owner, h)) _streamed(event);
+    });
     final version = task?['streamVersion'];
     // Only this task's version (or a new connection) needs a re-read; streamed
     // deltas already keep the view current between them.
@@ -131,15 +174,19 @@ class _ConversationPageState extends State<ConversationPage> {
       scroll.position.pixels >= scroll.position.maxScrollExtent - 80;
 
   Future<void> _readCachedTimeline() async {
-    if (_cacheLoaded) return;
+    final owner = _owner;
+    if (_cacheLoaded || owner == null) return;
     _cacheLoaded = true;
     final epoch = hub.local.cacheEpoch;
     try {
       final cached = await hub.local.cachedTimeline(
         widget.hostId,
         widget.taskId,
+        bindingEpoch: owner.bindingEpoch,
       );
       if (!mounted ||
+          !identical(_owner, owner) ||
+          owner.operations.retired ||
           _freshTimeline ||
           hub.local.cacheEpoch != epoch ||
           cached == null) {
@@ -180,7 +227,15 @@ class _ConversationPageState extends State<ConversationPage> {
   }
 
   void _saveTimeline() {
-    if (!_freshTimeline || !live.loaded || _timelineSyncedAt == null) return;
+    final owner = _owner;
+    if (!_freshTimeline ||
+        !live.loaded ||
+        _timelineSyncedAt == null ||
+        owner == null ||
+        !identical(host, owner) ||
+        owner.operations.retired) {
+      return;
+    }
     unawaited(
       hub.local
           .cacheTimeline(
@@ -189,6 +244,7 @@ class _ConversationPageState extends State<ConversationPage> {
             {'items': timeline, 'lastSequence': live.cursor},
             _timelineSyncedAt!,
             _timelineCacheEpoch,
+            bindingEpoch: owner.bindingEpoch,
           )
           .catchError((Object e) {
             hub.local.cacheError = '离线会话未能保存：$e';
@@ -203,12 +259,14 @@ class _ConversationPageState extends State<ConversationPage> {
     }
     final h = host, link = host?.link;
     if (link == null) return;
-    final epoch = h!.connectionEpoch;
+    final epoch = h!.connectionEpoch, reading = live;
     _readingTimeline = true;
-    live.beginRead();
+    reading.beginRead();
     try {
       final value = await _readTail(link);
       if (!mounted ||
+          !identical(_owner, h) ||
+          !identical(live, reading) ||
           h.link != link ||
           h.connectionEpoch != epoch ||
           !h.online) {
@@ -231,30 +289,37 @@ class _ConversationPageState extends State<ConversationPage> {
         _revealFocus(0);
       }
     } catch (e) {
-      if (mounted && h.link == link && h.connectionEpoch == epoch) {
+      if (mounted &&
+          identical(_owner, h) &&
+          identical(live, reading) &&
+          h.link == link &&
+          h.connectionEpoch == epoch) {
         setState(() {
           loading = false;
           error = '$e';
         });
       }
     } finally {
-      _readingTimeline = false;
-      live.endRead();
-      if (_timelineDirty && mounted) {
-        _timelineDirty = false;
-        unawaited(loadTimeline());
+      reading.endRead();
+      if (identical(_owner, h) && identical(live, reading)) {
+        _readingTimeline = false;
+        if (_timelineDirty && mounted) {
+          _timelineDirty = false;
+          unawaited(loadTimeline());
+        }
       }
     }
   }
 
   /// The newest turns only; a PC without `timeline_tail` sends everything.
   Future<dynamic> _readTail(HostLink link) async {
+    final owner = _owner;
     if (!_tailUnsupported) {
       try {
         return await link.call('timeline_tail', {'taskId': widget.taskId});
       } on ProtocolException catch (e) {
         if (!e.message.contains('remote method unavailable')) rethrow;
-        _tailUnsupported = true;
+        if (identical(_owner, owner)) _tailUnsupported = true;
       }
     }
     return link.call('timeline_snapshot', [widget.taskId]);
@@ -265,7 +330,7 @@ class _ConversationPageState extends State<ConversationPage> {
   Future<bool> loadEarlier({String? untilTurn}) async {
     final h = host, link = host?.link, before = live.earlierBefore;
     if (_loadingEarlier || link == null || before == null) return false;
-    final epoch = h!.connectionEpoch;
+    final epoch = h!.connectionEpoch, reading = live;
     setState(() => _loadingEarlier = true);
     try {
       final page = await link.call('timeline_tail', {
@@ -273,15 +338,25 @@ class _ConversationPageState extends State<ConversationPage> {
         'beforeTurn': before,
         'untilTurn': ?untilTurn,
       });
-      if (!mounted || h.connectionEpoch != epoch) return false;
+      if (!mounted ||
+          !identical(_owner, h) ||
+          !identical(live, reading) ||
+          h.link != link ||
+          h.connectionEpoch != epoch) {
+        return false;
+      }
       if (live.earlierBefore != before) return false;
       setState(() => live.prependEarlier(Map<String, dynamic>.from(page)));
       return true;
     } catch (e) {
-      if (mounted) setState(() => error = '$e');
+      if (mounted && identical(_owner, h) && identical(live, reading)) {
+        setState(() => error = '$e');
+      }
       return false;
     } finally {
-      if (mounted) setState(() => _loadingEarlier = false);
+      if (mounted && identical(_owner, h) && identical(live, reading)) {
+        setState(() => _loadingEarlier = false);
+      }
     }
   }
 
@@ -289,6 +364,7 @@ class _ConversationPageState extends State<ConversationPage> {
   /// The PC reads back to it in as few pages as fit; the user sees progress
   /// and can stop, and a turn that no longer exists is reported.
   Future<void> _pageToFocus() async {
+    final owner = _owner;
     final turn = widget.focusTurnId;
     if (turn == null) return;
     bool present() => live.items.any((i) => i['turnId'] == turn);
@@ -300,28 +376,43 @@ class _ConversationPageState extends State<ConversationPage> {
     });
     try {
       while (mounted &&
+          identical(_owner, owner) &&
           !present() &&
           !_locateCancelled &&
           live.earlierBefore != null) {
         if (!await loadEarlier(untilTurn: 'turn:$turn')) break;
-        if (mounted) setState(() => _locatePages++);
+        if (mounted && identical(_owner, owner)) setState(() => _locatePages++);
       }
     } finally {
-      if (mounted) setState(() => _locating = false);
+      if (mounted && identical(_owner, owner)) {
+        setState(() => _locating = false);
+      }
     }
-    if (mounted && !present() && !_locateCancelled && error == null) {
+    if (mounted &&
+        identical(_owner, owner) &&
+        !present() &&
+        !_locateCancelled &&
+        error == null) {
       setState(() => error = '没有找到要打开的这一轮，它可能已被删除。');
     }
   }
 
   Future<void> _loadFullItem(String itemId) async {
-    final link = host?.link;
+    final owner = _owner, reading = live, link = host?.link;
+    final epoch = owner?.connectionEpoch;
     if (link == null) throw const ProtocolException('电脑离线，连接后再查看完整内容。');
     final item = await link.call('timeline_item', {
       'taskId': widget.taskId,
       'itemId': itemId,
     });
-    if (!mounted || item is! Map) return;
+    if (!mounted ||
+        item is! Map ||
+        !identical(_owner, owner) ||
+        !identical(live, reading) ||
+        owner?.link != link ||
+        owner?.connectionEpoch != epoch) {
+      return;
+    }
     setState(() => live.replaceItem(Map<String, dynamic>.from(item)));
   }
 
@@ -329,7 +420,9 @@ class _ConversationPageState extends State<ConversationPage> {
   /// estimated position until it is built, then align it. A turn that never
   /// appears stops the search, so following new output works again.
   void _revealFocus(int attempt) {
+    final owner = _owner;
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!identical(_owner, owner)) return;
       if (!mounted || _focused) return;
       final target = _focusKey.currentContext;
       if (target != null) {
@@ -585,7 +678,8 @@ class _ConversationPageState extends State<ConversationPage> {
           ),
           PopupMenuButton<String>(
             tooltip: '更多',
-            enabled: h.online && t != null,
+            enabled:
+                t != null && (h.online || AppScope.of(context).runtime != null),
             onSelected: (v) async {
               if (v == 'rename') {
                 await _rename();
@@ -596,10 +690,22 @@ class _ConversationPageState extends State<ConversationPage> {
               }
             },
             itemBuilder: (_) => [
-              if (t != null) ...sessionMenuItems(SessionRef(h, t)),
+              if (t != null)
+                ...sessionMenuItems(
+                  SessionRef(h, t),
+                  notifications: AppScope.of(context).runtime != null,
+                ),
               const PopupMenuDivider(),
-              const PopupMenuItem(value: 'rename', child: Text('重命名')),
-              const PopupMenuItem(value: 'delete', child: Text('删除会话')),
+              PopupMenuItem(
+                value: 'rename',
+                enabled: h.online,
+                child: const Text('重命名'),
+              ),
+              PopupMenuItem(
+                value: 'delete',
+                enabled: h.online,
+                child: const Text('删除会话'),
+              ),
             ],
           ),
         ],

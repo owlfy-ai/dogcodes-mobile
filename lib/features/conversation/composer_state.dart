@@ -49,6 +49,7 @@ class ComposerState extends ChangeNotifier {
 
   Map<String, dynamic> _snapshot() => {
     'hostId': host?.id,
+    'localBindingEpoch': ?host?.bindingEpoch,
     'projectId': projectId,
     'taskId': taskId,
     'text': prompt.text,
@@ -104,14 +105,34 @@ class ComposerState extends ChangeNotifier {
   }) async {
     final next = h == null || project == null
         ? null
-        : draftKey(h.id, project, task);
+        : draftKey(h.id, project, task, bindingEpoch: h.bindingEpoch);
     if (restoring && next == _bindingKey) return;
-    if (!restoring && next == key) {
+    if (!restoring && next == key && identical(host, h)) {
       ensureChoice();
       return;
     }
-    final previous = carry ? _snapshot() : null;
-    final savedPrevious = restoring ? Future<void>.value() : flush();
+    final rebinding =
+        host != null &&
+        h != null &&
+        host!.id == h.id &&
+        host!.bindingEpoch != h.bindingEpoch;
+    final discardSource =
+        rebinding ||
+        (h == null && host?.operations.retired == true) ||
+        (host != null &&
+            !hub.hosts.contains(host) &&
+            host!.bindingEpoch != h?.bindingEpoch);
+    final previous = carry && !discardSource ? _snapshot() : null;
+    final savedPrevious = restoring || discardSource
+        ? Future<void>.value()
+        : flush();
+    if (discardSource) {
+      _hydrating = true;
+      prompt.clear();
+      attachments = [];
+      _choice = null;
+      _hydrating = false;
+    }
     final generation = ++_generation;
     _bindingKey = next;
     restoring = true;
@@ -147,7 +168,9 @@ class ComposerState extends ChangeNotifier {
       if (previous != null &&
           ((saved?['text'] ?? '') == '' &&
               (saved?['attachments'] as List? ?? []).isEmpty)) {
-        final sameHost = previous['hostId'] == h?.id;
+        final sameHost =
+            previous['hostId'] == h?.id &&
+            previous['localBindingEpoch'] == h?.bindingEpoch;
         data = {
           ...previous,
           'attachments': [
@@ -258,9 +281,18 @@ class ComposerState extends ChangeNotifier {
       );
       rethrow;
     }
-    attachments.addAll(items);
+    final target = attachments;
+    target.addAll(items);
     error = null;
-    await flush();
+    try {
+      await flush();
+    } catch (_) {
+      target.removeWhere((item) => items.contains(item));
+      await store.releaseUnusedAttachments(
+        items.map((item) => item.blobId).whereType<String>(),
+      );
+      rethrow;
+    }
     _notify();
   }
 

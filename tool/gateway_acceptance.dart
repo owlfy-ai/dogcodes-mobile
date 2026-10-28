@@ -110,6 +110,7 @@ Future<void> main(List<String> args) async {
   final originalPair = PairingRecovery.fromInvitation(
     invitation,
     phone.publicHex,
+    bindingEpoch: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
   );
   await PairingJournal(
     pairStorage,
@@ -201,7 +202,11 @@ Future<void> main(List<String> args) async {
       'Read-only quota unavailable',
     );
     final ops = MobileOperations(MemorySecrets(), client.hostId);
-    final attachmentBytes = List<int>.generate(150000, (i) => i % 256);
+    const attachmentChunkBytes = 256 * 1024;
+    final attachmentBytes = List<int>.generate(
+      attachmentChunkBytes * 2 + 137,
+      (i) => i % 256,
+    );
     final upload = {
       'uploadId': uuid(),
       'name': 'gateway-fixture.bin',
@@ -213,18 +218,25 @@ Future<void> main(List<String> args) async {
     await client.call('attachment_upload_chunk', [
       upload,
       '0',
-      base64.encode(attachmentBytes.sublist(0, 65536)),
+      base64.encode(attachmentBytes.sublist(0, attachmentChunkBytes)),
     ]);
     final resumed = await client.call('attachment_upload_status', upload);
-    require(resumed['offset'] == '65536', 'Attachment resume offset lost');
-    for (var offset = 65536; offset < attachmentBytes.length; offset += 65536) {
+    require(
+      resumed['offset'] == '$attachmentChunkBytes',
+      'Attachment resume offset lost',
+    );
+    for (
+      var offset = attachmentChunkBytes;
+      offset < attachmentBytes.length;
+      offset += attachmentChunkBytes
+    ) {
       await client.call('attachment_upload_chunk', [
         upload,
         '$offset',
         base64.encode(
           attachmentBytes.sublist(
             offset,
-            (offset + 65536).clamp(0, attachmentBytes.length),
+            (offset + attachmentChunkBytes).clamp(0, attachmentBytes.length),
           ),
         ),
       ]);
@@ -241,9 +253,12 @@ Future<void> main(List<String> args) async {
       '0',
       65536,
     ]);
+    final readBytes = base64.decode(firstChunk['bytes'] as String);
     require(
-      base64.decode(firstChunk['bytes'] as String).length == 65536,
-      'Attachment read unavailable',
+      readBytes.length == 65536 &&
+          sha256.convert(readBytes).toString() ==
+              sha256.convert(attachmentBytes.sublist(0, 65536)).toString(),
+      'Attachment read bytes changed',
     );
     final original = {
       'scope': 'mobile-fixture',
@@ -607,9 +622,12 @@ Future<void> main(List<String> args) async {
     } on RemoteOutcomeUnknown {
       beforeLaunchLost = true;
     }
-    final unaccepted = (await ops.pending())!;
-    require(beforeLaunchLost, 'Missing fixture transport loss');
-    await ops.finishLaunchTracking(second, unaccepted);
+    final unaccepted = await ops.sidePending();
+    require(
+      beforeLaunchLost && unaccepted != null && await ops.pending() == null,
+      'Uncertain terminal launch was not isolated from message tracking',
+    );
+    await ops.finishLaunchTracking(second, unaccepted!);
     var fenced = false;
     try {
       await second.call('terminal_start', unaccepted['request']);
@@ -617,7 +635,7 @@ Future<void> main(List<String> args) async {
       fenced = true;
     }
     require(
-      fenced && await ops.pending() == null,
+      fenced && await ops.sidePending() == null,
       'Late terminal launch was not fenced',
     );
 
@@ -706,7 +724,7 @@ Future<void> main(List<String> args) async {
       lost = true;
     }
     require(
-      lost && await ops.pending() != null,
+      lost && await ops.sidePending() != null && await ops.pending() == null,
       'Lost commit reply did not retain its identity',
     );
     final reopened = MobileOperations(ops.storage, second.hostId);
@@ -743,7 +761,7 @@ Future<void> main(List<String> args) async {
       'Original workflow did not push the confirmed commit',
     );
     require(
-      await reopened.pending() == null,
+      await reopened.sidePending() == null,
       'Confirmed Git workflow remained pending',
     );
 

@@ -41,9 +41,9 @@ void main() {
     },
   );
 
-  test('legacy video embeds cursor, JPEG retains separate overlay', () {
+  test('only explicit source metadata marks a pointer as embedded', () {
     final cursor = RemoteCursor()..configure(video: {'codec': 'h264'});
-    expect(cursor.embedded, isTrue);
+    expect(cursor.embedded, isFalse);
     cursor.configure();
     expect(cursor.embedded, isFalse);
     cursor.update(remote, now);
@@ -52,6 +52,24 @@ void main() {
     cursor.expirePrediction();
     expect(cursor.position(after(1000)), const Offset(1, 0));
   });
+
+  test(
+    'JPEG source metadata clears a stale separate pointer even if unchanged',
+    () {
+      final cursor = RemoteCursor()..configure();
+      cursor.update(remote, now);
+      cursor.move(local, after(1));
+      cursor.update({'unchanged': true, 'cursorEmbedded': true}, after(10));
+      expect(cursor.embedded, isTrue);
+      expect(cursor.position(after(10)), isNull);
+      cursor.move(local, after(20));
+      expect(cursor.position(after(419)), local);
+      expect(cursor.position(after(420)), isNull);
+      cursor.update({'cursorEmbedded': false, ...remote}, after(500));
+      expect(cursor.embedded, isFalse);
+      expect(cursor.position(after(500)), const Offset(1, 0));
+    },
+  );
 
   test('switching screens clears old geometry and prediction priority', () {
     final cursor = RemoteCursor()..move(local, now);
@@ -82,4 +100,47 @@ void main() {
     cursor.move(local, now);
     expect(cursor.position(after(-1)), isNull);
   });
+  test(
+    'explicitly unknown source only predicts until a valid determination arrives',
+    () {
+      final cursor = RemoteCursor()..configure(video: {'cursorEmbedded': null});
+      expect(cursor.embedded, isNull);
+      expect(cursor.predictionOnly, isTrue);
+      cursor.update(remote, now);
+      expect(cursor.position(now), isNull);
+      cursor.move(local, now);
+      expect(cursor.position(after(399)), local);
+      expect(cursor.position(after(400)), isNull);
+      cursor.update({
+        'video': {'cursorEmbedded': false},
+        ...remote,
+      }, after(500));
+      expect(cursor.embedded, isFalse);
+      expect(cursor.position(after(500)), const Offset(1, 0));
+      cursor.update({
+        'video': {'cursorEmbedded': null},
+      }, after(501));
+      expect(cursor.position(after(501)), isNull);
+    },
+  );
+  test(
+    'unchanged JPEG can clear a stale overlay with an unknown cursor mode',
+    () {
+      final cursor = RemoteCursor()..configure();
+      cursor.update(remote, now);
+      expect(cursor.position(now), const Offset(1, 0));
+      cursor.update({
+        'unchanged': true,
+        'cursorEmbedded': null,
+        ...remote,
+      }, after(1));
+      expect(cursor.embedded, isNull);
+      expect(cursor.position(after(1)), isNull);
+      cursor.move(local, after(2));
+      expect(cursor.position(after(401)), local);
+      expect(cursor.position(after(402)), isNull);
+      cursor.update({'cursorEmbedded': false, ...remote}, after(500));
+      expect(cursor.position(after(500)), const Offset(1, 0));
+    },
+  );
 }

@@ -2,9 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import '../../core/pc_api.dart';
+import '../../core/host_hub.dart';
 import '../../ui/theme.dart';
 import '../../ui/widgets.dart';
 import 'tool_context.dart';
+import 'workspace_connection.dart';
 
 /// 07 文件: read-only browsing of the PC project; edits go through an Agent
 /// or remote desktop.
@@ -20,7 +22,27 @@ class FilesPage extends StatefulWidget {
   State<FilesPage> createState() => _FilesPageState();
 }
 
-class _FilesPageState extends State<FilesPage> {
+class _FilesPageState extends State<FilesPage>
+    with WorkspaceConnection<FilesPage> {
+  @override
+  HostState get workspaceHost => tool.host;
+  int _loadOrder = 0, _searchOrder = 0;
+  @override
+  void onWorkspaceConnectionChanged() {
+    _loadOrder++;
+    _searchOrder++;
+    _debounce?.cancel();
+    roots = [];
+    entries = [];
+    matches = null;
+    error = null;
+    loading = false;
+    if (tool.host.online) {
+      _load();
+      _onSearch();
+    }
+  }
+
   final search = TextEditingController();
   List<String> roots = [];
   int root = 0;
@@ -49,14 +71,27 @@ class _FilesPageState extends State<FilesPage> {
 
   Future<void> _load() async {
     final link = tool.link, task = tool.taskId;
-    if (link == null || task == null) return setState(() => loading = false);
+    final order = ++_loadOrder, epoch = tool.host.connectionEpoch;
+    final requestedRoot = root, requestedPath = path;
+    bool current() =>
+        mounted &&
+        order == _loadOrder &&
+        epoch == tool.host.connectionEpoch &&
+        link == tool.link &&
+        task == tool.taskId;
+    if (link == null || task == null || !tool.host.online) {
+      return setState(() => loading = false);
+    }
     setState(() {
       loading = true;
       error = null;
     });
     try {
-      if (roots.isEmpty) roots = await link.workspaceRoots(task);
-      final list = await link.directory(task, root, path);
+      final available = roots.isEmpty ? await link.workspaceRoots(task) : roots;
+      if (!current()) return;
+      setState(() => roots = available);
+      final list = await link.directory(task, requestedRoot, requestedPath);
+      if (!current()) return;
       list.sort((a, b) {
         final d =
             (b['directory'] == true ? 1 : 0) - (a['directory'] == true ? 1 : 0);
@@ -66,24 +101,36 @@ class _FilesPageState extends State<FilesPage> {
                 '${b['name']}'.toLowerCase(),
               );
       });
-      if (mounted) setState(() => entries = list);
+      setState(() {
+        roots = available;
+        entries = list;
+      });
     } catch (e) {
-      if (mounted) setState(() => error = '$e');
+      if (current()) setState(() => error = '$e');
     } finally {
-      if (mounted) setState(() => loading = false);
+      if (current()) setState(() => loading = false);
     }
   }
 
   void _onSearch() {
     _debounce?.cancel();
+    final order = ++_searchOrder;
     final q = search.text.trim();
     if (q.isEmpty) return setState(() => matches = null);
     _debounce = Timer(const Duration(milliseconds: 300), () async {
       final link = tool.link, task = tool.taskId;
-      if (link == null || task == null) return;
+      final epoch = tool.host.connectionEpoch;
+      bool current() =>
+          mounted &&
+          order == _searchOrder &&
+          epoch == tool.host.connectionEpoch &&
+          link == tool.link &&
+          task == tool.taskId &&
+          search.text.trim() == q;
+      if (link == null || task == null || !tool.host.online) return;
       try {
         final result = await link.findFiles(task, q);
-        if (!mounted || search.text.trim() != q) return;
+        if (!current()) return;
         setState(
           () => matches = [
             for (final f in (result['files'] as List? ?? const []))
@@ -91,13 +138,14 @@ class _FilesPageState extends State<FilesPage> {
           ],
         );
       } catch (e) {
-        if (mounted) showError(context, e);
+        if (mounted && current()) showError(context, e);
       }
     });
   }
 
   void _open(String p) => setState(() {
     path = p;
+    entries = [];
     _load();
   });
 
@@ -144,6 +192,7 @@ class _FilesPageState extends State<FilesPage> {
                 onSelected: (r) => setState(() {
                   root = r;
                   path = '';
+                  entries = [];
                   _load();
                 }),
                 itemBuilder: (_) => [
@@ -153,7 +202,7 @@ class _FilesPageState extends State<FilesPage> {
               ),
           ],
         ),
-        body: tool.link == null || tool.taskId == null
+        body: !tool.host.online || tool.taskId == null
             ? ToolUnavailable(tool: tool)
             : Column(
                 children: [
@@ -324,21 +373,44 @@ class FilePreviewPage extends StatefulWidget {
   State<FilePreviewPage> createState() => _FilePreviewPageState();
 }
 
-class _FilePreviewPageState extends State<FilePreviewPage> {
+class _FilePreviewPageState extends State<FilePreviewPage>
+    with WorkspaceConnection<FilePreviewPage> {
+  @override
+  HostState get workspaceHost => widget.tool.host;
+  int _loadOrder = 0;
+  @override
+  void onWorkspaceConnectionChanged() {
+    _loadOrder++;
+    preview = null;
+    error = null;
+    if (workspaceHost.online) _load();
+  }
+
   Map<String, dynamic>? preview;
   String? error;
 
   @override
   void initState() {
     super.initState();
+    _load();
+  }
+
+  Future<void> _load() async {
     final link = widget.tool.link, task = widget.tool.taskId;
-    if (link == null || task == null) return;
-    link
-        .filePreview(task, widget.root, widget.path)
-        .then((v) => mounted ? setState(() => preview = v) : null)
-        .catchError(
-          (Object e) => mounted ? setState(() => error = '$e') : null,
-        );
+    final order = ++_loadOrder, epoch = workspaceHost.connectionEpoch;
+    bool current() =>
+        mounted &&
+        order == _loadOrder &&
+        epoch == workspaceHost.connectionEpoch &&
+        link == widget.tool.link &&
+        task == widget.tool.taskId;
+    if (link == null || task == null || !workspaceHost.online) return;
+    try {
+      final result = await link.filePreview(task, widget.root, widget.path);
+      if (current()) setState(() => preview = result);
+    } catch (e) {
+      if (current()) setState(() => error = '$e');
+    }
   }
 
   @override
@@ -347,7 +419,9 @@ class _FilePreviewPageState extends State<FilePreviewPage> {
     final text = preview?['text'] as String?;
     final image = preview?['image'] as String?;
     Widget body;
-    if (error != null) {
+    if (!workspaceHost.online || widget.tool.taskId == null) {
+      body = ToolUnavailable(tool: widget.tool);
+    } else if (error != null) {
       body = Center(child: InlineNotice(error!, danger: true));
     } else if (preview == null) {
       body = const Center(child: CircularProgressIndicator());

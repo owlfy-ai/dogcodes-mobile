@@ -8,10 +8,20 @@ extension TerminalStopWrites on MobileOperations {
     saved['request']['expectedEpoch'],
   ]);
   Future<Map<String, dynamic>> _readStops() async {
+    if (_journalsForgotten || _scope.cleanupPending) return {};
+    if (!await _scope.matches(bindingEpoch)) return {};
     final raw = await storage.read(_stopsKey);
-    return raw == null || raw == 'null'
-        ? <String, dynamic>{}
-        : Map<String, dynamic>.from(jsonDecode(raw) as Map);
+    if (_journalsForgotten || _scope.cleanupPending) return {};
+    if (!await _scope.matches(bindingEpoch)) return {};
+    if (raw == null || raw == 'null') return {};
+    final all = Map<String, dynamic>.from(jsonDecode(raw) as Map);
+    if (bindingEpoch == null) return all;
+    return {
+      for (final entry in all.entries)
+        if (entry.value is Map &&
+            entry.value['localBindingEpoch'] == bindingEpoch)
+          entry.key: entry.value,
+    };
   }
 
   Future<List<Map<String, dynamic>>> pendingTerminalStops() => _journalSerial(
@@ -22,6 +32,7 @@ extension TerminalStopWrites on MobileOperations {
   );
   Future<void> _storeStop(Map<String, dynamic> saved) => _journalSerial(
     () async {
+      await _requireBindingActive();
       final all = await _readStops();
       if (_journalsForgotten) throw const ProtocolException('这台电脑已移除，未发送关闭请求。');
       if (all.values.any(
@@ -32,6 +43,7 @@ extension TerminalStopWrites on MobileOperations {
       if (all.length >= 64) {
         throw const ProtocolException('等待确认的关闭请求太多，请先处理待处理页里的卡片。');
       }
+      if (bindingEpoch != null) saved['localBindingEpoch'] = bindingEpoch;
       all[_stopId(saved)] = saved;
       await storage.write(_stopsKey, jsonEncode(all));
       if (_journalsForgotten) throw const ProtocolException('这台电脑已移除，未发送关闭请求。');
@@ -39,11 +51,6 @@ extension TerminalStopWrites on MobileOperations {
   );
   Future<void> _clearStop(Map<String, dynamic> saved) async {
     if (_journalsForgotten) return;
-    // Preserve recovery for requests saved by the previous app version.
-    if (saved['journal'] != 'terminal-stops') {
-      await _clearIfCurrent(saved);
-      return;
-    }
     await _journalSerial(() async {
       if (_journalsForgotten) return;
       final all = await _readStops(), id = _stopId(saved);
@@ -54,17 +61,7 @@ extension TerminalStopWrites on MobileOperations {
     });
   }
 
-  Future<void> forgetTerminalStops() {
-    _journalsForgotten = true;
-    return _journalSerial(() async {
-      final store = storage;
-      if (store is ErasableSecretStorage) {
-        await store.delete(_stopsKey);
-      } else {
-        await store.write(_stopsKey, 'null');
-      }
-    });
-  }
+  Future<void> forgetTerminalStops() => forgetRecoveryJournals();
 
   Future<void> _guardRunStops(
     HostApi client,
@@ -86,13 +83,24 @@ extension TerminalStopWrites on MobileOperations {
     }
   }
 
+  Future<void> _requireStopEpoch(HostApi client) async {
+    final capabilities = await client.call('remote_capabilities', null);
+    if (capabilities is! Map || capabilities['terminalStopEpoch'] != true) {
+      throw const ProtocolException('请更新电脑端后再关闭终端，当前版本无法核实原终端身份。');
+    }
+  }
+
   Future<Map<String, dynamic>> terminalStop(
     HostApi client,
     Map<String, dynamic> terminal,
   ) async {
-    if (terminal['id'] is! String || terminal['epoch'] is! String) {
+    if (terminal['id'] is! String ||
+        terminal['id'] == '' ||
+        terminal['epoch'] is! String ||
+        terminal['epoch'] == '') {
       throw const ProtocolException('终端身份不完整，请刷新后再关闭。');
     }
+    await _requireStopEpoch(client);
     final saved = <String, dynamic>{
       'kind': 'terminal_stop',
       'journal': 'terminal-stops',
@@ -166,7 +174,10 @@ extension TerminalStopWrites on MobileOperations {
     try {
       return await _stopResult(
         saved,
-        await client.call('terminal_stop', saved['request']['terminalId']),
+        await _write(client, 'terminal_stop', {
+          'terminalId': saved['request']['terminalId'],
+          'expectedEpoch': saved['request']['expectedEpoch'],
+        }, saved: saved),
       );
     } on ProtocolException catch (e) {
       if (_gone(e)) return _stopResult(saved, null);
@@ -195,6 +206,7 @@ extension TerminalStopWrites on MobileOperations {
   ) async {
     final found = await verifyTerminalStop(client, saved);
     if (found != null && found['state'] != 'stopping') return found;
+    await _requireStopEpoch(client);
     return sendTerminalStop(client, saved);
   }
 

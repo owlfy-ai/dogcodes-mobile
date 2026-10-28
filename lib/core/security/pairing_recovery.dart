@@ -1,6 +1,7 @@
 import 'dart:convert';
 import '../protocol.dart';
 import 'secret_storage.dart';
+import 'host_lifecycle.dart';
 
 /// Stored before contacting the PC. Deliberately excludes the pairing PSK:
 /// this can only recover an existing grant for the phone's original identity.
@@ -13,11 +14,13 @@ class PairingRecovery implements PairingPins {
     this.phoneTicket,
     this.phonePublicKey,
     this.recoverUntil,
+    this.bindingEpoch,
   );
   factory PairingRecovery.fromInvitation(
     PairingInvitation invitation,
-    String phonePublicKey,
-  ) {
+    String phonePublicKey, {
+    required String bindingEpoch,
+  }) {
     if (invitation.phoneTicket == null) {
       throw const ProtocolException('请在电脑上生成新版配对二维码。');
     }
@@ -29,6 +32,7 @@ class PairingRecovery implements PairingPins {
       invitation.phoneTicket!,
       phonePublicKey,
       invitation.expiresAt.add(const Duration(minutes: 15)),
+      bindingEpoch,
     );
   }
   factory PairingRecovery.fromJson(
@@ -42,7 +46,8 @@ class PairingRecovery implements PairingPins {
       final ticket = data['phoneTicket'] as String;
       final host = data['hostId'] as String,
           invitation = data['invitationId'] as String;
-      if (data['version'] != 1 ||
+      if (!validBindingEpoch(data['bindingEpoch']) ||
+          data['version'] != 1 ||
           base64Url.decode(base64Url.normalize(key)).length != 32 ||
           !RegExp(r'^[0-9a-f]{64}$').hasMatch(phone) ||
           !RegExp(r'^[A-Za-z0-9_-]{32,256}$').hasMatch(ticket) ||
@@ -67,6 +72,7 @@ class PairingRecovery implements PairingPins {
         ticket,
         phone,
         DateTime.parse(data['recoverUntil'] as String).toUtc(),
+        data['bindingEpoch'] as String,
       );
     } catch (_) {
       throw const ProtocolException('配对恢复记录无法读取，请先核实手机安全存储。');
@@ -77,6 +83,7 @@ class PairingRecovery implements PairingPins {
   @override
   final Uri service;
   final String phoneTicket, phonePublicKey;
+  final String bindingEpoch;
   final DateTime recoverUntil;
   Map<String, dynamic> toJson() => {
     'version': 1,
@@ -87,6 +94,7 @@ class PairingRecovery implements PairingPins {
     'phoneTicket': phoneTicket,
     'phonePublicKey': phonePublicKey,
     'recoverUntil': recoverUntil.toIso8601String(),
+    'bindingEpoch': bindingEpoch,
   };
   bool sameAttempt(PairingRecovery other) =>
       jsonEncode(toJson()) == jsonEncode(other.toJson());
@@ -95,16 +103,13 @@ class PairingRecovery implements PairingPins {
 }
 
 class PairingJournal {
-  PairingJournal(this.storage, {this.allowLocalDevelopment = false});
+  PairingJournal(this.storage, {this.allowLocalDevelopment = false})
+    : _registry = HostRegistry(storage);
   final SecretStorage storage;
   final bool allowLocalDevelopment;
+  final HostRegistry _registry;
   static const key = 'dogcodes.pairing.pending.v1';
-  Future<void> _tail = Future.value();
-  Future<T> _serial<T>(Future<T> Function() work) {
-    final next = _tail.then((_) => work());
-    _tail = next.then<void>((_) {}, onError: (Object _, StackTrace _) {});
-    return next;
-  }
+  Future<T> _serial<T>(Future<T> Function() work) => _registry.serial(work);
 
   Future<Map<String, PairingRecovery>> _load() async {
     final raw = await storage.read(key);

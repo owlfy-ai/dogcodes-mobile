@@ -376,7 +376,7 @@ void main() {
         {'hostId': 'macbook-pro-host', 'displayName': 'MacBook Pro'},
       ],
       connector: (host) async => FakeLink(host['hostId'] as String),
-      forgetter: (id) async => forgotten.add(id),
+      forgetter: (id, _) async => forgotten.add(id),
     );
     await tester.pumpWidget(DogCodesApp(hub: hub));
     await tester.pumpAndSettle();

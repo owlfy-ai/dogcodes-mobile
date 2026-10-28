@@ -9,6 +9,7 @@ import 'features/inbox/pending_page.dart';
 import 'features/sessions/sessions_page.dart';
 import 'features/workspace/workspace_page.dart';
 import 'ui/theme.dart';
+import 'features/conversation/conversation_page.dart';
 
 /// Shared app services for every page below the shell.
 class AppScope extends InheritedWidget {
@@ -43,6 +44,9 @@ class DogCodesApp extends StatefulWidget {
 class _DogCodesAppState extends State<DogCodesApp> {
   late final AppPreferences preferences;
   late final HostHub hub;
+  final navigator = GlobalKey<NavigatorState>();
+  final messenger = GlobalKey<ScaffoldMessengerState>();
+  bool _pushScheduled = false;
   @override
   void initState() {
     super.initState();
@@ -57,6 +61,11 @@ class _DogCodesAppState extends State<DogCodesApp> {
           forgetter: runtime?.hosts.forget,
           local: runtime?.local,
         );
+    if (runtime != null) {
+      runtime.push.addListener(_pushChanged);
+      hub.addListener(_pushChanged);
+      runtime.push.initialize(hub);
+    }
     if (!hub.loaded) {
       if (runtime == null) {
         hub.load();
@@ -70,9 +79,64 @@ class _DogCodesAppState extends State<DogCodesApp> {
 
   @override
   void dispose() {
+    if (widget.runtime != null) {
+      widget.runtime!.push.removeListener(_pushChanged);
+      hub.removeListener(_pushChanged);
+      widget.runtime!.push.dispose();
+    }
     if (widget.hub == null) hub.dispose();
     preferences.dispose();
     super.dispose();
+  }
+
+  void _pushChanged() {
+    if (!mounted ||
+        !hub.loaded ||
+        _pushScheduled ||
+        widget.runtime?.push.hasPendingOpen != true) {
+      return;
+    }
+    _pushScheduled = true;
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      _pushScheduled = false;
+      if (!mounted || navigator.currentState == null) return;
+      final runtime = widget.runtime;
+      final opened = runtime?.push.takeOpen();
+      if (runtime == null || opened == null) return;
+      final host = hub.host(opened.hostId);
+      if (host == null) {
+        messenger.currentState?.showSnackBar(
+          const SnackBar(content: Text('这台电脑已移除，请核实电脑列表中的绑定。')),
+        );
+        return;
+      }
+      try {
+        final record = await runtime.hosts.read(host.id);
+        if (!mounted) return;
+        if (record == null ||
+            record['bindingEpoch'] != host.bindingEpoch ||
+            hub.host(host.id) != host) {
+          messenger.currentState?.showSnackBar(
+            const SnackBar(content: Text('电脑绑定已改变，请从电脑列表重新打开。')),
+          );
+          return;
+        }
+      } catch (_) {
+        if (mounted) {
+          messenger.currentState?.showSnackBar(
+            const SnackBar(content: Text('暂时无法读取电脑绑定，请稍后重试。')),
+          );
+        }
+        return;
+      }
+      if (!host.online) hub.connect(host);
+      navigator.currentState?.push(
+        MaterialPageRoute<void>(
+          builder: (_) =>
+              ConversationPage(hostId: host.id, taskId: opened.taskId),
+        ),
+      );
+    });
   }
 
   @override
@@ -84,6 +148,8 @@ class _DogCodesAppState extends State<DogCodesApp> {
     child: ListenableBuilder(
       listenable: preferences,
       builder: (context, _) => MaterialApp(
+        navigatorKey: navigator,
+        scaffoldMessengerKey: messenger,
         title: 'DogCodes',
         debugShowCheckedModeBanner: false,
         theme: dcTheme(Brightness.light),
@@ -136,7 +202,9 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      AppScope.of(context).hub.resume();
+      final scope = AppScope.of(context);
+      scope.hub.resume();
+      scope.runtime?.push.refresh();
     }
   }
 

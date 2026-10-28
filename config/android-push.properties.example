@@ -1,0 +1,18 @@
+# Copy to private/android-push.properties; fill only the channels you use.
+# Do not leave partially configured groups. Absent groups are not registered.
+# Direct HMS: Huawei appid= prefix is required. Xiaomi and FCM numeric IDs use id=.
+# com.huawei.hms.client.appid=appid=YOUR_HUAWEI_APP_ID
+# com.hihonor.push.app_id=YOUR_HONOR_APP_ID
+# com.xiaomi.push.id=id=YOUR_XIAOMI_APP_ID
+# com.xiaomi.push.key=id=YOUR_XIAOMI_APP_KEY
+# com.vivo.push.api_key=YOUR_VIVO_API_KEY
+# com.vivo.push.app_id=YOUR_VIVO_APP_ID
+# com.oppo.push.key=YOUR_OPPO_KEY
+# com.oppo.push.secret=YOUR_OPPO_SECRET
+# com.meizu.push.id=YOUR_MEIZU_APP_ID
+# com.meizu.push.key=YOUR_MEIZU_APP_KEY
+# Direct FCM: fill all four fields from the Android Firebase app configuration.
+# dogcodes.push.fcm.sender_id=id=YOUR_FCM_SENDER_ID
+# dogcodes.push.fcm.app_id=YOUR_FCM_APP_ID
+# dogcodes.push.fcm.project_id=YOUR_FCM_PROJECT_ID
+# dogcodes.push.fcm.api_key=YOUR_FCM_API_KEY

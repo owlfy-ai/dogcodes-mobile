@@ -10,12 +10,14 @@ import 'video_recovery_test.dart' show ReadyScreens;
 
 class ResizingScreens extends ReadyScreens {
   int width = 640, applied = 0;
+  int? sourceHeight;
+  bool applyWidthChanges = true;
   final changes = <Map>[];
   Map<String, dynamic> get description => {
     'codec': 'h264',
     'transport': 'binary',
     'width': width,
-    'height': width * 5 ~/ 8,
+    'height': sourceHeight ?? width * 5 ~/ 8,
     'generation': generation,
     'clientReadyRequired': true,
     'resize': {
@@ -33,7 +35,7 @@ class ResizingScreens extends ReadyScreens {
       if (args['targetWidth'] != null) {
         changes.add(Map.of(args as Map));
         final seq = int.parse(args['viewRequest'] as String);
-        if (seq > applied) {
+        if (applyWidthChanges && seq > applied) {
           applied = seq;
           width = args['targetWidth'] as int;
           generation++;
@@ -78,7 +80,71 @@ Future<void> pinch(WidgetTester t) async {
 
 void main() {
   testWidgets(
-    'resizing keeps the old texture and input until the new decoder outputs a frame',
+    'a source geometry generation rebuilds the decoder without a new width sequence',
+    (t) async {
+      t.view.physicalSize = const Size(400, 800);
+      t.view.devicePixelRatio = 1;
+      addTearDown(t.view.reset);
+      const channel = MethodChannel('dogcodes/h264');
+      final formats = <Map>[], disposed = <int>[], counts = <int, int>{};
+      final decoding = Completer<void>();
+      t.binding.defaultBinaryMessenger.setMockMethodCallHandler(channel, (
+        call,
+      ) async {
+        final id = (call.arguments as Map?)?['id'] as int?;
+        if (call.method == 'create') {
+          formats.add(Map.of(call.arguments as Map));
+          return formats.length == 1 ? 7 : 8;
+        }
+        if (call.method == 'decode') {
+          if (id == 8) await decoding.future;
+          counts[id!] = (counts[id] ?? 0) + 1;
+        }
+        if (call.method == 'stats') return {'decoded': counts[id] ?? 0};
+        if (call.method == 'dispose') disposed.add(id!);
+        return null;
+      });
+      addTearDown(
+        () => t.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+          channel,
+          null,
+        ),
+      );
+      final link = ResizingScreens()..applyWidthChanges = false;
+      final host = HostState({'hostId': 'pc'}, MemorySecretStorage())
+        ..link = link
+        ..status = LinkStatus.online;
+      await t.pumpWidget(
+        MaterialApp(
+          theme: dcTheme(Brightness.light),
+          home: RemoteDesktopPage(host: host),
+        ),
+      );
+      await flush(t);
+      expect(formats, hasLength(1));
+      link.width = 320;
+      link.sourceHeight = 640;
+      link.generation++;
+      await t.pump(const Duration(seconds: 1));
+      await flush(t);
+      expect(link.applied, 0);
+      expect(formats, hasLength(2));
+      expect(formats.last['width'], 320);
+      expect(formats.last['height'], 640);
+      expect(link.ready, [1, 2]);
+      expect(t.widget<Texture>(find.byType(Texture)).textureId, 7);
+      expect(disposed, isNot(contains(7)));
+      decoding.complete();
+      await flush(t);
+      expect(t.widget<Texture>(find.byType(Texture)).textureId, 8);
+      expect(disposed.where((id) => id == 7), hasLength(1));
+      await t.pumpWidget(const SizedBox());
+      await flush(t);
+      expect(disposed.where((id) => id == 8), hasLength(1));
+    },
+  );
+  testWidgets(
+    'resizing keeps the old texture and suspends input until the new decoder outputs a frame',
     (t) async {
       t.view.physicalSize = const Size(400, 800);
       t.view.devicePixelRatio = 1;
@@ -126,7 +192,12 @@ void main() {
       expect(t.widget<Texture>(find.byType(Texture)).textureId, 7);
       await t.tap(find.byType(Texture));
       await flush(t);
-      expect(link.inputs, isNotEmpty);
+      expect(
+        link.inputs,
+        isEmpty,
+        reason:
+            'old picture clicks must not be sent while the decoder is replaced',
+      );
       creating.complete(8);
       await flush(t);
       expect(link.ready, [1, 2]);
@@ -136,6 +207,14 @@ void main() {
       await flush(t);
       expect(t.widget<Texture>(find.byType(Texture)).textureId, 8);
       expect(disposed.where((id) => id == 7).length, 1);
+      expect(
+        link.inputs,
+        isEmpty,
+        reason: 'the old click must never be replayed',
+      );
+      await t.tap(find.byType(Texture));
+      await flush(t);
+      expect(link.inputs, isNotEmpty);
       await t.pumpWidget(const SizedBox());
       await flush(t);
       expect(disposed.where((id) => id == 8).length, 1);

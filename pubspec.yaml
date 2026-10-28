@@ -23,6 +23,7 @@ dependencies:
     path: packages/dogcodes_clipboard
   dogcodes_video:
     path: packages/dogcodes_video
+  aliyun_push: 1.2.0
 dev_dependencies:
   integration_test:
     sdk: flutter

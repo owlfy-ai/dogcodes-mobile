@@ -26,6 +26,7 @@ import 'remote_view.dart';
 import 'remote_cursor.dart';
 import 'video_stats.dart';
 import 'video_resolution.dart';
+import 'video_recovery.dart';
 
 /// 10 远程桌面: device-level screen and input for one PC, independent of any
 /// Agent. Where WebRTC reaches the PC (direct or TURN), the page opens a
@@ -46,8 +47,10 @@ class DesktopPreparationFailure implements Exception {
 }
 
 class RemoteDesktopPage extends StatefulWidget {
-  const RemoteDesktopPage({super.key, required this.host});
+  const RemoteDesktopPage({super.key, required this.host, this.recoveryClock});
   final HostState host;
+  @visibleForTesting
+  final Duration Function()? recoveryClock;
   @override
   State<RemoteDesktopPage> createState() => _RemoteDesktopPageState();
 }
@@ -116,6 +119,7 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
   /// platform decoder into a texture.
   H264Decoder? _decoder, _heldDecoder;
   final _resolution = VideoResolution();
+  final _pipelineRecovery = VideoRecovery();
   final _resolutionClock = Stopwatch()..start();
   Timer? _resolutionDebounce;
   int? _resolutionCandidate;
@@ -614,6 +618,7 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
       _resolutionCandidate = null;
       _lastDecoded = _sentAtProgress = _stalledTicks = 0;
       _gotVideoFrame = true;
+      _syncInputPicture();
       _videoNote = null;
       setState(() {});
     } on DesktopAuthorizationEnded catch (e) {
@@ -700,24 +705,29 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
     }
   }
 
+  Future<RTCVideoRenderer> _createRtpRenderer(bool Function() current) =>
+      ownedResource<RTCVideoRenderer>(
+        create: () async {
+          final value = RTCVideoRenderer();
+          try {
+            await value.initialize();
+            return value;
+          } catch (_) {
+            await disposeDesktopRenderer(value);
+            rethrow;
+          }
+        },
+        current: current,
+        release: disposeDesktopRenderer,
+        timeout: const Duration(seconds: 3),
+      );
+
   Future<void> _prepareRtpCandidate(
     DesktopCandidate candidate,
     bool Function() current,
   ) async {
-    final renderer = await ownedResource<RTCVideoRenderer>(
-      create: () async {
-        final value = RTCVideoRenderer();
-        try {
-          await value.initialize();
-          return value;
-        } catch (_) {
-          await disposeDesktopRenderer(value);
-          rethrow;
-        }
-      },
-      current: () => current() && !candidate.closed,
-      release: disposeDesktopRenderer,
-      timeout: const Duration(seconds: 3),
+    final renderer = await _createRtpRenderer(
+      () => current() && !candidate.closed,
     );
     candidate.renderer = renderer;
     renderer.onFirstFrameRendered = () {
@@ -926,7 +936,11 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
           return;
         }
         if (_current(session)) unawaited(_videoLoop(session));
-      } else if (video is Map && await _startVideo(video)) {
+      } else if (video is Map) {
+        if (!await _startVideo(video)) {
+          if (_current(session)) await _fallback(session, '手机视频画面不可用');
+          return;
+        }
         if (_current(session)) unawaited(_videoLoop(session));
       } else {
         if (!_current(session)) return;
@@ -1067,7 +1081,19 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
       _heldRenderer = previousRenderer;
       _renderer = null;
     }
-    final relay = RelayVideoReceiver(
+    late final RelayVideoReceiver relay;
+    relay = RelayVideoReceiver(
+      onLiveChanged: (live) {
+        if (!current() || !identical(_relay, relay)) return;
+        _syncInputPicture();
+        setState(() {
+          if (!live && !_pipelineRecovery.active) {
+            _videoNote = '画面正在恢复';
+          } else if (live && _videoNote == '画面正在恢复') {
+            _videoNote = null;
+          }
+        });
+      },
       decode: (data, keyframe) async {
         await decoder.decode(data, keyframe: keyframe);
         if (!firstDecoded.isCompleted) firstDecoded.complete();
@@ -1085,6 +1111,7 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
     );
     _decoder = decoder;
     _relay = relay;
+    _syncInputPicture();
     _relayFrames = link.events
         .where(
           (e) =>
@@ -1108,6 +1135,8 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
               'ready': true,
               'generation': video['generation'],
               'keyframe': true,
+              'includeCursor': true,
+              'knownCursorShapeId': ?_cursorState.shapeId,
             }),
           );
           if (!current() || _decoder != decoder) return false;
@@ -1118,6 +1147,7 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
               response['relay']['generation'] != video['generation']) {
             throw StateError('电脑未确认当前画面的就绪状态');
           }
+          _cursorState.update(response, DateTime.now());
         } catch (_) {
           if (!current() || _decoder != decoder) return false;
           rethrow;
@@ -1151,10 +1181,19 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
     final session = _session;
     final desk = _desk;
     if (desk == null) return false;
-    final renderer = RTCVideoRenderer();
+    bool current() => _current(session) && identical(desk, _desk);
+    final RTCVideoRenderer renderer;
     try {
-      await renderer.initialize();
+      renderer = await _createRtpRenderer(current);
+    } catch (_) {
+      return false;
+    }
+    try {
       final stream = await desk.stream.timeout(const Duration(seconds: 5));
+      if (!current()) {
+        await disposeDesktopRenderer(renderer);
+        return false;
+      }
       await renderer
           .setSrcObject(stream: stream)
           .timeout(const Duration(seconds: 3));
@@ -1162,14 +1201,12 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
       await disposeDesktopRenderer(renderer);
       return false;
     }
-    if (!_current(session)) {
+    if (!current()) {
       await disposeDesktopRenderer(renderer);
       return false;
     }
     renderer.onResize = () {
-      if (!_current(session) ||
-          _renderer != renderer ||
-          renderer.videoWidth == 0) {
+      if (!current() || _renderer != renderer || renderer.videoWidth == 0) {
         return;
       }
       setState(() {
@@ -1213,6 +1250,8 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
                   if (_gotVideoFrame && !gestures.active && !_handoffPreparing)
                     ..._resolution.request(_resolutionClock.elapsed),
                   'keyframe': !_gotVideoFrame || _stalledTicks >= 2,
+                  'knownCursorShapeId': ?_cursorState.shapeId,
+                  'includeCursor': true,
                 })
                 as Map;
         if (!_current(session)) return;
@@ -1227,6 +1266,40 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
           return;
         }
         final description = remote['video'];
+        final pictureChanging =
+            description is Map &&
+            (description['codecReady'] == false ||
+                (description['resize'] is Map &&
+                    description['resize']['state'] == 'updating') ||
+                (_resolution.newer(description) &&
+                    description['generation'] !=
+                        _activeVideoDescription?['generation']));
+        final recoveryExpired = _pipelineRecovery.observe(
+          remote['recovery'],
+          widget.recoveryClock?.call() ?? _resolutionClock.elapsed,
+          scope: (session, screenGeneration),
+          changing: pictureChanging,
+        );
+        _syncInputPicture();
+        if (recoveryExpired) {
+          await _fallback(session, '电脑画面恢复超时');
+          return;
+        }
+        if (_pipelineRecovery.active &&
+            (description is! Map ||
+                description['codecReady'] == false ||
+                (description['resize'] is Map &&
+                    description['resize']['state'] == 'updating'))) {
+          _videoNote = '电脑画面正在恢复';
+          _stalledTicks = 0;
+          if (_current(session)) setState(() {});
+          continue;
+        }
+        if (_pipelineRecovery.active) {
+          _videoNote = '电脑画面正在恢复';
+        } else if (_videoNote == '电脑画面正在恢复') {
+          _videoNote = null;
+        }
         if (description is Map && _resolution.newer(description)) {
           final previous = _activeVideoDescription;
           if (decoder != null &&
@@ -1257,6 +1330,44 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
             }
             _lastDecoded = _sentAtProgress = _stalledTicks = 0;
             _gotVideoFrame = true;
+            _pipelineRecovery.decoded();
+            _syncInputPicture();
+            if (_videoNote == '电脑画面正在恢复') _videoNote = null;
+          }
+          if (decoder == null &&
+              desk != null &&
+              description['clientReadyRequired'] == true &&
+              description['ready'] != true) {
+            final previousReports = await desk.peer.getStats().timeout(
+              const Duration(seconds: 3),
+            );
+            if (!_current(session) || screenGeneration != _screenGeneration) {
+              continue;
+            }
+            final beforeReady = parseVideoStats([
+              for (final report in previousReports)
+                (report.type, report.values),
+            ], DateTime.now());
+            if (beforeReady != null) _lastDecoded = beforeReady.framesDecoded;
+            final ack = await api
+                .call('remote_desktop_video', {
+                  'leaseId': l,
+                  'generation': description['generation'],
+                  'ready': true,
+                  'keyframe': true,
+                })
+                .timeout(const Duration(seconds: 5));
+            if (!_current(session) || screenGeneration != _screenGeneration) {
+              continue;
+            }
+            checkDesktopAuthorization(ack);
+            if (ack is! Map ||
+                ack['video'] is! Map ||
+                ack['video']['generation'] != description['generation'] ||
+                ack['video']['ready'] != true) {
+              throw StateError('电脑画面代次尚未确认');
+            }
+            _stalledTicks = 0;
           }
           _resolution.accept(description);
           _activeVideoDescription = Map.from(description);
@@ -1311,9 +1422,27 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
           _videoKbps = _relayBytes / 1024;
           _relayBytes = 0;
         } else if (desk != null) {
-          final reports = await desk.peer.getStats();
+          final List<StatsReport> reports;
+          try {
+            reports = await desk.peer.getStats().timeout(
+              const Duration(seconds: 3),
+            );
+          } catch (_) {
+            if (!_current(session)) return;
+            if (screenGeneration != _screenGeneration ||
+                busy ||
+                !identical(desk, _desk)) {
+              continue;
+            }
+            await _fallback(session, '手机视频状态读取失败');
+            return;
+          }
           if (!_current(session)) return;
-          if (screenGeneration != _screenGeneration || busy) continue;
+          if (screenGeneration != _screenGeneration ||
+              busy ||
+              !identical(desk, _desk)) {
+            continue;
+          }
           final sample = parseVideoStats([
             for (final r in reports) (r.type, r.values),
           ], DateTime.now());
@@ -1327,6 +1456,11 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
         }
         final sent = (remote['frames'] as num?)?.toInt() ?? 0;
         if (count > _lastDecoded && sent > 0) {
+          if (_pipelineRecovery.active) {
+            _pipelineRecovery.decoded();
+            _syncInputPicture();
+            if (_videoNote == '电脑画面正在恢复') _videoNote = null;
+          }
           _gotVideoFrame = true;
           _stalledTicks = 0;
           _sentAtProgress = sent;
@@ -1425,6 +1559,7 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
           maxWidth: _wantedWidth(),
           quality: _rate.quality,
           knownFrameId: frameId,
+          knownCursorShapeId: _cursorState.shapeId,
         );
         if (!mounted || session != _session) return;
         if (busy ||
@@ -1524,11 +1659,16 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
     if (!busy) _queue?.add(event);
   }
 
+  bool get _pictureReady => !_pipelineRecovery.active && (_relay?.live ?? true);
+
+  void _syncInputPicture() => _queue?.setViewReady(_pictureReady);
+
   void _moveTo(Offset local) {
+    if (!_pictureReady) return;
     final remote = viewport.toRemote(local);
     _cursorState.move(remote, DateTime.now());
     _cursorExpiry?.cancel();
-    if (_cursorState.embedded) {
+    if (_cursorState.predictionOnly) {
       _cursorExpiry = Timer(RemoteCursor.predictionWindow, () {
         _cursorState.expirePrediction();
         if (mounted) setState(() {});
@@ -1542,6 +1682,12 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
 
   void _gesture(RemoteGesture g) {
     if (lease == null || busy) return;
+    if (!_pictureReady &&
+        g is! RemoteDragEnd &&
+        g is! RemoteZoom &&
+        g is! RemotePan) {
+      return;
+    }
     switch (g) {
       case RemoteClick(:final at, :final button):
         if (!viewport.contains(at)) return;
@@ -2156,6 +2302,10 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
         });
         final pointer = _cursor;
         final cursor = pointer == null ? null : viewport.toLocal(pointer);
+        final shape = _cursorState.shape;
+        final shapeRect = cursor == null
+            ? null
+            : shape?.rect(cursor, viewport.rect);
         return Listener(
           behavior: HitTestBehavior.opaque,
           onPointerDown: _pointer,
@@ -2196,7 +2346,7 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
                                 : FilterQuality.low,
                           ),
                   ),
-                  if (_videoNote != null && !_video)
+                  if (_videoNote != null && (!_video || !_pictureReady))
                     Positioned(
                       left: 8,
                       bottom: 8,
@@ -2213,13 +2363,28 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
                   if (cursor != null)
                     Positioned(
                       key: const ValueKey('desktop-cursor'),
-                      left: cursor.dx,
-                      top: cursor.dy,
-                      child: const IgnorePointer(
-                        child: CustomPaint(
-                          size: Size(14, 20),
-                          painter: _CursorPainter(),
-                        ),
+                      left: shapeRect?.left ?? cursor.dx,
+                      top: shapeRect?.top ?? cursor.dy,
+                      child: IgnorePointer(
+                        child: shape != null && shapeRect != null
+                            ? Image.memory(
+                                shape.bytes,
+                                key: ValueKey(
+                                  'desktop-cursor-shape-${shape.id}',
+                                ),
+                                width: shapeRect.width,
+                                height: shapeRect.height,
+                                fit: BoxFit.fill,
+                                filterQuality: FilterQuality.none,
+                                errorBuilder: (_, _, _) => const CustomPaint(
+                                  size: Size(14, 20),
+                                  painter: _CursorPainter(),
+                                ),
+                              )
+                            : const CustomPaint(
+                                size: Size(14, 20),
+                                painter: _CursorPainter(),
+                              ),
                       ),
                     ),
                 ],

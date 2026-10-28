@@ -5,6 +5,29 @@ import 'package:dogcodes_app/data/local_workspace.dart';
 
 void main() {
   test(
+    'unsupported draft key cannot be adopted or overwrite current data',
+    () async {
+      final folder = await Directory.systemTemp.createTemp(
+        'dogcodes-current-draft-',
+      );
+      var local = LocalWorkspace.directory(folder);
+      final current = draftKey('pc', 'p', null);
+      try {
+        await local.saveDraft(current, {'text': 'current draft'});
+        await expectLater(
+          local.saveDraft('["pc","p",null]', {'text': 'unsupported draft'}),
+          throwsFormatException,
+        );
+        local.dispose();
+        local = LocalWorkspace.directory(folder);
+        expect((await local.draft(current))!['text'], 'current draft');
+      } finally {
+        local.dispose();
+        await folder.delete(recursive: true);
+      }
+    },
+  );
+  test(
     'replacement disk stores serialize concurrent draft writes in admission order',
     () async {
       final folder = await Directory.systemTemp.createTemp(

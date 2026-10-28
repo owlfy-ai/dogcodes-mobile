@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:math';
 import 'host_api.dart';
 import 'security/secret_storage.dart';
+import 'security/host_lifecycle.dart';
 import 'protocol.dart';
 import 'pc_api.dart' show uuid;
 
@@ -32,12 +33,22 @@ String operationId() {
 }
 
 class MobileOperations {
-  MobileOperations(this.storage, this.hostId, {this.onDraftSubmitted});
+  MobileOperations(
+    this.storage,
+    this.hostId, {
+    this.onDraftSubmitted,
+    this.bindingEpoch,
+  }) : _scope = HostRegistry(storage).host(hostId) {
+    _scopeGeneration = _scope.generation;
+  }
   final Future<void> Function(Map<String, dynamic> identity)? onDraftSubmitted;
   final SecretStorage storage;
   final String hostId;
-  bool _saving = false;
-  bool _journalsForgotten = false;
+  final HostLifecycle _scope;
+  final String? bindingEpoch;
+  late final int _scopeGeneration;
+  bool get _journalsForgotten => _scopeGeneration != _scope.generation;
+  bool get retired => _journalsForgotten;
   String get key => 'dogcodes.pending.v1.$hostId';
 
   /// Workspace writes wait in their own slot, so an unconfirmed Git step,
@@ -52,24 +63,33 @@ class MobileOperations {
   };
   String _laneKey(Object? kind) => sideKinds.contains(kind) ? '$key.side' : key;
 
-  Future<void> _storeNew(Map<String, dynamic> value) async {
-    final lane = _laneKey(value['kind']);
-    final busy = lane == key ? '请先确认上一条消息或审批的结果。' : '请先确认上一项设置或工作区操作的结果。';
-    if (_saving) throw ProtocolException(busy);
-    _saving = true;
-    try {
-      if (await _read(lane) != null) throw ProtocolException(busy);
-      await storage.write(lane, jsonEncode(value));
-    } finally {
-      _saving = false;
-    }
-  }
+  Future<void> _storeNew(Map<String, dynamic> value) =>
+      _journalSerial(() async {
+        await _requireBindingActive();
+        final lane = _laneKey(value['kind']);
+        if (await _read(lane) != null) {
+          throw ProtocolException(
+            lane == key ? '请先确认上一条消息或审批的结果。' : '请先确认上一项设置或工作区操作的结果。',
+          );
+        }
+        _requireJournalActive();
+        value['localTrackingId'] ??= operationId();
+        if (bindingEpoch != null) value['localBindingEpoch'] = bindingEpoch;
+        await storage.write(lane, jsonEncode(value));
+        _requireJournalActive();
+      });
 
   Future<Map<String, dynamic>?> _read(String lane) async {
+    if (_journalsForgotten || _scope.cleanupPending) return null;
+    if (!await _scope.matches(bindingEpoch)) return null;
     final value = await storage.read(lane);
-    return value == null || value == 'null'
-        ? null
-        : jsonDecode(value) as Map<String, dynamic>;
+    if (_journalsForgotten || _scope.cleanupPending) return null;
+    if (!await _scope.matches(bindingEpoch)) return null;
+    if (value == null || value == 'null') return null;
+    final record = jsonDecode(value) as Map<String, dynamic>;
+    return bindingEpoch == null || record['localBindingEpoch'] == bindingEpoch
+        ? record
+        : null;
   }
 
   /// The unconfirmed message, approval or conversation operation.
@@ -82,19 +102,14 @@ class MobileOperations {
   Future<Map<String, dynamic>?> _current(Map<String, dynamic> saved) =>
       _read(_laneKey(saved['kind']));
 
-  Future<void> _clearIfCurrent(Map<String, dynamic> saved) async {
-    if (_saving) return;
-    _saving = true;
-    try {
-      // A late reply must not erase a different operation started after the
-      // user explicitly ended tracking of this one.
-      if (jsonEncode(await _current(saved)) == jsonEncode(saved)) {
-        await storage.write(_laneKey(saved['kind']), 'null');
-      }
-    } finally {
-      _saving = false;
-    }
-  }
+  Future<void> _clearIfCurrent(Map<String, dynamic> saved) =>
+      _journalSerial(() async {
+        if (_journalsForgotten) return;
+        if (_sameRecoveryValue(await _current(saved), saved)) {
+          if (_journalsForgotten) return;
+          await storage.write(_laneKey(saved['kind']), 'null');
+        }
+      });
 
   Future<dynamic> send(
     HostApi client,
@@ -112,6 +127,7 @@ class MobileOperations {
 
   Future<void> _finishSend(Map<String, dynamic> saved, dynamic value) async {
     if (value is Map && value['state'] == 'closed') {
+      if (!_sameRecoveryValue(await _current(saved), saved)) return;
       if (value['resolution']?['status'] == 'submitted' &&
           saved['draft'] is Map) {
         await onDraftSubmitted?.call(
@@ -127,10 +143,10 @@ class MobileOperations {
     Map<String, dynamic> request,
     Map<String, dynamic> saved,
   ) async {
-    final value = await client.call('submission_intents', {
+    final value = await _write(client, 'submission_intents', {
       'type': 'start',
       ...request,
-    });
+    }, saved: saved);
     await _finishSend(saved, value);
     return value;
   }
@@ -171,10 +187,12 @@ class MobileOperations {
         if (task.isEmpty ||
             parseSequence(task.first['streamVersion'].toString()) >
                 parseSequence(envelope['expectedStreamVersion'].toString())) {
-          final resolved = await client.call('invalidate_approval_response', [
-            saved['query'],
-            envelope['expectedStreamVersion'],
-          ]);
+          final resolved = await _write(
+            client,
+            'invalidate_approval_response',
+            [saved['query'], envelope['expectedStreamVersion']],
+            saved: saved,
+          );
           if (resolved['status'] == 'invalidated') {
             await _clearIfCurrent(saved);
           }
@@ -207,6 +225,10 @@ class MobileOperations {
     }
     if (saved['kind'] == 'git') return retryGit(client, saved);
     if (saved['kind'] == 'index') {
+      if (saved['phase'] == 'closing') {
+        await finishGitTracking(client, saved);
+        return {'state': 'closed'};
+      }
       final found = await verifyIndex(client, saved);
       return found ?? sendIndex(client, saved);
     }
@@ -229,9 +251,10 @@ class MobileOperations {
       final found = await verify(client, saved);
       if (await _current(saved) == null) return found;
       if (found != null) throw const ProtocolException('原决定已受理，正在核实交付结果。');
-      await client.call('execute', [saved['envelope']]);
+      await _write(client, 'execute', [saved['envelope']], saved: saved);
       return verify(client, saved);
     }
+    if (saved['phase'] == 'closing') return _retireSubmission(client, saved);
     final request = Map<String, dynamic>.from(saved['request'] as Map);
     final verified = await verify(client, saved);
     if (verified is Map && verified['state'] == 'closed') return verified;
@@ -242,10 +265,20 @@ class MobileOperations {
     final saved = await pending();
     if (saved == null) return null;
     if (saved['kind'] != 'send') throw const ProtocolException('请先核实原审批决定。');
-    final result = await client.call('submission_intents', {
-      'type': 'retire',
-      'operationId': saved['request']['operationId'],
-    });
+    return _retireSubmission(client, await _beginClosing(saved));
+  }
+
+  Future<dynamic> _retireSubmission(
+    HostApi client,
+    Map<String, dynamic> saved,
+  ) async {
+    final result = await _write(
+      client,
+      'submission_intents',
+      {'type': 'retire', 'operationId': saved['request']['operationId']},
+      saved: saved,
+      closing: true,
+    );
     if (result is Map && result['state'] == 'closed') {
       await _clearIfCurrent(saved);
     }
@@ -282,9 +315,10 @@ class MobileOperations {
         },
       },
     };
-    final query = await client.call('prepare_approval_response', [envelope]);
-    await _storeNew({'kind': 'approval', 'query': query, 'envelope': envelope});
-    await client.call('execute', [envelope]);
-    await verify(client);
+    final query = await _write(client, 'prepare_approval_response', [envelope]);
+    final saved = {'kind': 'approval', 'query': query, 'envelope': envelope};
+    await _storeNew(saved);
+    await _write(client, 'execute', [envelope], saved: saved);
+    await verify(client, saved);
   }
 }

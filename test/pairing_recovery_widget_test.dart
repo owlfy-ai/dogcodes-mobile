@@ -6,6 +6,7 @@ import 'package:dogcodes_app/core/protocol.dart';
 import 'package:dogcodes_app/core/security/pairing_recovery.dart';
 import 'package:dogcodes_app/features/devices/pairing_page.dart';
 import 'package:dogcodes_app/ui/theme.dart';
+
 import 'pairing_recovery_test.dart' show MemorySecrets, invitation, phoneKey;
 
 class OfflineRuntime extends MobileRuntime {
@@ -23,7 +24,11 @@ void main() {
     'restarted pairing page exposes the original receipt and retains it while offline',
     (t) async {
       final storage = MemorySecrets(),
-          original = PairingRecovery.fromInvitation(invitation(), phoneKey);
+          original = PairingRecovery.fromInvitation(
+            invitation(),
+            phoneKey,
+            bindingEpoch: testEpoch,
+          );
       await PairingJournal(storage).begin(original);
       final runtime = OfflineRuntime(storage);
       await t.pumpWidget(
@@ -49,7 +54,11 @@ void main() {
     'removing a local record explains that PC authorization may remain',
     (t) async {
       final storage = MemorySecrets(),
-          original = PairingRecovery.fromInvitation(invitation(), phoneKey);
+          original = PairingRecovery.fromInvitation(
+            invitation(),
+            phoneKey,
+            bindingEpoch: testEpoch,
+          );
       await PairingJournal(storage).begin(original);
       final runtime = OfflineRuntime(storage);
       await t.pumpWidget(
@@ -74,7 +83,11 @@ void main() {
     'expired pairing recovery offers rescan instead of new authorization',
     (t) async {
       final storage = MemorySecrets(),
-          original = PairingRecovery.fromInvitation(invitation(), phoneKey);
+          original = PairingRecovery.fromInvitation(
+            invitation(),
+            phoneKey,
+            bindingEpoch: testEpoch,
+          );
       final expired = PairingRecovery.fromJson({
         ...original.toJson(),
         'recoverUntil': '2020-01-01T00:00:00Z',
@@ -100,3 +113,5 @@ void main() {
     },
   );
 }
+
+const testEpoch = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';

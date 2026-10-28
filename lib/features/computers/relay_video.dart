@@ -14,6 +14,7 @@ class RelayVideoReceiver {
   RelayVideoReceiver({
     required this.decode,
     required this.control,
+    this.onLiveChanged,
     this.ackInterval = const Duration(milliseconds: 100),
     this.maxBacklog = 6,
     DateTime Function()? now,
@@ -24,6 +25,10 @@ class RelayVideoReceiver {
 
   /// `remote_desktop_video` with a cumulative ack and/or a keyframe request.
   final Future<void> Function({int? ack, bool keyframe}) control;
+
+  /// Reference loss freezes input immediately; only decoded IDR output can
+  /// restore it. Ordinary transport/PC status cannot prove a live picture.
+  final void Function(bool live)? onLiveChanged;
   final Duration ackInterval;
   final int maxBacklog;
   final DateTime Function() _now;
@@ -33,6 +38,7 @@ class RelayVideoReceiver {
   // The stream opens with an IDR; a keyframe is requested only on trouble.
   bool _ackInFlight = false, _keyPending = false;
   int _decodedSeq = 0, _ackedSeq = 0;
+  int _referenceEpoch = 0;
   int _failures = 0;
   DateTime _lastAck = DateTime(0), _lastKeyRequest = DateTime(0);
   DateTime _retryAt = DateTime(0);
@@ -60,7 +66,14 @@ class RelayVideoReceiver {
       }
       skipped += drop;
       _queue.removeRange(0, drop);
-      if (lastKey <= 0) _wantKey();
+      if (lastKey <= 0) {
+        _wantKey();
+      } else {
+        // The queued IDR can recover without requesting another one, but
+        // an older in-flight frame cannot restore references we just dropped.
+        _referenceEpoch++;
+        _setNeedKey(true);
+      }
       _scheduleAck();
     }
     unawaited(_pump());
@@ -77,9 +90,10 @@ class RelayVideoReceiver {
           skipped++;
         } else {
           try {
+            final references = _referenceEpoch;
             await decode(f.data, f.key);
             decoded++;
-            if (f.key) _needKey = false;
+            if (f.key && references == _referenceEpoch) _setNeedKey(false);
           } catch (_) {
             failed = true;
           }
@@ -95,9 +109,16 @@ class RelayVideoReceiver {
   }
 
   void _wantKey() {
-    _needKey = true;
+    _referenceEpoch++;
+    _setNeedKey(true);
     _keyPending = true;
     _scheduleAck();
+  }
+
+  void _setNeedKey(bool value) {
+    if (_needKey == value) return;
+    _needKey = value;
+    if (!_disposed) onLiveChanged?.call(!value);
   }
 
   void _scheduleAck() {

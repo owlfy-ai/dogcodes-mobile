@@ -35,6 +35,16 @@ class ScreenPeer extends Peer {
   Future<List<StatsReport>> getStats([MediaStreamTrack? track]) async => [];
 }
 
+class HeldStatsPeer extends ScreenPeer {
+  final result = Completer<List<StatsReport>>();
+  int reads = 0;
+  @override
+  Future<List<StatsReport>> getStats([MediaStreamTrack? track]) {
+    reads++;
+    return result.future;
+  }
+}
+
 class RtcScreenLink extends CountLink {
   int selects = 0;
   @override
@@ -51,12 +61,13 @@ class RtcScreenLink extends CountLink {
         'leaseId': 'lease',
         'inputSequence': '0',
         'inputBatch': 64,
-        'video': {
-          'codec': 'h264',
-          'width': 1600,
-          'height': 1000,
-          'transport': 'webrtc',
-        },
+        if (params['video'] == true)
+          'video': {
+            'codec': 'h264',
+            'width': 1600,
+            'height': 1000,
+            'transport': 'webrtc',
+          },
       };
     }
     if (method == 'remote_desktop_select') {
@@ -68,6 +79,119 @@ class RtcScreenLink extends CountLink {
 }
 
 void main() {
+  testWidgets(
+    'an unanswered RTP stats call falls back without retiring business RPCs',
+    (t) async {
+      const methods = MethodChannel('FlutterWebRTC.Method');
+      const events = MethodChannel('FlutterWebRTC.Event');
+      final textures = <String>[];
+      t.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        events,
+        (_) async => null,
+      );
+      t.binding.defaultBinaryMessenger.setMockMethodCallHandler(methods, (
+        call,
+      ) async {
+        if (call.method == 'createVideoRenderer') {
+          final id = 40 + textures.length;
+          final path = 'FlutterWebRTC/Texture$id';
+          textures.add(path);
+          t.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+            MethodChannel(path),
+            (_) async => null,
+          );
+          return {'textureId': id};
+        }
+        return null;
+      });
+      addTearDown(() {
+        t.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+          methods,
+          null,
+        );
+        t.binding.defaultBinaryMessenger.setMockMethodCallHandler(events, null);
+        for (final path in textures) {
+          t.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+            MethodChannel(path),
+            null,
+          );
+        }
+      });
+      final business = CountLink(),
+          connections = <RtcScreenLink>[],
+          peer = HeldStatsPeer();
+      final routed = AdaptiveHostLink(
+        relay: business,
+        relayDialer: () async => CountLink(),
+        directDialer: (_) async => throw StateError('no'),
+        desktopDialer: (_) async {
+          final link = RtcScreenLink();
+          connections.add(link);
+          return DesktopConnection(
+            link,
+            peer,
+            Future.value(ScreenStream()),
+            video: true,
+          );
+        },
+      );
+      final host = HostState({'hostId': 'pc'}, MemorySecretStorage())
+        ..link = routed
+        ..status = LinkStatus.online;
+      Future<void> flush() async {
+        for (var i = 0; i < 16; i++) {
+          await t.pump();
+        }
+      }
+
+      try {
+        await t.pumpWidget(
+          MaterialApp(
+            theme: dcTheme(Brightness.light),
+            home: RemoteDesktopPage(host: host),
+          ),
+        );
+        await flush();
+        expect(connections, hasLength(1));
+        await t.pump(const Duration(seconds: 1));
+        await flush();
+        expect(peer.reads, 1);
+        await t.pump(const Duration(seconds: 3));
+        await flush();
+        // The retired renderer has its own existing three-second cleanup
+        // bound; native EventChannel cancellation may finish after the stats.
+        for (var i = 0; i < 4 && connections.length < 2; i++) {
+          await t.pump(const Duration(seconds: 1));
+          await flush();
+        }
+        expect(
+          connections,
+          hasLength(2),
+          reason: 'native stats must not freeze lease recovery forever',
+        );
+        expect(connections.first.closed, 1);
+        expect(connections.last.opens.single['video'], isNot(true));
+        expect(connections.last.frames, isNotEmpty);
+        expect(business.closed, 0);
+        expect(await routed.call('device_status', null), {'locked': false});
+        peer.result.completeError(StateError('late retired peer failure'));
+        await flush();
+        expect(
+          connections,
+          hasLength(2),
+          reason: 'late failure cannot restart the replacement',
+        );
+        expect(connections.last.closed, 0);
+      } finally {
+        await t.pumpWidget(const SizedBox());
+        await flush();
+        if (!peer.result.isCompleted) peer.result.complete([]);
+        await flush();
+        unawaited(routed.close());
+        await flush();
+      }
+    },
+  );
   testWidgets(
     'RTC screen switches replace the peer even if renderer cleanup fails',
     (t) async {

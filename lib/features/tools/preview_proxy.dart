@@ -12,6 +12,8 @@ class PreviewProxy {
   final HostLink link;
   final String previewId;
   HttpServer? _server;
+  bool _stopped = false;
+  Future<void>? _stopping;
   final _sockets = <WebSocket>{};
 
   int get port => _server!.port;
@@ -31,8 +33,14 @@ class PreviewProxy {
   };
 
   Future<void> start() async {
-    _server = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
-    _server!.listen(_handle, onError: (Object _) {});
+    if (_stopped) throw StateError('预览已关闭');
+    final server = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
+    if (_stopped) {
+      await server.close(force: true);
+      throw StateError('预览已关闭');
+    }
+    _server = server;
+    server.listen(_handle, onError: (Object _) {});
   }
 
   Future<void> _handle(HttpRequest request) async {
@@ -44,7 +52,12 @@ class PreviewProxy {
     }
     final response = request.response;
     try {
+      if (_stopped) {
+        response.statusCode = HttpStatus.serviceUnavailable;
+        return;
+      }
       final body = await request.fold<List<int>>([], (a, b) => a..addAll(b));
+      if (_stopped) return;
       final headers = <String, String>{};
       request.headers.forEach((name, values) {
         if (!_hopByHop.contains(name.toLowerCase())) {
@@ -69,14 +82,21 @@ class PreviewProxy {
       response.contentLength = bytes.length;
       response.add(bytes);
     } catch (e) {
-      response.statusCode = HttpStatus.badGateway;
-      response.headers.contentType = ContentType.html;
-      response.write(
-        '<meta name="viewport" content="width=device-width">'
-        '<p style="font-family:sans-serif;padding:16px">预览请求失败：${const HtmlEscape().convert('$e')}</p>',
-      );
+      try {
+        response.statusCode = HttpStatus.badGateway;
+        response.headers.contentType = ContentType.html;
+        response.write(
+          '<meta name="viewport" content="width=device-width">'
+          '<p style="font-family:sans-serif;padding:16px">预览请求失败：${const HtmlEscape().convert('$e')}</p>',
+        );
+      } catch (_) {
+        // The WebView or page may already have closed this response.
+      }
+    } finally {
+      try {
+        await response.close();
+      } catch (_) {}
     }
-    await response.close();
   }
 
   Future<void> _socket(HttpRequest request, String path) async {
@@ -87,9 +107,30 @@ class PreviewProxy {
             .where((v) => v.isNotEmpty)
             .toList() ??
         const <String>[];
-    Map<String, dynamic> opened;
+    String? id;
+    WebSocket? local;
+    var open = true;
+    Future<void>? retiring;
+    Future<void> retire() {
+      open = false;
+      return retiring ??= () async {
+        final socket = local;
+        if (socket != null) {
+          _sockets.remove(socket);
+          unawaited(socket.close().catchError((Object _) {}));
+        }
+        final remote = id;
+        if (remote != null) {
+          try {
+            await link.call('preview_ws_close', remote);
+          } catch (_) {}
+        }
+      }();
+    }
+
     try {
-      opened = Map<String, dynamic>.from(
+      if (_stopped) throw StateError('预览已关闭');
+      final opened = Map<String, dynamic>.from(
         await link.call('preview_ws_open', {
               'previewId': previewId,
               'path': path,
@@ -97,65 +138,84 @@ class PreviewProxy {
             })
             as Map,
       );
-    } catch (_) {
-      request.response.statusCode = HttpStatus.badGateway;
-      await request.response.close();
-      return;
-    }
-    final id = opened['socketId'] as String;
-    final protocol = opened['protocol'] as String?;
-    final socket = await WebSocketTransformer.upgrade(
-      request,
-      protocolSelector: protocol == null ? null : (_) => protocol,
-    );
-    _sockets.add(socket);
-    var sequence = 0;
-    var open = true;
-    socket.listen(
-      (data) async {
-        sequence++;
-        try {
-          await link.call('preview_ws_write', {
-            'socketId': id,
-            'sequence': '$sequence',
-            'text': data is String ? data : null,
-            'bytes': data is List<int> ? base64.encode(data) : null,
-          });
-        } catch (_) {
-          await socket.close();
-        }
-      },
-      onDone: () {
-        open = false;
-        link.call('preview_ws_close', id).catchError((Object _) => null);
-        _sockets.remove(socket);
-      },
-    );
-    // Long-poll the PC side until either end closes.
-    while (open) {
-      try {
+      id = opened['socketId'] as String;
+      if (_stopped) throw StateError('预览已关闭');
+      final protocol = opened['protocol'] as String?;
+      final socket = await WebSocketTransformer.upgrade(
+        request,
+        protocolSelector: protocol == null ? null : (_) => protocol,
+      );
+      local = socket;
+      if (_stopped) return;
+      _sockets.add(socket);
+      var sequence = 0;
+      // Stream.asyncMap pauses delivery until this frame's RPC completes.
+      // A lost reply closes this stream; neither this frame nor queued later
+      // messages are replayed on another connection.
+      socket
+          .asyncMap((data) async {
+            if (!open || _stopped) return;
+            sequence++;
+            try {
+              final reply = await link.call('preview_ws_write', {
+                'socketId': id,
+                'sequence': '$sequence',
+                'text': data is String ? data : null,
+                'bytes': data is List<int> ? base64.encode(data) : null,
+              });
+              if (reply is! Map || reply['sequence'] != '$sequence') {
+                throw StateError('项目 WebSocket 写入未获确认');
+              }
+            } catch (_) {
+              await retire();
+            }
+          })
+          .listen(
+            (_) {},
+            onDone: () => unawaited(retire()),
+            onError: (Object _) => unawaited(retire()),
+          );
+      // Reading proceeds independently while outgoing frames stay ordered.
+      while (open && !_stopped) {
         final m = await link.call('preview_ws_read', id) as Map;
+        if (!open || _stopped) break;
         switch (m['type']) {
           case 'text':
             socket.add(m['text'] as String);
           case 'binary':
             socket.add(base64.decode(m['bytes'] as String));
           case 'closed':
-            await socket.close();
-            open = false;
+            return;
         }
-      } catch (_) {
-        await socket.close();
-        open = false;
       }
+    } catch (_) {
+      if (local == null) {
+        try {
+          request.response.statusCode = HttpStatus.badGateway;
+          await request.response.close();
+        } catch (_) {}
+      }
+    } finally {
+      await retire();
     }
   }
 
-  Future<void> stop() async {
-    for (final s in _sockets.toList()) {
-      await s.close();
+  Future<void> stop() => _stopping ??= _stop();
+
+  Future<void> _stop() async {
+    _stopped = true;
+    for (final socket in _sockets.toList()) {
+      unawaited(socket.close().catchError((Object _) {}));
     }
-    await _server?.close(force: true);
-    await link.previewClose(previewId).catchError((Object _) => null);
+    _sockets.clear();
+    final server = _server;
+    _server = null;
+    try {
+      await server?.close(force: true);
+    } finally {
+      try {
+        await link.previewClose(previewId);
+      } catch (_) {}
+    }
   }
 }

@@ -27,6 +27,7 @@ P2P 仍使用官方服務進行在線定位和初始協商，不表示可以不�
 
 - 切換後**不重播任何失敗 RPC**。任務、Git、審批等副作用仍使用原 operationId/receipt 核實；終端輸入、鍵鼠、預覽 POST/WS 不能因重連自動發送第二次。恢復連線和重做操作是兩件事。
 - 所有連線沿用 4-byte big-endian JSON 長度幀及 8 MiB 單請求上限。加密前每塊 16000 bytes，密文不超過 SCTP 的 16384 bytes；併發請求按完整幀序列化，保持 Noise counter 和 JSON 分片順序。
+- 附件的 256 KiB 業務分塊不是單一傳輸包；Base64 後的 RPC 可以超過 256 KiB，仍由共用 SecureHostClient 按上述 16000 bytes 分片後加密。服務端 WSS 的 256 KiB 單包限制、DataChannel 的 16 KiB 限制及 8 MiB 業務請求上限分屬不同層，不能直接用前者推算附件分塊上限。
 - WebRTC 原生發送積壓以 256 KiB 作等待水位，等待有超時；未消費的接收佇列最多 1 MiB。這些是瞬時背壓與單訊息保護，沒有累計 64 MiB 斷線閾值。
 - 本輪接入現有業務通道。手機的檔案/Git/終端/運行/畫面/附件頁面仍需各自接入後端 API；未因此自動完成所有桌面能力。新增桌面 lease、預覽、watch、附件專用通道時必須在物理連線切換後重新建立資源，不沿用舊 connection-owned ID。
 

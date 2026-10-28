@@ -7,6 +7,7 @@ import 'package:dogcodes_app/core/protocol.dart';
 import 'package:dogcodes_app/core/security/noise_endpoint.dart';
 import 'package:dogcodes_app/core/security/pairing_recovery.dart';
 import 'package:dogcodes_app/core/security/secret_storage.dart';
+
 import 'package:dogcodes_app/core/secure_host_client.dart';
 
 class MemorySecrets implements SecretStorage {
@@ -38,7 +39,11 @@ void main() {
     'restart retains original pins and ticket, but not the pairing PSK',
     () async {
       final storage = MemorySecrets(), scan = invitation();
-      final original = PairingRecovery.fromInvitation(scan, phoneKey);
+      final original = PairingRecovery.fromInvitation(
+        scan,
+        phoneKey,
+        bindingEpoch: testEpoch,
+      );
       await PairingJournal(storage).begin(original);
       final raw = storage.values[PairingJournal.key]!;
       expect(raw, isNot(contains('"secret"')));
@@ -52,9 +57,13 @@ void main() {
   test('unconfirmed storage writes fail closed', () async {
     final storage = MemorySecrets()..dropPairWrite = true;
     await expectLater(
-      PairingJournal(
-        storage,
-      ).begin(PairingRecovery.fromInvitation(invitation(), phoneKey)),
+      PairingJournal(storage).begin(
+        PairingRecovery.fromInvitation(
+          invitation(),
+          phoneKey,
+          bindingEpoch: testEpoch,
+        ),
+      ),
       throwsA(isA<ProtocolException>()),
     );
     expect(await PairingJournal(storage).list(), isEmpty);
@@ -63,7 +72,13 @@ void main() {
     final storage = MemorySecrets()..values[PairingJournal.key] = 'broken';
     final journal = PairingJournal(storage);
     await expectLater(
-      journal.begin(PairingRecovery.fromInvitation(invitation(), phoneKey)),
+      journal.begin(
+        PairingRecovery.fromInvitation(
+          invitation(),
+          phoneKey,
+          bindingEpoch: testEpoch,
+        ),
+      ),
       throwsA(isA<ProtocolException>()),
     );
     expect(storage.values[PairingJournal.key], 'broken');
@@ -73,10 +88,12 @@ void main() {
     final first = PairingRecovery.fromInvitation(
       invitation(id: 'first'),
       phoneKey,
+      bindingEpoch: testEpoch,
     );
     final second = PairingRecovery.fromInvitation(
       invitation(id: 'second'),
       phoneKey,
+      bindingEpoch: testEpoch,
     );
     await journal.begin(first);
     await journal.begin(second);
@@ -87,10 +104,20 @@ void main() {
   });
   test('a pending computer pin cannot be silently replaced', () async {
     final journal = PairingJournal(MemorySecrets());
-    await journal.begin(PairingRecovery.fromInvitation(invitation(), phoneKey));
+    await journal.begin(
+      PairingRecovery.fromInvitation(
+        invitation(),
+        phoneKey,
+        bindingEpoch: testEpoch,
+      ),
+    );
     await expectLater(
       journal.begin(
-        PairingRecovery.fromInvitation(invitation(hostByte: 8), phoneKey),
+        PairingRecovery.fromInvitation(
+          invitation(hostByte: 8),
+          phoneKey,
+          bindingEpoch: testEpoch,
+        ),
       ),
       throwsA(isA<ProtocolException>()),
     );
@@ -98,7 +125,11 @@ void main() {
   });
   test('concurrent writes preserve different computers', () async {
     final journal = PairingJournal(MemorySecrets());
-    final first = PairingRecovery.fromInvitation(invitation(), phoneKey);
+    final first = PairingRecovery.fromInvitation(
+      invitation(),
+      phoneKey,
+      bindingEpoch: testEpoch,
+    );
     final data = {...first.toJson(), 'hostId': 'another-pc'};
     await Future.wait([
       journal.begin(first),
@@ -117,7 +148,11 @@ void main() {
     {'hostKey': 'bad'},
   ]) {
     test('restored recovery records reject invalid ${change.keys.single}', () {
-      final original = PairingRecovery.fromInvitation(invitation(), phoneKey);
+      final original = PairingRecovery.fromInvitation(
+        invitation(),
+        phoneKey,
+        bindingEpoch: testEpoch,
+      );
       expect(
         () => PairingRecovery.fromJson({
           ...original.toJson(),
@@ -146,7 +181,11 @@ void main() {
         },
       );
       test('a different phone identity cannot request recovery', () async {
-        final original = PairingRecovery.fromInvitation(invitation(), phoneKey);
+        final original = PairingRecovery.fromInvitation(
+          invitation(),
+          phoneKey,
+          bindingEpoch: testEpoch,
+        );
         await expectLater(
           SecureHostClient.recoverPairing(
             original,
@@ -161,6 +200,7 @@ void main() {
         final original = PairingRecovery.fromInvitation(
           invitation(),
           phone.publicHex,
+          bindingEpoch: testEpoch,
         );
         final expired = PairingRecovery.fromJson({
           ...original.toJson(),
@@ -177,3 +217,5 @@ void main() {
         : false,
   );
 }
+
+const testEpoch = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';

@@ -70,7 +70,7 @@ class PreferencesPage extends StatelessWidget {
             OfflineCacheSettings(hub: scope.hub),
             const InlineNotice(
               '无需注册账号：通过电脑上的配对二维码建立信任，可随时在电脑上撤销。'
-              '草稿和离线缓存保存在这部手机；通知尚未接入。',
+              '草稿和离线缓存保存在这部手机；提醒偏好可在电脑或会话菜单中设置。',
             ),
           ],
         ),

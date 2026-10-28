@@ -33,10 +33,20 @@ class _PreviewPageState extends State<PreviewPage> {
   }
 
   Future<void> _open() async {
+    PreviewProxy? opening;
     try {
       final opened = await widget.link.previewOpen(widget.taskId, widget.port);
       final p = PreviewProxy(widget.link, opened['previewId'] as String);
+      opening = p;
+      if (!mounted) return;
       await p.start();
+      if (!mounted) return;
+      final origin = Uri(
+        scheme: 'http',
+        host: '127.0.0.1',
+        port: p.port,
+        path: '/',
+      );
       final controller = WebViewController()
         ..setJavaScriptMode(JavaScriptMode.unrestricted)
         ..setNavigationDelegate(
@@ -46,22 +56,26 @@ class _PreviewPageState extends State<PreviewPage> {
                 ? setState(() => path = Uri.tryParse(c.url ?? '')?.path)
                 : null,
             // Stay inside the preview; external links are not followed.
-            onNavigationRequest: (r) => Uri.tryParse(r.url)?.host == '127.0.0.1'
-                ? NavigationDecision.navigate
-                : NavigationDecision.prevent,
+            onNavigationRequest: (r) {
+              final target = Uri.tryParse(r.url);
+              return target?.scheme == origin.scheme &&
+                      target?.host == origin.host &&
+                      target?.port == origin.port
+                  ? NavigationDecision.navigate
+                  : NavigationDecision.prevent;
+            },
           ),
         )
-        ..loadRequest(Uri.parse('http://127.0.0.1:${p.port}/'));
-      if (!mounted) {
-        await p.stop();
-        return;
-      }
+        ..loadRequest(origin);
       setState(() {
         proxy = p;
         web = controller;
       });
+      opening = null; // The mounted page now owns this proxy.
     } catch (e) {
       if (mounted) setState(() => error = '$e');
+    } finally {
+      await opening?.stop();
     }
   }
 

@@ -131,11 +131,14 @@ void main() {
     }
 
     test(
-      'concurrent large frames preserve Noise order and SCTP message bounds',
+      'concurrent attachment-sized frames preserve Noise order and packet bounds',
       () async {
         final (client, peer) = await connect();
-        final a = List.filled(40000, 'a').join(),
-            b = List.filled(40000, 'b').join();
+        final bytes = Uint8List.fromList(
+          List.generate(256 * 1024, (i) => i % 256),
+        );
+        final a = base64Encode(bytes), b = List.filled(40000, 'b').join();
+        expect(utf8.encode(jsonEncode(a)).length, greaterThan(maxFrameBytes));
         final results = await Future.wait([
           client.call('echo', a),
           client.call('echo', b),

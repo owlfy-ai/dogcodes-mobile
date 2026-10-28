@@ -11,6 +11,38 @@ import 'package:dogcodes_app/features/computers/relay_video.dart';
 import 'package:dogcodes_app/ui/theme.dart';
 import 'relay_video_test.dart' show frame;
 import 'remote_desktop_widget_test.dart' show DesktopLink;
+import 'native_cursor_test.dart' show cursorWire, nativeShapeId;
+
+class NativeCursorScreens extends DesktopLink {
+  NativeCursorScreens(bool video) {
+    relayVideo = video;
+  }
+  int shapesSent = 0;
+  @override
+  Future<dynamic> call(String method, dynamic args) async {
+    final result = await super.call(method, args);
+    if (method == 'remote_desktop_open' && result['video'] is Map) {
+      result['video'] = {
+        ...result['video'] as Map,
+        'generation': 1,
+        'clientReadyRequired': true,
+        'cursorEmbedded': false,
+      };
+    }
+    if (method == 'remote_desktop_video' && args['ready'] == true) {
+      result['relay'] = {'generation': 1, 'ready': true};
+      pushed.add({...frame(1, key: true), 'leaseId': 'lease', 'generation': 1});
+    }
+    if (method == 'remote_desktop_frame' ||
+        (method == 'remote_desktop_video' && args['includeCursor'] == true)) {
+      final pixels = args['knownCursorShapeId'] != nativeShapeId;
+      if (pixels) shapesSent++;
+      result['cursor'] = cursorWire(pixels: pixels);
+      if (method == 'remote_desktop_frame') result['cursorEmbedded'] = false;
+    }
+    return result;
+  }
+}
 
 class Screens extends DesktopLink {
   Screens() {
@@ -79,13 +111,22 @@ class ReadyScreens extends Screens {
 
 class PointerScreens extends ReadyScreens {
   PointerScreens(this.embedded);
-  final bool embedded;
+  final bool? embedded;
   @override
   Future<dynamic> call(String method, dynamic args) async {
     final result = await super.call(method, args);
     if (method == 'remote_desktop_open' || method == 'remote_desktop_select') {
       result['video']['cursorEmbedded'] = embedded;
     }
+    return result;
+  }
+}
+
+class EmbeddedScreenshots extends DesktopLink {
+  @override
+  Future<dynamic> call(String method, dynamic args) async {
+    final result = await super.call(method, args);
+    if (method == 'remote_desktop_frame') result['cursorEmbedded'] = true;
     return result;
   }
 }
@@ -130,7 +171,115 @@ class DelayedScreen extends Screens {
 }
 
 void main() {
-  for (final embedded in [true, false]) {
+  for (final video in [false, true]) {
+    testWidgets(
+      'native pointer is painted and acknowledged on ${video ? "video" : "JPEG"}',
+      (t) async {
+        const channel = MethodChannel('dogcodes/h264');
+        t.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+          channel,
+          (call) async => switch (call.method) {
+            'create' => 7,
+            'stats' => {'decoded': 1},
+            _ => null,
+          },
+        );
+        addTearDown(
+          () => t.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+            channel,
+            null,
+          ),
+        );
+        final link = NativeCursorScreens(video);
+        final host = HostState({'hostId': 'pc'}, MemorySecretStorage())
+          ..link = link
+          ..status = LinkStatus.online;
+        await t.pumpWidget(
+          MaterialApp(
+            theme: dcTheme(Brightness.light),
+            home: RemoteDesktopPage(host: host),
+          ),
+        );
+        if (!video) {
+          await t.runAsync(() async {
+            for (var i = 0; i < 25 && link.frames.isEmpty; i++) {
+              await Future<void>.delayed(const Duration(milliseconds: 20));
+              await t.pump();
+            }
+            await Future<void>.delayed(const Duration(milliseconds: 50));
+          });
+        }
+        for (var i = 0; i < 12; i++) {
+          await t.pump();
+        }
+        if (video) {
+          await t.pump(const Duration(milliseconds: 1001));
+          await t.pump();
+        }
+        expect(
+          find.byKey(const ValueKey('desktop-cursor-shape-$nativeShapeId')),
+          findsOneWidget,
+        );
+        for (var i = 0; i < 4; i++) {
+          if ([
+            ...link.frames,
+            ...link.controls,
+          ].any((r) => r['knownCursorShapeId'] == nativeShapeId)) {
+            break;
+          }
+          await t.pump(const Duration(milliseconds: 1001));
+          await t.pump();
+        }
+        expect(
+          [
+            ...link.frames,
+            ...link.controls,
+          ].any((r) => r['knownCursorShapeId'] == nativeShapeId),
+          true,
+        );
+        expect(link.shapesSent, 1);
+        expect(
+          find.byKey(const ValueKey('desktop-cursor-shape-$nativeShapeId')),
+          findsOneWidget,
+        );
+        await t.pumpWidget(const SizedBox.shrink());
+      },
+    );
+  }
+
+  testWidgets('JPEG with an embedded pointer does not retain a second arrow', (
+    t,
+  ) async {
+    final link = EmbeddedScreenshots();
+    final host = HostState({'hostId': 'pc'}, MemorySecretStorage())
+      ..link = link
+      ..status = LinkStatus.online;
+    await t.pumpWidget(
+      MaterialApp(
+        theme: dcTheme(Brightness.light),
+        home: RemoteDesktopPage(host: host),
+      ),
+    );
+    await t.runAsync(() async {
+      for (var i = 0; i < 25 && link.frames.isEmpty; i++) {
+        await Future<void>.delayed(const Duration(milliseconds: 20));
+        await t.pump();
+      }
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+    });
+    await t.pump();
+    final pointer = find.byKey(const ValueKey('desktop-cursor'));
+    expect(find.byType(Image), findsOneWidget);
+    expect(pointer, findsNothing);
+    await t.tap(find.byType(Image));
+    await t.pump();
+    expect(pointer, findsOneWidget);
+    await t.pump(const Duration(milliseconds: 401));
+    expect(pointer, findsNothing);
+    await t.pumpWidget(const SizedBox.shrink());
+  });
+
+  for (final embedded in [true, false, null]) {
     testWidgets('video pointer prediction expires only if embedded=$embedded', (
       t,
     ) async {
@@ -165,7 +314,7 @@ void main() {
       await t.pump();
       expect(pointer, findsOneWidget);
       await t.pump(const Duration(milliseconds: 401));
-      expect(pointer, embedded ? findsNothing : findsOneWidget);
+      expect(pointer, embedded != false ? findsNothing : findsOneWidget);
       await t.pumpWidget(const SizedBox.shrink());
     });
   }

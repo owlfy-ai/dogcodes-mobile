@@ -32,6 +32,9 @@ class _TerminalPageState extends State<TerminalPage>
       s.dispose();
     }
     sessions.clear();
+    terminals = [];
+    loading = tool.host.online;
+    error = null;
     if (tool.host.online) _load();
   }
 
@@ -42,6 +45,23 @@ class _TerminalPageState extends State<TerminalPage>
   String? error;
 
   ToolContext get tool => widget.tool;
+  List<String> get directories {
+    final project = tool.host.project(tool.projectId);
+    if (project == null) return [];
+    return [
+      if (project['path'] is String) project['path'] as String,
+      for (final path
+          in (project['additionalDirectories'] as List? ?? const []))
+        path as String,
+    ];
+  }
+
+  String directoryName(String path) =>
+      path
+          .split(RegExp(r'[\\/]'))
+          .where((part) => part.isNotEmpty)
+          .lastOrNull ??
+      path;
 
   @override
   void initState() {
@@ -87,7 +107,7 @@ class _TerminalPageState extends State<TerminalPage>
         terminals = list;
         error = null;
         current =
-            select ??
+            (list.any((t) => t['id'] == select) ? select : null) ??
             (list.any((t) => t['id'] == current)
                 ? current
                 : list.lastOrNull?['id'] as String?);
@@ -101,22 +121,63 @@ class _TerminalPageState extends State<TerminalPage>
 
   TerminalSession? _session(String? id) {
     final link = tool.link;
-    if (id == null || link == null) return null;
+    if (id == null ||
+        link == null ||
+        loading ||
+        !tool.host.online ||
+        !terminals.any((terminal) => terminal['id'] == id)) {
+      return null;
+    }
     return sessions.putIfAbsent(id, () => TerminalSession(link, id)..start());
   }
 
   Future<void> _new() async {
-    final link = tool.link;
+    final link = tool.link, epoch = tool.host.connectionEpoch;
     if (link == null || busy || !tool.host.online) return;
+    final paths = directories;
+    if (paths.isEmpty) return showError(context, '项目目录不可用，请刷新项目后重试。');
+    final index = paths.length == 1
+        ? 0
+        : await showModalBottomSheet<int>(
+            context: context,
+            builder: (sheet) => SafeArea(
+              child: ListView(
+                shrinkWrap: true,
+                children: [
+                  const ListTile(title: Text('选择终端目录')),
+                  for (var i = 0; i < paths.length; i++)
+                    ListTile(
+                      leading: const Icon(Icons.folder_outlined),
+                      title: Text(directoryName(paths[i])),
+                      subtitle: Text(paths[i]),
+                      onTap: () => Navigator.pop(sheet, i),
+                    ),
+                ],
+              ),
+            ),
+          );
+    if (!mounted || index == null) return;
+    final latest = directories;
+    if (!tool.host.online ||
+        link != tool.link ||
+        epoch != tool.host.connectionEpoch ||
+        index >= latest.length ||
+        latest[index] != paths[index]) {
+      showError(context, '连接或项目目录已改变，请重新选择终端目录。');
+      return;
+    }
     setState(() => busy = true);
     try {
       final result = await tool.host.operations.terminalStart(
         link,
         projectId: tool.projectId,
-        cwd: tool.path,
+        directoryIndex: index,
+        cwd: paths[index],
       );
       if (result == null) throw const ProtocolException('启动结果待核实，请使用原操作恢复。');
-      if (mounted) await _load(select: result['terminal']?['id'] as String?);
+      if (mounted && link == tool.link && epoch == tool.host.connectionEpoch) {
+        await _load(select: result['terminal']?['id'] as String?);
+      }
     } catch (e) {
       if (mounted) showError(context, e);
     } finally {
@@ -194,7 +255,9 @@ class _TerminalPageState extends State<TerminalPage>
                     children: [
                       for (var i = 0; i < terminals.length; i++)
                         _Tab(
-                          label: '终端 ${i + 1}',
+                          label: directories.length > 1
+                              ? '${directoryName('${terminals[i]['cwd'] ?? ''}')} · ${i + 1}'
+                              : '终端 ${i + 1}',
                           selected: terminals[i]['id'] == current,
                           onTap: () => setState(
                             () => current = terminals[i]['id'] as String,

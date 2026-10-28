@@ -65,3 +65,9 @@ android/key.properties
 
 /android/app/src/main/jniLibs/
 /ios/Endpoint/
+
+# Android tooling reports are generated artifacts.
+/android/build/
+
+# Native plugin Gradle caches are local build state.
+**/.gradle/

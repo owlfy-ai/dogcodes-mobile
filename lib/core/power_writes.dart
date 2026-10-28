@@ -9,7 +9,7 @@ extension PowerWrites on MobileOperations {
   ) async {
     try {
       return _keepAwakePolicy(
-        await client.call('power_preferences_set', {'enabled': enabled}),
+        await _write(client, 'power_preferences_set', {'enabled': enabled}),
       );
     } on ProtocolException {
       rethrow;

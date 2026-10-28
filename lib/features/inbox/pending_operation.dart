@@ -155,6 +155,7 @@ class _PendingOperationCardState extends State<PendingOperationCard> {
     final op = widget.operation ?? widget.host.pendingOperation;
     if (op == null) return const SizedBox.shrink();
     final send = op['kind'] == 'send';
+    final closing = op['phase'] == 'closing';
     final session = [
       'history',
       'fork',
@@ -188,7 +189,9 @@ class _PendingOperationCardState extends State<PendingOperationCard> {
           ),
           const SizedBox(height: 4),
           Text(
-            widget.host.online
+            closing
+                ? '${widget.host.name} · 正在确认「不再等待」。重试仅确认原操作的结束状态，已经执行的内容不会撤销。'
+                : widget.host.online
                 ? '${widget.host.name} · 网络中断时手机没收到电脑的回复。点「重新确认」查看结果；重新发送也不会重复执行。'
                 : '${widget.host.name} · 网络中断时手机没收到电脑的回复。连上电脑后会自动确认。',
             style: Theme.of(context).textTheme.bodySmall,
@@ -240,7 +243,7 @@ class _PendingOperationCardState extends State<PendingOperationCard> {
               ),
               OutlinedButton(
                 onPressed: enabled ? () => recover('retry') : null,
-                child: const Text('重新发送'),
+                child: Text(closing ? '继续确认结束' : '重新发送'),
               ),
               if (send)
                 TextButton(

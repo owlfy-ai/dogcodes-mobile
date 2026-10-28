@@ -7,10 +7,20 @@ extension CancelWrites on MobileOperations {
     saved['envelope']['payload']['data']['runId'],
   ]);
   Future<Map<String, dynamic>> _readCancels() async {
+    if (_journalsForgotten || _scope.cleanupPending) return {};
+    if (!await _scope.matches(bindingEpoch)) return {};
     final raw = await storage.read(_cancelKey);
-    return raw == null || raw == 'null'
-        ? <String, dynamic>{}
-        : Map<String, dynamic>.from(jsonDecode(raw) as Map);
+    if (_journalsForgotten || _scope.cleanupPending) return {};
+    if (!await _scope.matches(bindingEpoch)) return {};
+    if (raw == null || raw == 'null') return {};
+    final all = Map<String, dynamic>.from(jsonDecode(raw) as Map);
+    if (bindingEpoch == null) return all;
+    return {
+      for (final entry in all.entries)
+        if (entry.value is Map &&
+            entry.value['localBindingEpoch'] == bindingEpoch)
+          entry.key: entry.value,
+    };
   }
 
   Future<List<Map<String, dynamic>>> pendingCancellations() => _journalSerial(
@@ -28,6 +38,7 @@ extension CancelWrites on MobileOperations {
       });
   Future<void> _storeCancel(Map<String, dynamic> saved) => _journalSerial(
     () async {
+      await _requireBindingActive();
       final all = await _readCancels(), target = _cancelTarget(saved);
       if (_journalsForgotten) throw const ProtocolException('这台电脑已移除，未发送停止请求。');
       if (all.containsKey(target)) {
@@ -36,6 +47,7 @@ extension CancelWrites on MobileOperations {
       if (all.length >= 64) {
         throw const ProtocolException('等待确认的停止请求太多，请先处理待处理页里的卡片。');
       }
+      if (bindingEpoch != null) saved['localBindingEpoch'] = bindingEpoch;
       all[target] = saved;
       await storage.write(_cancelKey, jsonEncode(all));
       if (_journalsForgotten) throw const ProtocolException('这台电脑已移除，未发送停止请求。');
@@ -50,17 +62,7 @@ extension CancelWrites on MobileOperations {
           await storage.write(_cancelKey, jsonEncode(all));
         }
       });
-  Future<void> forgetCancellations() {
-    _journalsForgotten = true;
-    return _journalSerial(() async {
-      final store = storage;
-      if (store is ErasableSecretStorage) {
-        await store.delete(_cancelKey);
-      } else {
-        await store.write(_cancelKey, 'null');
-      }
-    });
-  }
+  Future<void> forgetCancellations() => forgetRecoveryJournals();
 
   Map<String, dynamic> _cancelIntent(Map<String, dynamic> task) {
     final run = task['activePrimaryRun'];
@@ -158,7 +160,7 @@ extension CancelWrites on MobileOperations {
   }) async {
     if (_journalsForgotten) throw const ProtocolException('这台电脑已移除，未发送停止请求。');
     try {
-      await client.call('execute', [saved['envelope']]);
+      await _write(client, 'execute', [saved['envelope']], saved: saved);
     } on ProtocolException catch (e) {
       if (!e.message.contains('Conflict') || remaining <= 0) rethrow;
       // The task moved on since this request was built. Stop the same run
@@ -180,12 +182,15 @@ extension CancelWrites on MobileOperations {
     Map<String, dynamic> next,
   ) => _journalSerial(() async {
     if (_journalsForgotten) throw const ProtocolException('这台电脑已移除，未重新发送停止请求。');
+    await _requireBindingActive();
     final all = await _readCancels(), target = _cancelTarget(current);
     if (!_sameGitValue(all[target], current) || _cancelTarget(next) != target) {
       throw const ProtocolException('原停止请求已改变，请刷新。');
     }
+    if (bindingEpoch != null) next['localBindingEpoch'] = bindingEpoch;
     all[target] = next;
     await storage.write(_cancelKey, jsonEncode(all));
+    _requireJournalActive();
   });
 
   Future<dynamic> retryCancel(

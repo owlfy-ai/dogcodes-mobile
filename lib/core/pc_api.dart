@@ -95,15 +95,30 @@ extension PcApi on HostApi {
   Future<Map<String, dynamic>> changes(
     String taskId, {
     String mode = 'uncommitted',
+    String? rootId,
+    String? reference,
+    int? parent,
   }) async => _map(
     await review('query', {
       'taskId': taskId,
-      'rootId': null,
+      'rootId': rootId,
       'mode': mode,
-      'reference': null,
-      'parent': null,
+      'reference': reference,
+      'parent': parent,
     }),
   );
+  Future<List<Map<String, dynamic>>> gitHistory(
+    String taskId,
+    String rootId, {
+    int skip = 0,
+  }) async => _list(
+    await review('history', {'taskId': taskId, 'rootId': rootId, 'skip': skip}),
+  );
+  Future<List<Map<String, dynamic>>> gitBranches(
+    String taskId,
+    String rootId,
+  ) async =>
+      _list(await review('branches', {'taskId': taskId, 'rootId': rootId}));
   Future<Map<String, dynamic>> changedFile(
     String taskId,
     String snapshotId,
@@ -197,6 +212,7 @@ extension PcApi on HostApi {
   Future<Map<String, dynamic>> terminalStart({
     required String projectId,
     required String cwd,
+    int directoryIndex = 0,
     int cols = 80,
     int rows = 24,
   }) async => _map(
@@ -204,7 +220,7 @@ extension PcApi on HostApi {
       'projectLaunch': null,
       'operationId': uuid(),
       'projectId': projectId,
-      'directoryIndex': 0,
+      'directoryIndex': directoryIndex,
       'taskId': null,
       'commandId': null,
       'label': '终端',
@@ -296,12 +312,14 @@ extension PcApi on HostApi {
     int maxWidth = 1280,
     int quality = 60,
     String? knownFrameId,
+    String? knownCursorShapeId,
   }) async => _map(
     await _desktopCall('remote_desktop_frame', {
       'leaseId': leaseId,
       'maxWidth': maxWidth,
       'quality': quality,
       'knownFrameId': ?knownFrameId,
+      'knownCursorShapeId': ?knownCursorShapeId,
     }),
   );
   Future<dynamic> desktopSelect(String leaseId, int monitorId) => _desktopCall(

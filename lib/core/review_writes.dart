@@ -135,9 +135,11 @@ extension ReviewWrites on MobileOperations {
     Map<String, dynamic> saved,
   ) async {
     final request = saved['request'] as Map;
-    final result = await client.call(
+    final result = await _write(
+      client,
       saved['kind'] == 'repair' ? 'review_repair' : 'start_turn_review',
       [request],
+      saved: saved,
     );
     if (saved['kind'] == 'repair') return _acceptRepair(saved, result);
     _validateReview(request, result);
@@ -155,14 +157,14 @@ extension ReviewWrites on MobileOperations {
       final request = saved['request'] as Map;
       return _acceptRepair(
         saved,
-        await client.call('review_repair', [
+        await _write(client, 'review_repair', [
           {
             'action': 'resume',
             'taskId': request['taskId'],
             'runId': request['reference']['runId'],
             'operationId': request['operationId'],
           },
-        ]),
+        ], saved: saved),
       );
     }
     return found;

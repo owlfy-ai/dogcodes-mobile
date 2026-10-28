@@ -52,8 +52,10 @@ void main() {
   test('a decode error skips deltas until a requested keyframe', () {
     fakeAsync((async) {
       final acks = <(int?, bool)>[];
+      final pictures = <bool>[];
       var fail = false;
       final r = RelayVideoReceiver(
+        onLiveChanged: pictures.add,
         decode: (data, key) async {
           if (fail) throw StateError('broken');
         },
@@ -79,8 +81,29 @@ void main() {
       async.elapse(const Duration(milliseconds: 150));
       expect(r.live, isTrue);
       expect(r.decoded, 2);
+      expect(pictures, [true, false, true]);
     });
   });
+
+  test(
+    'a disposed receiver never publishes late decoded picture readiness',
+    () {
+      fakeAsync((async) {
+        final hold = Completer<void>(), pictures = <bool>[];
+        final r = RelayVideoReceiver(
+          decode: (_, _) => hold.future,
+          control: ({int? ack, bool keyframe = false}) async {},
+          onLiveChanged: pictures.add,
+        );
+        r.onFrame(frame(1, key: true));
+        async.flushMicrotasks();
+        r.dispose();
+        hold.complete();
+        async.flushMicrotasks();
+        expect(pictures, isEmpty);
+      });
+    },
+  );
 
   test('a backlog drops to the newest keyframe, or asks for one', () {
     fakeAsync((async) {
@@ -106,10 +129,63 @@ void main() {
       expect(acks.any((a) => a.$2), isTrue);
       hold.complete();
       async.elapse(const Duration(milliseconds: 200));
-      // After the stuck keyframe, remaining deltas decode; nothing is lost
-      // from the ack sequence.
+      // Dropped reference frames still advance the cumulative ack. The old
+      // in-flight IDR cannot make the retained deltas decodable again.
       expect(acks.last.$1, 6);
+      expect(calls, 1, reason: 'deltas depend on discarded reference frames');
+      expect(r.live, isFalse);
+      r.onFrame(frame(7, key: true));
+      async.elapse(const Duration(milliseconds: 150));
+      expect(r.live, isTrue);
+      expect(r.decoded, 2);
+      r.onFrame(frame(8));
+      async.elapse(const Duration(milliseconds: 150));
+      expect(calls, 3);
+      expect(acks.last.$1, 8);
       r.dispose();
     });
   });
+
+  test(
+    'a retained newer IDR must decode before dropped references recover',
+    () {
+      fakeAsync((async) {
+        final first = Completer<void>(), replacement = Completer<void>();
+        final acks = <(int?, bool)>[];
+        var calls = 0;
+        final r = RelayVideoReceiver(
+          decode: (data, key) async {
+            calls++;
+            if (calls == 1) await first.future;
+            if (calls == 2) await replacement.future;
+          },
+          control: ({int? ack, bool keyframe = false}) async =>
+              acks.add((ack, keyframe)),
+          maxBacklog: 3,
+          now: () => async.getClock(DateTime(2026)).now(),
+        );
+        r.onFrame(frame(1, key: true));
+        async.flushMicrotasks();
+        r.onFrame(frame(2));
+        r.onFrame(frame(3, key: true));
+        r.onFrame(frame(4));
+        r.onFrame(frame(5));
+        first.complete();
+        async.flushMicrotasks();
+        expect(calls, 2);
+        expect(r.live, isFalse, reason: 'the retained IDR is still decoding');
+        replacement.complete();
+        async.elapse(const Duration(milliseconds: 200));
+        expect(r.live, isTrue);
+        expect(calls, 4);
+        expect(acks.last.$1, 5);
+        expect(
+          acks.any((ack) => ack.$2),
+          isFalse,
+          reason: 'the queued IDR suffices',
+        );
+        r.dispose();
+      });
+    },
+  );
 }

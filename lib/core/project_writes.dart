@@ -34,7 +34,9 @@ extension ProjectWrites on MobileOperations {
     if (directory is! Map || directory['path'] != request['path']) {
       throw const ProtocolException('原项目目录已变化，请核实原结果后重新选择。');
     }
-    final registered = await client.call('register_project', [request]);
+    final registered = await _write(client, 'register_project', [
+      request,
+    ], saved: saved);
     if (registered is! Map || registered['projectId'] is! String) {
       throw const ProtocolException('添加项目结果尚未确认，请核实原操作。');
     }

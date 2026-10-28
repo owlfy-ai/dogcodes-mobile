@@ -21,18 +21,29 @@ class StopApi implements HostApi {
     target['id'] as String: {...target, 'status': 'running'},
   };
   final calls = <String>[];
-  bool loseBefore = false, loseAfter = false, slow = false;
+  bool loseBefore = false,
+      loseAfter = false,
+      slow = false,
+      supportsEpoch = true;
   @override
   Future<dynamic> call(String method, dynamic args) async {
     calls.add(method);
-    final info = terminals[args];
+    if (method == 'remote_capabilities') {
+      return {'terminalStopEpoch': supportsEpoch};
+    }
+    final info = terminals[args is Map ? args['terminalId'] : args];
     if (method == 'terminal_get') {
       if (info == null) throw const ProtocolException('终端不存在或属于已清除的后台实例');
       return clone(info);
     }
     expect(method, 'terminal_stop');
+    expect(args, {
+      'terminalId': target['id'],
+      'expectedEpoch': target['epoch'],
+    });
     if (loseBefore) throw const RemoteOutcomeUnknown();
     if (info == null) throw const ProtocolException('终端不存在或属于已清除的后台实例');
+    if (args['expectedEpoch'] != info['epoch']) return clone(info);
     info['status'] = slow ? 'stopping' : 'exited';
     if (loseAfter) throw const RemoteOutcomeUnknown();
     return clone(info);
@@ -40,6 +51,42 @@ class StopApi implements HostApi {
 }
 
 void main() {
+  test(
+    'an older PC is rejected before tracking or sending an unsafe bare-ID stop',
+    () async {
+      final ops = MobileOperations(MemorySecretStorage(), 'pc');
+      final pc = StopApi()..supportsEpoch = false;
+      await expectLater(
+        ops.terminalStop(pc, target),
+        throwsA(isA<ProtocolException>()),
+      );
+      expect(pc.calls, ['remote_capabilities']);
+      expect(await ops.pendingTerminalStops(), isEmpty);
+      expect(pc.terminals.values.single['status'], 'running');
+    },
+  );
+
+  test(
+    'stop sends the frozen epoch; a restart after verification cannot close the replacement',
+    () async {
+      final ops = MobileOperations(MemorySecretStorage(), 'pc');
+      final pc = RacingStopApi();
+      await expectLater(
+        ops.terminalStop(pc, target),
+        throwsA(isA<RemoteOutcomeUnknown>()),
+      );
+      final saved = (await ops.pendingTerminalStops()).single;
+      pc.race = true;
+      expect((await ops.retryTerminalStop(pc, saved))!['state'], 'rejected');
+      expect(pc.current['status'], 'running');
+      expect(pc.writes.last, {
+        'terminalId': target['id'],
+        'expectedEpoch': target['epoch'],
+      });
+      expect(await ops.pendingTerminalStops(), isEmpty);
+    },
+  );
+
   test('a lost close reply is settled by reading the terminal', () async {
     final storage = MemorySecretStorage(), pc = StopApi()..loseAfter = true;
     await expectLater(
@@ -129,4 +176,29 @@ void main() {
       expect(await ops.pendingTerminalStops(), isEmpty);
     },
   );
+}
+
+class RacingStopApi implements HostApi {
+  Map<String, dynamic> current = {...target, 'status': 'running'};
+  final writes = <dynamic>[];
+  bool race = false;
+  @override
+  Future<dynamic> call(String method, dynamic args) async {
+    if (method == 'remote_capabilities') return {'terminalStopEpoch': true};
+    if (method == 'terminal_get') {
+      final read = clone(current);
+      if (race) {
+        current = {...current, 'epoch': 'new-core', 'status': 'running'};
+      }
+      return read;
+    }
+    expect(method, 'terminal_stop');
+    writes.add(args);
+    if (!race) throw const RemoteOutcomeUnknown();
+    // A PC enforcing the target checks the epoch; the legacy bare ID stops it.
+    if (args is! Map || args['expectedEpoch'] == current['epoch']) {
+      current['status'] = 'exited';
+    }
+    return clone(current);
+  }
 }

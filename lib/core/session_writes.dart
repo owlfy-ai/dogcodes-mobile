@@ -162,7 +162,7 @@ extension SessionWrites on MobileOperations {
   ) async {
     if (saved['kind'] == 'session') {
       try {
-        await client.call('execute', [saved['envelope']]);
+        await _write(client, 'execute', [saved['envelope']], saved: saved);
       } on ProtocolException catch (e) {
         // The session changed since the request was built: done already, or
         // send the same change again on its current version.
@@ -184,12 +184,12 @@ extension SessionWrites on MobileOperations {
           saved['envelope']['payload']['data']['title'] as String?,
         );
         await _replaceCurrent(saved, next);
-        await client.call('execute', [next['envelope']]);
+        await _write(client, 'execute', [next['envelope']], saved: next);
         return verifySession(client, next);
       }
     } else if (saved['kind'] == 'history') {
       try {
-        await client.call('execute', [saved['envelope']]);
+        await _write(client, 'execute', [saved['envelope']], saved: saved);
       } on ProtocolException {
         // A definite answer; lost replies stay tracked for verification.
         await _releaseRejectedCommand(client, saved);
@@ -199,7 +199,7 @@ extension SessionWrites on MobileOperations {
       final request = saved['request'] as Map;
       final id = await withReplyTimeout(
         const Duration(minutes: 2),
-        () => client.call('fork_task', [request]),
+        () => _write(client, 'fork_task', [request], saved: saved),
       );
       if (id != request['newTaskId']) {
         throw const ProtocolException('Fork 返回的会话身份不一致，请核实原操作。');
@@ -244,18 +244,17 @@ extension SessionWrites on MobileOperations {
   Future<void> _replaceCurrent(
     Map<String, dynamic> current,
     Map<String, dynamic> next,
-  ) async {
-    if (_saving) throw const ProtocolException('请稍后再试。');
-    _saving = true;
-    try {
-      if (jsonEncode(await _current(current)) != jsonEncode(current)) {
-        throw const ProtocolException('原会话操作已变化，请刷新。');
-      }
-      await storage.write(_laneKey(current['kind']), jsonEncode(next));
-    } finally {
-      _saving = false;
+  ) => _journalSerial(() async {
+    await _requireBindingActive();
+    if (!_sameRecoveryValue(await _current(current), current)) {
+      throw const ProtocolException('原操作已变化，请刷新。');
     }
-  }
+    _requireJournalActive();
+    next['localTrackingId'] ??= current['localTrackingId'] ?? operationId();
+    if (bindingEpoch != null) next['localBindingEpoch'] = bindingEpoch;
+    await storage.write(_laneKey(current['kind']), jsonEncode(next));
+    _requireJournalActive();
+  });
 
   Future<dynamic> verifySession(
     HostApi client,

@@ -70,7 +70,7 @@ extension GitWrites on MobileOperations {
     HostApi client,
     Map<String, dynamic> saved,
   ) async {
-    await _gitCall(client, 'index', saved['request'] as Map);
+    await _gitWrite(client, 'index', saved['request'] as Map, saved);
     final found = await verifyIndex(client, saved);
     if (found == null || found['state'] != 'succeeded') {
       throw ProtocolException(
@@ -104,6 +104,20 @@ extension GitWrites on MobileOperations {
 
   Future<dynamic> _gitCall(HostApi client, String operation, Map arguments) =>
       client.call('review', {'operation': operation, 'arguments': arguments});
+
+  Future<dynamic> _gitWrite(
+    HostApi client,
+    String operation,
+    Map arguments,
+    Map<String, dynamic> saved, {
+    bool closing = false,
+  }) => _write(
+    client,
+    'review',
+    {'operation': operation, 'arguments': arguments},
+    saved: saved,
+    closing: closing,
+  );
 
   Future<Map<String, dynamic>?> gitWrite(
     HostApi client, {
@@ -144,7 +158,7 @@ extension GitWrites on MobileOperations {
     bool advance = false,
   }) async {
     try {
-      await _gitCall(client, 'git_action', saved['request'] as Map);
+      await _gitWrite(client, 'git_action', saved['request'] as Map, saved);
     } on ProtocolException {
       // An explicit rejection before journal admission cannot have an effect.
       // Transport loss remains tracked with the frozen operation identity.
@@ -245,16 +259,20 @@ extension GitWrites on MobileOperations {
     if (!['awaiting_next', 'push_failed'].contains(result['state'])) {
       throw ProtocolException(gitResultMessage(result));
     }
-    await _gitCall(client, 'git_advance', {
+    await _gitWrite(client, 'git_advance', {
       'taskId': saved['request']['taskId'],
       'operationId': result['receipt']['request']['operationId'],
-    });
+    }, saved);
   }
 
   Future<Map<String, dynamic>?> retryGit(
     HostApi client,
     Map<String, dynamic> saved,
   ) async {
+    if (saved['phase'] == 'closing') {
+      await finishGitTracking(client, saved);
+      return {'state': 'closed'};
+    }
     final found = await verifyGit(client, saved);
     if (found == null) {
       return _sendGit(
@@ -274,11 +292,18 @@ extension GitWrites on MobileOperations {
     HostApi client,
     Map<String, dynamic> saved,
   ) async {
+    saved = await _beginClosing(saved);
     final index = saved['kind'] == 'index';
-    final closed = await _gitCall(client, index ? 'file_close' : 'git_close', {
-      'taskId': saved['request']['taskId'],
-      'operationId': saved['request']['operationId'],
-    });
+    final closed = await _gitWrite(
+      client,
+      index ? 'file_close' : 'git_close',
+      {
+        'taskId': saved['request']['taskId'],
+        'operationId': saved['request']['operationId'],
+      },
+      saved,
+      closing: true,
+    );
     if (closed is! Map ||
         closed['closed'] != true ||
         !_sameGitValue(

@@ -14,6 +14,7 @@ extension WorkspaceWrites on MobileOperations {
     HostApi client, {
     required String projectId,
     required String cwd,
+    int directoryIndex = 0,
   }) async {
     await _requireWorkspaceRecovery(client, 'terminalLaunchRecovery');
     final saved = <String, dynamic>{
@@ -24,7 +25,7 @@ extension WorkspaceWrites on MobileOperations {
         'projectLaunch': null,
         'operationId': uuid(),
         'projectId': projectId,
-        'directoryIndex': 0,
+        'directoryIndex': directoryIndex,
         'taskId': null,
         'commandId': null,
         'label': '终端',
@@ -180,9 +181,11 @@ extension WorkspaceWrites on MobileOperations {
     HostApi client,
     Map<String, dynamic> saved,
   ) async {
-    final reply = await client.call(
+    final reply = await _write(
+      client,
       saved['method'] as String,
       saved['request'],
+      saved: saved,
     );
     if (saved['kind'] == 'run_config') {
       if (reply is! Map ||
@@ -207,33 +210,42 @@ extension WorkspaceWrites on MobileOperations {
     HostApi client,
     Map<String, dynamic> saved,
   ) async {
+    if (saved['phase'] == 'closing') {
+      return finishLaunchTracking(client, saved);
+    }
     final found = await verifyWorkspace(client, saved);
     if (found != null) return found;
     return sendWorkspace(client, saved);
   }
 
-  Future<void> finishLaunchTracking(
+  Future<Map<String, dynamic>> finishLaunchTracking(
     HostApi client,
     Map<String, dynamic> saved,
   ) async {
     if (saved['kind'] != 'terminal') {
       throw const ProtocolException('没有待核实的启动操作。');
     }
+    saved = await _beginClosing(saved);
     final request = saved['request'] as Map;
-    final result = await client.call('terminal_launch_intents', {
-      'type': 'retire',
-      'operationId': request['operationId'],
-    });
+    final result = await _write(
+      client,
+      'terminal_launch_intents',
+      {'type': 'retire', 'operationId': request['operationId']},
+      saved: saved,
+      closing: true,
+    );
     if (result is! Map || result['operationId'] != request['operationId']) {
       throw const ProtocolException('电脑未确认原启动已关闭，记录仍保留。');
     }
     if (result['state'] == 'retired') {
       await _clearIfCurrent(saved);
-      return;
+      return {'state': 'retired'};
     }
     // Already admitted: validate its immutable receipt; do not stop the process.
-    if (await verifyWorkspace(client, saved) == null) {
+    final found = await verifyWorkspace(client, saved);
+    if (found == null) {
       throw const ProtocolException('原启动结果尚未确认，记录仍保留。');
     }
+    return found;
   }
 }

@@ -8,7 +8,10 @@ Map<String, dynamic> description({
   int seq = 0,
   int width = 640,
   int max = 1280,
+  int? generation,
+  String state = 'ready',
 }) => {
+  'generation': generation,
   'width': width,
   'height': width * 5 ~/ 8,
   'resize': {
@@ -17,9 +20,33 @@ Map<String, dynamic> description({
     'applied': '$seq',
     'targetWidth': width,
     'maxWidth': max,
+    'state': state,
   },
 };
 void main() {
+  test(
+    'source geometry uses its generation without losing an outstanding width request',
+    () {
+      final resolution = VideoResolution()
+        ..start(description(generation: 3))
+        ..want(960);
+      final pending = resolution.request(Duration.zero);
+      expect(
+        resolution.newer(description(generation: 4, state: 'updating')),
+        false,
+      );
+      final rotated = description(generation: 4, width: 640, max: 960);
+      expect(resolution.newer(rotated), true);
+      resolution.accept(rotated);
+      expect(resolution.limit, 960);
+      expect(resolution.request(const Duration(seconds: 3)), pending);
+      expect(resolution.newer(rotated), false);
+      expect(resolution.newer(description(generation: 3, seq: 1)), false);
+      expect(resolution.newer(description(id: 'other', generation: 99)), false);
+      resolution.accept(description(generation: 5, seq: 1, width: 960));
+      expect(resolution.inFlight, false);
+    },
+  );
   test(
     'freezes an unknown request, coalesces later wishes and ignores another monitor',
     () {
