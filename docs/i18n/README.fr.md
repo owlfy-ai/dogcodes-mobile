@@ -3,7 +3,7 @@
 
 <img src="../../assets/branding/app-icon.png" alt="dog.codes" width="96" height="96" />
 
-# dog.codes
+# dog.codes.mobile
 
 **Pilotez vos agents depuis votre téléphone**
 
