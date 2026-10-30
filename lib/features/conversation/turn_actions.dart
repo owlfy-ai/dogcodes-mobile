@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../core/host_hub.dart';
@@ -16,14 +17,15 @@ class TurnActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final reply = finalTurnReply(entry.items), s = session;
     final finishedAt = DateTime.tryParse('${entry.completion['completedAt']}');
     final forkBlocked = s == null
         ? null
         : !s.host.online
-        ? '电脑离线，连接后才能 Fork'
+        ? tr("电脑离线，连接后才能 Fork")
         : s.running
-        ? '会话正在运行，结束后才能从本轮 Fork'
+        ? tr("会话正在运行，结束后才能从本轮 Fork")
         : null;
     return Padding(
       key: ValueKey('turn-actions:${entry.turnId}'),
@@ -35,7 +37,7 @@ class TurnActions extends StatelessWidget {
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               IconButton(
-                tooltip: '复制本轮回复',
+                tooltip: tr("复制本轮回复"),
                 icon: const Icon(Icons.copy_outlined, size: 19),
                 onPressed: reply.isEmpty
                     ? null
@@ -44,20 +46,20 @@ class TurnActions extends StatelessWidget {
                           await Clipboard.setData(ClipboardData(text: reply));
                           if (context.mounted) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('已复制本轮回复')),
+                              SnackBar(content: Text(tr("已复制本轮回复"))),
                             );
                           }
                         } catch (_) {
                           if (context.mounted) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('复制失败，请重试')),
+                              SnackBar(content: Text(tr("复制失败，请重试"))),
                             );
                           }
                         }
                       },
               ),
               IconButton(
-                tooltip: '本轮消耗',
+                tooltip: tr("本轮消耗"),
                 icon: const Icon(Icons.bar_chart_outlined, size: 21),
                 onPressed: () => showModalBottomSheet<void>(
                   context: context,
@@ -73,7 +75,7 @@ class TurnActions extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
                       children: [
                         Text(
-                          '本轮消耗',
+                          tr("本轮消耗"),
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
                         const SizedBox(height: 12),
@@ -108,7 +110,7 @@ class TurnActions extends StatelessWidget {
               ),
               IconButton(
                 // Stays tappable while blocked so the phone can say why.
-                tooltip: forkBlocked ?? '从本轮 Fork',
+                tooltip: forkBlocked ?? tr("从本轮 Fork"),
                 icon: Icon(
                   Icons.fork_right,
                   size: 21,
@@ -138,7 +140,7 @@ class TurnActions extends StatelessWidget {
               ),
               TextButton.icon(
                 icon: const Icon(Icons.fact_check_outlined, size: 19),
-                label: const Text('本轮审查'),
+                label: Text(tr("本轮审查")),
                 onPressed: s == null
                     ? null
                     : () => showModalBottomSheet<void>(

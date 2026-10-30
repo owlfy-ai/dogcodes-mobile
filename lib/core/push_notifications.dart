@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
@@ -110,7 +111,7 @@ class PushNotifications extends ChangeNotifier {
       if (!_disposed && enabled && configured) await refresh();
     } catch (_) {
       _restored = true;
-      error = '无法读取后台提醒设置，请检查系统安全存储后重试。';
+      error = tr("无法读取后台提醒设置，请检查系统安全存储后重试。");
     }
     _notify();
   }
@@ -190,10 +191,10 @@ class PushNotifications extends ChangeNotifier {
         }
       }
       _registered.removeWhere((key, _) => !keys.contains(key));
-      if (failed) error = '部分电脑的通知尚未登记，请检查网络后重新检测。';
+      if (failed) error = tr("部分电脑的通知尚未登记，请检查网络后重新检测。");
     } catch (_) {
       ready = false;
-      error = '后台提醒尚未启用，请核实系统通知权限和通知服务配置后重试。';
+      error = tr("后台提醒尚未启用，请核实系统通知权限和通知服务配置后重试。");
     }
   }
 

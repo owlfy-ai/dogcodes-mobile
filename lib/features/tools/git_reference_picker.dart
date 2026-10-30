@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'package:flutter/material.dart';
 import '../../core/host_api.dart';
 import '../../core/host_hub.dart';
@@ -81,68 +82,71 @@ class _GitReferencePickerState extends State<GitReferencePicker>
   }
 
   @override
-  Widget build(BuildContext context) => SafeArea(
-    child: SizedBox(
-      height: MediaQuery.sizeOf(context).height * .7,
-      child: Column(
-        children: [
-          ListTile(
-            title: Text(widget.commits ? '选择历史提交' : '选择比较分支'),
-            trailing: IconButton(
-              tooltip: '关闭',
-              icon: const Icon(Icons.close),
-              onPressed: () => Navigator.pop(context),
+  Widget build(BuildContext context) {
+    watchAppLanguage(context);
+    return SafeArea(
+      child: SizedBox(
+        height: MediaQuery.sizeOf(context).height * .7,
+        child: Column(
+          children: [
+            ListTile(
+              title: Text(widget.commits ? tr("选择历史提交") : tr("选择比较分支")),
+              trailing: IconButton(
+                tooltip: tr("关闭"),
+                icon: const Icon(Icons.close),
+                onPressed: () => Navigator.pop(context),
+              ),
             ),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: entries.length,
-              itemBuilder: (_, i) {
-                final entry = entries[i];
-                final id = widget.commits
-                    ? '${entry['id']}'
-                    : '${entry['name']}';
-                final label = widget.commits
-                    ? shortCommit(id)
-                    : id.replaceFirst(RegExp(r'^refs/(heads|remotes)/'), '');
-                return ListTile(
-                  title: Text(
-                    widget.commits ? '${entry['subject']}' : label,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  subtitle: Text(
-                    widget.commits
-                        ? '$label · ${entry['author']} · ${entry['date']}'
-                        : shortCommit('${entry['commit']}'),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  onTap: () => Navigator.pop(
-                    context,
-                    GitReference(id, label, [
-                      for (final p in entry['parents'] as List? ?? []) '$p',
-                    ]),
-                  ),
-                );
-              },
+            Expanded(
+              child: ListView.builder(
+                itemCount: entries.length,
+                itemBuilder: (_, i) {
+                  final entry = entries[i];
+                  final id = widget.commits
+                      ? '${entry['id']}'
+                      : '${entry['name']}';
+                  final label = widget.commits
+                      ? shortCommit(id)
+                      : id.replaceFirst(RegExp(r'^refs/(heads|remotes)/'), '');
+                  return ListTile(
+                    title: Text(
+                      widget.commits ? '${entry['subject']}' : label,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    subtitle: Text(
+                      widget.commits
+                          ? '$label · ${entry['author']} · ${entry['date']}'
+                          : shortCommit('${entry['commit']}'),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    onTap: () => Navigator.pop(
+                      context,
+                      GitReference(id, label, [
+                        for (final p in entry['parents'] as List? ?? []) '$p',
+                      ]),
+                    ),
+                  );
+                },
+              ),
             ),
-          ),
-          if (error != null) InlineNotice(error!, danger: true),
-          if (loading)
-            const LinearProgressIndicator()
-          else if (error != null || more)
-            TextButton(
-              onPressed: _load,
-              child: Text(error != null ? '重试' : '加载更早的提交'),
-            )
-          else if (entries.isEmpty)
-            Padding(
-              padding: const EdgeInsets.all(24),
-              child: Text(widget.commits ? '没有提交记录' : '没有可比较的分支'),
-            ),
-        ],
+            if (error != null) InlineNotice(error!, danger: true),
+            if (loading)
+              const LinearProgressIndicator()
+            else if (error != null || more)
+              TextButton(
+                onPressed: _load,
+                child: Text(error != null ? tr("重试") : tr("加载更早的提交")),
+              )
+            else if (entries.isEmpty)
+              Padding(
+                padding: const EdgeInsets.all(24),
+                child: Text(widget.commits ? tr("没有提交记录") : tr("没有可比较的分支")),
+              ),
+          ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 }

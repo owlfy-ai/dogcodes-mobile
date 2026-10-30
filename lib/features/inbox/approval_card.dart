@@ -1,4 +1,6 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'package:flutter/material.dart';
+import 'approval_presentation.dart';
 import 'question_form.dart';
 import '../../app.dart';
 import '../../core/host_hub.dart';
@@ -34,13 +36,31 @@ class _ApprovalCardState extends State<ApprovalCard> {
     if (link == null) return;
     setState(() => busy = true);
     try {
-      await h.operations.approval(
+      final receipt = await h.operations.approval(
         link,
         widget.item.task,
         widget.item.approval,
         optionId,
         answer: answer,
       );
+      if (receipt != null) {
+        final option = (widget.item.approval['options'] as List? ?? const [])
+            .whereType<Map>()
+            .where((o) => o['optionId'] == optionId)
+            .firstOrNull;
+        hub.recordApprovalChoice(
+          h,
+          widget.item.task,
+          widget.item.approval,
+          label: '${option?['label'] ?? ''}',
+          answer: answer,
+        );
+      }
+      if (receipt is Map && receipt['delivery'] == 'failed') {
+        messenger.showSnackBar(
+          SnackBar(content: Text(tr("电脑已记录你的决定，但 Agent 已不在等待，请在会话中查看。"))),
+        );
+      }
     } catch (e) {
       messenger.showSnackBar(SnackBar(content: Text('$e')));
     } finally {
@@ -51,6 +71,7 @@ class _ApprovalCardState extends State<ApprovalCard> {
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final item = widget.item;
     final a = item.approval;
     final c = context.dc;
@@ -65,7 +86,10 @@ class _ApprovalCardState extends State<ApprovalCard> {
     final form = a['question'] is Map
         ? Map<String, dynamic>.from(a['question'] as Map)
         : null;
-    final tool = (a['toolName'] as String?)?.trim();
+    final tool = (a['toolName'] as String?)?.trim() ?? '';
+    final view = item.isQuestion
+        ? null
+        : approvalPresentation('${a['commandSummary'] ?? ''}', tool);
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: c.line),
@@ -88,42 +112,38 @@ class _ApprovalCardState extends State<ApprovalCard> {
                   ),
                 ),
                 Tag(
-                  item.isQuestion ? '问题' : '权限',
+                  view?.category ?? tr("问题"),
                   tone: item.isQuestion ? Tone.muted : Tone.warning,
                 ),
               ],
             ),
           if (widget.showContext) const SizedBox(height: 10),
           Text(
-            item.isQuestion
-                ? '${form?['title'] ?? 'Agent 有一个问题'}'
-                : tool == null || tool.isEmpty
-                ? '允许这项操作？'
-                : '允许 $tool？',
+            view?.question ?? '${form?['title'] ?? tr("Agent 有一个问题")}',
             style: Theme.of(context).textTheme.titleMedium,
           ),
           const SizedBox(height: 4),
           Text(
             item.isQuestion
-                ? '会话「${item.task['title'] ?? ''}」需要你的回答。'
-                : '会话「${item.task['title'] ?? ''}」请求以下操作。',
+                ? tr("会话「{0}」需要你的回答。", [item.task['title'] ?? ''])
+                : tr("会话「{0}」请求以下操作。", [item.task['title'] ?? '']),
             style: Theme.of(context).textTheme.bodySmall,
           ),
-          if (!item.isQuestion) ...[
-            const SizedBox(height: 10),
-            CodeBlock('${a['commandSummary'] ?? ''}'),
-          ],
+          if (view != null) ApprovalDetails(view),
           const SizedBox(height: 12),
           if (item.isQuestion && !supportsQuestion(form))
             Text(
-              '这个问题的格式暂不支持在手机上回答，请在电脑上回答，回答后这里会自动更新。',
+              tr("这个问题的格式暂不支持在手机上回答，请在电脑上回答，回答后这里会自动更新。"),
               style: Theme.of(context).textTheme.bodySmall,
             )
           else if (!item.host.online)
-            Text('电脑离线，重新连接后再处理。', style: Theme.of(context).textTheme.bodySmall)
+            Text(
+              tr("电脑离线，重新连接后再处理。"),
+              style: Theme.of(context).textTheme.bodySmall,
+            )
           else if (item.host.pendingOperation != null)
             Text(
-              '这台电脑有一项操作结果待核实，请先核实。',
+              tr("这台电脑有一项操作结果待核实，请先核实。"),
               style: Theme.of(context).textTheme.bodySmall,
             )
           else if (item.isQuestion)
@@ -141,7 +161,7 @@ class _ApprovalCardState extends State<ApprovalCard> {
                       onPressed: enabled
                           ? () => respond(o['optionId'] as String)
                           : null,
-                      child: Text(o['label'] as String),
+                      child: Text(tr(o['label'] as String)),
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -158,7 +178,7 @@ class _ApprovalCardState extends State<ApprovalCard> {
                               child: CircularProgressIndicator(strokeWidth: 2),
                             )
                           : Text(
-                              accept.first['label'] as String,
+                              tr(accept.first['label'] as String),
                               overflow: TextOverflow.ellipsis,
                             ),
                     ),
@@ -167,13 +187,13 @@ class _ApprovalCardState extends State<ApprovalCard> {
                   const SizedBox(width: 6),
                   PopupMenuButton<String>(
                     enabled: enabled,
-                    tooltip: '其他授权范围',
+                    tooltip: tr("其他授权范围"),
                     onSelected: respond,
                     itemBuilder: (_) => [
                       for (final o in accept.skip(1))
                         PopupMenuItem(
                           value: o['optionId'] as String,
-                          child: Text(o['label'] as String),
+                          child: Text(tr(o['label'] as String)),
                         ),
                     ],
                     child: Container(
@@ -189,6 +209,71 @@ class _ApprovalCardState extends State<ApprovalCard> {
                 ],
               ],
             ),
+        ],
+      ),
+    );
+  }
+}
+
+/// The command, files or other content an approval is about.
+class ApprovalDetails extends StatelessWidget {
+  const ApprovalDetails(this.view, {super.key});
+  final ApprovalPresentation view;
+  @override
+  Widget build(BuildContext context) {
+    watchAppLanguage(context);
+    final small = Theme.of(context).textTheme.bodySmall;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        for (final section in view.sections) ...[
+          const SizedBox(height: 10),
+          Text(section.label, style: small),
+          const SizedBox(height: 4),
+          _SectionText(section),
+        ],
+        if (view.warning != null) ...[
+          const SizedBox(height: 10),
+          Text(
+            view.warning!,
+            style: small?.copyWith(color: context.dc.removed),
+          ),
+        ],
+      ],
+    );
+  }
+}
+
+/// Long content (diffs, file bodies) starts at a few lines; tap to see all.
+class _SectionText extends StatefulWidget {
+  const _SectionText(this.section);
+  final ApprovalSection section;
+  @override
+  State<_SectionText> createState() => _SectionTextState();
+}
+
+class _SectionTextState extends State<_SectionText> {
+  bool expanded = false;
+  @override
+  Widget build(BuildContext context) {
+    watchAppLanguage(context);
+    final s = widget.section;
+    final long = s.expandable && '\n'.allMatches(s.text).length >= 8;
+    final block = CodeBlock(s.text, maxLines: long && !expanded ? 8 : null);
+    if (!long) return block;
+    return InkWell(
+      onTap: () => setState(() => expanded = !expanded),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          block,
+          Padding(
+            padding: const EdgeInsets.only(top: 4),
+            child: Text(
+              expanded ? tr("收起") : tr("展开全部"),
+              style: TextStyle(color: context.dc.accent, fontSize: 13),
+            ),
+          ),
         ],
       ),
     );

@@ -23,14 +23,14 @@ extension SessionWrites on MobileOperations {
         parsed == null ||
         parsed.isNegative ||
         parsed > BigInt.parse('18446744073709551615')) {
-      throw const ProtocolException('会话版本不可用，请刷新后重试。');
+      throw ProtocolException(tr("会话版本不可用，请刷新后重试。"));
     }
     final clean = title?.trim();
     if (clean != null &&
         (clean.isEmpty ||
             clean.runes.length > 120 ||
             RegExp(r'[\x00-\x1f\x7f-\x9f]').hasMatch(clean))) {
-      throw const ProtocolException('会话名称需为 1–120 个字符，且不能包含控制字符。');
+      throw ProtocolException(tr("会话名称需为 1–120 个字符，且不能包含控制字符。"));
     }
     final saved = _sessionIntent(task, clean);
     await _storeNew(saved);
@@ -100,30 +100,55 @@ extension SessionWrites on MobileOperations {
     String? state,
   ) async {
     if (state != null && state != 'pinned' && state != 'archived') {
-      throw const ProtocolException('会话状态无效。');
+      throw ProtocolException(tr("会话状态无效。"));
     }
+    return _setHistoryEntry(client, 'tasks', 'taskId', taskId, state);
+  }
+
+  /// Pins, removes (hides; sessions and files stay) or restores a project in
+  /// the PC's shared project list, exactly as the desktop does.
+  Future<dynamic> setProjectState(
+    HostApi client,
+    String projectId,
+    String? state,
+  ) async {
+    if (state != null && state != 'pinned' && state != 'removed') {
+      throw ProtocolException(tr("项目状态无效。"));
+    }
+    return _setHistoryEntry(client, 'projects', 'projectId', projectId, state);
+  }
+
+  Future<dynamic> _setHistoryEntry(
+    HostApi client,
+    String section,
+    String idKey,
+    String id,
+    String? state,
+  ) async {
     final current = await client.call('history_preferences', null);
     if (current is! Map ||
         current['preferences'] is! Map ||
         current['revision'] == null) {
-      throw const ProtocolException('无法读取电脑的会话设置，请更新电脑端后重试。');
+      throw ProtocolException(tr("无法读取电脑的会话设置，请更新电脑端后重试。"));
     }
     final preferences = jsonDecode(jsonEncode(current['preferences'])) as Map;
-    final tasks = Map<String, dynamic>.from(preferences['tasks'] as Map? ?? {});
+    final entries = Map<String, dynamic>.from(
+      preferences[section] as Map? ?? {},
+    );
     if (state == null) {
-      tasks.remove(taskId);
+      entries.remove(id);
     } else {
-      tasks[taskId] = state;
+      entries[id] = state;
     }
-    preferences['tasks'] = tasks;
-    final id = operationId();
+    preferences[section] = entries;
+    final command = operationId();
     final saved = <String, dynamic>{
       'kind': 'history',
-      'taskId': taskId,
+      idKey: id,
       'envelope': {
         'schemaVersion': 1,
-        'commandId': id,
-        'idempotencyKey': id,
+        'commandId': command,
+        'idempotencyKey': command,
         'actor': {'kind': 'local_user'},
         'expectedStreamVersion': current['revision'],
         'issuedAt': DateTime.now().toUtc().toIso8601String(),
@@ -141,7 +166,7 @@ extension SessionWrites on MobileOperations {
     String environment,
   ) async {
     if (!['workspace', 'worktree'].contains(environment)) {
-      throw const ProtocolException('Fork 环境无效。');
+      throw ProtocolException(tr("Fork 环境无效。"));
     }
     final saved = <String, dynamic>{
       'kind': 'fork',
@@ -202,7 +227,7 @@ extension SessionWrites on MobileOperations {
         () => _write(client, 'fork_task', [request], saved: saved),
       );
       if (id != request['newTaskId']) {
-        throw const ProtocolException('Fork 返回的会话身份不一致，请核实原操作。');
+        throw ProtocolException(tr("Fork 返回的会话身份不一致，请核实原操作。"));
       }
     }
     return verifySession(client, saved);
@@ -230,7 +255,7 @@ extension SessionWrites on MobileOperations {
     Map<String, dynamic> saved,
   ) async {
     if (saved['kind'] != 'session') {
-      throw const ProtocolException('没有待确认的会话操作。');
+      throw ProtocolException(tr("没有待确认的会话操作。"));
     }
     await _clearIfCurrent(saved);
     return {
@@ -247,7 +272,7 @@ extension SessionWrites on MobileOperations {
   ) => _journalSerial(() async {
     await _requireBindingActive();
     if (!_sameRecoveryValue(await _current(current), current)) {
-      throw const ProtocolException('原操作已变化，请刷新。');
+      throw ProtocolException(tr("原操作已变化，请刷新。"));
     }
     _requireJournalActive();
     next['localTrackingId'] ??= current['localTrackingId'] ?? operationId();
@@ -279,7 +304,7 @@ extension SessionWrites on MobileOperations {
           final actual = result['request'];
           if (actual is! Map ||
               request.keys.any((k) => actual[k] != request[k])) {
-            throw const ProtocolException('Fork 回执与原请求不一致。');
+            throw ProtocolException(tr("Fork 回执与原请求不一致。"));
           }
         }
         await _clearIfCurrent(saved);
@@ -299,7 +324,7 @@ extension SessionWrites on MobileOperations {
       'review',
       'repair',
     ].contains(saved?['kind'])) {
-      throw const ProtocolException('这项操作需要先核实结果。');
+      throw ProtocolException(tr("这项操作需要先核实结果。"));
     }
     await _clearIfCurrent(saved!);
   }

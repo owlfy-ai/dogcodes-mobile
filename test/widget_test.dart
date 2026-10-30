@@ -2,9 +2,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:dogcodes_app/app.dart';
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'package:dogcodes_app/core/host_hub.dart';
 import 'package:dogcodes_app/core/protocol.dart';
-import 'package:dogcodes_app/features/inbox/pending_page.dart';
 import 'package:dogcodes_app/core/security/secret_storage.dart';
 
 class FakeLink implements HostLink {
@@ -137,7 +137,7 @@ class FakeLink implements HostLink {
                   'approvalId': 'a1',
                   'turnId': 'turn1',
                   'toolName': 'Bash',
-                  'commandSummary': 'pnpm test',
+                  'commandSummary': '{"input":{"command":"pnpm test"}}',
                   'requestedAtSequence': 8,
                   'options': [
                     {
@@ -202,38 +202,94 @@ HostHub fakeHub([FakeLink? link]) => HostHub(
 );
 
 void main() {
-  testWidgets('unconfigured app starts on 电脑 with an honest empty state', (
+  testWidgets('first run without a computer is a pairing step, not tabs', (
     tester,
   ) async {
     await tester.pumpWidget(const DogCodesApp());
     await tester.pumpAndSettle();
     expect(find.text('把电脑上的工作带在身边'), findsOneWidget);
-    final connect = tester.widget<ButtonStyleButton>(
-      find.ancestor(
-        of: find.text('连接电脑'),
-        matching: find.bySubtype<ButtonStyleButton>(),
-      ),
-    );
-    expect(connect.onPressed, isNull);
-    for (final label in ['会话', '工作区', '待处理', '电脑']) {
-      expect(
-        find.descendant(
-          of: find.byType(NavigationBar),
-          matching: find.text(label),
+    expect(find.text('点击「连接手机」，屏幕上会显示二维码'), findsOneWidget);
+    expect(find.byType(NavigationBar), findsNothing);
+    // Unconfigured build: honest note, pairing buttons disabled.
+    expect(find.text('当前内测版本尚未配置接入服务。'), findsOneWidget);
+    for (final label in ['扫码连接电脑', '粘贴配对链接']) {
+      final button = tester.widget<ButtonStyleButton>(
+        find.ancestor(
+          of: find.text(label),
+          matching: find.bySubtype<ButtonStyleButton>(),
         ),
-        findsOneWidget,
       );
+      expect(button.onPressed, isNull);
     }
-    await tester.tap(find.text('会话').last);
-    await tester.pumpAndSettle();
-    expect(find.text('会话将从电脑同步'), findsOneWidget);
-    await tester.tap(find.text('电脑').last);
-    await tester.pumpAndSettle();
     await tester.tap(find.byTooltip('偏好设置'));
     await tester.pumpAndSettle();
-    expect(find.text('跟随系统'), findsOneWidget);
-    expect(find.text('未配置'), findsOneWidget);
+    expect(find.text('跟随系统'), findsNWidgets(2));
+    expect(find.text('语言'), findsNWidgets(2));
+    expect(find.text('接入服务'), findsNothing);
+    await tester.tap(find.byIcon(Icons.translate));
+    await tester.pumpAndSettle();
+    addTearDown(() => languageOverride = null);
+    await tester.tap(find.text('Deutsch'));
+    await tester.pumpAndSettle();
+    expect(find.text('Einstellungen'), findsOneWidget);
     expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('a paired computer that cannot be reached offers retry', (
+    tester,
+  ) async {
+    var attempts = 0;
+    final hub = HostHub(
+      storage: MemorySecretStorage(),
+      lister: () async => [
+        {'hostId': 'mac', 'displayName': 'MacBook Pro'},
+      ],
+      connector: (host) async {
+        if (++attempts == 1) throw StateError('电脑未响应');
+        return FakeLink('mac');
+      },
+    );
+    await tester.pumpWidget(DogCodesApp(hub: hub));
+    await tester.pumpAndSettle();
+    expect(find.text('暂时连接不上电脑'), findsOneWidget);
+    expect(find.text('MacBook Pro'), findsOneWidget);
+    expect(find.textContaining('电脑未响应'), findsOneWidget);
+    expect(find.text('电脑上的 DogCodes 正在运行'), findsOneWidget);
+    expect(find.byType(NavigationBar), findsNothing);
+    // No cached copy yet: nothing to browse offline.
+    expect(find.textContaining('查看离线记录'), findsNothing);
+
+    await tester.tap(find.text('重新连接'));
+    await tester.pumpAndSettle();
+    expect(attempts, 2);
+    expect(find.byType(NavigationBar), findsOneWidget);
+    expect(find.text('优化登录流程'), findsOneWidget);
+
+    await tester.pumpWidget(const SizedBox());
+    hub.dispose();
+  });
+
+  testWidgets('cached records can be opened while the computer is away', (
+    tester,
+  ) async {
+    final hub = fakeHub();
+    await hub.load(connect: false);
+    final h = hub.hosts.single
+      ..connectAttempts = 1
+      ..error = '连接超时'
+      ..snapshot = {'projects': [], 'tasks': []}
+      ..syncedAt = DateTime.now();
+    expect(h.online, isFalse);
+    await tester.pumpWidget(DogCodesApp(hub: hub));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('查看离线记录'), findsOneWidget);
+    await tester.ensureVisible(find.textContaining('查看离线记录'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.textContaining('查看离线记录'));
+    await tester.pumpAndSettle();
+    expect(find.byType(NavigationBar), findsOneWidget);
+    await tester.pumpWidget(const SizedBox());
+    hub.dispose();
   });
 
   testWidgets('sessions, pending approvals and conversation use PC data', (
@@ -255,23 +311,26 @@ void main() {
 
     await tester.tap(find.text('2 项等待处理'));
     await tester.pumpAndSettle();
-    expect(find.text('允许 Bash？'), findsOneWidget);
+    // The inbox lists each request as a message: chat, preview, status.
+    expect(find.text('2 项需要你处理'), findsOneWidget);
+    expect(find.text('命令：pnpm test'), findsOneWidget);
+    expect(find.text('登录方式采用哪一种？'), findsOneWidget);
+    expect(find.text('等待你确认'), findsOneWidget);
+    expect(find.text('等待你回答'), findsOneWidget);
+
+    await tester.tap(find.text('命令：pnpm test'));
+    await tester.pumpAndSettle();
+    expect(find.text('是否允许运行以下命令？'), findsOneWidget);
     expect(find.text('pnpm test'), findsOneWidget);
     expect(find.text('允许一次'), findsOneWidget);
     expect(find.text('拒绝'), findsOneWidget);
     expect(find.byTooltip('其他授权范围'), findsOneWidget);
+    await tester.tap(find.byTooltip('返回'));
+    await tester.pumpAndSettle();
 
     // Structured question answered on the phone, validated again by the PC.
-    await tester.scrollUntilVisible(
-      find.text('发送回答'),
-      200,
-      scrollable: find
-          .descendant(
-            of: find.byType(PendingPage),
-            matching: find.byType(Scrollable),
-          )
-          .first,
-    );
+    await tester.tap(find.text('登录方式采用哪一种？'));
+    await tester.pumpAndSettle();
     expect(find.text('登录方式采用哪一种？'), findsOneWidget);
     await tester.ensureVisible(find.text('邮箱验证码'));
     await tester.pumpAndSettle();
@@ -288,6 +347,8 @@ void main() {
       'cancelled': false,
       'values': {'method': '邮箱验证码'},
     });
+    await tester.tap(find.byTooltip('返回'));
+    await tester.pumpAndSettle();
 
     await tester.tap(find.text('电脑').last);
     await tester.pumpAndSettle();
@@ -358,7 +419,7 @@ void main() {
     final cancel = link.executed.last['payload'];
     expect(cancel['type'], 'cancel_turn');
     expect(cancel['data'], {'taskId': 't1', 'turnId': 'turn1', 'runId': 'r1'});
-    expect(find.text('允许 Bash？'), findsOneWidget);
+    expect(find.text('是否允许运行以下命令？'), findsOneWidget);
     await tester.tap(find.byTooltip('返回'));
     for (var i = 0; i < 10; i++) {
       await tester.pump(const Duration(milliseconds: 100));
@@ -455,7 +516,7 @@ void main() {
     final hub = fakeHub();
     await tester.pumpWidget(DogCodesApp(hub: hub));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('工作区').last);
+    await tester.tap(find.text('项目').last);
     await tester.pumpAndSettle();
     await tester.tap(find.text('查看全部'));
     await tester.pumpAndSettle();
@@ -486,7 +547,7 @@ void main() {
     final hub = fakeHub();
     await tester.pumpWidget(DogCodesApp(hub: hub));
     await tester.pumpAndSettle();
-    for (final tab in ['工作区', '待处理', '电脑', '会话']) {
+    for (final tab in ['项目', '待处理', '电脑', '会话']) {
       await tester.tap(find.text(tab).last);
       await tester.pumpAndSettle();
       expect(tester.takeException(), isNull, reason: tab);

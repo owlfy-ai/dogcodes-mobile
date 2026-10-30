@@ -6,6 +6,8 @@ import 'package:path_provider/path_provider.dart';
 import '../core/protocol.dart';
 import '../core/security/host_lifecycle.dart';
 import '../core/security/secret_storage.dart';
+import 'package:dogcodes_app/l10n/strings.dart';
+
 part 'workspace_binding.dart';
 
 String draftKey(
@@ -118,7 +120,7 @@ class LocalWorkspace extends ChangeNotifier {
     if (!await file.exists()) return null;
     final raw = jsonDecode(await file.readAsString());
     if (raw is! Map || raw['key'] != key || raw['data'] is! Map) {
-      throw const FormatException('本机保存的数据不可读取');
+      throw FormatException(tr("本机保存的数据不可读取"));
     }
     return Map<String, dynamic>.from(raw['data'] as Map);
   }
@@ -231,7 +233,7 @@ class LocalWorkspace extends ChangeNotifier {
         Future<void> write() async {
           if (!RegExp(r'^[a-zA-Z0-9_-]+$').hasMatch(id) ||
               bytes.length > maxAttachmentBytes) {
-            throw StateError('附件大小或标识无效');
+            throw StateError(tr("附件大小或标识无效"));
           }
           final base = await _base();
           var used = _blobs.values.fold<int>(0, (total, b) => total + b.length);
@@ -244,7 +246,7 @@ class LocalWorkspace extends ChangeNotifier {
             }
           }
           if (used + bytes.length > 256 * 1024 * 1024) {
-            throw StateError('手机未发送附件已超过 256 MB，请先发送或移除其他草稿中的附件。');
+            throw StateError(tr("手机未发送附件已超过 256 MB，请先发送或移除其他草稿中的附件。"));
           }
           if (base == null) {
             _blobs[id] = Uint8List.fromList(bytes);
@@ -316,16 +318,18 @@ class LocalWorkspace extends ChangeNotifier {
   }
 
   Future<Uint8List> blob(String id) => _serial(() async {
-    if (!RegExp(r'^[a-zA-Z0-9_-]+$').hasMatch(id)) throw StateError('附件标识无效');
+    if (!RegExp(r'^[a-zA-Z0-9_-]+$').hasMatch(id)) {
+      throw StateError(tr("附件标识无效"));
+    }
     final base = await _base();
     if (base == null) {
       final value = _blobs[id];
-      if (value == null) throw StateError('本机附件已不可读取，请重新添加。');
+      if (value == null) throw StateError(tr("本机附件已不可读取，请重新添加。"));
       return Uint8List.fromList(value);
     }
     final file = File('${base.path}/attachments/$id');
     if (await file.length() > maxAttachmentBytes) {
-      throw StateError('本机附件大小已变化。');
+      throw StateError(tr("本机附件大小已变化。"));
     }
     return file.readAsBytes();
   });
@@ -466,6 +470,47 @@ class LocalWorkspace extends ChangeNotifier {
           'snapshot': {...frozen, 'items': items},
           'syncedAt': at.toUtc().toIso8601String(),
           'truncated': truncated,
+        });
+      }, () {}),
+    );
+  }
+
+  /// Approvals and questions this phone has seen for one computer, pending
+  /// and handled. Kept with the offline cache and cleared with it.
+  Future<List<Map<String, dynamic>>> approvalHistory(
+    String host, {
+    String? bindingEpoch,
+  }) => _serial(
+    () => _bound(
+      host,
+      bindingEpoch,
+      () async => [
+        for (final e
+            in (await _get(
+                      'cache',
+                      _approvalHistoryKey(host, bindingEpoch),
+                    ))?['entries']
+                    as List? ??
+                const [])
+          Map<String, dynamic>.from(e as Map),
+      ],
+      () => <Map<String, dynamic>>[],
+    ),
+  );
+
+  Future<void> saveApprovalHistory(
+    String host,
+    List<Map<String, dynamic>> entries,
+    int epoch, {
+    String? bindingEpoch,
+  }) {
+    final frozen = jsonDecode(jsonEncode(entries)) as List;
+    return _serial(
+      () => _bound<void>(host, bindingEpoch, () async {
+        if (epoch != cacheEpoch) return;
+        await _cachePut(_approvalHistoryKey(host, bindingEpoch), {
+          'entries': frozen,
+          'syncedAt': DateTime.now().toUtc().toIso8601String(),
         });
       }, () {}),
     );

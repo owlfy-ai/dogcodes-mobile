@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:convert';
 import 'dart:typed_data';
 import 'protocol.dart';
@@ -60,7 +61,7 @@ class FrameReader {
       if (message['type'] == 'fragment_cancel') {
         final id = message['id'];
         if (id is! String || !RegExp(r'^[a-f0-9]{32}$').hasMatch(id)) {
-          throw const ProtocolException('消息分片取消标识无效。');
+          throw ProtocolException(tr("消息分片取消标识无效。"));
         }
         _fragments.remove(id);
         continue;
@@ -78,7 +79,7 @@ class FrameReader {
     final binary = word & _binary != 0;
     final length = word & ~_binary & 0xffffffff;
     if (length == 0 || length > maxMessage) {
-      throw const ProtocolException('消息大小超出范围。');
+      throw ProtocolException(tr("消息大小超出范围。"));
     }
     if (buffered < length + 4) return null;
     final body = Uint8List.sublistView(_bytes, _start + 4, _start + 4 + length);
@@ -92,10 +93,10 @@ class FrameReader {
     if (!binary) {
       return jsonDecode(utf8.decode(body)) as Map<String, dynamic>;
     }
-    if (length < 4) throw const ProtocolException('二进制消息格式无效。');
+    if (length < 4) throw ProtocolException(tr("二进制消息格式无效。"));
     final headerLength = ByteData.sublistView(body).getUint32(0);
     if (headerLength > length - 4 || headerLength > 64 * 1024) {
-      throw const ProtocolException('二进制消息格式无效。');
+      throw ProtocolException(tr("二进制消息格式无效。"));
     }
     final header =
         jsonDecode(utf8.decode(body.sublist(4, 4 + headerLength)))
@@ -120,20 +121,20 @@ class FrameReader {
         payload.isEmpty ||
         payload.length > 8192 ||
         offset + payload.length > total) {
-      throw const ProtocolException('消息分片格式无效。');
+      throw ProtocolException(tr("消息分片格式无效。"));
     }
     var fragment = _fragments[id];
     if (fragment == null) {
       // One large control response may pass an incomplete video. A third
       // simultaneous assembly is never produced by the PC scheduler.
       if (offset != 0 || _fragments.length >= 2) {
-        throw const ProtocolException('消息分片顺序或数量无效。');
+        throw ProtocolException(tr("消息分片顺序或数量无效。"));
       }
       fragment = _Fragment(total);
       _fragments[id] = fragment;
     }
     if (fragment.bytes.length != total || fragment.received != offset) {
-      throw const ProtocolException('消息分片不连续。');
+      throw ProtocolException(tr("消息分片不连续。"));
     }
     fragment.bytes.setRange(offset, offset + payload.length, payload);
     fragment.received += payload.length;
@@ -145,14 +146,14 @@ class FrameReader {
     final word = ByteData.sublistView(fragment.bytes).getUint32(0);
     final length = word & ~_binary & 0xffffffff;
     if (length != total - 4 || length > maxMessage || length == 0) {
-      throw const ProtocolException('消息分片长度无效。');
+      throw ProtocolException(tr("消息分片长度无效。"));
     }
     final result = _decode(
       Uint8List.sublistView(fragment.bytes, 4),
       word & _binary != 0,
     );
     if (result['type'] == 'fragment') {
-      throw const ProtocolException('不允许嵌套消息分片。');
+      throw ProtocolException(tr("不允许嵌套消息分片。"));
     }
     _onFragment?.call(id, total);
     return result;

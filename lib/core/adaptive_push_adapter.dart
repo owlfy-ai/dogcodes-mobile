@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/services.dart';
@@ -68,7 +69,7 @@ class AdaptivePushAdapter implements PushAdapter {
           requestPermission ? 'authorize' : 'allowed',
         ) !=
         true) {
-      throw const ProtocolException('系统通知权限尚未开启。');
+      throw ProtocolException(tr("系统通知权限尚未开启。"));
     }
     // Huawei with HMS is the explicit exception to the FCM-first preference.
     final providers = _isIOS
@@ -94,6 +95,6 @@ class AdaptivePushAdapter implements PushAdapter {
     if (!_isIOS && _fallback.configured) {
       return _fallback.register(requestPermission: false);
     }
-    throw const ProtocolException('暂时无法连接可用的通知服务，请稍后重试。');
+    throw ProtocolException(tr("暂时无法连接可用的通知服务，请稍后重试。"));
   }
 }

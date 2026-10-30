@@ -570,3 +570,11 @@ iOS 已接通申请权限、APNs 当前 token、限时注册、冷／热点击�
 iOS Runner 的 Debug／Release／Profile Bundle ID 与 Android applicationId／namespace 统一为 `codes.dog.mobile`，iOS 测试目标同步为 `codes.dog.mobile.RunnerTests`。五个 Android 原生入口迁到匹配的 Kotlin 包目录；服务端 APNs topic、HMS packageName 和 EMAS 辅助 Activity 示例／测试及当前推送文档同步更新。
 
 Android ARM64 debug 与 iOS 模拟器目标均编译通过；读取实际 APK 确认包名和 MainActivity，合并 Manifest 的五个入口均属于新包；读取实际 iOS Info.plist 确认 Bundle ID。服务端四项推送专项、Rust 格式及相关差异检查通过，没有新增或重复整套业务测试。日志 `/tmp/dogcodes-mobile-id-{android-build,ios-build,push-tests}.log`。Apple／Firebase／华为／EMAS 后台应用与签名授权须使用新标识，尚未进行真实推送／设备验收；未提交推送。
+
+## 2026-10-28 Xcode 真机目标的旧推送插件模块校验
+
+在独立 DerivedData 的 generic/platform=iOS Debug 构建中复现 aliyun_push 的四条错误：CocoaPods umbrella 的引号导入、Flutter/Flutter.h 缺失，以及两个模块构建失败。Flutter 头文件实际存在，失败发生于 VerifyModule，普通插件编译使用的 Flutter 搜索路径未进入该独立验证命令。
+
+Podfile 的 post_install 仅对 aliyun_push 设置 ENABLE_MODULE_VERIFIER=NO，保留正常源码编译、模块导入与最终链接；不修改 pub 缓存或全局编译警告，也不改变签名配置。重新生成 Pods 后增量及另一独立目录的干净 iPhoneOS arm64 Debug 构建均成功，使用 CODE_SIGNING_ALLOWED=NO，未安装／运行手机 App或发送推送。锁文件仅 Podfile checksum 更新，依赖版本不变；用户已配置的 Team、Bundle ID 与推送 entitlements 保留。
+
+证据：/tmp/dogcodes-ios-device-push-before.log、/tmp/dogcodes-ios-device-push-after.log、/tmp/dogcodes-ios-device-push-clean.log。Xcode 重新 Run 时仍需使用原已配置的真机签名；实际运行及收件不由此标为通过。未提交推送。

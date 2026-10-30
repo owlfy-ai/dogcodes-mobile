@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
@@ -196,7 +197,7 @@ extension TurnArtifacts on HostApi {
 
   Future<TurnChanges> _read(String taskId, Map<String, dynamic> meta) async {
     final total = (meta['byteLength'] as num).toInt();
-    if (total > 1048576) throw StateError('本轮变更记录过大，请在电脑上查看');
+    if (total > 1048576) throw StateError(tr("本轮变更记录过大，请在电脑上查看"));
     final bytes = <int>[];
     while (bytes.length < total || total == 0) {
       final chunk = await call('read_artifact', [
@@ -211,17 +212,17 @@ extension TurnArtifacts on HostApi {
       ]);
       final part = (chunk as Map)['bytes'] as List? ?? const [];
       if (chunk['offset'] != bytes.length || (part.isEmpty && total > 0)) {
-        throw StateError('本轮变更记录读取不一致');
+        throw StateError(tr("本轮变更记录读取不一致"));
       }
       bytes.addAll(part.cast<num>().map((b) => b.toInt()));
       if (chunk['nextOffset'] == null) break;
     }
     if (bytes.length != total ||
         sha256.convert(bytes).toString() != meta['payloadSha256']) {
-      throw StateError('本轮变更记录校验失败');
+      throw StateError(tr("本轮变更记录校验失败"));
     }
     final data = jsonDecode(utf8.decode(bytes));
-    if (data is! Map) throw StateError('本轮变更记录格式不可用');
+    if (data is! Map) throw StateError(tr("本轮变更记录格式不可用"));
     return TurnChanges.parse(Map<String, dynamic>.from(data));
   }
 }

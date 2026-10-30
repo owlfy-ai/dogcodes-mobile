@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
@@ -29,17 +30,22 @@ class ClipboardCancelled implements Exception {
 /// A transfer owns a physical authenticated connection, separate from the
 /// video/input lease and the business link. A route is chosen before staging;
 /// it cannot migrate a connection-bound transfer or replay a clipboard write.
+///
+/// Small payloads such as text stay on the relay: setting up a direct path
+/// costs more time than it saves.
 Future<HostLink> openClipboardLink(
   AdaptiveHostLink business, {
   required bool Function() current,
+  bool direct = true,
 }) async {
   final relay = await ownedResource<HostLink>(
     create: business.relayDialer,
     current: current,
     release: (v) => v.close(),
-    timeout: const Duration(seconds: 12),
+    timeout: const Duration(seconds: 20),
   );
   try {
+    if (!direct) return relay;
     final caps = await relay.call('remote_capabilities', null);
     if (!current()) throw const ClipboardCancelled();
     if (caps is Map &&
@@ -113,14 +119,14 @@ class ClipboardTransfer {
       if (_id != null) 'transferId': _id,
       ...?args,
     });
-    if (result is! Map) throw const _ClipboardResponseInvalid('剪贴板传输响应无效');
+    if (result is! Map) throw _ClipboardResponseInvalid(tr("剪贴板传输响应无效"));
     // Save even a late begin response so finally can close its orphaned buffer.
     if (op.startsWith('begin_') && result['transferId'] is String) {
       _id = result['transferId'] as String;
     }
     _check();
     if (result['transferId'] != _id) {
-      throw const _ClipboardResponseInvalid('剪贴板传输身份不匹配');
+      throw _ClipboardResponseInvalid(tr("剪贴板传输身份不匹配"));
     }
     return Map<String, dynamic>.from(result);
   }
@@ -151,7 +157,7 @@ class ClipboardTransfer {
         m['chunkBytes'] is! int ||
         (m['chunkBytes'] as int) < 1 ||
         (m['chunkBytes'] as int) > chunkBytes) {
-      throw const ProtocolException('剪贴板传输校验信息不匹配');
+      throw ProtocolException(tr("剪贴板传输校验信息不匹配"));
     }
   }
 
@@ -159,8 +165,8 @@ class ClipboardTransfer {
     if (bytes.isEmpty || bytes.length > kind.maxBytes) {
       throw ProtocolException(
         kind == ClipboardKind.image
-            ? '图片需小于 16 MB，请缩小图片后重试'
-            : '剪贴板文字为空或超过 1 MB',
+            ? tr("图片需小于 16 MB，请缩小图片后重试")
+            : tr("剪贴板文字为空或超过 1 MB"),
       );
     }
     final hash = await _hash(bytes);
@@ -179,7 +185,7 @@ class ClipboardTransfer {
         direction: 'upload',
         state: 'staging',
       );
-      if (m['offset'] != 0) throw const ProtocolException('图片传输起始位置无效');
+      if (m['offset'] != 0) throw ProtocolException(tr("图片传输起始位置无效"));
       final chunk = m['chunkBytes'] as int;
       for (var offset = 0; offset < bytes.length;) {
         final end = min(offset + chunk, bytes.length);
@@ -187,7 +193,7 @@ class ClipboardTransfer {
           'offset': offset,
           'bytes': base64Encode(Uint8List.sublistView(bytes, offset, end)),
         });
-        if (reply['offset'] != end) throw const ProtocolException('剪贴板上传位置不匹配');
+        if (reply['offset'] != end) throw ProtocolException(tr("剪贴板上传位置不匹配"));
         offset = end;
         _progress(offset, bytes.length);
       }
@@ -202,10 +208,10 @@ class ClipboardTransfer {
           receipt = await _call('status');
         } catch (_) {
           _check();
-          throw const ProtocolException('尚未确认电脑剪贴板是否更新，请从电脑获取核实；不会自动重发');
+          throw ProtocolException(tr("尚未确认电脑剪贴板是否更新，请从电脑获取核实；不会自动重发"));
         }
         if (receipt['state'] != 'applied') {
-          throw const ProtocolException('未确认电脑剪贴板已更新，请从电脑获取核实；不会自动重发');
+          throw ProtocolException(tr("未确认电脑剪贴板已更新，请从电脑获取核实；不会自动重发"));
         }
       }
       _manifest(
@@ -217,7 +223,7 @@ class ClipboardTransfer {
         state: 'applied',
       );
       if (receipt['offset'] != bytes.length) {
-        throw const ProtocolException('剪贴板写入回执不完整，请从电脑获取核实');
+        throw ProtocolException(tr("剪贴板写入回执不完整，请从电脑获取核实"));
       }
     } finally {
       await close();
@@ -235,7 +241,7 @@ class ClipboardTransfer {
         final encoded = r['bytes'];
         if (encoded is! String ||
             encoded.length > ((chunkBytes + 2) ~/ 3) * 4) {
-          throw const ProtocolException('剪贴板下载数据块过大');
+          throw ProtocolException(tr("剪贴板下载数据块过大"));
         }
         final b = base64Decode(encoded);
         final end = offset + b.length;
@@ -244,14 +250,14 @@ class ClipboardTransfer {
             b.length > (m['chunkBytes'] as int) ||
             end > size ||
             r['nextOffset'] != end) {
-          throw const ProtocolException('剪贴板下载位置不匹配');
+          throw ProtocolException(tr("剪贴板下载位置不匹配"));
         }
         bytes.setRange(offset, end, b);
         offset = end;
         _progress(offset, size);
       }
       if (await _hash(bytes) != m['sha256']) {
-        throw const ProtocolException('剪贴板内容校验失败，未写入手机剪贴板');
+        throw ProtocolException(tr("剪贴板内容校验失败，未写入手机剪贴板"));
       }
       _check();
       return bytes;

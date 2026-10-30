@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import '../../core/host_hub.dart';
@@ -70,12 +71,12 @@ class ComposerState extends ChangeNotifier {
   Future<void> flush() async {
     final scope = key;
     if (scope == null || restoring) return;
-    if (restoreFailed) throw const ProtocolException('请先恢复原草稿，未覆盖本机记录。');
+    if (restoreFailed) throw ProtocolException(tr("请先恢复原草稿，未覆盖本机记录。"));
     try {
       await store.saveDraft(scope, _snapshot());
     } catch (e) {
       if (!_disposed) {
-        error = '草稿未能保存：$e';
+        error = tr("草稿未能保存：{0}", [e]);
         notifyListeners();
       }
       rethrow;
@@ -210,7 +211,7 @@ class ComposerState extends ChangeNotifier {
     } catch (e) {
       if (generation == _generation) {
         restoreFailed = true;
-        error = '无法恢复草稿：$e';
+        error = tr("无法恢复草稿：{0}", [e]);
       }
     } finally {
       if (!_disposed && generation == _generation) {
@@ -257,12 +258,12 @@ class ComposerState extends ChangeNotifier {
         model: choice?.model ?? fresh.model,
         thinking: choice?.thinking,
       );
-      if (!choiceValid) error = '原 Agent、模型或思考强度当前不可用，请重新选择后发送。';
+      if (!choiceValid) error = tr("原 Agent、模型或思考强度当前不可用，请重新选择后发送。");
       await flush();
       _notify();
     } catch (e) {
       if (!_disposed && generation == _generation) {
-        error = '暂时无法读取模型，可保留草稿后重试：$e';
+        error = tr("暂时无法读取模型，可保留草稿后重试：{0}", [e]);
         _notify();
       }
     } finally {
@@ -316,10 +317,10 @@ class ComposerState extends ChangeNotifier {
   }
 
   Future<List<Map<String, dynamic>>> prepareAttachments() async {
-    if (uploading) throw const ProtocolException('附件仍在上传。');
+    if (uploading) throw ProtocolException(tr("附件仍在上传。"));
     final h = host, link = host?.link;
     if (h == null || link == null || !h.online) {
-      throw const ProtocolException('电脑离线，附件及任务已保留为草稿。');
+      throw ProtocolException(tr("电脑离线，附件及任务已保留为草稿。"));
     }
     validateAttachmentSelection(attachments);
     final generation = ++_uploadGeneration, epoch = h.connectionEpoch;

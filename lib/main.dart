@@ -5,10 +5,33 @@ import 'core/access_client.dart';
 import 'core/mobile_runtime.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
+  final binding = WidgetsFlutterBinding.ensureInitialized();
+  // Keep the native launch view until Flutter's identical artwork is decoded;
+  // otherwise its first frame can briefly be an empty black canvas.
+  binding.deferFirstFrame();
+  final artwork = const AssetImage(
+    'assets/branding/launch-lockup.png',
+  ).resolve(const ImageConfiguration());
+  late final ImageStreamListener listener;
+  void ready() {
+    artwork.removeListener(listener);
+    binding.allowFirstFrame();
+  }
+
+  listener = ImageStreamListener(
+    (image, _) {
+      image.dispose();
+      ready();
+    },
+    onError: (Object error, StackTrace? stack) {
+      debugPrint('Launch artwork unavailable: $error');
+      ready();
+    },
+  );
+  artwork.addListener(listener);
   const address = String.fromEnvironment(
     'DOGCODES_SERVICE_URL',
-    defaultValue: kDebugMode ? 'http://127.0.0.1:8787' : '',
+    defaultValue: 'https://global.dog.codes',
   );
   const development = bool.fromEnvironment('DOGCODES_LOCAL_DEV');
   runApp(

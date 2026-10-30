@@ -35,7 +35,7 @@ extension ReviewWrites on MobileOperations {
   }) async {
     final indices = findings.toSet().toList()..sort();
     if (indices.isEmpty || run['inputSha256'] is! String) {
-      throw const ProtocolException('请选择有效的审查问题。');
+      throw ProtocolException(tr("请选择有效的审查问题。"));
     }
     final saved = {
       'kind': 'repair',
@@ -74,7 +74,7 @@ extension ReviewWrites on MobileOperations {
           'runId',
           'repairTurnId',
         ].any((k) => actual['recheckOf']?[k] != request['recheckOf']?[k])) {
-      throw const ProtocolException('审查回执与原请求不匹配，请保留原操作并核实。');
+      throw ProtocolException(tr("审查回执与原请求不匹配，请保留原操作并核实。"));
     }
   }
 
@@ -93,7 +93,7 @@ extension ReviewWrites on MobileOperations {
             request['reference']['inputSha256'] ||
         jsonEncode(intent['reference']?['findingIndices']) !=
             jsonEncode(request['reference']['findingIndices'])) {
-      throw const ProtocolException('修复回执与原请求不匹配，请先核实电脑上的原修复。');
+      throw ProtocolException(tr("修复回执与原请求不匹配，请先核实电脑上的原修复。"));
     }
     if (['submitted', 'abandoned'].contains(value['state'])) {
       await _clearIfCurrent(saved);
@@ -119,7 +119,7 @@ extension ReviewWrites on MobileOperations {
       );
     }
     final runs = await client.call('turn_reviews', [request['taskId']]);
-    if (runs is! List) throw const ProtocolException('无法读取审查记录，请更新电脑端后重试。');
+    if (runs is! List) throw ProtocolException(tr("无法读取审查记录，请更新电脑端后重试。"));
     for (final run in runs) {
       if (run is Map && run['request']?['runId'] == request['runId']) {
         _validateReview(request, run);

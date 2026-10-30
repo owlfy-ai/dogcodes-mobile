@@ -36,23 +36,22 @@ extension CancelWrites on MobileOperations {
             ? null
             : Map<String, dynamic>.from(all.values.first as Map);
       });
-  Future<void> _storeCancel(Map<String, dynamic> saved) => _journalSerial(
-    () async {
-      await _requireBindingActive();
-      final all = await _readCancels(), target = _cancelTarget(saved);
-      if (_journalsForgotten) throw const ProtocolException('这台电脑已移除，未发送停止请求。');
-      if (all.containsKey(target)) {
-        throw const ProtocolException('这个任务已经有一个停止请求在等待确认。');
-      }
-      if (all.length >= 64) {
-        throw const ProtocolException('等待确认的停止请求太多，请先处理待处理页里的卡片。');
-      }
-      if (bindingEpoch != null) saved['localBindingEpoch'] = bindingEpoch;
-      all[target] = saved;
-      await storage.write(_cancelKey, jsonEncode(all));
-      if (_journalsForgotten) throw const ProtocolException('这台电脑已移除，未发送停止请求。');
-    },
-  );
+  Future<void> _storeCancel(Map<String, dynamic> saved) =>
+      _journalSerial(() async {
+        await _requireBindingActive();
+        final all = await _readCancels(), target = _cancelTarget(saved);
+        if (_journalsForgotten) throw ProtocolException(tr("这台电脑已移除，未发送停止请求。"));
+        if (all.containsKey(target)) {
+          throw ProtocolException(tr("这个任务已经有一个停止请求在等待确认。"));
+        }
+        if (all.length >= 64) {
+          throw ProtocolException(tr("等待确认的停止请求太多，请先处理待处理页里的卡片。"));
+        }
+        if (bindingEpoch != null) saved['localBindingEpoch'] = bindingEpoch;
+        all[target] = saved;
+        await storage.write(_cancelKey, jsonEncode(all));
+        if (_journalsForgotten) throw ProtocolException(tr("这台电脑已移除，未发送停止请求。"));
+      });
   Future<void> _clearCancel(Map<String, dynamic> saved) =>
       _journalSerial(() async {
         if (_journalsForgotten) return;
@@ -70,7 +69,7 @@ extension CancelWrites on MobileOperations {
         run['runId'] is! String ||
         run['turnId'] is! String ||
         task['taskId'] is! String) {
-      throw const ProtocolException('任务当前没有可停止的运行。');
+      throw ProtocolException(tr("任务当前没有可停止的运行。"));
     }
     parseSequence('${task['streamVersion']}');
     final id = operationId();
@@ -139,7 +138,7 @@ extension CancelWrites on MobileOperations {
   ) async {
     final fresh = await client.call('bootstrap', null);
     if (fresh is! Map || fresh['tasks'] is! List) {
-      throw const ProtocolException('暂时无法读取任务状态，请稍后再确认。');
+      throw ProtocolException(tr("暂时无法读取任务状态，请稍后再确认。"));
     }
     final task = (fresh['tasks'] as List)
         .where((t) => t is Map && t['taskId'] == saved['taskId'])
@@ -158,7 +157,7 @@ extension CancelWrites on MobileOperations {
     Map<String, dynamic> saved, {
     int remaining = 4,
   }) async {
-    if (_journalsForgotten) throw const ProtocolException('这台电脑已移除，未发送停止请求。');
+    if (_journalsForgotten) throw ProtocolException(tr("这台电脑已移除，未发送停止请求。"));
     try {
       await _write(client, 'execute', [saved['envelope']], saved: saved);
     } on ProtocolException catch (e) {
@@ -181,11 +180,11 @@ extension CancelWrites on MobileOperations {
     Map<String, dynamic> current,
     Map<String, dynamic> next,
   ) => _journalSerial(() async {
-    if (_journalsForgotten) throw const ProtocolException('这台电脑已移除，未重新发送停止请求。');
+    if (_journalsForgotten) throw ProtocolException(tr("这台电脑已移除，未重新发送停止请求。"));
     await _requireBindingActive();
     final all = await _readCancels(), target = _cancelTarget(current);
     if (!_sameGitValue(all[target], current) || _cancelTarget(next) != target) {
-      throw const ProtocolException('原停止请求已改变，请刷新。');
+      throw ProtocolException(tr("原停止请求已改变，请刷新。"));
     }
     if (bindingEpoch != null) next['localBindingEpoch'] = bindingEpoch;
     all[target] = next;
@@ -203,15 +202,15 @@ extension CancelWrites on MobileOperations {
     HostApi client,
     Map<String, dynamic> saved,
   ) async {
-    if (saved['kind'] != 'cancel') throw const ProtocolException('没有待确认的停止请求。');
+    if (saved['kind'] != 'cancel') throw ProtocolException(tr("没有待确认的停止请求。"));
     await _clearCancel(saved);
     return {'cancelReceipt': const {}, 'state': 'abandoned'};
   }
 }
 
 String cancelResultMessage(Map result) => switch (result['state']) {
-  'accepted' => '电脑已收到停止请求，任务会在停下后更新状态。',
-  'target_finished' => '这次运行已经结束，不需要再停止。',
-  'abandoned' => '已不再等待。如果电脑收到了这个停止请求，任务仍会停下。',
-  _ => '还不确定是否已停止，可以再发一次停止。',
+  'accepted' => tr("电脑已收到停止请求，任务会在停下后更新状态。"),
+  'target_finished' => tr("这次运行已经结束，不需要再停止。"),
+  'abandoned' => tr("已不再等待。如果电脑收到了这个停止请求，任务仍会停下。"),
+  _ => tr("还不确定是否已停止，可以再发一次停止。"),
 };

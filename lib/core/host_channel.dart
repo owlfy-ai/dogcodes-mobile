@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'protocol.dart';
 
 /// Implement only after key-pinned E2E handshake and host authorization.
@@ -20,7 +21,7 @@ class HostRequest {
   }) {
     if ([requestId, hostId, method].any((s) => s.isEmpty) ||
         (mutating && (operationId == null || operationId!.isEmpty))) {
-      throw const ProtocolException('写操作必须保留原始操作标识。');
+      throw ProtocolException(tr("写操作必须保留原始操作标识。"));
     }
   }
   final String requestId;

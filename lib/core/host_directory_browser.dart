@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'package:flutter/foundation.dart';
 import 'host_hub.dart';
 import 'pc_api.dart';
@@ -54,7 +55,7 @@ class HostDirectoryBrowser extends ChangeNotifier {
     final link = host.link, epoch = host.connectionEpoch;
     try {
       if (!host.online || link == null) {
-        throw const ProtocolException('电脑离线，重新连接后再浏览目录。');
+        throw ProtocolException(tr("电脑离线，重新连接后再浏览目录。"));
       }
       final value = await link.hostDirectories(
         target,
@@ -63,16 +64,16 @@ class HostDirectoryBrowser extends ChangeNotifier {
       );
       if (_disposed || generation != _generation) return;
       if (host.link != link || host.connectionEpoch != epoch || !host.online) {
-        throw const ProtocolException('连接已更换，请重新读取目录。');
+        throw ProtocolException(tr("连接已更换，请重新读取目录。"));
       }
       if (value['entries'] is! List ||
           (target != null && value['path'] is! String) ||
           (append && value['path'] != path)) {
-        throw const ProtocolException('电脑未返回有效的目录列表，请更新电脑端后重试。');
+        throw ProtocolException(tr("电脑未返回有效的目录列表，请更新电脑端后重试。"));
       }
       final after = (value['next'] as num?)?.toInt();
       if (after != null && after <= offset) {
-        throw const ProtocolException('目录分页没有前进，请刷新目录。');
+        throw ProtocolException(tr("目录分页没有前进，请刷新目录。"));
       }
       final list = [
         for (final e in value['entries'] as List)
@@ -94,7 +95,7 @@ class HostDirectoryBrowser extends ChangeNotifier {
         error =
             e is ProtocolException &&
                 e.message.contains('remote method unavailable')
-            ? '电脑端暂不支持目录选择，请更新电脑端后重试。'
+            ? tr("电脑端暂不支持目录选择，请更新电脑端后重试。")
             : '$e';
       }
     } finally {

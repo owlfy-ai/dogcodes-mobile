@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'theme.dart';
@@ -18,7 +19,11 @@ class QuotaReading {
   final String? window;
   final DateTime? resetsAt;
 
-  static const _labels = {300: '5 小时', 10080: '每周', 0: '当前账期'};
+  static Map<int, String> get _labels => {
+    300: tr("5 小时"),
+    10080: tr("每周"),
+    0: tr("当前账期"),
+  };
   static const _billing = {
     'cursor-included',
     'cursor-models',
@@ -66,8 +71,8 @@ class QuotaReading {
       window: primary == null
           ? null
           : _billing.contains(primary['id'])
-          ? '每月'
-          : _labels[minutes] ?? '$minutes 分钟',
+          ? tr("每月")
+          : _labels[minutes] ?? tr("{0} 分钟", [minutes]),
       resetsAt: resets is num
           ? DateTime.fromMillisecondsSinceEpoch(resets.toInt() * 1000)
           : null,
@@ -100,8 +105,8 @@ class QuotaReading {
         ? account
         : windows.every(
             (w) =>
-                w['scope'] == '套餐内（终端读数）' ||
-                (w['id'] == 'kiro-included' && w['scope'] == '套餐内（Kiro）'),
+                w['scope'] == tr("套餐内（终端读数）") ||
+                (w['id'] == 'kiro-included' && w['scope'] == tr("套餐内（Kiro）")),
           )
         ? windows
         : <Map<String, dynamic>>[];
@@ -142,11 +147,11 @@ class QuotaReading {
   String get description {
     final parts = [
       exhausted
-          ? '额度已用尽'
+          ? tr("额度已用尽")
           : remaining == null
-          ? '额度暂无读数'
-          : '${window ?? ''}剩余额度 ${remaining!.round()}%',
-      if (resetsAt != null) '重置时间：${_time(resetsAt!)}',
+          ? tr("额度暂无读数")
+          : tr("{0}剩余额度 {1}%", [window ?? '', remaining!.round()]),
+      if (resetsAt != null) tr("重置时间：{0}", [_time(resetsAt!)]),
     ];
     return parts.join('，');
   }
@@ -157,7 +162,7 @@ class QuotaReading {
     final hm = '${two(t.hour)}:${two(t.minute)}';
     return t.year == now.year && t.month == now.month && t.day == now.day
         ? hm
-        : '${t.month}月${t.day}日 $hm';
+        : tr("{0}月{1}日 {2}", [t.month, t.day, hm]);
   }
 }
 
@@ -168,6 +173,7 @@ class QuotaRing extends StatelessWidget {
   final bool showValue;
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final c = context.dc;
     final color = reading.color(c);
     return Tooltip(

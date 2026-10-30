@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../../core/host_api.dart';
@@ -86,33 +87,36 @@ class _PreviewPageState extends State<PreviewPage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: DetailBar(
-      title: '预览',
-      subtitle: 'localhost:${widget.port}${path ?? ''}',
-      actions: [
-        IconButton(
-          tooltip: '后退',
-          onPressed: web == null ? null : () => web!.goBack(),
-          icon: const Icon(Icons.arrow_back),
-        ),
-        IconButton(
-          tooltip: '刷新',
-          onPressed: web == null ? null : () => web!.reload(),
-          icon: const Icon(Icons.refresh),
-        ),
-      ],
-    ),
-    body: error != null
-        ? Center(child: InlineNotice(error!, danger: true))
-        : web == null
-        ? const Center(child: CircularProgressIndicator())
-        : Column(
-            children: [
-              if (progress < 100)
-                LinearProgressIndicator(value: progress / 100, minHeight: 2),
-              Expanded(child: WebViewWidget(controller: web!)),
-            ],
+  Widget build(BuildContext context) {
+    watchAppLanguage(context);
+    return Scaffold(
+      appBar: DetailBar(
+        title: tr("预览"),
+        subtitle: 'localhost:${widget.port}${path ?? ''}',
+        actions: [
+          IconButton(
+            tooltip: tr("后退"),
+            onPressed: web == null ? null : () => web!.goBack(),
+            icon: const Icon(Icons.arrow_back),
           ),
-  );
+          IconButton(
+            tooltip: tr("刷新"),
+            onPressed: web == null ? null : () => web!.reload(),
+            icon: const Icon(Icons.refresh),
+          ),
+        ],
+      ),
+      body: error != null
+          ? Center(child: InlineNotice(error!, danger: true))
+          : web == null
+          ? const Center(child: CircularProgressIndicator())
+          : Column(
+              children: [
+                if (progress < 100)
+                  LinearProgressIndicator(value: progress / 100, minHeight: 2),
+                Expanded(child: WebViewWidget(controller: web!)),
+              ],
+            ),
+    );
+  }
 }

@@ -1,0 +1,3 @@
+"NSCameraUsageDescription" = "Escaneie o QR code de pareamento do seu computador ou tire uma foto para anexar a uma tarefa.";
+"NSLocalNetworkUsageDescription" = "Conecte-se diretamente e com criptografia ao computador pareado para ver conversas e trabalhar remotamente.";
+"NSPhotoLibraryUsageDescription" = "Escolha fotos para anexar às tarefas no seu computador.";

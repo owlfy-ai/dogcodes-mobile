@@ -6,7 +6,7 @@ extension WorkspaceWrites on MobileOperations {
   Future<void> _requireWorkspaceRecovery(HostApi client, String feature) async {
     final caps = await client.call('remote_capabilities', null);
     if (caps is! Map || caps[feature] != true) {
-      throw const ProtocolException('请更新电脑端后再操作，尚未启动或修改配置。');
+      throw ProtocolException(tr("请更新电脑端后再操作，尚未启动或修改配置。"));
     }
   }
 
@@ -28,7 +28,7 @@ extension WorkspaceWrites on MobileOperations {
         'directoryIndex': directoryIndex,
         'taskId': null,
         'commandId': null,
-        'label': '终端',
+        'label': tr("终端"),
         'cwd': cwd,
         'command': null,
         'cols': 80,
@@ -128,7 +128,7 @@ extension WorkspaceWrites on MobileOperations {
       });
       if (receipt == null) return null;
       if (receipt is! Map || receipt['operationId'] != request['operationId']) {
-        throw const ProtocolException('原启动回执不匹配。');
+        throw ProtocolException(tr("原启动回执不匹配。"));
       }
       if (receipt['state'] == 'retired') {
         await _clearIfCurrent(saved);
@@ -144,7 +144,7 @@ extension WorkspaceWrites on MobileOperations {
           terminal is! Map ||
           terminal['id'] != request['operationId'] ||
           terminal['projectId'] != saved['projectId']) {
-        throw const ProtocolException('原启动记录与项目或运行配置不匹配，未重新执行。');
+        throw ProtocolException(tr("原启动记录与项目或运行配置不匹配，未重新执行。"));
       }
       final info = Map<String, dynamic>.from(terminal);
       // Exited, interrupted and failed terminals are still the original launch.
@@ -160,7 +160,7 @@ extension WorkspaceWrites on MobileOperations {
     if (receipt is! Map ||
         receipt['operationId'] != request['operationId'] ||
         !_sameGitValue(request, receipt['request'])) {
-      throw const ProtocolException('运行配置回执与原操作不匹配，请更新电脑端后核实。');
+      throw ProtocolException(tr("运行配置回执与原操作不匹配，请更新电脑端后核实。"));
     }
     if ([
       'running',
@@ -190,7 +190,7 @@ extension WorkspaceWrites on MobileOperations {
     if (saved['kind'] == 'run_config') {
       if (reply is! Map ||
           (!reply.containsKey('Ok') && !reply.containsKey('Err'))) {
-        throw const ProtocolException('电脑没有返回可确认的运行配置结果，请核实原操作。');
+        throw ProtocolException(tr("电脑没有返回可确认的运行配置结果，请核实原操作。"));
       }
       if (reply['Err'] is Map) {
         final err = reply['Err'] as Map;
@@ -200,7 +200,7 @@ extension WorkspaceWrites on MobileOperations {
         if (found == null && err['kind'] == 'rejected') {
           await _clearIfCurrent(saved);
         }
-        throw ProtocolException('${err['message'] ?? '运行配置操作未完成，请核实。'}');
+        throw ProtocolException('${err['message'] ?? tr("运行配置操作未完成，请核实。")}');
       }
     }
     return verifyWorkspace(client, saved);
@@ -223,7 +223,7 @@ extension WorkspaceWrites on MobileOperations {
     Map<String, dynamic> saved,
   ) async {
     if (saved['kind'] != 'terminal') {
-      throw const ProtocolException('没有待核实的启动操作。');
+      throw ProtocolException(tr("没有待核实的启动操作。"));
     }
     saved = await _beginClosing(saved);
     final request = saved['request'] as Map;
@@ -235,7 +235,7 @@ extension WorkspaceWrites on MobileOperations {
       closing: true,
     );
     if (result is! Map || result['operationId'] != request['operationId']) {
-      throw const ProtocolException('电脑未确认原启动已关闭，记录仍保留。');
+      throw ProtocolException(tr("电脑未确认原启动已关闭，记录仍保留。"));
     }
     if (result['state'] == 'retired') {
       await _clearIfCurrent(saved);
@@ -244,7 +244,7 @@ extension WorkspaceWrites on MobileOperations {
     // Already admitted: validate its immutable receipt; do not stop the process.
     final found = await verifyWorkspace(client, saved);
     if (found == null) {
-      throw const ProtocolException('原启动结果尚未确认，记录仍保留。');
+      throw ProtocolException(tr("原启动结果尚未确认，记录仍保留。"));
     }
     return found;
   }

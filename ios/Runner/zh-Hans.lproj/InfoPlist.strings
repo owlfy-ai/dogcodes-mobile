@@ -1,0 +1,3 @@
+"NSCameraUsageDescription" = "扫描电脑配对二维码，或拍摄照片作为任务附件。";
+"NSLocalNetworkUsageDescription" = "与已配对的电脑建立加密直连，以查看会话和远程操作。";
+"NSPhotoLibraryUsageDescription" = "选择照片作为任务附件发送到自己的电脑。";

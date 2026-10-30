@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
@@ -21,7 +22,7 @@ class RelayProbe {
       },
       onError: (Object error, StackTrace stack) {
         if (_frames.hasListener) {
-          _frames.addError(const ProtocolException('中继连接中断，操作结果需要核实。'), stack);
+          _frames.addError(ProtocolException(tr("中继连接中断，操作结果需要核实。")), stack);
         }
       },
       onDone: () {
@@ -50,7 +51,7 @@ class RelayProbe {
         origin.hasFragment ||
         (origin.path.isNotEmpty && origin.path != '/') ||
         !RegExp(r'^[a-zA-Z0-9-]{1,128}$').hasMatch(sessionId)) {
-      throw const ProtocolException('中继探针仅供本地开发使用。');
+      throw ProtocolException(tr("中继探针仅供本地开发使用。"));
     }
     final client = HttpClient()..connectionTimeout = const Duration(seconds: 5);
     try {
@@ -71,10 +72,10 @@ class RelayProbe {
   Stream<Uint8List> get frames => _frames.stream;
   void send(Uint8List payload) {
     if (payload.isEmpty || payload.length > maxFrameBytes) {
-      throw const ProtocolException('数据帧大小超出范围。');
+      throw ProtocolException(tr("数据帧大小超出范围。"));
     }
     if (_socket.readyState != WebSocket.open) {
-      throw const ProtocolException('连接已关闭；操作结果需要核实。');
+      throw ProtocolException(tr("连接已关闭；操作结果需要核实。"));
     }
     _socket.add(payload);
   }

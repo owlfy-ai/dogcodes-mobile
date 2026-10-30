@@ -1,7 +1,8 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:async';
+import '../../core/protocol.dart';
 import 'dart:convert';
 import 'package:dogcodes_video/dogcodes_video.dart';
-import 'package:dogcodes_clipboard/dogcodes_clipboard.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,6 +12,7 @@ import '../../core/clipboard_transfer.dart';
 import '../../core/host_hub.dart';
 import '../../core/host_api.dart';
 import '../../core/desktop_handoff.dart';
+import 'clipboard_sheets.dart';
 import 'desktop_candidate.dart';
 import '../../core/pc_api.dart';
 import '../../core/owned_resource.dart';
@@ -71,9 +73,10 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
   int _session = 0;
   int _screenGeneration = 0;
   ClipboardTransfer? _clipboardTransfer;
-  ImageClipboardWrite? _clipboardImageWrite;
   HostLink? _clipboardLink;
-  bool _clipboardBusy = false, _clipboardWriteStarted = false;
+  bool _clipboardBusy = false,
+      _clipboardWriteStarted = false,
+      _clipboardSending = false;
   int _clipboardEpoch = 0;
   double? _clipboardProgress;
 
@@ -317,7 +320,7 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
       await relay.close();
     } catch (_) {
       if (_current(session) && !_videoDisabled) {
-        _videoNote = '直连未建立，使用加密中继';
+        _videoNote = tr("直连未建立，使用加密中继");
       }
     }
   }
@@ -341,12 +344,12 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
         if (event['type'] == 'disconnected' ||
             event['type'] == 'transport_changed') {
           if (deferLoss()) return;
-          _recover('连接已变化，正在恢复远程桌面');
+          _recover(tr("连接已变化，正在恢复远程桌面"));
         }
       },
       onDone: () {
         if (_current(session) && identical(source, _api) && !deferLoss()) {
-          _recover('连接中断，正在恢复远程桌面');
+          _recover(tr("连接中断，正在恢复远程桌面"));
         }
       },
     );
@@ -541,7 +544,7 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
           },
           timeout: const Duration(seconds: 3),
         );
-        if (prepared == null) throw StateError('无法准备新解码器');
+        if (prepared == null) throw StateError(tr("无法准备新解码器"));
         candidate.decoder = prepared;
       }
       if (!original()) throw const ResourceExpired();
@@ -612,7 +615,7 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
               prepared: candidate.takeDecoder(),
             );
       if (!committing()) return;
-      if (!adopted) throw StateError('新画面解码不可用');
+      if (!adopted) throw StateError(tr("新画面解码不可用"));
       _resolution.start(migratedVideo);
       _activeVideoDescription = Map.from(migratedVideo);
       _resolutionCandidate = null;
@@ -625,7 +628,7 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
       if (_current(session) && lease == id) _authorizationEnded(e);
     } catch (_) {
       if (_current(session) && lease == id && resource?.adopted == true) {
-        await _fallback(session, '换路后画面不可用');
+        await _fallback(session, tr("换路后画面不可用"));
       }
     } finally {
       if (!settled &&
@@ -635,13 +638,15 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
         try {
           final result = await protocol!.abandon();
           if (result.moved) {
-            _recover('正在核实并恢复远程桌面连接');
+            _recover(tr("正在核实并恢复远程桌面连接"));
           } else {
             safeResume = true;
             _handoffRevision = '${result.snapshot['revision']}';
           }
         } catch (_) {
-          if (_current(session) && lease == id) _recover('连接归属暂时无法核实，正在恢复远程桌面');
+          if (_current(session) && lease == id) {
+            _recover(tr("连接归属暂时无法核实，正在恢复远程桌面"));
+          }
         }
       }
       if (safeResume && _current(session) && identical(_queue, queue)) {
@@ -822,7 +827,7 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
     if (++_recoveries > 3) {
       setState(() {
         busy = false;
-        error = '连接暂时无法恢复，请点击重新连接。';
+        error = tr("连接暂时无法恢复，请点击重新连接。");
       });
       return;
     }
@@ -854,7 +859,7 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
         after: old == null ? null : api?.desktopClose(old).then<void>((_) {}),
       );
       if (!_current(session)) return;
-      if (h.link == null) throw StateError('电脑离线，连接后再打开远程桌面');
+      if (h.link == null) throw StateError(tr("电脑离线，连接后再打开远程桌面"));
       await _openDesktop(session);
       if (!_current(session)) return;
       final link = _api!;
@@ -873,7 +878,7 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
       }
       displays = await link.displays();
       if (!_current(session)) return;
-      if (displays.isEmpty) throw StateError('电脑没有可用的显示器');
+      if (displays.isEmpty) throw StateError(tr("电脑没有可用的显示器"));
       if (!displays.any((d) => d['id'] == monitor)) {
         monitor =
             (displays.firstWhere(
@@ -932,19 +937,19 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
       final video = opened['video'];
       if (video is Map && video['transport'] == 'binary') {
         if (!await _startRelayVideo(video, id, link)) {
-          await _fallback(session, '手机解码器不可用');
+          await _fallback(session, tr("手机解码器不可用"));
           return;
         }
         if (_current(session)) unawaited(_videoLoop(session));
       } else if (video is Map) {
         if (!await _startVideo(video)) {
-          if (_current(session)) await _fallback(session, '手机视频画面不可用');
+          if (_current(session)) await _fallback(session, tr("手机视频画面不可用"));
           return;
         }
         if (_current(session)) unawaited(_videoLoop(session));
       } else {
         if (!_current(session)) return;
-        if (wantVideo) _videoNote = '视频画面不可用，使用图片模式';
+        if (wantVideo) _videoNote = tr("视频画面不可用，使用图片模式");
         setState(() => busy = false);
         unawaited(_frames(session));
         return;
@@ -965,7 +970,7 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
       }
       return;
     } catch (e) {
-      if (_current(session)) _recover('暂时无法连接：$e');
+      if (_current(session)) _recover(tr("暂时无法连接：{0}", [e]));
       return;
     }
     if (_current(session)) setState(() => busy = false);
@@ -975,13 +980,13 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
     if (!_current(session)) return;
     _videoDisabled = true;
     _relayVideoOff = true;
-    _videoNote = '$reason，已切换图片模式';
+    _videoNote = tr("{0}，已切换图片模式", [reason]);
     await _start();
   }
 
   Future<bool> _prepareDesktop(int session, HostLink link) async {
     setState(() {
-      _desktopPreparationNote = '请在电脑上允许共享屏幕和键鼠控制';
+      _desktopPreparationNote = tr("请在电脑上允许共享屏幕和键鼠控制");
     });
     try {
       final fresh = _freshDesktopPermission;
@@ -992,7 +997,7 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
           if (fresh) 'fresh': true,
         });
         if (!_current(session)) return false;
-        if (result is! Map) throw StateError('电脑授权回复无效，请重新连接');
+        if (result is! Map) throw StateError(tr("电脑授权回复无效，请重新连接"));
         if (result['state'] == 'ready') {
           setState(() {
             _desktopPreparationNote = null;
@@ -1001,10 +1006,10 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
           return true;
         }
         if (result['state'] != 'pending') {
-          throw StateError('电脑未能准备屏幕共享，请重新连接并授权');
+          throw StateError(tr("电脑未能准备屏幕共享，请重新连接并授权"));
         }
         if (deadline.elapsed >= const Duration(minutes: 2)) {
-          throw StateError('等待电脑授权超时，请重新连接后再试');
+          throw StateError(tr("等待电脑授权超时，请重新连接后再试"));
         }
         await _wait(const Duration(milliseconds: 500));
       }
@@ -1088,8 +1093,8 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
         _syncInputPicture();
         setState(() {
           if (!live && !_pipelineRecovery.active) {
-            _videoNote = '画面正在恢复';
-          } else if (live && _videoNote == '画面正在恢复') {
+            _videoNote = tr("画面正在恢复");
+          } else if (live && _videoNote == tr("画面正在恢复")) {
             _videoNote = null;
           }
         });
@@ -1145,7 +1150,7 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
               response['relay'] is! Map ||
               response['relay']['ready'] != true ||
               response['relay']['generation'] != video['generation']) {
-            throw StateError('电脑未确认当前画面的就绪状态');
+            throw StateError(tr("电脑未确认当前画面的就绪状态"));
           }
           _cursorState.update(response, DateTime.now());
         } catch (_) {
@@ -1262,7 +1267,7 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
         }
         _cursorState.update(remote, DateTime.now());
         if (remote['error'] != null) {
-          await _fallback(session, '电脑视频编码异常');
+          await _fallback(session, tr("电脑视频编码异常"));
           return;
         }
         final description = remote['video'];
@@ -1282,7 +1287,7 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
         );
         _syncInputPicture();
         if (recoveryExpired) {
-          await _fallback(session, '电脑画面恢复超时');
+          await _fallback(session, tr("电脑画面恢复超时"));
           return;
         }
         if (_pipelineRecovery.active &&
@@ -1290,14 +1295,14 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
                 description['codecReady'] == false ||
                 (description['resize'] is Map &&
                     description['resize']['state'] == 'updating'))) {
-          _videoNote = '电脑画面正在恢复';
+          _videoNote = tr("电脑画面正在恢复");
           _stalledTicks = 0;
           if (_current(session)) setState(() {});
           continue;
         }
         if (_pipelineRecovery.active) {
-          _videoNote = '电脑画面正在恢复';
-        } else if (_videoNote == '电脑画面正在恢复') {
+          _videoNote = tr("电脑画面正在恢复");
+        } else if (_videoNote == tr("电脑画面正在恢复")) {
           _videoNote = null;
         }
         if (description is Map && _resolution.newer(description)) {
@@ -1318,21 +1323,21 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
               if (!_current(session) || screenGeneration != _screenGeneration) {
                 continue;
               }
-              await _fallback(session, '清晰度调整后解码器不可用');
+              await _fallback(session, tr("清晰度调整后解码器不可用"));
               return;
             }
             if (!_current(session) || screenGeneration != _screenGeneration) {
               continue;
             }
             if (!adopted) {
-              await _fallback(session, '清晰度调整后解码器不可用');
+              await _fallback(session, tr("清晰度调整后解码器不可用"));
               return;
             }
             _lastDecoded = _sentAtProgress = _stalledTicks = 0;
             _gotVideoFrame = true;
             _pipelineRecovery.decoded();
             _syncInputPicture();
-            if (_videoNote == '电脑画面正在恢复') _videoNote = null;
+            if (_videoNote == tr("电脑画面正在恢复")) _videoNote = null;
           }
           if (decoder == null &&
               desk != null &&
@@ -1365,7 +1370,7 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
                 ack['video'] is! Map ||
                 ack['video']['generation'] != description['generation'] ||
                 ack['video']['ready'] != true) {
-              throw StateError('电脑画面代次尚未确认');
+              throw StateError(tr("电脑画面代次尚未确认"));
             }
             _stalledTicks = 0;
           }
@@ -1412,7 +1417,7 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
           } catch (_) {
             if (screenGeneration != _screenGeneration || busy) continue;
             if (decoder != _decoder) continue;
-            await _fallback(session, '手机解码器停止响应');
+            await _fallback(session, tr("手机解码器停止响应"));
             return;
           }
           if (!_current(session)) return;
@@ -1434,7 +1439,7 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
                 !identical(desk, _desk)) {
               continue;
             }
-            await _fallback(session, '手机视频状态读取失败');
+            await _fallback(session, tr("手机视频状态读取失败"));
             return;
           }
           if (!_current(session)) return;
@@ -1459,7 +1464,7 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
           if (_pipelineRecovery.active) {
             _pipelineRecovery.decoded();
             _syncInputPicture();
-            if (_videoNote == '电脑画面正在恢复') _videoNote = null;
+            if (_videoNote == tr("电脑画面正在恢复")) _videoNote = null;
           }
           _gotVideoFrame = true;
           _stalledTicks = 0;
@@ -1470,7 +1475,10 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
         }
         _lastDecoded = count;
         if (_stalledTicks >= (_gotVideoFrame ? 5 : 8)) {
-          await _fallback(session, _gotVideoFrame ? '视频解码停止响应' : '视频首帧等待超时');
+          await _fallback(
+            session,
+            _gotVideoFrame ? tr("视频解码停止响应") : tr("视频首帧等待超时"),
+          );
           return;
         }
         if (_current(session)) setState(() {});
@@ -1479,14 +1487,17 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
         if (screenGeneration != _screenGeneration || busy) continue;
         if (e is DesktopAuthorizationEnded) {
           _authorizationEnded(e);
-        } else if ('$e'.contains('锁定')) {
+        } else if ((e is ProtocolException ? e.rawMessage : '$e').contains(
+              '锁定',
+            ) ||
+            '$e'.toLowerCase().contains('locked')) {
           _stop();
           setState(() {
             locked = true;
             busy = false;
           });
         } else {
-          _recover('远控连接中断，正在重新连接');
+          _recover(tr("远控连接中断，正在重新连接"));
         }
         return;
       }
@@ -1585,15 +1596,17 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
           return;
         }
         final message = '$e';
-        if (!message.contains('过于频繁')) {
-          if (message.contains('锁定')) {
+        if (!message.contains('过于频繁') &&
+            !message.toLowerCase().contains('too many requests')) {
+          if (message.contains('锁定') ||
+              message.toLowerCase().contains('locked')) {
             _stop();
             setState(() {
               locked = true;
               busy = false;
             });
           } else {
-            _recover('画面连接中断，正在重新连接');
+            _recover(tr("画面连接中断，正在重新连接"));
           }
           return;
         }
@@ -1841,7 +1854,7 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
       if (_decoder != null && video is Map) {
         _closeRelayVideo();
         if (!await _startRelayVideo(video, l, api)) {
-          await _fallback(session, '切屏后解码器不可用');
+          await _fallback(session, tr("切屏后解码器不可用"));
           return;
         }
         if (video['clientReadyRequired'] != true) {
@@ -1886,7 +1899,7 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
         if (e is DesktopAuthorizationEnded) {
           _authorizationEnded(e);
         } else {
-          _recover('切换屏幕失败，正在恢复连接');
+          _recover(tr("切换屏幕失败，正在恢复连接"));
         }
       }
     } finally {
@@ -1896,8 +1909,6 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
 
   void _cancelClipboard() {
     ++_clipboardEpoch;
-    unawaited(_clipboardImageWrite?.cancel().catchError((Object _) => false));
-    _clipboardImageWrite = null;
     _clipboardTransfer?.cancel();
     _clipboardTransfer = null;
     final link = _clipboardLink;
@@ -1915,66 +1926,68 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            for (final kind in ClipboardKind.values) ...[
-              ListTile(
-                leading: Icon(
-                  kind == ClipboardKind.text
-                      ? Icons.text_fields
-                      : Icons.image_outlined,
-                ),
-                title: Text('发送${kind == ClipboardKind.text ? '文字' : '图片'}到电脑'),
-                subtitle: const Text('读取手机剪贴板，按系统提示允许粘贴'),
-                onTap: () => Navigator.pop(s, 'send_${kind.name}'),
-              ),
-              ListTile(
-                leading: const Icon(Icons.download_outlined),
-                title: Text('从电脑获取${kind == ClipboardKind.text ? '文字' : '图片'}'),
-                subtitle: const Text('复制到手机剪贴板'),
-                onTap: () => Navigator.pop(s, 'get_${kind.name}'),
-              ),
-            ],
+            ListTile(
+              leading: const Icon(Icons.upload_outlined),
+              title: Text(tr("发送文字到电脑")),
+              subtitle: Text(tr("编辑后发送到电脑剪贴板")),
+              onTap: () => Navigator.pop(s, 'send'),
+            ),
+            ListTile(
+              leading: const Icon(Icons.download_outlined),
+              title: Text(tr("从电脑获取文字")),
+              subtitle: Text(tr("读取电脑剪贴板，复制到这部手机")),
+              onTap: () => Navigator.pop(s, 'get'),
+            ),
           ],
         ),
       ),
     );
     if (action == null || !mounted || _paused || _clipboardBusy) return;
+    if (action == 'get') {
+      final text = await _clipboardText();
+      if (text != null && mounted) await showReceivedText(context, text);
+      return;
+    }
+    // Read only after the explicit action; iOS may ask to allow pasting.
+    String initial = '';
+    try {
+      initial = (await Clipboard.getData(Clipboard.kTextPlain))?.text ?? '';
+    } catch (_) {}
+    if (!mounted) return;
+    final draft = await showClipboardComposer(
+      context,
+      initial: initial,
+      canPaste: _queue != null && !locked,
+    );
+    if (draft == null || !mounted || _paused || _clipboardBusy) return;
+    await _clipboardText(send: draft.text, paste: draft.paste);
+  }
+
+  /// Sends [send] to the computer clipboard, or returns the computer's text
+  /// after copying it to the phone. Null when it did not complete.
+  Future<String?> _clipboardText({String? send, bool paste = false}) async {
     final business = h.link;
     if (business is! AdaptiveHostLink) {
-      showError(context, '当前连接不支持独立剪贴板传输，请更新电脑和 App 后重试');
-      return;
+      showError(context, tr("当前连接不支持独立剪贴板传输，请更新电脑和 App 后重试"));
+      return null;
     }
     final epoch = ++_clipboardEpoch;
     bool current() => mounted && !_paused && epoch == _clipboardEpoch;
-    final kind = action.endsWith('_image')
-        ? ClipboardKind.image
-        : ClipboardKind.text;
-    final sending = action.startsWith('send_');
+    final sending = send != null;
     setState(() {
       _clipboardBusy = true;
+      _clipboardSending = sending;
       _clipboardProgress = null;
     });
     HostLink? link;
     try {
-      // Read only after the explicit action, before spending time opening a link.
-      Uint8List? outgoing;
-      if (sending) {
-        if (kind == ClipboardKind.image) {
-          outgoing = await ImageClipboard.readPng();
-          if (outgoing == null) throw '手机剪贴板没有图片，或尚未允许粘贴';
-        } else {
-          final data = await Clipboard.getData(Clipboard.kTextPlain);
-          if ((data?.text ?? '').isEmpty) throw '手机剪贴板没有文字';
-          outgoing = Uint8List.fromList(utf8.encode(data!.text!));
-        }
-      }
-      if (!current()) throw const ClipboardCancelled();
-      link = await openClipboardLink(business, current: current);
+      link = await openClipboardLink(business, current: current, direct: false);
       if (!current()) throw const ClipboardCancelled();
       _clipboardLink = link;
       final caps = await link.call('remote_capabilities', null);
       if (caps is! Map ||
           (caps['clipboardTransfer'] as Map?)?['version'] != 1) {
-        throw '电脑尚不支持分块剪贴板传输，请更新电脑客户端';
+        throw tr("电脑尚不支持分块剪贴板传输，请更新电脑客户端");
       }
       if (!current()) throw const ClipboardCancelled();
       final transfer = ClipboardTransfer(
@@ -1986,38 +1999,54 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
       );
       _clipboardTransfer = transfer;
       if (sending) {
-        await transfer.send(outgoing!, kind);
-      } else {
-        final bytes = await transfer.receive(kind);
-        if (!current()) throw const ClipboardCancelled();
-        _clipboardWriteStarted = true;
-        if (kind == ClipboardKind.image) {
-          final write = ImageClipboard.beginWrite(bytes);
-          _clipboardImageWrite = write;
-          try {
-            await write.done;
-          } finally {
-            if (identical(_clipboardImageWrite, write)) {
-              _clipboardImageWrite = null;
-            }
-          }
+        await transfer.send(
+          Uint8List.fromList(utf8.encode(send)),
+          ClipboardKind.text,
+        );
+        if (!mounted || !current()) return null;
+        final pasteKey = switch (caps['platform']) {
+          'macos' => 'meta',
+          'windows' || 'linux' => 'ctrl',
+          _ => null,
+        };
+        if (paste && pasteKey != null && _queue != null) {
+          _pasteOnComputer(pasteKey);
+          showError(context, tr("已粘贴到电脑"));
+        } else if (paste) {
+          showError(context, tr("已发送到电脑剪贴板。更新电脑端后可自动粘贴"));
         } else {
-          await Clipboard.setData(ClipboardData(text: utf8.decode(bytes)));
+          showError(context, tr("已发送到电脑剪贴板，可在电脑上粘贴"));
         }
+        return send;
       }
-      if (mounted && current()) {
-        showError(context, sending ? '已发送到电脑剪贴板' : '已复制到手机剪贴板');
+      final Uint8List bytes;
+      try {
+        bytes = await transfer.receive(ClipboardKind.text);
+      } on ProtocolException catch (e) {
+        // Older computers report an empty clipboard as "empty or too large".
+        if (e.rawMessage == '剪贴板没有文字' ||
+            e.rawMessage == '剪贴板内容为空或过大（图片限 16 MB，文字限 1 MB）') {
+          throw tr("电脑剪贴板里没有文字，先在电脑上复制后再试");
+        }
+        rethrow;
       }
+      if (!current()) throw const ClipboardCancelled();
+      final text = utf8.decode(bytes, allowMalformed: true);
+      if (text.isEmpty) throw tr("电脑剪贴板里没有文字，先在电脑上复制后再试");
+      _clipboardWriteStarted = true;
+      await Clipboard.setData(ClipboardData(text: text));
+      return current() ? text : null;
     } on ClipboardCancelled {
       // Background/route closure never resumes a write.
     } on ResourceExpired {
       // A connection that arrives after cancellation is closed by its owner.
     } catch (e) {
       if (mounted && current()) {
-        showError(
-          context,
-          e is PlatformException ? e.message ?? '剪贴板操作未完成' : e,
-        );
+        showError(context, switch (e) {
+          PlatformException() => e.message ?? tr("剪贴板操作未完成"),
+          TimeoutException() => tr("连接超时，请检查网络后重试。"),
+          _ => e,
+        });
       }
     } finally {
       if (link != null) unawaited(link.close().catchError((Object _) {}));
@@ -2033,33 +2062,48 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
         }
       }
     }
+    return null;
+  }
+
+  /// ⌘V / Ctrl+V on the computer, ignoring any sticky modifier chips.
+  void _pasteOnComputer(String modifier) {
+    if (_modifiers.isNotEmpty) setState(_modifiers.clear);
+    for (final (key, direction) in [
+      (modifier, 'press'),
+      ('v', 'press'),
+      ('v', 'release'),
+      (modifier, 'release'),
+    ]) {
+      _input({'kind': 'key', 'key': key, 'direction': direction});
+    }
   }
 
   String get _status {
-    if (lease == null) return locked ? '电脑已锁定' : '未连接';
+    if (lease == null) return locked ? tr("电脑已锁定") : tr("未连接");
     if (_video) {
       return 'H.264${_decoder != null ? ' · ${_binaryRoute.label}' : ''} · '
           '${_videoFps.round()} fps · $_lastRtt ms · '
           '${_videoKbps.toStringAsFixed(0)} KB/s';
     }
-    if (frame == null) return '连接中';
+    if (frame == null) return tr("连接中");
     return '${_frameTimes.length} fps · $_lastRtt ms · '
         '${_kbps.toStringAsFixed(0)} KB/s';
   }
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final c = context.dc;
     return Scaffold(
       backgroundColor: c.canvas,
       appBar: DetailBar(
-        title: '远程桌面',
+        title: tr("远程桌面"),
         subtitle: '${h.name} · $_status',
         actions: [
           if (displays.length > 1 || _requiresDesktopPreparation)
             PopupMenuButton<int>(
               enabled: !busy,
-              tooltip: '切换屏幕',
+              tooltip: tr("切换屏幕"),
               icon: const Icon(Icons.monitor_outlined),
               onSelected: (display) {
                 if (display == -1) {
@@ -2074,12 +2118,15 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
                   PopupMenuItem(
                     value: (d['id'] as num).toInt(),
                     child: Text(
-                      '屏幕 ${i + 1}${d['primary'] == true ? '（主）' : ''}',
+                      tr("屏幕 {0}{1}", [
+                        i + 1,
+                        d['primary'] == true ? tr("（主）") : '',
+                      ]),
                     ),
                   ),
                 if (_requiresDesktopPreparation) ...[
                   const PopupMenuDivider(),
-                  const PopupMenuItem(value: -1, child: Text('重新选择共享屏幕')),
+                  PopupMenuItem(value: -1, child: Text(tr("重新选择共享屏幕"))),
                 ],
               ],
             ),
@@ -2103,9 +2150,7 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            _clipboardProgress == null
-                                ? '正在准备剪贴板传输…'
-                                : '剪贴板传输 ${(_clipboardProgress! * 100).round()}%',
+                            _clipboardSending ? tr("正在发送到电脑…") : tr("正在从电脑获取…"),
                           ),
                           LinearProgressIndicator(value: _clipboardProgress),
                         ],
@@ -2118,10 +2163,10 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
                             (_clipboardTransfer?.mayHaveWritten ?? false);
                         setState(_cancelClipboard);
                         if (unknown) {
-                          showError(context, '已停止等待，复制操作可能已完成，请核实剪贴板');
+                          showError(context, tr("已停止等待，复制操作可能已完成，请核实剪贴板"));
                         }
                       },
-                      child: const Text('取消'),
+                      child: Text(tr("取消")),
                     ),
                   ],
                 ),
@@ -2153,11 +2198,11 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
                 border: Border(top: BorderSide(color: c.line)),
               ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _Tool(
                     icon: Icons.keyboard_outlined,
-                    label: '键盘',
+                    label: tr("键盘"),
                     onTap: lease == null || busy
                         ? null
                         : () => keyFocus.hasFocus
@@ -2168,7 +2213,7 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
                     icon: gestures.panMode
                         ? Icons.pan_tool
                         : Icons.pan_tool_outlined,
-                    label: gestures.panMode ? '移动画面' : '操作电脑',
+                    label: gestures.panMode ? tr("移动画面") : tr("操作电脑"),
                     onTap: lease == null || busy
                         ? null
                         : () => setState(
@@ -2177,21 +2222,21 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
                   ),
                   _Tool(
                     icon: Icons.fit_screen_outlined,
-                    label: '适应屏幕',
+                    label: tr("适应屏幕"),
                     onTap: lease == null || busy
                         ? null
                         : () => setState(viewport.fit),
                   ),
                   _Tool(
                     icon: Icons.content_paste,
-                    label: '剪贴板',
+                    label: tr("剪贴板"),
                     onTap: h.link == null || _paused || _clipboardBusy
                         ? null
                         : _clipboard,
                   ),
                   _Tool(
                     icon: Icons.refresh,
-                    label: '重新连接',
+                    label: tr("重新连接"),
                     onTap: busy
                         ? null
                         : () {
@@ -2257,14 +2302,14 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
 
   Widget _screen(DcColors c) {
     if (!h.online && lease == null) {
-      return const Center(child: Text('电脑离线'));
+      return Center(child: Text(tr("电脑离线")));
     }
     if (locked) {
-      return const Center(
+      return Center(
         child: Padding(
           padding: EdgeInsets.all(32),
           child: Text(
-            '电脑已锁定，Agent 操作仍可用。\n解锁电脑后点「重新连接」。',
+            tr("电脑已锁定，Agent 操作仍可用。\n解锁电脑后点「重新连接」。"),
             textAlign: TextAlign.center,
           ),
         ),
@@ -2431,18 +2476,31 @@ class _Tool extends StatelessWidget {
   final String label;
   final VoidCallback? onTap;
   @override
-  Widget build(BuildContext context) => InkWell(
-    onTap: onTap,
-    child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, color: onTap == null ? context.dc.secondary : null),
-          const SizedBox(height: 2),
-          Text(label, style: const TextStyle(fontSize: 11)),
-        ],
+  Widget build(BuildContext context) {
+    watchAppLanguage(context);
+    // Equal shares of the bar, so longer translations wrap instead of
+    // overflowing.
+    return Expanded(
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 8),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(icon, color: onTap == null ? context.dc.secondary : null),
+              const SizedBox(height: 2),
+              Text(
+                label,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 11, height: 1.2),
+              ),
+            ],
+          ),
+        ),
       ),
-    ),
-  );
+    );
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:convert';
 
 /// Presentation of PC timeline items, ported from the desktop
@@ -62,54 +63,54 @@ bool isSubagent(Activity a) =>
     (a.name ?? '').startsWith('Task:');
 
 String categoryOf(Activity a) {
-  if (isSubagent(a)) return '子智能体';
+  if (isSubagent(a)) return tr("子智能体");
   final name = (a.name ?? '').toLowerCase();
   if (['edit', 'delete', 'move'].contains(a.category) ||
       RegExp(
         r'^(edit|write|multiedit|apply_patch|filechange|file_change|replace_in_file|write_file|write_to_file|replace_file_content)$',
       ).hasMatch(name)) {
-    return '修改';
+    return tr("修改");
   }
   if (RegExp(r'^(websearch|web_search|search_web)$').hasMatch(name)) {
-    return '网页搜索';
+    return tr("网页搜索");
   }
   if (a.category == 'read' ||
       RegExp(r'^(read|read_file|view_file|readfile)$').hasMatch(name)) {
-    return '读取';
+    return tr("读取");
   }
   if (a.category == 'search' ||
       RegExp(
         r'^(grep|glob|find_by_name|grep_search|search_files)$',
       ).hasMatch(name)) {
-    return '搜索';
+    return tr("搜索");
   }
   if (a.category == 'execute' ||
       RegExp(
         r'^(bash|terminal|commandexecution|command_execution|run_command|shell|exec_command)$',
       ).hasMatch(name)) {
-    return '终端';
+    return tr("终端");
   }
   if (a.category == 'fetch' ||
       RegExp(r'^(webfetch|web_fetch|read_url_content)$').hasMatch(name)) {
-    return '获取网页';
+    return tr("获取网页");
   }
-  return '工具';
+  return tr("工具");
 }
 
-const _states = {
-  'pending': '等待中',
-  'running': '进行中',
-  'started': '进行中',
-  'in_progress': '进行中',
-  'completed': '完成',
-  'succeeded': '完成',
+Map<String, String> get _states => {
+  'pending': tr("等待中"),
+  'running': tr("进行中"),
+  'started': tr("进行中"),
+  'in_progress': tr("进行中"),
+  'completed': tr("完成"),
+  'succeeded': tr("完成"),
   // Tool failures are routine agent recovery steps, not user-facing alerts.
   'failed': '',
-  'interrupted': '已中断',
-  'cancelled': '已取消',
-  'unknown': '状态未确认',
+  'interrupted': tr("已中断"),
+  'cancelled': tr("已取消"),
+  'unknown': tr("状态未确认"),
 };
-String statusLabel(Activity a) => _states[a.status ?? ''] ?? '状态未确认';
+String statusLabel(Activity a) => _states[a.status ?? ''] ?? tr("状态未确认");
 
 bool isRunning(Activity a, bool active) =>
     active && ['running', 'started', 'in_progress'].contains(a.status);
@@ -196,7 +197,7 @@ String terminalOutput(Object? value) {
 
 /// Title shown on a tool row: command, path, pattern or tool name.
 String toolTitle(Activity a) {
-  if (categoryOf(a) == '终端') {
+  if (categoryOf(a) == tr("终端")) {
     final command = terminalCommand(a.input);
     if (command.isNotEmpty) return command;
   }
@@ -209,7 +210,7 @@ String toolTitle(Activity a) {
         input['command'] ?? input['pattern'] ?? input['query'] ?? input['url'];
     if (v is String && v.isNotEmpty) return v;
   }
-  return a.title ?? a.name ?? '工具';
+  return a.title ?? a.name ?? tr("工具");
 }
 
 String _nativeId(Item i) => (i['itemId'] as String? ?? '').replaceFirst(
@@ -235,7 +236,7 @@ bool _readOnly(Item i) {
       a.data['artifact'] == null &&
       a.type == 'tool' &&
       ['completed', 'succeeded'].contains(a.status) &&
-      ['读取', '搜索', '网页搜索', '获取网页'].contains(categoryOf(a));
+      [tr("读取"), tr("搜索"), tr("网页搜索"), tr("获取网页")].contains(categoryOf(a));
 }
 
 bool _isAnswer(Item i) {
@@ -270,7 +271,9 @@ class LookupEntry extends Entry {
       final c = categoryOf(activityOf(i)!);
       counts[c] = (counts[c] ?? 0) + 1;
     }
-    return counts.entries.map((e) => '${e.key} ${e.value} 次').join(' · ');
+    return counts.entries
+        .map((e) => tr("{0} {1} 次", [e.key, e.value]))
+        .join(' · ');
   }
 }
 
@@ -422,10 +425,10 @@ String editPatch(String oldText, String newText) => [
 
 String durationLabel(Duration d) {
   final s = d.inSeconds;
-  if (s < 60) return '$s 秒';
+  if (s < 60) return tr("{0} 秒", [s]);
   final m = d.inMinutes;
-  if (m < 60) return '$m 分 ${s % 60} 秒';
-  return '${d.inHours} 小时 ${m % 60} 分';
+  if (m < 60) return tr("{0} 分 {1} 秒", [m, s % 60]);
+  return tr("{0} 小时 {1} 分", [d.inHours, m % 60]);
 }
 
 /// The end of a failed step's output: why it stopped. The PC sends only this

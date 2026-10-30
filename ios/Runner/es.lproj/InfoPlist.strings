@@ -1,0 +1,3 @@
+"NSCameraUsageDescription" = "Escanea el código QR de vinculación de tu ordenador o haz una foto para adjuntarla a una tarea.";
+"NSLocalNetworkUsageDescription" = "Conéctate de forma directa y cifrada a tu ordenador vinculado para ver conversaciones y trabajar en remoto.";
+"NSPhotoLibraryUsageDescription" = "Elige fotos para adjuntarlas a tareas en tu ordenador.";

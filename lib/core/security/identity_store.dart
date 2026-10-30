@@ -1,8 +1,10 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'host_lifecycle.dart';
 import '../protocol.dart';
+import '../service_origin.dart';
 import 'noise_endpoint.dart';
 import '../secure_host_client.dart' show displayHostName;
 import 'secret_storage.dart';
@@ -42,7 +44,7 @@ class DeviceIdentityStore {
           publicHex: data['public'] as String,
         );
       } catch (_) {
-        throw const ProtocolException('本机设备身份无法读取，请先恢复安全存储。');
+        throw ProtocolException(tr("本机设备身份无法读取，请先恢复安全存储。"));
       }
     }
     final identity = create();
@@ -53,7 +55,7 @@ class DeviceIdentityStore {
     });
     await storage.write('dogcodes.phone.identity.v1', value);
     if (await storage.read('dogcodes.phone.identity.v1') != value) {
-      throw const ProtocolException('设备身份未能安全保存，尚未开始配对。');
+      throw ProtocolException(tr("设备身份未能安全保存，尚未开始配对。"));
     }
     return identity;
   }
@@ -78,10 +80,10 @@ class TrustedHostStore {
       }
       parseSequence(data['grantRevision'] as String);
     } catch (_) {
-      throw const ProtocolException('已保存的电脑身份无法读取，请先核实配对。');
+      throw ProtocolException(tr("已保存的电脑身份无法读取，请先核实配对。"));
     }
     if (!validBindingEpoch(data['bindingEpoch'])) {
-      throw const ProtocolException('已保存的电脑身份无法读取，请先核实配对。');
+      throw ProtocolException(tr("已保存的电脑身份无法读取，请先核实配对。"));
     }
     return data;
   }
@@ -134,24 +136,24 @@ class TrustedHostStore {
         acknowledgement['grantRevision'] is! String ||
         parseSequence(acknowledgement['grantRevision'] as String) ==
             BigInt.zero) {
-      throw const ProtocolException('配对回执与当前连接不一致。');
+      throw ProtocolException(tr("配对回执与当前连接不一致。"));
     }
     await _registry.serial(
       () => _registry.host(invitation.hostId).serial(() async {
         final host = _registry.host(invitation.hostId);
         var current = await host.record();
         if (current == null || current['bindingEpoch'] != bindingEpoch) {
-          throw const ProtocolException('这项配对已因移除电脑而失效，请重新扫码。');
+          throw ProtocolException(tr("这项配对已因移除电脑而失效，请重新扫码。"));
         }
         if (current['unpaired'] != true) {
           final ready = await _read(host);
-          if (ready == null) throw const ProtocolException('电脑绑定已变化，请重新扫码。');
+          if (ready == null) throw ProtocolException(tr("电脑绑定已变化，请重新扫码。"));
           current = ready;
         }
         if (current['unpaired'] != true &&
             (current['publicKey'] != hostHex ||
                 current['service'] != invitation.service.toString())) {
-          throw const ProtocolException('电脑身份已发生变化，需要先解除旧配对。');
+          throw ProtocolException(tr("电脑身份已发生变化，需要先解除旧配对。"));
         }
         if (current['unpaired'] == true) {
           host.generation++;
@@ -190,7 +192,7 @@ class TrustedHostStore {
               current?['bindingEpoch'] != expectedBinding &&
               !(current?['unpaired'] == true &&
                   current?['previousEpoch'] == expectedBinding)) {
-            throw const ProtocolException('电脑绑定已变化，未移除新的绑定，请刷新后确认。');
+            throw ProtocolException(tr("电脑绑定已变化，未移除新的绑定，请刷新后确认。"));
           }
           host.generation++;
           host.cleanupPending = true;
@@ -229,11 +231,7 @@ class TrustedHostStore {
 }
 
 bool validSavedService(String value) {
-  final uri = Uri.parse(value);
-  return (uri.scheme == 'https' ||
-          (!kReleaseMode && uri.scheme == 'http' && uri.host == '127.0.0.1')) &&
-      uri.userInfo.isEmpty &&
-      !uri.hasQuery &&
-      !uri.hasFragment &&
-      (uri.path.isEmpty || uri.path == '/');
+  final uri = Uri.tryParse(value);
+  return uri != null &&
+      validServiceOrigin(uri, allowLocalDevelopment: !kReleaseMode);
 }

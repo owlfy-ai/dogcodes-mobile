@@ -71,3 +71,6 @@ android/key.properties
 
 # Native plugin Gradle caches are local build state.
 **/.gradle/
+
+# Generated App Store screenshots and bundles (tool/store regenerates them).
+/store/

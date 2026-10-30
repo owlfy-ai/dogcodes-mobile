@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'package:flutter/material.dart';
 import '../../app.dart';
 import '../../core/host_hub.dart';
@@ -25,11 +26,10 @@ class _PushStatus extends StatelessWidget {
   final PushNotifications? push;
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final value = push;
     if (value == null) {
-      return const InlineNotice(
-        '后台提醒暂未启用，静音设置可提前保存。仅影响这部手机，不影响电脑任务和 Agent 审批。',
-      );
+      return InlineNotice(tr("后台提醒暂未启用，静音设置可提前保存。仅影响这部手机，不影响电脑任务和 Agent 审批。"));
     }
     return ListenableBuilder(
       listenable: value,
@@ -37,10 +37,10 @@ class _PushStatus extends StatelessWidget {
         children: [
           InlineNotice(
             value.ready
-                ? '通知通道已连接。提醒只影响这部手机，不会直接批准操作。'
+                ? tr("通知通道已连接。提醒只影响这部手机，不会直接批准操作。")
                 : value.configured
-                ? '后台提醒暂未启用，可在这里授权系统通知。'
-                : '此版本未配置后台提醒，静音设置可提前保存。',
+                ? tr("后台提醒暂未启用，可在这里授权系统通知。")
+                : tr("此版本未配置后台提醒，静音设置可提前保存。"),
           ),
           if (value.error != null) InlineNotice(value.error!, danger: true),
           if (value.configured)
@@ -51,10 +51,10 @@ class _PushStatus extends StatelessWidget {
               icon: const Icon(Icons.notifications_outlined),
               label: Text(
                 value.busy
-                    ? '正在连接通知服务'
+                    ? tr("正在连接通知服务")
                     : value.enabled
-                    ? '重新检测后台提醒'
-                    : '启用后台提醒',
+                    ? tr("重新检测后台提醒")
+                    : tr("启用后台提醒"),
               ),
             ),
         ],
@@ -93,7 +93,7 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
         retired = true;
         settings = null;
         loading = saving = false;
-        error = '电脑绑定已改变，请返回设备列表。';
+        error = tr("电脑绑定已改变，请返回设备列表。");
       });
     }
   }
@@ -107,7 +107,7 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
   Future<void> _load() async {
     if (!current || loading || saving) return;
     if (api == null) {
-      setState(() => error = '通知设置暂不可用。');
+      setState(() => error = tr("通知设置暂不可用。"));
       return;
     }
     setState(() {
@@ -154,7 +154,7 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
         if (current) {
           setState(() {
             settings = null;
-            error = '保存结果未确认，请检查网络后重新读取。';
+            error = tr("保存结果未确认，请检查网络后重新读取。");
           });
         }
       }
@@ -177,16 +177,17 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final value = settings, task = widget.taskId;
     return Scaffold(
       appBar: DetailBar(
-        title: '通知设置',
+        title: tr("通知设置"),
         subtitle: task == null
             ? widget.host.name
-            : '${widget.host.task(task)?['title'] ?? '会话'} · ${widget.host.name}',
+            : '${widget.host.task(task)?['title'] ?? tr("会话")} · ${widget.host.name}',
         actions: [
           IconButton(
-            tooltip: '重新读取',
+            tooltip: tr("重新读取"),
             onPressed: retired || loading || saving ? null : _load,
             icon: const Icon(Icons.refresh),
           ),
@@ -200,13 +201,13 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
           if (value != null) ...[
             if (task == null) ...[
               SwitchListTile(
-                title: const Text('静音这台电脑'),
+                title: Text(tr("静音这台电脑")),
                 value: value.muted,
                 onChanged: ready
                     ? (enabled) => _save(value.copyWith(muted: enabled))
                     : null,
               ),
-              const SectionLabel('提醒类型'),
+              SectionLabel(tr("提醒类型")),
               for (final kind in notificationKinds.entries)
                 SwitchListTile(
                   title: Text(kind.value),
@@ -224,25 +225,25 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
                       : null,
                 ),
               if (value.mutedTasks.isNotEmpty) ...[
-                const SectionLabel('已静音会话'),
+                SectionLabel(tr("已静音会话")),
                 for (final id in value.mutedTasks)
                   ListTile(
                     title: Text(
-                      widget.host.task(id)?['title'] as String? ?? '未加载的会话',
+                      widget.host.task(id)?['title'] as String? ?? tr("未加载的会话"),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
                     trailing: IconButton(
-                      tooltip: '取消会话静音',
+                      tooltip: tr("取消会话静音"),
                       onPressed: ready ? () => _muteTask(id, false) : null,
                       icon: const Icon(Icons.notifications_active_outlined),
                     ),
                   ),
               ],
             ] else ...[
-              if (value.muted) const InlineNotice('这台电脑已静音，取消会话静音后仍不会收到提醒。'),
+              if (value.muted) InlineNotice(tr("这台电脑已静音，取消会话静音后仍不会收到提醒。")),
               SwitchListTile(
-                title: const Text('静音此会话'),
+                title: Text(tr("静音此会话")),
                 value: value.mutedTasks.contains(task),
                 onChanged: ready ? (enabled) => _muteTask(task, enabled) : null,
               ),

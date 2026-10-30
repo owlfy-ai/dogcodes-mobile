@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'package:flutter/material.dart';
 import '../../core/task_attachments.dart';
 import '../../core/pc_api.dart' show uuid;
@@ -38,10 +39,10 @@ class _ComposerAttachmentsState extends State<ComposerAttachments> {
         mainAxisSize: MainAxisSize.min,
         children: [
           for (final (value, title, icon) in [
-            ('photos', '照片', Icons.photo_outlined),
-            ('camera', '拍照', Icons.camera_alt_outlined),
-            ('files', '手机文件', Icons.attach_file),
-            ('pc', '电脑项目文件', Icons.computer_outlined),
+            ('photos', tr("照片"), Icons.photo_outlined),
+            ('camera', tr("拍照"), Icons.camera_alt_outlined),
+            ('files', tr("手机文件"), Icons.attach_file),
+            ('pc', tr("电脑项目文件"), Icons.computer_outlined),
           ])
             ListTile(
               leading: Icon(icon),
@@ -53,13 +54,13 @@ class _ComposerAttachmentsState extends State<ComposerAttachments> {
               subtitle:
                   value == 'pc' &&
                       draft.host?.latestTask(draft.projectId) == null
-                  ? const Text('需先在此项目创建一个会话')
+                  ? Text(tr("需先在此项目创建一个会话"))
                   : null,
               onTap: () => Navigator.pop(sheet, value),
             ),
-          const Padding(
+          Padding(
             padding: EdgeInsets.all(16),
-            child: Text('最多 16 个附件，总大小不超过 25 MB。'),
+            child: Text(tr("最多 16 个附件，总大小不超过 25 MB。")),
           ),
         ],
       ),
@@ -88,7 +89,7 @@ class _ComposerAttachmentsState extends State<ComposerAttachments> {
           'uploadId': id,
           'request': null,
         });
-        if (draft.key != key) throw StateError('草稿目标已变化，请回到原项目重新选择附件。');
+        if (draft.key != key) throw StateError(tr("草稿目标已变化，请回到原项目重新选择附件。"));
         await draft.add([
           TaskAttachment(
             request: Map<String, dynamic>.from(identity as Map),
@@ -101,11 +102,11 @@ class _ComposerAttachmentsState extends State<ComposerAttachments> {
           key!,
           selected,
         );
-        if (draft.key != key) throw StateError('草稿目标已变化，请回到原项目重新选择附件。');
+        if (draft.key != key) throw StateError(tr("草稿目标已变化，请回到原项目重新选择附件。"));
         await draft.add(items);
       }
     } catch (e) {
-      if (mounted) setState(() => error = '无法添加附件：$e');
+      if (mounted) setState(() => error = tr("无法添加附件：{0}", [e]));
     } finally {
       draft.setPicking(false);
       if (mounted) setState(() {});
@@ -125,12 +126,13 @@ class _ComposerAttachmentsState extends State<ComposerAttachments> {
       await widget.draft.remove(item);
       if (mounted) setState(() => error = null);
     } catch (e) {
-      if (mounted) setState(() => error = '未能移除附件：$e');
+      if (mounted) setState(() => error = tr("未能移除附件：{0}", [e]));
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final d = widget.draft;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -150,18 +152,23 @@ class _ComposerAttachmentsState extends State<ComposerAttachments> {
                   ? null
                   : _pick,
               icon: const Icon(Icons.attach_file, size: 19),
-              label: Text(d.picking ? '正在添加…' : '添加附件'),
+              label: Text(d.picking ? tr("正在添加…") : tr("添加附件")),
             ),
             if (d.attachments.isNotEmpty)
               InkWell(
                 onTap: () => FocusScope.of(context).unfocus(),
                 child: Text(
-                  '${d.attachments.length} 个 · ${attachmentSize(d.attachments.fold<int>(0, (s, a) => s + a.size))}',
+                  tr("{0} 个 · {1}", [
+                    d.attachments.length,
+                    attachmentSize(
+                      d.attachments.fold<int>(0, (s, a) => s + a.size),
+                    ),
+                  ]),
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
               ),
             if (d.uploading)
-              TextButton(onPressed: d.pauseUploads, child: const Text('暂停上传'))
+              TextButton(onPressed: d.pauseUploads, child: Text(tr("暂停上传")))
             else if (d.attachments.any(
               (a) => a.reference == null || a.error != null,
             ))
@@ -169,7 +176,7 @@ class _ComposerAttachmentsState extends State<ComposerAttachments> {
                 onPressed: widget.enabled && d.host?.online == true
                     ? _upload
                     : null,
-                child: const Text('上传／继续上传'),
+                child: Text(tr("上传／继续上传")),
               ),
           ],
         ),
@@ -197,10 +204,19 @@ class _ComposerAttachmentsState extends State<ComposerAttachments> {
                             Text(
                               a.error ??
                                   (d.activeAttachment == a.id
-                                      ? '上传 ${(a.offset / (a.size == 0 ? 1 : a.size) * 100).round()}%'
+                                      ? tr("上传 {0}%", [
+                                          (a.offset /
+                                                  (a.size == 0 ? 1 : a.size) *
+                                                  100)
+                                              .round(),
+                                        ])
                                       : a.reference != null
-                                      ? '已上传 · ${attachmentSize(a.size)}'
-                                      : '已保存在手机 · ${attachmentSize(a.size)}'),
+                                      ? tr("已上传 · {0}", [
+                                          attachmentSize(a.size),
+                                        ])
+                                      : tr("已保存在手机 · {0}", [
+                                          attachmentSize(a.size),
+                                        ])),
                               style: TextStyle(
                                 fontSize: 12,
                                 color: a.error == null
@@ -212,7 +228,7 @@ class _ComposerAttachmentsState extends State<ComposerAttachments> {
                         ),
                       ),
                       IconButton(
-                        tooltip: '移除附件 ${a.name}',
+                        tooltip: tr("移除附件 {0}", [a.name]),
                         onPressed: widget.enabled && !d.uploading
                             ? () => _remove(a)
                             : null,
@@ -225,7 +241,7 @@ class _ComposerAttachmentsState extends State<ComposerAttachments> {
           ),
         if (error != null) InlineNotice(error!, danger: true),
         if (d.restoreFailed)
-          TextButton(onPressed: d.retryRestore, child: const Text('重试恢复草稿')),
+          TextButton(onPressed: d.retryRestore, child: Text(tr("重试恢复草稿"))),
       ],
     );
   }

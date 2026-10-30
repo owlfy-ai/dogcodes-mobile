@@ -40,5 +40,14 @@ end
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
+    # This legacy static plugin is consumed by the app, not distributed as a
+    # standalone framework. Xcode's module verifier omits Flutter's SDK search
+    # path and rejects CocoaPods' generated quoted umbrella import. Keep normal
+    # compilation/linking checks; scope this compatibility setting to the pod.
+    if target.name == 'aliyun_push'
+      target.build_configurations.each do |configuration|
+        configuration.build_settings['ENABLE_MODULE_VERIFIER'] = 'NO'
+      end
+    end
   end
 end

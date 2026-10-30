@@ -1,5 +1,7 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart' show ScrollDirection;
 import '../../app.dart';
 import '../../core/host_hub.dart';
 import '../../core/live_timeline.dart';
@@ -67,6 +69,15 @@ class _ConversationPageState extends State<ConversationPage> {
   final _focusKey = GlobalKey();
   bool _focused = false;
   bool _ready = false;
+
+  /// Whether the view keeps to the newest output. Only the user's own
+  /// scrolling changes it, so content that grows later (a turn's diff, the
+  /// composer resizing) keeps the bottom in view. A focused turn starts free.
+  late bool _following = widget.focusTurnId == null;
+
+  /// A finger is on the timeline (or a fling it started is running): never
+  /// move the view under it.
+  bool _userScrolling = false;
 
   HostState? get host => hub.host(widget.hostId);
   Map<String, dynamic>? get task => host?.task(widget.taskId);
@@ -160,18 +171,13 @@ class _ConversationPageState extends State<ConversationPage> {
   /// Streamed answer text and activity merge in place, without a reload.
   void _streamed(Map<String, dynamic> event) {
     if (!mounted) return;
-    final atEnd = _atEnd;
     final changed = live.apply(event);
     if (live.needsSnapshot) unawaited(loadTimeline());
     if (!changed) return;
     if (_freshTimeline) _scheduleCache();
     setState(() {});
-    if (atEnd) _toEnd();
+    if (_following) _toEnd();
   }
-
-  bool get _atEnd =>
-      !scroll.hasClients ||
-      scroll.position.pixels >= scroll.position.maxScrollExtent - 80;
 
   Future<void> _readCachedTimeline() async {
     final owner = _owner;
@@ -247,7 +253,7 @@ class _ConversationPageState extends State<ConversationPage> {
             bindingEpoch: owner.bindingEpoch,
           )
           .catchError((Object e) {
-            hub.local.cacheError = '离线会话未能保存：$e';
+            hub.local.cacheError = tr("离线会话未能保存：{0}", [e]);
           }),
     );
   }
@@ -272,7 +278,6 @@ class _ConversationPageState extends State<ConversationPage> {
           !h.online) {
         return;
       }
-      final atEnd = _atEnd;
       setState(() {
         if (live.reset(Map<String, dynamic>.from(value as Map))) {
           _freshTimeline = true;
@@ -283,7 +288,7 @@ class _ConversationPageState extends State<ConversationPage> {
         loading = false;
         error = null;
       });
-      if (atEnd) _toEnd();
+      if (_following) _toEnd();
       if (!_focused && widget.focusTurnId != null) {
         await _pageToFocus();
         _revealFocus(0);
@@ -393,14 +398,14 @@ class _ConversationPageState extends State<ConversationPage> {
         !present() &&
         !_locateCancelled &&
         error == null) {
-      setState(() => error = '没有找到要打开的这一轮，它可能已被删除。');
+      setState(() => error = tr("没有找到要打开的这一轮，它可能已被删除。"));
     }
   }
 
   Future<void> _loadFullItem(String itemId) async {
     final owner = _owner, reading = live, link = host?.link;
     final epoch = owner?.connectionEpoch;
-    if (link == null) throw const ProtocolException('电脑离线，连接后再查看完整内容。');
+    if (link == null) throw ProtocolException(tr("电脑离线，连接后再查看完整内容。"));
     final item = await link.call('timeline_item', {
       'taskId': widget.taskId,
       'itemId': itemId,
@@ -450,11 +455,39 @@ class _ConversationPageState extends State<ConversationPage> {
 
   Future<void> _initChoice() => draft.ensureChoice();
 
+  bool _scrolled(ScrollNotification n) {
+    if (n.depth != 0) return false;
+    if (n is UserScrollNotification) {
+      _userScrolling = n.direction != ScrollDirection.idle;
+    }
+    // Any drag toward older content stops following at once; only coming
+    // back to rest at the very bottom follows again.
+    if (n is ScrollUpdateNotification &&
+        n.dragDetails != null &&
+        (n.scrollDelta ?? 0) < 0) {
+      _following = false;
+    } else if (n is ScrollEndNotification) {
+      _following = n.metrics.pixels >= n.metrics.maxScrollExtent - 4;
+    }
+    return false;
+  }
+
+  /// Content or viewport size changed without a scroll: stay at the bottom.
+  bool _resized(ScrollMetricsNotification n) {
+    if (_following &&
+        !_userScrolling &&
+        n.depth == 0 &&
+        n.metrics.pixels < n.metrics.maxScrollExtent) {
+      _toEnd();
+    }
+    return false;
+  }
+
   void _toEnd() {
     if (widget.focusTurnId != null && !_focused) return;
     void jump([int left = 3]) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (!scroll.hasClients) return;
+        if (!scroll.hasClients || !_following || _userScrolling) return;
         final end = scroll.position.maxScrollExtent;
         scroll.jumpTo(end);
         // Building the last rows refines the estimated extent.
@@ -473,7 +506,7 @@ class _ConversationPageState extends State<ConversationPage> {
     final title = await showDialog<String>(
       context: context,
       builder: (d) => AlertDialog(
-        title: const Text('重命名会话'),
+        title: Text(tr("重命名会话")),
         content: TextFormField(
           initialValue: inputTitle,
           onChanged: (value) => inputTitle = value,
@@ -481,13 +514,10 @@ class _ConversationPageState extends State<ConversationPage> {
           maxLength: 120,
         ),
         actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(d),
-            child: const Text('取消'),
-          ),
+          TextButton(onPressed: () => Navigator.pop(d), child: Text(tr("取消"))),
           TextButton(
             onPressed: () => Navigator.pop(d, inputTitle.trim()),
-            child: const Text('保存'),
+            child: Text(tr("保存")),
           ),
         ],
       ),
@@ -514,16 +544,18 @@ class _ConversationPageState extends State<ConversationPage> {
     final ok = await showDialog<bool>(
       context: context,
       builder: (d) => AlertDialog(
-        title: const Text('删除这个会话？'),
-        content: Text('将在「${h.name}」上永久删除「${t['title']}」及其记录，无法恢复。项目文件不会被删除。'),
+        title: Text(tr("删除这个会话？")),
+        content: Text(
+          tr("将在「{0}」上永久删除「{1}」及其记录，无法恢复。项目文件不会被删除。", [h.name, t['title']]),
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(d, false),
-            child: const Text('取消'),
+            child: Text(tr("取消")),
           ),
           TextButton(
             onPressed: () => Navigator.pop(d, true),
-            child: Text('删除', style: TextStyle(color: context.dc.removed)),
+            child: Text(tr("删除"), style: TextStyle(color: context.dc.removed)),
           ),
         ],
       ),
@@ -554,9 +586,9 @@ class _ConversationPageState extends State<ConversationPage> {
       await h.operations.cancel(link, t);
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('停止请求未确认：$e。请刷新核实任务状态。')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(tr("停止请求未确认：{0}。请刷新核实任务状态。", [e]))),
+        );
       }
     } finally {
       await hub.refresh(h);
@@ -572,6 +604,8 @@ class _ConversationPageState extends State<ConversationPage> {
     final text = prompt.text;
     if (h == null || link == null || t == null || c == null) return;
     if (!draft.hasContent || sending || !h.online || !draft.choiceValid) return;
+    _following = true;
+    _toEnd();
     setState(() {
       sending = true;
       error = null;
@@ -601,7 +635,7 @@ class _ConversationPageState extends State<ConversationPage> {
         await draft.submitted(identity);
         _toEnd();
       } else if (value is Map && value['state'] == 'closed') {
-        error = '电脑未受理这次发送，内容已保留。';
+        error = tr("电脑未受理这次发送，内容已保留。");
       }
     } catch (e) {
       error = '$e';
@@ -626,15 +660,16 @@ class _ConversationPageState extends State<ConversationPage> {
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final h = host;
     final t = task;
     if (h == null) {
-      return const Scaffold(
-        appBar: DetailBar(title: '会话'),
+      return Scaffold(
+        appBar: DetailBar(title: tr("会话")),
         body: EmptyNote(
           icon: Icons.link_off,
-          title: '这台电脑已不在列表中',
-          body: '可能已在电脑上撤销配对。',
+          title: tr("这台电脑已不在列表中"),
+          body: tr("可能已在电脑上撤销配对。"),
         ),
       );
     }
@@ -668,16 +703,16 @@ class _ConversationPageState extends State<ConversationPage> {
     ];
     return Scaffold(
       appBar: DetailBar(
-        title: t?['title'] as String? ?? '会话',
+        title: t?['title'] as String? ?? tr("会话"),
         subtitle: [?projectName, h.name].join(' · '),
         actions: [
           IconButton(
-            tooltip: '刷新',
+            tooltip: tr("刷新"),
             onPressed: h.online ? () => hub.refresh(h) : null,
             icon: const Icon(Icons.refresh),
           ),
           PopupMenuButton<String>(
-            tooltip: '更多',
+            tooltip: tr("更多"),
             enabled:
                 t != null && (h.online || AppScope.of(context).runtime != null),
             onSelected: (v) async {
@@ -699,12 +734,12 @@ class _ConversationPageState extends State<ConversationPage> {
               PopupMenuItem(
                 value: 'rename',
                 enabled: h.online,
-                child: const Text('重命名'),
+                child: Text(tr("重命名")),
               ),
               PopupMenuItem(
                 value: 'delete',
                 enabled: h.online,
-                child: const Text('删除会话'),
+                child: Text(tr("删除会话")),
               ),
             ],
           ),
@@ -715,7 +750,12 @@ class _ConversationPageState extends State<ConversationPage> {
           if (!h.online) _OfflineBar(host: h, onRetry: () => hub.connect(h)),
           if (_cachedTimeline)
             InlineNotice(
-              '${h.online ? '正在同步，先显示本机缓存' : '离线缓存'} · 内容同步于 ${_timelineSyncedAt?.toLocal().toString().substring(0, 16) ?? '未知时间'}${_cacheTruncated ? ' · 仅缓存最近部分内容' : ''}。附件原文需电脑在线。',
+              tr("{0} · 内容同步于 {1}{2}。附件原文需电脑在线。", [
+                h.online ? tr("正在同步，先显示本机缓存") : tr("离线缓存"),
+                _timelineSyncedAt?.toLocal().toString().substring(0, 16) ??
+                    tr("未知时间"),
+                _cacheTruncated ? tr(" · 仅缓存最近部分内容") : '',
+              ]),
             ),
           if (error != null) InlineNotice(error!, danger: true),
           if (draft.error != null) InlineNotice(draft.error!, danger: true),
@@ -725,7 +765,7 @@ class _ConversationPageState extends State<ConversationPage> {
                     child: h.online
                         ? const CircularProgressIndicator()
                         : Text(
-                            '电脑离线，暂无已缓存的对话内容。',
+                            tr("电脑离线，暂无已缓存的对话内容。"),
                             style: TextStyle(color: context.dc.secondary),
                           ),
                   )
@@ -756,8 +796,8 @@ class _ConversationPageState extends State<ConversationPage> {
                               Expanded(
                                 child: Text(
                                   _locatePages == 0
-                                      ? '正在定位到该轮…'
-                                      : '正在定位到该轮…已加载 $_locatePages 页',
+                                      ? tr("正在定位到该轮…")
+                                      : tr("正在定位到该轮…已加载 {0} 页", [_locatePages]),
                                 ),
                               ),
                               TextButton(
@@ -765,7 +805,7 @@ class _ConversationPageState extends State<ConversationPage> {
                                   _locateCancelled = true;
                                   _focused = true;
                                 }),
-                                child: const Text('取消'),
+                                child: Text(tr("取消")),
                               ),
                             ],
                           ),
@@ -783,7 +823,7 @@ class _ConversationPageState extends State<ConversationPage> {
                                       ),
                                     )
                                   : const Icon(Icons.history, size: 18),
-                              label: const Text('加载更早的消息'),
+                              label: Text(tr("加载更早的消息")),
                             ),
                           ),
                       ];
@@ -804,7 +844,7 @@ class _ConversationPageState extends State<ConversationPage> {
                                 ),
                                 const SizedBox(width: 10),
                                 Text(
-                                  'Agent 正在电脑上工作…',
+                                  tr("Agent 正在电脑上工作…"),
                                   style: Theme.of(context).textTheme.bodySmall,
                                 ),
                               ],
@@ -832,18 +872,24 @@ class _ConversationPageState extends State<ConversationPage> {
                         executor: defaultExecutor(h, t),
                         executors: h.executors,
                         loadFullItem: _loadFullItem,
-                        child: ListView.builder(
-                          key: const ValueKey('conversation-timeline'),
-                          controller: scroll,
-                          padding: const EdgeInsets.fromLTRB(
-                            DcSpace.page,
-                            8,
-                            DcSpace.page,
-                            16,
+                        child: NotificationListener<ScrollMetricsNotification>(
+                          onNotification: _resized,
+                          child: NotificationListener<ScrollNotification>(
+                            onNotification: _scrolled,
+                            child: ListView.builder(
+                              key: const ValueKey('conversation-timeline'),
+                              controller: scroll,
+                              padding: const EdgeInsets.fromLTRB(
+                                DcSpace.page,
+                                8,
+                                DcSpace.page,
+                                16,
+                              ),
+                              itemCount: children.length,
+                              itemBuilder: (_, i) => children[i],
+                              findChildIndexCallback: (key) => indexOf[key],
+                            ),
                           ),
-                          itemCount: children.length,
-                          itemBuilder: (_, i) => children[i],
-                          findChildIndexCallback: (key) => indexOf[key],
                         ),
                       );
                     },
@@ -917,24 +963,31 @@ class _OfflineBar extends StatelessWidget {
   final HostState host;
   final VoidCallback onRetry;
   @override
-  Widget build(BuildContext context) => Container(
-    color: context.dc.surface,
-    padding: const EdgeInsets.fromLTRB(DcSpace.page, 4, 8, 4),
-    child: Row(
-      children: [
-        Expanded(
-          child: Text(
-            host.status == LinkStatus.connecting
-                ? '正在连接电脑…'
-                : '电脑离线${host.syncedAt == null ? '' : ' · 最后同步 ${shortTime(host.syncedAt)}'}。任务不会因此停止。',
-            style: Theme.of(context).textTheme.bodySmall,
+  Widget build(BuildContext context) {
+    watchAppLanguage(context);
+    return Container(
+      color: context.dc.surface,
+      padding: const EdgeInsets.fromLTRB(DcSpace.page, 4, 8, 4),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              host.status == LinkStatus.connecting
+                  ? tr("正在连接电脑…")
+                  : tr("电脑离线{0}。任务不会因此停止。", [
+                      host.syncedAt == null
+                          ? ''
+                          : tr(" · 最后同步 {0}", [shortTime(host.syncedAt)]),
+                    ]),
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
           ),
-        ),
-        if (host.status == LinkStatus.offline)
-          TextButton(onPressed: onRetry, child: const Text('重新连接')),
-      ],
-    ),
-  );
+          if (host.status == LinkStatus.offline)
+            TextButton(onPressed: onRetry, child: Text(tr("重新连接"))),
+        ],
+      ),
+    );
+  }
 }
 
 class _Composer extends StatelessWidget {
@@ -966,6 +1019,7 @@ class _Composer extends StatelessWidget {
   final VoidCallback? onPick;
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final c = context.dc;
     return SafeArea(
       top: false,
@@ -990,8 +1044,8 @@ class _Composer extends StatelessWidget {
                         ? 3
                         : 6,
                     enabled: enabled,
-                    decoration: const InputDecoration(
-                      hintText: '继续交给 Agent…',
+                    decoration: InputDecoration(
+                      hintText: tr("继续交给 Agent…"),
                       filled: false,
                       contentPadding: EdgeInsets.symmetric(vertical: 10),
                     ),
@@ -1002,7 +1056,7 @@ class _Composer extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(right: 6),
                     child: IconButton.outlined(
-                      tooltip: '停止',
+                      tooltip: tr("停止"),
                       onPressed: onStop,
                       icon: const Icon(Icons.stop_rounded),
                     ),
@@ -1011,7 +1065,7 @@ class _Composer extends StatelessWidget {
                   listenable: controller,
                   builder: (context, _) => IconButton.filled(
                     style: accentIconButton(context),
-                    tooltip: '发送',
+                    tooltip: tr("发送"),
                     onPressed:
                         canSend &&
                             choice != null &&

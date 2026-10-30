@@ -17,16 +17,19 @@ bool _sameGitValue(dynamic expected, dynamic actual) {
 }
 
 String gitResultMessage(Map result) => switch (result['state']) {
-  'succeeded' => result['pushed'] == true ? '已提交并推送' : 'Git 操作已完成',
-  'awaiting_next' => '已经提交，还不确定是否推送成功，可以重新发送推送。',
-  'push_failed' =>
-    '提交已完成，推送失败：${result['receipt']?['outcome']?['message'] ?? ''}',
-  'failed' => 'Git 操作失败：${result['receipt']?['outcome']?['message'] ?? ''}',
-  'running' => '电脑正在执行 Git 操作，稍后再确认。',
-  'unknown' => 'Git 操作中途中断了，请在「变更」里看一下仓库现在的状态。',
-  'needs_attention' => 'Git 操作只完成了一部分，请先在「变更」里看一下再继续。',
-  'closed' => '已不再等待这次 Git 操作。',
-  _ => '电脑上还查不到这次 Git 操作，可能没收到，可以重新发送。',
+  'succeeded' => result['pushed'] == true ? tr("已提交并推送") : tr("Git 操作已完成"),
+  'awaiting_next' => tr("已经提交，还不确定是否推送成功，可以重新发送推送。"),
+  'push_failed' => tr("提交已完成，推送失败：{0}", [
+    result['receipt']?['outcome']?['message'] ?? '',
+  ]),
+  'failed' => tr("Git 操作失败：{0}", [
+    result['receipt']?['outcome']?['message'] ?? '',
+  ]),
+  'running' => tr("电脑正在执行 Git 操作，稍后再确认。"),
+  'unknown' => tr("Git 操作中途中断了，请在「变更」里看一下仓库现在的状态。"),
+  'needs_attention' => tr("Git 操作只完成了一部分，请先在「变更」里看一下再继续。"),
+  'closed' => tr("已不再等待这次 Git 操作。"),
+  _ => tr("电脑上还查不到这次 Git 操作，可能没收到，可以重新发送。"),
 };
 
 extension GitWrites on MobileOperations {
@@ -74,7 +77,7 @@ extension GitWrites on MobileOperations {
     final found = await verifyIndex(client, saved);
     if (found == null || found['state'] != 'succeeded') {
       throw ProtocolException(
-        found == null ? '还不确定文件是否已暂存，所以没有继续提交。' : gitResultMessage(found),
+        found == null ? tr("还不确定文件是否已暂存，所以没有继续提交。") : gitResultMessage(found),
       );
     }
     return found;
@@ -91,7 +94,7 @@ extension GitWrites on MobileOperations {
     if (receipt == null) return null;
     if (receipt is! Map ||
         !_sameGitValue(_expectedIndex(saved), receipt['request'])) {
-      throw const ProtocolException('暂存回执与原文件选择不一致，未重新执行。');
+      throw ProtocolException(tr("暂存回执与原文件选择不一致，未重新执行。"));
     }
     final state = receipt['closed'] == true
         ? 'closed'
@@ -131,7 +134,7 @@ extension GitWrites on MobileOperations {
   }) async {
     if (!['commit', 'push', 'pull', 'sync'].contains(action) ||
         (push && action != 'commit')) {
-      throw const ProtocolException('Git 操作无效。');
+      throw ProtocolException(tr("Git 操作无效。"));
     }
     final saved = <String, dynamic>{
       'kind': 'git',
@@ -204,7 +207,7 @@ extension GitWrites on MobileOperations {
               };
       }
       if (raw is! Map || raw['request'] is! Map || raw['outcome'] is! Map) {
-        throw const ProtocolException('电脑未返回有效的 Git 操作回执。');
+        throw ProtocolException(tr("电脑未返回有效的 Git 操作回执。"));
       }
       final request = raw['request'] as Map;
       final valid = parent == null
@@ -215,7 +218,7 @@ extension GitWrites on MobileOperations {
                 request['action'] == 'push' &&
                 request['workflow']?['parentOperationId'] ==
                     parent['request']['operationId'];
-      if (!valid) throw const ProtocolException('Git 回执与原请求不一致，未继续操作。');
+      if (!valid) throw ProtocolException(tr("Git 回执与原请求不一致，未继续操作。"));
       final status = raw['outcome']['status'];
       String state;
       if (raw['closed'] == true) {
@@ -248,7 +251,7 @@ extension GitWrites on MobileOperations {
         'pushed': parent != null || original['action'] == 'push',
       };
     }
-    throw const ProtocolException('Git 接续记录过长或存在循环，请在电脑上核实。');
+    throw ProtocolException(tr("Git 接续记录过长或存在循环，请在电脑上核实。"));
   }
 
   Future<void> _advanceGit(
@@ -310,7 +313,7 @@ extension GitWrites on MobileOperations {
           index ? _expectedIndex(saved) : saved['request'],
           closed['request'],
         )) {
-      throw const ProtocolException('电脑尚未确认结束原 Git 跟踪。');
+      throw ProtocolException(tr("电脑尚未确认结束原 Git 跟踪。"));
     }
     await _clearIfCurrent(saved);
   }

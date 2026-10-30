@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import '../../app.dart';
@@ -9,11 +10,16 @@ import '../tools/line_diff.dart';
 import 'timeline_view.dart' show AgentMarkdown, TimelineView;
 import 'turn_reviews_sheet.dart' show reviewActive;
 
-const _severity = {'critical': '严重', 'high': '高', 'medium': '中', 'low': '低'};
-const _verdict = {
-  'confirmed': 'AI 复核支持',
-  'refuted': 'AI 复核不支持',
-  'uncertain': '待核实',
+Map<String, String> get _severity => {
+  'critical': tr("严重"),
+  'high': tr("高"),
+  'medium': tr("中"),
+  'low': tr("低"),
+};
+Map<String, String> get _verdict => {
+  'confirmed': tr("AI 复核支持"),
+  'refuted': tr("AI 复核不支持"),
+  'uncertain': tr("待核实"),
 };
 
 class ReviewReportView extends StatefulWidget {
@@ -78,7 +84,7 @@ class _ReviewReportViewState extends State<ReviewReportView> {
       if (mounted && host.link == link && host.connectionEpoch == epoch) {
         setState(() {
           repairKnown = false;
-          error = '无法核实修复状态：$e';
+          error = tr("无法核实修复状态：{0}", [e]);
         });
       }
     } finally {
@@ -146,14 +152,18 @@ class _ReviewReportViewState extends State<ReviewReportView> {
           builder: (context, snap) => ListView(
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
             children: [
-              Text('审查代码证据', style: Theme.of(context).textTheme.titleLarge),
+              Text(tr("审查代码证据"), style: Theme.of(context).textTheme.titleLarge),
               const SizedBox(height: 8),
               SelectableText(
-                '${finding['path'] ?? finding['fileId']} · ${finding['startLine']}–${finding['endLine']} 行',
+                tr("{0} · {1}–{2} 行", [
+                  finding['path'] ?? finding['fileId'],
+                  finding['startLine'],
+                  finding['endLine'],
+                ]),
               ),
-              const InlineNotice('这是审查时保存的版本，当前文件可能已变化。'),
+              InlineNotice(tr("这是审查时保存的版本，当前文件可能已变化。")),
               if (snap.hasError)
-                InlineNotice('读取审查代码失败：${snap.error}', danger: true)
+                InlineNotice(tr("读取审查代码失败：{0}", [snap.error]), danger: true)
               else if (!snap.hasData)
                 const LinearProgressIndicator()
               else if (snap.data is Map)
@@ -180,6 +190,7 @@ class _ReviewReportViewState extends State<ReviewReportView> {
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final run = widget.run, active = reviewActive(widget.run);
     final report = run['report'] as Map?;
     final findings = [
@@ -199,23 +210,23 @@ class _ReviewReportViewState extends State<ReviewReportView> {
       children: [
         if (failure != null && failure.isNotEmpty) ...[
           InlineNotice(
-            networkFailure ? '审查连接中断，本次审查未完成。请检查网络后重新检查。' : failure,
+            networkFailure ? tr("审查连接中断，本次审查未完成。请检查网络后重新检查。") : failure,
             danger: true,
           ),
           if (networkFailure)
             ExpansionTile(
-              title: const Text('错误详情'),
+              title: Text(tr("错误详情")),
               children: [SelectableText(failure)],
             ),
         ],
         if (run['status'] == 'interrupted' && failure == null)
-          const InlineNotice('审查连接中断，本次审查未完成。', danger: true),
+          InlineNotice(tr("审查连接中断，本次审查未完成。"), danger: true),
         if (report != null) ...[
           for (final warning in report['warnings'] as List? ?? const [])
             InlineNotice('$warning'),
           if ((report['files'] as List? ?? []).isNotEmpty)
             ExpansionTile(
-              title: const Text('文件覆盖情况'),
+              title: Text(tr("文件覆盖情况")),
               children: [
                 for (final f in report['files'] as List)
                   if (f is Map)
@@ -224,7 +235,7 @@ class _ReviewReportViewState extends State<ReviewReportView> {
                         '${f['rootLabel'] == null ? '' : '${f['rootLabel']}/'}${f['path']}',
                       ),
                       subtitle: Text(
-                        '${{'reported': '已检查', 'partial': '部分原文缺失', 'not_reported': '未报告检查', 'unavailable': '原文不可用'}[f['status']] ?? '待核实'}${(f['rules'] as List? ?? []).isEmpty ? '' : '\n${(f['rules'] as List).join('\n')}'}',
+                        '${{'reported': tr("已检查"), 'partial': tr("部分原文缺失"), 'not_reported': tr("未报告检查"), 'unavailable': tr("原文不可用")}[f['status']] ?? tr("待核实")}${(f['rules'] as List? ?? []).isEmpty ? '' : '\n${(f['rules'] as List).join('\n')}'}',
                       ),
                     ),
               ],
@@ -232,8 +243,8 @@ class _ReviewReportViewState extends State<ReviewReportView> {
           if (findings.isEmpty)
             Text(
               run['status'] == 'completed' && report['structured'] == true
-                  ? '本次审查未报告问题。'
-                  : '审查尚未形成完整问题报告，不能据此判断是否存在问题。',
+                  ? tr("本次审查未报告问题。")
+                  : tr("审查尚未形成完整问题报告，不能据此判断是否存在问题。"),
             ),
           for (var i = 0; i < findings.length; i++)
             Row(
@@ -251,10 +262,18 @@ class _ReviewReportViewState extends State<ReviewReportView> {
                   child: ExpansionTile(
                     tilePadding: EdgeInsets.zero,
                     title: Text(
-                      '${run['request']['kind'] == 'security' ? '潜在${_severity[findings[i]['severity']] ?? ''}风险' : _severity[findings[i]['severity']] ?? ''} · ${findings[i]['title']}',
+                      '${run['request']['kind'] == 'security' ? tr("潜在{0}风险", [_severity[findings[i]['severity']] ?? '']) : _severity[findings[i]['severity']] ?? ''} · ${findings[i]['title']}',
                     ),
                     subtitle: Text(
-                      '${findings[i]['rootLabel'] == null ? '' : '${findings[i]['rootLabel']}/'}${findings[i]['path'] ?? findings[i]['fileId']} · ${findings[i]['side'] == 'before' ? '改动前 · ' : ''}${findings[i]['startLine']}–${findings[i]['endLine']} 行',
+                      tr("{0}{1} · {2}{3}–{4} 行", [
+                        findings[i]['rootLabel'] == null
+                            ? ''
+                            : '${findings[i]['rootLabel']}/',
+                        findings[i]['path'] ?? findings[i]['fileId'],
+                        findings[i]['side'] == 'before' ? tr("改动前 · ") : '',
+                        findings[i]['startLine'],
+                        findings[i]['endLine'],
+                      ]),
                     ),
                     children: [
                       SelectableText('${findings[i]['description'] ?? ''}'),
@@ -262,7 +281,7 @@ class _ReviewReportViewState extends State<ReviewReportView> {
                         const SizedBox(height: 8),
                         Text(
                           _verdict[findings[i]['verification']['verdict']] ??
-                              '待核实',
+                              tr("待核实"),
                         ),
                         SelectableText(
                           '${findings[i]['verification']['reason'] ?? ''}',
@@ -271,10 +290,12 @@ class _ReviewReportViewState extends State<ReviewReportView> {
                       if ('${findings[i]['evidence'] ?? ''}'.isNotEmpty)
                         CodeBlock('${findings[i]['evidence']}'),
                       if ('${findings[i]['suggestion'] ?? ''}'.isNotEmpty)
-                        SelectableText('建议：${findings[i]['suggestion']}'),
+                        SelectableText(
+                          tr("建议：{0}", [findings[i]['suggestion']]),
+                        ),
                       if (findings[i]['locationVerified'] != true)
                         Text(
-                          '${findings[i]['locationNote'] ?? '位置尚未校验，请先核实。'}',
+                          '${findings[i]['locationNote'] ?? tr("位置尚未校验，请先核实。")}',
                         ),
                       TextButton.icon(
                         onPressed:
@@ -283,7 +304,7 @@ class _ReviewReportViewState extends State<ReviewReportView> {
                             ? () => _source(findings[i])
                             : null,
                         icon: const Icon(Icons.difference_outlined, size: 18),
-                        label: const Text('查看审查时的代码'),
+                        label: Text(tr("查看审查时的代码")),
                       ),
                     ],
                   ),
@@ -309,10 +330,10 @@ class _ReviewReportViewState extends State<ReviewReportView> {
                         }
                       }),
                 child: Text(
-                  selected.length == findings.length ? '取消全选' : '全选问题',
+                  selected.length == findings.length ? tr("取消全选") : tr("全选问题"),
                 ),
               ),
-              Text('已选 ${selected.length} 项'),
+              Text(tr("已选 {0} 项", [selected.length])),
               FilledButton(
                 onPressed:
                     !enabled ||
@@ -323,26 +344,26 @@ class _ReviewReportViewState extends State<ReviewReportView> {
                         host.pendingOperation != null
                     ? null
                     : () => _repair(),
-                child: const Text('开始修复'),
+                child: Text(tr("开始修复")),
               ),
             ],
           ),
-          if (taskRunning) const InlineNotice('主对话正在回复，结束后可提交修复。'),
+          if (taskRunning) InlineNotice(tr("主对话正在回复，结束后可提交修复。")),
           if (repair?['state'] == 'submitted')
-            const InlineNotice('修复已提交给主 Agent，携带所选问题及原审查上下文。'),
+            InlineNotice(tr("修复已提交给主 Agent，携带所选问题及原审查上下文。")),
         ],
         if (pendingRepair) ...[
-          InlineNotice('有一项修复尚未提交。${repair?['lastError'] ?? ''}'),
+          InlineNotice(tr("有一项修复尚未提交。{0}", [repair?['lastError'] ?? ''])),
           Wrap(
             spacing: 8,
             children: [
               TextButton(
                 onPressed: enabled ? () => _repair('resume') : null,
-                child: const Text('继续原修复'),
+                child: Text(tr("继续原修复")),
               ),
               TextButton(
                 onPressed: enabled ? () => _repair('abandon') : null,
-                child: const Text('放弃这次修复'),
+                child: Text(tr("放弃这次修复")),
               ),
             ],
           ),
@@ -352,7 +373,19 @@ class _ReviewReportViewState extends State<ReviewReportView> {
             ListTile(
               contentPadding: EdgeInsets.zero,
               title: Text(
-                '问题 ${(r['findingIndices'] as List? ?? []).map((i) => (i as num).toInt() + 1).join('、')} · ${{'running': '修复中', 'completed': '修复已完成', 'failed': '修复失败', 'cancelled': '修复已取消', 'interrupted': '修复已中断'}[r['status']] ?? '待核实'}',
+                tr("问题 {0} · {1}", [
+                  (r['findingIndices'] as List? ?? [])
+                      .map((i) => (i as num).toInt() + 1)
+                      .join('、'),
+                  {
+                        'running': tr("修复中"),
+                        'completed': tr("修复已完成"),
+                        'failed': tr("修复失败"),
+                        'cancelled': tr("修复已取消"),
+                        'interrupted': tr("修复已中断"),
+                      }[r['status']] ??
+                      tr("待核实"),
+                ]),
               ),
               subtitle: r['status'] == 'completed'
                   ? TextButton(
@@ -361,19 +394,19 @@ class _ReviewReportViewState extends State<ReviewReportView> {
                               widget.activeRecheckTurns.contains(r['turnId'])
                           ? null
                           : () => widget.onRecheck!(r['turnId'] as String),
-                      child: const Text('复审修复后的版本'),
+                      child: Text(tr("复审修复后的版本")),
                     )
                   : null,
             ),
         if (error != null) InlineNotice(error!, danger: true),
         if ('${run['result'] ?? ''}'.isNotEmpty)
           ExpansionTile(
-            title: const Text('审查原文'),
+            title: Text(tr("审查原文")),
             children: [AgentMarkdown('${run['result']}')],
           ),
         if ((run['activities'] as List? ?? []).isNotEmpty)
           ExpansionTile(
-            title: const Text('审查过程'),
+            title: Text(tr("审查过程")),
             children: [
               TimelineView(
                 items: [
@@ -392,7 +425,7 @@ class _ReviewReportViewState extends State<ReviewReportView> {
           alignment: Alignment.centerRight,
           child: TextButton(
             onPressed: active ? widget.onCancel : widget.onRetry,
-            child: Text(active ? '取消审查' : '重新检查'),
+            child: Text(active ? tr("取消审查") : tr("重新检查")),
           ),
         ),
       ],

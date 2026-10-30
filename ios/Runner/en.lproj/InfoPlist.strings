@@ -1,0 +1,3 @@
+"NSCameraUsageDescription" = "Scan your computer’s pairing QR code or take a photo to attach to a task.";
+"NSLocalNetworkUsageDescription" = "Connect directly to your paired computer with encryption to view chats and work remotely.";
+"NSPhotoLibraryUsageDescription" = "Choose photos to attach to tasks on your own computer.";

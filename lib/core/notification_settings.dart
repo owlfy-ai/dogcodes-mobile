@@ -1,13 +1,14 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'pc_api.dart' show uuid;
 import 'protocol.dart';
 import 'secure_host_client.dart';
 import 'security/identity_store.dart';
 
-const notificationKinds = {
-  'approval': '待审批',
-  'question': '待回答',
-  'completed': '任务完成',
-  'failed': '执行失败',
+Map<String, String> get notificationKinds => {
+  'approval': tr("待审批"),
+  'question': tr("待回答"),
+  'completed': tr("任务完成"),
+  'failed': tr("执行失败"),
 };
 
 class NotificationSettings {
@@ -46,7 +47,7 @@ class NotificationSettings {
         enabledKinds: kinds,
       );
     } catch (_) {
-      throw const ProtocolException('通知设置响应无效，请重新读取。');
+      throw ProtocolException(tr("通知设置响应无效，请重新读取。"));
     }
   }
 
@@ -143,7 +144,7 @@ class NotificationSettingsApi {
   ) async {
     final record = await hosts.read(hostId);
     if (record == null || record['bindingEpoch'] != epoch) {
-      throw const ProtocolException('电脑绑定已改变，请返回设备列表。');
+      throw ProtocolException(tr("电脑绑定已改变，请返回设备列表。"));
     }
     Map<String, dynamic> response;
     try {
@@ -156,19 +157,19 @@ class NotificationSettingsApi {
       );
     } on RouteRequestRejected catch (e) {
       throw ProtocolException(switch (e.statusCode) {
-        401 || 403 => '设备授权已失效，请核实电脑绑定。',
-        409 => '通知设置已改变，请重新读取后修改。',
-        429 => '操作过于频繁，请稍后重试。',
-        _ => '通知服务暂时不可用，请稍后重试。',
+        401 || 403 => tr("设备授权已失效，请核实电脑绑定。"),
+        409 => tr("通知设置已改变，请重新读取后修改。"),
+        429 => tr("操作过于频繁，请稍后重试。"),
+        _ => tr("通知服务暂时不可用，请稍后重试。"),
       });
     } on ProtocolException {
       rethrow;
     } catch (_) {
-      throw const ProtocolException('无法确认通知设置，请检查网络后重新读取。');
+      throw ProtocolException(tr("无法确认通知设置，请检查网络后重新读取。"));
     }
     final current = await hosts.read(hostId);
     if (current == null || current['bindingEpoch'] != epoch) {
-      throw const ProtocolException('电脑绑定已改变，请返回设备列表。');
+      throw ProtocolException(tr("电脑绑定已改变，请返回设备列表。"));
     }
     return NotificationSettings.parse(response);
   }

@@ -19,6 +19,7 @@ class ClipboardLink implements HostLink {
   bool corruptDownload = false, wrongOffset = false, wrongReceipt = false;
   int writes = 0, closed = 0;
   Future<void> Function()? appendWait;
+  String? platform;
   @override
   String get hostId => 'pc';
   @override
@@ -36,6 +37,7 @@ class ClipboardLink implements HostLink {
       return {
         'transportMethods': ['direct_open'],
         'clipboardTransfer': {'version': 1},
+        'platform': ?platform,
       };
     }
     if (method != 'clipboard_transfer') throw StateError('unavailable');
@@ -44,6 +46,12 @@ class ClipboardLink implements HostLink {
     final op = p['operation'];
     if (op == 'begin_upload' || op == 'begin_download') {
       final down = op == 'begin_download';
+      // As the computer reports an empty clipboard.
+      if (down && clipboard.isEmpty) {
+        throw ProtocolException(
+          p['kind'] == 'text' ? '剪贴板没有文字' : '剪贴板内容为空或过大（图片限 16 MB，文字限 1 MB）',
+        );
+      }
       snapshot = Uint8List.fromList(clipboard);
       staged = Uint8List(0);
       manifest = {

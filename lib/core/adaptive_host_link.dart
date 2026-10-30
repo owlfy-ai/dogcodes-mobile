@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:async';
 import 'host_api.dart';
 import 'secure_host_client.dart';
@@ -10,8 +11,9 @@ enum ConnectionRoute {
   turn('TURN 中继'),
   webRtc('WebRTC · 路径待确认');
 
-  const ConnectionRoute(this.label);
-  final String label;
+  const ConnectionRoute(this._label);
+  final String _label;
+  String get label => tr(_label);
   static ConnectionRoute fromStatus(Map status) =>
       switch ((status['route'] as Map?)?['mode']) {
         'direct' => direct,
@@ -209,7 +211,7 @@ class AdaptiveHostLink implements RoutedHostLink {
     }
     if (link.hostId != hostId) {
       await _disposeLink(link);
-      throw const ProtocolException('连接的电脑身份不一致。');
+      throw ProtocolException(tr("连接的电脑身份不一致。"));
     }
     final old = _active;
     _generation++;

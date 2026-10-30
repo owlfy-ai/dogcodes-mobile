@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -95,6 +96,7 @@ class _TurnFilesCardState extends State<TurnFilesCard> {
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final c = context.dc;
     return FutureBuilder<TurnChanges>(
       future: future,
@@ -104,13 +106,15 @@ class _TurnFilesCardState extends State<TurnFilesCard> {
             children: [
               Flexible(
                 child: Text(
-                  kDebugMode ? '本轮变更加载失败：${snap.error}' : '本轮变更加载失败',
+                  kDebugMode
+                      ? tr("本轮变更加载失败：{0}", [snap.error])
+                      : tr("本轮变更加载失败"),
                   style: TextStyle(fontSize: 13, color: c.secondary),
                 ),
               ),
               TextButton(
                 onPressed: () => setState(() => _load(retry: true)),
-                child: const Text('重试'),
+                child: Text(tr("重试")),
               ),
             ],
           );
@@ -147,7 +151,7 @@ class _TurnFilesCardState extends State<TurnFilesCard> {
                           children: [
                             Flexible(
                               child: Text(
-                                '${changes.files.length} 个文件已更改',
+                                tr("{0} 个文件已更改", [changes.files.length]),
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
                                   fontSize: 14,
@@ -168,7 +172,7 @@ class _TurnFilesCardState extends State<TurnFilesCard> {
                         icon: done != null
                             ? const Icon(Icons.check, size: 16)
                             : const Icon(Icons.commit, size: 16),
-                        label: Text(done ?? '提交'),
+                        label: Text(done ?? tr("提交")),
                       ),
                     ],
                   ),
@@ -180,7 +184,7 @@ class _TurnFilesCardState extends State<TurnFilesCard> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
                     child: Text(
-                      '连接中断后的恢复快照 · 仅反映检查时的文件变化，外部工具可能仍在写入',
+                      tr("连接中断后的恢复快照 · 仅反映检查时的文件变化，外部工具可能仍在写入"),
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),
@@ -200,6 +204,7 @@ class _Counts extends StatelessWidget {
   final int additions, deletions;
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final c = context.dc;
     const style = TextStyle(fontSize: 12, fontFamily: monoFamily);
     return Row(
@@ -218,6 +223,7 @@ class _FileRow extends StatelessWidget {
   final TurnFile file;
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final c = context.dc;
     final f = file;
     final color = switch (f.status) {
@@ -268,7 +274,10 @@ class _FileRow extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             if (f.binary)
-              Text('二进制', style: TextStyle(fontSize: 12, color: c.secondary))
+              Text(
+                tr("二进制"),
+                style: TextStyle(fontSize: 12, color: c.secondary),
+              )
             else
               _Counts(f.additions, f.deletions),
           ],
@@ -283,6 +292,7 @@ class _FileDiffSheet extends StatelessWidget {
   final TurnFile file;
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     return DraggableScrollableSheet(
       expand: false,
       initialChildSize: 0.75,
@@ -293,12 +303,15 @@ class _FileDiffSheet extends StatelessWidget {
         children: [
           Text(file.display, style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: 4),
-          Text('本轮保存的历史 Diff', style: Theme.of(context).textTheme.bodySmall),
+          Text(
+            tr("本轮保存的历史 Diff"),
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
           const SizedBox(height: 12),
           file.binary
-              ? const Text('二进制文件，无法显示差异')
+              ? Text(tr("二进制文件，无法显示差异"))
               : file.before == null && file.after == null
-              ? const Text('这一轮未保存该文件的内容')
+              ? Text(tr("这一轮未保存该文件的内容"))
               : UnifiedDiff(lines: hunks(file.lines)),
         ],
       ),
@@ -439,7 +452,7 @@ class _TurnCommitSheetState extends State<TurnCommitSheet> {
       phase = _Phase.summarizing;
     });
     final executor = this.executor;
-    if (executor == null) throw StateError('没有可用于生成提交说明的 Agent');
+    if (executor == null) throw StateError(tr("没有可用于生成提交说明的 Agent"));
     final text = await link.commitSummary(task, t.rootId, executor);
     if (!mounted || id != _run) return;
     setState(() {
@@ -511,11 +524,13 @@ class _TurnCommitSheetState extends State<TurnCommitSheet> {
       );
       if (result?['state'] == 'succeeded') {
         _added = null;
-        _finish(push ? '已提交并推送' : '已提交');
+        _finish(push ? tr("已提交并推送") : tr("已提交"));
       } else {
         _fail(
           _run,
-          result == null ? '提交结果待核实，请到待处理页面核实原操作' : gitResultMessage(result),
+          result == null
+              ? tr("提交结果待核实，请到待处理页面核实原操作")
+              : gitResultMessage(result),
         );
       }
     } catch (e) {
@@ -532,15 +547,16 @@ class _TurnCommitSheetState extends State<TurnCommitSheet> {
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final c = context.dc;
     final busy =
         phase == _Phase.preparing ||
         phase == _Phase.summarizing ||
         phase == _Phase.committing;
     final status = switch (phase) {
-      _Phase.preparing => '正在暂存本轮文件…',
-      _Phase.summarizing => '正在生成提交说明…',
-      _Phase.committing => '正在提交…',
+      _Phase.preparing => tr("正在暂存本轮文件…"),
+      _Phase.summarizing => tr("正在生成提交说明…"),
+      _Phase.committing => tr("正在提交…"),
       _ => null,
     };
     final canCommit = phase == _Phase.ready && message.text.trim().isNotEmpty;
@@ -555,7 +571,7 @@ class _TurnCommitSheetState extends State<TurnCommitSheet> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text('提交本轮修改', style: Theme.of(context).textTheme.titleMedium),
+          Text(tr("提交本轮修改"), style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: 12),
           if (targets.length > 1) ...[
             SegmentedButton<String>(
@@ -569,10 +585,13 @@ class _TurnCommitSheetState extends State<TurnCommitSheet> {
             const SizedBox(height: 12),
           ],
           if (phase == _Phase.empty && error == null)
-            const Text('本轮修改已没有未提交的内容（可能已提交或已撤销）。'),
+            Text(tr("本轮修改已没有未提交的内容（可能已提交或已撤销）。")),
           if (snapshotId != null || phase == _Phase.committed)
             Text(
-              '将提交 $files 个文件${extra > 0 ? '，其中 $extra 个是此前已暂存的其他更改' : ''}。',
+              tr("将提交 {0} 个文件{1}。", [
+                files,
+                extra > 0 ? tr("，其中 {0} 个是此前已暂存的其他更改", [extra]) : '',
+              ]),
               style: Theme.of(context).textTheme.bodySmall,
             ),
           if (phase != _Phase.empty && phase != _Phase.preparing) ...[
@@ -583,8 +602,8 @@ class _TurnCommitSheetState extends State<TurnCommitSheet> {
               minLines: 2,
               maxLines: 5,
               onChanged: (_) => setState(() {}),
-              decoration: const InputDecoration(
-                hintText: '提交说明',
+              decoration: InputDecoration(
+                hintText: tr("提交说明"),
                 border: OutlineInputBorder(),
               ),
             ),
@@ -614,20 +633,20 @@ class _TurnCommitSheetState extends State<TurnCommitSheet> {
           if (phase == _Phase.committed || phase == _Phase.empty)
             FilledButton(
               onPressed: () => Navigator.pop(context, done),
-              child: const Text('完成'),
+              child: Text(tr("完成")),
             )
           else
             Row(
               children: [
                 IconButton(
-                  tooltip: '重新生成',
+                  tooltip: tr("重新生成"),
                   onPressed: busy || target == null ? null : _regenerate,
                   icon: const Icon(Icons.auto_awesome_outlined),
                 ),
                 if (widget.executors.length > 1)
                   Flexible(
                     child: PopupMenuButton<Map<String, dynamic>>(
-                      tooltip: '编写提交说明的 Agent',
+                      tooltip: tr("编写提交说明的 Agent"),
                       // Switching while one writes abandons that attempt.
                       enabled:
                           phase == _Phase.ready || phase == _Phase.summarizing,
@@ -667,12 +686,12 @@ class _TurnCommitSheetState extends State<TurnCommitSheet> {
                 const Spacer(),
                 OutlinedButton(
                   onPressed: canCommit ? () => _commit(push: false) : null,
-                  child: const Text('提交'),
+                  child: Text(tr("提交")),
                 ),
                 const SizedBox(width: 8),
                 FilledButton(
                   onPressed: canCommit ? () => _commit(push: true) : null,
-                  child: const Text('提交并推送'),
+                  child: Text(tr("提交并推送")),
                 ),
               ],
             ),

@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -62,8 +63,8 @@ class TerminalSession {
       if (batch['gap'] == true) {
         terminal.write(
           _after == '0'
-              ? '\x1b[2m（较早的输出已被电脑释放）\x1b[0m\r\n'
-              : '\r\n\x1b[2m… 部分较早的输出已被电脑丢弃 …\x1b[0m\r\n',
+              ? tr("\u001b[2m（较早的输出已被电脑释放）\u001b[0m\r\n")
+              : tr("\r\n\u001b[2m… 部分较早的输出已被电脑丢弃 …\u001b[0m\r\n"),
         );
       }
       if (bytes.isNotEmpty) {
@@ -130,12 +131,13 @@ bool terminalActive(Map? info) =>
     ['starting', 'running', 'stopping'].contains(info?['status']);
 
 String terminalStatus(Map? info) => switch (info?['status']) {
-  'starting' => '启动中',
-  'running' => '运行中',
-  'stopping' => '停止中',
-  'exited' => info?['exitCode'] == null ? '已结束' : '已退出（${info?['exitCode']}）',
-  'failed' => '启动失败',
-  _ => '状态未知',
+  'starting' => tr("启动中"),
+  'running' => tr("运行中"),
+  'stopping' => tr("停止中"),
+  'exited' =>
+    info?['exitCode'] == null ? tr("已结束") : tr("已退出（{0}）", [info?['exitCode']]),
+  'failed' => tr("启动失败"),
+  _ => tr("状态未知"),
 };
 
 class TerminalPane extends StatefulWidget {
@@ -203,6 +205,7 @@ class _TerminalPaneState extends State<TerminalPane> {
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final c = context.dc;
     final s = widget.session;
     return Column(
@@ -255,7 +258,7 @@ class _TerminalPaneState extends State<TerminalPane> {
                             _unconfirmedLine = null;
                           }
                         },
-                        child: const Text('核实输入结果'),
+                        child: Text(tr("核实输入结果")),
                       ),
                     if (s.input.canResume)
                       TextButton(
@@ -263,18 +266,20 @@ class _TerminalPaneState extends State<TerminalPane> {
                           final ok = await showDialog<bool>(
                             context: context,
                             builder: (d) => AlertDialog(
-                              title: const Text('继续输入？'),
-                              content: const Text(
-                                '请先检查终端当前状态；未确认的输入可能已部分生效。继续会清空当前输入框并丢弃未发送内容，不会重新发送原输入。',
+                              title: Text(tr("继续输入？")),
+                              content: Text(
+                                tr(
+                                  "请先检查终端当前状态；未确认的输入可能已部分生效。继续会清空当前输入框并丢弃未发送内容，不会重新发送原输入。",
+                                ),
                               ),
                               actions: [
                                 TextButton(
                                   onPressed: () => Navigator.pop(d, false),
-                                  child: const Text('取消'),
+                                  child: Text(tr("取消")),
                                 ),
                                 TextButton(
                                   onPressed: () => Navigator.pop(d, true),
-                                  child: const Text('已检查，继续'),
+                                  child: Text(tr("已检查，继续")),
                                 ),
                               ],
                             ),
@@ -283,7 +288,7 @@ class _TerminalPaneState extends State<TerminalPane> {
                             line.clear();
                           }
                         },
-                        child: const Text('继续输入'),
+                        child: Text(tr("继续输入")),
                       ),
                   ],
                 )
@@ -302,11 +307,11 @@ class _TerminalPaneState extends State<TerminalPane> {
               textInputAction: TextInputAction.send,
               style: const TextStyle(fontFamily: monoFamily, fontSize: 14),
               decoration: InputDecoration(
-                hintText: '输入命令，回车发送',
+                hintText: tr("输入命令，回车发送"),
                 prefixText: '\$ ',
                 isDense: true,
                 suffixIcon: IconButton(
-                  tooltip: '发送',
+                  tooltip: tr("发送"),
                   icon: const Icon(Icons.keyboard_return),
                   onPressed: _submitting ? null : _submit,
                 ),
@@ -354,6 +359,7 @@ class _Key extends StatelessWidget {
   final bool active;
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final c = context.dc;
     return Padding(
       padding: const EdgeInsets.only(right: 6),

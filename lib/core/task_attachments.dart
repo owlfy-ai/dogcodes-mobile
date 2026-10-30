@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
@@ -49,7 +50,7 @@ class TaskAttachment {
     String? owner,
   }) async {
     if (await file.length() > LocalWorkspace.maxAttachmentBytes) {
-      throw const ProtocolException('附件总大小不能超过 25 MB。');
+      throw ProtocolException(tr("附件总大小不能超过 25 MB。"));
     }
     final bytes = await file.readAsBytes();
     final name = file.name
@@ -60,7 +61,7 @@ class TaskAttachment {
         lookupMimeType(name, headerBytes: bytes.take(32).toList()) ??
         'application/octet-stream';
     if (name.isEmpty || utf8.encode(name).length > 512) {
-      throw const ProtocolException('附件文件名过长或无效。');
+      throw ProtocolException(tr("附件文件名过长或无效。"));
     }
     if (mime.startsWith('image/') &&
         ![
@@ -69,7 +70,7 @@ class TaskAttachment {
           'image/webp',
           'image/gif',
         ].contains(mime)) {
-      throw const ProtocolException('图片请使用 PNG、JPEG、GIF 或 WebP 格式。');
+      throw ProtocolException(tr("图片请使用 PNG、JPEG、GIF 或 WebP 格式。"));
     }
     final id = uuid();
     await store.saveBlob(id, bytes, owner: owner);
@@ -87,10 +88,10 @@ class TaskAttachment {
 }
 
 void validateAttachmentSelection(List<TaskAttachment> items) {
-  if (items.length > 16) throw const ProtocolException('一次最多发送 16 个附件。');
+  if (items.length > 16) throw ProtocolException(tr("一次最多发送 16 个附件。"));
   if (items.fold<int>(0, (total, a) => total + a.size) >
       LocalWorkspace.maxAttachmentBytes) {
-    throw const ProtocolException('附件总大小不能超过 25 MB。');
+    throw ProtocolException(tr("附件总大小不能超过 25 MB。"));
   }
 }
 
@@ -110,7 +111,7 @@ class AttachmentTransfer {
     required Future<void> Function() checkpoint,
   }) async {
     void check() {
-      if (cancelled()) throw const ProtocolException('附件上传已暂停，可继续原上传。');
+      if (cancelled()) throw ProtocolException(tr("附件上传已暂停，可继续原上传。"));
     }
 
     void accept(dynamic value) {
@@ -120,7 +121,7 @@ class AttachmentTransfer {
           value['path'] is! String ||
           value['integrity']?['sha256'] != item.request['sha256'] ||
           value['integrity']?['byteLength'] != item.size) {
-        throw const ProtocolException('附件回执与原文件不一致，未发送任务。');
+        throw ProtocolException(tr("附件回执与原文件不一致，未发送任务。"));
       }
       item.reference = Map<String, dynamic>.from(value);
       item.offset = item.size;
@@ -148,11 +149,11 @@ class AttachmentTransfer {
     final bytes = await store.blob(item.blobId!);
     if (bytes.length != item.size ||
         sha256.convert(bytes).toString() != item.request['sha256']) {
-      throw const ProtocolException('本机附件内容已变化，请重新添加；未上传变化后的文件。');
+      throw ProtocolException(tr("本机附件内容已变化，请重新添加；未上传变化后的文件。"));
     }
     final state = await link.call('attachment_upload_begin', item.request);
     check();
-    if (state is! Map) throw const ProtocolException('电脑端暂不支持附件上传，请更新电脑端。');
+    if (state is! Map) throw ProtocolException(tr("电脑端暂不支持附件上传，请更新电脑端。"));
     if (state['state'] == 'completed') {
       accept(state['attachment']);
       await checkpoint();
@@ -160,7 +161,7 @@ class AttachmentTransfer {
     }
     var offset = int.tryParse('${state['offset']}');
     if (offset == null || offset < 0 || offset > bytes.length) {
-      throw const ProtocolException('电脑返回的附件位置无效。');
+      throw ProtocolException(tr("电脑返回的附件位置无效。"));
     }
     item.offset = offset;
     await checkpoint();
@@ -177,7 +178,7 @@ class AttachmentTransfer {
       ]);
       check();
       if (result is! Map || int.tryParse('${result['offset']}') != end) {
-        throw const ProtocolException('附件分块位置未确认，请继续原上传。');
+        throw ProtocolException(tr("附件分块位置未确认，请继续原上传。"));
       }
       offset = end;
       item.offset = end;
@@ -224,7 +225,7 @@ class TaskAttachmentPicker {
         );
       }
       final saved = await store.draft(key);
-      if (saved == null) throw const ProtocolException('原草稿不可读取，请重新选择附件。');
+      if (saved == null) throw ProtocolException(tr("原草稿不可读取，请重新选择附件。"));
       final previous = [
         for (final a in saved['attachments'] as List? ?? [])
           TaskAttachment.fromJson(a as Map),
@@ -271,7 +272,7 @@ class TaskAttachmentPicker {
     }
     final created = <TaskAttachment>[];
     try {
-      if (lost.isEmpty) throw const ProtocolException('上次附件选择未完成，请重新选择。');
+      if (lost.isEmpty) throw ProtocolException(tr("上次附件选择未完成，请重新选择。"));
       if (lost.exception != null) throw lost.exception!;
       final items = [
         for (final a in saved['attachments'] as List? ?? [])
@@ -286,12 +287,12 @@ class TaskAttachmentPicker {
       await store.saveDraft(key, {
         ...saved,
         'attachments': items.map((a) => a.toJson()).toList(),
-        'recoveryNote': '已恢复系统文件选择器返回的附件，请核对后发送。',
+        'recoveryNote': tr("已恢复系统文件选择器返回的附件，请核对后发送。"),
       });
     } catch (e) {
       await store.saveDraft(key, {
         ...saved,
-        'recoveryNote': '附件选择未完成：$e，请重新选择。',
+        'recoveryNote': tr("附件选择未完成：{0}，请重新选择。", [e]),
       });
     } finally {
       await store.releaseUnusedAttachments(

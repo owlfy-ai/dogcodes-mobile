@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import '../../ui/theme.dart';
 import '../../ui/widgets.dart';
 import 'tool_context.dart';
 import 'workspace_connection.dart';
+import 'workspace_directory_picker.dart';
 
 /// 07 文件: read-only browsing of the PC project; edits go through an Agent
 /// or remote desktop.
@@ -35,6 +37,7 @@ class _FilesPageState extends State<FilesPage>
     roots = [];
     entries = [];
     matches = null;
+    partialMatches = false;
     error = null;
     loading = false;
     if (tool.host.online) {
@@ -46,9 +49,11 @@ class _FilesPageState extends State<FilesPage>
   final search = TextEditingController();
   List<String> roots = [];
   int root = 0;
+  String? selectedRootPath;
   String path = '';
   List<Map<String, dynamic>> entries = [];
   List<Map<String, dynamic>>? matches;
+  bool partialMatches = false;
   bool loading = true, searching = false;
   String? error;
   Timer? _debounce;
@@ -73,6 +78,7 @@ class _FilesPageState extends State<FilesPage>
     final link = tool.link, task = tool.taskId;
     final order = ++_loadOrder, epoch = tool.host.connectionEpoch;
     final requestedRoot = root, requestedPath = path;
+    final requestedRootPath = selectedRootPath;
     bool current() =>
         mounted &&
         order == _loadOrder &&
@@ -89,8 +95,26 @@ class _FilesPageState extends State<FilesPage>
     try {
       final available = roots.isEmpty ? await link.workspaceRoots(task) : roots;
       if (!current()) return;
-      setState(() => roots = available);
-      final list = await link.directory(task, requestedRoot, requestedPath);
+      final index = requestedRootPath == null
+          ? requestedRoot
+          : available.indexOf(requestedRootPath);
+      final nextRoot = index >= 0 && index < available.length ? index : 0;
+      final nextPath =
+          requestedRootPath != null &&
+              (available.isEmpty || available[nextRoot] != requestedRootPath)
+          ? ''
+          : requestedPath;
+      setState(() {
+        roots = available;
+        root = nextRoot;
+        path = nextPath;
+        selectedRootPath = available.isEmpty ? null : available[nextRoot];
+      });
+      if (nextRoot != requestedRoot && search.text.trim().isNotEmpty) {
+        _onSearch();
+      }
+      if (available.isEmpty) return;
+      final list = await link.directory(task, nextRoot, nextPath);
       if (!current()) return;
       list.sort((a, b) {
         final d =
@@ -116,7 +140,13 @@ class _FilesPageState extends State<FilesPage>
     _debounce?.cancel();
     final order = ++_searchOrder;
     final q = search.text.trim();
-    if (q.isEmpty) return setState(() => matches = null);
+    final requestedRoot = root;
+    if (q.isEmpty) {
+      return setState(() {
+        matches = null;
+        partialMatches = false;
+      });
+    }
     _debounce = Timer(const Duration(milliseconds: 300), () async {
       final link = tool.link, task = tool.taskId;
       final epoch = tool.host.connectionEpoch;
@@ -126,17 +156,20 @@ class _FilesPageState extends State<FilesPage>
           epoch == tool.host.connectionEpoch &&
           link == tool.link &&
           task == tool.taskId &&
+          root == requestedRoot &&
           search.text.trim() == q;
       if (link == null || task == null || !tool.host.online) return;
       try {
         final result = await link.findFiles(task, q);
         if (!current()) return;
-        setState(
-          () => matches = [
+        setState(() {
+          partialMatches = result['partial'] == true;
+          matches = [
             for (final f in (result['files'] as List? ?? const []))
-              Map<String, dynamic>.from(f as Map),
-          ],
-        );
+              if (((f as Map)['root'] as num?)?.toInt() == requestedRoot)
+                Map<String, dynamic>.from(f),
+          ];
+        });
       } catch (e) {
         if (mounted && current()) showError(context, e);
       }
@@ -148,6 +181,20 @@ class _FilesPageState extends State<FilesPage>
     entries = [];
     _load();
   });
+
+  void _selectRoot(int value) {
+    if (value == root) return;
+    setState(() {
+      root = value;
+      selectedRootPath = roots[value];
+      path = '';
+      entries = [];
+      matches = null;
+      partialMatches = false;
+    });
+    _load();
+    _onSearch();
+  }
 
   void _preview(int r, String p) {
     if (widget.selectAttachment) {
@@ -163,6 +210,7 @@ class _FilesPageState extends State<FilesPage>
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final c = context.dc;
     final segments = path.split('/').where((s) => s.isNotEmpty).toList();
     return PopScope(
@@ -179,33 +227,23 @@ class _FilesPageState extends State<FilesPage>
       child: Scaffold(
         appBar: DetailBar(
           title: widget.selectAttachment
-              ? '选择项目文件'
+              ? tr("选择项目文件")
               : segments.isEmpty
               ? tool.projectName
               : segments.last,
           subtitle: tool.subtitle,
-          actions: [
-            if (roots.length > 1)
-              PopupMenuButton<int>(
-                tooltip: '切换目录',
-                icon: const Icon(Icons.folder_copy_outlined),
-                onSelected: (r) => setState(() {
-                  root = r;
-                  path = '';
-                  entries = [];
-                  _load();
-                }),
-                itemBuilder: (_) => [
-                  for (var i = 0; i < roots.length; i++)
-                    PopupMenuItem(value: i, child: Text(roots[i])),
-                ],
-              ),
-          ],
         ),
         body: !tool.host.online || tool.taskId == null
             ? ToolUnavailable(tool: tool)
             : Column(
                 children: [
+                  WorkspaceDirectoryPicker<int>(
+                    directories: [
+                      for (final (i, p) in roots.indexed) (value: i, path: p),
+                    ],
+                    value: root,
+                    onChanged: _selectRoot,
+                  ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(
                       DcSpace.page,
@@ -215,8 +253,8 @@ class _FilesPageState extends State<FilesPage>
                     ),
                     child: TextField(
                       controller: search,
-                      decoration: const InputDecoration(
-                        hintText: '搜索文件',
+                      decoration: InputDecoration(
+                        hintText: tr("搜索当前目录内的文件"),
                         prefixIcon: Icon(Icons.search),
                       ),
                     ),
@@ -231,7 +269,9 @@ class _FilesPageState extends State<FilesPage>
                         ),
                         children: [
                           _Crumb(
-                            label: tool.projectName,
+                            label: selectedRootPath == null
+                                ? tool.projectName
+                                : workspaceDirectoryName(selectedRootPath!),
                             onTap: () => _open(''),
                           ),
                           for (var i = 0; i < segments.length; i++) ...[
@@ -250,6 +290,8 @@ class _FilesPageState extends State<FilesPage>
                       ),
                     ),
                   if (error != null) InlineNotice(error!, danger: true),
+                  if (matches != null && partialMatches)
+                    InlineNotice(tr("搜索结果未全部返回，请输入更具体的文件名或路径。")),
                   Expanded(child: _list()),
                 ],
               ),
@@ -260,7 +302,7 @@ class _FilesPageState extends State<FilesPage>
   Widget _list() {
     if (matches != null) {
       if (matches!.isEmpty) {
-        return const Center(child: Text('没有匹配的文件'));
+        return Center(child: Text(tr("没有匹配的文件")));
       }
       return ListView.builder(
         itemCount: matches!.length,
@@ -303,15 +345,18 @@ class _Crumb extends StatelessWidget {
   final String label;
   final VoidCallback onTap;
   @override
-  Widget build(BuildContext context) => InkWell(
-    onTap: onTap,
-    child: Center(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 4),
-        child: Text(label, style: Theme.of(context).textTheme.bodySmall),
+  Widget build(BuildContext context) {
+    watchAppLanguage(context);
+    return InkWell(
+      onTap: onTap,
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 4),
+          child: Text(label, style: Theme.of(context).textTheme.bodySmall),
+        ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 IconData fileIcon(String name, {bool directory = false}) {
@@ -342,21 +387,24 @@ class _FileRow extends StatelessWidget {
   final bool directory;
   final VoidCallback onTap;
   @override
-  Widget build(BuildContext context) => ListTile(
-    minTileHeight: DcSpace.touch + 4,
-    contentPadding: const EdgeInsets.symmetric(horizontal: DcSpace.page),
-    leading: Icon(fileIcon(name, directory: directory), size: 22),
-    title: Text(name, overflow: TextOverflow.ellipsis),
-    subtitle: detail == null
-        ? null
-        : Text(
-            detail!,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
-    trailing: directory ? const Icon(Icons.chevron_right, size: 20) : null,
-    onTap: onTap,
-  );
+  Widget build(BuildContext context) {
+    watchAppLanguage(context);
+    return ListTile(
+      minTileHeight: DcSpace.touch + 4,
+      contentPadding: const EdgeInsets.symmetric(horizontal: DcSpace.page),
+      leading: Icon(fileIcon(name, directory: directory), size: 22),
+      title: Text(name, overflow: TextOverflow.ellipsis),
+      subtitle: detail == null
+          ? null
+          : Text(
+              detail!,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+      trailing: directory ? const Icon(Icons.chevron_right, size: 20) : null,
+      onTap: onTap,
+    );
+  }
 }
 
 class FilePreviewPage extends StatefulWidget {
@@ -415,6 +463,7 @@ class _FilePreviewPageState extends State<FilePreviewPage>
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final name = widget.path.split('/').last;
     final text = preview?['text'] as String?;
     final image = preview?['image'] as String?;
@@ -434,10 +483,10 @@ class _FilePreviewPageState extends State<FilePreviewPage>
     } else if (text != null) {
       body = CodeView(text: text);
     } else {
-      body = const Center(child: Text('此文件无法预览（二进制或过大）'));
+      body = Center(child: Text(tr("此文件无法预览（二进制或过大）")));
     }
     return Scaffold(
-      appBar: DetailBar(title: name, subtitle: '${widget.path} · 只读'),
+      appBar: DetailBar(title: name, subtitle: tr("{0} · 只读", [widget.path])),
       body: body,
     );
   }
@@ -449,6 +498,7 @@ class CodeView extends StatelessWidget {
   final String text;
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final c = context.dc;
     final lines = text.split('\n');
     final gutter = '${lines.length}'.length;

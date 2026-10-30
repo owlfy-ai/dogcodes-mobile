@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import '../../app.dart';
@@ -94,7 +95,7 @@ class _AddProjectPageState extends State<AddProjectPage> {
     if (h.project(id) != null) {
       Navigator.of(context).pop<AddedProject>((hostId: h.id, projectId: id));
     } else {
-      setState(() => error = '项目已添加，列表尚未同步。请重新连接后刷新结果。');
+      setState(() => error = tr("项目已添加，列表尚未同步。请重新连接后刷新结果。"));
     }
   }
 
@@ -139,256 +140,280 @@ class _AddProjectPageState extends State<AddProjectPage> {
   }
 
   @override
-  Widget build(BuildContext context) => ListenableBuilder(
-    listenable: hub,
-    builder: (context, _) {
-      final h = host, b = browser;
-      final existing = h?.projects
-          .where(
-            (p) =>
-                p['path'] == b?.path &&
-                ((p['additionalDirectories'] as List?)?.isEmpty ?? true) &&
-                (name.text.trim().isEmpty ||
-                    p['displayName'] == name.text.trim()),
-          )
-          .firstOrNull;
-      return Scaffold(
-        appBar: const DetailBar(title: '添加项目'),
-        body: h == null || b == null
-            ? const EmptyNote(
-                icon: Icons.computer_outlined,
-                title: '还没有连接电脑',
-                body: '请先绑定电脑，再选择电脑上的项目目录。',
-              )
-            : SafeArea(
-                top: false,
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: ListView(
-                        padding: const EdgeInsets.all(DcSpace.page),
-                        children: [
-                          PopupMenuButton<String>(
-                            tooltip: '选择添加项目的电脑',
-                            enabled: !adding && addedId == null,
-                            onSelected: (id) => setState(() => _selectHost(id)),
-                            itemBuilder: (_) => [
-                              for (final computer in hub.hosts)
-                                PopupMenuItem(
-                                  value: computer.id,
-                                  child: Text(
-                                    '${computer.name}${computer.online ? '' : ' · 离线'}',
-                                  ),
-                                ),
-                            ],
-                            child: Panel(
-                              child: Row(
-                                children: [
-                                  const Icon(Icons.computer_outlined, size: 20),
-                                  const SizedBox(width: 8),
-                                  Expanded(child: Text(h.name)),
-                                  StatusLabel(
-                                    h.online ? '在线' : '离线',
-                                    tone: h.online ? Tone.accent : Tone.muted,
-                                  ),
-                                  const Icon(Icons.expand_more),
-                                ],
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 12),
-                          Text(
-                            '选择这台电脑上已有的目录',
-                            style: Theme.of(context).textTheme.bodySmall,
-                          ),
-                          const SizedBox(height: 8),
-                          TextField(
-                            controller: address,
-                            enabled:
-                                !adding &&
-                                addedId == null &&
-                                h.online &&
-                                !b.loading &&
-                                !b.loadingMore,
-                            autocorrect: false,
-                            enableSuggestions: false,
-                            textInputAction: TextInputAction.go,
-                            onChanged: (_) => setState(() {}),
-                            onSubmitted: (value) => b.open(
-                              value.trim().isEmpty ? null : value.trim(),
-                            ),
-                            decoration: InputDecoration(
-                              labelText: '电脑目录路径',
-                              hintText: '输入完整路径，或在下方逐层选择',
-                              suffixIcon: IconButton(
-                                tooltip: '前往目录',
-                                onPressed:
-                                    adding || !h.online || addedId != null
-                                    ? null
-                                    : () => b.open(
-                                        address.text.trim().isEmpty
-                                            ? null
-                                            : address.text.trim(),
-                                      ),
-                                icon: const Icon(Icons.arrow_forward),
-                              ),
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              TextButton.icon(
-                                onPressed:
-                                    adding || addedId != null || !h.online
-                                    ? null
-                                    : () => b.open(null),
-                                icon: const Icon(Icons.home_outlined, size: 18),
-                                label: const Text('起始位置'),
-                              ),
-                              TextButton.icon(
-                                onPressed:
-                                    adding ||
-                                        addedId != null ||
-                                        !h.online ||
-                                        b.path == null ||
-                                        b.loading
-                                    ? null
-                                    : () => b.open(b.parent),
-                                icon: const Icon(Icons.arrow_upward, size: 18),
-                                label: const Text('上一级'),
-                              ),
-                              const Spacer(),
-                              TextButton.icon(
-                                onPressed:
-                                    adding ||
-                                        addedId != null ||
-                                        !h.online ||
-                                        b.loading
-                                    ? null
-                                    : () => b.setShowHidden(!b.showHidden),
-                                icon: Icon(
-                                  b.showHidden
-                                      ? Icons.visibility_off_outlined
-                                      : Icons.visibility_outlined,
-                                  size: 18,
-                                ),
-                                label: Text(b.showHidden ? '不显示隐藏' : '显示隐藏'),
-                              ),
-                            ],
-                          ),
-                          if (!h.online) const InlineNotice('电脑离线，请重新连接后浏览目录。'),
-                          if (b.path != null && address.text.trim() != b.path)
-                            const InlineNotice('目录路径已修改，请点箭头或回车确认后再添加。'),
-                          if (b.loading)
-                            const LinearProgressIndicator(minHeight: 2),
-                          if (b.error != null) ...[
-                            InlineNotice(b.error!, danger: true),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: TextButton(
-                                onPressed: adding || !h.online ? null : b.retry,
-                                child: const Text('重试读取目录'),
-                              ),
-                            ),
-                          ],
-                          if (!b.loading &&
-                              b.loaded &&
-                              b.error == null &&
-                              b.entries.isEmpty)
-                            const Padding(
-                              padding: EdgeInsets.all(24),
-                              child: Text('当前目录没有子目录，可直接添加此目录。'),
-                            ),
-                          for (final directory in b.entries)
-                            ListTile(
-                              contentPadding: EdgeInsets.zero,
-                              leading: const Icon(Icons.folder_outlined),
-                              title: Text(directory['name'] as String),
-                              trailing: const Icon(Icons.chevron_right),
-                              enabled:
-                                  h.online &&
-                                  !adding &&
-                                  !b.loading &&
-                                  addedId == null,
-                              onTap: () => b.open(directory['path'] as String),
-                            ),
-                          if (b.next != null && !b.loading)
-                            TextButton(
-                              onPressed: b.loadingMore || adding || !h.online
-                                  ? null
-                                  : b.more,
-                              child: Text(b.loadingMore ? '加载中…' : '加载更多目录'),
-                            ),
-                          const SizedBox(height: 12),
-                          if (b.path != null) ...[
-                            TextField(
-                              controller: name,
+  Widget build(BuildContext context) {
+    watchAppLanguage(context);
+    return ListenableBuilder(
+      listenable: hub,
+      builder: (context, _) {
+        final h = host, b = browser;
+        final existing = h?.projects
+            .where(
+              (p) =>
+                  p['path'] == b?.path &&
+                  ((p['additionalDirectories'] as List?)?.isEmpty ?? true) &&
+                  (name.text.trim().isEmpty ||
+                      p['displayName'] == name.text.trim()),
+            )
+            .firstOrNull;
+        return Scaffold(
+          appBar: DetailBar(title: tr("添加项目")),
+          body: h == null || b == null
+              ? EmptyNote(
+                  icon: Icons.computer_outlined,
+                  title: tr("还没有连接电脑"),
+                  body: tr("请先绑定电脑，再选择电脑上的项目目录。"),
+                )
+              : SafeArea(
+                  top: false,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: ListView(
+                          padding: const EdgeInsets.all(DcSpace.page),
+                          children: [
+                            PopupMenuButton<String>(
+                              tooltip: tr("选择添加项目的电脑"),
                               enabled: !adding && addedId == null,
-                              onChanged: (_) => setState(() {}),
-                              maxLength: 120,
-                              decoration: const InputDecoration(
-                                labelText: '项目名称（可选）',
-                                hintText: '留空使用目录名；已有项目会直接复用',
+                              onSelected: (id) =>
+                                  setState(() => _selectHost(id)),
+                              itemBuilder: (_) => [
+                                for (final computer in hub.hosts)
+                                  PopupMenuItem(
+                                    value: computer.id,
+                                    child: Text(
+                                      '${computer.name}${computer.online ? '' : tr(" · 离线")}',
+                                    ),
+                                  ),
+                              ],
+                              child: Panel(
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.computer_outlined,
+                                      size: 20,
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Expanded(child: Text(h.name)),
+                                    StatusLabel(
+                                      h.online ? tr("在线") : tr("离线"),
+                                      tone: h.online ? Tone.accent : Tone.muted,
+                                    ),
+                                    const Icon(Icons.expand_more),
+                                  ],
+                                ),
                               ),
                             ),
-                            SelectableText(
-                              b.path!,
+                            const SizedBox(height: 12),
+                            Text(
+                              tr("选择这台电脑上已有的目录"),
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
-                          ],
-                          if (existing != null)
-                            InlineNotice(
-                              '该目录已添加为「${projectLabel(existing)}」，将打开已有项目。',
-                            ),
-                          if (error != null) InlineNotice(error!, danger: true),
-                          if (h.pendingOperation != null)
-                            Padding(
-                              padding: const EdgeInsets.only(top: 12),
-                              child: PendingOperationCard(
-                                key: ValueKey(h.id),
-                                host: h,
-                                onProjectRegistered: (id) => _registered(h, id),
+                            const SizedBox(height: 8),
+                            TextField(
+                              controller: address,
+                              enabled:
+                                  !adding &&
+                                  addedId == null &&
+                                  h.online &&
+                                  !b.loading &&
+                                  !b.loadingMore,
+                              autocorrect: false,
+                              enableSuggestions: false,
+                              textInputAction: TextInputAction.go,
+                              onChanged: (_) => setState(() {}),
+                              onSubmitted: (value) => b.open(
+                                value.trim().isEmpty ? null : value.trim(),
+                              ),
+                              decoration: InputDecoration(
+                                labelText: tr("电脑目录路径"),
+                                hintText: tr("输入完整路径，或在下方逐层选择"),
+                                suffixIcon: IconButton(
+                                  tooltip: tr("前往目录"),
+                                  onPressed:
+                                      adding || !h.online || addedId != null
+                                      ? null
+                                      : () => b.open(
+                                          address.text.trim().isEmpty
+                                              ? null
+                                              : address.text.trim(),
+                                        ),
+                                  icon: const Icon(Icons.arrow_forward),
+                                ),
                               ),
                             ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(
-                        DcSpace.page,
-                        8,
-                        DcSpace.page,
-                        12,
-                      ),
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: FilledButton(
-                          onPressed: addedId != null
-                              ? (adding || !h.online
+                            Row(
+                              children: [
+                                TextButton.icon(
+                                  onPressed:
+                                      adding || addedId != null || !h.online
+                                      ? null
+                                      : () => b.open(null),
+                                  icon: const Icon(
+                                    Icons.home_outlined,
+                                    size: 18,
+                                  ),
+                                  label: Text(tr("起始位置")),
+                                ),
+                                TextButton.icon(
+                                  onPressed:
+                                      adding ||
+                                          addedId != null ||
+                                          !h.online ||
+                                          b.path == null ||
+                                          b.loading
+                                      ? null
+                                      : () => b.open(b.parent),
+                                  icon: const Icon(
+                                    Icons.arrow_upward,
+                                    size: 18,
+                                  ),
+                                  label: Text(tr("上一级")),
+                                ),
+                                const Spacer(),
+                                TextButton.icon(
+                                  onPressed:
+                                      adding ||
+                                          addedId != null ||
+                                          !h.online ||
+                                          b.loading
+                                      ? null
+                                      : () => b.setShowHidden(!b.showHidden),
+                                  icon: Icon(
+                                    b.showHidden
+                                        ? Icons.visibility_off_outlined
+                                        : Icons.visibility_outlined,
+                                    size: 18,
+                                  ),
+                                  label: Text(
+                                    b.showHidden ? tr("不显示隐藏") : tr("显示隐藏"),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            if (!h.online) InlineNotice(tr("电脑离线，请重新连接后浏览目录。")),
+                            if (b.path != null && address.text.trim() != b.path)
+                              InlineNotice(tr("目录路径已修改，请点箭头或回车确认后再添加。")),
+                            if (b.loading)
+                              const LinearProgressIndicator(minHeight: 2),
+                            if (b.error != null) ...[
+                              InlineNotice(b.error!, danger: true),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: TextButton(
+                                  onPressed: adding || !h.online
+                                      ? null
+                                      : b.retry,
+                                  child: Text(tr("重试读取目录")),
+                                ),
+                              ),
+                            ],
+                            if (!b.loading &&
+                                b.loaded &&
+                                b.error == null &&
+                                b.entries.isEmpty)
+                              Padding(
+                                padding: EdgeInsets.all(24),
+                                child: Text(tr("当前目录没有子目录，可直接添加此目录。")),
+                              ),
+                            for (final directory in b.entries)
+                              ListTile(
+                                contentPadding: EdgeInsets.zero,
+                                leading: const Icon(Icons.folder_outlined),
+                                title: Text(directory['name'] as String),
+                                trailing: const Icon(Icons.chevron_right),
+                                enabled:
+                                    h.online &&
+                                    !adding &&
+                                    !b.loading &&
+                                    addedId == null,
+                                onTap: () =>
+                                    b.open(directory['path'] as String),
+                              ),
+                            if (b.next != null && !b.loading)
+                              TextButton(
+                                onPressed: b.loadingMore || adding || !h.online
                                     ? null
-                                    : () => _registered(h, addedId!))
-                              : (adding ||
-                                        !h.online ||
-                                        h.pendingOperation != null ||
-                                        !b.selectable ||
-                                        address.text.trim() != b.path
-                                    ? null
-                                    : _add),
-                          child: Text(
-                            addedId != null
-                                ? '刷新添加结果'
-                                : adding
-                                ? '正在添加…'
-                                : existing != null
-                                ? '打开已有项目'
-                                : '添加此目录',
+                                    : b.more,
+                                child: Text(
+                                  b.loadingMore ? tr("加载中…") : tr("加载更多目录"),
+                                ),
+                              ),
+                            const SizedBox(height: 12),
+                            if (b.path != null) ...[
+                              TextField(
+                                controller: name,
+                                enabled: !adding && addedId == null,
+                                onChanged: (_) => setState(() {}),
+                                maxLength: 120,
+                                decoration: InputDecoration(
+                                  labelText: tr("项目名称（可选）"),
+                                  hintText: tr("留空使用目录名；已有项目会直接复用"),
+                                ),
+                              ),
+                              SelectableText(
+                                b.path!,
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                            ],
+                            if (existing != null)
+                              InlineNotice(
+                                tr("该目录已添加为「{0}」，将打开已有项目。", [
+                                  projectLabel(existing),
+                                ]),
+                              ),
+                            if (error != null)
+                              InlineNotice(error!, danger: true),
+                            if (h.pendingOperation != null)
+                              Padding(
+                                padding: const EdgeInsets.only(top: 12),
+                                child: PendingOperationCard(
+                                  key: ValueKey(h.id),
+                                  host: h,
+                                  onProjectRegistered: (id) =>
+                                      _registered(h, id),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(
+                          DcSpace.page,
+                          8,
+                          DcSpace.page,
+                          12,
+                        ),
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: FilledButton(
+                            onPressed: addedId != null
+                                ? (adding || !h.online
+                                      ? null
+                                      : () => _registered(h, addedId!))
+                                : (adding ||
+                                          !h.online ||
+                                          h.pendingOperation != null ||
+                                          !b.selectable ||
+                                          address.text.trim() != b.path
+                                      ? null
+                                      : _add),
+                            child: Text(
+                              addedId != null
+                                  ? tr("刷新添加结果")
+                                  : adding
+                                  ? tr("正在添加…")
+                                  : existing != null
+                                  ? tr("打开已有项目")
+                                  : tr("添加此目录"),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-      );
-    },
-  );
+        );
+      },
+    );
+  }
 }

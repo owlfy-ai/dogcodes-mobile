@@ -101,10 +101,7 @@ void main() {
     await hub.attach(hub.hosts.single, link);
     await tester.pumpWidget(DogCodesApp(hub: hub));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('工作区').last);
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('添加项目'));
-    await tester.pumpAndSettle();
+    await openNewProject(tester);
     await chooseDirectory(tester);
     await tester.enterText(find.byType(TextField).first, r'C:\Projects\.\app');
     await tester.pumpAndSettle();
@@ -139,10 +136,7 @@ void main() {
       await hub.attach(hub.hosts.single, link);
       await tester.pumpWidget(DogCodesApp(hub: hub));
       await tester.pumpAndSettle();
-      await tester.tap(find.text('工作区').last);
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('添加项目'));
-      await tester.pumpAndSettle();
+      await openNewProject(tester);
       expect(
         tester
             .widget<FilledButton>(find.widgetWithText(FilledButton, '添加此目录'))
@@ -172,10 +166,7 @@ void main() {
       await hub.attach(hub.hosts.single, link);
       await tester.pumpWidget(DogCodesApp(hub: hub));
       await tester.pumpAndSettle();
-      await tester.tap(find.text('工作区').last);
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('添加项目'));
-      await tester.pumpAndSettle();
+      await openNewProject(tester);
       await chooseDirectory(tester);
       expect(find.text('打开已有项目'), findsOneWidget);
       await tester.tap(find.text('打开已有项目'));
@@ -196,10 +187,7 @@ void main() {
       await hub.attach(hub.hosts.single, link);
       await tester.pumpWidget(DogCodesApp(hub: hub));
       await tester.pumpAndSettle();
-      await tester.tap(find.text('工作区').last);
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('添加项目'));
-      await tester.pumpAndSettle();
+      await openNewProject(tester);
       await chooseDirectory(tester);
       await tester.tap(find.text('添加此目录'));
       await tester.pumpAndSettle();
@@ -242,6 +230,8 @@ void main() {
   ) async {
     final link = ProjectLink(empty: true), hub = fakeHub();
     await hub.load(connect: false);
+    // Already tried and failed: the gate shows 连接不上, not a fresh attempt.
+    hub.hosts.single.connectAttempts = 1;
     await tester.pumpWidget(DogCodesApp(hub: hub));
     await tester.pumpAndSettle();
     // Opened while the computer is offline (e.g. it dropped off afterwards).
@@ -264,4 +254,14 @@ void main() {
     await tester.pumpWidget(const SizedBox());
     hub.dispose();
   });
+}
+
+/// 项目 tab → project sheet → 新建项目.
+Future<void> openNewProject(WidgetTester tester) async {
+  await tester.tap(find.text('项目').last);
+  await tester.pumpAndSettle();
+  await tester.tap(find.byTooltip('选择项目'));
+  await tester.pumpAndSettle();
+  await tester.tap(find.text('新建项目').last);
+  await tester.pumpAndSettle();
 }

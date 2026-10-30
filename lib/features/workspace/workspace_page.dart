@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'package:flutter/material.dart';
 import '../../app.dart';
 import '../../core/host_hub.dart';
@@ -13,8 +14,11 @@ import '../tools/run_page.dart';
 import '../tools/terminal_page.dart';
 import '../tools/tool_context.dart';
 import 'add_project_page.dart';
+import '../projects/project_sheet.dart';
 
-/// 05 工作区: always bound to one PC and one of its projects.
+/// 05 项目: always bound to one PC and one of its real projects (never 无项目).
+/// Choosing and managing projects happens in the bottom sheet behind the
+/// project field; this page is the chosen project's tools and sessions.
 class WorkspacePage extends StatefulWidget {
   const WorkspacePage({super.key});
   @override
@@ -45,13 +49,17 @@ class _WorkspacePageState extends State<WorkspacePage> {
       hostId = h.id;
       projectId = null;
     }
-    final project = h.project(projectId) ?? h.projects.firstOrNull;
+    final listed = h.listedProjects;
+    final project =
+        listed.where((p) => p['projectId'] == projectId).firstOrNull ??
+        listed.firstOrNull;
     projectId = project?['projectId'] as String?;
     return (h, project);
   }
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final hub = AppScope.of(context).hub;
     return ListenableBuilder(
       listenable: hub,
@@ -61,26 +69,26 @@ class _WorkspacePageState extends State<WorkspacePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             RootHeader(
-              title: '工作区',
+              title: tr("项目"),
               actions: [
-                TextButton.icon(
-                  onPressed: hub.hosts.any((h) => h.online)
-                      ? _addProject
-                      : null,
-                  icon: const Icon(Icons.create_new_folder_outlined, size: 20),
-                  label: const Text('添加项目'),
-                ),
+                if (selected?.$2 case final project?)
+                  IconButton(
+                    tooltip: tr("项目操作"),
+                    onPressed: () =>
+                        showProjectActions(context, selected!.$1, project),
+                    icon: const Icon(Icons.more_horiz),
+                  ),
               ],
             ),
             Expanded(
               child: selected == null
                   ? EmptyNote(
                       icon: Icons.folder_open_outlined,
-                      title: '还没有连接电脑',
-                      body: '连接电脑后，在这里查看项目及其会话。',
+                      title: tr("还没有连接电脑"),
+                      body: tr("连接电脑后，在这里查看项目及其会话。"),
                       action: OutlinedButton(
                         onPressed: () => HomeShell.select(context, 3),
-                        child: const Text('去连接电脑'),
+                        child: Text(tr("去连接电脑")),
                       ),
                     )
                   : _content(context, hub, selected.$1, selected.$2),
@@ -116,9 +124,18 @@ class _WorkspacePageState extends State<WorkspacePage> {
           const SizedBox(height: 24),
           InlineNotice(
             h.snapshot == null
-                ? '${h.name} 尚未同步项目；电脑在线时会自动同步。'
-                : '${h.name} 上还没有项目，点右上角「添加项目」选择电脑上的已有目录。',
+                ? tr("{0} 尚未同步项目；电脑在线时会自动同步。", [h.name])
+                : tr("{0} 上还没有项目。新建项目时选择电脑上的已有目录。", [h.name]),
           ),
+          if (h.snapshot != null)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: DcSpace.page),
+              child: FilledButton.icon(
+                onPressed: h.online ? _addProject : null,
+                icon: const Icon(Icons.create_new_folder_outlined),
+                label: Text(tr("新建项目")),
+              ),
+            ),
         ],
       );
     }
@@ -131,15 +148,6 @@ class _WorkspacePageState extends State<WorkspacePage> {
       padding: const EdgeInsets.only(bottom: 24),
       children: [
         picker,
-        Padding(
-          padding: const EdgeInsets.fromLTRB(DcSpace.page, 6, DcSpace.page, 0),
-          child: Text(
-            project['path'] as String? ?? '',
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
-        ),
         const SizedBox(height: 16),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: DcSpace.page - 4),
@@ -147,29 +155,29 @@ class _WorkspacePageState extends State<WorkspacePage> {
             children: [
               _Tool(
                 Icons.insert_drive_file_outlined,
-                '文件',
-                '浏览项目文件',
+                tr("文件"),
+                tr("浏览项目文件"),
                 (t) => FilesPage(tool: t),
                 tool,
               ),
               _Tool(
                 Icons.call_split,
-                '变更',
-                '查看代码变更',
+                tr("变更"),
+                tr("查看代码变更"),
                 (t) => ChangesPage(tool: t),
                 tool,
               ),
               _Tool(
                 Icons.terminal,
-                '终端',
-                '远程终端',
+                tr("终端"),
+                tr("远程终端"),
                 (t) => TerminalPage(tool: t),
                 tool,
               ),
               _Tool(
                 Icons.play_arrow_outlined,
-                '运行',
-                '启动开发服务',
+                tr("运行"),
+                tr("启动开发服务"),
                 (t) => RunPage(tool: t),
                 tool,
               ),
@@ -177,8 +185,9 @@ class _WorkspacePageState extends State<WorkspacePage> {
           ),
         ),
         _GitRow(key: ValueKey('${h.id}/$projectId/${h.revision}'), tool: tool),
+        _Directories(project: project),
         SectionLabel(
-          '最近会话',
+          tr("最近会话"),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -188,7 +197,7 @@ class _WorkspacePageState extends State<WorkspacePage> {
                   hub.sessionScope.value = (h.id, projectId);
                   HomeShell.select(context, 0);
                 },
-                child: const Text('查看全部'),
+                child: Text(tr("查看全部")),
               ),
               TextButton(
                 onPressed: h.online
@@ -201,13 +210,13 @@ class _WorkspacePageState extends State<WorkspacePage> {
                         ),
                       )
                     : null,
-                child: const Text('新会话'),
+                child: Text(tr("新会话")),
               ),
             ],
           ),
         ),
         if (sessions.isEmpty)
-          const InlineNotice('这个项目还没有会话。')
+          InlineNotice(tr("这个项目还没有会话。"))
         else
           for (final s in sessions) SessionRow(session: s),
       ],
@@ -224,6 +233,7 @@ class _Tool extends StatelessWidget {
   final ToolContext tool;
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final c = context.dc;
     final enabled = tool.host.online;
     return Expanded(
@@ -302,6 +312,7 @@ class _GitRowState extends State<_GitRow> {
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final w = ws;
     if (w == null || w['git'] != true) return const SizedBox.shrink();
     final changed = (w['changedFiles'] as num?)?.toInt() ?? 0;
@@ -319,13 +330,65 @@ class _GitRowState extends State<_GitRow> {
             const SizedBox(width: 8),
             Expanded(
               child: Text(
-                '${w['branch'] ?? '分离 HEAD'} · ${changed == 0 ? '工作区干净' : '$changed 个文件待提交'}',
+                '${w['branch'] ?? tr("分离 HEAD")} · ${changed == 0 ? tr("没有未提交的更改") : tr("{0} 个文件待提交", [changed])}',
                 overflow: TextOverflow.ellipsis,
               ),
             ),
             const Icon(Icons.chevron_right),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// The project's directories; the first is where sessions start.
+class _Directories extends StatelessWidget {
+  const _Directories({required this.project});
+  final Map<String, dynamic> project;
+  @override
+  Widget build(BuildContext context) {
+    watchAppLanguage(context);
+    final c = context.dc;
+    final dirs = [
+      '${project['path']}',
+      for (final d in (project['additionalDirectories'] as List? ?? const []))
+        '$d',
+    ];
+    final home = RegExp(r'^(/Users|/home)/[^/]+');
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(DcSpace.page, 12, DcSpace.page, 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          for (var i = 0; i < dirs.length; i++)
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 3),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.folder_outlined,
+                    size: 16,
+                    color: i == 0 ? c.text : c.secondary,
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      dirs[i].replaceFirstMapped(home, (_) => '~'),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontSize: 13, color: c.secondary),
+                    ),
+                  ),
+                  if (i == 0 && dirs.length > 1)
+                    Text(
+                      tr("主目录"),
+                      style: TextStyle(fontSize: 12, color: c.secondary),
+                    ),
+                ],
+              ),
+            ),
+        ],
       ),
     );
   }

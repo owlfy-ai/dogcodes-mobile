@@ -1,5 +1,7 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:convert';
 import '../protocol.dart';
+import '../service_origin.dart';
 import 'secret_storage.dart';
 import 'host_lifecycle.dart';
 
@@ -22,7 +24,7 @@ class PairingRecovery implements PairingPins {
     required String bindingEpoch,
   }) {
     if (invitation.phoneTicket == null) {
-      throw const ProtocolException('请在电脑上生成新版配对二维码。');
+      throw ProtocolException(tr("请在电脑上生成新版配对二维码。"));
     }
     return PairingRecovery._(
       invitation.hostId,
@@ -53,15 +55,10 @@ class PairingRecovery implements PairingPins {
           !RegExp(r'^[A-Za-z0-9_-]{32,256}$').hasMatch(ticket) ||
           !RegExp(r'^[A-Za-z0-9_-]{1,128}$').hasMatch(host) ||
           !RegExp(r'^[A-Za-z0-9_-]{1,128}$').hasMatch(invitation) ||
-          (service.scheme != 'https' &&
-              !(allowLocalDevelopment &&
-                  service.scheme == 'http' &&
-                  service.host == '127.0.0.1')) ||
-          service.host.isEmpty ||
-          service.userInfo.isNotEmpty ||
-          service.hasQuery ||
-          service.hasFragment ||
-          (service.path.isNotEmpty && service.path != '/')) {
+          !validServiceOrigin(
+            service,
+            allowLocalDevelopment: allowLocalDevelopment,
+          )) {
         throw const FormatException();
       }
       return PairingRecovery._(
@@ -75,7 +72,7 @@ class PairingRecovery implements PairingPins {
         data['bindingEpoch'] as String,
       );
     } catch (_) {
-      throw const ProtocolException('配对恢复记录无法读取，请先核实手机安全存储。');
+      throw ProtocolException(tr("配对恢复记录无法读取，请先核实手机安全存储。"));
     }
   }
   @override
@@ -122,7 +119,7 @@ class PairingJournal {
           entry.key as String: _entry(entry.key, entry.value),
       };
     } catch (_) {
-      throw const ProtocolException('配对恢复记录无法读取，请先核实手机安全存储。');
+      throw ProtocolException(tr("配对恢复记录无法读取，请先核实手机安全存储。"));
     }
   }
 
@@ -141,7 +138,7 @@ class PairingJournal {
     });
     await storage.write(key, raw);
     if (await storage.read(key) != raw) {
-      throw const ProtocolException('配对恢复信息未能安全保存。');
+      throw ProtocolException(tr("配对恢复信息未能安全保存。"));
     }
   }
 
@@ -153,10 +150,10 @@ class PairingJournal {
         (old.hostKey != record.hostKey ||
             old.service != record.service ||
             old.phonePublicKey != record.phonePublicKey)) {
-      throw const ProtocolException('待核实电脑的身份发生变化，请先核实原配对。');
+      throw ProtocolException(tr("待核实电脑的身份发生变化，请先核实原配对。"));
     }
     if (old == null && records.length >= 128) {
-      throw const ProtocolException('待核实配对过多，请先核实原记录。');
+      throw ProtocolException(tr("待核实配对过多，请先核实原记录。"));
     }
     records[record.hostId] = record;
     await _write(records);

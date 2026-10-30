@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:convert';
 import 'host_api.dart';
 import 'adaptive_host_link.dart';
@@ -40,7 +41,7 @@ class MobileRuntime {
       }
       await TaskAttachmentPicker.recover(local);
     } catch (e) {
-      local.cacheError = '上次附件选择未能恢复：$e';
+      local.cacheError = tr("上次附件选择未能恢复：{0}", [e]);
     }
   }
 
@@ -67,7 +68,7 @@ class MobileRuntime {
   final _pairingHosts = <String>{};
   Future<HostLink> pair(PairingInvitation invitation) async {
     if (!_pairingHosts.add(invitation.hostId)) {
-      throw const ProtocolException('正在处理这台电脑的原配对，请稍后核实。');
+      throw ProtocolException(tr("正在处理这台电脑的原配对，请稍后核实。"));
     }
     try {
       return await _pair(invitation);
@@ -86,7 +87,7 @@ class MobileRuntime {
     if (old != null &&
         (old['publicKey'] != peer ||
             old['service'] != invitation.service.toString())) {
-      throw const ProtocolException('电脑身份已发生变化，需要先解除旧配对。');
+      throw ProtocolException(tr("电脑身份已发生变化，需要先解除旧配对。"));
     }
     final original = PairingRecovery.fromInvitation(
       invitation,
@@ -123,14 +124,14 @@ class MobileRuntime {
 
   Future<HostLink> recoverPairing(PairingRecovery original) async {
     if (!_pairingHosts.add(original.hostId)) {
-      throw const ProtocolException('正在处理这台电脑的原配对，请稍后核实。');
+      throw ProtocolException(tr("正在处理这台电脑的原配对，请稍后核实。"));
     }
     try {
       final saved = (await pairingJournal.list())
           .where((p) => p.hostId == original.hostId)
           .firstOrNull;
       if (saved?.sameAttempt(original) != true) {
-        throw const ProtocolException('原配对恢复记录已改变，请刷新后核实。');
+        throw ProtocolException(tr("原配对恢复记录已改变，请刷新后核实。"));
       }
       final phone = await identity.get();
       return await _recoverOriginal(original, phone);
@@ -167,7 +168,7 @@ class MobileRuntime {
   Future<HostLink> reconnect(Map<String, dynamic> host) async {
     final current = await hosts.read(host['hostId'] as String);
     if (current == null || current['bindingEpoch'] != host['bindingEpoch']) {
-      throw const ProtocolException('电脑绑定已移除或变化，请重新配对后连接。');
+      throw ProtocolException(tr("电脑绑定已移除或变化，请重新配对后连接。"));
     }
     host = current;
     final phone = await identity.get();

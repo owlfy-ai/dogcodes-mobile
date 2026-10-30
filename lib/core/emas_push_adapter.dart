@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:io';
 import 'package:aliyun_push/aliyun_push.dart';
 import 'package:flutter/services.dart';
@@ -42,18 +43,18 @@ class EmasPushAdapter implements PushAdapter {
 
   void _check(Map<dynamic, dynamic> value) {
     if (value['code'] != kAliyunPushSuccessCode) {
-      throw const ProtocolException('通知服务初始化失败。');
+      throw ProtocolException(tr("通知服务初始化失败。"));
     }
   }
 
   @override
   Future<PushRegistration> register({required bool requestPermission}) async {
-    if (!configured) throw const ProtocolException('此版本未配置备用通知服务。');
+    if (!configured) throw ProtocolException(tr("此版本未配置备用通知服务。"));
     if (await _native.invokeMethod<bool>(
           requestPermission ? 'authorize' : 'allowed',
         ) !=
         true) {
-      throw const ProtocolException('系统通知权限尚未开启。');
+      throw ProtocolException(tr("系统通知权限尚未开启。"));
     }
     if (!_initialized) {
       _check(
@@ -65,9 +66,9 @@ class EmasPushAdapter implements PushAdapter {
       _check(
         await sdk.createAndroidChannel(
           'dogcodes_tasks',
-          '任务提醒',
+          tr("任务提醒"),
           3,
-          '待审批、待回答、完成和失败提醒',
+          tr("待审批、待回答、完成和失败提醒"),
         ),
       );
       // FCM/HMS tokens and message services belong to the direct providers.
@@ -76,7 +77,7 @@ class EmasPushAdapter implements PushAdapter {
     }
     final device = await sdk.getDeviceId();
     if (device.isEmpty || device.length > 8192) {
-      throw const ProtocolException('未获取到通知设备身份。');
+      throw ProtocolException(tr("未获取到通知设备身份。"));
     }
     return PushRegistration('emas_android', device);
   }

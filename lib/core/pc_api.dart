@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:convert';
 import 'dart:math';
 import 'host_api.dart';
@@ -33,7 +34,7 @@ class DesktopAuthorizationEnded implements Exception {
 void checkDesktopAuthorization(dynamic response) {
   if (response is Map && response['authorizationEnded'] == true) {
     throw DesktopAuthorizationEnded(
-      response['error'] as String? ?? '电脑已结束屏幕共享，请重新连接并授权',
+      response['error'] as String? ?? tr("电脑已结束屏幕共享，请重新连接并授权"),
     );
   }
 }
@@ -88,6 +89,27 @@ extension PcApi on HostApi {
   );
   Future<Map<String, dynamic>> findFiles(String taskId, String query) async =>
       _map(await call('workspace_find_files', [taskId, query, true]));
+
+  // ── Projects ────────────────────────────────────────────────────────────
+  /// Renames a project or changes its directories. The PC validates every
+  /// directory and rejects the edit if the project changed meanwhile.
+  Future<void> updateProject(
+    Map<String, dynamic> project, {
+    required String name,
+    required String path,
+    required List<String> additionalDirectories,
+  }) async {
+    await call('update_project', [
+      {
+        'projectId': project['projectId'],
+        // u64 on the PC; sent as text so it never loses precision.
+        'expectedStreamVersion': '${project['streamVersion'] ?? 0}',
+        'displayName': name.trim(),
+        'path': path,
+        'additionalDirectories': additionalDirectories,
+      },
+    ]);
+  }
 
   // ── Changes / Git ───────────────────────────────────────────────────────
   Future<dynamic> review(String operation, Map<String, dynamic> arguments) =>
@@ -223,7 +245,7 @@ extension PcApi on HostApi {
       'directoryIndex': directoryIndex,
       'taskId': null,
       'commandId': null,
-      'label': '终端',
+      'label': tr("终端"),
       'cwd': cwd,
       'command': null,
       'cols': cols,

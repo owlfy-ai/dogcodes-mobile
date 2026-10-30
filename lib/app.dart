@@ -1,4 +1,6 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'core/access_client.dart';
 import 'core/host_hub.dart';
 import 'core/mobile_runtime.dart';
@@ -9,7 +11,9 @@ import 'features/inbox/pending_page.dart';
 import 'features/sessions/sessions_page.dart';
 import 'features/workspace/workspace_page.dart';
 import 'ui/theme.dart';
+import 'ui/startup_screen.dart';
 import 'features/conversation/conversation_page.dart';
+import 'features/devices/connect_gate.dart';
 
 /// Shared app services for every page below the shell.
 class AppScope extends InheritedWidget {
@@ -47,6 +51,10 @@ class _DogCodesAppState extends State<DogCodesApp> {
   final navigator = GlobalKey<NavigatorState>();
   final messenger = GlobalKey<ScaffoldMessengerState>();
   bool _pushScheduled = false;
+
+  /// Set once a computer was reachable (or offline records were chosen);
+  /// later drops then show banners inside the tabs instead of the gate.
+  bool _entered = false;
   @override
   void initState() {
     super.initState();
@@ -106,7 +114,7 @@ class _DogCodesAppState extends State<DogCodesApp> {
       final host = hub.host(opened.hostId);
       if (host == null) {
         messenger.currentState?.showSnackBar(
-          const SnackBar(content: Text('这台电脑已移除，请核实电脑列表中的绑定。')),
+          SnackBar(content: Text(tr("这台电脑已移除，请核实电脑列表中的绑定。"))),
         );
         return;
       }
@@ -117,14 +125,14 @@ class _DogCodesAppState extends State<DogCodesApp> {
             record['bindingEpoch'] != host.bindingEpoch ||
             hub.host(host.id) != host) {
           messenger.currentState?.showSnackBar(
-            const SnackBar(content: Text('电脑绑定已改变，请从电脑列表重新打开。')),
+            SnackBar(content: Text(tr("电脑绑定已改变，请从电脑列表重新打开。"))),
           );
           return;
         }
       } catch (_) {
         if (mounted) {
           messenger.currentState?.showSnackBar(
-            const SnackBar(content: Text('暂时无法读取电脑绑定，请稍后重试。')),
+            SnackBar(content: Text(tr("暂时无法读取电脑绑定，请稍后重试。"))),
           );
         }
         return;
@@ -139,26 +147,61 @@ class _DogCodesAppState extends State<DogCodesApp> {
     });
   }
 
+  Widget _home() {
+    if (!hub.loaded) return const StartupScreen(key: ValueKey('startup'));
+    final phase = gatePhase(hub);
+    if (hub.hosts.isEmpty) _entered = false;
+    if (phase == null) _entered = true;
+    if (_entered) return const HomeShell(key: ValueKey('home'));
+    final cached = hub.hosts.any((h) => h.snapshot != null);
+    return ConnectGate(
+      key: const ValueKey('gate'),
+      phase: phase!,
+      onBrowseOffline: cached ? () => setState(() => _entered = true) : null,
+    );
+  }
+
   @override
-  Widget build(BuildContext context) => AppScope(
-    hub: hub,
-    preferences: preferences,
-    runtime: widget.runtime,
-    client: widget.client,
-    child: ListenableBuilder(
-      listenable: preferences,
-      builder: (context, _) => MaterialApp(
-        navigatorKey: navigator,
-        scaffoldMessengerKey: messenger,
-        title: 'DogCodes',
-        debugShowCheckedModeBanner: false,
-        theme: dcTheme(Brightness.light),
-        darkTheme: dcTheme(Brightness.dark),
-        themeMode: preferences.themeMode,
-        home: const HomeShell(),
+  Widget build(BuildContext context) {
+    watchAppLanguage(context);
+    return AppScope(
+      hub: hub,
+      preferences: preferences,
+      runtime: widget.runtime,
+      client: widget.client,
+      child: ListenableBuilder(
+        listenable: preferences,
+        builder: (context, _) => MaterialApp(
+          navigatorKey: navigator,
+          scaffoldMessengerKey: messenger,
+          title: 'DogCodes',
+          supportedLocales: [for (final l in appLanguages) l.locale],
+          // Widgets follow the language chosen in 偏好设置; tr() reads the
+          // same override.
+          locale: appLanguages
+              .where((l) => l.id == preferences.language)
+              .firstOrNull
+              ?.locale,
+          localizationsDelegates: GlobalMaterialLocalizations.delegates,
+          debugShowCheckedModeBanner: false,
+          theme: dcTheme(Brightness.light),
+          darkTheme: dcTheme(Brightness.dark),
+          themeMode: preferences.themeMode,
+          home: ListenableBuilder(
+            listenable: hub,
+            builder: (context, _) => AnimatedSwitcher(
+              duration: MediaQuery.disableAnimationsOf(context)
+                  ? Duration.zero
+                  : const Duration(milliseconds: 180),
+              switchInCurve: Curves.easeOut,
+              switchOutCurve: Curves.easeIn,
+              child: _home(),
+            ),
+          ),
+        ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 /// Four root entries in fixed order: 会话、工作区、待处理、电脑.
@@ -173,30 +216,12 @@ class HomeShell extends StatefulWidget {
 
 class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
   int tab = 0;
-  bool _started = false;
   void select(int index) => setState(() => tab = index);
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (_started) return;
-    _started = true;
-    // First launch without a paired computer starts on 电脑 for pairing.
-    final hub = AppScope.of(context).hub;
-    void initial() {
-      if (!hub.loaded) return;
-      hub.removeListener(initial);
-      if (hub.hosts.isEmpty && mounted && tab == 0) setState(() => tab = 3);
-    }
-
-    hub.addListener(initial);
-    initial();
   }
 
   @override
@@ -216,6 +241,7 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final hub = AppScope.of(context).hub;
     return AnnotatedRegion(
       value: overlayStyle(Theme.of(context).brightness),
@@ -244,15 +270,15 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
                 selectedIndex: tab,
                 onDestinationSelected: select,
                 destinations: [
-                  const NavigationDestination(
+                  NavigationDestination(
                     icon: Icon(Icons.chat_bubble_outline),
                     selectedIcon: Icon(Icons.chat_bubble),
-                    label: '会话',
+                    label: tr("会话"),
                   ),
-                  const NavigationDestination(
+                  NavigationDestination(
                     icon: Icon(Icons.folder_outlined),
                     selectedIcon: Icon(Icons.folder),
-                    label: '工作区',
+                    label: tr("项目"),
                   ),
                   NavigationDestination(
                     icon: Badge(
@@ -265,12 +291,12 @@ class _HomeShellState extends State<HomeShell> with WidgetsBindingObserver {
                       label: Text('$pending'),
                       child: const Icon(Icons.error),
                     ),
-                    label: '待处理',
+                    label: tr("待处理"),
                   ),
-                  const NavigationDestination(
+                  NavigationDestination(
                     icon: Icon(Icons.computer_outlined),
                     selectedIcon: Icon(Icons.computer),
-                    label: '电脑',
+                    label: tr("电脑"),
                   ),
                 ],
               );

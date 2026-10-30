@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'package:flutter/material.dart';
 import '../../core/pc_api.dart';
 import '../../core/host_hub.dart';
@@ -11,6 +12,7 @@ import 'line_diff.dart';
 import 'tool_context.dart';
 import 'workspace_connection.dart';
 import 'git_reference_picker.dart';
+import 'workspace_directory_picker.dart';
 
 /// 06 变更: Git changes of the project, single-column diff, stage/unstage and
 /// commit / commit & push. Every Git write carries an operation ID; a lost
@@ -22,12 +24,12 @@ class ChangesPage extends StatefulWidget {
   State<ChangesPage> createState() => _ChangesPageState();
 }
 
-const _modes = {
-  'uncommitted': '未提交变更',
-  'staged': '已暂存',
-  'unstaged': '未暂存',
-  'committed': '历史提交',
-  'branch': '分支比较',
+Map<String, String> get _modes => {
+  'uncommitted': tr("未提交变更"),
+  'staged': tr("已暂存"),
+  'unstaged': tr("未暂存"),
+  'committed': tr("历史提交"),
+  'branch': tr("分支比较"),
 };
 
 class _ChangesPageState extends State<ChangesPage>
@@ -98,7 +100,7 @@ class _ChangesPageState extends State<ChangesPage>
             .split(RegExp(r'[\\/]'))
             .where((part) => part.isNotEmpty)
             .lastOrNull ??
-        '目录';
+        tr("目录");
   }
 
   int get staged =>
@@ -117,6 +119,21 @@ class _ChangesPageState extends State<ChangesPage>
     selectedRootId = id;
     selected.clear();
     expanded = null;
+  }
+
+  void _changeRoot(String id) {
+    if (!roots.any((r) => (r['root'] as Map?)?['id'] == id)) return;
+    final reset = historical && id != rootId;
+    setState(() {
+      _selectRoot(id);
+      if (reset) {
+        mode = 'uncommitted';
+        reference = null;
+        parent = 0;
+        snapshot = null;
+      }
+    });
+    if (reset) _load();
   }
 
   Future<void> _chooseMode(String next) async {
@@ -148,7 +165,7 @@ class _ChangesPageState extends State<ChangesPage>
           task != tool.taskId ||
           id != rootId ||
           order != _loadOrder) {
-        showError(context, '连接或目录已改变，请重新选择比较目标。');
+        showError(context, tr("连接或目录已改变，请重新选择比较目标。"));
         return;
       }
     }
@@ -276,24 +293,27 @@ class _ChangesPageState extends State<ChangesPage>
         !tool.host.online) {
       return;
     }
-    if (text.isEmpty) return showError(context, '请填写提交说明');
+    if (text.isEmpty) return showError(context, tr("请填写提交说明"));
     var stageAll = false;
     if (staged == 0) {
       final ok = await showDialog<bool>(
         context: context,
         builder: (d) => AlertDialog(
-          title: const Text('暂存全部并提交？'),
+          title: Text(tr("暂存全部并提交？")),
           content: Text(
-            '${roots.length > 1 ? '目录：${rootName(root!)}。' : ''}当前没有已暂存的文件，将暂存全部 ${files.length} 个变更后提交。',
+            tr("{0}当前没有已暂存的文件，将暂存全部 {1} 个变更后提交。", [
+              roots.length > 1 ? tr("目录：{0}。", [rootName(root!)]) : '',
+              files.length,
+            ]),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(d, false),
-              child: const Text('取消'),
+              child: Text(tr("取消")),
             ),
             TextButton(
               onPressed: () => Navigator.pop(d, true),
-              child: const Text('暂存并提交'),
+              child: Text(tr("暂存并提交")),
             ),
           ],
         ),
@@ -307,7 +327,7 @@ class _ChangesPageState extends State<ChangesPage>
         !tool.host.online ||
         id != rootId ||
         snapshotId != snapshot?['id']) {
-      showError(context, '连接或变更已更新，请核对后重新提交。');
+      showError(context, tr("连接或变更已更新，请核对后重新提交。"));
       return;
     }
     setState(() => busy = true);
@@ -329,7 +349,7 @@ class _ChangesPageState extends State<ChangesPage>
         }
         showError(
           context,
-          result == null ? 'Git 操作结果待核实' : gitResultMessage(result),
+          result == null ? tr("Git 操作结果待核实") : gitResultMessage(result),
         );
       }
     } catch (e) {
@@ -395,7 +415,7 @@ class _ChangesPageState extends State<ChangesPage>
       if (mounted) {
         showError(
           context,
-          result == null ? 'Git 操作结果待核实' : gitResultMessage(result),
+          result == null ? tr("Git 操作结果待核实") : gitResultMessage(result),
         );
       }
     } catch (e) {
@@ -409,6 +429,7 @@ class _ChangesPageState extends State<ChangesPage>
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final c = context.dc;
     final directory = roots
         .where((r) => (r['root'] as Map?)?['id'] == rootId)
@@ -419,50 +440,17 @@ class _ChangesPageState extends State<ChangesPage>
     };
     return Scaffold(
       appBar: DetailBar(
-        title: '变更',
+        title: tr("变更"),
         subtitle: tool.subtitle,
         actions: [
-          if (roots.length > 1)
-            PopupMenuButton<String>(
-              tooltip: '选择 Git 目录',
-              enabled: !busy && !loading && !choosingReference,
-              icon: const Icon(Icons.folder_copy_outlined),
-              onSelected: (id) {
-                if (roots.any((r) => (r['root'] as Map?)?['id'] == id)) {
-                  final reset = historical && id != rootId;
-                  setState(() {
-                    _selectRoot(id);
-                    if (reset) {
-                      mode = 'uncommitted';
-                      reference = null;
-                      parent = 0;
-                      snapshot = null;
-                    }
-                  });
-                  if (reset) _load();
-                }
-              },
-              itemBuilder: (_) => [
-                for (final value in roots)
-                  CheckedPopupMenuItem(
-                    value: (value['root'] as Map)['id'] as String,
-                    checked: (value['root'] as Map)['id'] == rootId,
-                    child: Text(
-                      '${(value['root'] as Map)['path']}',
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-              ],
-            ),
           PopupMenuButton<String>(
-            tooltip: '更多 Git 操作',
+            tooltip: tr("更多 Git 操作"),
             enabled: !busy && tool.host.online && canGit,
             onSelected: _plain,
-            itemBuilder: (_) => const [
-              PopupMenuItem(value: 'push', child: Text('推送')),
-              PopupMenuItem(value: 'pull', child: Text('拉取')),
-              PopupMenuItem(value: 'sync', child: Text('同步')),
+            itemBuilder: (_) => [
+              PopupMenuItem(value: 'push', child: Text(tr("推送"))),
+              PopupMenuItem(value: 'pull', child: Text(tr("拉取"))),
+              PopupMenuItem(value: 'sync', child: Text(tr("同步"))),
             ],
           ),
         ],
@@ -472,6 +460,20 @@ class _ChangesPageState extends State<ChangesPage>
           : Column(
               children: [
                 if (busy) const LinearProgressIndicator(minHeight: 2),
+                WorkspaceDirectoryPicker<String>(
+                  tooltip: tr("选择 Git 目录"),
+                  directories: [
+                    for (final value in roots)
+                      (
+                        value: (value['root'] as Map)['id'] as String,
+                        path: '${(value['root'] as Map)['path']}',
+                      ),
+                  ],
+                  value: rootId,
+                  onChanged: busy || loading || choosingReference
+                      ? null
+                      : _changeRoot,
+                ),
                 if (tool.host.sideOperation != null)
                   Padding(
                     padding: const EdgeInsets.all(DcSpace.page),
@@ -505,13 +507,13 @@ class _ChangesPageState extends State<ChangesPage>
                         child: Text(
                           roots.length > 1 && directory != null
                               ? rootName(directory)
-                              : '${workspace?['branch'] ?? (workspace?['git'] == false ? '非 Git 目录' : '—')}',
+                              : '${workspace?['branch'] ?? (workspace?['git'] == false ? tr("非 Git 目录") : '—')}',
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       const Spacer(),
                       PopupMenuButton<String>(
-                        tooltip: '比较范围',
+                        tooltip: tr("比较范围"),
                         initialValue: mode,
                         enabled: !busy && !loading && !choosingReference,
                         onSelected: _chooseMode,
@@ -560,7 +562,7 @@ class _ChangesPageState extends State<ChangesPage>
                                   : () => _chooseMode(mode),
                               icon: const Icon(Icons.history, size: 16),
                               label: Text(
-                                reference?.label ?? '选择比较目标',
+                                reference?.label ?? tr("选择比较目标"),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -568,7 +570,7 @@ class _ChangesPageState extends State<ChangesPage>
                             if (mode == 'committed' &&
                                 (reference?.parents.length ?? 0) > 1)
                               PopupMenuButton<int>(
-                                tooltip: '选择父提交',
+                                tooltip: tr("选择父提交"),
                                 enabled: !loading && !choosingReference,
                                 onSelected: (value) {
                                   setState(() {
@@ -587,23 +589,26 @@ class _ChangesPageState extends State<ChangesPage>
                                     PopupMenuItem(
                                       value: i,
                                       child: Text(
-                                        '父提交 ${i + 1} · ${shortCommit(reference!.parents[i])}',
+                                        tr("父提交 {0} · {1}", [
+                                          i + 1,
+                                          shortCommit(reference!.parents[i]),
+                                        ]),
                                       ),
                                     ),
                                 ],
                                 child: Padding(
                                   padding: const EdgeInsets.all(12),
-                                  child: Text('父提交 ${parent + 1} ▾'),
+                                  child: Text(tr("父提交 {0} ▾", [parent + 1])),
                                 ),
                               ),
                           ],
                         ),
                         Text(
                           mode == 'branch'
-                              ? '只读 · 当前 HEAD 相对所选分支共同祖先的变更'
+                              ? tr("只读 · 当前 HEAD 相对所选分支共同祖先的变更")
                               : reference?.parents.isEmpty == true
-                              ? '只读 · 首次提交相对空目录的变更'
-                              : '只读 · 此提交相对父提交的变更',
+                              ? tr("只读 · 首次提交相对空目录的变更")
+                              : tr("只读 · 此提交相对父提交的变更"),
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
                       ],
@@ -615,8 +620,8 @@ class _ChangesPageState extends State<ChangesPage>
                     children: [
                       Text(
                         historical
-                            ? '${files.length} 个文件'
-                            : '${files.length} 个文件 · 已暂存 $staged',
+                            ? tr("{0} 个文件", [files.length])
+                            : tr("{0} 个文件 · 已暂存 {1}", [files.length, staged]),
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                       const Spacer(),
@@ -625,13 +630,13 @@ class _ChangesPageState extends State<ChangesPage>
                           onPressed: busy || !canGit
                               ? null
                               : () => _stage(unstage: true),
-                          child: const Text('取消暂存'),
+                          child: Text(tr("取消暂存")),
                         ),
                         TextButton(
                           onPressed: busy || !canGit
                               ? null
                               : () => _stage(unstage: false),
-                          child: const Text('暂存'),
+                          child: Text(tr("暂存")),
                         ),
                       ],
                     ],
@@ -647,10 +652,10 @@ class _ChangesPageState extends State<ChangesPage>
                           onRefresh: _load,
                           child: files.isEmpty
                               ? ListView(
-                                  children: const [
+                                  children: [
                                     Padding(
                                       padding: EdgeInsets.all(40),
-                                      child: Center(child: Text('没有变更')),
+                                      child: Center(child: Text(tr("没有变更"))),
                                     ),
                                   ],
                                 )
@@ -714,9 +719,9 @@ class _ChangesPageState extends State<ChangesPage>
                             minLines: 1,
                             maxLines: 4,
                             decoration: InputDecoration(
-                              hintText: '提交说明',
+                              hintText: tr("提交说明"),
                               suffixIcon: IconButton(
-                                tooltip: 'AI 生成提交说明',
+                                tooltip: tr("AI 生成提交说明"),
                                 onPressed: busy || files.isEmpty || !canGit
                                     ? null
                                     : _summary,
@@ -732,7 +737,7 @@ class _ChangesPageState extends State<ChangesPage>
                                   onPressed: busy || files.isEmpty || !canGit
                                       ? null
                                       : () => _commit(push: false),
-                                  child: const Text('提交'),
+                                  child: Text(tr("提交")),
                                 ),
                               ),
                               const SizedBox(width: 10),
@@ -741,7 +746,7 @@ class _ChangesPageState extends State<ChangesPage>
                                   onPressed: busy || files.isEmpty || !canGit
                                       ? null
                                       : () => _commit(push: true),
-                                  child: const Text('提交并推送'),
+                                  child: Text(tr("提交并推送")),
                                 ),
                               ),
                             ],
@@ -816,7 +821,7 @@ class _ChangedFileState extends State<_ChangedFile> {
         return;
       }
       if (r['binary'] == true) {
-        note = '二进制文件，无法显示差异';
+        note = tr("二进制文件，无法显示差异");
       } else {
         final text = r['text'] as Map?;
         List<String> lines(Object? v) => [
@@ -837,6 +842,7 @@ class _ChangedFileState extends State<_ChangedFile> {
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final c = context.dc;
     final f = widget.file;
     final path = '${f['path']}';
@@ -955,12 +961,13 @@ class UnifiedDiff extends StatelessWidget {
   final List<DiffLine> lines;
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final c = context.dc;
     if (lines.isEmpty) {
       return Padding(
         padding: const EdgeInsets.all(12),
         child: Text(
-          '内容无差异（可能仅权限或换行变化）',
+          tr("内容无差异（可能仅权限或换行变化）"),
           style: Theme.of(context).textTheme.bodySmall,
         ),
       );
@@ -1015,9 +1022,9 @@ class UnifiedDiff extends StatelessWidget {
                 ),
               ),
             if (lines.length > shown.length)
-              const Padding(
+              Padding(
                 padding: EdgeInsets.all(8),
-                child: Text('… 差异过长，已截断'),
+                child: Text(tr("… 差异过长，已截断")),
               ),
           ],
         ),

@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import '../../core/pc_api.dart';
@@ -11,6 +12,7 @@ import '../../ui/widgets.dart';
 import 'preview_page.dart';
 import 'terminal_pane.dart';
 import 'tool_context.dart';
+import 'workspace_directory_picker.dart';
 
 /// 09 运行与预览: project run configurations shared with the PC, start/stop,
 /// output, and an in-app preview of the dev server.
@@ -26,6 +28,7 @@ class _RunPageState extends State<RunPage> with WorkspaceConnection<RunPage> {
   HostState get workspaceHost => tool.host;
   int _loadOrder = 0;
   int? directoryIndex;
+  String? directoryPath;
   @override
   void onWorkspaceConnectionChanged() {
     _loadOrder++;
@@ -47,18 +50,20 @@ class _RunPageState extends State<RunPage> with WorkspaceConnection<RunPage> {
 
   ToolContext get tool => widget.tool;
 
-  List<({int dir, Map<String, dynamic> cmd})> get commands => [
+  List<Map<String, dynamic>> get directories => [
+    for (final d in (catalog?['directories'] as List? ?? const []))
+      Map<String, dynamic>.from(d as Map),
+  ];
+  List<({int dir, Map<String, dynamic> cmd})> get allCommands => [
     for (final (i, d)
         in ((catalog?['directories'] as List?) ?? const []).indexed)
       for (final c in ((d as Map)['commands'] as List? ?? const []))
         (dir: i, cmd: Map<String, dynamic>.from(c as Map)),
   ];
+  List<({int dir, Map<String, dynamic> cmd})> get commands =>
+      allCommands.where((c) => c.dir == directoryIndex).toList();
   ({int dir, Map<String, dynamic> cmd})? get selected => commands
-      .where(
-        (c) =>
-            c.cmd['id'] == commandId &&
-            (directoryIndex == null || c.dir == directoryIndex),
-      )
+      .where((c) => c.cmd['id'] == commandId && c.dir == directoryIndex)
       .firstOrNull;
   Map<String, dynamic>? get running => runs
       .where(
@@ -103,7 +108,8 @@ class _RunPageState extends State<RunPage> with WorkspaceConnection<RunPage> {
       if (!mounted ||
           order != _loadOrder ||
           epoch != tool.host.connectionEpoch ||
-          link != tool.link) {
+          link != tool.link ||
+          task != tool.taskId) {
         return;
       }
       final cat = results[0] as Map<String, dynamic>;
@@ -117,20 +123,31 @@ class _RunPageState extends State<RunPage> with WorkspaceConnection<RunPage> {
             ),
           );
         error = null;
-        if (selected == null) {
+        final previous = directories.indexWhere(
+          (d) => d['path'] == directoryPath,
+        );
+        if (previous >= 0) {
+          directoryIndex = previous;
+        } else {
           final active = runs.where(terminalActive).firstOrNull;
           final next =
-              commands
+              allCommands
                   .where(
                     (c) =>
                         c.cmd['id'] == active?['commandId'] &&
                         c.dir == active?['directoryIndex'],
                   )
                   .firstOrNull ??
-              commands.where((c) => c.cmd['pinned'] == true).firstOrNull ??
-              commands.firstOrNull;
-          commandId = next?.cmd['id'] as String?;
-          directoryIndex = next?.dir;
+              allCommands.where((c) => c.cmd['pinned'] == true).firstOrNull ??
+              allCommands.firstOrNull;
+          directoryIndex = next?.dir ?? (directories.isEmpty ? null : 0);
+          commandId = null;
+        }
+        directoryPath = directoryIndex == null
+            ? null
+            : directories[directoryIndex!]['path'] as String?;
+        if (selected == null) {
+          commandId = _preferredCommand();
         }
       });
       _attach();
@@ -139,6 +156,32 @@ class _RunPageState extends State<RunPage> with WorkspaceConnection<RunPage> {
     } finally {
       if (mounted && order == _loadOrder) setState(() => loading = false);
     }
+  }
+
+  String? _preferredCommand() {
+    final next =
+        commands
+            .where(
+              (c) => runs.any(
+                (r) =>
+                    terminalActive(r) &&
+                    r['directoryIndex'] == c.dir &&
+                    r['commandId'] == c.cmd['id'],
+              ),
+            )
+            .firstOrNull ??
+        commands.where((c) => c.cmd['pinned'] == true).firstOrNull ??
+        commands.firstOrNull;
+    return next?.cmd['id'] as String?;
+  }
+
+  void _selectDirectory(int index) {
+    setState(() {
+      directoryIndex = index;
+      directoryPath = directories[index]['path'] as String?;
+      commandId = _preferredCommand();
+    });
+    _attach();
   }
 
   /// Shows the latest run of the selected command (running or finished).
@@ -193,7 +236,7 @@ class _RunPageState extends State<RunPage> with WorkspaceConnection<RunPage> {
         directoryIndex: sel.dir,
         commandId: sel.cmd['id'] as String,
       );
-      if (result == null) throw const ProtocolException('启动结果待核实，请使用原操作恢复。');
+      if (result == null) throw ProtocolException(tr("启动结果待核实，请使用原操作恢复。"));
       if (mounted) await _load();
     } catch (e) {
       if (mounted) showError(context, e);
@@ -232,7 +275,7 @@ class _RunPageState extends State<RunPage> with WorkspaceConnection<RunPage> {
       if (original?.dir != selected?.dir ||
           original?.cmd['id'] != selected?.cmd['id'] ||
           generation != catalog?['generation']) {
-        showError(context, '运行配置已改变，请确认后再启动。');
+        showError(context, tr("运行配置已改变，请确认后再启动。"));
         return;
       }
       await _start();
@@ -248,11 +291,11 @@ class _RunPageState extends State<RunPage> with WorkspaceConnection<RunPage> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(d, false),
-              child: const Text('取消'),
+              child: Text(tr("取消")),
             ),
             TextButton(
               onPressed: () => Navigator.pop(d, true),
-              child: const Text('继续'),
+              child: Text(tr("继续")),
             ),
           ],
         ),
@@ -277,7 +320,7 @@ class _RunPageState extends State<RunPage> with WorkspaceConnection<RunPage> {
       final label = await showDialog<String>(
         context: context,
         builder: (d) => AlertDialog(
-          title: const Text('重命名运行配置'),
+          title: Text(tr("重命名运行配置")),
           content: TextFormField(
             initialValue: labelText,
             onChanged: (value) => labelText = value,
@@ -287,11 +330,11 @@ class _RunPageState extends State<RunPage> with WorkspaceConnection<RunPage> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(d),
-              child: const Text('取消'),
+              child: Text(tr("取消")),
             ),
             TextButton(
               onPressed: () => Navigator.pop(d, labelText.trim()),
-              child: const Text('保存'),
+              child: Text(tr("保存")),
             ),
           ],
         ),
@@ -302,8 +345,8 @@ class _RunPageState extends State<RunPage> with WorkspaceConnection<RunPage> {
       edit['pinned'] = sel.cmd['pinned'] != true;
     } else if (action == 'delete') {
       if (!await _confirm(
-            '删除运行配置？',
-            '移除“${sel.cmd['label']}”的启动配置，已运行的进程不会停止。',
+            tr("删除运行配置？"),
+            tr("移除“{0}”的启动配置，已运行的进程不会停止。", [sel.cmd['label']]),
           ) ||
           !mounted) {
         return;
@@ -342,7 +385,7 @@ class _RunPageState extends State<RunPage> with WorkspaceConnection<RunPage> {
           ),
     );
     if (overwrite &&
-        (!await _confirm('重新分析项目？', '将重新生成运行配置，覆盖未固定的自定义修改，固定项会保留。') ||
+        (!await _confirm(tr("重新分析项目？"), tr("将重新生成运行配置，覆盖未固定的自定义修改，固定项会保留。")) ||
             !mounted)) {
       return;
     }
@@ -353,14 +396,14 @@ class _RunPageState extends State<RunPage> with WorkspaceConnection<RunPage> {
         child: ListView(
           shrinkWrap: true,
           children: [
-            const ListTile(title: Text('选择分析项目的 Agent')),
+            ListTile(title: Text(tr("选择分析项目的 Agent"))),
             for (final e in tool.host.executors)
               ListTile(
                 title: Text(agentLabel(e['providerId'] as String?)),
                 onTap: () => Navigator.pop(d, Map<String, dynamic>.from(e)),
               ),
             if (tool.host.executors.isEmpty)
-              const ListTile(title: Text('没有可用 Agent，请先在电脑上连接。')),
+              ListTile(title: Text(tr("没有可用 Agent，请先在电脑上连接。"))),
           ],
         ),
       ),
@@ -389,22 +432,19 @@ class _RunPageState extends State<RunPage> with WorkspaceConnection<RunPage> {
     final value = await showDialog<int>(
       context: context,
       builder: (d) => AlertDialog(
-        title: const Text('预览端口'),
+        title: Text(tr("预览端口")),
         content: TextFormField(
           initialValue: portText,
           onChanged: (value) => portText = value,
           keyboardType: TextInputType.number,
-          decoration: const InputDecoration(hintText: '例如 5173'),
+          decoration: InputDecoration(hintText: tr("例如 5173")),
           autofocus: true,
         ),
         actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(d),
-            child: const Text('取消'),
-          ),
+          TextButton(onPressed: () => Navigator.pop(d), child: Text(tr("取消"))),
           TextButton(
             onPressed: () => Navigator.pop(d, int.tryParse(portText.trim())),
-            child: const Text('打开'),
+            child: Text(tr("打开")),
           ),
         ],
       ),
@@ -424,12 +464,16 @@ class _RunPageState extends State<RunPage> with WorkspaceConnection<RunPage> {
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final c = context.dc;
     final sel = selected;
     final active = running != null;
+    final directory = directoryIndex == null
+        ? null
+        : directories[directoryIndex!];
     return Scaffold(
       appBar: DetailBar(
-        title: '运行与预览',
+        title: tr("运行与预览"),
         subtitle: '${tool.host.name} · ${tool.projectName}',
       ),
       body: !tool.host.online || tool.taskId == null
@@ -439,6 +483,15 @@ class _RunPageState extends State<RunPage> with WorkspaceConnection<RunPage> {
           : Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                WorkspaceDirectoryPicker<int>(
+                  tooltip: tr("选择运行目录"),
+                  directories: [
+                    for (final (i, d) in directories.indexed)
+                      (value: i, path: '${d['path']}'),
+                  ],
+                  value: directoryIndex,
+                  onChanged: busy ? null : _selectDirectory,
+                ),
                 WorkspaceRecoveryCards(
                   host: tool.host,
                   projectId: tool.projectId,
@@ -450,22 +503,26 @@ class _RunPageState extends State<RunPage> with WorkspaceConnection<RunPage> {
                     TextButton.icon(
                       onPressed: busy || catalog == null ? null : _analyze,
                       icon: const Icon(Icons.auto_awesome_outlined, size: 18),
-                      label: const Text('分析项目'),
+                      label: Text(tr("分析项目")),
                     ),
                     const Spacer(),
                     IconButton(
-                      tooltip: '刷新运行配置',
+                      tooltip: tr("刷新运行配置"),
                       onPressed: busy ? null : _load,
                       icon: const Icon(Icons.refresh),
                     ),
                   ],
                 ),
-                if ((catalog?['directories'] as List? ?? []).any(
-                  (d) => d['status'] == 'analyzing',
-                ))
-                  const InlineNotice('Agent 正在分析项目，可稍后刷新查看。'),
+                if (directory?['status'] == 'analyzing')
+                  InlineNotice(tr("Agent 正在分析项目，可稍后刷新查看。")),
+                if (directory?['error'] != null)
+                  InlineNotice('${directory!['error']}', danger: true),
                 if (commands.isEmpty)
-                  const InlineNotice('这个项目还没有运行配置，点击「分析项目」生成启动方式。')
+                  InlineNotice(
+                    directories.isEmpty
+                        ? tr("这个项目尚未关联目录。")
+                        : tr("当前目录还没有运行配置，点击「分析项目」生成启动方式。"),
+                  )
                 else
                   Padding(
                     padding: const EdgeInsets.fromLTRB(DcSpace.page, 4, 12, 4),
@@ -476,10 +533,12 @@ class _RunPageState extends State<RunPage> with WorkspaceConnection<RunPage> {
                         Expanded(
                           child: PopupMenuButton<({int dir, String id})>(
                             enabled: !busy,
-                            tooltip: '选择运行配置',
+                            tooltip: tr("选择运行配置"),
                             onSelected: (value) {
-                              commandId = value.id;
-                              directoryIndex = value.dir;
+                              setState(() {
+                                commandId = value.id;
+                                directoryIndex = value.dir;
+                              });
                               _attach();
                             },
                             itemBuilder: (_) => [
@@ -496,7 +555,7 @@ class _RunPageState extends State<RunPage> with WorkspaceConnection<RunPage> {
                               children: [
                                 Flexible(
                                   child: Text(
-                                    '${sel?.cmd['label'] ?? '选择配置'}',
+                                    '${sel?.cmd['label'] ?? tr("选择配置")}',
                                     overflow: TextOverflow.ellipsis,
                                     style: Theme.of(
                                       context,
@@ -509,33 +568,35 @@ class _RunPageState extends State<RunPage> with WorkspaceConnection<RunPage> {
                           ),
                         ),
                         StatusLabel(
-                          active ? '运行中' : '未运行',
+                          active ? tr("运行中") : tr("未运行"),
                           tone: active ? Tone.accent : Tone.muted,
                         ),
                         if (sel != null)
                           PopupMenuButton<String>(
-                            tooltip: '管理运行配置',
+                            tooltip: tr("管理运行配置"),
                             enabled: !busy,
                             onSelected: _edit,
                             itemBuilder: (_) => [
-                              const PopupMenuItem(
+                              PopupMenuItem(
                                 value: 'rename',
-                                child: Text('重命名'),
+                                child: Text(tr("重命名")),
                               ),
                               PopupMenuItem(
                                 value: 'pin',
                                 child: Text(
-                                  sel.cmd['pinned'] == true ? '取消固定' : '固定配置',
+                                  sel.cmd['pinned'] == true
+                                      ? tr("取消固定")
+                                      : tr("固定配置"),
                                 ),
                               ),
-                              const PopupMenuItem(
+                              PopupMenuItem(
                                 value: 'delete',
-                                child: Text('删除配置'),
+                                child: Text(tr("删除配置")),
                               ),
                             ],
                           ),
                         IconButton(
-                          tooltip: active ? '停止' : '启动',
+                          tooltip: active ? tr("停止") : tr("启动"),
                           onPressed: busy || sel == null
                               ? null
                               : (active ? _stop : _start),
@@ -547,7 +608,7 @@ class _RunPageState extends State<RunPage> with WorkspaceConnection<RunPage> {
                         ),
                         if (active)
                           IconButton(
-                            tooltip: '重启',
+                            tooltip: tr("重启"),
                             onPressed: busy ? null : _restart,
                             icon: const Icon(Icons.restart_alt),
                           ),
@@ -563,9 +624,9 @@ class _RunPageState extends State<RunPage> with WorkspaceConnection<RunPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          _Field('启动命令', '${sel.cmd['command']}'),
+                          _Field(tr("启动命令"), '${sel.cmd['command']}'),
                           _Field(
-                            '项目目录',
+                            tr("项目目录"),
                             '${((catalog!['directories'] as List)[sel.dir] as Map)['path']}',
                           ),
                         ],
@@ -577,7 +638,7 @@ class _RunPageState extends State<RunPage> with WorkspaceConnection<RunPage> {
                   child: Row(
                     children: [
                       Text(
-                        '项目预览',
+                        tr("项目预览"),
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       const Spacer(),
@@ -585,11 +646,11 @@ class _RunPageState extends State<RunPage> with WorkspaceConnection<RunPage> {
                         FilledButton.icon(
                           onPressed: () => _preview(port!),
                           icon: const Icon(Icons.open_in_browser, size: 18),
-                          label: Text('打开 localhost:$port'),
+                          label: Text(tr("打开 localhost:{0}", [port])),
                         ),
                       TextButton(
                         onPressed: _askPort,
-                        child: Text(port == null ? '指定端口' : '其他端口'),
+                        child: Text(port == null ? tr("指定端口") : tr("其他端口")),
                       ),
                     ],
                   ),
@@ -604,7 +665,7 @@ class _RunPageState extends State<RunPage> with WorkspaceConnection<RunPage> {
                   child: Row(
                     children: [
                       Text(
-                        '输出',
+                        tr("输出"),
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
                       const SizedBox(width: 8),
@@ -623,7 +684,7 @@ class _RunPageState extends State<RunPage> with WorkspaceConnection<RunPage> {
                   child: session == null
                       ? Center(
                           child: Text(
-                            '尚未运行过此配置',
+                            tr("尚未运行过此配置"),
                             style: TextStyle(color: c.secondary),
                           ),
                         )
@@ -644,26 +705,29 @@ class _Field extends StatelessWidget {
   const _Field(this.label, this.value);
   final String label, value;
   @override
-  Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.symmetric(vertical: 2),
-    child: Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-          width: 68,
-          child: Text(label, style: Theme.of(context).textTheme.bodySmall),
-        ),
-        Expanded(
-          child: Text(
-            value,
-            style: const TextStyle(
-              fontFamily: monoFamily,
-              fontFamilyFallback: monoFallback,
-              fontSize: 13,
+  Widget build(BuildContext context) {
+    watchAppLanguage(context);
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 2),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 68,
+            child: Text(label, style: Theme.of(context).textTheme.bodySmall),
+          ),
+          Expanded(
+            child: Text(
+              value,
+              style: const TextStyle(
+                fontFamily: monoFamily,
+                fontFamilyFallback: monoFallback,
+                fontSize: 13,
+              ),
             ),
           ),
-        ),
-      ],
-    ),
-  );
+        ],
+      ),
+    );
+  }
 }

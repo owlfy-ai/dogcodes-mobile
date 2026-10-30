@@ -298,4 +298,19 @@ void main() {
     expect(await store.cachedTimeline('one', 't'), isNull);
     expect(await store.draft(draftKey('two', 'p', 't')), isNotNull);
   });
+  test(
+    'approval history is kept per computer and goes with the cache',
+    () async {
+      final store = LocalWorkspace.memory();
+      final entry = {'key': 'k', 'status': 'handled'};
+      await store.saveApprovalHistory('pc', [entry], store.cacheEpoch);
+      expect(await store.approvalHistory('pc'), [entry]);
+      expect(await store.approvalHistory('other'), isEmpty);
+      await store.forgetHost('pc');
+      expect(await store.approvalHistory('pc'), isEmpty);
+      await store.saveApprovalHistory('pc', [entry], store.cacheEpoch);
+      await store.clearCache();
+      expect(await store.approvalHistory('pc'), isEmpty);
+    },
+  );
 }

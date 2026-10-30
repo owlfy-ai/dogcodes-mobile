@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'package:flutter/material.dart';
 import '../../ui/theme.dart';
 
@@ -22,6 +23,30 @@ List<_Choice>? _choices(Map schema) {
     return [for (final v in schema['enum'] as List) _Choice(v, '$v')];
   }
   return null;
+}
+
+/// One line per answered field, in the question's own words.
+List<String> answerSummary(Map? form, Map? answer) {
+  if (answer == null) return const [];
+  if (answer['cancelled'] == true) return [tr("已取消回答")];
+  final props = (form?['schema'] as Map?)?['properties'] as Map? ?? const {};
+  final values = answer['values'] as Map? ?? const {};
+  String label(Map? field, Object? value) {
+    if (value is bool) return value ? tr("是") : tr("否");
+    final choices = field == null
+        ? null
+        : _choices(
+            field['type'] == 'array' ? field['items'] as Map? ?? {} : field,
+          );
+    if (value is List) return value.map((v) => label(field, v)).join('、');
+    return choices?.where((c) => c.value == value).firstOrNull?.label ??
+        '$value';
+  }
+
+  return [
+    for (final MapEntry(:key, :value) in values.entries)
+      '${(props[key] as Map?)?['title'] ?? key}：${label(props[key] as Map?, value)}',
+  ];
 }
 
 /// Whether every field uses a type this form can render; otherwise the
@@ -99,7 +124,7 @@ class _QuestionFormViewState extends State<QuestionFormView> {
       final v = _value(key, e.value as Map);
       if (v == null || (v is List && v.isEmpty && !required.contains(key))) {
         if (required.contains(key)) {
-          setState(() => error = '请回答所有必填问题');
+          setState(() => error = tr("请回答所有必填问题"));
           return;
         }
         continue;
@@ -112,6 +137,7 @@ class _QuestionFormViewState extends State<QuestionFormView> {
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final c = context.dc;
     final children = <Widget>[];
     for (final e in props.entries) {
@@ -119,7 +145,7 @@ class _QuestionFormViewState extends State<QuestionFormView> {
       final field = e.value as Map;
       final type = field['type'] ?? 'string';
       final title =
-          '${field['title'] ?? key}${required.contains(key) ? '' : '（可选）'}';
+          '${field['title'] ?? key}${required.contains(key) ? '' : tr("（可选）")}';
       children.add(
         Padding(
           padding: const EdgeInsets.only(top: 12, bottom: 4),
@@ -181,7 +207,7 @@ class _QuestionFormViewState extends State<QuestionFormView> {
         children.add(
           Row(
             children: [
-              for (final (v, label) in const [(true, '是'), (false, '否')])
+              for (final (v, label) in [(true, tr("是")), (false, tr("否"))])
                 Padding(
                   padding: const EdgeInsets.only(right: 8),
                   child: ChoiceChip(
@@ -210,7 +236,7 @@ class _QuestionFormViewState extends State<QuestionFormView> {
             keyboardType: type == 'string'
                 ? TextInputType.text
                 : const TextInputType.numberWithOptions(decimal: true),
-            decoration: const InputDecoration(hintText: '输入你的答案…'),
+            decoration: InputDecoration(hintText: tr("输入你的答案…")),
           ),
         );
       }
@@ -235,14 +261,14 @@ class _QuestionFormViewState extends State<QuestionFormView> {
                 onPressed: widget.enabled
                     ? () => widget.onSubmit({'cancelled': true, 'values': {}})
                     : null,
-                child: const Text('取消回答'),
+                child: Text(tr("取消回答")),
               ),
             ),
             const SizedBox(width: 10),
             Expanded(
               child: FilledButton(
                 onPressed: widget.enabled ? submit : null,
-                child: const Text('发送回答'),
+                child: Text(tr("发送回答")),
               ),
             ),
           ],

@@ -16,6 +16,18 @@ Flutter iOS / Android 手機端，無帳號登入，自己的手機連接自己�
 
 端點使用共用 Rust Noise 庫，原生打包進手機；密鑰與配對資訊進入系統安全存儲。手機固定 PC 公鑰，PC daemon 將已認證手機識別為 PairedDevice，服務僅路由密文字節。任務結果未知時保留原輸入與 operationId，由使用者核實/重試，不自動重發。
 
+## 中英文界面与 App Store 素材
+
+手机端支持简体中文和英文，按系统语言偏好选择；其他语言回退英文。覆盖页面、菜单、提示、权限选项、系统控件及 iOS 相机/照片/局域网权限说明。用户对话、代码、路径和 Agent 返回的业务内容保留原文。修改英文资源后运行 `python3 tool/l10n/generate.py`，占位参数校验与语言切换测试位于 `test/localization_test.dart`。
+
+App Store 中英文各 8 张详情图，分别导出两种 iPhone 尺寸和 13 英寸 iPad 尺寸。上传包与预览见 [store/v2](store/v2/README.md)，生成脚本位于 `tool/store/`，示例数据与个人电脑隔离。
+
+## 線上連接
+
+桌面端與手機端的新配對預設使用 `https://global.dog.codes`，debug 與 release 相同，WebSocket 使用對應的 `wss://global.dog.codes`。桌面側邊欄打開「连接手机」後自動生成並顯示二維碼，過期自動更新，無需點擊生成按鈕；手機在「连接电脑」掃碼即可。不需要先啟動本機 server，也無需額外傳入 `--dart-define`。
+
+已保存的配對綁定原服務地址，不會把舊服務憑據自動發往新服務。桌面端原先使用其他服務時，新版本在 `remote/services/global.dog.codes` 使用獨立配置，舊配置與配對記錄保留；已經使用線上服務的原配置繼續沿用。切換服務需重新配對；手機保留的舊電腦記錄仍按原地址重連，可從手機移除後重新掃碼。普通桌面配對頁固定使用線上服務，不提供地址輸入框。桌面端採用單一執行個體；Core 隨桌面端啟動及退出。手機遠端連線需要桌面端保持開啟或最小化，關閉主視窗會中斷連線及正在執行的工作；有活動工作時會先要求確認。以下本機流程供隔離 PC fixture 驗收使用。
+
 ## 開發與本機配對
 
 已驗證 Flutter **3.47.7** / Dart **3.13.5**（`.fvmrc`）；另需 Rust、對應 Rust target、Xcode/iOS runtime 或 Android SDK/NDK。Android 當前原生庫僅支援 ARM64，NDK 固定 **28.2.13676358**，可在 Android Studio SDK Manager 安裝。構建腳本不自行安裝 SDK 或接受授權。
@@ -32,18 +44,28 @@ flutter run -d YOUR_SIMULATOR_ID
 Gradle/Xcode 構建階段自動執行 `tool/build_endpoint.py`，將 Rust `.so` / 靜態庫打包，產物不入庫。無需把動態庫路徑傳給手機 App。桌面測試用動態庫才需要 `DOGCODES_ENDPOINT_LIBRARY`。
 
 1. 在獨立 `dogcodes-server` 工程按其 README 啟動本機服務（預設 8787）。
-2. 使用更新後的 PC 開發版，偏好選單選「连接手机」，以 `http://127.0.0.1:8787` 建立二維碼。既有舊 daemon 需在任務空閒後正常退出/重開，勿強停正在執行的任務。
-3. App debug 預設同一標準 service origin；iOS 使用回環，Android 模擬器傳輸自動改走 `10.0.2.2`，QR 驗證/Noise context 仍綁定 `127.0.0.1`，勿將二維碼內容改成另一地址。
-4. App 選「连接电脑」掃碼；模擬器無相機時可在 PC 複製配對連結，於 App 貼上。關閉 PC 配對視窗會取消尚未完成的邀請。
+2. 使用 gateway 驗收工具啟動隔離 PC fixture，傳入 `http://127.0.0.1:8787` 並取得配對連結（具體入口見 server README）；普通桌面配對頁使用線上服務。
+3. App 使用 `flutter run --dart-define=DOGCODES_SERVICE_URL=http://127.0.0.1:8787`，與 PC 使用相同 service origin；iOS 使用回環，Android 模擬器傳輸自動改走 `10.0.2.2`，QR 驗證/Noise context 仍綁定 `127.0.0.1`，勿將二維碼內容改成另一地址。
+4. App 選「连接电脑」掃碼；模擬器無相機時可在 PC 複製配對連結，於 App 貼上。離開 PC「连接手机」頁面會取消該頁尚未完成的邀請。
 5. 配對成功後選 PC 現有項目/會話、Agent/模型/思考強度並發送；權限審批在會話內處理。離開頁面不會停止 PC 任務；回到設備列表可重新連接。PC 設備列表可撤銷已配對手機。
 
-正式/真機入口須使用可信 HTTPS 官方測試域名（目前尚未部署）：
+隔離 PC fixture 的真機局域網 debug：手機與電腦連同一 Wi-Fi，fixture 使用 `http://電腦局域網IP:8787`，App 使用完全相同的 service origin：
 
 ```sh
-flutter run --dart-define=DOGCODES_SERVICE_URL=https://YOUR_OFFICIAL_TEST_ORIGIN
+flutter run --debug --dart-define=DOGCODES_SERVICE_URL=http://192.168.1.100:8787
+# 使用 Xcode Run 前，可先生成含同一地址的開發配置：
+flutter build ios --debug --config-only --dart-define=DOGCODES_SERVICE_URL=http://192.168.1.100:8787
 ```
 
-Release 不使用本機 HTTP，未配置地址時不能新建配對；Android 僅 debug manifest 開放明文開發流量。Release 簽名/Team 仍由維護者私下設定；`.env.example` 只說明欄位，不自動載入。管理令牌、私鑰、配對 secret 不得編進 App 或貼入日誌。
+服務端 compose 的私有 `.env` 設定 `DOGCODES_SERVER_BIND=192.168.1.100`（替換為電腦 IP），再重建 server 容器；只對局域網開放公共 8787，管理端與資料庫仍綁定回環。debug HTTP 僅接受回環或 RFC1918 字面 IP；release 仍只接受 HTTPS。不要手動改二維碼的 service，它也參與 Noise 身份驗證。由回環改為 LAN 後，移除手機上尚未成功的舊本機配對記錄，重新掃描 PC 新產生的二維碼。
+
+正式/跨網真機預設連接線上入口，也可顯式指定：
+
+```sh
+flutter run --dart-define=DOGCODES_SERVICE_URL=https://global.dog.codes
+```
+
+Release 不使用本機 HTTP，預設使用上述線上地址；Android 僅 debug manifest 開放明文開發流量。Release 簽名/Team 仍由維護者私下設定；`.env.example` 只說明欄位，不自動載入。管理令牌、私鑰、配對 secret 不得編進 App 或貼入日誌。
 
 ## 真實 UI 端到端（模擬器）
 

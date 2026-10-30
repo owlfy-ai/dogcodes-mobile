@@ -19,9 +19,9 @@ bool _sameRecoveryValue(dynamic a, dynamic b) {
 
 extension RecoveryJournals on MobileOperations {
   void _requireJournalActive() {
-    if (_journalsForgotten) throw const ProtocolException('这台电脑已移除，未再发送请求。');
+    if (_journalsForgotten) throw ProtocolException(tr("这台电脑已移除，未再发送请求。"));
     if (_scope.cleanupPending) {
-      throw const ProtocolException('原电脑记录尚未清理完成，请重试移除电脑后再连接。');
+      throw ProtocolException(tr("原电脑记录尚未清理完成，请重试移除电脑后再连接。"));
     }
   }
 
@@ -69,7 +69,7 @@ extension RecoveryJournals on MobileOperations {
   Future<void> _requireBindingActive() async {
     _requireJournalActive();
     if (!await _scope.matches(bindingEpoch)) {
-      throw const ProtocolException('电脑绑定已变化，未发送原操作；请重新连接后确认。');
+      throw ProtocolException(tr("电脑绑定已变化，未发送原操作；请重新连接后确认。"));
     }
     _requireJournalActive();
   }
@@ -112,7 +112,7 @@ extension RecoveryJournals on MobileOperations {
         _requireJournalActive();
         if (!_sameRecoveryValue(current, saved) ||
             saved['phase'] == 'closing' && !closing) {
-          throw const ProtocolException('原操作已结束或已更新，请刷新后操作。');
+          throw ProtocolException(tr("原操作已结束或已更新，请刷新后操作。"));
         }
       }
       // Freeze arguments, start the RPC under admission, then release the gate

@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:convert';
 import 'dart:ffi';
 import 'dart:io';
@@ -13,7 +14,7 @@ typedef _FreeDart = void Function(Pointer<Utf8>);
 class EndpointIdentity {
   EndpointIdentity({required this.secretHex, required this.publicHex}) {
     if (!_isKey(secretHex) || !_isKey(publicHex)) {
-      throw const ProtocolException('设备密钥格式无效，不能继续连接。');
+      throw ProtocolException(tr("设备密钥格式无效，不能继续连接。"));
     }
   }
   final String secretHex;
@@ -27,7 +28,7 @@ String hexBytes(List<int> bytes) =>
     bytes.map((n) => n.toRadixString(16).padLeft(2, '0')).join();
 Uint8List fromHex(String input) {
   if (input.length.isOdd || !RegExp(r'^[0-9a-f]*$').hasMatch(input)) {
-    throw const ProtocolException('加密数据格式无效。');
+    throw ProtocolException(tr("加密数据格式无效。"));
   }
   return Uint8List.fromList([
     for (var i = 0; i < input.length; i += 2)
@@ -60,11 +61,11 @@ class NoiseEndpoint {
     try {
       input.asTypedList(bytes.length).setAll(0, bytes);
       output = _call(input, bytes.length);
-      if (output == nullptr) throw const ProtocolException('加密组件暂时不可用。');
+      if (output == nullptr) throw ProtocolException(tr("加密组件暂时不可用。"));
       final response =
           jsonDecode(output.toDartString()) as Map<String, dynamic>;
       if (response['ok'] != true) {
-        throw const ProtocolException('设备身份验证或加密状态校验失败，请重新连接。');
+        throw ProtocolException(tr("设备身份验证或加密状态校验失败，请重新连接。"));
       }
       return response['value'] as Map<String, dynamic>;
     } finally {
@@ -107,7 +108,7 @@ class NoiseSession {
   final NoiseEndpoint _endpoint;
   int? _handle;
   Map<String, dynamic> _invoke(String op, [Uint8List? bytes]) {
-    if (_handle == null) throw const ProtocolException('加密连接已关闭。');
+    if (_handle == null) throw ProtocolException(tr("加密连接已关闭。"));
     try {
       return _endpoint._invoke({
         'op': op,

@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'package:flutter/material.dart';
 import '../../app.dart';
 import '../../core/host_hub.dart';
@@ -16,26 +17,26 @@ List<PopupMenuEntry<String>> sessionMenuItems(
     PopupMenuItem(
       value: 'pin',
       enabled: s.host.online,
-      child: Text(s.pinned ? '取消置顶' : '置顶会话'),
+      child: Text(s.pinned ? tr("取消置顶") : tr("置顶会话")),
     ),
   PopupMenuItem(
     value: 'archive',
     enabled: s.host.online,
     child: Text(
       s.archived
-          ? '取消归档'
+          ? tr("取消归档")
           : s.pinned
-          ? '归档会话（将取消置顶）'
-          : '归档会话',
+          ? tr("归档会话（将取消置顶）")
+          : tr("归档会话"),
     ),
   ),
   PopupMenuItem(
     value: 'history',
     enabled: s.host.online,
-    child: const Text('搜索历史正文'),
+    child: Text(tr("搜索历史正文")),
   ),
   if (notifications)
-    const PopupMenuItem(value: 'notifications', child: Text('通知设置')),
+    PopupMenuItem(value: 'notifications', child: Text(tr("通知设置"))),
 ];
 
 Future<void> sessionAction(
@@ -83,20 +84,23 @@ class SessionMenu extends StatefulWidget {
 class _SessionMenuState extends State<SessionMenu> {
   bool busy = false;
   @override
-  Widget build(BuildContext context) => PopupMenuButton<String>(
-    tooltip: '会话操作',
-    enabled:
-        !busy &&
-        (widget.session.host.online || AppScope.of(context).runtime != null),
-    icon: const Icon(Icons.more_horiz, size: 20),
-    itemBuilder: (_) => sessionMenuItems(
-      widget.session,
-      notifications: AppScope.of(context).runtime != null,
-    ),
-    onSelected: (action) async {
-      setState(() => busy = true);
-      await sessionAction(context, widget.session, action);
-      if (mounted) setState(() => busy = false);
-    },
-  );
+  Widget build(BuildContext context) {
+    watchAppLanguage(context);
+    return PopupMenuButton<String>(
+      tooltip: tr("会话操作"),
+      enabled:
+          !busy &&
+          (widget.session.host.online || AppScope.of(context).runtime != null),
+      icon: const Icon(Icons.more_horiz, size: 20),
+      itemBuilder: (_) => sessionMenuItems(
+        widget.session,
+        notifications: AppScope.of(context).runtime != null,
+      ),
+      onSelected: (action) async {
+        setState(() => busy = true);
+        await sessionAction(context, widget.session, action);
+        if (mounted) setState(() => busy = false);
+      },
+    );
+  }
 }

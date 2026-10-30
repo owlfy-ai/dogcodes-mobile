@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'package:flutter/material.dart';
 import '../../app.dart';
 import '../../core/host_hub.dart';
@@ -28,6 +29,7 @@ class _SessionsPageState extends State<SessionsPage> {
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final hub = AppScope.of(context).hub;
     return ListenableBuilder(
       listenable: Listenable.merge([hub, search, hub.sessionScope]),
@@ -45,6 +47,7 @@ class _SessionsPageState extends State<SessionsPage> {
         }
         final query = search.text.trim().toLowerCase();
         final scope = hub.sessions.where((s) {
+          if (s.hiddenByRemovedProject) return false;
           if (effectiveHost != null && s.host.id != effectiveHost) return false;
           if (projectFilter != null && s.projectId != projectFilter) {
             return false;
@@ -63,10 +66,10 @@ class _SessionsPageState extends State<SessionsPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             RootHeader(
-              title: '会话',
+              title: tr("会话"),
               actions: [
                 IconButton(
-                  tooltip: '搜索历史正文',
+                  tooltip: tr("搜索历史正文"),
                   icon: const Icon(Icons.manage_search),
                   onPressed: scope.isEmpty
                       ? null
@@ -81,7 +84,7 @@ class _SessionsPageState extends State<SessionsPage> {
                 ),
                 IconButton.filled(
                   style: accentIconButton(context),
-                  tooltip: '新会话',
+                  tooltip: tr("新会话"),
                   onPressed: canCreate
                       ? () => Navigator.of(context).push(
                           MaterialPageRoute<void>(
@@ -139,11 +142,11 @@ class _SessionsPageState extends State<SessionsPage> {
     if (hub.loaded && hub.hosts.isEmpty) {
       return EmptyNote(
         icon: Icons.forum_outlined,
-        title: '会话将从电脑同步',
-        body: '连接自己的电脑后，在这里查看和续接各项目的会话。网络中断时，电脑上的任务会继续执行。',
+        title: tr("会话将从电脑同步"),
+        body: tr("连接自己的电脑后，在这里查看和续接各项目的会话。网络中断时，电脑上的任务会继续执行。"),
         action: OutlinedButton(
           onPressed: () => HomeShell.select(context, 3),
-          child: const Text('去连接电脑'),
+          child: Text(tr("去连接电脑")),
         ),
       );
     }
@@ -164,8 +167,8 @@ class _SessionsPageState extends State<SessionsPage> {
         child: TextField(
           controller: search,
           textInputAction: TextInputAction.search,
-          decoration: const InputDecoration(
-            hintText: '搜索会话',
+          decoration: InputDecoration(
+            hintText: tr("搜索会话"),
             prefixIcon: Icon(Icons.search),
           ),
         ),
@@ -179,7 +182,7 @@ class _SessionsPageState extends State<SessionsPage> {
               children: [
                 const Icon(Icons.schedule, size: 20),
                 const SizedBox(width: 10),
-                Expanded(child: Text('$pending 项等待处理')),
+                Expanded(child: Text(tr("{0} 项等待处理", [pending]))),
                 const Icon(Icons.chevron_right),
               ],
             ),
@@ -188,10 +191,10 @@ class _SessionsPageState extends State<SessionsPage> {
       for (final h in offline)
         InlineNotice(
           h.status == LinkStatus.connecting
-              ? '${h.name} 连接中…'
+              ? tr("{0} 连接中…", [h.name])
               : h.syncedAt == null
-              ? '${h.name} 离线'
-              : '${h.name} 离线 · 显示 ${shortTime(h.syncedAt)} 同步的内容',
+              ? tr("{0} 离线", [h.name])
+              : tr("{0} 离线 · 显示 {1} 同步的内容", [h.name, shortTime(h.syncedAt)]),
         ),
     ];
     if (listed.isEmpty) {
@@ -200,12 +203,12 @@ class _SessionsPageState extends State<SessionsPage> {
           padding: const EdgeInsets.all(40),
           child: Text(
             query.isNotEmpty
-                ? '没有匹配的会话'
+                ? tr("没有匹配的会话")
                 : archived.isNotEmpty
-                ? '没有未归档的会话'
+                ? tr("没有未归档的会话")
                 : hub.hosts.any((h) => h.snapshot != null)
-                ? '还没有会话，点右上角 + 开始新任务'
-                : '正在从电脑同步会话…',
+                ? tr("还没有会话，点右上角 + 开始新任务")
+                : tr("正在从电脑同步会话…"),
             textAlign: TextAlign.center,
             style: TextStyle(color: context.dc.secondary),
           ),
@@ -214,7 +217,7 @@ class _SessionsPageState extends State<SessionsPage> {
     } else {
       final pinned = listed.where((s) => s.pinned).toList();
       if (pinned.isNotEmpty) {
-        children.add(const SectionLabel('置顶'));
+        children.add(SectionLabel(tr("置顶")));
         children.addAll(pinned.map((s) => SessionRow(session: s)));
       }
       // Day → computer → project; each level ordered by its newest session.
@@ -297,7 +300,7 @@ class _SessionsPageState extends State<SessionsPage> {
           key: const ValueKey('archived-sessions'),
           contentPadding: const EdgeInsets.symmetric(horizontal: DcSpace.page),
           leading: const Icon(Icons.archive_outlined, size: 20),
-          title: Text('已归档 (${archived.length})'),
+          title: Text(tr("已归档 ({0})", [archived.length])),
           trailing: Icon(showArchived ? Icons.expand_less : Icons.expand_more),
           onTap: () => setState(() => showArchived = !showArchived),
         ),
@@ -323,12 +326,13 @@ class SessionRow extends StatelessWidget {
   final SessionRef session;
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final s = session;
     final status = s.needsAttention
-        ? const StatusLabel('待处理', tone: Tone.warning)
+        ? StatusLabel(tr("待处理"), tone: Tone.warning)
         : s.running
-        ? const StatusLabel('进行中', tone: Tone.accent)
-        : const StatusLabel('空闲');
+        ? StatusLabel(tr("进行中"), tone: Tone.accent)
+        : StatusLabel(tr("空闲"));
     return InkWell(
       onTap: () => Navigator.of(context).push(
         MaterialPageRoute<void>(
@@ -375,7 +379,7 @@ class SessionRow extends StatelessWidget {
                 const SizedBox(height: 4),
                 status,
                 if (s.archived)
-                  Text('已归档', style: Theme.of(context).textTheme.bodySmall),
+                  Text(tr("已归档"), style: Theme.of(context).textTheme.bodySmall),
               ],
             ),
             SessionMenu(session: s),

@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'package:flutter/material.dart';
 import 'theme.dart';
 
@@ -7,21 +8,29 @@ class RootHeader extends StatelessWidget {
   final String title;
   final List<Widget> actions;
   @override
-  Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.fromLTRB(DcSpace.page, 12, 14, 8),
-    child: Row(
-      children: [
-        Expanded(
-          child: Text(
-            title,
-            style: Theme.of(context).textTheme.headlineSmall,
-            semanticsLabel: title,
-          ),
+  Widget build(BuildContext context) {
+    watchAppLanguage(context);
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(DcSpace.page, 12, 14, 8),
+      // As tall as an icon button whether or not this tab has actions, so the
+      // title and content below it sit in the same place on every tab.
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(minHeight: 48),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                title,
+                style: Theme.of(context).textTheme.headlineSmall,
+                semanticsLabel: title,
+              ),
+            ),
+            ...actions,
+          ],
         ),
-        ...actions,
-      ],
-    ),
-  );
+      ),
+    );
+  }
 }
 
 /// Pushed detail pages use a back button with a title and optional subtitle.
@@ -38,30 +47,33 @@ class DetailBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(60);
   @override
-  Widget build(BuildContext context) => AppBar(
-    toolbarHeight: 60,
-    leading: Navigator.of(context).canPop()
-        ? IconButton(
-            icon: const Icon(Icons.arrow_back_ios_new, size: 20),
-            tooltip: '返回',
-            onPressed: () => Navigator.of(context).maybePop(),
-          )
-        : null,
-    title: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(title, overflow: TextOverflow.ellipsis),
-        if (subtitle != null)
-          Text(
-            subtitle!,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
-      ],
-    ),
-    actions: [...actions, const SizedBox(width: 4)],
-  );
+  Widget build(BuildContext context) {
+    watchAppLanguage(context);
+    return AppBar(
+      toolbarHeight: 60,
+      leading: Navigator.of(context).canPop()
+          ? IconButton(
+              icon: const Icon(Icons.arrow_back_ios_new, size: 20),
+              tooltip: tr("返回"),
+              onPressed: () => Navigator.of(context).maybePop(),
+            )
+          : null,
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(title, overflow: TextOverflow.ellipsis),
+          if (subtitle != null)
+            Text(
+              subtitle!,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+        ],
+      ),
+      actions: [...actions, const SizedBox(width: 4)],
+    );
+  }
 }
 
 enum Tone { accent, warning, muted, danger }
@@ -73,6 +85,7 @@ class StatusLabel extends StatelessWidget {
   final Tone tone;
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final c = context.dc;
     final color = switch (tone) {
       Tone.accent => c.accent,
@@ -110,6 +123,7 @@ class Panel extends StatelessWidget {
   final bool outlined;
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final c = context.dc;
     final radius = BorderRadius.circular(DcSpace.control);
     return Material(
@@ -136,17 +150,20 @@ class SectionLabel extends StatelessWidget {
   final Widget? trailing;
   final double top;
   @override
-  Widget build(BuildContext context) => Padding(
-    padding: EdgeInsets.fromLTRB(DcSpace.page, top, DcSpace.page, 8),
-    child: Row(
-      children: [
-        Expanded(
-          child: Text(text, style: Theme.of(context).textTheme.titleMedium),
-        ),
-        ?trailing,
-      ],
-    ),
-  );
+  Widget build(BuildContext context) {
+    watchAppLanguage(context);
+    return Padding(
+      padding: EdgeInsets.fromLTRB(DcSpace.page, top, DcSpace.page, 8),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(text, style: Theme.of(context).textTheme.titleMedium),
+          ),
+          ?trailing,
+        ],
+      ),
+    );
+  }
 }
 
 /// Agent logo as the desktop draws it (styles.css `.agent-icon`): a rounded
@@ -193,6 +210,7 @@ class AgentGlyph extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final dark = Theme.of(context).brightness == Brightness.dark;
     var id = (providerId ?? '').toLowerCase();
     if (id == 'claude') id = 'claude-code';
@@ -255,6 +273,7 @@ class Tag extends StatelessWidget {
   final Tone tone;
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final c = context.dc;
     final color = tone == Tone.warning ? c.warning : c.secondary;
     return Container(
@@ -274,27 +293,30 @@ class CodeBlock extends StatelessWidget {
   final String text;
   final int? maxLines;
   @override
-  Widget build(BuildContext context) => Container(
-    width: double.infinity,
-    decoration: BoxDecoration(
-      color: context.dc.code,
-      borderRadius: BorderRadius.circular(8),
-    ),
-    child: SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      padding: const EdgeInsets.all(12),
-      child: SelectableText(
-        text,
-        maxLines: maxLines,
-        style: const TextStyle(
-          fontFamily: monoFamily,
-          fontFamilyFallback: monoFallback,
-          fontSize: 13,
-          height: 1.5,
+  Widget build(BuildContext context) {
+    watchAppLanguage(context);
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: context.dc.code,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.all(12),
+        child: SelectableText(
+          text,
+          maxLines: maxLines,
+          style: const TextStyle(
+            fontFamily: monoFamily,
+            fontFamilyFallback: monoFallback,
+            fontSize: 13,
+            height: 1.5,
+          ),
         ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 class EmptyNote extends StatelessWidget {
@@ -312,45 +334,48 @@ class EmptyNote extends StatelessWidget {
   final Widget? action;
   final String? footnote;
   @override
-  Widget build(BuildContext context) => Center(
-    child: SingleChildScrollView(
-      padding: const EdgeInsets.all(32),
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 420),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(icon, size: 40, color: context.dc.secondary),
-            const SizedBox(height: 20),
-            Text(
-              title,
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              body,
-              textAlign: TextAlign.center,
-              style: Theme.of(
-                context,
-              ).textTheme.bodyMedium?.copyWith(color: context.dc.secondary),
-            ),
-            if (action != null)
-              Padding(padding: const EdgeInsets.only(top: 24), child: action),
-            if (footnote != null)
-              Padding(
-                padding: const EdgeInsets.only(top: 16),
-                child: Text(
-                  footnote!,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
+  Widget build(BuildContext context) {
+    watchAppLanguage(context);
+    return Center(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(32),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 420),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(icon, size: 40, color: context.dc.secondary),
+              const SizedBox(height: 20),
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.titleLarge,
               ),
-          ],
+              const SizedBox(height: 8),
+              Text(
+                body,
+                textAlign: TextAlign.center,
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium?.copyWith(color: context.dc.secondary),
+              ),
+              if (action != null)
+                Padding(padding: const EdgeInsets.only(top: 24), child: action),
+              if (footnote != null)
+                Padding(
+                  padding: const EdgeInsets.only(top: 16),
+                  child: Text(
+                    footnote!,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 /// One-line inline error or notice under a header.
@@ -359,16 +384,22 @@ class InlineNotice extends StatelessWidget {
   final String text;
   final bool danger;
   @override
-  Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: DcSpace.page, vertical: 6),
-    child: Text(
-      text,
-      style: TextStyle(
-        fontSize: 13,
-        color: danger ? context.dc.removed : context.dc.secondary,
+  Widget build(BuildContext context) {
+    watchAppLanguage(context);
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: DcSpace.page,
+        vertical: 6,
       ),
-    ),
-  );
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 13,
+          color: danger ? context.dc.removed : context.dc.secondary,
+        ),
+      ),
+    );
+  }
 }
 
 String shortTime(DateTime? value, {DateTime? now}) {
@@ -380,13 +411,13 @@ String shortTime(DateTime? value, {DateTime? now}) {
   final day = DateTime(local.year, local.month, local.day);
   final diff = DateTime(today.year, today.month, today.day).difference(day);
   if (diff.inDays == 0) return hm;
-  if (diff.inDays == 1) return '昨天 $hm';
-  if (local.year == today.year) return '${local.month}月${local.day}日';
+  if (diff.inDays == 1) return tr("昨天 {0}", [hm]);
+  if (local.year == today.year) return tr("{0}月{1}日", [local.month, local.day]);
   return '${local.year}/${local.month}/${local.day}';
 }
 
 String dayGroup(DateTime? value, {DateTime? now}) {
-  if (value == null) return '更早';
+  if (value == null) return tr("更早");
   final local = value.toLocal();
   final today = now ?? DateTime.now();
   final diff = DateTime(
@@ -394,8 +425,8 @@ String dayGroup(DateTime? value, {DateTime? now}) {
     today.month,
     today.day,
   ).difference(DateTime(local.year, local.month, local.day)).inDays;
-  if (diff <= 0) return '今天';
-  if (diff == 1) return '昨天';
-  if (diff < 7) return '近 7 天';
-  return '更早';
+  if (diff <= 0) return tr("今天");
+  if (diff == 1) return tr("昨天");
+  if (diff < 7) return tr("近 7 天");
+  return tr("更早");
 }

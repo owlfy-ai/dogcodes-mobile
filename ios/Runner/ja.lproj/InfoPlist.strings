@@ -1,0 +1,3 @@
+"NSCameraUsageDescription" = "パソコンのペアリング用 QR コードを読み取るか、写真を撮ってタスクに添付します。";
+"NSLocalNetworkUsageDescription" = "ペアリング済みのパソコンと暗号化された直接接続を行い、会話の確認やリモート操作をします。";
+"NSPhotoLibraryUsageDescription" = "写真を選んでタスクの添付ファイルとして自分のパソコンに送ります。";

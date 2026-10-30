@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
@@ -26,17 +27,20 @@ class TimelineView extends StatelessWidget {
   final GlobalKey? focusKey;
   final SessionRef? session;
   @override
-  Widget build(BuildContext context) => Column(
-    crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: timelineEntries(
-      context,
-      items: items,
-      activeTurnId: activeTurnId,
-      focusTurnId: focusTurnId,
-      focusKey: focusKey,
-      session: session,
-    ).widgets,
-  );
+  Widget build(BuildContext context) {
+    watchAppLanguage(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: timelineEntries(
+        context,
+        items: items,
+        activeTurnId: activeTurnId,
+        focusTurnId: focusTurnId,
+        focusKey: focusKey,
+        session: session,
+      ).widgets,
+    );
+  }
 }
 
 /// One widget per timeline entry, keyed by the entry's identity so expanded
@@ -110,37 +114,42 @@ class EntryView extends StatelessWidget {
   final String? activeTurnId;
   final SessionRef? session;
   @override
-  Widget build(BuildContext context) => switch (entry) {
-    TurnActionsEntry e => TurnActions(entry: e, session: session),
-    ItemEntry e => _ItemView(entry: e, activeTurnId: activeTurnId),
-    LookupEntry e => _Expandable(
-      icon: Icons.manage_search,
-      label: '查阅',
-      title: e.summary,
-      child: Column(
-        children: [
-          for (final i in e.items)
-            _ItemView(entry: ItemEntry(i), activeTurnId: activeTurnId),
-        ],
+  Widget build(BuildContext context) {
+    watchAppLanguage(context);
+    return switch (entry) {
+      TurnActionsEntry e => TurnActions(entry: e, session: session),
+      ItemEntry e => _ItemView(entry: e, activeTurnId: activeTurnId),
+      LookupEntry e => _Expandable(
+        icon: Icons.manage_search,
+        label: tr("查阅"),
+        title: e.summary,
+        child: Column(
+          children: [
+            for (final i in e.items)
+              _ItemView(entry: ItemEntry(i), activeTurnId: activeTurnId),
+          ],
+        ),
       ),
-    ),
-    ProcessEntry e => _Expandable(
-      icon: Icons.checklist,
-      label: '过程',
-      title: [
-        '${e.steps} 个步骤',
-        if (e.startedAt != null && e.completedAt != null)
-          '用时 ${durationLabel(e.completedAt!.difference(e.startedAt!))}',
-      ].join(' · '),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          for (final c in e.entries)
-            EntryView(entry: c, activeTurnId: activeTurnId),
-        ],
+      ProcessEntry e => _Expandable(
+        icon: Icons.checklist,
+        label: tr("过程"),
+        title: [
+          tr("{0} 个步骤", [e.steps]),
+          if (e.startedAt != null && e.completedAt != null)
+            tr("用时 {0}", [
+              durationLabel(e.completedAt!.difference(e.startedAt!)),
+            ]),
+        ].join(' · '),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            for (final c in e.entries)
+              EntryView(entry: c, activeTurnId: activeTurnId),
+          ],
+        ),
       ),
-    ),
-  };
+    };
+  }
 }
 
 /// The PC shortened this item to keep the page under the transfer limit.
@@ -156,6 +165,7 @@ class _FullItemButtonState extends State<_FullItemButton> {
   String? error;
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final load = TurnScope.of(context)?.loadFullItem;
     final id = widget.item['itemId'];
     final bytes = widget.item['fullBytes'];
@@ -170,7 +180,7 @@ class _FullItemButtonState extends State<_FullItemButton> {
                   child: CircularProgressIndicator(strokeWidth: 2),
                 )
               : const Icon(Icons.unfold_more, size: 18),
-          label: Text('内容较长已截断，显示完整内容$size'),
+          label: Text(tr("内容较长已截断，显示完整内容{0}", [size])),
           onPressed: busy || load == null || id is! String
               ? null
               : () async {
@@ -200,6 +210,7 @@ class _ItemView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final item = entry.item;
     final active = activeTurnId != null && item['turnId'] == activeTurnId;
     final content = _body(context, item, active);
@@ -263,7 +274,7 @@ class _ItemView extends StatelessWidget {
       case 'tool.started' || 'tool.completed' || 'tool.failed' || 'tool':
         return _Expandable(
           icon: Icons.build_outlined,
-          label: '工具',
+          label: tr("工具"),
           title: text.split('\n').first,
           child: text.contains('\n') ? CodeBlock(text) : null,
         );
@@ -283,7 +294,7 @@ class _ItemView extends StatelessWidget {
             final data = jsonDecode(text);
             return _Expandable(
               icon: Icons.info_outline,
-              label: '记录',
+              label: tr("记录"),
               title: '${item['kind']}',
               child: CodeBlock(printable(data)),
             );
@@ -300,6 +311,7 @@ class AgentMarkdown extends StatelessWidget {
   final String text;
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final theme = Theme.of(context);
     final c = context.dc;
     final base = theme.textTheme.bodyLarge!;
@@ -350,6 +362,7 @@ class _UserBubble extends StatelessWidget {
   final Object? attachments;
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final count = attachments is List ? (attachments as List).length : 0;
     return Padding(
       padding: const EdgeInsets.only(top: 14, bottom: 4),
@@ -373,7 +386,7 @@ class _UserBubble extends StatelessWidget {
             padding: const EdgeInsets.only(top: 4),
             child: Text(
               [
-                if (count > 0) '$count 个附件',
+                if (count > 0) tr("{0} 个附件", [count]),
                 ?time.isEmpty ? null : time,
               ].join(' · '),
               style: Theme.of(context).textTheme.bodySmall,
@@ -395,13 +408,13 @@ class _UserBubble extends StatelessWidget {
 }
 
 IconData _categoryIcon(String category) => switch (category) {
-  '修改' => Icons.edit_outlined,
-  '读取' => Icons.description_outlined,
-  '搜索' => Icons.search,
-  '网页搜索' => Icons.travel_explore,
-  '获取网页' => Icons.language,
-  '终端' => Icons.terminal,
-  '子智能体' => Icons.account_tree_outlined,
+  '修改' || 'Edit' => Icons.edit_outlined,
+  '读取' || 'Read' => Icons.description_outlined,
+  '搜索' || 'Search' => Icons.search,
+  '网页搜索' || 'Web search' => Icons.travel_explore,
+  '获取网页' || 'Fetch webpage' => Icons.language,
+  '终端' || 'Terminal' => Icons.terminal,
+  '子智能体' || 'Subagent' => Icons.account_tree_outlined,
   _ => Icons.build_outlined,
 };
 
@@ -417,6 +430,7 @@ class _ActivityView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final running = isRunning(a, active);
     if (a.type == 'message') return AgentMarkdown(a.text ?? '');
     if (a.type == 'thought') {
@@ -426,16 +440,20 @@ class _ActivityView extends StatelessWidget {
           ? DateTime.now().difference(a.startedAt!).inSeconds
           : null;
       final label = running
-          ? '思考中'
+          ? tr("思考中")
           : a.status == 'interrupted'
-          ? '思考已中断'
-          : '思考';
+          ? tr("思考已中断")
+          : tr("思考");
       return _Line(
         icon: Icons.psychology_outlined,
         running: running,
         text: seconds == null
-            ? '$label · 时间未记录'
-            : '$label · ${running ? '约' : '持续了约'} $seconds 秒',
+            ? tr("{0} · 时间未记录", [label])
+            : tr("{0} · {1} {2} 秒", [
+                label,
+                running ? tr("约") : tr("持续了约"),
+                seconds,
+              ]),
       );
     }
     final category = categoryOf(a);
@@ -449,7 +467,7 @@ class _ActivityView extends StatelessWidget {
             ((a.input is Map ? (a.input as Map)['description'] : null)
                 as String?) ??
             a.name ??
-            '委派任务',
+            tr("委派任务"),
         status: status,
         running: running,
         // Only its result: the subagent's own steps stay on the PC.
@@ -459,17 +477,18 @@ class _ActivityView extends StatelessWidget {
             if (subagentResult(a) case final result?)
               AgentMarkdown(result)
             else
-              const _Muted('暂无子任务结论'),
+              _Muted(tr("暂无子任务结论")),
             _Muted(
               children.isEmpty
-                  ? '执行过程请在电脑上查看'
-                  : '共 ${children.length} 步，执行过程请在电脑上查看',
+                  ? tr("执行过程请在电脑上查看")
+                  : tr("共 {0} 步，执行过程请在电脑上查看", [children.length]),
             ),
           ],
         ),
       );
     }
-    if (category == '修改' && (a.changes.isNotEmpty || inputPath(a).isNotEmpty)) {
+    if (category == tr("修改") &&
+        (a.changes.isNotEmpty || inputPath(a).isNotEmpty)) {
       final files = a.changes.isNotEmpty
           ? [for (final c in a.changes) '${c['path'] ?? ''}']
           : [inputPath(a)];
@@ -478,7 +497,7 @@ class _ActivityView extends StatelessWidget {
           for (final f in files)
             _Expandable(
               icon: Icons.edit_outlined,
-              label: '修改',
+              label: tr("修改"),
               title: f.split('/').last,
               status: status,
               running: running,
@@ -486,7 +505,7 @@ class _ActivityView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(f, style: Theme.of(context).textTheme.bodySmall),
-                  const _Muted('改动内容见本轮文件变更，或在电脑上查看'),
+                  _Muted(tr("改动内容见本轮文件变更，或在电脑上查看")),
                 ],
               ),
             ),
@@ -495,7 +514,7 @@ class _ActivityView extends StatelessWidget {
     }
     // What was run and, for a failed step, why it stopped; outputs stay on
     // the PC (it no longer sends them to the phone).
-    final command = category == '终端' ? terminalCommand(a.input) : '';
+    final command = category == tr("终端") ? terminalCommand(a.input) : '';
     final failure = failurePreview(a);
     final detail = Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -505,7 +524,7 @@ class _ActivityView extends StatelessWidget {
         else if (a.input != null)
           CodeBlock(_clip(printable(a.input))),
         if (failure != null) ...[const SizedBox(height: 6), CodeBlock(failure)],
-        const _Muted('完整输出请在电脑上查看'),
+        _Muted(tr("完整输出请在电脑上查看")),
       ],
     );
     return _Expandable(
@@ -519,7 +538,7 @@ class _ActivityView extends StatelessWidget {
   }
 
   static String _clip(String s) =>
-      s.length > 4000 ? '${s.substring(0, 4000)}\n… 内容过长，已截断' : s;
+      s.length > 4000 ? tr("{0}\n… 内容过长，已截断", [s.substring(0, 4000)]) : s;
 }
 
 /// Compact row that expands to show detail.
@@ -544,6 +563,7 @@ class _ExpandableState extends State<_Expandable> {
   bool open = false;
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final c = context.dc;
     final small = Theme.of(context).textTheme.bodySmall;
     return Padding(
@@ -613,24 +633,27 @@ class _Line extends StatelessWidget {
   final String text;
   final bool running;
   @override
-  Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.symmetric(vertical: 6),
-    child: Row(
-      children: [
-        if (running)
-          const SizedBox.square(
-            dimension: 14,
-            child: CircularProgressIndicator(strokeWidth: 1.5),
-          )
-        else
-          Icon(icon, size: 16, color: context.dc.secondary),
-        const SizedBox(width: 8),
-        Expanded(
-          child: Text(text, style: Theme.of(context).textTheme.bodySmall),
-        ),
-      ],
-    ),
-  );
+  Widget build(BuildContext context) {
+    watchAppLanguage(context);
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: Row(
+        children: [
+          if (running)
+            const SizedBox.square(
+              dimension: 14,
+              child: CircularProgressIndicator(strokeWidth: 1.5),
+            )
+          else
+            Icon(icon, size: 16, color: context.dc.secondary),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(text, style: Theme.of(context).textTheme.bodySmall),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 Map<String, dynamic>? _json(String text) {
@@ -651,6 +674,7 @@ class _Notice extends StatelessWidget {
   final bool danger;
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final color = danger ? context.dc.removed : context.dc.secondary;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
@@ -672,10 +696,13 @@ class _Muted extends StatelessWidget {
   const _Muted(this.text);
   final String text;
   @override
-  Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.symmetric(vertical: 4),
-    child: Text(text, style: Theme.of(context).textTheme.bodySmall),
-  );
+  Widget build(BuildContext context) {
+    watchAppLanguage(context);
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Text(text, style: Theme.of(context).textTheme.bodySmall),
+    );
+  }
 }
 
 class _ForkContext extends StatelessWidget {
@@ -683,6 +710,7 @@ class _ForkContext extends StatelessWidget {
   final String text;
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     List<Map>? messages;
     try {
       final data = jsonDecode(text) as Map;
@@ -694,15 +722,15 @@ class _ForkContext extends StatelessWidget {
     } catch (_) {}
     return _Expandable(
       icon: Icons.call_split,
-      label: '分叉',
-      title: '从历史轮次分叉 · 继承的上下文',
+      label: tr("分叉"),
+      title: tr("从历史轮次分叉 · 继承的上下文"),
       child: messages == null
-          ? const _Muted('分叉上下文暂不可显示')
+          ? _Muted(tr("分叉上下文暂不可显示"))
           : Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 for (final m in messages) ...[
-                  _Muted(m['kind'] == 'turn.queued' ? '你' : 'Agent'),
+                  _Muted(m['kind'] == 'turn.queued' ? tr("你") : 'Agent'),
                   AgentMarkdown('${m['text'] ?? ''}'),
                 ],
               ],
@@ -717,6 +745,7 @@ class DiffBlock extends StatelessWidget {
   final String diff;
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final c = context.dc;
     final lines = diff.split('\n').take(400).toList();
     return Container(
@@ -750,9 +779,9 @@ class DiffBlock extends StatelessWidget {
                 ),
               ),
             if (diff.split('\n').length > 400)
-              const Padding(
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 12),
-                child: Text('… 差异过长，已截断'),
+                child: Text(tr("… 差异过长，已截断")),
               ),
           ],
         ),

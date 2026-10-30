@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -33,11 +34,11 @@ class PreviewProxy {
   };
 
   Future<void> start() async {
-    if (_stopped) throw StateError('预览已关闭');
+    if (_stopped) throw StateError(tr("预览已关闭"));
     final server = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
     if (_stopped) {
       await server.close(force: true);
-      throw StateError('预览已关闭');
+      throw StateError(tr("预览已关闭"));
     }
     _server = server;
     server.listen(_handle, onError: (Object _) {});
@@ -86,8 +87,10 @@ class PreviewProxy {
         response.statusCode = HttpStatus.badGateway;
         response.headers.contentType = ContentType.html;
         response.write(
-          '<meta name="viewport" content="width=device-width">'
-          '<p style="font-family:sans-serif;padding:16px">预览请求失败：${const HtmlEscape().convert('$e')}</p>',
+          tr(
+            "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">预览请求失败：{0}</p>",
+            [const HtmlEscape().convert('$e')],
+          ),
         );
       } catch (_) {
         // The WebView or page may already have closed this response.
@@ -129,7 +132,7 @@ class PreviewProxy {
     }
 
     try {
-      if (_stopped) throw StateError('预览已关闭');
+      if (_stopped) throw StateError(tr("预览已关闭"));
       final opened = Map<String, dynamic>.from(
         await link.call('preview_ws_open', {
               'previewId': previewId,
@@ -139,7 +142,7 @@ class PreviewProxy {
             as Map,
       );
       id = opened['socketId'] as String;
-      if (_stopped) throw StateError('预览已关闭');
+      if (_stopped) throw StateError(tr("预览已关闭"));
       final protocol = opened['protocol'] as String?;
       final socket = await WebSocketTransformer.upgrade(
         request,
@@ -164,7 +167,7 @@ class PreviewProxy {
                 'bytes': data is List<int> ? base64.encode(data) : null,
               });
               if (reply is! Map || reply['sequence'] != '$sequence') {
-                throw StateError('项目 WebSocket 写入未获确认');
+                throw StateError(tr("项目 WebSocket 写入未获确认"));
               }
             } catch (_) {
               await retire();

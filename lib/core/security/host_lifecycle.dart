@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
@@ -80,7 +81,7 @@ class HostLifecycle {
       }
       return value;
     } catch (_) {
-      throw const ProtocolException('电脑绑定状态无法读取，请先检查系统安全存储。');
+      throw ProtocolException(tr("电脑绑定状态无法读取，请先检查系统安全存储。"));
     }
   }
 
@@ -90,7 +91,7 @@ class HostLifecycle {
     final confirmed = await storage.read(key);
     hasRecord = confirmed != null && confirmed != 'null';
     if (confirmed != raw) {
-      throw const ProtocolException('电脑绑定状态未能安全保存，请核实原操作。');
+      throw ProtocolException(tr("电脑绑定状态未能安全保存，请核实原操作。"));
     }
   }
 

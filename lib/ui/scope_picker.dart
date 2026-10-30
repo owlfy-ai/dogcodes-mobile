@@ -1,14 +1,16 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'package:flutter/material.dart';
 import '../core/host_hub.dart';
 import 'theme.dart';
 import 'widgets.dart';
+import '../features/projects/project_sheet.dart';
 
 /// Computer first, then a project on that computer. Projects are never merged
 /// across computers: each is a directory registered on one PC.
 ///
-/// With [allowAll] (筛选) both levels offer 「全部」 and the project level is
-/// only available once a computer is chosen. Without it (执行对象) both levels
-/// must be chosen.
+/// With [allowAll] (会话 filter) both levels offer 「全部」, and the project
+/// sheet also offers 不在项目中工作. Without it (项目 tab) a real project must
+/// be chosen. The project level opens a bottom sheet once a computer is set.
 class ScopePicker extends StatelessWidget {
   const ScopePicker({
     super.key,
@@ -36,6 +38,7 @@ class ScopePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final host = _host;
     final single = hosts.length == 1;
     final projects = host?.projects ?? const <Map<String, dynamic>>[];
@@ -53,13 +56,13 @@ class ScopePicker extends StatelessWidget {
                   trailing: _status(hosts.first),
                 )
               : PopupMenuButton<String>(
-                  tooltip: '选择电脑',
+                  tooltip: tr("选择电脑"),
                   onSelected: (id) => onChanged(id == _all ? null : id, null),
                   itemBuilder: (_) => [
                     if (allowAll)
-                      const PopupMenuItem<String>(
+                      PopupMenuItem<String>(
                         value: _all,
-                        child: Text('全部电脑'),
+                        child: Text(tr("全部电脑")),
                       ),
                     for (final h in hosts)
                       PopupMenuItem<String>(
@@ -80,7 +83,7 @@ class ScopePicker extends StatelessWidget {
                   ],
                   child: _Field(
                     icon: Icons.computer_outlined,
-                    label: host?.name ?? '全部电脑',
+                    label: host?.name ?? tr("全部电脑"),
                     trailing: host == null ? null : _status(host),
                     menu: true,
                   ),
@@ -90,34 +93,32 @@ class ScopePicker extends StatelessWidget {
         Flexible(
           // Unsynced (offline before first load) reads like 「全部」, not empty.
           child: host == null || (host.snapshot == null && allowAll)
-              ? _Field(icon: Icons.folder_outlined, label: '全部项目', muted: true)
-              : PopupMenuButton<String>(
-                  tooltip: '选择项目',
-                  enabled: projects.isNotEmpty,
-                  onSelected: (id) =>
-                      onChanged(host.id, id == _all ? null : id),
-                  itemBuilder: (_) => [
-                    if (allowAll)
-                      const PopupMenuItem<String>(
-                        value: _all,
-                        child: Text('全部项目'),
-                      ),
-                    for (final p in projects)
-                      PopupMenuItem<String>(
-                        value: p['projectId'] as String,
-                        child: Text(projectLabel(p) ?? '项目'),
-                      ),
-                  ],
-                  child: _Field(
-                    icon: Icons.folder_outlined,
-                    label: project != null
-                        ? projectLabel(project)!
-                        : projects.isEmpty
-                        ? '没有项目'
-                        : '全部项目',
-                    menu: projects.isNotEmpty,
-                    strong: project != null,
-                  ),
+              ? _Field(
+                  icon: Icons.folder_outlined,
+                  label: tr("全部项目"),
+                  muted: true,
+                )
+              : _Field(
+                  icon: project != null && isScratchProject(project)
+                      ? Icons.chat_bubble_outline
+                      : Icons.folder_outlined,
+                  label: project != null
+                      ? projectLabel(project)!
+                      : allowAll
+                      ? tr("全部项目")
+                      : tr("没有项目"),
+                  menu: true,
+                  strong: project != null,
+                  tooltip: tr("选择项目"),
+                  onTap: () async {
+                    final pick = await showProjectSheet(
+                      context,
+                      hostId: host.id,
+                      selected: projectId,
+                      filter: allowAll,
+                    );
+                    if (pick != null) onChanged(host.id, pick.projectId);
+                  },
                 ),
         ),
       ],
@@ -125,9 +126,9 @@ class ScopePicker extends StatelessWidget {
   }
 
   static Widget _status(HostState h) => StatusLabel(switch (h.status) {
-    LinkStatus.online => '在线',
-    LinkStatus.connecting => '连接中',
-    LinkStatus.offline => '离线',
+    LinkStatus.online => tr("在线"),
+    LinkStatus.connecting => tr("连接中"),
+    LinkStatus.offline => tr("离线"),
   }, tone: h.online ? Tone.accent : Tone.muted);
 }
 
@@ -139,15 +140,21 @@ class _Field extends StatelessWidget {
     this.menu = false,
     this.muted = false,
     this.strong = false,
+    this.onTap,
+    this.tooltip,
   });
   final IconData icon;
   final String label;
   final Widget? trailing;
   final bool menu, muted, strong;
+  final VoidCallback? onTap;
+  final String? tooltip;
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final c = context.dc;
-    return Panel(
+    final field = Panel(
+      onTap: onTap,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -170,5 +177,6 @@ class _Field extends StatelessWidget {
         ],
       ),
     );
+    return tooltip == null ? field : Tooltip(message: tooltip!, child: field);
   }
 }

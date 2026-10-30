@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'package:flutter/material.dart';
 import '../../core/host_api.dart';
 import '../../app.dart';
@@ -27,7 +28,7 @@ class AgentChoice {
     return null;
   }
 
-  String get modelName => _model?['label'] as String? ?? '默认模型';
+  String get modelName => _model?['label'] as String? ?? tr("默认模型");
   List<Map<String, dynamic>> get thinkingOptions => [
     for (final t in (_model?['thinkingOptions'] as List? ?? const []))
       Map<String, dynamic>.from(t as Map),
@@ -43,7 +44,7 @@ class AgentChoice {
 
   /// Chosen level, or the model's default when the user kept it.
   String get thinkingName =>
-      labelOf(thinking) ?? labelOf(defaultThinking) ?? '默认';
+      labelOf(thinking) ?? labelOf(defaultThinking) ?? tr("默认");
 
   AgentChoice withModel(String? id) =>
       AgentChoice(executor, catalog: catalog, model: id);
@@ -187,6 +188,7 @@ class _AgentSheetState extends State<_AgentSheet> {
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final c = context.dc;
     final selected = choice;
     final thinking = selected?.thinkingOptions ?? const [];
@@ -196,11 +198,11 @@ class _AgentSheetState extends State<_AgentSheet> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text('选择 Agent', style: Theme.of(context).textTheme.titleLarge),
+          Text(tr("选择 Agent"), style: Theme.of(context).textTheme.titleLarge),
           const SizedBox(height: 12),
           if (widget.host.executors.isEmpty && !loading && error == null)
             Text(
-              '这台电脑上没有已就绪并启用的 Agent。安装或登录需在电脑上完成。',
+              tr("这台电脑上没有已就绪并启用的 Agent。安装或登录需在电脑上完成。"),
               style: Theme.of(context).textTheme.bodySmall,
             ),
           Flexible(
@@ -225,7 +227,7 @@ class _AgentSheetState extends State<_AgentSheet> {
             height: DcSpace.touch + 8,
             child: Row(
               children: [
-                const Text('模型'),
+                Text(tr("模型")),
                 const Spacer(),
                 if (loading)
                   const SizedBox.square(
@@ -235,7 +237,7 @@ class _AgentSheetState extends State<_AgentSheet> {
                 else
                   PopupMenuButton<String>(
                     enabled: (selected?.models.isNotEmpty ?? false),
-                    tooltip: '选择模型',
+                    tooltip: tr("选择模型"),
                     onSelected: (v) =>
                         setState(() => choice = selected!.withModel(v)),
                     itemBuilder: (_) => [
@@ -250,7 +252,7 @@ class _AgentSheetState extends State<_AgentSheet> {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text(selected?.modelName ?? '默认模型'),
+                          Text(selected?.modelName ?? tr("默认模型")),
                           const Icon(Icons.expand_more, size: 18),
                         ],
                       ),
@@ -271,7 +273,7 @@ class _AgentSheetState extends State<_AgentSheet> {
             onPressed: selected == null || loading
                 ? null
                 : () => Navigator.of(context).pop(selected),
-            child: const Text('完成'),
+            child: Text(tr("完成")),
           ),
         ],
       ),
@@ -292,6 +294,7 @@ class _AgentRow extends StatelessWidget {
   final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final c = context.dc;
     final label = executor['label'] ?? executor['displayName'];
     return Padding(
@@ -323,7 +326,7 @@ class _AgentRow extends StatelessWidget {
             Icon(
               selected ? Icons.check_circle : Icons.radio_button_unchecked,
               color: selected ? c.accent : c.line,
-              semanticLabel: selected ? '已选择' : '未选择',
+              semanticLabel: selected ? tr("已选择") : tr("未选择"),
             ),
           ],
         ),
@@ -347,19 +350,20 @@ class AgentChips extends StatelessWidget {
   final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final c = choice;
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
         children: [
           _Chip(
-            c?.agentName ?? (loading ? '加载 Agent…' : '选择 Agent'),
+            c?.agentName ?? (loading ? tr("加载 Agent…") : tr("选择 Agent")),
             onTap,
             quota: quota,
           ),
           if (c != null) _Chip(c.modelName, onTap),
           if (c != null && c.thinkingOptions.isNotEmpty)
-            _Chip('思考 ${c.thinkingName}', onTap),
+            _Chip(tr("思考 {0}", [c.thinkingName]), onTap),
         ],
       ),
     );
@@ -372,33 +376,36 @@ class _Chip extends StatelessWidget {
   final QuotaReading? quota;
   final VoidCallback? onTap;
   @override
-  Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(right: 8),
-    child: InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(8),
-      child: Container(
-        constraints: const BoxConstraints(minHeight: 36),
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        decoration: BoxDecoration(
-          color: context.dc.surface,
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(label, style: const TextStyle(fontSize: 13)),
-            if (quota != null) ...[
-              const SizedBox(width: 8),
-              QuotaRing(reading: quota!),
+  Widget build(BuildContext context) {
+    watchAppLanguage(context);
+    return Padding(
+      padding: const EdgeInsets.only(right: 8),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(8),
+        child: Container(
+          constraints: const BoxConstraints(minHeight: 36),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          decoration: BoxDecoration(
+            color: context.dc.surface,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(label, style: const TextStyle(fontSize: 13)),
+              if (quota != null) ...[
+                const SizedBox(width: 8),
+                QuotaRing(reading: quota!),
+              ],
+              const SizedBox(width: 2),
+              const Icon(Icons.expand_more, size: 16),
             ],
-            const SizedBox(width: 2),
-            const Icon(Icons.expand_more, size: 16),
-          ],
+          ),
         ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 /// Intensity order shared by vendors; ids outside it (e.g. auto, default) are
@@ -428,6 +435,7 @@ class ThinkingSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final c = context.dc;
     final options = choice.thinkingOptions;
     final levels =
@@ -454,18 +462,18 @@ class ThinkingSlider extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Text('思考强度'),
+              Text(tr("思考强度")),
               const Spacer(),
               Text(
                 usingDefault
-                    ? '默认 · ${choice.thinkingName}'
+                    ? tr("默认 · {0}", [choice.thinkingName])
                     : choice.thinkingName,
                 style: TextStyle(fontWeight: FontWeight.w600, color: c.text),
               ),
               if (!usingDefault)
                 TextButton(
                   onPressed: () => onChanged(null),
-                  child: const Text('恢复默认'),
+                  child: Text(tr("恢复默认")),
                 ),
             ],
           ),

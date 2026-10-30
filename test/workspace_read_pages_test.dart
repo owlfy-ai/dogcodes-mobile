@@ -121,7 +121,12 @@ void main() {
     ) async {
       await t.tap(find.byTooltip('切换目录'));
       await t.pumpAndSettle();
-      await t.tap(find.text('/second'));
+      await t.tap(
+        find.ancestor(
+          of: find.text('/second'),
+          matching: find.byType(CheckedPopupMenuItem<int>),
+        ),
+      );
       await t.pumpAndSettle();
       expect(find.text('new.txt'), findsOneWidget);
       old.complete([

@@ -30,25 +30,24 @@ extension TerminalStopWrites on MobileOperations {
         Map<String, dynamic>.from(value as Map),
     ],
   );
-  Future<void> _storeStop(Map<String, dynamic> saved) => _journalSerial(
-    () async {
-      await _requireBindingActive();
-      final all = await _readStops();
-      if (_journalsForgotten) throw const ProtocolException('这台电脑已移除，未发送关闭请求。');
-      if (all.values.any(
-        (old) => _stopTarget(old as Map) == _stopTarget(saved),
-      )) {
-        throw const ProtocolException('这个终端已经有一个关闭请求在等待确认。');
-      }
-      if (all.length >= 64) {
-        throw const ProtocolException('等待确认的关闭请求太多，请先处理待处理页里的卡片。');
-      }
-      if (bindingEpoch != null) saved['localBindingEpoch'] = bindingEpoch;
-      all[_stopId(saved)] = saved;
-      await storage.write(_stopsKey, jsonEncode(all));
-      if (_journalsForgotten) throw const ProtocolException('这台电脑已移除，未发送关闭请求。');
-    },
-  );
+  Future<void> _storeStop(Map<String, dynamic> saved) =>
+      _journalSerial(() async {
+        await _requireBindingActive();
+        final all = await _readStops();
+        if (_journalsForgotten) throw ProtocolException(tr("这台电脑已移除，未发送关闭请求。"));
+        if (all.values.any(
+          (old) => _stopTarget(old as Map) == _stopTarget(saved),
+        )) {
+          throw ProtocolException(tr("这个终端已经有一个关闭请求在等待确认。"));
+        }
+        if (all.length >= 64) {
+          throw ProtocolException(tr("等待确认的关闭请求太多，请先处理待处理页里的卡片。"));
+        }
+        if (bindingEpoch != null) saved['localBindingEpoch'] = bindingEpoch;
+        all[_stopId(saved)] = saved;
+        await storage.write(_stopsKey, jsonEncode(all));
+        if (_journalsForgotten) throw ProtocolException(tr("这台电脑已移除，未发送关闭请求。"));
+      });
   Future<void> _clearStop(Map<String, dynamic> saved) async {
     if (_journalsForgotten) return;
     await _journalSerial(() async {
@@ -78,7 +77,7 @@ extension TerminalStopWrites on MobileOperations {
     )) {
       final result = await verifyTerminalStop(client, stop);
       if (result?['state'] != 'stopped') {
-        throw const ProtocolException('原终端关闭结果尚未确认，请核实结束后再启动这个运行配置。');
+        throw ProtocolException(tr("原终端关闭结果尚未确认，请核实结束后再启动这个运行配置。"));
       }
     }
   }
@@ -86,7 +85,7 @@ extension TerminalStopWrites on MobileOperations {
   Future<void> _requireStopEpoch(HostApi client) async {
     final capabilities = await client.call('remote_capabilities', null);
     if (capabilities is! Map || capabilities['terminalStopEpoch'] != true) {
-      throw const ProtocolException('请更新电脑端后再关闭终端，当前版本无法核实原终端身份。');
+      throw ProtocolException(tr("请更新电脑端后再关闭终端，当前版本无法核实原终端身份。"));
     }
   }
 
@@ -98,7 +97,7 @@ extension TerminalStopWrites on MobileOperations {
         terminal['id'] == '' ||
         terminal['epoch'] is! String ||
         terminal['epoch'] == '') {
-      throw const ProtocolException('终端身份不完整，请刷新后再关闭。');
+      throw ProtocolException(tr("终端身份不完整，请刷新后再关闭。"));
     }
     await _requireStopEpoch(client);
     final saved = <String, dynamic>{
@@ -160,17 +159,19 @@ extension TerminalStopWrites on MobileOperations {
       'stopRequest': request,
       'state': state,
       'terminal': ?info,
-      if (state == 'rejected') 'error': '终端已经重新启动过，没有关闭新的终端。',
+      if (state == 'rejected') 'error': tr("终端已经重新启动过，没有关闭新的终端。"),
     };
   }
 
-  static bool _gone(ProtocolException e) => e.message.contains('终端不存在');
+  static bool _gone(ProtocolException e) =>
+      e.rawMessage.contains('终端不存在') ||
+      e.rawMessage.toLowerCase().contains('terminal does not exist');
 
   Future<Map<String, dynamic>> sendTerminalStop(
     HostApi client,
     Map<String, dynamic> saved,
   ) async {
-    if (_journalsForgotten) throw const ProtocolException('这台电脑已移除，未发送关闭请求。');
+    if (_journalsForgotten) throw ProtocolException(tr("这台电脑已移除，未发送关闭请求。"));
     try {
       return await _stopResult(
         saved,
@@ -216,7 +217,7 @@ extension TerminalStopWrites on MobileOperations {
     Map<String, dynamic> original,
   ) async {
     if (original['kind'] != 'terminal_stop') {
-      throw const ProtocolException('没有待确认的终端关闭操作。');
+      throw ProtocolException(tr("没有待确认的终端关闭操作。"));
     }
     await _clearStop(original);
     return {'stopRequest': original['request'], 'state': 'abandoned'};
@@ -224,9 +225,9 @@ extension TerminalStopWrites on MobileOperations {
 }
 
 String terminalStopMessage(Map result) => switch (result['state']) {
-  'stopped' => '终端已经关闭。',
-  'abandoned' => '已不再等待。如果电脑收到了关闭请求，终端仍会关闭。',
-  'rejected' => '${result['error'] ?? '终端已改变，关闭请求未执行。'}',
-  'stopping' => '电脑已收到关闭请求，正在等终端结束。',
-  _ => '${result['error'] ?? '还不确定终端是否已关闭，可以稍后再确认。'}',
+  'stopped' => tr("终端已经关闭。"),
+  'abandoned' => tr("已不再等待。如果电脑收到了关闭请求，终端仍会关闭。"),
+  'rejected' => '${result['error'] ?? tr("终端已改变，关闭请求未执行。")}',
+  'stopping' => tr("电脑已收到关闭请求，正在等终端结束。"),
+  _ => '${result['error'] ?? tr("还不确定终端是否已关闭，可以稍后再确认。")}',
 };

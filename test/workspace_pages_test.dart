@@ -179,9 +179,14 @@ void main() {
         ),
       );
       await t.pumpAndSettle();
-      await t.tap(find.byTooltip('选择运行配置'));
+      await t.tap(find.byTooltip('选择运行目录'));
       await t.pumpAndSettle();
-      await t.tap(find.text('Second directory'));
+      await t.tap(
+        find.ancestor(
+          of: find.text('/fixture/1'),
+          matching: find.byType(CheckedPopupMenuItem<int>),
+        ),
+      );
       await t.pumpAndSettle();
       await t.tap(find.byTooltip('启动'));
       await t.pumpAndSettle();

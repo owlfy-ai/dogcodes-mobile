@@ -1,4 +1,6 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'host_api.dart';
 import 'adaptive_host_link.dart';
@@ -33,10 +35,13 @@ class HostState {
   String get name {
     final label = record['displayName'];
     if (label is String && label.isNotEmpty) return label;
-    return '电脑 ${id.length > 6 ? id.substring(0, 6) : id}';
+    return tr("电脑 {0}", [id.length > 6 ? id.substring(0, 6) : id]);
   }
 
   LinkStatus status = LinkStatus.offline;
+
+  /// Connection attempts this app session; 0 means one is still to come.
+  int connectAttempts = 0;
   HostLink? link;
   Map<String, dynamic>? snapshot;
   Map<String, dynamic>? history;
@@ -49,6 +54,11 @@ class HostState {
 
   List<Map<String, dynamic>> executors = [];
   Map<String, List<Map<String, dynamic>>> approvals = {};
+
+  /// Approvals and questions seen on this phone, newest last. A pending entry
+  /// becomes handled once the computer no longer lists it; [_choice] says
+  /// what this phone answered, when it was the one that answered.
+  List<Map<String, dynamic>> approvalHistory = [];
 
   /// Unconfirmed message, approval or conversation operation; while set,
   /// sending and answering approvals wait.
@@ -113,6 +123,41 @@ class HostState {
     return null;
   }
 
+  /// 'pinned' / 'removed' from the PC's shared project list settings.
+  String? projectState(String? id) =>
+      (history?['preferences'] as Map?)?['projects']?[id] as String?;
+
+  /// The PC's built-in home for chats outside any project.
+  Map<String, dynamic>? get scratchProject =>
+      projects.where(isScratchProject).firstOrNull;
+
+  /// Real projects the user keeps in the list: pinned first, then by recent
+  /// activity, as on the PC. Excludes 无项目 and removed projects.
+  List<Map<String, dynamic>> get listedProjects {
+    final list = [
+      for (final p in projects)
+        if (!isScratchProject(p) &&
+            projectState(p['projectId'] as String?) != 'removed')
+          p,
+    ];
+    int rank(Map<String, dynamic> p) =>
+        projectState(p['projectId'] as String?) == 'pinned' ? 0 : 1;
+    DateTime at(Map<String, dynamic> p) =>
+        DateTime.tryParse('${p['updatedAt']}') ?? DateTime(0);
+    list.sort((a, b) {
+      final r = rank(a).compareTo(rank(b));
+      return r != 0 ? r : at(b).compareTo(at(a));
+    });
+    return list;
+  }
+
+  List<Map<String, dynamic>> get removedProjects => [
+    for (final p in projects)
+      if (!isScratchProject(p) &&
+          projectState(p['projectId'] as String?) == 'removed')
+        p,
+  ];
+
   Map<String, dynamic>? task(String? id) {
     for (final t in tasks) {
       if (t['taskId'] == id) return t;
@@ -152,13 +197,18 @@ class SessionRef {
   final Map<String, dynamic> task;
   String get taskId => task['taskId'] as String;
   String get projectId => task['projectId'] as String;
-  String get title => task['title'] as String? ?? '未命名会话';
+  String get title => task['title'] as String? ?? tr("未命名会话");
   String? get state =>
       (host.history?['preferences'] as Map?)?['tasks']?[taskId] as String?;
   bool get pinned => state == 'pinned';
   bool get archived => state == 'archived';
+
+  /// As on the desktop, a removed project hides its ordinary sessions;
+  /// pinned and archived ones stay in their own sections.
+  bool get hiddenByRemovedProject =>
+      !pinned && !archived && host.projectState(projectId) == 'removed';
   Map<String, dynamic>? get project => host.project(projectId);
-  String get projectName => projectLabel(project) ?? '项目';
+  String get projectName => projectLabel(project) ?? tr("未命名项目");
   bool get running => task['activePrimaryRun'] != null;
   bool get needsAttention =>
       host.pendingInteractions(taskId) > 0 ||
@@ -177,18 +227,63 @@ class SessionRef {
       DateTime.tryParse(task['updatedAt'] as String? ?? '');
 }
 
+/// An approval or question this phone saw that is no longer waiting.
+class HandledApproval {
+  HandledApproval(this.host, this.entry);
+  final HostState host;
+  final Map<String, dynamic> entry;
+  Map<String, dynamic> get approval =>
+      Map<String, dynamic>.from(entry['approval'] as Map);
+  bool get isQuestion => approval['question'] != null;
+  DateTime get handledAt =>
+      DateTime.tryParse('${entry['handledAt']}') ??
+      DateTime.fromMillisecondsSinceEpoch(0);
+  String get taskId => entry['taskId'] as String;
+  String? get providerId =>
+      ((host.task(taskId)?['lastTurnExecutor'] ??
+                  host.task(taskId)?['preferredExecutor'])
+              as Map?)?['providerId']
+          as String? ??
+      entry['providerId'] as String?;
+  String get taskTitle =>
+      '${host.task(taskId)?['title'] ?? entry['taskTitle'] ?? ''}';
+  String get projectName =>
+      projectLabel(host.project(entry['projectId'] as String?)) ?? tr("未命名项目");
+
+  /// What this phone answered; null when it was handled elsewhere.
+  Map<String, dynamic>? get choice => entry['choice'] is Map
+      ? Map<String, dynamic>.from(entry['choice'] as Map)
+      : null;
+}
+
 class ApprovalRef {
   ApprovalRef(this.host, this.task, this.approval);
   final HostState host;
   final Map<String, dynamic> task;
   final Map<String, dynamic> approval;
+  String get key => HostHub.approvalKey(task['taskId'] as String, approval);
+  String? get providerId =>
+      ((task['lastTurnExecutor'] ?? task['preferredExecutor'])
+              as Map?)?['providerId']
+          as String?;
+
+  /// When this phone first saw the request.
+  DateTime? get seenAt => DateTime.tryParse(
+    '${host.approvalHistory.where((e) => e['key'] == key).firstOrNull?['seenAt']}',
+  );
   bool get isQuestion => approval['question'] != null;
   String get projectName =>
-      projectLabel(host.project(task['projectId'] as String?)) ?? '项目';
+      projectLabel(host.project(task['projectId'] as String?)) ?? tr("未命名项目");
 }
+
+/// The PC keeps chats that belong to no project in a built-in project with
+/// this fixed name; the desktop shows it as 无项目.
+bool isScratchProject(Map<String, dynamic>? project) =>
+    project?['displayName'] == '快速对话';
 
 String? projectLabel(Map<String, dynamic>? project) {
   if (project == null) return null;
+  if (isScratchProject(project)) return tr("无项目");
   final name = project['displayName'] as String?;
   if (name != null && name.isNotEmpty) return name;
   final path = project['path'] as String? ?? '';
@@ -211,8 +306,8 @@ String agentLabel(String? providerId) => switch (providerId?.toLowerCase()) {
   'opencode' => 'OpenCode',
   'deepseek-harness' => 'DeepSeek Harness',
   'kiro' => 'Kiro',
-  'fake' => '离线模式',
-  'fake-peer' => '离线协作',
+  'fake' => tr("离线模式"),
+  'fake-peer' => tr("离线协作"),
   final id => id[0].toUpperCase() + id.substring(1),
 };
 
@@ -292,22 +387,27 @@ class HostHub extends ChangeNotifier {
             ];
             h.syncedAt = DateTime.tryParse('${cached['syncedAt']}');
           }
+          h.approvalHistory = await local.approvalHistory(
+            h.id,
+            bindingEpoch: h.bindingEpoch,
+          );
+          if (!current()) return;
           h.pendingOperation = await h.operations.pending();
           h.sideOperation = await h.operations.sidePending();
         } catch (_) {
-          h.error = '部分离线数据暂时无法读取，联网后可重新同步。';
+          h.error = tr("部分离线数据暂时无法读取，联网后可重新同步。");
         }
         if (!current()) return;
         try {
           h.pendingCancellations = await h.operations.pendingCancellations();
         } catch (_) {
-          h.error = '停止请求暂时无法读取，请检查系统安全存储。';
+          h.error = tr("停止请求暂时无法读取，请检查系统安全存储。");
         }
         if (!current()) return;
         try {
           h.pendingTerminalStops = await h.operations.pendingTerminalStops();
         } catch (_) {
-          h.error = '终端关闭记录暂时无法读取，请检查系统安全存储。';
+          h.error = tr("终端关闭记录暂时无法读取，请检查系统安全存储。");
         }
         if (!current()) return;
         next.add(h);
@@ -328,7 +428,7 @@ class HostHub extends ChangeNotifier {
       loadError = null;
     } catch (_) {
       if (!current()) return;
-      loadError = '已配对电脑暂时无法读取，请检查系统安全存储。';
+      loadError = tr("已配对电脑暂时无法读取，请检查系统安全存储。");
     }
     if (!current()) return;
     loaded = true;
@@ -355,6 +455,7 @@ class HostHub extends ChangeNotifier {
     }
     final generation = h._transportGeneration;
     h.status = LinkStatus.connecting;
+    h.connectAttempts++;
     h.error = null;
     _notify();
     try {
@@ -383,7 +484,7 @@ class HostHub extends ChangeNotifier {
     if (h.operations.retired ||
         !await HostRegistry(storage).host(h.id).matches(h.bindingEpoch)) {
       await link.close();
-      throw const ProtocolException('电脑绑定已变化，未使用旧页面接管新的连接。');
+      throw ProtocolException(tr("电脑绑定已变化，未使用旧页面接管新的连接。"));
     }
     final dropping = _drop(h);
     final generation = h._transportGeneration;
@@ -410,7 +511,7 @@ class HostHub extends ChangeNotifier {
         h._debounce?.cancel();
         final ready = event['type'] == 'transport_changed';
         h.status = ready ? LinkStatus.online : LinkStatus.connecting;
-        h.error = ready ? null : '连接中断，正在重新连接。已发送操作不会重复执行。';
+        h.error = ready ? null : tr("连接中断，正在重新连接。已发送操作不会重复执行。");
         h.revision++;
         _notify();
         if (ready) unawaited(refresh(h, executors: true));
@@ -483,7 +584,7 @@ class HostHub extends ChangeNotifier {
     h._transportGeneration++;
     unawaited(lost?.close());
     h.status = LinkStatus.offline;
-    h.error ??= '连接已断开。电脑上的任务不会因此停止。';
+    h.error ??= tr("连接已断开。电脑上的任务不会因此停止。");
     _notify();
   }
 
@@ -539,7 +640,7 @@ class HostHub extends ChangeNotifier {
       await dropping;
       if (cleanupError != null) throw cleanupError!;
     } catch (_) {
-      h.error = '移除未完成，连接已关闭；请重试移除或核实安全存储。';
+      h.error = tr("移除未完成，连接已关闭；请重试移除或核实安全存储。");
       rethrow;
     } finally {
       h._removing = false;
@@ -550,6 +651,7 @@ class HostHub extends ChangeNotifier {
   Future<void> clearOfflineCache() async {
     await local.clearCache();
     for (final h in hosts) {
+      h.approvalHistory = [];
       if (!h.online) {
         h.snapshot = null;
         h.history = null;
@@ -610,6 +712,7 @@ class HostHub extends ChangeNotifier {
       }
       if (!current()) return;
       h.approvals = approvals;
+      _trackApprovals(h);
       h.syncedAt = DateTime.now();
       h.error = null;
       h.revision++;
@@ -636,7 +739,7 @@ class HostHub extends ChangeNotifier {
               bindingEpoch: h.bindingEpoch,
             )
             .catchError((Object e) {
-              local.cacheError = '离线缓存未能保存：$e';
+              local.cacheError = tr("离线缓存未能保存：{0}", [e]);
             }),
       );
     } catch (e) {
@@ -689,17 +792,17 @@ class HostHub extends ChangeNotifier {
       h.pendingOperation = await h.operations.pending();
       h.sideOperation = await h.operations.sidePending();
     } catch (_) {
-      h.error = '待确认的操作暂时无法读取，请检查系统安全存储。';
+      h.error = tr("待确认的操作暂时无法读取，请检查系统安全存储。");
     }
     try {
       h.pendingCancellations = await h.operations.pendingCancellations();
     } catch (_) {
-      h.error = '停止请求暂时无法读取，请检查系统安全存储。';
+      h.error = tr("停止请求暂时无法读取，请检查系统安全存储。");
     }
     try {
       h.pendingTerminalStops = await h.operations.pendingTerminalStops();
     } catch (_) {
-      h.error = '终端关闭记录暂时无法读取，请检查系统安全存储。';
+      h.error = tr("终端关闭记录暂时无法读取，请检查系统安全存储。");
     }
     _notify();
   }
@@ -799,7 +902,7 @@ class HostHub extends ChangeNotifier {
   /// background refresh finished). Returns an error message, or null.
   Future<String?> loadExecutors(HostState h) async {
     final link = h.link;
-    if (link == null) return '电脑离线';
+    if (link == null) return tr("电脑离线");
     try {
       final snapshot =
           h.snapshot ??
@@ -859,6 +962,139 @@ class HostHub extends ChangeNotifier {
         if (h.task(entry.key) case final task?)
           for (final a in entry.value) ApprovalRef(h, task, a),
   ];
+
+  /// Handled approvals and questions, newest first. Read-only history.
+  List<HandledApproval> get approvalHistory => [
+    for (final h in hosts)
+      for (final e in h.approvalHistory)
+        if (e['status'] == 'handled') HandledApproval(h, e),
+  ]..sort((a, b) => b.handledAt.compareTo(a.handledAt));
+
+  /// Identifies one request across refreshes and in the stored history.
+  static String approvalKey(String taskId, Map<String, dynamic> a) =>
+      jsonEncode([taskId, a['turnId'], a['approvalId']]);
+
+  static const _historyLimit = 50;
+  static const _historyAge = Duration(days: 30);
+
+  /// Record what the computer lists now; anything it stopped listing has been
+  /// handled (here, on the computer, or by the run ending).
+  void _trackApprovals(HostState h) {
+    final now = DateTime.now().toUtc();
+    final byKey = {for (final e in h.approvalHistory) e['key'] as String: e};
+    final listed = <String>{};
+    var changed = false;
+    for (final MapEntry(key: taskId, value: list) in h.approvals.entries) {
+      final title = h.task(taskId)?['title'];
+      for (final a in list) {
+        final key = approvalKey(taskId, a);
+        listed.add(key);
+        final old = byKey[key];
+        // An answer from this phone stays recorded even if the computer
+        // still lists the request for a moment.
+        if (old != null &&
+            (old['status'] == 'pending' || old['choice'] != null)) {
+          continue;
+        }
+        byKey[key] = {
+          'key': key,
+          'taskId': taskId,
+          'taskTitle': ?title,
+          'projectId': ?h.task(taskId)?['projectId'],
+          'providerId': ?_providerOf(h.task(taskId)),
+          'approval': a,
+          'status': 'pending',
+          'seenAt': now.toIso8601String(),
+        };
+        changed = true;
+      }
+    }
+    for (final e in byKey.values) {
+      if (e['status'] == 'pending' && !listed.contains(e['key'])) {
+        e['status'] = 'handled';
+        e['handledAt'] = now.toIso8601String();
+        changed = true;
+      }
+    }
+    final handled = byKey.values.where((e) => e['status'] == 'handled').toList()
+      ..sort((a, b) => '${b['handledAt']}'.compareTo('${a['handledAt']}'));
+    final drop = {
+      for (final (i, e) in handled.indexed)
+        if (i >= _historyLimit ||
+            now.difference(DateTime.parse(e['handledAt'] as String)) >
+                _historyAge)
+          e['key'],
+    };
+    if (drop.isNotEmpty) changed = true;
+    if (!changed) return;
+    h.approvalHistory = [
+      for (final e in byKey.values)
+        if (!drop.contains(e['key'])) e,
+    ];
+    _saveHistory(h);
+  }
+
+  /// This phone answered [approval]; the computer has recorded the decision.
+  void recordApprovalChoice(
+    HostState h,
+    Map<String, dynamic> task,
+    Map<String, dynamic> approval, {
+    required String label,
+    Map<String, dynamic>? answer,
+  }) {
+    final taskId = task['taskId'] as String;
+    final key = approvalKey(taskId, approval);
+    final now = DateTime.now().toUtc().toIso8601String();
+    h.approvalHistory = [
+      for (final e in h.approvalHistory)
+        if (e['key'] != key) e,
+      {
+        'key': key,
+        'taskId': taskId,
+        'taskTitle': ?task['title'],
+        'projectId': ?task['projectId'],
+        'providerId': ?_providerOf(task),
+        'approval': approval,
+        'status': 'handled',
+        'handledAt': now,
+        'choice': {'label': label, 'answer': ?answer},
+      },
+    ];
+    _saveHistory(h);
+    _notify();
+  }
+
+  static String? _providerOf(Map<String, dynamic>? task) =>
+      ((task?['lastTurnExecutor'] ?? task?['preferredExecutor'])
+              as Map?)?['providerId']
+          as String?;
+
+  /// Remove handled entries; requests still waiting are never removed.
+  void deleteApprovalHistory(Iterable<HandledApproval> items) {
+    final keys = <HostState, Set<Object?>>{};
+    for (final i in items) {
+      (keys[i.host] ??= {}).add(i.entry['key']);
+    }
+    for (final MapEntry(key: h, value: drop) in keys.entries) {
+      h.approvalHistory = [
+        for (final e in h.approvalHistory)
+          if (e['status'] != 'handled' || !drop.contains(e['key'])) e,
+      ];
+      _saveHistory(h);
+    }
+    _notify();
+  }
+
+  void _saveHistory(HostState h) => unawaited(
+    local
+        .saveApprovalHistory(
+          h.id,
+          h.approvalHistory,
+          local.cacheEpoch,
+          bindingEpoch: h.bindingEpoch,
+        )
+        .catchError((Object _) {}),
+  );
 
   List<HostState> get hostsWithPendingOperation => [
     for (final h in hosts)

@@ -1,0 +1,3 @@
+"NSCameraUsageDescription" = "Scanne den Kopplungs-QR-Code deines Computers oder nimm ein Foto als Anhang für eine Aufgabe auf.";
+"NSLocalNetworkUsageDescription" = "Verbinde dich verschlüsselt und direkt mit deinem gekoppelten Computer, um Unterhaltungen zu sehen und remote zu arbeiten.";
+"NSPhotoLibraryUsageDescription" = "Wähle Fotos als Anhänge für Aufgaben auf deinem Computer.";

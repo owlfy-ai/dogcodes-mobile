@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
@@ -26,7 +27,7 @@ class TerminalInput extends ChangeNotifier {
     if (_closed || paused) return Future.value(false);
     if (bytes.isEmpty) return Future.value(true);
     if (bytes.length > 16384 || _bytes + bytes.length > 65536) {
-      message = '待发送的输入过多，本次未发送，请缩短输入后再试。';
+      message = tr("待发送的输入过多，本次未发送，请缩短输入后再试。");
       notifyListeners();
       return Future.value(false);
     }
@@ -38,9 +39,9 @@ class TerminalInput extends ChangeNotifier {
   }
 
   Future<dynamic> _raw(String method, dynamic args) async {
-    if (_closed) throw const ProtocolException('终端页面已离开，未继续发送输入。');
+    if (_closed) throw ProtocolException(tr("终端页面已离开，未继续发送输入。"));
     final value = await api.call(method, args);
-    if (_closed) throw const ProtocolException('终端页面已离开，未继续发送输入。');
+    if (_closed) throw ProtocolException(tr("终端页面已离开，未继续发送输入。"));
     return value;
   }
 
@@ -51,7 +52,7 @@ class TerminalInput extends ChangeNotifier {
         value['epoch'] is! String ||
         value['revision'] is! String ||
         value['sequence'] is! String) {
-      throw const ProtocolException('终端输入回执不匹配');
+      throw ProtocolException(tr("终端输入回执不匹配"));
     }
     parseSequence(value['revision'] as String);
     parseSequence(value['sequence'] as String);
@@ -62,7 +63,7 @@ class TerminalInput extends ChangeNotifier {
     final caps = await _raw('remote_capabilities', null);
     if (caps is! Map || caps['terminalInputStreams'] != true) {
       canResume = false;
-      throw const ProtocolException('请更新电脑端后输入；终端输出仍可查看。');
+      throw ProtocolException(tr("请更新电脑端后输入；终端输出仍可查看。"));
     }
     final info = await _raw('terminal_get', terminalId);
     if (info is! Map ||
@@ -75,7 +76,7 @@ class TerminalInput extends ChangeNotifier {
           info['epoch'] is String &&
           info['status'] == 'starting';
       throw ProtocolException(
-        canResume ? '终端正在启动，请稍后继续输入。' : '原终端当前不可输入，请刷新查看状态。',
+        canResume ? tr("终端正在启动，请稍后继续输入。") : tr("原终端当前不可输入，请刷新查看状态。"),
       );
     }
     final original = await _call({
@@ -97,15 +98,15 @@ class TerminalInput extends ChangeNotifier {
         opened['owned'] != true ||
         parseSequence(opened['revision'] as String) !=
             parseSequence(original['revision'] as String) + BigInt.one) {
-      throw const ProtocolException('终端输入连接已改变，请检查后继续。');
+      throw ProtocolException(tr("终端输入连接已改变，请检查后继续。"));
     }
     _lease = opened;
     _sequence = opened['sequence'] as String;
     if (opened['state'] != 'ready' || opened['uncertain'] == true) {
       throw ProtocolException(
         opened['state'] == 'opening'
-            ? '输入连接仍在切换，请稍后检查并继续。'
-            : '上次输入结果待核实，请检查终端输出后再继续。',
+            ? tr("输入连接仍在切换，请稍后检查并继续。")
+            : tr("上次输入结果待核实，请检查终端输出后再继续。"),
       );
     }
   }
@@ -160,7 +161,7 @@ class TerminalInput extends ChangeNotifier {
           result = await _inspect(expected);
         }
         if (!_applied(result, expected)) {
-          throw const ProtocolException('输入结果尚未确认，请核实或检查终端后继续；不会重发原输入。');
+          throw ProtocolException(tr("输入结果尚未确认，请核实或检查终端后继续；不会重发原输入。"));
         }
         _sequence = next;
         _unknown = null;
@@ -170,7 +171,7 @@ class TerminalInput extends ChangeNotifier {
         paused = true;
         message = e is ProtocolException
             ? e.message
-            : '终端连接中断，输入结果待核实；未发送的队列已丢弃，不会自动重发。';
+            : tr("终端连接中断，输入结果待核实；未发送的队列已丢弃，不会自动重发。");
         item.done.complete(false);
       } finally {
         _bytes -= item.bytes.length;
@@ -203,9 +204,9 @@ class TerminalInput extends ChangeNotifier {
         notifyListeners();
         return true;
       }
-      message = '原输入仍未确认或通道已改变，请检查终端输出后继续；不会重发。';
+      message = tr("原输入仍未确认或通道已改变，请检查终端输出后继续；不会重发。");
     } catch (_) {
-      message = '暂时无法核实输入，请连接后再试；不会重发原输入。';
+      message = tr("暂时无法核实输入，请连接后再试；不会重发原输入。");
     }
     if (!_closed) notifyListeners();
     return false;
@@ -223,7 +224,7 @@ class TerminalInput extends ChangeNotifier {
       notifyListeners();
       return true;
     } catch (e) {
-      message = e is ProtocolException ? e.message : '输入连接尚未恢复，请稍后再试。';
+      message = e is ProtocolException ? e.message : tr("输入连接尚未恢复，请稍后再试。");
       if (!_closed) notifyListeners();
       return false;
     }

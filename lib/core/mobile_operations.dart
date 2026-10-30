@@ -7,6 +7,8 @@ import 'security/host_lifecycle.dart';
 import 'protocol.dart';
 import 'pc_api.dart' show uuid;
 
+import 'package:dogcodes_app/l10n/strings.dart';
+
 part 'session_writes.dart';
 part 'project_writes.dart';
 part 'review_writes.dart';
@@ -69,7 +71,7 @@ class MobileOperations {
         final lane = _laneKey(value['kind']);
         if (await _read(lane) != null) {
           throw ProtocolException(
-            lane == key ? '请先确认上一条消息或审批的结果。' : '请先确认上一项设置或工作区操作的结果。',
+            lane == key ? tr("请先确认上一条消息或审批的结果。") : tr("请先确认上一项设置或工作区操作的结果。"),
           );
         }
         _requireJournalActive();
@@ -117,7 +119,7 @@ class MobileOperations {
     Map<String, dynamic>? draft,
   }) async {
     if (await pending() != null) {
-      throw const ProtocolException('请先确认上一条消息或审批的结果。');
+      throw ProtocolException(tr("请先确认上一条消息或审批的结果。"));
     }
     final request = {...original, 'operationId': operationId()};
     final saved = {'kind': 'send', 'request': request, 'draft': ?draft};
@@ -175,9 +177,10 @@ class MobileOperations {
     }
     if (saved['kind'] == 'approval') {
       final value = await client.call('approval_receipt', [saved['query']]);
-      if (value != null && value['delivery'] == 'sent') {
-        await _clearIfCurrent(saved);
-      }
+      // A receipt means the computer recorded this decision once; handing it
+      // to the agent is the computer's job from here, and resending would be
+      // refused. Nothing is left for the user to confirm.
+      if (value != null) await _clearIfCurrent(saved);
       if (value == null) {
         final envelope = Map<String, dynamic>.from(saved['envelope'] as Map);
         final fresh = await client.call('bootstrap', null);
@@ -243,14 +246,14 @@ class MobileOperations {
       final receipt = await verifySession(client, saved);
       if (await _current(saved) == null) return receipt;
       if (receipt is Map && receipt['status'] == 'running') {
-        throw const ProtocolException('Fork 正在电脑上执行，请等待并核实。');
+        throw ProtocolException(tr("Fork 正在电脑上执行，请等待并核实。"));
       }
       return sendSession(client, saved);
     }
     if (saved['kind'] == 'approval') {
       final found = await verify(client, saved);
       if (await _current(saved) == null) return found;
-      if (found != null) throw const ProtocolException('原决定已受理，正在核实交付结果。');
+      if (found != null) throw ProtocolException(tr("原决定已受理，正在核实交付结果。"));
       await _write(client, 'execute', [saved['envelope']], saved: saved);
       return verify(client, saved);
     }
@@ -264,7 +267,7 @@ class MobileOperations {
   Future<dynamic> abandon(HostApi client) async {
     final saved = await pending();
     if (saved == null) return null;
-    if (saved['kind'] != 'send') throw const ProtocolException('请先核实原审批决定。');
+    if (saved['kind'] != 'send') throw ProtocolException(tr("请先核实原审批决定。"));
     return _retireSubmission(client, await _beginClosing(saved));
   }
 
@@ -285,7 +288,8 @@ class MobileOperations {
     return result;
   }
 
-  Future<void> approval(
+  /// Returns the computer's receipt, or null while it is still unconfirmed.
+  Future<dynamic> approval(
     HostApi client,
     Map<String, dynamic> task,
     Map<String, dynamic> approval,
@@ -293,7 +297,7 @@ class MobileOperations {
     Map<String, dynamic>? answer,
   }) async {
     if (await pending() != null) {
-      throw const ProtocolException('请先确认上一条消息或审批的结果。');
+      throw ProtocolException(tr("请先确认上一条消息或审批的结果。"));
     }
     final id = operationId();
     final envelope = {
@@ -319,6 +323,6 @@ class MobileOperations {
     final saved = {'kind': 'approval', 'query': query, 'envelope': envelope};
     await _storeNew(saved);
     await _write(client, 'execute', [envelope], saved: saved);
-    await verify(client, saved);
+    return verify(client, saved);
   }
 }

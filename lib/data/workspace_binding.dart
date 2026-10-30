@@ -13,7 +13,7 @@ class _LocalState {
       fields[1] is! String ||
       (fields[2] != null && fields[2] is! String) ||
       (fields[3] != null && !validBindingEpoch(fields[3]))) {
-    throw const FormatException('草稿归属不可读取');
+    throw FormatException(tr("草稿归属不可读取"));
   }
   return (host: fields[0] as String, epoch: fields[3] as String?);
 }
@@ -22,8 +22,11 @@ String _hostCacheKey(String host, String? epoch) =>
     'host:${jsonEncode([host, epoch])}';
 String _timelineKey(String host, String task, String? epoch) =>
     'timeline:${jsonEncode([host, task, epoch])}';
+String _approvalHistoryKey(String host, String? epoch) =>
+    'approvals:${jsonEncode([host, epoch])}';
 bool _cacheBelongs(String key, String host, String? epoch) {
   if (key == _hostCacheKey(host, epoch)) return true;
+  if (key == _approvalHistoryKey(host, epoch)) return true;
   if (!key.startsWith('timeline:')) return false;
   try {
     final parts = jsonDecode(key.substring(9)) as List;
@@ -55,7 +58,7 @@ String? _cacheHost(String key) {
 extension WorkspaceBinding on LocalWorkspace {
   void attachBindings(SecretStorage storage) {
     if (_bindings != null && !identical(_bindings, storage)) {
-      throw StateError('工作区已属于另一份设备存储');
+      throw StateError(tr("工作区已属于另一份设备存储"));
     }
     _bindings = storage;
   }
@@ -68,7 +71,7 @@ extension WorkspaceBinding on LocalWorkspace {
   ) async {
     final bindings = _bindings;
     if (bindings == null) {
-      if (epoch != null) throw StateError('工作区设备存储尚未初始化');
+      if (epoch != null) throw StateError(tr("工作区设备存储尚未初始化"));
       return action();
     }
     final scope = HostRegistry(bindings).host(host);
@@ -107,7 +110,7 @@ extension WorkspaceBinding on LocalWorkspace {
         final raw = jsonDecode(await entity.readAsString()) as Map;
         final key = raw['key'] as String;
         if (entity.path.split('/').last != '${_id(space, key)}.json') {
-          throw const FormatException('本机数据归属不一致');
+          throw FormatException(tr("本机数据归属不一致"));
         }
         result.add((
           key: key,
@@ -128,7 +131,7 @@ extension WorkspaceBinding on LocalWorkspace {
     if (marker != null &&
         (!validBindingEpoch(marker['bindingEpoch']) ||
             marker['complete'] is! bool)) {
-      throw const FormatException('本地绑定记录不可读取');
+      throw FormatException(tr("本地绑定记录不可读取"));
     }
     if (marker?['bindingEpoch'] == epoch && marker?['complete'] == true) return;
     await _put('meta', markerKey, {'bindingEpoch': epoch, 'complete': false});
@@ -166,7 +169,7 @@ extension WorkspaceBinding on LocalWorkspace {
       owner.host,
       owner.epoch,
       action,
-      () => throw const ProtocolException('电脑绑定已变化，未覆盖原草稿。'),
+      () => throw ProtocolException(tr("电脑绑定已变化，未覆盖原草稿。")),
     );
   }
 

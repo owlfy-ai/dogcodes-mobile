@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:dogcodes_app/core/mobile_runtime.dart';
@@ -19,7 +20,50 @@ class OfflineRuntime extends MobileRuntime {
   }
 }
 
+class RefusedRuntime extends MobileRuntime {
+  RefusedRuntime(MemorySecrets storage) : super(storage: storage);
+  @override
+  Future<HostLink> recoverPairing(PairingRecovery original) async {
+    throw const SocketException('Connection refused, errno = 61');
+  }
+}
+
 void main() {
+  testWidgets(
+    'loopback connection failure explains real-device addressing and keeps recovery record',
+    (t) async {
+      final storage = MemorySecrets();
+      final saved = PairingRecovery.fromInvitation(
+        invitation(),
+        phoneKey,
+        bindingEpoch: testEpoch,
+      ).toJson();
+      saved['service'] = 'http://127.0.0.1:8787';
+      final original = PairingRecovery.fromJson(
+        saved,
+        allowLocalDevelopment: true,
+      );
+      final runtime = RefusedRuntime(storage);
+      await runtime.pairingJournal.begin(original);
+      await t.pumpWidget(
+        MaterialApp(
+          theme: dcTheme(Brightness.light),
+          home: PairingPage(trustedService: original.service, runtime: runtime),
+        ),
+      );
+      await t.pumpAndSettle();
+      await t.tap(find.text('核实原配对'));
+      await t.pumpAndSettle();
+      expect(find.textContaining('二维码使用了本机地址，手机无法访问'), findsOneWidget);
+      expect(find.textContaining('SocketException'), findsNothing);
+      expect(find.textContaining('errno'), findsNothing);
+      expect(
+        (await runtime.pairingJournal.list()).single.service,
+        original.service,
+      );
+    },
+  );
+
   testWidgets(
     'restarted pairing page exposes the original receipt and retains it while offline',
     (t) async {

@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -24,8 +25,11 @@ Future<Map<String, dynamic>> routeRequest(
   String method = 'POST',
   Map<String, dynamic>? body,
   int maxResponseBytes = 16384,
+  HttpClient? http,
 }) async {
-  final client = HttpClient()..connectionTimeout = const Duration(seconds: 8);
+  // A caller-owned client keeps the TLS connection alive for its next request.
+  final client =
+      http ?? (HttpClient()..connectionTimeout = const Duration(seconds: 8));
   try {
     final request = await client
         .openUrl(method, reachable(service).resolve(path))
@@ -40,26 +44,28 @@ Future<Map<String, dynamic>> routeRequest(
     if (response.statusCode != 200) {
       throw RouteRequestRejected(
         response.statusCode,
-        response.statusCode == 503 ? '电脑暂时离线，请稍后重连。' : '连接请求未被接受，请核实设备授权。',
+        response.statusCode == 503
+            ? tr("电脑暂时离线，请稍后重连。")
+            : tr("连接请求未被接受，请核实设备授权。"),
       );
     }
     final data = <int>[];
     await for (final part in response.timeout(const Duration(seconds: 8))) {
       data.addAll(part);
       if (data.length > maxResponseBytes) {
-        throw const ProtocolException('连接响应过大。');
+        throw ProtocolException(tr("连接响应过大。"));
       }
     }
     return jsonDecode(utf8.decode(data)) as Map<String, dynamic>;
   } finally {
-    client.close(force: true);
+    if (http == null) client.close(force: true);
   }
 }
 
 class RemoteOutcomeUnknown implements Exception {
   const RemoteOutcomeUnknown();
   @override
-  String toString() => '连接中断，操作结果待核实；请勿重复发送。';
+  String toString() => tr("连接中断，操作结果待核实；请勿重复发送。");
 }
 
 class SecureHostClient implements AuthenticatedHostChannel, HostLink {
@@ -106,7 +112,7 @@ class SecureHostClient implements AuthenticatedHostChannel, HostLink {
     NoiseEndpoint endpoint,
   ) async {
     if (invitation.phoneTicket == null) {
-      throw const ProtocolException('请在电脑上生成新版配对二维码。');
+      throw ProtocolException(tr("请在电脑上生成新版配对二维码。"));
     }
     final psk = hexBytes(
       base64Url.decode(base64Url.normalize(invitation.secret)),
@@ -146,11 +152,21 @@ class SecureHostClient implements AuthenticatedHostChannel, HostLink {
   ) async {
     final id = host['hostId'] as String;
     final service = Uri.parse(host['service'] as String);
-    final route = await routeRequest(
-      service,
-      '/v1/hosts/$id/connections',
-      host['routeToken'] as String,
-    );
+    // One client for the route request and the relay upgrade, so the upgrade
+    // reuses the open TLS connection instead of negotiating a second one.
+    final http = HttpClient()..connectionTimeout = const Duration(seconds: 8);
+    final Map<String, dynamic> route;
+    try {
+      route = await routeRequest(
+        service,
+        '/v1/hosts/$id/connections',
+        host['routeToken'] as String,
+        http: http,
+      );
+    } catch (_) {
+      http.close(force: true);
+      rethrow;
+    }
     final session = route['sessionId'] as String;
     final noise = endpoint.session(
       identity: phone,
@@ -164,6 +180,7 @@ class SecureHostClient implements AuthenticatedHostChannel, HostLink {
       session,
       route['phoneTicket'] as String,
       noise,
+      http: http,
     );
     try {
       final ack = await client._handshake.future.timeout(
@@ -174,7 +191,7 @@ class SecureHostClient implements AuthenticatedHostChannel, HostLink {
           ack['hostId'] != id ||
           ack['binding'] != noise.binding ||
           noise.authenticatedPeer != host['publicKey']) {
-        throw const ProtocolException('电脑连接身份不一致。');
+        throw ProtocolException(tr("电脑连接身份不一致。"));
       }
       return client;
     } catch (_) {
@@ -191,10 +208,10 @@ class SecureHostClient implements AuthenticatedHostChannel, HostLink {
     NoiseEndpoint endpoint,
   ) async {
     if (phone.publicHex != original.phonePublicKey) {
-      throw const ProtocolException('手机身份与原配对不一致，未重新申请授权。');
+      throw ProtocolException(tr("手机身份与原配对不一致，未重新申请授权。"));
     }
     if (!original.recoverUntil.isAfter(DateTime.now().toUtc())) {
-      throw const ProtocolException('原配对恢复期限已过，请在电脑核实授权后重新扫码。');
+      throw ProtocolException(tr("原配对恢复期限已过，请在电脑核实授权后重新扫码。"));
     }
     final route = await routeRequest(
       original.service,
@@ -227,13 +244,13 @@ class SecureHostClient implements AuthenticatedHostChannel, HostLink {
           connected['hostId'] != original.hostId ||
           connected['binding'] != noise.binding ||
           noise.authenticatedPeer != peer) {
-        throw const ProtocolException('电脑连接身份与原配对不一致。');
+        throw ProtocolException(tr("电脑连接身份与原配对不一致。"));
       }
       final receipt = await client.call(
         'pairing_receipt',
         original.invitationId,
       );
-      if (receipt is! Map) throw const ProtocolException('电脑未返回原配对回执。');
+      if (receipt is! Map) throw ProtocolException(tr("电脑未返回原配对回执。"));
       client.hostName = displayHostName(receipt['hostName']);
       return (client, Map<String, dynamic>.from(receipt));
     } catch (_) {
@@ -247,9 +264,11 @@ class SecureHostClient implements AuthenticatedHostChannel, HostLink {
     String hostId,
     String session,
     String token,
-    NoiseSession noise,
-  ) async {
-    final http = HttpClient()..connectionTimeout = const Duration(seconds: 8);
+    NoiseSession noise, {
+    HttpClient? http,
+  }) async {
+    final upgrade =
+        http ?? (HttpClient()..connectionTimeout = const Duration(seconds: 8));
     WebSocket? socket;
     try {
       final url = reachable(service).replace(
@@ -259,7 +278,7 @@ class SecureHostClient implements AuthenticatedHostChannel, HostLink {
       socket = await WebSocket.connect(
         url.toString(),
         headers: {'Authorization': 'Bearer $token'},
-        customClient: http,
+        customClient: upgrade,
       ).timeout(const Duration(seconds: 10));
       socket.pingInterval = const Duration(seconds: 20);
       final client = SecureHostClient._(
@@ -274,7 +293,8 @@ class SecureHostClient implements AuthenticatedHostChannel, HostLink {
       await socket?.close();
       rethrow;
     } finally {
-      http.close(force: true);
+      // The upgraded socket is detached from the client and stays open.
+      upgrade.close(force: true);
     }
   }
 
@@ -301,7 +321,7 @@ class SecureHostClient implements AuthenticatedHostChannel, HostLink {
           ack['transport'] != 'webrtc' ||
           ack['connectionId'] != connectionId ||
           ack['purpose'] != purpose) {
-        throw const ProtocolException('直连身份验证失败。');
+        throw ProtocolException(tr("直连身份验证失败。"));
       }
       client.hostName = displayHostName(ack['hostName']);
       return client;
@@ -316,7 +336,7 @@ class SecureHostClient implements AuthenticatedHostChannel, HostLink {
     if (_closed) return;
     try {
       if (message is! List<int> || message.length > 65535) {
-        throw const ProtocolException('加密数据格式无效。');
+        throw ProtocolException(tr("加密数据格式无效。"));
       }
       if (!_noiseReady) {
         _noise.readHandshake(Uint8List.fromList(message));
@@ -354,7 +374,7 @@ class SecureHostClient implements AuthenticatedHostChannel, HostLink {
   @override
   Future<Map<String, dynamic>> request(Map<String, dynamic> envelope) async {
     if (_closed) throw const RemoteOutcomeUnknown();
-    if (_waiting.length >= 16) throw const ProtocolException('请求较多，请稍后重试。');
+    if (_waiting.length >= 16) throw ProtocolException(tr("请求较多，请稍后重试。"));
     final id = 'request-${++_next}';
     final message = {
       ...envelope,
@@ -364,7 +384,7 @@ class SecureHostClient implements AuthenticatedHostChannel, HostLink {
     };
     final bytes = utf8.encode(jsonEncode(message));
     if (bytes.length > 8 * 1024 * 1024) {
-      throw const ProtocolException('请求过大。');
+      throw ProtocolException(tr("请求过大。"));
     }
     final framed = Uint8List(bytes.length + 4);
     ByteData.sublistView(framed).setUint32(0, bytes.length);
@@ -467,7 +487,7 @@ class SecureHostClient implements AuthenticatedHostChannel, HostLink {
     _frames.clear();
     _fragmentAcks.clear();
     if (!_handshake.isCompleted) {
-      _handshake.completeError(const ProtocolException('配对连接中断，结果需要核实。'));
+      _handshake.completeError(ProtocolException(tr("配对连接中断，结果需要核实。")));
     }
     for (final c in _waiting.values) {
       c.completeError(const RemoteOutcomeUnknown());

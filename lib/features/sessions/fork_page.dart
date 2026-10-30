@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'package:flutter/material.dart';
 import '../../app.dart';
 import '../../core/host_hub.dart';
@@ -34,7 +35,7 @@ class _ForkPageState extends State<ForkPage> {
     final turn = widget.turnId;
     if (link == null || !h.online || busy) return;
     if (h.task(s.taskId)?['activePrimaryRun'] != null) {
-      setState(() => error = '请等待当前任务结束后再 Fork。');
+      setState(() => error = tr("请等待当前任务结束后再 Fork。"));
       return;
     }
     setState(() {
@@ -67,10 +68,11 @@ class _ForkPageState extends State<ForkPage> {
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final hub = AppScope.of(context).hub, s = widget.session;
     return Scaffold(
       appBar: DetailBar(
-        title: 'Fork 会话',
+        title: tr("Fork 会话"),
         subtitle: '${s.title} · ${s.host.name}',
       ),
       body: ListenableBuilder(
@@ -78,7 +80,7 @@ class _ForkPageState extends State<ForkPage> {
         builder: (context, _) => ListView(
           padding: const EdgeInsets.all(DcSpace.page),
           children: [
-            const Text('从本轮结束时的历史创建独立会话。'),
+            Text(tr("从本轮结束时的历史创建独立会话。")),
             if (widget.prompt != null) ...[
               const SizedBox(height: 12),
               Text(
@@ -88,9 +90,13 @@ class _ForkPageState extends State<ForkPage> {
               ),
             ],
             const Divider(),
-            for (final (id, title, detail) in const [
-              ('workspace', '当前工作区', '共享当前项目文件，仅复制对话历史。'),
-              ('worktree', '新 Worktree', '在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照。'),
+            for (final (id, title, detail) in [
+              ('workspace', tr("当前工作区"), tr("共享当前项目文件，仅复制对话历史。")),
+              (
+                'worktree',
+                tr("新 Worktree"),
+                tr("在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照。"),
+              ),
             ])
               ListTile(
                 contentPadding: EdgeInsets.zero,
@@ -115,10 +121,10 @@ class _ForkPageState extends State<ForkPage> {
                       s.host.task(s.taskId)?['activePrimaryRun'] != null
                   ? null
                   : _fork,
-              child: Text(busy ? '正在创建…' : '创建 Fork'),
+              child: Text(busy ? tr("正在创建…") : tr("创建 Fork")),
             ),
             if (s.host.task(s.taskId)?['activePrimaryRun'] != null)
-              const InlineNotice('请等待当前任务结束后再 Fork。'),
+              InlineNotice(tr("请等待当前任务结束后再 Fork。")),
           ],
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import '../../app.dart';
@@ -9,22 +10,22 @@ import '../../ui/widgets.dart';
 import '../inbox/pending_operation.dart';
 import 'review_report.dart';
 
-const reviewLabels = {
-  'code': '审查代码',
-  'security': '安全检查',
-  'performance': '性能分析',
-  'tests': '检查测试',
-  'requirements': '对照要求',
-  'impact': '评估影响',
+Map<String, String> get reviewLabels => {
+  'code': tr("审查代码"),
+  'security': tr("安全检查"),
+  'performance': tr("性能分析"),
+  'tests': tr("检查测试"),
+  'requirements': tr("对照要求"),
+  'impact': tr("评估影响"),
 };
-const reviewStatuses = {
-  'queued': '准备中',
-  'running': '检查中',
-  'cancelling': '正在取消',
-  'completed': '已完成',
-  'failed': '失败',
-  'cancelled': '已取消',
-  'interrupted': '连接中断',
+Map<String, String> get reviewStatuses => {
+  'queued': tr("准备中"),
+  'running': tr("检查中"),
+  'cancelling': tr("正在取消"),
+  'completed': tr("已完成"),
+  'failed': tr("失败"),
+  'cancelled': tr("已取消"),
+  'interrupted': tr("连接中断"),
 };
 bool reviewActive(Map run) =>
     ['queued', 'running', 'cancelling'].contains(run['status']);
@@ -73,14 +74,14 @@ class _TurnReviewsSheetState extends State<TurnReviewsSheet> {
     final link = host.link, epoch = host.connectionEpoch;
     try {
       if (!host.online || link == null) {
-        throw const ProtocolException('电脑离线，请重新连接后查看审查。');
+        throw ProtocolException(tr("电脑离线，请重新连接后查看审查。"));
       }
       final all = await link.call('turn_reviews', [widget.session.taskId]);
-      if (all is! List) throw const ProtocolException('电脑端暂不支持本轮审查，请更新电脑端后重试。');
+      if (all is! List) throw ProtocolException(tr("电脑端暂不支持本轮审查，请更新电脑端后重试。"));
       List<Map<String, dynamic>>? choices;
       if (!catalogLoaded || catalogEpoch != epoch || catalog) {
         final found = await link.call('review_executors', []);
-        if (found is! List) throw const ProtocolException('无法读取可用的审查 Agent。');
+        if (found is! List) throw ProtocolException(tr("无法读取可用的审查 Agent。"));
         choices = [
           for (final e in found)
             if (e is Map) Map<String, dynamic>.from(e),
@@ -173,7 +174,7 @@ class _TurnReviewsSheetState extends State<TurnReviewsSheet> {
         if (repairTurn != null) {
           ScaffoldMessenger.of(
             context,
-          ).showSnackBar(const SnackBar(content: Text('已发起复审，可在修复轮次底部查看。')));
+          ).showSnackBar(SnackBar(content: Text(tr("已发起复审，可在修复轮次底部查看。"))));
         }
       }
     });
@@ -181,6 +182,7 @@ class _TurnReviewsSheetState extends State<TurnReviewsSheet> {
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final hub = AppScope.of(context).hub;
     return ListenableBuilder(
       listenable: hub,
@@ -193,12 +195,12 @@ class _TurnReviewsSheetState extends State<TurnReviewsSheet> {
               children: [
                 Expanded(
                   child: Text(
-                    '本轮审查',
+                    tr("本轮审查"),
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
                 IconButton(
-                  tooltip: '刷新审查',
+                  tooltip: tr("刷新审查"),
                   onPressed: busy ? null : () => _load(catalog: true),
                   icon: const Icon(Icons.refresh),
                 ),
@@ -209,16 +211,16 @@ class _TurnReviewsSheetState extends State<TurnReviewsSheet> {
             child: ListView(
               padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
               children: [
-                if (!host.online) const InlineNotice('电脑离线，审查会继续在电脑上运行。'),
+                if (!host.online) InlineNotice(tr("电脑离线，审查会继续在电脑上运行。")),
                 if (loading) const LinearProgressIndicator(),
                 if (!loading && executors.isEmpty)
-                  const InlineNotice('暂无可用的审查 Agent，请在电脑上连接或重新检测 Agent。'),
+                  InlineNotice(tr("暂无可用的审查 Agent，请在电脑上连接或重新检测 Agent。")),
                 if (executors.isNotEmpty)
                   DropdownButtonFormField<String>(
                     key: ValueKey('review-agent:${_key(executor!)}'),
                     initialValue: _key(executor!),
                     isExpanded: true,
-                    decoration: const InputDecoration(labelText: '审查使用的 Agent'),
+                    decoration: InputDecoration(labelText: tr("审查使用的 Agent")),
                     items: [
                       for (final e in executors)
                         DropdownMenuItem(
@@ -268,11 +270,13 @@ class _TurnReviewsSheetState extends State<TurnReviewsSheet> {
                   ),
                 const SizedBox(height: 12),
                 if (!loading && runs.isEmpty && readError == null)
-                  const Text('本轮尚未发起审查。'),
+                  Text(tr("本轮尚未发起审查。")),
                 for (final run in runs.reversed) ...[
                   ListTile(
                     contentPadding: EdgeInsets.zero,
-                    title: Text(reviewLabels[run['request']['kind']] ?? '历史审查'),
+                    title: Text(
+                      reviewLabels[run['request']['kind']] ?? tr("历史审查"),
+                    ),
                     subtitle: Text(
                       '${agentLabel(run['request']['executor']['providerId'] as String?)} · ${shortTime(DateTime.tryParse('${run['createdAt']}'))}',
                     ),
@@ -280,7 +284,7 @@ class _TurnReviewsSheetState extends State<TurnReviewsSheet> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          reviewStatuses[run['status']] ?? '状态未知',
+                          reviewStatuses[run['status']] ?? tr("状态未知"),
                           style: TextStyle(
                             color: run['status'] == 'completed'
                                 ? context.dc.accent

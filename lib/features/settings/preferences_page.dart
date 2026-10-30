@@ -1,8 +1,9 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'package:flutter/material.dart';
 import '../../app.dart';
+import '../../core/preferences.dart';
 import '../../ui/theme.dart';
 import '../../ui/widgets.dart';
-import 'service_status.dart';
 import 'offline_cache.dart';
 
 /// 12 偏好设置. Appearance swatches are fixed white / black and do not invert
@@ -11,24 +12,25 @@ class PreferencesPage extends StatelessWidget {
   const PreferencesPage({super.key});
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final scope = AppScope.of(context);
     final prefs = scope.preferences;
     return Scaffold(
-      appBar: const DetailBar(title: '偏好设置'),
+      appBar: DetailBar(title: tr("偏好设置")),
       body: ListenableBuilder(
         listenable: prefs,
         builder: (context, _) => ListView(
           padding: const EdgeInsets.only(bottom: 24),
           children: [
-            const SectionLabel('外观', top: 8),
+            SectionLabel(tr("外观"), top: 8),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: DcSpace.page),
               child: Row(
                 children: [
-                  for (final (mode, label) in const [
-                    (ThemeMode.system, '跟随系统'),
-                    (ThemeMode.light, '亮色'),
-                    (ThemeMode.dark, '暗色'),
+                  for (final (mode, label) in [
+                    (ThemeMode.system, tr("跟随系统")),
+                    (ThemeMode.light, tr("亮色")),
+                    (ThemeMode.dark, tr("暗色")),
                   ])
                     Expanded(
                       child: Padding(
@@ -44,39 +46,68 @@ class PreferencesPage extends StatelessWidget {
                 ],
               ),
             ),
-            const SectionLabel('连接'),
+            SectionLabel(tr("语言")),
             _Row(
-              icon: Icons.cloud_outlined,
-              title: '接入服务',
-              detail: scope.client?.origin.host ?? '未配置',
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute<void>(
-                  builder: (_) => Scaffold(
-                    appBar: const DetailBar(title: '接入服务'),
-                    body: ServiceStatus(client: scope.client),
-                  ),
-                ),
-              ),
+              icon: Icons.translate,
+              title: tr("语言"),
+              detail:
+                  appLanguages
+                      .where((l) => l.id == prefs.language)
+                      .firstOrNull
+                      ?.name ??
+                  tr("跟随系统"),
+              onTap: () => _pickLanguage(context, prefs),
             ),
-            const SectionLabel('电脑'),
+            SectionLabel(tr("电脑")),
             _Row(
               icon: Icons.devices_outlined,
-              title: '管理已绑定设备',
-              detail: '${scope.hub.hosts.length} 台',
+              title: tr("管理已绑定设备"),
+              detail: tr("{0} 台", [scope.hub.hosts.length]),
               onTap: () => Navigator.of(context).maybePop(),
             ),
             const SizedBox(height: 16),
-            const SectionLabel('本机数据'),
+            SectionLabel(tr("本机数据")),
             OfflineCacheSettings(hub: scope.hub),
-            const InlineNotice(
-              '无需注册账号：通过电脑上的配对二维码建立信任，可随时在电脑上撤销。'
-              '草稿和离线缓存保存在这部手机；提醒偏好可在电脑或会话菜单中设置。',
+            InlineNotice(
+              tr(
+                "无需注册账号：通过电脑上的配对二维码建立信任，可随时在电脑上撤销。草稿和离线缓存保存在这部手机；提醒偏好可在电脑或会话菜单中设置。",
+              ),
             ),
           ],
         ),
       ),
     );
   }
+}
+
+/// Language names stay in their own script so anyone can find theirs.
+Future<void> _pickLanguage(BuildContext context, AppPreferences prefs) async {
+  final options = <(String?, String)>[
+    (null, tr("跟随系统")),
+    for (final l in appLanguages) (l.id, l.name),
+  ];
+  final picked = await showModalBottomSheet<(String?,)>(
+    context: context,
+    showDragHandle: true,
+    isScrollControlled: true,
+    builder: (context) => SafeArea(
+      child: ListView(
+        shrinkWrap: true,
+        children: [
+          for (final (id, name) in options)
+            ListTile(
+              title: Text(name),
+              trailing: id == prefs.language
+                  ? Icon(Icons.check, color: context.dc.accent)
+                  : null,
+              selected: id == prefs.language,
+              onTap: () => Navigator.of(context).pop((id,)),
+            ),
+        ],
+      ),
+    ),
+  );
+  if (picked != null) await prefs.setLanguage(picked.$1);
 }
 
 class _ThemeTile extends StatelessWidget {
@@ -92,6 +123,7 @@ class _ThemeTile extends StatelessWidget {
   final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final c = context.dc;
     const white = Color(0xFFFFFFFF), black = Color(0xFF000000);
     final border = Border.all(color: const Color(0xFFBDBDBD));
@@ -156,21 +188,24 @@ class _Row extends StatelessWidget {
   final String? detail;
   final VoidCallback? onTap;
   @override
-  Widget build(BuildContext context) => InkWell(
-    onTap: onTap,
-    child: Container(
-      constraints: const BoxConstraints(minHeight: 52),
-      padding: const EdgeInsets.symmetric(horizontal: DcSpace.page),
-      child: Row(
-        children: [
-          Icon(icon, size: 22),
-          const SizedBox(width: 14),
-          Expanded(child: Text(title)),
-          if (detail != null)
-            Text(detail!, style: Theme.of(context).textTheme.bodySmall),
-          const Icon(Icons.chevron_right),
-        ],
+  Widget build(BuildContext context) {
+    watchAppLanguage(context);
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        constraints: const BoxConstraints(minHeight: 52),
+        padding: const EdgeInsets.symmetric(horizontal: DcSpace.page),
+        child: Row(
+          children: [
+            Icon(icon, size: 22),
+            const SizedBox(width: 14),
+            Expanded(child: Text(title)),
+            if (detail != null)
+              Text(detail!, style: Theme.of(context).textTheme.bodySmall),
+            const Icon(Icons.chevron_right),
+          ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 }

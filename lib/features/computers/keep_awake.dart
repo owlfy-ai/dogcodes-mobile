@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'package:flutter/material.dart';
 import '../../core/host_hub.dart';
 import '../../core/pc_api.dart';
@@ -96,6 +97,7 @@ class _KeepAwakeState extends State<KeepAwake>
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final online = widget.host.online;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -103,9 +105,9 @@ class _KeepAwakeState extends State<KeepAwake>
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
           dense: true,
-          title: const Text('任务或远控期间保持唤醒'),
+          title: Text(tr("任务或远控期间保持唤醒")),
           subtitle: Text(
-            !online ? '电脑离线，重连后刷新设置' : '阻止空闲睡眠，仍可锁屏或手动睡眠',
+            !online ? tr("电脑离线，重连后刷新设置") : tr("阻止空闲睡眠，仍可锁屏或手动睡眠"),
             style: Theme.of(context).textTheme.bodySmall,
           ),
           value: policy?['enabled'] == true,
@@ -115,13 +117,13 @@ class _KeepAwakeState extends State<KeepAwake>
         ),
         if (note != null) InlineNotice(note!),
         if (policy?['error'] is String)
-          InlineNotice('电脑暂未能保持唤醒：${policy!['error']}'),
+          InlineNotice(tr("电脑暂未能保持唤醒：{0}", [policy!['error']])),
         if (error != null)
           Row(
             children: [
               Expanded(child: InlineNotice(error!, danger: true)),
               IconButton(
-                tooltip: '刷新保持唤醒设置',
+                tooltip: tr("刷新保持唤醒设置"),
                 onPressed: online && !loading && !busy ? _load : null,
                 icon: const Icon(Icons.refresh),
               ),

@@ -125,4 +125,26 @@ void main() {
       expect(await operations.pending(), null);
     },
   );
+  test(
+    'an accepted approval stops waiting even before the agent gets it',
+    () async {
+      final operations = MobileOperations(Secrets(), 'host');
+      final api = Api((method, args) async {
+        if (method == 'prepare_approval_response') {
+          return {'operationId': args[0]['commandId'], 'taskId': 'task'};
+        }
+        if (method == 'execute') return {'accepted': true};
+        if (method == 'approval_receipt') return {'delivery': 'unknown'};
+        throw StateError('unexpected');
+      });
+      final receipt = await operations.approval(
+        api,
+        {'taskId': 'task', 'streamVersion': '9'},
+        {'turnId': 'turn', 'approvalId': 'a', 'requestedAtSequence': '8'},
+        'allow-once',
+      );
+      expect(receipt, {'delivery': 'unknown'});
+      expect(await operations.pending(), null);
+    },
+  );
 }

@@ -1,0 +1,3 @@
+"NSCameraUsageDescription" = "Scansiona il codice QR di associazione del computer o scatta una foto da allegare a un’attività.";
+"NSLocalNetworkUsageDescription" = "Connettiti in modo diretto e cifrato al computer associato per vedere le conversazioni e lavorare da remoto.";
+"NSPhotoLibraryUsageDescription" = "Scegli le foto da allegare alle attività sul tuo computer.";

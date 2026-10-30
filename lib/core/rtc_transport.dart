@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
@@ -314,7 +315,7 @@ _dial({
         answer['purpose'] != purpose ||
         jsonEncode(answer['noiseContext']) != jsonEncode(context) ||
         (answer['answer'] as Map)['type'] != 'answer') {
-      throw const ProtocolException('直连协商响应无效。');
+      throw ProtocolException(tr("直连协商响应无效。"));
     }
     await peer.setRemoteDescription(
       RTCSessionDescription(answer['answer']['sdp'] as String, 'answer'),

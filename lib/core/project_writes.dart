@@ -8,7 +8,7 @@ extension ProjectWrites on MobileOperations {
     required String path,
     String displayName = '',
   }) async {
-    if (path.isEmpty) throw const ProtocolException('请先选择电脑上的目录。');
+    if (path.isEmpty) throw ProtocolException(tr("请先选择电脑上的目录。"));
     final saved = <String, dynamic>{
       'kind': 'project',
       'request': {
@@ -32,13 +32,13 @@ extension ProjectWrites on MobileOperations {
       'offset': 0,
     });
     if (directory is! Map || directory['path'] != request['path']) {
-      throw const ProtocolException('原项目目录已变化，请核实原结果后重新选择。');
+      throw ProtocolException(tr("原项目目录已变化，请核实原结果后重新选择。"));
     }
     final registered = await _write(client, 'register_project', [
       request,
     ], saved: saved);
     if (registered is! Map || registered['projectId'] is! String) {
-      throw const ProtocolException('添加项目结果尚未确认，请核实原操作。');
+      throw ProtocolException(tr("添加项目结果尚未确认，请核实原操作。"));
     }
     final found = await verifyProject(
       client,
@@ -58,7 +58,7 @@ extension ProjectWrites on MobileOperations {
     final request = saved['request'] as Map;
     final snapshot = await client.call('bootstrap', null);
     if (snapshot is! Map || snapshot['projects'] is! List) {
-      throw const ProtocolException('无法核实电脑上的项目，请重新连接后再试。');
+      throw ProtocolException(tr("无法核实电脑上的项目，请重新连接后再试。"));
     }
     for (final project in snapshot['projects'] as List) {
       if (project is! Map || project['projectId'] is! String) continue;

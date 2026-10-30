@@ -7,6 +7,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   mobile_scanner: ^7.2.0
   crypto: ^3.0.7
   ffi: ^2.1.4
@@ -19,8 +21,6 @@ dependencies:
   image_picker: ^1.2.4
   path_provider: ^2.1.6
   mime: ^2.1.0
-  dogcodes_clipboard:
-    path: packages/dogcodes_clipboard
   dogcodes_video:
     path: packages/dogcodes_video
   aliyun_push: 1.2.0
@@ -36,3 +36,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/agents/
+    - assets/branding/launch-lockup.png

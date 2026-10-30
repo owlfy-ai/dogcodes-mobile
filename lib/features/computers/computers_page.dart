@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'package:flutter/material.dart';
 import '../../app.dart';
 import '../../core/host_hub.dart';
@@ -31,6 +32,7 @@ class ComputersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final scope = AppScope.of(context);
     final hub = scope.hub;
     final canPair = scope.client != null && scope.runtime != null;
@@ -40,15 +42,15 @@ class ComputersPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           RootHeader(
-            title: '电脑',
+            title: tr("电脑"),
             actions: [
               IconButton(
-                tooltip: '扫码连接',
+                tooltip: tr("扫码连接"),
                 onPressed: canPair ? () => pair(context, scan: true) : null,
                 icon: const Icon(Icons.qr_code_scanner),
               ),
               IconButton(
-                tooltip: '偏好设置',
+                tooltip: tr("偏好设置"),
                 onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute<void>(
                     builder: (_) => const PreferencesPage(),
@@ -62,18 +64,18 @@ class ComputersPage extends StatelessWidget {
             child: hub.loaded && hub.hosts.isEmpty
                 ? EmptyNote(
                     icon: Icons.devices_outlined,
-                    title: '把电脑上的工作带在身边',
-                    body: '连接自己的电脑，查看会话、发送任务并处理 Agent 的权限请求。无需注册账号。',
+                    title: tr("把电脑上的工作带在身边"),
+                    body: tr("连接自己的电脑，查看会话、发送任务并处理 Agent 的权限请求。无需注册账号。"),
                     action: FilledButton.icon(
                       onPressed: canPair ? () => pair(context) : null,
                       icon: const Icon(Icons.add),
-                      label: const Text('连接电脑'),
+                      label: Text(tr("连接电脑")),
                     ),
                     footnote:
                         hub.loadError ??
                         (scope.client == null
-                            ? '当前内测版本尚未配置接入服务。'
-                            : '在电脑端打开「连接手机」，扫描二维码。'),
+                            ? tr("当前内测版本尚未配置接入服务。")
+                            : tr("在电脑端打开「连接手机」，扫描二维码。")),
                   )
                 : ListView(
                     padding: const EdgeInsets.fromLTRB(
@@ -102,11 +104,11 @@ class ComputersPage extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text('连接电脑'),
+                                  Text(tr("连接电脑")),
                                   Text(
                                     canPair
-                                        ? '扫描电脑上的二维码，或粘贴配对链接'
-                                        : '当前内测版本尚未配置接入服务',
+                                        ? tr("扫描电脑上的二维码，或粘贴配对链接")
+                                        : tr("当前内测版本尚未配置接入服务"),
                                     style: Theme.of(
                                       context,
                                     ).textTheme.bodySmall,
@@ -132,13 +134,14 @@ class _HostCard extends StatelessWidget {
   final HostState host;
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final hub = AppScope.of(context).hub;
     final c = context.dc;
     final h = host;
     final status = switch (h.status) {
-      LinkStatus.online => const StatusLabel('在线', tone: Tone.accent),
-      LinkStatus.connecting => const StatusLabel('连接中'),
-      LinkStatus.offline => const StatusLabel('离线'),
+      LinkStatus.online => StatusLabel(tr("在线"), tone: Tone.accent),
+      LinkStatus.connecting => StatusLabel(tr("连接中")),
+      LinkStatus.offline => StatusLabel(tr("离线")),
     };
     final agents = h.installations;
     return Container(
@@ -165,7 +168,7 @@ class _HostCard extends StatelessWidget {
               status,
               const Spacer(),
               PopupMenuButton<String>(
-                tooltip: '更多',
+                tooltip: tr("更多"),
                 onSelected: (v) {
                   if (v == 'notifications') {
                     Navigator.of(context).push(
@@ -180,15 +183,16 @@ class _HostCard extends StatelessWidget {
                     showDialog<void>(
                       context: context,
                       builder: (dialog) => AlertDialog(
-                        title: Text('从这部手机移除「${h.name}」？'),
-                        content: const Text(
-                          '手机会删除这台电脑的配对凭证，之后需重新扫码才能连接。'
-                          '电脑上的任务不受影响；如需让电脑也拒绝这部手机，请在电脑的设备列表中撤销。',
+                        title: Text(tr("从这部手机移除「{0}」？", [h.name])),
+                        content: Text(
+                          tr(
+                            "手机会删除这台电脑的配对凭证，之后需重新扫码才能连接。电脑上的任务不受影响；如需让电脑也拒绝这部手机，请在电脑的设备列表中撤销。",
+                          ),
                         ),
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.of(dialog).pop(),
-                            child: const Text('取消'),
+                            child: Text(tr("取消")),
                           ),
                           TextButton(
                             onPressed: () async {
@@ -198,15 +202,17 @@ class _HostCard extends StatelessWidget {
                               } catch (_) {
                                 if (context.mounted) {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text('移除未完成，连接已关闭，请重试或核实安全存储。'),
+                                    SnackBar(
+                                      content: Text(
+                                        tr("移除未完成，连接已关闭，请重试或核实安全存储。"),
+                                      ),
                                     ),
                                   );
                                 }
                               }
                             },
                             child: Text(
-                              '移除',
+                              tr("移除"),
                               style: TextStyle(color: context.dc.removed),
                             ),
                           ),
@@ -218,15 +224,17 @@ class _HostCard extends StatelessWidget {
                     showDialog<void>(
                       context: context,
                       builder: (_) => AlertDialog(
-                        title: const Text('撤销绑定'),
+                        title: Text(tr("撤销绑定")),
                         content: Text(
-                          '请在「${h.name}」的设备列表中撤销这部手机。撤销后这部手机将无法再连接该电脑；'
-                          '电脑上正在执行的任务不受影响。',
+                          tr(
+                            "请在「{0}」的设备列表中撤销这部手机。撤销后这部手机将无法再连接该电脑；电脑上正在执行的任务不受影响。",
+                            [h.name],
+                          ),
                         ),
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.of(context).pop(),
-                            child: const Text('知道了'),
+                            child: Text(tr("知道了")),
                           ),
                         ],
                       ),
@@ -235,19 +243,16 @@ class _HostCard extends StatelessWidget {
                 },
                 itemBuilder: (_) => [
                   if (AppScope.of(context).runtime != null)
-                    const PopupMenuItem(
+                    PopupMenuItem(
                       value: 'notifications',
-                      child: Text('通知设置'),
+                      child: Text(tr("通知设置")),
                     ),
                   if (h.status == LinkStatus.offline)
-                    const PopupMenuItem(value: 'connect', child: Text('重新连接')),
+                    PopupMenuItem(value: 'connect', child: Text(tr("重新连接"))),
                   if (h.link != null)
-                    const PopupMenuItem(
-                      value: 'disconnect',
-                      child: Text('断开连接'),
-                    ),
-                  const PopupMenuItem(value: 'revoke', child: Text('撤销绑定')),
-                  const PopupMenuItem(value: 'forget', child: Text('从手机移除')),
+                    PopupMenuItem(value: 'disconnect', child: Text(tr("断开连接"))),
+                  PopupMenuItem(value: 'revoke', child: Text(tr("撤销绑定"))),
+                  PopupMenuItem(value: 'forget', child: Text(tr("从手机移除"))),
                 ],
               ),
             ],
@@ -270,7 +275,8 @@ class _HostCard extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 8),
                     child: Text(
                       [
-                        if (h.syncedAt != null) '最后同步 ${shortTime(h.syncedAt)}',
+                        if (h.syncedAt != null)
+                          tr("最后同步 {0}", [shortTime(h.syncedAt)]),
                         if (h.status == LinkStatus.offline && h.error != null)
                           h.error!,
                       ].join(' · '),
@@ -282,7 +288,7 @@ class _HostCard extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 8),
                     child: OutlinedButton(
                       onPressed: () => hub.connect(h),
-                      child: const Text('重新连接'),
+                      child: Text(tr("重新连接")),
                     ),
                   ),
                 // Remote desktop belongs to the device, never to an Agent.
@@ -295,7 +301,7 @@ class _HostCard extends StatelessWidget {
                         )
                       : null,
                   icon: const Icon(Icons.desktop_windows_outlined),
-                  label: Text(h.online ? '远程桌面' : '远程桌面 · 电脑离线'),
+                  label: Text(h.online ? tr("远程桌面") : tr("远程桌面 · 电脑离线")),
                 ),
                 if (h.online)
                   KeepAwake(key: ValueKey('awake-${h.id}'), host: h),
@@ -308,9 +314,9 @@ class _HostCard extends StatelessWidget {
                       quota: h.quotas[a['installationId']],
                     ),
                 ] else if (h.snapshot != null)
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(top: 12),
-                    child: Text('这台电脑上还没有检测到 Agent。'),
+                    child: Text(tr("这台电脑上还没有检测到 Agent。")),
                   ),
               ],
             ),
@@ -328,6 +334,7 @@ class _AgentStatus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    watchAppLanguage(context);
     final i = installation;
     final ready = i['status'] == 'ready';
     final version = i['version'] as String?;
@@ -353,7 +360,7 @@ class _AgentStatus extends StatelessWidget {
             const SizedBox(width: 12),
           ],
           StatusLabel(
-            ready ? '已就绪' : _status(i['status'] as String?),
+            ready ? tr("已就绪") : _status(i['status'] as String?),
             tone: ready ? Tone.accent : Tone.muted,
           ),
         ],
@@ -362,10 +369,10 @@ class _AgentStatus extends StatelessWidget {
   }
 
   String _status(String? s) => switch (s) {
-    'installed' => '已安装 · 未就绪',
-    'not_configured' => '需要在电脑上配置',
-    'unsupported_version' => '版本不支持',
-    'broken' => '异常',
-    _ => '不可用',
+    'installed' => tr("已安装 · 未就绪"),
+    'not_configured' => tr("需要在电脑上配置"),
+    'unsupported_version' => tr("版本不支持"),
+    'broken' => tr("异常"),
+    _ => tr("不可用"),
   };
 }

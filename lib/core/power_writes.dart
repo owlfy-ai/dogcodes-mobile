@@ -18,13 +18,13 @@ extension PowerWrites on MobileOperations {
         await client.call('power_preferences', null),
       );
       if (now['enabled'] == enabled) return now;
-      throw const ProtocolException('电脑没有收到这次设置，请再试一次。');
+      throw ProtocolException(tr("电脑没有收到这次设置，请再试一次。"));
     }
   }
 
   Map<String, dynamic> _keepAwakePolicy(dynamic value) {
     if (value is! Map || value['enabled'] is! bool) {
-      throw const ProtocolException('电脑返回的保持唤醒状态无效。');
+      throw ProtocolException(tr("电脑返回的保持唤醒状态无效。"));
     }
     return Map<String, dynamic>.from(value);
   }

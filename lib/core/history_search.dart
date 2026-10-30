@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
@@ -63,7 +64,7 @@ class HistorySearch extends ChangeNotifier {
     if (utf8.encode(query).length > 1024) {
       searching = false;
       notifyListeners();
-      throw const ProtocolException('关键词过长，请缩短后再搜索。');
+      throw ProtocolException(tr("关键词过长，请缩短后再搜索。"));
     }
     final online = sessions.where((s) => s.host.online).toList()
       ..sort((a, b) {
@@ -120,7 +121,7 @@ class HistorySearch extends ChangeNotifier {
       acquired = await _acquire(generation);
       if (!acquired) return;
       if (!host.online || link == null) {
-        throw const ProtocolException('电脑离线，连接后重试搜索。');
+        throw ProtocolException(tr("电脑离线，连接后重试搜索。"));
       }
       final value = await link.call('query_history', [
         {
@@ -134,22 +135,22 @@ class HistorySearch extends ChangeNotifier {
       ]);
       if (_disposed || generation != _generation) return;
       if (host.link != link || host.connectionEpoch != epoch || !host.online) {
-        throw const ProtocolException('连接已更换，请重试本次搜索。');
+        throw ProtocolException(tr("连接已更换，请重试本次搜索。"));
       }
       if (value is! Map ||
           value['items'] is! List ||
           value['throughSequence'] == null) {
-        throw const ProtocolException('电脑未返回可用的历史搜索结果。');
+        throw ProtocolException(tr("电脑未返回可用的历史搜索结果。"));
       }
       final next = value['nextCursor'] == null
           ? null
           : int.parse('${value['nextCursor']}');
       if (next != null && next <= (group.next ?? 0)) {
-        throw const ProtocolException('历史搜索游标没有前进，请重新搜索。');
+        throw ProtocolException(tr("历史搜索游标没有前进，请重新搜索。"));
       }
       final through = int.parse('${value['throughSequence']}');
       if (group.through != null && through != group.through) {
-        throw const ProtocolException('历史搜索范围发生变化，请重新搜索。');
+        throw ProtocolException(tr("历史搜索范围发生变化，请重新搜索。"));
       }
       final known = group.items.map((i) => '${i['sequence']}').toSet();
       for (final raw in value['items'] as List) {

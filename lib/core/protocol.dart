@@ -1,11 +1,14 @@
+import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:convert';
+import 'service_origin.dart';
 
 const protocolVersion = 1;
 const maxFrameBytes = 262144;
 
 class ProtocolException implements Exception {
-  const ProtocolException(this.message);
-  final String message;
+  const ProtocolException(this.rawMessage);
+  final String rawMessage;
+  String get message => tr(rawMessage);
   @override
   String toString() => message;
 }
@@ -21,7 +24,7 @@ class ServiceInfo {
         service != 'dogcodes-access' ||
         frameLimit < 1 ||
         frameLimit > maxFrameBytes) {
-      throw const ProtocolException('服务版本不兼容，请更新 App 或服务端。');
+      throw ProtocolException(tr("服务版本不兼容，请更新 App 或服务端。"));
     }
   }
   final int version;
@@ -59,7 +62,7 @@ class PairingInvitation implements PairingPins {
     bool allowLocalDevelopment = false,
   }) {
     if (input.length > 4096) {
-      throw const ProtocolException('二维码内容过长。');
+      throw ProtocolException(tr("二维码内容过长。"));
     }
     final uri = Uri.tryParse(input);
     if (uri == null ||
@@ -70,7 +73,7 @@ class PairingInvitation implements PairingPins {
         uri.userInfo.isNotEmpty ||
         uri.hasPort ||
         uri.fragment.isEmpty) {
-      throw const ProtocolException('不是 DogCodes 配对二维码。');
+      throw ProtocolException(tr("不是 DogCodes 配对二维码。"));
     }
     try {
       final bytes = base64Url.decode(base64Url.normalize(uri.fragment));
@@ -86,26 +89,23 @@ class PairingInvitation implements PairingPins {
       final invitationId = data['invitationId'] as String;
       if (data['version'] != protocolVersion ||
           service != trustedService ||
-          (service.scheme != 'https' &&
-              !(allowLocalDevelopment &&
-                  service.scheme == 'http' &&
-                  service.host == '127.0.0.1')) ||
-          service.userInfo.isNotEmpty ||
-          service.hasQuery ||
-          service.hasFragment ||
+          !validServiceOrigin(
+            service,
+            allowLocalDevelopment: allowLocalDevelopment,
+          ) ||
           !RegExp(r'^[A-Za-z0-9_-]{1,128}$').hasMatch(hostId) ||
           !RegExp(r'^[A-Za-z0-9_-]{1,128}$').hasMatch(invitationId) ||
           base64Url.decode(base64Url.normalize(hostKey)).length != 32 ||
           base64Url.decode(base64Url.normalize(secret)).length != 32) {
-        throw const ProtocolException('配对二维码无效，或来自未配置的服务。');
+        throw ProtocolException(tr("配对二维码无效，或来自未配置的服务。"));
       }
       if (!expiresAt.isAfter(now)) {
-        throw const ProtocolException('配对二维码已过期，请在电脑上重新生成。');
+        throw ProtocolException(tr("配对二维码已过期，请在电脑上重新生成。"));
       }
       // Small clock differences must not reject a freshly generated five-minute
       // QR. The PC/server still enforce its original expiry, with no extension.
       if (expiresAt.difference(now) > const Duration(minutes: 5, seconds: 30)) {
-        throw const ProtocolException('设备时间不一致，请校准手机和电脑时间后重试。');
+        throw ProtocolException(tr("设备时间不一致，请校准手机和电脑时间后重试。"));
       }
       return PairingInvitation._(
         hostId,
@@ -119,7 +119,7 @@ class PairingInvitation implements PairingPins {
     } on ProtocolException {
       rethrow;
     } catch (_) {
-      throw const ProtocolException('无法读取配对二维码。');
+      throw ProtocolException(tr("无法读取配对二维码。"));
     }
   }
   @override
@@ -140,11 +140,11 @@ class PairingInvitation implements PairingPins {
 /// Cursors are decimal strings on the remote wire, never JSON doubles.
 BigInt parseSequence(String value) {
   if (!RegExp(r'^(0|[1-9][0-9]*)$').hasMatch(value)) {
-    throw const ProtocolException('事件游标格式无效。');
+    throw ProtocolException(tr("事件游标格式无效。"));
   }
   final result = BigInt.parse(value);
   if (result > BigInt.parse('18446744073709551615')) {
-    throw const ProtocolException('事件游标超出范围。');
+    throw ProtocolException(tr("事件游标超出范围。"));
   }
   return result;
 }
