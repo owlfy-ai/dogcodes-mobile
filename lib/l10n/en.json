@@ -14,6 +14,8 @@
   "套餐内（终端读数）": "Included plan (terminal reading)",
   "套餐内（Kiro）": "Included plan (Kiro)",
   "额度已用尽": "Quota exhausted",
+  "用尽": "None",
+  "其他": "Other",
   "额度暂无读数": "Quota unavailable",
   "{0}剩余额度 {1}%": "{0}{1}% remaining",
   "重置时间：{0}": "Resets: {0}",

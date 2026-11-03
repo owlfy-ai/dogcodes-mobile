@@ -919,7 +919,7 @@ class _ConversationPageState extends State<ConversationPage> {
                 !draft.uploading &&
                 !draft.picking &&
                 draft.choiceValid,
-            quota: QuotaReading.from(
+            quota: QuotaMeter.from(
               h.quotas[choice?.executor['installationId']],
             ),
             loading: choice == null && h.online,
@@ -1010,7 +1010,7 @@ class _Composer extends StatelessWidget {
   final AgentChoice? choice;
   final Widget attachments;
   final bool hasAttachments, canSend;
-  final QuotaReading? quota;
+  final QuotaMeter? quota;
   final bool loading;
   final bool sending, enabled;
   final VoidCallback onSend;

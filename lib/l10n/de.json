@@ -14,6 +14,8 @@
   "套餐内（终端读数）": "Im Tarif enthalten (Terminalwert)",
   "套餐内（Kiro）": "Im Tarif enthalten (Kiro)",
   "额度已用尽": "Kontingent aufgebraucht",
+  "用尽": "Leer",
+  "其他": "Andere",
   "额度暂无读数": "Kontingent nicht verfügbar",
   "{0}剩余额度 {1}%": "{0}{1} % verbleibend",
   "重置时间：{0}": "Zurückgesetzt: {0}",

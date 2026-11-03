@@ -14,6 +14,8 @@
   "套餐内（终端读数）": "Inclus dans l’offre (relevé du terminal)",
   "套餐内（Kiro）": "Inclus dans l’offre (Kiro)",
   "额度已用尽": "Quota épuisé",
+  "用尽": "Fin",
+  "其他": "Autres",
   "额度暂无读数": "Quota indisponible",
   "{0}剩余额度 {1}%": "{0}{1} % restant",
   "重置时间：{0}": "Réinitialisation : {0}",

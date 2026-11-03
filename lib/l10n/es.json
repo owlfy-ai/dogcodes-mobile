@@ -14,6 +14,8 @@
   "套餐内（终端读数）": "Incluido en el plan (lectura del terminal)",
   "套餐内（Kiro）": "Incluido en el plan (Kiro)",
   "额度已用尽": "Cuota agotada",
+  "用尽": "Fin",
+  "其他": "Otros",
   "额度暂无读数": "Cuota no disponible",
   "{0}剩余额度 {1}%": "{0}{1} % restante",
   "重置时间：{0}": "Se restablece: {0}",

@@ -338,9 +338,10 @@ class _AgentStatus extends StatelessWidget {
     final i = installation;
     final ready = i['status'] == 'ready';
     final version = i['version'] as String?;
-    final reading = QuotaReading.from(quota);
+    final meter = QuotaMeter.from(quota);
+    final showsFigure = meter?.showsFigure ?? false;
     return Padding(
-      padding: const EdgeInsets.only(top: 10),
+      padding: const EdgeInsets.symmetric(vertical: 12),
       child: Row(
         children: [
           AgentGlyph(providerId: i['providerId'] as String?, size: 32),
@@ -355,14 +356,15 @@ class _AgentStatus extends StatelessWidget {
               ],
             ),
           ),
-          if (reading != null) ...[
-            QuotaRing(reading: reading),
-            const SizedBox(width: 12),
+          if (meter != null) ...[
+            QuotaBars(meter: meter),
+            if (!showsFigure || !ready) const SizedBox(width: 12),
           ],
-          StatusLabel(
-            ready ? tr("已就绪") : _status(i['status'] as String?),
-            tone: ready ? Tone.accent : Tone.muted,
-          ),
+          if (!ready || !showsFigure)
+            StatusLabel(
+              ready ? tr("已就绪") : _status(i['status'] as String?),
+              tone: ready ? Tone.accent : Tone.muted,
+            ),
         ],
       ),
     );

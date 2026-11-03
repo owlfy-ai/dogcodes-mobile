@@ -1,10 +1,9 @@
 import 'package:dogcodes_app/l10n/strings.dart';
-import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'theme.dart';
 
-/// Remaining-quota ring, ported from the desktop (AgentQuotaRing.tsx and
-/// quotaPresentation.ts) so both clients pick the same window and colours.
+/// Remaining-quota bars, ported from the desktop picker (AgentQuotaRing.tsx
+/// and quotaPresentation.ts) so both clients list the same windows.
 class QuotaReading {
   QuotaReading({
     required this.remaining,
@@ -156,94 +155,387 @@ class QuotaReading {
     return parts.join('，');
   }
 
-  static String _time(DateTime t) {
-    String two(int n) => n.toString().padLeft(2, '0');
-    final now = DateTime.now();
-    final hm = '${two(t.hour)}:${two(t.minute)}';
-    return t.year == now.year && t.month == now.month && t.day == now.day
-        ? hm
-        : tr("{0}月{1}日 {2}", [t.month, t.day, hm]);
+  static String _time(DateTime t) => _quotaClock(t);
+}
+
+String _quotaClock(DateTime t) {
+  String two(int n) => n.toString().padLeft(2, '0');
+  final now = DateTime.now();
+  final hm = '${two(t.hour)}:${two(t.minute)}';
+  return t.year == now.year && t.month == now.month && t.day == now.day
+      ? hm
+      : tr("{0}月{1}日 {2}", [t.month, t.day, hm]);
+}
+
+/// One picker row: a window label and bar, a balance amount, or "?".
+class QuotaMeterRow {
+  const QuotaMeterRow({
+    required this.text,
+    this.label,
+    this.remaining,
+    this.amount = false,
+    this.detail,
+  });
+
+  final String? label;
+  final double? remaining;
+  final String text;
+  final bool amount;
+  final String? detail;
+}
+
+/// Every window the desktop picker shows for one agent.
+class QuotaMeter {
+  QuotaMeter(this.rows);
+  final List<QuotaMeterRow> rows;
+
+  /// A window or a balance is on screen, so Ready is redundant even when the
+  /// reading itself is unknown.
+  bool get showsFigure => rows.any((row) => row.amount || row.label != null);
+
+  String get description =>
+      rows.map((row) => row.detail ?? row.text).join('\n');
+
+  static const _billing = {
+    'cursor-included',
+    'cursor-models',
+    'cursor-other-models',
+    'kiro-included',
+  };
+
+  /// [view] is one `quota_snapshots_for` entry. Null when the PC sent no quota.
+  static QuotaMeter? from(Map<String, dynamic>? view, {DateTime? now}) {
+    final quota = view?['quota'];
+    if (quota is! Map) return null;
+    final providerId = '${view?['providerId'] ?? ''}';
+    final windows = [
+      for (final w in (quota['windows'] as List? ?? const []))
+        if (w is Map) Map<String, dynamic>.from(w),
+    ];
+    final picked = _pickerWindows(windows, providerId);
+    if (picked.isEmpty) {
+      final amounts = [
+        for (final b in (quota['balances'] as List? ?? const []))
+          if (b is Map && b['amount'] is num)
+            QuotaMeterRow(
+              text: _balance(b['amount'] as num, '${b['currency'] ?? ''}'),
+              amount: true,
+            ),
+      ];
+      if (amounts.isNotEmpty) return QuotaMeter(amounts);
+      return QuotaMeter([QuotaMeterRow(text: '?', detail: tr("额度暂无读数"))]);
+    }
+    final at = now ?? DateTime.now();
+    return QuotaMeter([for (final w in picked) _meterRow(w, providerId, at)]);
+  }
+
+  static List<Map<String, dynamic>> _pickerWindows(
+    List<Map<String, dynamic>> windows,
+    String providerId,
+  ) {
+    if (providerId == 'cursor') {
+      return [
+        for (final id in ['cursor-models', 'cursor-other-models'])
+          ...windows.where((w) => w['id'] == id),
+      ];
+    }
+    if (providerId == 'antigravity') {
+      return _byLength(
+        windows
+            .where(
+              (w) =>
+                  w['scope'] == 'Gemini Models' ||
+                  '${w['id'] ?? ''}'.startsWith('Gemini Models:'),
+            )
+            .toList(),
+      );
+    }
+    if (providerId == 'opencode') {
+      final go = windows
+          .where((w) => '${w['id'] ?? ''}'.startsWith('opencode-go-'))
+          .toList();
+      return _byLength(go.isNotEmpty ? go : windows);
+    }
+    final account = windows.where((w) => w['scope'] == null).toList();
+    final included = windows.every(
+      (w) =>
+          w['scope'] == '套餐内（终端读数）' ||
+          (w['id'] == 'kiro-included' && w['scope'] == '套餐内（Kiro）'),
+    );
+    final pool = account.isNotEmpty
+        ? account
+        : included
+        ? windows
+        : <Map<String, dynamic>>[];
+    return _byLength(pool);
+  }
+
+  static int _rank(Map<String, dynamic> w) {
+    final minutes = (w['windowMinutes'] as num?)?.toInt() ?? 0;
+    return minutes == 0 ? 1 << 30 : minutes;
+  }
+
+  static List<Map<String, dynamic>> _byLength(
+    List<Map<String, dynamic>> windows,
+  ) {
+    final copy = [...windows];
+    copy.sort((a, b) => _rank(a).compareTo(_rank(b)));
+    return copy;
+  }
+
+  static QuotaMeterRow _meterRow(
+    Map<String, dynamic> window,
+    String providerId,
+    DateTime at,
+  ) {
+    final resets = window['resetsAtUnix'];
+    final resetAt = resets is num
+        ? DateTime.fromMillisecondsSinceEpoch(resets.toInt() * 1000)
+        : null;
+    final pending = resetAt != null && !resetAt.isAfter(at);
+    final remaining = pending
+        ? null
+        : QuotaReading._remaining(window['usedPercent']);
+    final label = _label(window, providerId);
+    final text = remaining == null
+        ? '?'
+        : remaining == 0
+        ? tr("用尽")
+        : _percentText(remaining);
+    final head = remaining == null
+        ? tr("额度暂无读数")
+        : remaining == 0
+        ? tr("额度已用尽")
+        : tr("{0}剩余额度 {1}%", [label, remaining.round()]);
+    final detail = resetAt == null
+        ? '$label $head'.trim()
+        : '$label $head，${tr("重置时间：{0}", [_quotaClock(resetAt)])}'.trim();
+    return QuotaMeterRow(
+      label: label,
+      remaining: remaining,
+      text: text,
+      detail: detail,
+    );
+  }
+
+  static String _label(Map<String, dynamic> window, String providerId) {
+    final id = '${window['id'] ?? ''}';
+    if (providerId == 'cursor' && id == 'cursor-models') return 'Cursor';
+    if (providerId == 'cursor' && id == 'cursor-other-models') return tr("其他");
+    final minutes = (window['windowMinutes'] as num?)?.toInt();
+    if (id == 'opencode-go-monthly' || _billing.contains(id)) return tr("每月");
+    return switch (minutes) {
+      300 => tr("5 小时"),
+      10080 => tr("每周"),
+      0 => tr("当前账期"),
+      _ => tr("{0} 分钟", [minutes]),
+    };
+  }
+
+  static String _percentText(double remaining) {
+    if (remaining > 0 && remaining < 1) return '<1%';
+    final rounded = (remaining * 10).round() / 10;
+    if (rounded == rounded.roundToDouble()) return '${rounded.round()}%';
+    return '$rounded%';
+  }
+
+  static String _balance(num amount, String currency) {
+    if (amount > 0 && amount < 0.000001) return '$currency <0.000001';
+    final abs = amount.abs();
+    final digits = abs != 0 && abs < 0.01 ? 6 : 2;
+    return '$currency ${amount.toStringAsFixed(digits)}'.trim();
   }
 }
 
-/// Compact ring + percentage. Long-press shows the window and reset time.
-class QuotaRing extends StatelessWidget {
-  const QuotaRing({super.key, required this.reading, this.showValue = true});
-  final QuotaReading reading;
-  final bool showValue;
+Color _quotaColor(double remaining) => remaining > 50
+    ? const Color(0xFF34A853)
+    : remaining > 20
+    ? const Color(0xFFE2B96F)
+    : const Color(0xFFD93025);
+
+/// Label, thin bar and remaining text. Long-press shows the reset time.
+/// [compact] hugs the window name, for the composer chip.
+class QuotaBars extends StatelessWidget {
+  const QuotaBars({super.key, required this.meter, this.compact = false});
+  final QuotaMeter meter;
+  final bool compact;
+
   @override
   Widget build(BuildContext context) {
     watchAppLanguage(context);
     final c = context.dc;
-    final color = reading.color(c);
+    final lone =
+        meter.rows.length == 1 &&
+        meter.rows.single.label == null &&
+        !meter.rows.single.amount;
     return Tooltip(
-      message: reading.description,
+      message: meter.description,
       triggerMode: TooltipTriggerMode.longPress,
       child: Semantics(
-        label: reading.description,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            CustomPaint(
-              size: const Size.square(18),
-              painter: _RingPainter(
-                fraction: (reading.remaining ?? 0) / 100,
-                color: color,
-                track: c.secondary.withValues(alpha: 0.3),
+        label: meter.description,
+        child: compact && meter.rows.any((row) => row.label != null)
+            ? _CompactQuota(rows: meter.rows)
+            : Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  for (final row in meter.rows) ...[
+                    if (row != meter.rows.first) const SizedBox(height: 7),
+                    if (lone)
+                      Text(
+                        row.text,
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: c.secondary,
+                          fontFeatures: const [FontFeature.tabularFigures()],
+                        ),
+                      )
+                    else if (row.amount)
+                      Text(
+                        row.text,
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: c.secondary,
+                          fontFeatures: const [FontFeature.tabularFigures()],
+                        ),
+                      )
+                    else
+                      _QuotaBar(row: row),
+                  ],
+                ],
               ),
-            ),
-            if (showValue) ...[
-              const SizedBox(width: 4),
-              Text(
-                reading.valueText,
-                style: TextStyle(
-                  fontSize: 13,
-                  color: reading.exhausted ? color : c.secondary,
-                  fontFeatures: const [FontFeature.tabularFigures()],
-                ),
-              ),
-            ],
-          ],
-        ),
       ),
     );
   }
 }
 
-class _RingPainter extends CustomPainter {
-  _RingPainter({
-    required this.fraction,
-    required this.color,
-    required this.track,
-  });
-  final double fraction;
-  final Color color, track;
-  @override
-  void paint(Canvas canvas, Size size) {
-    // Same proportions as the desktop SVG: r=7, stroke 2.5 in a 20 box.
-    final scale = size.width / 20;
-    final rect = Rect.fromCircle(
-      center: size.center(Offset.zero),
-      radius: 7 * scale,
-    );
-    final stroke = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2.5 * scale;
-    canvas.drawArc(rect, 0, math.pi * 2, false, stroke..color = track);
-    if (fraction > 0) {
-      canvas.drawArc(
-        rect,
-        -math.pi / 2,
-        math.pi * 2 * fraction.clamp(0, 1),
-        false,
-        stroke
-          ..color = color
-          ..strokeCap = StrokeCap.round,
-      );
-    }
-  }
+/// Window names sit in their own column, only as wide as the longest label.
+class _CompactQuota extends StatelessWidget {
+  const _CompactQuota({required this.rows});
+  final List<QuotaMeterRow> rows;
 
   @override
-  bool shouldRepaint(_RingPainter old) =>
-      old.fraction != fraction || old.color != color || old.track != track;
+  Widget build(BuildContext context) {
+    final c = context.dc;
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            for (var i = 0; i < rows.length; i++) ...[
+              if (i > 0) const SizedBox(height: 7),
+              SizedBox(
+                height: 16,
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    rows[i].label ?? '',
+                    style: TextStyle(
+                      fontSize: 12,
+                      height: 1,
+                      color: c.secondary,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ],
+        ),
+        const SizedBox(width: 6),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            for (var i = 0; i < rows.length; i++) ...[
+              if (i > 0) const SizedBox(height: 7),
+              _QuotaTrack(row: rows[i]),
+            ],
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _QuotaBar extends StatelessWidget {
+  const _QuotaBar({required this.row});
+  final QuotaMeterRow row;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.dc;
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SizedBox(
+          width: 68,
+          child: Text(
+            row.label ?? '',
+            textAlign: TextAlign.right,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(fontSize: 12, height: 1.3, color: c.secondary),
+          ),
+        ),
+        const SizedBox(width: 8),
+        _QuotaTrack(row: row),
+      ],
+    );
+  }
+}
+
+class _QuotaTrack extends StatelessWidget {
+  const _QuotaTrack({required this.row});
+  final QuotaMeterRow row;
+
+  @override
+  Widget build(BuildContext context) {
+    final c = context.dc;
+    final remaining = row.remaining;
+    final color = remaining == null ? c.secondary : _quotaColor(remaining);
+    final fraction = ((remaining ?? 0) / 100).clamp(0.0, 1.0);
+    return SizedBox(
+      height: 16,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            width: 64,
+            height: 5,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(99),
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  ColoredBox(color: c.secondary.withValues(alpha: 0.28)),
+                  FractionallySizedBox(
+                    alignment: Alignment.centerLeft,
+                    widthFactor: fraction,
+                    child: ColoredBox(
+                      color: remaining == null ? Colors.transparent : color,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(width: 8),
+          SizedBox(
+            width: 48,
+            child: Text(
+              row.text,
+              textAlign: TextAlign.right,
+              maxLines: 1,
+              style: TextStyle(
+                fontSize: 13,
+                height: 1.3,
+                color: color,
+                fontFeatures: const [FontFeature.tabularFigures()],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

@@ -213,7 +213,7 @@ class _AgentSheetState extends State<_AgentSheet> {
                 for (final e in widget.host.executors)
                   _AgentRow(
                     executor: e,
-                    quota: QuotaReading.from(
+                    quota: QuotaMeter.from(
                       widget.host.quotas[e['installationId']],
                     ),
                     selected: sameExecutor(e, selected?.executor),
@@ -289,7 +289,7 @@ class _AgentRow extends StatelessWidget {
     this.quota,
   });
   final Map<String, dynamic> executor;
-  final QuotaReading? quota;
+  final QuotaMeter? quota;
   final bool selected;
   final VoidCallback onTap;
   @override
@@ -320,7 +320,7 @@ class _AgentRow extends StatelessWidget {
               ),
             ),
             if (quota != null) ...[
-              QuotaRing(reading: quota!),
+              QuotaBars(meter: quota!),
               const SizedBox(width: 12),
             ],
             Icon(
@@ -345,7 +345,7 @@ class AgentChips extends StatelessWidget {
     this.loading = false,
   });
   final AgentChoice? choice;
-  final QuotaReading? quota;
+  final QuotaMeter? quota;
   final bool loading;
   final VoidCallback? onTap;
   @override
@@ -373,7 +373,7 @@ class AgentChips extends StatelessWidget {
 class _Chip extends StatelessWidget {
   const _Chip(this.label, this.onTap, {this.quota});
   final String label;
-  final QuotaReading? quota;
+  final QuotaMeter? quota;
   final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
@@ -395,8 +395,8 @@ class _Chip extends StatelessWidget {
             children: [
               Text(label, style: const TextStyle(fontSize: 13)),
               if (quota != null) ...[
-                const SizedBox(width: 8),
-                QuotaRing(reading: quota!),
+                const SizedBox(width: 6),
+                QuotaBars(meter: quota!, compact: true),
               ],
               const SizedBox(width: 2),
               const Icon(Icons.expand_more, size: 16),

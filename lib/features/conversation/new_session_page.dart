@@ -313,11 +313,11 @@ class _NewSessionPageState extends State<NewSessionPage> {
                                 ],
                               ),
                             ),
-                            if (QuotaReading.from(
+                            if (QuotaMeter.from(
                                   h?.quotas[choice?.executor['installationId']],
                                 )
                                 case final q?) ...[
-                              QuotaRing(reading: q),
+                              QuotaBars(meter: q),
                               const SizedBox(width: 8),
                             ],
                             Icon(Icons.chevron_right, color: c.secondary),
