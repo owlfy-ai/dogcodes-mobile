@@ -57,6 +57,7 @@ class _ConversationPageState extends State<ConversationPage> {
   AgentChoice? get choice => draft.choice;
   set choice(AgentChoice? value) => draft.choice = value;
   bool loading = true, sending = false, stopping = false;
+  String? _sendingProviderId;
   String? error;
   int _epoch = -1;
   bool _tailUnsupported = false, _loadingEarlier = false;
@@ -608,6 +609,7 @@ class _ConversationPageState extends State<ConversationPage> {
     _toEnd();
     setState(() {
       sending = true;
+      _sendingProviderId = c.executor['providerId'] as String?;
       error = null;
     });
     try {
@@ -625,7 +627,7 @@ class _ConversationPageState extends State<ConversationPage> {
           'prompt': text,
           'model': c.model,
           'thinking': c.thinking,
-          'permissionMode': null,
+          'permissionMode': c.effectivePermission,
           'attachments': attachments,
         },
       }, draft: identity);
@@ -641,7 +643,12 @@ class _ConversationPageState extends State<ConversationPage> {
       error = '$e';
     } finally {
       await hub.refresh(h);
-      if (mounted) setState(() => sending = false);
+      if (mounted) {
+        setState(() {
+          sending = false;
+          _sendingProviderId = null;
+        });
+      }
     }
   }
 
@@ -678,7 +685,16 @@ class _ConversationPageState extends State<ConversationPage> {
       for (final a in h.approvals[widget.taskId] ?? const [])
         if (t != null) ApprovalRef(h, t, a),
     ];
-    final running = t?['activePrimaryRun'] != null;
+    final run = t?['activePrimaryRun'] as Map?;
+    final running = run != null;
+    final connecting = running
+        ? const {'queued', 'starting'}.contains(run['state'])
+        : sending;
+    final providerId =
+        (run?['executor'] as Map?)?['providerId'] as String? ??
+        _sendingProviderId ??
+        (t?['preferredExecutor'] as Map?)?['providerId'] as String? ??
+        choice?.executor['providerId'] as String?;
     final recoveryCards = <Widget>[
       for (final cancellation in h.pendingCancellations.where(
         (c) => c['taskId'] == widget.taskId,
@@ -831,7 +847,7 @@ class _ConversationPageState extends State<ConversationPage> {
                       final children = <Widget>[
                         ...head,
                         ...entries.widgets,
-                        if (running && h.online)
+                        if ((running || sending) && h.online)
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 8),
                             child: Row(
@@ -843,9 +859,17 @@ class _ConversationPageState extends State<ConversationPage> {
                                   ),
                                 ),
                                 const SizedBox(width: 10),
-                                Text(
-                                  tr("Agent 正在电脑上工作…"),
-                                  style: Theme.of(context).textTheme.bodySmall,
+                                Flexible(
+                                  child: Text(
+                                    connecting
+                                        ? tr("正在连接{0}", [
+                                            agentLabel(providerId),
+                                          ])
+                                        : tr("正在响应"),
+                                    style: Theme.of(
+                                      context,
+                                    ).textTheme.bodySmall,
+                                  ),
                                 ),
                               ],
                             ),
@@ -908,8 +932,7 @@ class _ConversationPageState extends State<ConversationPage> {
           _Composer(
             controller: prompt,
             choice: choice,
-            attachments: ComposerAttachments(draft: draft, enabled: !sending),
-            hasAttachments: draft.attachments.isNotEmpty,
+            draft: draft,
             canSend:
                 h.online &&
                 t != null &&
@@ -921,6 +944,7 @@ class _ConversationPageState extends State<ConversationPage> {
                 draft.choiceValid,
             quota: QuotaMeter.from(
               h.quotas[choice?.executor['installationId']],
+              composer: true,
             ),
             loading: choice == null && h.online,
             sending: sending,
@@ -990,12 +1014,11 @@ class _OfflineBar extends StatelessWidget {
   }
 }
 
-class _Composer extends StatelessWidget {
+class _Composer extends StatefulWidget {
   const _Composer({
     required this.controller,
     required this.choice,
-    required this.attachments,
-    required this.hasAttachments,
+    required this.draft,
     required this.canSend,
     this.quota,
     this.loading = false,
@@ -1008,8 +1031,8 @@ class _Composer extends StatelessWidget {
   });
   final TextEditingController controller;
   final AgentChoice? choice;
-  final Widget attachments;
-  final bool hasAttachments, canSend;
+  final ComposerState draft;
+  final bool canSend;
   final QuotaMeter? quota;
   final bool loading;
   final bool sending, enabled;
@@ -1018,83 +1041,153 @@ class _Composer extends StatelessWidget {
   final bool running;
   final VoidCallback? onPick;
   @override
+  State<_Composer> createState() => _ComposerState();
+}
+
+class _ComposerState extends State<_Composer> {
+  static const _inset = 8.0, _gap = 6.0;
+  final _focus = FocusNode();
+
+  /// Width of each side of the bottom row: the send button, plus stop while
+  /// a run is active. The attach side gets the same width.
+  double get _side => widget.running ? DcSpace.touch * 2 + _gap : DcSpace.touch;
+
+  @override
+  void dispose() {
+    _focus.dispose();
+    super.dispose();
+  }
+
+  void _edit() {
+    if (!widget.enabled || _focus.hasFocus) return;
+    _focus.requestFocus();
+  }
+
+  @override
   Widget build(BuildContext context) {
     watchAppLanguage(context);
     final c = context.dc;
+    final keyboard = MediaQuery.viewInsetsOf(context).bottom > 0;
     return SafeArea(
       top: false,
-      child: Container(
-        margin: const EdgeInsets.fromLTRB(12, 4, 12, 8),
-        padding: const EdgeInsets.fromLTRB(12, 8, 8, 8),
-        decoration: BoxDecoration(
-          color: c.canvas,
-          border: Border.all(color: c.line),
-          borderRadius: BorderRadius.circular(DcSpace.composer),
-        ),
-        child: Column(
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: controller,
-                    minLines: 1,
-                    maxLines: MediaQuery.viewInsetsOf(context).bottom > 0
-                        ? 3
-                        : 6,
-                    enabled: enabled,
-                    decoration: InputDecoration(
-                      hintText: tr("继续交给 Agent…"),
-                      filled: false,
-                      contentPadding: EdgeInsets.symmetric(vertical: 10),
-                    ),
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: _edit,
+        child: Container(
+          margin: const EdgeInsets.fromLTRB(12, 4, 12, 8),
+          // The bottom row's buttons sit the same distance from the left,
+          // right and bottom edges; the text keeps its own wider inset.
+          padding: const EdgeInsets.all(_inset),
+          decoration: BoxDecoration(
+            color: c.canvas,
+            border: Border.all(color: c.line),
+            borderRadius: BorderRadius.circular(DcSpace.composer),
+          ),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(6, 2, 6, 4),
+                child: TextField(
+                  controller: widget.controller,
+                  focusNode: _focus,
+                  minLines: 3,
+                  maxLines: keyboard ? 6 : 8,
+                  enabled: widget.enabled,
+                  textAlignVertical: TextAlignVertical.top,
+                  decoration: InputDecoration(
+                    hintText: tr("继续交给 Agent…"),
+                    filled: false,
+                    isCollapsed: true,
+                    contentPadding: const EdgeInsets.symmetric(vertical: 6),
+                    border: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
                   ),
                 ),
-                const SizedBox(width: 6),
-                if (running)
-                  Padding(
-                    padding: const EdgeInsets.only(right: 6),
-                    child: IconButton.outlined(
-                      tooltip: tr("停止"),
-                      onPressed: onStop,
-                      icon: const Icon(Icons.stop_rounded),
-                    ),
-                  ),
-                ListenableBuilder(
-                  listenable: controller,
-                  builder: (context, _) => IconButton.filled(
-                    style: accentIconButton(context),
-                    tooltip: tr("发送"),
-                    onPressed:
-                        canSend &&
-                            choice != null &&
-                            (controller.text.trim().isNotEmpty ||
-                                hasAttachments)
-                        ? onSend
-                        : null,
-                    icon: sending
-                        ? const SizedBox.square(
-                            dimension: 18,
-                            child: CircularProgressIndicator(strokeWidth: 2),
-                          )
-                        : const Icon(Icons.arrow_upward),
-                  ),
-                ),
-              ],
-            ),
-            attachments,
-            const SizedBox(height: 4),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: AgentChips(
-                choice: choice,
-                onTap: onPick,
-                quota: quota,
-                loading: loading,
               ),
-            ),
-          ],
+              ComposerAttachments(
+                draft: widget.draft,
+                enabled: widget.enabled,
+                // Equal slots either side keep the agent chip on the
+                // composer's centre line, whatever the right side holds.
+                sideWidth: _side,
+                trailing: Row(
+                  children: [
+                    Expanded(
+                      child: Center(
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: AgentChips(
+                            choice: widget.choice,
+                            onTap: widget.onPick,
+                            quota: widget.quota,
+                            loading: widget.loading,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: _side,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          if (widget.running) ...[
+                            IconButton.outlined(
+                              style: IconButton.styleFrom(
+                                fixedSize: const Size(
+                                  DcSpace.touch,
+                                  DcSpace.touch,
+                                ),
+                                padding: EdgeInsets.zero,
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              ),
+                              tooltip: tr("停止"),
+                              onPressed: widget.onStop,
+                              icon: const Icon(Icons.stop_rounded),
+                            ),
+                            const SizedBox(width: _gap),
+                          ],
+                          ListenableBuilder(
+                            listenable: widget.controller,
+                            builder: (context, _) => IconButton.filled(
+                              style: accentIconButton(context).copyWith(
+                                fixedSize: const WidgetStatePropertyAll(
+                                  Size(DcSpace.touch, DcSpace.touch),
+                                ),
+                                padding: const WidgetStatePropertyAll(
+                                  EdgeInsets.zero,
+                                ),
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              ),
+                              tooltip: tr("发送"),
+                              onPressed:
+                                  widget.canSend &&
+                                      widget.choice != null &&
+                                      (widget.controller.text
+                                              .trim()
+                                              .isNotEmpty ||
+                                          widget.draft.attachments.isNotEmpty)
+                                  ? widget.onSend
+                                  : null,
+                              icon: widget.sending
+                                  ? const SizedBox.square(
+                                      dimension: 18,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                      ),
+                                    )
+                                  : const Icon(Icons.arrow_upward),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

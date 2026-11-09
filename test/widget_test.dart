@@ -381,7 +381,6 @@ void main() {
     expect(find.text('我会先检查登录逻辑，再处理错误状态。'), findsOneWidget);
     expect(find.text('读取 auth.ts'), findsOneWidget);
     expect(find.text('Claude Code'), findsOneWidget);
-    expect(find.text('默认模型'), findsOneWidget);
     expect(link.calls, contains('timeline_snapshot'));
     expect(link.calls, contains('subscribe_project'));
 
@@ -407,11 +406,11 @@ void main() {
     expect(link.calls.sublist(reads), isNot(contains('bootstrap')));
 
     await tester.scrollUntilVisible(
-      find.text('Agent 正在电脑上工作…'),
+      find.text('正在响应'),
       300,
       scrollable: timeline,
     );
-    expect(find.text('Agent 正在电脑上工作…'), findsOneWidget);
+    expect(find.text('正在响应'), findsOneWidget);
     await tester.tap(find.byTooltip('停止'));
     for (var i = 0; i < 5; i++) {
       await tester.pump(const Duration(milliseconds: 100));

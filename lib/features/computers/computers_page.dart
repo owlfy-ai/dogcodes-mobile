@@ -143,7 +143,11 @@ class _HostCard extends StatelessWidget {
       LinkStatus.connecting => StatusLabel(tr("连接中")),
       LinkStatus.offline => StatusLabel(tr("离线")),
     };
-    final agents = h.installations;
+    final agents = orderAgents(
+      h.installations,
+      (agent) => '${agent['providerId']}',
+      h.agentOrder,
+    );
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: c.line),
@@ -308,11 +312,20 @@ class _HostCard extends StatelessWidget {
                 if (agents.isNotEmpty) ...[
                   const SizedBox(height: 12),
                   Divider(color: c.line),
-                  for (final a in agents)
+                  for (var index = 0; index < agents.length; index++) ...[
+                    if (index > 0)
+                      Divider(
+                        height: 1,
+                        thickness: 1,
+                        color: c.line,
+                        indent: 8,
+                        endIndent: 8,
+                      ),
                     _AgentStatus(
-                      installation: a,
-                      quota: h.quotas[a['installationId']],
+                      installation: agents[index],
+                      quota: h.quotas[agents[index]['installationId']],
                     ),
+                  ],
                 ] else if (h.snapshot != null)
                   Padding(
                     padding: EdgeInsets.only(top: 12),

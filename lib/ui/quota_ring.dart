@@ -204,7 +204,13 @@ class QuotaMeter {
   };
 
   /// [view] is one `quota_snapshots_for` entry. Null when the PC sent no quota.
-  static QuotaMeter? from(Map<String, dynamic>? view, {DateTime? now}) {
+  /// [composer] is the shorter set shown under the message box, as on the
+  /// desktop: OpenCode's monthly window stays in the agent picker only.
+  static QuotaMeter? from(
+    Map<String, dynamic>? view, {
+    DateTime? now,
+    bool composer = false,
+  }) {
     final quota = view?['quota'];
     if (quota is! Map) return null;
     final providerId = '${view?['providerId'] ?? ''}';
@@ -212,7 +218,14 @@ class QuotaMeter {
       for (final w in (quota['windows'] as List? ?? const []))
         if (w is Map) Map<String, dynamic>.from(w),
     ];
-    final picked = _pickerWindows(windows, providerId);
+    var picked = _pickerWindows(windows, providerId);
+    if (composer && providerId == 'opencode') {
+      final short = [
+        for (final w in picked)
+          if (w['id'] != 'opencode-go-monthly') w,
+      ];
+      if (short.isNotEmpty) picked = short;
+    }
     if (picked.isEmpty) {
       final amounts = [
         for (final b in (quota['balances'] as List? ?? const []))
@@ -409,49 +422,56 @@ class QuotaBars extends StatelessWidget {
   }
 }
 
-/// Window names sit in their own column, only as wide as the longest label.
+/// Window names, bars and amounts each sit in their own column: names and
+/// amounts only as wide as their longest entry, amounts right-aligned so the
+/// digits line up close to the bars.
 class _CompactQuota extends StatelessWidget {
   const _CompactQuota({required this.rows});
   final List<QuotaMeterRow> rows;
 
+  static const _row = 14.0, _gap = 2.0;
+
   @override
   Widget build(BuildContext context) {
     final c = context.dc;
+    Widget column(
+      CrossAxisAlignment align,
+      Widget Function(QuotaMeterRow row) cell,
+    ) => Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: align,
+      children: [
+        for (var i = 0; i < rows.length; i++) ...[
+          if (i > 0) const SizedBox(height: _gap),
+          SizedBox(
+            height: _row,
+            child: Align(
+              alignment: align == CrossAxisAlignment.end
+                  ? Alignment.centerRight
+                  : Alignment.centerLeft,
+              child: cell(rows[i]),
+            ),
+          ),
+        ],
+      ],
+    );
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            for (var i = 0; i < rows.length; i++) ...[
-              if (i > 0) const SizedBox(height: 7),
-              SizedBox(
-                height: 16,
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    rows[i].label ?? '',
-                    style: TextStyle(
-                      fontSize: 12,
-                      height: 1,
-                      color: c.secondary,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ],
+        column(
+          CrossAxisAlignment.end,
+          (row) => Text(
+            row.label ?? '',
+            style: TextStyle(fontSize: 12, height: 1, color: c.secondary),
+          ),
         ),
         const SizedBox(width: 6),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            for (var i = 0; i < rows.length; i++) ...[
-              if (i > 0) const SizedBox(height: 7),
-              _QuotaTrack(row: rows[i]),
-            ],
-          ],
+        column(
+          CrossAxisAlignment.start,
+          (row) => _QuotaTrack(row: row, height: _row, amount: false),
         ),
+        const SizedBox(width: 6),
+        column(CrossAxisAlignment.end, (row) => _QuotaAmount(row: row)),
       ],
     );
   }
@@ -485,8 +505,13 @@ class _QuotaBar extends StatelessWidget {
 }
 
 class _QuotaTrack extends StatelessWidget {
-  const _QuotaTrack({required this.row});
+  const _QuotaTrack({required this.row, this.height = 16, this.amount = true});
   final QuotaMeterRow row;
+  final double height;
+
+  /// Whether the amount follows the bar in a fixed-width slot; compact rows
+  /// put amounts in a column of their own.
+  final bool amount;
 
   @override
   Widget build(BuildContext context) {
@@ -495,7 +520,7 @@ class _QuotaTrack extends StatelessWidget {
     final color = remaining == null ? c.secondary : _quotaColor(remaining);
     final fraction = ((remaining ?? 0) / 100).clamp(0.0, 1.0);
     return SizedBox(
-      height: 16,
+      height: height,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -519,22 +544,34 @@ class _QuotaTrack extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: 8),
-          SizedBox(
-            width: 48,
-            child: Text(
-              row.text,
-              textAlign: TextAlign.right,
-              maxLines: 1,
-              style: TextStyle(
-                fontSize: 13,
-                height: 1.3,
-                color: color,
-                fontFeatures: const [FontFeature.tabularFigures()],
-              ),
-            ),
-          ),
+          if (amount) ...[
+            const SizedBox(width: 8),
+            SizedBox(width: 48, child: _QuotaAmount(row: row)),
+          ],
         ],
+      ),
+    );
+  }
+}
+
+class _QuotaAmount extends StatelessWidget {
+  const _QuotaAmount({required this.row});
+  final QuotaMeterRow row;
+
+  @override
+  Widget build(BuildContext context) {
+    final remaining = row.remaining;
+    return Text(
+      row.text,
+      textAlign: TextAlign.right,
+      maxLines: 1,
+      style: TextStyle(
+        fontSize: 13,
+        height: 1.3,
+        color: remaining == null
+            ? context.dc.secondary
+            : _quotaColor(remaining),
+        fontFeatures: const [FontFeature.tabularFigures()],
       ),
     );
   }

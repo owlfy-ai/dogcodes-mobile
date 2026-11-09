@@ -53,6 +53,29 @@ class HostState {
   }
 
   List<Map<String, dynamic>> executors = [];
+
+  /// PC Agent order. Empty until settings are read; sorting then uses the
+  /// same default order as the desktop.
+  List<String> agentOrder = [];
+  List<String> agentDisabled = [];
+
+  /// Accepts either an `agent_preferences` snapshot or the preferences object
+  /// carried by `preferences.agents.updated`.
+  void applyAgentPreferences(Map<String, dynamic> value) {
+    final nested = value['preferences'];
+    final prefs = nested is Map ? nested : value;
+    agentOrder = _agentIds(prefs['order']);
+    agentDisabled = _agentIds(prefs['disabled']);
+    executors = orderAgents(
+      [
+        for (final executor in executors)
+          if (!agentDisabled.contains('${executor['providerId']}')) executor,
+      ],
+      (executor) => '${executor['providerId']}',
+      agentOrder,
+    );
+  }
+
   Map<String, List<Map<String, dynamic>>> approvals = {};
 
   /// Approvals and questions seen on this phone, newest last. A pending entry
@@ -547,6 +570,15 @@ class HostHub extends ChangeNotifier {
             'preferences': envelope['payload'],
           });
         }
+        if (envelope['eventType'] == 'preferences.agents.updated' &&
+            envelope['payload'] is Map) {
+          h.applyAgentPreferences(
+            Map<String, dynamic>.from(envelope['payload'] as Map),
+          );
+          h.revision++;
+          _notify();
+          unawaited(refresh(h, executors: true));
+        }
         h._stream.add(Map<String, dynamic>.from(envelope));
         // Streamed output is merged by the open conversation; it does not
         // change the overview, so it must not cost a full refresh per chunk.
@@ -693,11 +725,14 @@ class HostHub extends ChangeNotifier {
         // Older PCs may lack organization APIs; ordinary conversations remain usable.
       }
       if (executors || h.executors.isEmpty) {
-        final executors = await _executors(link, snapshot);
+        final executors = await _executors(link, h, snapshot);
         final quotas = await _quotas(link);
         if (!current()) return;
         h.executors = executors;
         h.quotas = quotas;
+      } else {
+        await _syncAgentOrder(link, h);
+        if (!current()) return;
       }
       final approvals = <String, List<Map<String, dynamic>>>{};
       for (final task in h.tasks) {
@@ -910,7 +945,7 @@ class HostHub extends ChangeNotifier {
       final snapshot =
           h.snapshot ??
           Map<String, dynamic>.from(await link.call('bootstrap', null) as Map);
-      h.executors = await _executors(link, snapshot);
+      h.executors = await _executors(link, h, snapshot);
       h.quotas = await _quotas(link);
       _notify();
       return null;
@@ -921,26 +956,37 @@ class HostHub extends ChangeNotifier {
 
   Future<List<Map<String, dynamic>>> _executors(
     HostApi link,
+    HostState h,
     Map<String, dynamic> snapshot,
   ) async {
-    final preferences = await link.call('agent_preferences', null);
-    final disabled =
-        (((preferences is Map ? preferences['preferences'] : null) ??
-                    preferences)
-                as Map?)?['disabled']
-            as List? ??
-        const [];
+    await _syncAgentOrder(link, h);
     final ready = [
       for (final i in (snapshot['installations'] as List? ?? const []))
-        if (i['status'] == 'ready' && !disabled.contains(i['providerId'])) i,
+        if (i['status'] == 'ready' &&
+            !h.agentDisabled.contains(i['providerId']))
+          i,
     ];
     final registered =
         await link.call('registered_executors', null) as List? ?? const [];
-    return [
-      for (final e in registered)
-        if (ready.any((i) => i['installationId'] == e['installationId']))
-          Map<String, dynamic>.from(e as Map),
-    ];
+    return orderAgents(
+      [
+        for (final e in registered)
+          if (ready.any((i) => i['installationId'] == e['installationId']))
+            Map<String, dynamic>.from(e as Map),
+      ],
+      (e) => '${e['providerId']}',
+      h.agentOrder,
+    );
+  }
+
+  Future<void> _syncAgentOrder(HostApi link, HostState h) async {
+    try {
+      final value = await link.call('agent_preferences', null);
+      if (value is Map)
+        h.applyAgentPreferences(Map<String, dynamic>.from(value));
+    } catch (_) {
+      // Older computers may not share Agent order; the default order still applies.
+    }
   }
 
   /// Cross-computer sessions, most recently updated first.
@@ -1133,4 +1179,58 @@ class HostHub extends ChangeNotifier {
     }
     super.dispose();
   }
+}
+
+List<String> _agentIds(Object? value) => [
+  for (final id in value as List? ?? const [])
+    if (id is String && id.isNotEmpty) id,
+];
+
+/// Same fallback as the desktop when the user has not arranged these Agents.
+const defaultAgentOrder = [
+  'codex',
+  'claude-code',
+  'grok',
+  'cursor',
+  'antigravity',
+  'zcode',
+  'kimi',
+  'codebuddy',
+  'pi',
+  'opencode',
+  'deepseek-harness',
+  'kiro',
+];
+
+/// PC order first, then the desktop default, then unknown ids by name.
+List<T> orderAgents<T>(
+  List<T> items,
+  String Function(T item) providerId,
+  List<String> preferenceOrder,
+) {
+  final order = <String>[];
+  void add(String id) {
+    if (id.isNotEmpty && !order.contains(id)) order.add(id);
+  }
+
+  for (final id in preferenceOrder) {
+    add(id);
+  }
+  for (final id in defaultAgentOrder) {
+    add(id);
+  }
+  int rank(String id) {
+    final index = order.indexOf(id);
+    return index < 0 ? order.length : index;
+  }
+
+  final sorted = [...items];
+  sorted.sort((a, b) {
+    final left = providerId(a);
+    final right = providerId(b);
+    final byRank = rank(left).compareTo(rank(right));
+    if (byRank != 0) return byRank;
+    return rank(left) == order.length ? left.compareTo(right) : 0;
+  });
+  return sorted;
 }

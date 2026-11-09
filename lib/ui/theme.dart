@@ -118,6 +118,9 @@ ThemeData dcTheme(Brightness brightness) {
     canvasColor: c.canvas,
     dividerColor: c.line,
     splashFactory: NoSplash.splashFactory,
+    // A phone app: a pointer resting over a row (the Simulator's mouse, an
+    // iPad trackpad) must not paint it like the selected one.
+    hoverColor: Colors.transparent,
     textTheme: text.copyWith(
       headlineSmall: text.headlineSmall?.copyWith(
         fontSize: 26,

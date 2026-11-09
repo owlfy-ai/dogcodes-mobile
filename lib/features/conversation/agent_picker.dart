@@ -1,5 +1,6 @@
 import 'package:dogcodes_app/l10n/strings.dart';
 import 'package:flutter/material.dart';
+import 'permission_presentation.dart';
 import '../../core/host_api.dart';
 import '../../app.dart';
 import '../../core/host_hub.dart';
@@ -10,11 +11,49 @@ import '../../ui/widgets.dart';
 /// Agent / model / thinking choice for one send. Kept per page on this phone;
 /// it never overwrites the PC's own pending selection.
 class AgentChoice {
-  const AgentChoice(this.executor, {this.catalog, this.model, this.thinking});
+  const AgentChoice(
+    this.executor, {
+    this.catalog,
+    this.model,
+    this.thinking,
+    this.permissions,
+    this.permissionMode,
+  });
   final Map<String, dynamic> executor;
   final Map<String, dynamic>? catalog;
   final String? model;
   final String? thinking;
+
+  /// The agent's permission catalog (`modes`, `defaultModeId`); null when the
+  /// computer could not provide one.
+  final Map<String, dynamic>? permissions;
+
+  /// Chosen permission mode; null keeps the agent's default.
+  final String? permissionMode;
+
+  List<PermissionModeView> get permissionModes => [
+    for (final m in (permissions?['modes'] as List? ?? const []))
+      if (m is Map)
+        permissionPresentation(
+          executor['providerId'] as String?,
+          Map<String, dynamic>.from(m),
+        ),
+  ];
+
+  /// The mode the next turn runs with, as the desktop sends it.
+  String? get effectivePermission {
+    final ids = permissionModes.map((m) => m.id);
+    if (permissionMode != null && ids.contains(permissionMode)) {
+      return permissionMode;
+    }
+    final fallback = permissions?['defaultModeId'] as String?;
+    return ids.contains(fallback) ? fallback : null;
+  }
+
+  PermissionModeView? get permissionView {
+    final id = effectivePermission;
+    return permissionModes.where((m) => m.id == id).firstOrNull;
+  }
 
   String get agentName => agentLabel(executor['providerId'] as String?);
   List<Map<String, dynamic>> get models => [
@@ -46,11 +85,33 @@ class AgentChoice {
   String get thinkingName =>
       labelOf(thinking) ?? labelOf(defaultThinking) ?? tr("默认");
 
-  AgentChoice withModel(String? id) =>
-      AgentChoice(executor, catalog: catalog, model: id);
-  AgentChoice withThinking(String? id) =>
-      AgentChoice(executor, catalog: catalog, model: model, thinking: id);
+  AgentChoice withModel(String? id) => AgentChoice(
+    executor,
+    catalog: catalog,
+    model: id,
+    permissions: permissions,
+    permissionMode: permissionMode,
+  );
+  AgentChoice withThinking(String? id) => AgentChoice(
+    executor,
+    catalog: catalog,
+    model: model,
+    thinking: id,
+    permissions: permissions,
+    permissionMode: permissionMode,
+  );
+  AgentChoice withPermission(String? id) => AgentChoice(
+    executor,
+    catalog: catalog,
+    model: model,
+    thinking: thinking,
+    permissions: permissions,
+    permissionMode: id,
+  );
 }
+
+/// The agent's own "use my default" reasoning option, as opposed to a level.
+bool isAgentDefaultThinking(Object? id) => '$id'.toLowerCase() == 'default';
 
 bool sameExecutor(Map? a, Map? b) {
   if (a == null || b == null) return false;
@@ -64,6 +125,13 @@ Future<AgentChoice> loadChoice(
   Map<String, dynamic> executor,
   String? taskId,
 ) async {
+  final permissions = link
+      .call('permission_catalog', [executor, taskId])
+      .then<Map<String, dynamic>?>(
+        (v) => v is Map ? Map<String, dynamic>.from(v) : null,
+        // An older computer or a busy agent: keep its default policy.
+        onError: (Object _) => null,
+      );
   final catalog = Map<String, dynamic>.from(
     await link.call('model_catalog_for_task', [executor, null, taskId]) as Map,
   );
@@ -71,6 +139,7 @@ Future<AgentChoice> loadChoice(
     executor,
     catalog: catalog,
     model: catalog['defaultModel'] as String?,
+    permissions: await permissions,
   );
 }
 
@@ -267,6 +336,12 @@ class _AgentSheetState extends State<_AgentSheet> {
               onChanged: (id) =>
                   setState(() => choice = selected.withThinking(id)),
             ),
+          if (!loading && (selected?.permissionModes.isNotEmpty ?? false))
+            PermissionPicker(
+              choice: selected!,
+              onChanged: (id) =>
+                  setState(() => choice = selected.withPermission(id)),
+            ),
           if (error != null) InlineNotice(error!, danger: true),
           const SizedBox(height: 8),
           FilledButton(
@@ -335,7 +410,144 @@ class _AgentRow extends StatelessWidget {
   }
 }
 
-/// Compact chips under the composer: Agent, model and thinking.
+/// Permission policy row: the current mode, and a menu of the agent's modes
+/// with what each allows. Applies from the next turn, as on the desktop.
+class PermissionPicker extends StatelessWidget {
+  const PermissionPicker({
+    super.key,
+    required this.choice,
+    required this.onChanged,
+  });
+  final AgentChoice choice;
+  final ValueChanged<String> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    watchAppLanguage(context);
+    final c = context.dc;
+    final current = choice.permissionView;
+    Color tone(PermissionModeView m) =>
+        m.kind == PermissionKind.full ? c.removed : c.text;
+    return SizedBox(
+      height: DcSpace.touch + 8,
+      child: Row(
+        children: [
+          Text(tr("权限策略")),
+          const Spacer(),
+          PopupMenuButton<String>(
+            tooltip: tr("权限策略"),
+            onSelected: onChanged,
+            constraints: const BoxConstraints(maxWidth: 320),
+            itemBuilder: (_) => [
+              for (final m in choice.permissionModes)
+                PopupMenuItem(
+                  value: m.id,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 8,
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 2),
+                        child: Icon(
+                          permissionKindIcon(m.kind),
+                          size: 20,
+                          color: tone(m),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              m.label,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                color: tone(m),
+                              ),
+                            ),
+                            if (m.description.isNotEmpty)
+                              Text(
+                                m.description,
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      SizedBox(
+                        width: 20,
+                        child: m.id == current?.id
+                            ? Icon(Icons.check, size: 18, color: c.accent)
+                            : null,
+                      ),
+                    ],
+                  ),
+                ),
+              // A quiet footnote under a hairline, not another option.
+              const PopupMenuDivider(height: 9),
+              PopupMenuItem(
+                enabled: false,
+                height: 28,
+                padding: const EdgeInsets.fromLTRB(12, 2, 12, 4),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.info_outline,
+                      size: 13,
+                      color: c.secondary.withValues(alpha: 0.7),
+                    ),
+                    const SizedBox(width: 6),
+                    Expanded(
+                      child: Text(
+                        tr("所选策略在下一轮执行时生效"),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 11,
+                          height: 1.2,
+                          color: c.secondary.withValues(alpha: 0.7),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (current != null) ...[
+                    Icon(
+                      permissionKindIcon(current.kind),
+                      size: 18,
+                      color: tone(current),
+                    ),
+                    const SizedBox(width: 6),
+                  ],
+                  Text(
+                    current?.label ?? tr("默认权限"),
+                    style: TextStyle(
+                      color: current == null ? null : tone(current),
+                    ),
+                  ),
+                  const Icon(Icons.expand_more, size: 18),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// The agent chip under the composer, with its quota.
 class AgentChips extends StatelessWidget {
   const AgentChips({
     super.key,
@@ -352,20 +564,11 @@ class AgentChips extends StatelessWidget {
   Widget build(BuildContext context) {
     watchAppLanguage(context);
     final c = choice;
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          _Chip(
-            c?.agentName ?? (loading ? tr("加载 Agent…") : tr("选择 Agent")),
-            onTap,
-            quota: quota,
-          ),
-          if (c != null) _Chip(c.modelName, onTap),
-          if (c != null && c.thinkingOptions.isNotEmpty)
-            _Chip(tr("思考 {0}", [c.thinkingName]), onTap),
-        ],
-      ),
+    // One chip; the composer scales it down rather than scrolling.
+    return _Chip(
+      c?.agentName ?? (loading ? tr("加载 Agent…") : tr("选择 Agent")),
+      onTap,
+      quota: quota,
     );
   }
 }
@@ -378,28 +581,27 @@ class _Chip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     watchAppLanguage(context);
-    return Padding(
-      padding: const EdgeInsets.only(right: 8),
+    final radius = BorderRadius.circular(DcSpace.touch / 2);
+    return Material(
+      color: context.dc.surface,
+      borderRadius: radius,
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: radius,
+        // At least as tall as the buttons beside it; one to three quota
+        // rows grow it, always centred.
         child: Container(
-          constraints: const BoxConstraints(minHeight: 36),
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          decoration: BoxDecoration(
-            color: context.dc.surface,
-            borderRadius: BorderRadius.circular(8),
-          ),
+          constraints: const BoxConstraints(minHeight: DcSpace.touch),
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+          alignment: Alignment.center,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(label, style: const TextStyle(fontSize: 13)),
               if (quota != null) ...[
-                const SizedBox(width: 6),
+                const SizedBox(width: 8),
                 QuotaBars(meter: quota!, compact: true),
               ],
-              const SizedBox(width: 2),
-              const Icon(Icons.expand_more, size: 16),
             ],
           ),
         ),
@@ -447,14 +649,18 @@ class ThinkingSlider extends StatelessWidget {
             _thinkingRank['${b['id']}'.toLowerCase()]!,
           ),
         );
+    // An agent's own "default" option means "use the agent's default", the
+    // same as choosing nothing, so it gets no chip of its own.
     final modes = [
       for (final t in options)
-        if (!levels.contains(t)) t,
+        if (!levels.contains(t) && !isAgentDefaultThinking(t['id'])) t,
     ];
     final effective = choice.thinking ?? choice.defaultThinking;
     final index = levels.indexWhere((t) => t['id'] == effective);
-    final usingDefault = choice.thinking == null;
+    final usingDefault =
+        choice.thinking == null || isAgentDefaultThinking(choice.thinking);
     String label(Map t) => '${t['label']}';
+    int at(double v) => v.round().clamp(0, levels.length - 1);
     return Padding(
       padding: const EdgeInsets.only(bottom: 4),
       child: Column(
@@ -465,9 +671,12 @@ class ThinkingSlider extends StatelessWidget {
               Text(tr("思考强度")),
               const Spacer(),
               Text(
-                usingDefault
-                    ? tr("默认 · {0}", [choice.thinkingName])
-                    : choice.thinkingName,
+                !usingDefault
+                    ? choice.thinkingName
+                    : isAgentDefaultThinking(effective) ||
+                          index < 0 && modes.isEmpty
+                    ? tr("默认")
+                    : tr("默认 · {0}", [choice.thinkingName]),
                 style: TextStyle(fontWeight: FontWeight.w600, color: c.text),
               ),
               if (!usingDefault)
@@ -509,13 +718,17 @@ class ThinkingSlider extends StatelessWidget {
                 showValueIndicator: ShowValueIndicator.onDrag,
               ),
               child: Slider(
+                // Another agent's levels get their own slider: the render
+                // object updates its value before its range, so a reused one
+                // briefly asks for a level the new list does not have.
+                key: ValueKey(levels.map((t) => t['id']).join('|')),
                 min: 0,
                 max: (levels.length - 1).toDouble(),
                 divisions: levels.length - 1,
                 value: (index < 0 ? 0 : index).toDouble(),
                 label: label(levels[index < 0 ? 0 : index]),
-                semanticFormatterCallback: (v) => label(levels[v.round()]),
-                onChanged: (v) => onChanged(levels[v.round()]['id'] as String),
+                semanticFormatterCallback: (v) => label(levels[at(v)]),
+                onChanged: (v) => onChanged(levels[at(v)]['id'] as String),
               ),
             ),
             Padding(

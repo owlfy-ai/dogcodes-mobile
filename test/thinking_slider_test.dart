@@ -103,4 +103,68 @@ void main() {
     expect(find.byType(Image), findsOneWidget);
     expect(find.text('U'), findsOneWidget);
   });
+
+  testWidgets('switching agents rebuilds the slider for the new levels', (
+    tester,
+  ) async {
+    final semantics = tester.ensureSemantics();
+    // Three levels, then an agent whose default sits beyond the old range:
+    // the old slider's label lookup must never see the new position.
+    await pump(
+      tester,
+      choice([
+        ['low', 'Thinking Low'],
+        ['high', 'Thinking High'],
+        ['max', 'Thinking Max'],
+      ], 'high'),
+    );
+    await pump(
+      tester,
+      choice([
+        ['off', 'off'],
+        ['low', 'low'],
+        ['medium', 'medium'],
+        ['high', 'high'],
+        ['xhigh', 'xhigh'],
+        ['max', 'max'],
+      ], 'xhigh'),
+    );
+    await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull);
+    expect(tester.widget<Slider>(find.byType(Slider)).divisions, 5);
+    expect(find.text('默认 · xhigh'), findsOneWidget);
+    semantics.dispose();
+  });
+
+  testWidgets("an agent's own default option is the default, not a chip", (
+    tester,
+  ) async {
+    await pump(
+      tester,
+      choice([
+        ['low', 'Low'],
+        ['high', 'High'],
+        ['max', 'Max'],
+        ['default', 'Default'],
+      ], 'default'),
+    );
+    expect(find.widgetWithText(ChoiceChip, 'Default'), findsNothing);
+    expect(find.text('默认'), findsOneWidget);
+    expect(find.text('恢复默认'), findsNothing);
+    // A saved explicit "default" reads the same and offers no reset.
+    await pump(
+      tester,
+      choice(
+        [
+          ['low', 'Low'],
+          ['max', 'Max'],
+          ['default', 'Default'],
+        ],
+        'default',
+        thinking: 'default',
+      ),
+    );
+    expect(find.text('默认'), findsOneWidget);
+    expect(find.text('恢复默认'), findsNothing);
+  });
 }

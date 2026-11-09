@@ -46,7 +46,11 @@ class ComposerState extends ChangeNotifier {
       (choice!.model == null ||
           choice!.models.any((m) => m['id'] == choice!.model)) &&
       (choice!.thinking == null ||
-          choice!.thinkingOptions.any((t) => t['id'] == choice!.thinking));
+          choice!.thinkingOptions.any((t) => t['id'] == choice!.thinking)) &&
+      // A saved policy the agent no longer offers must be chosen again.
+      (choice!.permissionMode == null ||
+          choice!.permissions == null ||
+          choice!.permissionModes.any((m) => m.id == choice!.permissionMode));
 
   Map<String, dynamic> _snapshot() => {
     'hostId': host?.id,
@@ -62,6 +66,8 @@ class ComposerState extends ChangeNotifier {
             'catalog': choice!.catalog,
             'model': choice!.model,
             'thinking': choice!.thinking,
+            'permissions': choice!.permissions,
+            'permissionMode': choice!.permissionMode,
           },
   };
   Map<String, dynamic> get identity => {
@@ -203,6 +209,10 @@ class ComposerState extends ChangeNotifier {
                 : null,
             model: c['model'] as String?,
             thinking: c['thinking'] as String?,
+            permissions: c['permissions'] is Map
+                ? Map<String, dynamic>.from(c['permissions'] as Map)
+                : null,
+            permissionMode: c['permissionMode'] as String?,
           );
         }
         error = data['recoveryNote'] as String?;
@@ -257,8 +267,10 @@ class ComposerState extends ChangeNotifier {
         catalog: fresh.catalog,
         model: choice?.model ?? fresh.model,
         thinking: choice?.thinking,
+        permissions: fresh.permissions ?? choice?.permissions,
+        permissionMode: choice?.permissionMode,
       );
-      if (!choiceValid) error = tr("原 Agent、模型或思考强度当前不可用，请重新选择后发送。");
+      if (!choiceValid) error = tr("原 Agent、模型、思考强度或权限策略当前不可用，请重新选择后发送。");
       await flush();
       _notify();
     } catch (e) {

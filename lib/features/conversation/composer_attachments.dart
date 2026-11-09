@@ -19,9 +19,18 @@ class ComposerAttachments extends StatefulWidget {
     super.key,
     required this.draft,
     this.enabled = true,
+    this.trailing,
+    this.sideWidth,
   });
   final ComposerState draft;
   final bool enabled;
+
+  /// Placed beside the attachment icon, inside the composer card.
+  final Widget? trailing;
+
+  /// Width reserved for the attachment button's side, so [trailing] can
+  /// centre its content against an equally wide right side.
+  final double? sideWidth;
   @override
   State<ComposerAttachments> createState() => _ComposerAttachmentsState();
 }
@@ -134,52 +143,69 @@ class _ComposerAttachmentsState extends State<ComposerAttachments> {
   Widget build(BuildContext context) {
     watchAppLanguage(context);
     final d = widget.draft;
+    final canPick =
+        widget.enabled &&
+        !d.restoring &&
+        !d.restoreFailed &&
+        !d.uploading &&
+        !d.picking &&
+        d.key != null;
+    final attach = IconButton.filled(
+      tooltip: tr("添加附件"),
+      style: IconButton.styleFrom(
+        backgroundColor: context.dc.surface,
+        foregroundColor: context.dc.text,
+        disabledBackgroundColor: context.dc.surface,
+        disabledForegroundColor: context.dc.secondary,
+        fixedSize: const Size(DcSpace.touch, DcSpace.touch),
+        minimumSize: const Size(DcSpace.touch, DcSpace.touch),
+        padding: EdgeInsets.zero,
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      ),
+      onPressed: canPick ? _pick : null,
+      icon: d.picking
+          ? SizedBox.square(
+              dimension: 18,
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                color: context.dc.text,
+              ),
+            )
+          : const Icon(Icons.attach_file, size: 20),
+    );
+    final status = Wrap(
+      spacing: 8,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: [
+        if (widget.trailing == null) attach,
+        if (d.attachments.isNotEmpty)
+          Text(
+            tr("{0} 个 · {1}", [
+              d.attachments.length,
+              attachmentSize(d.attachments.fold<int>(0, (s, a) => s + a.size)),
+            ]),
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
+        if (d.uploading)
+          TextButton(onPressed: d.pauseUploads, child: Text(tr("暂停上传")))
+        else if (d.attachments.any(
+          (a) => a.reference == null || a.error != null,
+        ))
+          TextButton(
+            onPressed: widget.enabled && d.host?.online == true
+                ? _upload
+                : null,
+            child: Text(tr("上传／继续上传")),
+          ),
+      ],
+    );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Wrap(
-          spacing: 8,
-          crossAxisAlignment: WrapCrossAlignment.center,
-          children: [
-            TextButton.icon(
-              onPressed:
-                  !widget.enabled ||
-                      d.restoring ||
-                      d.restoreFailed ||
-                      d.uploading ||
-                      d.picking ||
-                      d.key == null
-                  ? null
-                  : _pick,
-              icon: const Icon(Icons.attach_file, size: 19),
-              label: Text(d.picking ? tr("正在添加…") : tr("添加附件")),
-            ),
-            if (d.attachments.isNotEmpty)
-              InkWell(
-                onTap: () => FocusScope.of(context).unfocus(),
-                child: Text(
-                  tr("{0} 个 · {1}", [
-                    d.attachments.length,
-                    attachmentSize(
-                      d.attachments.fold<int>(0, (s, a) => s + a.size),
-                    ),
-                  ]),
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
-              ),
-            if (d.uploading)
-              TextButton(onPressed: d.pauseUploads, child: Text(tr("暂停上传")))
-            else if (d.attachments.any(
-              (a) => a.reference == null || a.error != null,
-            ))
-              TextButton(
-                onPressed: widget.enabled && d.host?.online == true
-                    ? _upload
-                    : null,
-                child: Text(tr("上传／继续上传")),
-              ),
-          ],
-        ),
+        if (widget.trailing == null)
+          status
+        else if (d.attachments.isNotEmpty || d.uploading)
+          status,
         if (d.attachments.isNotEmpty &&
             MediaQuery.viewInsetsOf(context).bottom == 0)
           ConstrainedBox(
@@ -242,6 +268,16 @@ class _ComposerAttachmentsState extends State<ComposerAttachments> {
         if (error != null) InlineNotice(error!, danger: true),
         if (d.restoreFailed)
           TextButton(onPressed: d.retryRestore, child: Text(tr("重试恢复草稿"))),
+        if (widget.trailing != null)
+          Row(
+            children: [
+              SizedBox(
+                width: widget.sideWidth,
+                child: Align(alignment: Alignment.centerLeft, child: attach),
+              ),
+              Expanded(child: widget.trailing!),
+            ],
+          ),
       ],
     );
   }

@@ -150,4 +150,24 @@ void main() {
     expect(find.text('5 小时'), findsOneWidget);
     expect(find.text('96%'), findsOneWidget);
   });
+
+  test(
+    'the composer shows OpenCode Go 5-hour and weekly, the picker all three',
+    () {
+      final go = view('opencode', [
+        {'id': 'opencode-go-rolling', 'windowMinutes': 300, 'usedPercent': 0},
+        {'id': 'opencode-go-weekly', 'windowMinutes': 10080, 'usedPercent': 0},
+        {'id': 'opencode-go-monthly', 'windowMinutes': 43200, 'usedPercent': 0},
+      ]);
+      expect(QuotaMeter.from(go)!.rows.map((r) => r.label), [
+        '5 小时',
+        '每周',
+        '每月',
+      ]);
+      expect(QuotaMeter.from(go, composer: true)!.rows.map((r) => r.label), [
+        '5 小时',
+        '每周',
+      ]);
+    },
+  );
 }

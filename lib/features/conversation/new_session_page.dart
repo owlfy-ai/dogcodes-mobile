@@ -27,6 +27,7 @@ class _NewSessionPageState extends State<NewSessionPage> {
   TextEditingController get prompt => draft.prompt;
   late HostHub hub;
   bool _ready = false, sending = false;
+  String? _sendingProviderId;
   String? hostId, projectId, error;
   AgentChoice? get choice => draft.choice;
   set choice(AgentChoice? value) => draft.choice = value;
@@ -88,6 +89,7 @@ class _NewSessionPageState extends State<NewSessionPage> {
     }
     setState(() {
       sending = true;
+      _sendingProviderId = c.executor['providerId'] as String?;
       error = null;
     });
     try {
@@ -105,7 +107,7 @@ class _NewSessionPageState extends State<NewSessionPage> {
           'prompt': text,
           'model': c.model,
           'thinking': c.thinking,
-          'permissionMode': null,
+          'permissionMode': c.effectivePermission,
           'attachments': attachments,
         },
       }, draft: identity);
@@ -124,7 +126,12 @@ class _NewSessionPageState extends State<NewSessionPage> {
       error = '$e';
       await hub.refresh(h);
     }
-    if (mounted) setState(() => sending = false);
+    if (mounted) {
+      setState(() {
+        sending = false;
+        _sendingProviderId = null;
+      });
+    }
   }
 
   void _open(String host, String task) {
@@ -360,11 +367,24 @@ class _NewSessionPageState extends State<NewSessionPage> {
                       child: FilledButton(
                         onPressed: canStart && draft.hasContent ? start : null,
                         child: sending
-                            ? const SizedBox.square(
-                                dimension: 18,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                ),
+                            ? Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const SizedBox.square(
+                                    dimension: 18,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Flexible(
+                                    child: Text(
+                                      tr("正在连接{0}", [
+                                        agentLabel(_sendingProviderId),
+                                      ]),
+                                    ),
+                                  ),
+                                ],
                               )
                             : Text(tr("开始任务")),
                       ),

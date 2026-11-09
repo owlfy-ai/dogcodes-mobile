@@ -82,7 +82,7 @@ void main() {
       await tester.pumpAndSettle();
 
       await tester.enterText(find.byType(TextField).last, '检查附件');
-      await tapVisible(tester, find.text('添加附件'));
+      await tapVisible(tester, find.byTooltip('添加附件'));
 
       await tapVisible(tester, find.text('手机文件'));
 
