@@ -455,7 +455,7 @@
   "当前工作区": "Espace de travail actuel",
   "共享当前项目文件，仅复制对话历史。": "Partage les fichiers du projet actuel et copie uniquement l’historique de la conversation.",
   "新 Worktree": "Nouveau worktree",
-  "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照。": "Crée un espace de travail séparé sur votre ordinateur et restaure l’instantané des fichiers de ce tour. Les tours anciens peuvent ne pas avoir d’instantané.",
+  "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照；非 Git 项目只继承对话。": "Crée un espace de travail séparé sur votre ordinateur et restaure l’instantané des fichiers de ce tour. Les tours anciens peuvent ne pas avoir d’instantané. Les projets hors Git ne reprennent que la conversation.",
   "正在创建…": "Création…",
   "创建 Fork": "Créer le fork",
   "取消置顶": "Désépingler",
@@ -722,7 +722,6 @@
   "完整输出请在电脑上查看": "Consultez la sortie complète sur votre ordinateur",
   "{0}\n… 内容过长，已截断": "{0}\n… Contenu tronqué",
   "分叉": "Fork",
-  "从历史轮次分叉 · 继承的上下文": "Forké depuis un tour précédent · Contexte hérité",
   "分叉上下文暂不可显示": "Contexte du fork indisponible",
   "请先恢复原草稿，未覆盖本机记录。": "Restaurez d’abord le brouillon d’origine. Les enregistrements locaux n’ont pas été écrasés.",
   "草稿未能保存：{0}": "Impossible d’enregistrer le brouillon : {0}",
@@ -1138,5 +1137,15 @@
   "等待你确认": "En attente de votre accord",
   "权限请求": "Demande d’autorisation",
   "这条记录已删除": "Cet élément a été supprimé",
-  "可以返回收件箱查看其它事项。": "Revenez à la boîte pour voir les autres éléments."
+  "可以返回收件箱查看其它事项。": "Revenez à la boîte pour voir les autres éléments.",
+  "分叉 · {0}": "Fork · {0}",
+  "分叉自较早的会话": "Forké depuis une conversation précédente",
+  "分叉自": "Forké depuis",
+  "已恢复所选轮次结束时的文件，未提交的成果可在“变更”中查看。": "Les fichiers ont été restaurés à la fin du tour choisi ; le travail non validé se trouve dans Modifications.",
+  "此项目不是 Git 仓库，分叉只继承对话上下文，并沿用同一项目目录。": "Ce projet n’est pas un dépôt Git ; le fork ne conserve que la conversation et continue dans le même dossier.",
+  "此会话由旧版分叉创建，未恢复历史轮次的文件。": "Cette conversation a été créée par un ancien fork et n’a pas restauré les fichiers du tour.",
+  "沿用同一项目目录；分叉不会还原文件。": "Utilise le même dossier de projet ; le fork ne restaure pas les fichiers.",
+  "收起继承的上下文": "Masquer le contexte hérité",
+  "查看继承的上下文（{0} 轮）": "Afficher le contexte hérité ({0})",
+  "Agent 已获得以上上下文，在下方发送消息即可从这里继续。": "L’agent dispose déjà de ce contexte. Envoyez un message ci-dessous pour continuer d’ici."
 }

@@ -455,7 +455,7 @@
   "当前工作区": "Espacio de trabajo actual",
   "共享当前项目文件，仅复制对话历史。": "Comparte los archivos del proyecto actual y copia solo el historial de la conversación.",
   "新 Worktree": "Nuevo worktree",
-  "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照。": "Crea un espacio de trabajo separado en tu computadora y restaura la instantánea de archivos de este turno. Los turnos antiguos pueden no tener instantánea.",
+  "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照；非 Git 项目只继承对话。": "Crea un espacio de trabajo separado en tu computadora y restaura la instantánea de archivos de este turno. Los turnos antiguos pueden no tener instantánea. Los proyectos sin Git solo heredan la conversación.",
   "正在创建…": "Creando…",
   "创建 Fork": "Crear fork",
   "取消置顶": "Desfijar",
@@ -722,7 +722,6 @@
   "完整输出请在电脑上查看": "Consulta la salida completa en tu computadora",
   "{0}\n… 内容过长，已截断": "{0}\n… Contenido truncado",
   "分叉": "Fork",
-  "从历史轮次分叉 · 继承的上下文": "Fork desde un turno anterior · Contexto heredado",
   "分叉上下文暂不可显示": "Contexto del fork no disponible",
   "请先恢复原草稿，未覆盖本机记录。": "Restaura primero el borrador original. Los registros locales no se sobrescribieron.",
   "草稿未能保存：{0}": "No se pudo guardar el borrador: {0}",
@@ -1138,5 +1137,15 @@
   "等待你确认": "Esperando tu aprobación",
   "权限请求": "Solicitud de permiso",
   "这条记录已删除": "Este registro se eliminó",
-  "可以返回收件箱查看其它事项。": "Vuelve a la bandeja para ver otros elementos."
+  "可以返回收件箱查看其它事项。": "Vuelve a la bandeja para ver otros elementos.",
+  "分叉 · {0}": "Fork · {0}",
+  "分叉自较早的会话": "Bifurcado de una conversación anterior",
+  "分叉自": "Bifurcado de",
+  "已恢复所选轮次结束时的文件，未提交的成果可在“变更”中查看。": "Los archivos se restauraron al final del turno elegido; el trabajo sin confirmar está en Cambios.",
+  "此项目不是 Git 仓库，分叉只继承对话上下文，并沿用同一项目目录。": "Este proyecto no es un repositorio Git; el fork solo conserva la conversación y continúa en la misma carpeta.",
+  "此会话由旧版分叉创建，未恢复历史轮次的文件。": "Esta conversación se creó con un fork antiguo y no restauró los archivos del turno.",
+  "沿用同一项目目录；分叉不会还原文件。": "Usa la misma carpeta del proyecto; el fork no restaura archivos.",
+  "收起继承的上下文": "Ocultar el contexto heredado",
+  "查看继承的上下文（{0} 轮）": "Ver el contexto heredado ({0})",
+  "Agent 已获得以上上下文，在下方发送消息即可从这里继续。": "El agente ya tiene este contexto. Envía un mensaje abajo para continuar desde aquí."
 }

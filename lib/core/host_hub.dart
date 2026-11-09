@@ -198,6 +198,9 @@ class SessionRef {
   String get taskId => task['taskId'] as String;
   String get projectId => task['projectId'] as String;
   String get title => task['title'] as String? ?? tr("未命名会话");
+
+  /// The session this one was forked from, on the same computer.
+  String? get forkedFrom => task['forkedFrom'] as String?;
   String? get state =>
       (host.history?['preferences'] as Map?)?['tasks']?[taskId] as String?;
   bool get pinned => state == 'pinned';

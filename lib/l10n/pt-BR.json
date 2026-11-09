@@ -455,7 +455,7 @@
   "当前工作区": "Espaço de trabalho atual",
   "共享当前项目文件，仅复制对话历史。": "Compartilha os arquivos do projeto atual e copia só o histórico da conversa.",
   "新 Worktree": "Novo worktree",
-  "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照。": "Cria um espaço de trabalho separado no computador e restaura o snapshot de arquivos desta rodada. Rodadas antigas podem não ter snapshot.",
+  "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照；非 Git 项目只继承对话。": "Cria um espaço de trabalho separado no computador e restaura o snapshot de arquivos desta rodada. Rodadas antigas podem não ter snapshot. Projetos sem Git herdam só a conversa.",
   "正在创建…": "Criando…",
   "创建 Fork": "Criar fork",
   "取消置顶": "Desafixar",
@@ -722,7 +722,6 @@
   "完整输出请在电脑上查看": "Veja a saída completa no computador",
   "{0}\n… 内容过长，已截断": "{0}\n… Conteúdo truncado",
   "分叉": "Fork",
-  "从历史轮次分叉 · 继承的上下文": "Fork de uma rodada anterior · Contexto herdado",
   "分叉上下文暂不可显示": "Contexto do fork indisponível",
   "请先恢复原草稿，未覆盖本机记录。": "Restaure primeiro o rascunho original. Os registros locais não foram substituídos.",
   "草稿未能保存：{0}": "Não foi possível salvar o rascunho: {0}",
@@ -1138,5 +1137,15 @@
   "等待你确认": "Aguardando sua aprovação",
   "权限请求": "Solicitação de permissão",
   "这条记录已删除": "Este registro foi excluído",
-  "可以返回收件箱查看其它事项。": "Volte à caixa para ver outros itens."
+  "可以返回收件箱查看其它事项。": "Volte à caixa para ver outros itens.",
+  "分叉 · {0}": "Fork · {0}",
+  "分叉自较早的会话": "Fork de uma conversa anterior",
+  "分叉自": "Fork de",
+  "已恢复所选轮次结束时的文件，未提交的成果可在“变更”中查看。": "Os arquivos foram restaurados ao fim da rodada escolhida; o trabalho não commitado está em Alterações.",
+  "此项目不是 Git 仓库，分叉只继承对话上下文，并沿用同一项目目录。": "Este projeto não é um repositório Git; o fork mantém só a conversa e continua na mesma pasta.",
+  "此会话由旧版分叉创建，未恢复历史轮次的文件。": "Esta conversa foi criada por um fork antigo e não restaurou os arquivos da rodada.",
+  "沿用同一项目目录；分叉不会还原文件。": "Usa a mesma pasta do projeto; o fork não restaura arquivos.",
+  "收起继承的上下文": "Ocultar o contexto herdado",
+  "查看继承的上下文（{0} 轮）": "Ver o contexto herdado ({0})",
+  "Agent 已获得以上上下文，在下方发送消息即可从这里继续。": "O agente já tem este contexto. Envie uma mensagem abaixo para continuar daqui."
 }

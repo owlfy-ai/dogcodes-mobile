@@ -455,7 +455,7 @@
   "当前工作区": "Aktueller Arbeitsbereich",
   "共享当前项目文件，仅复制对话历史。": "Teilt die aktuellen Projektdateien und kopiert nur den Chatverlauf.",
   "新 Worktree": "Neuer Worktree",
-  "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照。": "Erstellt einen separaten Arbeitsbereich auf deinem Computer und stellt den Datei-Snapshot dieser Runde wieder her. Ältere Runden haben eventuell keinen Snapshot.",
+  "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照；非 Git 项目只继承对话。": "Erstellt einen separaten Arbeitsbereich auf deinem Computer und stellt den Datei-Snapshot dieser Runde wieder her. Ältere Runden haben eventuell keinen Snapshot. Projekte ohne Git übernehmen nur das Gespräch.",
   "正在创建…": "Wird erstellt…",
   "创建 Fork": "Fork erstellen",
   "取消置顶": "Loslösen",
@@ -722,7 +722,6 @@
   "完整输出请在电脑上查看": "Die vollständige Ausgabe siehst du auf deinem Computer",
   "{0}\n… 内容过长，已截断": "{0}\n… Inhalt gekürzt",
   "分叉": "Fork",
-  "从历史轮次分叉 · 继承的上下文": "Von einer früheren Runde geforkt · Übernommener Kontext",
   "分叉上下文暂不可显示": "Fork-Kontext nicht verfügbar",
   "请先恢复原草稿，未覆盖本机记录。": "Stelle zuerst den ursprünglichen Entwurf wieder her. Lokale Einträge wurden nicht überschrieben.",
   "草稿未能保存：{0}": "Entwurf konnte nicht gespeichert werden: {0}",
@@ -1135,5 +1134,15 @@
   "等待你确认": "Wartet auf deine Freigabe",
   "权限请求": "Berechtigungsanfrage",
   "这条记录已删除": "Dieser Eintrag wurde gelöscht",
-  "可以返回收件箱查看其它事项。": "Zurück zum Posteingang, um andere Einträge zu sehen."
+  "可以返回收件箱查看其它事项。": "Zurück zum Posteingang, um andere Einträge zu sehen.",
+  "分叉 · {0}": "Fork · {0}",
+  "分叉自较早的会话": "Von einem früheren Gespräch abgezweigt",
+  "分叉自": "Abgezweigt von",
+  "已恢复所选轮次结束时的文件，未提交的成果可在“变更”中查看。": "Die Dateien wurden auf das Ende der gewählten Runde zurückgesetzt; nicht committete Arbeit steht unter Änderungen.",
+  "此项目不是 Git 仓库，分叉只继承对话上下文，并沿用同一项目目录。": "Dieses Projekt ist kein Git-Repository; der Fork übernimmt nur das Gespräch und arbeitet im selben Ordner weiter.",
+  "此会话由旧版分叉创建，未恢复历史轮次的文件。": "Dieses Gespräch stammt von einem älteren Fork und hat die Dateien der Runde nicht wiederhergestellt.",
+  "沿用同一项目目录；分叉不会还原文件。": "Verwendet denselben Projektordner; ein Fork stellt keine Dateien wieder her.",
+  "收起继承的上下文": "Übernommenen Kontext ausblenden",
+  "查看继承的上下文（{0} 轮）": "Übernommenen Kontext anzeigen ({0})",
+  "Agent 已获得以上上下文，在下方发送消息即可从这里继续。": "Der Agent kennt diesen Kontext bereits. Sende unten eine Nachricht, um hier weiterzumachen."
 }

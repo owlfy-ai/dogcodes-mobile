@@ -7,6 +7,7 @@ import '../../ui/scope_picker.dart';
 import '../../ui/widgets.dart';
 import '../conversation/conversation_page.dart';
 import '../conversation/new_session_page.dart';
+import 'fork_tree.dart';
 import 'history_search_page.dart';
 import 'session_menu.dart';
 
@@ -46,10 +47,15 @@ class _SessionsPageState extends State<SessionsPage> {
           projectFilter = null;
         }
         final query = search.text.trim().toLowerCase();
+        final byTask = {
+          for (final s in hub.sessions) '${s.host.id}/${s.taskId}': s,
+        };
         final scope = hub.sessions.where((s) {
           if (s.hiddenByRemovedProject) return false;
           if (effectiveHost != null && s.host.id != effectiveHost) return false;
-          if (projectFilter != null && s.projectId != projectFilter) {
+          // A worktree fork has its own project but belongs with its source.
+          if (projectFilter != null &&
+              _sourceProject(s, byTask) != projectFilter) {
             return false;
           }
           return true;
@@ -131,6 +137,17 @@ class _SessionsPageState extends State<SessionsPage> {
     );
   }
 
+  static String _sourceProject(SessionRef s, Map<String, SessionRef> byTask) {
+    var current = s;
+    final seen = {s.taskId};
+    for (var next = s.forkedFrom; next != null; next = current.forkedFrom) {
+      final source = byTask['${s.host.id}/$next'];
+      if (source == null || !seen.add(source.taskId)) break;
+      current = source;
+    }
+    return current.projectId;
+  }
+
   Widget _body(
     BuildContext context,
     HostHub hub,
@@ -161,6 +178,14 @@ class _SessionsPageState extends State<SessionsPage> {
     final listed = query.isEmpty
         ? sessions.where((s) => !s.archived).toList()
         : sessions;
+    // Forks follow their source session instead of standing on their own.
+    final forks = ForkTree(sessions);
+    Iterable<Widget> rows(Iterable<SessionRef> top) => [
+      for (final s in top)
+        if (!forks.isNested(s))
+          for (final (row, depth) in forks.branch(s))
+            SessionRow(session: row, depth: depth),
+    ];
     final children = <Widget>[
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: DcSpace.page),
@@ -218,12 +243,12 @@ class _SessionsPageState extends State<SessionsPage> {
       final pinned = listed.where((s) => s.pinned).toList();
       if (pinned.isNotEmpty) {
         children.add(SectionLabel(tr("置顶")));
-        children.addAll(pinned.map((s) => SessionRow(session: s)));
+        children.addAll(rows(pinned));
       }
       // Day → computer → project; each level ordered by its newest session.
       final days = <String, List<SessionRef>>{};
       for (final s in listed) {
-        if (s.pinned) continue;
+        if (s.pinned || forks.isNested(s)) continue;
         days.putIfAbsent(dayGroup(s.updatedAt), () => []).add(s);
       }
       for (final day in days.entries) {
@@ -287,9 +312,7 @@ class _SessionsPageState extends State<SessionsPage> {
                 ),
               );
             }
-            for (final s in project) {
-              children.add(SessionRow(session: s));
-            }
+            children.addAll(rows(project));
           }
         }
       }
@@ -306,7 +329,7 @@ class _SessionsPageState extends State<SessionsPage> {
         ),
       );
       if (showArchived) {
-        children.addAll(archived.map((s) => SessionRow(session: s)));
+        children.addAll(rows(archived));
       }
     }
     return RefreshIndicator(
@@ -322,8 +345,11 @@ class _SessionsPageState extends State<SessionsPage> {
 }
 
 class SessionRow extends StatelessWidget {
-  const SessionRow({super.key, required this.session});
+  const SessionRow({super.key, required this.session, this.depth = 0});
   final SessionRef session;
+
+  /// How many forks deep this row sits under the session it came from.
+  final int depth;
   @override
   Widget build(BuildContext context) {
     watchAppLanguage(context);
@@ -340,12 +366,22 @@ class SessionRow extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: DcSpace.page,
-          vertical: 10,
+        padding: EdgeInsets.fromLTRB(
+          DcSpace.page + (depth > 0 ? 12.0 + 22 * (depth - 1) : 0),
+          10,
+          DcSpace.page,
+          10,
         ),
         child: Row(
           children: [
+            if (depth > 0) ...[
+              Icon(
+                Icons.subdirectory_arrow_right,
+                size: 18,
+                color: context.dc.secondary,
+              ),
+              const SizedBox(width: 6),
+            ],
             AgentGlyph(providerId: s.providerId),
             const SizedBox(width: 12),
             Expanded(
@@ -353,14 +389,16 @@ class SessionRow extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    s.title,
+                    depth > 0
+                        ? s.title.replaceFirst(RegExp(r' · Fork$'), '')
+                        : s.title,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    s.agent,
+                    depth > 0 ? tr("分叉 · {0}", [s.agent]) : s.agent,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.bodySmall,

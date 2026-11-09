@@ -9,6 +9,7 @@ import 'timeline_model.dart';
 import 'turn_files.dart';
 import 'turn_actions.dart';
 import 'attachment_preview.dart';
+import 'conversation_page.dart';
 
 /// Renders a task timeline the way the desktop does: open Agent answers,
 /// compact tool rows, and finished turns folded behind their answer.
@@ -118,7 +119,11 @@ class EntryView extends StatelessWidget {
     watchAppLanguage(context);
     return switch (entry) {
       TurnActionsEntry e => TurnActions(entry: e, session: session),
-      ItemEntry e => _ItemView(entry: e, activeTurnId: activeTurnId),
+      ItemEntry e => _ItemView(
+        entry: e,
+        activeTurnId: activeTurnId,
+        session: session,
+      ),
       LookupEntry e => _Expandable(
         icon: Icons.manage_search,
         label: tr("查阅"),
@@ -204,9 +209,10 @@ class _FullItemButtonState extends State<_FullItemButton> {
 }
 
 class _ItemView extends StatelessWidget {
-  const _ItemView({required this.entry, this.activeTurnId});
+  const _ItemView({required this.entry, this.activeTurnId, this.session});
   final ItemEntry entry;
   final String? activeTurnId;
+  final SessionRef? session;
 
   @override
   Widget build(BuildContext context) {
@@ -270,7 +276,7 @@ class _ItemView extends StatelessWidget {
             ? const SizedBox.shrink()
             : TurnFilesCard(key: ValueKey(meta['artifactId']), metadata: meta);
       case 'fork_context':
-        return _ForkContext(text: text);
+        return ForkOrigin(text: text, session: session);
       case 'tool.started' || 'tool.completed' || 'tool.failed' || 'tool':
         return _Expandable(
           icon: Icons.build_outlined,
@@ -705,36 +711,188 @@ class _Muted extends StatelessWidget {
   }
 }
 
-class _ForkContext extends StatelessWidget {
-  const _ForkContext({required this.text});
+/// Opens a forked session: where it came from, what it inherited, and that
+/// it can carry on from here.
+class ForkOrigin extends StatefulWidget {
+  const ForkOrigin({super.key, required this.text, this.session});
   final String text;
+  final SessionRef? session;
+  @override
+  State<ForkOrigin> createState() => _ForkOriginState();
+}
+
+class _ForkOriginState extends State<ForkOrigin> {
+  bool open = false;
+
   @override
   Widget build(BuildContext context) {
     watchAppLanguage(context);
+    final c = context.dc;
+    final theme = Theme.of(context);
+    final small = theme.textTheme.bodySmall;
+    Map? data;
     List<Map>? messages;
     try {
-      final data = jsonDecode(text) as Map;
+      data = jsonDecode(widget.text) as Map;
       messages = [
         for (final m in jsonDecode(data['text'] as String) as List)
           if (m is Map && ['turn.queued', 'message.delta'].contains(m['kind']))
             m,
       ];
     } catch (_) {}
-    return _Expandable(
-      icon: Icons.call_split,
-      label: tr("分叉"),
-      title: tr("从历史轮次分叉 · 继承的上下文"),
-      child: messages == null
-          ? _Muted(tr("分叉上下文暂不可显示"))
-          : Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                for (final m in messages) ...[
-                  _Muted(m['kind'] == 'turn.queued' ? tr("你") : 'Agent'),
-                  AgentMarkdown('${m['text'] ?? ''}'),
-                ],
-              ],
+    if (data == null || messages == null) {
+      return _Muted(tr("分叉上下文暂不可显示"));
+    }
+    final session = widget.session;
+    final sourceId = data['sourceTaskId'] as String?;
+    String? sourceTitle;
+    for (final t in session?.host.tasks ?? const <Map<String, dynamic>>[]) {
+      if (t['taskId'] == sourceId) sourceTitle = t['title'] as String?;
+    }
+    final note = data['environment'] == 'worktree'
+        ? data['restoredTurnSnapshot'] == true
+              ? tr("已恢复所选轮次结束时的文件，未提交的成果可在“变更”中查看。")
+              : data['contextOnly'] == true
+              ? tr("此项目不是 Git 仓库，分叉只继承对话上下文，并沿用同一项目目录。")
+              : tr("此会话由旧版分叉创建，未恢复历史轮次的文件。")
+        : tr("沿用同一项目目录；分叉不会还原文件。");
+    final turns = messages.where((m) => m['kind'] == 'turn.queued').length;
+    // Nothing has happened in the fork yet.
+    final alone =
+        session != null &&
+        session.task['lastTurnExecutor'] == null &&
+        !session.running;
+    final openSource =
+        session != null && sourceId != null && sourceTitle != null
+        ? () => Navigator.of(context).push(
+            MaterialPageRoute<void>(
+              builder: (_) =>
+                  ConversationPage(hostId: session.host.id, taskId: sourceId),
             ),
+          )
+        : null;
+    return Container(
+      margin: const EdgeInsets.only(top: 4, bottom: 14),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: c.surface,
+        border: Border.all(color: c.line),
+        borderRadius: BorderRadius.circular(14),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 32,
+                height: 32,
+                decoration: BoxDecoration(
+                  color: c.accent.withValues(alpha: 0.16),
+                  borderRadius: BorderRadius.circular(9),
+                ),
+                child: Icon(Icons.call_split, size: 18, color: c.accent),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (sourceTitle == null)
+                      Text(
+                        tr("分叉自较早的会话"),
+                        style: theme.textTheme.titleSmall,
+                      )
+                    else
+                      InkWell(
+                        key: const ValueKey('fork-source'),
+                        onTap: openSource,
+                        borderRadius: BorderRadius.circular(4),
+                        child: Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(text: '${tr("分叉自")} '),
+                              TextSpan(
+                                text: sourceTitle,
+                                style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  decorationColor: c.secondary,
+                                ),
+                              ),
+                            ],
+                          ),
+                          style: theme.textTheme.titleSmall,
+                        ),
+                      ),
+                    const SizedBox(height: 3),
+                    Text(note, style: small),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          if (messages.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(left: 44, top: 8),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: TextButton.icon(
+                  key: const ValueKey('fork-context-toggle'),
+                  style: TextButton.styleFrom(
+                    foregroundColor: c.secondary,
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                    visualDensity: VisualDensity.compact,
+                  ),
+                  onPressed: () => setState(() => open = !open),
+                  icon: Icon(
+                    open ? Icons.expand_more : Icons.chevron_right,
+                    size: 18,
+                  ),
+                  label: Text(
+                    open
+                        ? tr("收起继承的上下文")
+                        : tr("查看继承的上下文（{0} 轮）", [turns]),
+                  ),
+                ),
+              ),
+            ),
+          if (open)
+            Container(
+              margin: const EdgeInsets.only(left: 44, top: 4),
+              padding: const EdgeInsets.only(left: 12),
+              decoration: BoxDecoration(
+                border: Border(left: BorderSide(color: c.line, width: 2)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  for (final m in messages) ...[
+                    Padding(
+                      padding: const EdgeInsets.only(top: 6),
+                      child: Text(
+                        m['kind'] == 'turn.queued' ? tr("你") : 'Agent',
+                        style: small?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: m['kind'] == 'turn.queued' ? c.accent : null,
+                        ),
+                      ),
+                    ),
+                    AgentMarkdown('${m['text'] ?? ''}'),
+                  ],
+                ],
+              ),
+            ),
+          if (alone)
+            Padding(
+              padding: const EdgeInsets.only(left: 44, top: 10),
+              child: Text(
+                tr("Agent 已获得以上上下文，在下方发送消息即可从这里继续。"),
+                style: small,
+              ),
+            ),
+        ],
+      ),
     );
   }
 }

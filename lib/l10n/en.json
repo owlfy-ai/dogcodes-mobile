@@ -455,7 +455,7 @@
   "当前工作区": "Current workspace",
   "共享当前项目文件，仅复制对话历史。": "Share current project files and copy only the conversation history.",
   "新 Worktree": "New worktree",
-  "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照。": "Create a separate workspace on your computer and restore this turn’s file snapshot. Older turns may have no snapshot.",
+  "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照；非 Git 项目只继承对话。": "Create a separate workspace on your computer and restore this turn’s file snapshot. Older turns may have no snapshot. Non-Git projects carry over only the conversation.",
   "正在创建…": "Creating…",
   "创建 Fork": "Create fork",
   "取消置顶": "Unpin",
@@ -722,7 +722,6 @@
   "完整输出请在电脑上查看": "View full output on your computer",
   "{0}\n… 内容过长，已截断": "{0}\n… Content truncated",
   "分叉": "Fork",
-  "从历史轮次分叉 · 继承的上下文": "Forked from an earlier turn · Inherited context",
   "分叉上下文暂不可显示": "Fork context unavailable",
   "请先恢复原草稿，未覆盖本机记录。": "Restore the original draft first. Local records were not overwritten.",
   "草稿未能保存：{0}": "Could not save draft: {0}",
@@ -1138,5 +1137,15 @@
   "等待你确认": "Waiting for your approval",
   "权限请求": "Permission request",
   "这条记录已删除": "This record was deleted",
-  "可以返回收件箱查看其它事项。": "Go back to the inbox to see other items."
+  "可以返回收件箱查看其它事项。": "Go back to the inbox to see other items.",
+  "分叉 · {0}": "Fork · {0}",
+  "分叉自较早的会话": "Forked from an earlier conversation",
+  "分叉自": "Forked from",
+  "已恢复所选轮次结束时的文件，未提交的成果可在“变更”中查看。": "Files were restored to the end of the selected turn; uncommitted work is under Changes.",
+  "此项目不是 Git 仓库，分叉只继承对话上下文，并沿用同一项目目录。": "This project isn't a Git repository, so the fork kept only the conversation and continues in the same project folder.",
+  "此会话由旧版分叉创建，未恢复历史轮次的文件。": "This session was created by an older fork and did not restore the turn's files.",
+  "沿用同一项目目录；分叉不会还原文件。": "Uses the same project folder; forking does not restore files.",
+  "收起继承的上下文": "Hide inherited context",
+  "查看继承的上下文（{0} 轮）": "Show inherited context ({0})",
+  "Agent 已获得以上上下文，在下方发送消息即可从这里继续。": "The agent already has this context. Send a message below to continue from here."
 }

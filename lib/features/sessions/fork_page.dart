@@ -95,7 +95,7 @@ class _ForkPageState extends State<ForkPage> {
               (
                 'worktree',
                 tr("新 Worktree"),
-                tr("在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照。"),
+                tr("在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照；非 Git 项目只继承对话。"),
               ),
             ])
               ListTile(
