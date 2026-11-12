@@ -55,7 +55,7 @@ Empareja un móvil una sola vez y haz todo lo que sigue desde cualquier lugar. T
 
   ![Aprueba y responde.](../../docs/images/readme/en/permissions.png)
 
-- **Revisa y confirma.** Consulta los cambios de cada carpeta del proyecto, prepara archivos, deja que un agente escriba el mensaje del commit y luego confirma, sube, descarga o sincroniza. Explora el historial de commits y compara ramas en modo de solo lectura.
+- **Revisa y confirma.** Consulta los cambios de cada carpeta del proyecto, prepara archivos, deja que un agente escriba el mensaje del commit y luego confirma, sube, descarga o sincroniza. Explora el historial de commits y compara ramas en modo de solo lectura. Deshaz de un toque todos los cambios de archivos de un turno.
 
   ![Revisa y confirma.](../../docs/images/readme/en/git-changes.png)
 
@@ -94,6 +94,8 @@ Empareja un móvil una sola vez y haz todo lo que sigue desde cualquier lugar. T
 2. Mantén dog.codes abierto o minimizado, abre **Connect phone** y escanea el código QR con **Connect computer** en la app móvil.
 3. Elige un ordenador y un proyecto, y continúa una conversación o inicia una nueva.
 
-La interfaz móvil está disponible en chino simplificado e inglés. Para compilar desde el código, emparejar en local, ejecutar pruebas y consultar detalles de implementación, lee la [guía de desarrollo](../../docs/development.md).
+¿Aún no tienes un ordenador a mano? Toca **Ver primero un ejemplo** en la primera pantalla para probar la app con un ordenador ficticio; no se conecta nada.
+
+La interfaz móvil está disponible en 11 idiomas: español, inglés, chino simplificado y tradicional, japonés, coreano, francés, alemán, portugués de Brasil, ruso e italiano. Para compilar desde el código, emparejar en local, ejecutar pruebas y consultar detalles de implementación, lee la [guía de desarrollo](../../docs/development.md).
 
 Los iconos de los agentes se comparten con la app de escritorio; consulta las [fuentes y avisos](../../docs/images/readme/agents/README.md). Los nombres y marcas pertenecen a sus respectivos propietarios.

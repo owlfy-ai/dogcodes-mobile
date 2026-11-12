@@ -1,3 +1,4 @@
+import 'package:dogcodes_app/l10n/backend_text.dart';
 import 'package:dogcodes_app/l10n/strings.dart';
 import 'dart:convert';
 import 'service_origin.dart';
@@ -8,7 +9,11 @@ const maxFrameBytes = 262144;
 class ProtocolException implements Exception {
   const ProtocolException(this.rawMessage);
   final String rawMessage;
-  String get message => tr(rawMessage);
+
+  /// App messages are translated here; codes from the computer use the
+  /// desktop's own translations.
+  String get message =>
+      localizeBackendText(rawMessage) ?? displayBackendText(tr(rawMessage));
   @override
   String toString() => message;
 }

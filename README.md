@@ -55,7 +55,7 @@ Pair a phone once and run everything below from anywhere. Your code and your age
 
   ![Approve permissions and answer questions — desktop first, phone where available](docs/images/readme/en/permissions.png)
 
-- **Review and commit.** See the changes in every project folder, stage files, have an agent write the commit message, then commit, push, pull or sync. Browse commit history and compare branches read-only.
+- **Review and commit.** See the changes in every project folder, stage files, have an agent write the commit message, then commit, push, pull or sync. Browse commit history and compare branches read-only. Undo a whole turn's file changes in one tap.
 
   ![Git management that feels familiar — desktop first, phone where available](docs/images/readme/en/git-changes.png)
 
@@ -94,6 +94,8 @@ Pair a phone once and run everything below from anywhere. Your code and your age
 2. Keep dog.codes open or minimized, open **Connect phone**, and scan the QR code with **Connect computer** in the phone app.
 3. Choose a computer and project, then continue a conversation or start a new one.
 
-The phone app supports Simplified Chinese and English. For source builds, local pairing, testing, and implementation notes, see the [development guide](docs/development.md).
+No computer at hand yet? Tap **Explore an example first** on the first screen to try the app with a made-up computer; nothing is connected.
+
+The phone app is available in 11 languages: English, Simplified and Traditional Chinese, Japanese, Korean, French, German, Spanish, Brazilian Portuguese, Russian and Italian. For source builds, local pairing, testing, and implementation notes, see the [development guide](docs/development.md).
 
 Agent icons are shared with the desktop app; see [asset sources and notices](docs/images/readme/agents/README.md). Product names and marks belong to their respective owners.

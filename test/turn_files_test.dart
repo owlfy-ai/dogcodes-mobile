@@ -28,6 +28,7 @@ class FakePc implements HostApi {
   final calls = <String>[];
   Map<String, dynamic>? committed;
   final receipts = <String, Map>{};
+  bool undone = false;
 
   List<int> get bytes => utf8.encode(jsonEncode(artifact));
   Map<String, dynamic> get meta => {
@@ -99,6 +100,23 @@ class FakePc implements HostApi {
           a['action'] == 'stage' ? index.add('$p') : index.remove('$p');
         }
         return null;
+      case 'undo_status':
+        return undone;
+      case 'undo':
+        undone = true;
+        receipts[a['operationId'] as String] = {
+          'request': {
+            'operationId': a['operationId'],
+            'taskId': a['request']['taskId'],
+            'command': 'core_turn_undo',
+            'arguments': {'request': a['request']},
+          },
+          'outcome': {'status': 'succeeded', 'result': null},
+          'closed': false,
+        };
+        return null;
+      case 'file_close':
+        return {...?receipts[a['operationId']], 'closed': true};
       case 'commit_summary':
         return 'feat: update a and b\n';
       case 'git_action':
@@ -223,6 +241,37 @@ void main() {
     await tester.pumpAndSettle();
     expect(pc.index, {'already.txt'});
     expect(pc.committed, isNull);
+  });
+
+  testWidgets('a whole turn can be undone after confirming', (tester) async {
+    final pc = FakePc({...artifact, 'attribution': 'workspace_interval'});
+    await tester.pumpWidget(host(pc, TurnFilesCard(metadata: pc.meta)));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('撤销本轮文件修改'));
+    await tester.pumpAndSettle();
+    expect(find.text('撤销本轮文件修改？'), findsOneWidget);
+    expect(find.textContaining('将这轮修改的 2 个文件'), findsOneWidget);
+    await tester.tap(find.text('确认撤销'));
+    await tester.pumpAndSettle();
+    expect(pc.undone, isTrue);
+    expect(pc.calls, containsAllInOrder(['undo', 'file_operation']));
+    expect(find.text('已撤销'), findsOneWidget);
+    final commit = tester.widget<TextButton>(
+      find.ancestor(
+        of: find.text('提交'),
+        matching: find.bySubtype<TextButton>(),
+      ),
+    );
+    expect(commit.onPressed, isNull);
+  });
+
+  testWidgets('captures the computer cannot restore offer no undo', (
+    tester,
+  ) async {
+    final pc = FakePc({...artifact, 'sharedWorkspace': true});
+    await tester.pumpWidget(host(pc, TurnFilesCard(metadata: pc.meta)));
+    await tester.pumpAndSettle();
+    expect(find.byTooltip('撤销本轮文件修改'), findsNothing);
   });
 
   testWidgets('a turn without file changes renders nothing', (tester) async {

@@ -143,8 +143,12 @@ class _HostCard extends StatelessWidget {
       LinkStatus.connecting => StatusLabel(tr("连接中")),
       LinkStatus.offline => StatusLabel(tr("离线")),
     };
+    // This computer's own Agents; each server lists its own below.
     final agents = orderAgents(
-      h.installations,
+      [
+        for (final i in h.installations)
+          if (i['targetId'] == null) i,
+      ],
       (agent) => '${agent['providerId']}',
       h.agentOrder,
     );
@@ -331,6 +335,19 @@ class _HostCard extends StatelessWidget {
                     padding: EdgeInsets.only(top: 12),
                     child: Text(tr("这台电脑上还没有检测到 Agent。")),
                   ),
+                if (h.servers.isNotEmpty) ...[
+                  const SizedBox(height: 12),
+                  Divider(color: c.line),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8, bottom: 4),
+                    child: Text(
+                      tr("远程主机"),
+                      style: Theme.of(context).textTheme.labelLarge,
+                    ),
+                  ),
+                  for (final server in h.servers)
+                    _ServerRow(host: h, server: server),
+                ],
               ],
             ),
           ),
@@ -339,6 +356,137 @@ class _HostCard extends StatelessWidget {
     );
   }
 }
+
+/// A server this computer reaches over SSH: its state, its Agents, and a way
+/// to reconnect it. Passwords and host keys are only handled on the computer.
+class _ServerRow extends StatefulWidget {
+  const _ServerRow({required this.host, required this.server});
+  final HostState host;
+  final Map<String, dynamic> server;
+  @override
+  State<_ServerRow> createState() => _ServerRowState();
+}
+
+class _ServerRowState extends State<_ServerRow> {
+  bool busy = false;
+
+  Future<void> _reconnect() async {
+    final hub = AppScope.of(context).hub;
+    setState(() => busy = true);
+    try {
+      await hub.reconnectServer(widget.host, '${widget.server['targetId']}');
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('$e')));
+      }
+    } finally {
+      if (mounted) setState(() => busy = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    watchAppLanguage(context);
+    final s = widget.server;
+    final phase = s['phase'];
+    final needsInput = s['needsInput'] == true;
+    final (label, tone) = switch (phase) {
+      _ when needsInput => (tr("需在电脑上确认"), Tone.muted),
+      'connected' when s['scanning'] == true => (tr("正在检测 Agent"), Tone.accent),
+      'connected' => (tr("已连接"), Tone.accent),
+      'connecting' => (tr("连接中"), Tone.muted),
+      'failed' => (serverErrorLabel(s['error'] as String?), Tone.muted),
+      _ => (tr("未连接"), Tone.muted),
+    };
+    // A changed host key must be reviewed where the key can be checked.
+    final canReconnect =
+        widget.host.online &&
+        !needsInput &&
+        s['error'] != 'host_key_changed' &&
+        const ['failed', 'disconnected', 'idle'].contains(phase);
+    final agents = [
+      for (final i in widget.host.installations)
+        if (i['targetId'] == s['targetId']) i,
+    ];
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            children: [
+              const Icon(Icons.dns_outlined, size: 22),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  '${s['name'] ?? ''}',
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              StatusLabel(label, tone: tone),
+            ],
+          ),
+          if (needsInput || s['error'] == 'host_key_changed')
+            Padding(
+              padding: const EdgeInsets.only(left: 32, top: 4),
+              child: Text(
+                tr("密码、密钥口令和主机密钥只在电脑上的 DogCodes 中处理。"),
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ),
+          if (canReconnect)
+            Padding(
+              padding: const EdgeInsets.only(left: 32, top: 6),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: OutlinedButton.icon(
+                  onPressed: busy ? null : _reconnect,
+                  icon: busy
+                      ? const SizedBox.square(
+                          dimension: 14,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : const Icon(Icons.refresh, size: 18),
+                  label: Text(tr("重新连接")),
+                ),
+              ),
+            ),
+          if (phase == 'connected' && agents.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(left: 32, top: 6),
+              child: Wrap(
+                spacing: 6,
+                runSpacing: 6,
+                children: [
+                  for (final a in agents)
+                    Tooltip(
+                      message: agentLabel(a['providerId'] as String?),
+                      child: AgentGlyph(
+                        providerId: a['providerId'] as String?,
+                        size: 24,
+                      ),
+                    ),
+                ],
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Why a server connection failed, in the user's words.
+String serverErrorLabel(String? kind) => switch (kind) {
+  'auth_failed' => tr("登录失败"),
+  'host_key_changed' => tr("主机密钥已变化"),
+  'host_key_rejected' => tr("主机密钥未被信任"),
+  'host_unreachable' => tr("无法访问服务器"),
+  'timeout' => tr("连接超时"),
+  'connection_closed' => tr("服务器断开了连接"),
+  _ => tr("连接失败"),
+};
 
 class _AgentStatus extends StatelessWidget {
   const _AgentStatus({required this.installation, this.quota});

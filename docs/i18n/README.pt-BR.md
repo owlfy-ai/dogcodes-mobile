@@ -55,7 +55,7 @@ Pareie um celular uma única vez e faça tudo abaixo de qualquer lugar. Seu cód
 
   ![Aprove e responda.](../../docs/images/readme/en/permissions.png)
 
-- **Revise e faça commit.** Veja as mudanças em cada pasta do projeto, prepare arquivos, peça a um agente que escreva a mensagem do commit e então confirme, envie, baixe ou sincronize. Navegue pelo histórico de commits e compare branches em modo somente leitura.
+- **Revise e faça commit.** Veja as mudanças em cada pasta do projeto, prepare arquivos, peça a um agente que escreva a mensagem do commit e então confirme, envie, baixe ou sincronize. Navegue pelo histórico de commits e compare branches em modo somente leitura. Desfaça com um toque todas as mudanças de arquivos de uma rodada.
 
   ![Revise e faça commit.](../../docs/images/readme/en/git-changes.png)
 
@@ -94,6 +94,8 @@ Pareie um celular uma única vez e faça tudo abaixo de qualquer lugar. Seu cód
 2. Mantenha o dog.codes aberto ou minimizado, abra **Connect phone** e escaneie o QR code com **Connect computer** no app do celular.
 3. Escolha um computador e um projeto e continue uma conversa ou comece uma nova.
 
-A interface do celular está disponível em chinês simplificado e inglês. Para compilar o código, parear localmente, testar e consultar detalhes de implementação, veja o [guia de desenvolvimento](../../docs/development.md).
+Ainda sem um computador por perto? Toque em **Ver um exemplo primeiro** na primeira tela para experimentar o app com um computador fictício; nada é conectado.
+
+A interface do celular está disponível em 11 idiomas: português do Brasil, inglês, chinês simplificado e tradicional, japonês, coreano, francês, alemão, espanhol, russo e italiano. Para compilar o código, parear localmente, testar e consultar detalhes de implementação, veja o [guia de desenvolvimento](../../docs/development.md).
 
 Os ícones dos agentes são compartilhados com o app de desktop; veja as [fontes e avisos](../../docs/images/readme/agents/README.md). Nomes de produtos e marcas pertencem aos respectivos proprietários.

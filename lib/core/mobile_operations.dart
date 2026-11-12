@@ -7,6 +7,7 @@ import 'security/host_lifecycle.dart';
 import 'protocol.dart';
 import 'pc_api.dart' show uuid;
 
+import 'package:dogcodes_app/l10n/backend_text.dart';
 import 'package:dogcodes_app/l10n/strings.dart';
 
 part 'session_writes.dart';
@@ -17,6 +18,7 @@ part 'workspace_writes.dart';
 part 'terminal_stop_writes.dart';
 part 'power_writes.dart';
 part 'cancel_writes.dart';
+part 'undo_writes.dart';
 part 'recovery_journals.dart';
 
 String operationId() {
@@ -59,6 +61,7 @@ class MobileOperations {
   static const sideKinds = {
     'git',
     'index',
+    'undo',
     'terminal',
     'run_config',
     'history',
@@ -168,6 +171,7 @@ class MobileOperations {
     }
     if (saved['kind'] == 'git') return verifyGit(client, saved);
     if (saved['kind'] == 'index') return verifyIndex(client, saved);
+    if (saved['kind'] == 'undo') return verifyUndo(client, saved);
     if (['review', 'repair'].contains(saved['kind'])) {
       return verifyReviewWrite(client, saved);
     }
@@ -227,6 +231,10 @@ class MobileOperations {
       return retryWorkspace(client, saved);
     }
     if (saved['kind'] == 'git') return retryGit(client, saved);
+    if (saved['kind'] == 'undo') {
+      final found = await verifyUndo(client, saved);
+      return found ?? sendUndo(client, saved);
+    }
     if (saved['kind'] == 'index') {
       if (saved['phase'] == 'closing') {
         await finishGitTracking(client, saved);

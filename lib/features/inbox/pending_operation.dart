@@ -489,6 +489,7 @@ String pendingLabel(Map<String, dynamic> op) => switch (op['kind']) {
   'repair' => tr("修复"),
   'git' => tr("Git 操作"),
   'index' => tr("暂存文件"),
+  'undo' => tr("撤销本轮文件修改"),
   'cancel' => tr("停止任务"),
   'terminal' => tr("启动终端"),
   'terminal_stop' => tr("关闭终端"),

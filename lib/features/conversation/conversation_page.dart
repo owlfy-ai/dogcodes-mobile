@@ -16,6 +16,7 @@ import '../inbox/pending_operation.dart';
 import 'agent_picker.dart';
 import 'timeline_view.dart';
 import 'turn_files.dart';
+import 'computer_use_banner.dart';
 import 'composer_state.dart';
 import 'composer_attachments.dart';
 import '../sessions/session_menu.dart';
@@ -720,7 +721,10 @@ class _ConversationPageState extends State<ConversationPage> {
     return Scaffold(
       appBar: DetailBar(
         title: t?['title'] as String? ?? tr("会话"),
-        subtitle: [?projectName, h.name].join(' · '),
+        subtitle: [
+          ?projectName,
+          h.placeName(h.project(t?['projectId'] as String?)),
+        ].join(' · '),
         actions: [
           IconButton(
             tooltip: tr("刷新"),
@@ -918,6 +922,12 @@ class _ConversationPageState extends State<ConversationPage> {
                       );
                     },
                   ),
+          ),
+          ComputerUseBanner(
+            key: ValueKey('computer-use-${h.id}-${widget.taskId}'),
+            host: h,
+            taskId: widget.taskId,
+            running: running && h.online,
           ),
           if (recoveryCards.length == 1) recoveryCards.single,
           if (recoveryCards.length > 1)

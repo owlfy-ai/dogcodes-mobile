@@ -243,7 +243,7 @@ class _TerminalPageState extends State<TerminalPage>
     return Scaffold(
       appBar: DetailBar(
         title: tr("终端"),
-        subtitle: '${tool.host.name} · ${tool.projectName}',
+        subtitle: '${tool.host.placeName(tool.project)} · ${tool.projectName}',
       ),
       body: !tool.host.online
           ? ToolUnavailable(tool: tool)

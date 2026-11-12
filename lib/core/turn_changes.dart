@@ -37,8 +37,12 @@ class TurnFile {
 }
 
 class TurnChanges {
-  TurnChanges(this.files, {this.recovered = false});
+  TurnChanges(this.files, {this.recovered = false, this.undoable = false});
   final List<TurnFile> files;
+
+  /// The whole turn can be restored, by the same checks the computer makes
+  /// before touching files (apps/desktop/src/turnFileActions.ts).
+  final bool undoable;
 
   /// Snapshot taken after an interruption; other tools may still be writing.
   final bool recovered;
@@ -107,11 +111,23 @@ class TurnChanges {
         ),
       );
     }
+    bool omitted(Object? version) =>
+        version is Map && version['contentOmitted'] == true;
+    final raws = [
+      for (final raw in (data['files'] as List? ?? const []))
+        if (raw is Map) raw,
+    ];
     return TurnChanges(
       files,
       recovered:
           data['attribution'] == 'workspace_recovery_interval' ||
           data['recoveredAfterInterruption'] == true,
+      undoable:
+          data['attribution'] == 'workspace_interval' &&
+          data['recoveredAfterInterruption'] != true &&
+          data['sharedWorkspace'] != true &&
+          raws.isNotEmpty &&
+          raws.every((f) => !omitted(f['before']) && !omitted(f['after'])),
     );
   }
 

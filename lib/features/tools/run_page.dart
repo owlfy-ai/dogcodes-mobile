@@ -474,7 +474,7 @@ class _RunPageState extends State<RunPage> with WorkspaceConnection<RunPage> {
     return Scaffold(
       appBar: DetailBar(
         title: tr("运行与预览"),
-        subtitle: '${tool.host.name} · ${tool.projectName}',
+        subtitle: '${tool.host.placeName(tool.project)} · ${tool.projectName}',
       ),
       body: !tool.host.online || tool.taskId == null
           ? ToolUnavailable(tool: tool)

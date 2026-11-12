@@ -55,7 +55,7 @@ Appairez un téléphone une seule fois et faites tout ce qui suit de n’importe
 
   ![Approuvez et répondez.](../../docs/images/readme/en/permissions.png)
 
-- **Relisez et validez.** Consultez les changements de chaque dossier du projet, indexez des fichiers, faites écrire le message de commit par un agent, puis validez, poussez, tirez ou synchronisez. Parcourez l’historique des commits et comparez des branches en lecture seule.
+- **Relisez et validez.** Consultez les changements de chaque dossier du projet, indexez des fichiers, faites écrire le message de commit par un agent, puis validez, poussez, tirez ou synchronisez. Parcourez l’historique des commits et comparez des branches en lecture seule. Annulez d’un geste toutes les modifications de fichiers d’un tour.
 
   ![Relisez et validez.](../../docs/images/readme/en/git-changes.png)
 
@@ -94,6 +94,8 @@ Appairez un téléphone une seule fois et faites tout ce qui suit de n’importe
 2. Gardez dog.codes ouvert ou réduit, ouvrez **Connect phone** et scannez le QR code avec **Connect computer** dans l’app mobile.
 3. Choisissez un ordinateur et un projet, puis reprenez une conversation ou démarrez-en une nouvelle.
 
-L’interface mobile est disponible en chinois simplifié et en anglais. Pour compiler les sources, appairer en local, tester et consulter les détails d’implémentation, voir le [guide de développement](../../docs/development.md).
+Pas encore d’ordinateur sous la main ? Touchez **Voir d’abord un exemple** sur le premier écran pour essayer l’app avec un ordinateur fictif ; rien n’est connecté.
+
+L’interface mobile est disponible en 11 langues : français, anglais, chinois simplifié et traditionnel, japonais, coréen, allemand, espagnol, portugais du Brésil, russe et italien. Pour compiler les sources, appairer en local, tester et consulter les détails d’implémentation, voir le [guide de développement](../../docs/development.md).
 
 Les icônes des agents sont partagées avec l’app de bureau ; voir les [sources et mentions](../../docs/images/readme/agents/README.md). Les noms de produits et marques appartiennent à leurs propriétaires respectifs.

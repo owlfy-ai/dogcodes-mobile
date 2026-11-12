@@ -13,7 +13,7 @@ class ToolContext {
   String get path => project['path'] as String? ?? '';
   String? get taskId => host.latestTask(projectId)?['taskId'] as String?;
   HostLink? get link => host.link;
-  String get subtitle => '$projectName · ${host.name}';
+  String get subtitle => '$projectName · ${host.placeName(project)}';
 }
 
 /// Shows a PC-side error without hiding the screen behind it.

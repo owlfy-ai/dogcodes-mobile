@@ -20,10 +20,10 @@ String gitResultMessage(Map result) => switch (result['state']) {
   'succeeded' => result['pushed'] == true ? tr("已提交并推送") : tr("Git 操作已完成"),
   'awaiting_next' => tr("已经提交，还不确定是否推送成功，可以重新发送推送。"),
   'push_failed' => tr("提交已完成，推送失败：{0}", [
-    result['receipt']?['outcome']?['message'] ?? '',
+    displayBackendText('${result['receipt']?['outcome']?['message'] ?? ''}'),
   ]),
   'failed' => tr("Git 操作失败：{0}", [
-    result['receipt']?['outcome']?['message'] ?? '',
+    displayBackendText('${result['receipt']?['outcome']?['message'] ?? ''}'),
   ]),
   'running' => tr("电脑正在执行 Git 操作，稍后再确认。"),
   'unknown' => tr("Git 操作中途中断了，请在「变更」里看一下仓库现在的状态。"),

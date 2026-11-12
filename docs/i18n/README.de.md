@@ -55,7 +55,7 @@ Koppel ein Smartphone einmal und erledige alles Folgende von überall. Dein Code
 
   ![Freigeben und antworten.](../../docs/images/readme/en/permissions.png)
 
-- **Prüfen und committen.** Sieh die Änderungen in jedem Projektordner, stage Dateien, lass einen Agent die Commit-Nachricht schreiben und committe, pushe, pulle oder synchronisiere dann. Durchsuche den Commit-Verlauf und vergleiche Branches schreibgeschützt.
+- **Prüfen und committen.** Sieh die Änderungen in jedem Projektordner, stage Dateien, lass einen Agent die Commit-Nachricht schreiben und committe, pushe, pulle oder synchronisiere dann. Durchsuche den Commit-Verlauf und vergleiche Branches schreibgeschützt. Mach die Dateiänderungen eines ganzen Durchgangs mit einem Tipp rückgängig.
 
   ![Prüfen und committen.](../../docs/images/readme/en/git-changes.png)
 
@@ -94,6 +94,8 @@ Koppel ein Smartphone einmal und erledige alles Folgende von überall. Dein Code
 2. Lass dog.codes geöffnet oder minimiert, öffne **Connect phone** und scanne den QR-Code mit **Connect computer** in der Smartphone-App.
 3. Wähle einen Computer und ein Projekt und setze ein Gespräch fort oder starte ein neues.
 
-Die Smartphone-Oberfläche unterstützt vereinfachtes Chinesisch und Englisch. Quellcode-Builds, lokales Pairing, Tests und Implementierungsdetails stehen im [Entwicklungsleitfaden](../../docs/development.md).
+Noch kein Computer zur Hand? Tippe auf dem ersten Bildschirm auf **Erst ein Beispiel ansehen**, um die App mit einem erfundenen Computer auszuprobieren; es wird nichts verbunden.
+
+Die Smartphone-Oberfläche gibt es in 11 Sprachen: Deutsch, Englisch, vereinfachtes und traditionelles Chinesisch, Japanisch, Koreanisch, Französisch, Spanisch, brasilianisches Portugiesisch, Russisch und Italienisch. Quellcode-Builds, lokales Pairing, Tests und Implementierungsdetails stehen im [Entwicklungsleitfaden](../../docs/development.md).
 
 Die Agent-Symbole werden mit der Desktop-App geteilt; siehe [Quellen und Hinweise](../../docs/images/readme/agents/README.md). Produktnamen und Marken gehören ihren jeweiligen Eigentümern.

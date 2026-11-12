@@ -6,6 +6,8 @@ import 'core/host_hub.dart';
 import 'core/mobile_runtime.dart';
 import 'core/preferences.dart';
 import 'core/security/secret_storage.dart';
+import 'demo/demo_banner.dart';
+import 'demo/demo_link.dart';
 import 'features/computers/computers_page.dart';
 import 'features/inbox/pending_page.dart';
 import 'features/sessions/sessions_page.dart';
@@ -23,17 +25,23 @@ class AppScope extends InheritedWidget {
     required this.preferences,
     required this.runtime,
     required this.client,
+    this.demo = false,
     required super.child,
   });
   final HostHub hub;
   final AppPreferences preferences;
   final MobileRuntime? runtime;
   final AccessClient? client;
+
+  /// The fictional example computer is shown (示例模式). Pairing, push and
+  /// the device's own services are unavailable then: [runtime] and [client]
+  /// are null.
+  final bool demo;
   static AppScope of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<AppScope>()!;
   @override
   bool updateShouldNotify(AppScope old) =>
-      hub != old.hub || preferences != old.preferences;
+      hub != old.hub || preferences != old.preferences || demo != old.demo;
 }
 
 class DogCodesApp extends StatefulWidget {
@@ -41,13 +49,25 @@ class DogCodesApp extends StatefulWidget {
   final AccessClient? client;
   final MobileRuntime? runtime;
   final HostHub? hub;
+
+  /// Opens the example computer, kept in memory only, without pairing.
+  static Future<void> enterDemo(BuildContext context) async =>
+      context.findAncestorStateOfType<_DogCodesAppState>()?._enterDemo();
+
+  /// Leaves the example and discards everything done in it.
+  static void exitDemo(BuildContext context) =>
+      context.findAncestorStateOfType<_DogCodesAppState>()?._exitDemo();
   @override
   State<DogCodesApp> createState() => _DogCodesAppState();
 }
 
 class _DogCodesAppState extends State<DogCodesApp> {
   late final AppPreferences preferences;
-  late final HostHub hub;
+  late final HostHub _paired;
+
+  /// The example's own hub while 示例模式 is open; never the paired one.
+  HostHub? _demo;
+  HostHub get hub => _demo ?? _paired;
   final navigator = GlobalKey<NavigatorState>();
   final messenger = GlobalKey<ScaffoldMessengerState>();
   bool _pushScheduled = false;
@@ -60,7 +80,7 @@ class _DogCodesAppState extends State<DogCodesApp> {
     super.initState();
     final runtime = widget.runtime;
     preferences = AppPreferences(runtime?.storage)..load();
-    hub =
+    _paired =
         widget.hub ??
         HostHub(
           storage: runtime?.storage ?? MemorySecretStorage(),
@@ -71,34 +91,65 @@ class _DogCodesAppState extends State<DogCodesApp> {
         );
     if (runtime != null) {
       runtime.push.addListener(_pushChanged);
-      hub.addListener(_pushChanged);
-      runtime.push.initialize(hub);
+      _paired.addListener(_pushChanged);
+      runtime.push.initialize(_paired);
     }
-    if (!hub.loaded) {
+    if (!_paired.loaded) {
       if (runtime == null) {
-        hub.load();
+        _paired.load();
       } else {
         runtime.initialize().then((_) {
-          if (mounted) hub.load();
+          if (mounted) _paired.load();
         });
       }
     }
+  }
+
+  Future<void> _enterDemo() async {
+    if (_demo != null) return;
+    final demo = HostHub(
+      storage: MemorySecretStorage(),
+      lister: () async => [
+        {'hostId': DemoLink.id, 'displayName': tr("示例电脑")},
+      ],
+    );
+    await demo.load(connect: false);
+    await demo.attach(demo.hosts.single, DemoLink());
+    if (!mounted || _demo != null) {
+      demo.dispose();
+      return;
+    }
+    navigator.currentState?.popUntil((r) => r.isFirst);
+    setState(() => _demo = demo);
+  }
+
+  void _exitDemo() {
+    final demo = _demo;
+    if (demo == null) return;
+    navigator.currentState?.popUntil((r) => r.isFirst);
+    messenger.currentState?.clearSnackBars();
+    setState(() => _demo = null);
+    // Pages leaving with the example may still read it during this frame.
+    WidgetsBinding.instance.addPostFrameCallback((_) => demo.dispose());
+    _pushChanged();
   }
 
   @override
   void dispose() {
     if (widget.runtime != null) {
       widget.runtime!.push.removeListener(_pushChanged);
-      hub.removeListener(_pushChanged);
+      _paired.removeListener(_pushChanged);
       widget.runtime!.push.dispose();
     }
-    if (widget.hub == null) hub.dispose();
+    _demo?.dispose();
+    if (widget.hub == null) _paired.dispose();
     preferences.dispose();
     super.dispose();
   }
 
   void _pushChanged() {
     if (!mounted ||
+        _demo != null ||
         !hub.loaded ||
         _pushScheduled ||
         widget.runtime?.push.hasPendingOpen != true) {
@@ -148,6 +199,7 @@ class _DogCodesAppState extends State<DogCodesApp> {
   }
 
   Widget _home() {
+    if (_demo != null) return const HomeShell(key: ValueKey('demo'));
     if (!hub.loaded) return const StartupScreen(key: ValueKey('startup'));
     final phase = gatePhase(hub);
     if (hub.hosts.isEmpty) _entered = false;
@@ -164,11 +216,13 @@ class _DogCodesAppState extends State<DogCodesApp> {
   @override
   Widget build(BuildContext context) {
     watchAppLanguage(context);
+    final demo = _demo != null;
     return AppScope(
       hub: hub,
       preferences: preferences,
-      runtime: widget.runtime,
-      client: widget.client,
+      runtime: demo ? null : widget.runtime,
+      client: demo ? null : widget.client,
+      demo: demo,
       child: ListenableBuilder(
         listenable: preferences,
         builder: (context, _) => MaterialApp(
@@ -187,6 +241,8 @@ class _DogCodesAppState extends State<DogCodesApp> {
           theme: dcTheme(Brightness.light),
           darkTheme: dcTheme(Brightness.dark),
           themeMode: preferences.themeMode,
+          builder: (context, child) =>
+              DemoFrame(visible: demo, child: child ?? const SizedBox()),
           home: ListenableBuilder(
             listenable: hub,
             builder: (context, _) => AnimatedSwitcher(

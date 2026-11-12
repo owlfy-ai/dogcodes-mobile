@@ -306,7 +306,18 @@ class _SessionsPageState extends State<SessionsPage> {
                         color: context.dc.secondary,
                       ),
                       const SizedBox(width: 6),
-                      Text(project.first.projectName, style: small),
+                      Flexible(
+                        child: Text(
+                          [
+                            project.first.projectName,
+                            ?project.first.host.serverName(
+                              project.first.project,
+                            ),
+                          ].join(' · '),
+                          overflow: TextOverflow.ellipsis,
+                          style: small,
+                        ),
+                      ),
                     ],
                   ),
                 ),

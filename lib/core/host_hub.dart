@@ -54,6 +54,27 @@ class HostState {
 
   List<Map<String, dynamic>> executors = [];
 
+  /// Servers (remote hosts) this computer runs projects on: name and
+  /// connection state only. Empty for computers that do not share them.
+  List<Map<String, dynamic>> servers = [];
+  bool _serversUnsupported = false;
+
+  /// The server [targetId] names, or null for this computer itself.
+  Map<String, dynamic>? server(Object? targetId) => targetId == null
+      ? null
+      : servers.where((s) => s['targetId'] == targetId).firstOrNull;
+
+  /// Where [project] runs, for subtitles: its server, else this computer.
+  String placeName(Map<String, dynamic>? project) =>
+      serverName(project) ?? name;
+
+  /// Where [project] runs: its server's name, or null on this computer.
+  String? serverName(Map<String, dynamic>? project) {
+    final id = project?['targetId'];
+    if (id == null) return null;
+    return server(id)?['name'] as String? ?? tr("远程主机");
+  }
+
   /// PC Agent order. Empty until settings are read; sorting then uses the
   /// same default order as the desktop.
   List<String> agentOrder = [];
@@ -724,6 +745,22 @@ class HostHub extends ChangeNotifier {
       } catch (_) {
         // Older PCs may lack organization APIs; ordinary conversations remain usable.
       }
+      if (!h._serversUnsupported) {
+        try {
+          final list = await link.call('remote_hosts', null);
+          if (!current()) return;
+          h.servers = [
+            for (final s in list as List? ?? const [])
+              Map<String, dynamic>.from(s as Map),
+          ];
+        } on ProtocolException catch (e) {
+          if (e.rawMessage.contains('remote method unavailable')) {
+            h._serversUnsupported = true;
+          }
+        } catch (_) {
+          // Keeps the last known list; projects stay usable either way.
+        }
+      }
       if (executors || h.executors.isEmpty) {
         final executors = await _executors(link, h, snapshot);
         final quotas = await _quotas(link);
@@ -933,6 +970,26 @@ class HostHub extends ChangeNotifier {
       };
     } catch (_) {
       return const {};
+    }
+  }
+
+  /// Asks [h] to reconnect one of its servers. A password or a new host key
+  /// is only ever typed at the computer; the list then says so.
+  Future<void> reconnectServer(HostState h, String targetId) async {
+    final link = h.link;
+    if (link == null) throw ProtocolException(tr("电脑离线"));
+    await link.call('remote_host_reconnect', targetId);
+    final server = h.server(targetId);
+    if (server != null) server['phase'] = 'connecting';
+    h.revision++;
+    _notify();
+    // Connecting takes a few seconds; check back without waiting for the poll.
+    for (final wait in const [2, 5, 10]) {
+      await Future<void>.delayed(Duration(seconds: wait));
+      if (_disposed || h.link != link) return;
+      await refresh(h);
+      final now = h.server(targetId)?['phase'];
+      if (now != 'connecting') return;
     }
   }
 

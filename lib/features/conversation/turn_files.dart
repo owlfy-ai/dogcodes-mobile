@@ -61,6 +61,9 @@ class _TurnFilesCardState extends State<TurnFilesCard> {
   bool expanded = false;
   String? done;
 
+  /// Whether the computer already undid this turn; null until known.
+  bool? undone;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -71,6 +74,39 @@ class _TurnFilesCardState extends State<TurnFilesCard> {
     final scope = TurnScope.of(context);
     if (scope?.link == null || (future != null && !retry)) return;
     future = scope!.link!.turnChanges(scope.taskId, widget.metadata);
+    _readUndone();
+  }
+
+  Future<void> _readUndone() async {
+    final scope = TurnScope.of(context);
+    if (scope?.link == null || scope?.operations == null) return;
+    try {
+      final value = await scope!.operations!.undoStatus(
+        scope.link!,
+        scope.taskId,
+        widget.metadata,
+      );
+      if (mounted) setState(() => undone = value);
+    } catch (_) {
+      // Older computers or a dropped link: the dialog still checks.
+    }
+  }
+
+  Future<void> _undo(TurnChanges changes) async {
+    final scope = TurnScope.of(context)!;
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (_) => _UndoDialog(
+        count: changes.files.length,
+        run: () => scope.operations!.undoTurn(
+          scope.link!,
+          scope.taskId,
+          widget.metadata,
+        ),
+      ),
+    );
+    await scope.onOperationChanged?.call();
+    if (ok == true && mounted) setState(() => undone = true);
   }
 
   Future<void> _commit(TurnChanges changes) async {
@@ -164,9 +200,29 @@ class _TurnFilesCardState extends State<TurnFilesCard> {
                           ],
                         ),
                       ),
+                      if (undone == true)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: Text(
+                            tr("已撤销"),
+                            style: TextStyle(fontSize: 13, color: c.secondary),
+                          ),
+                        )
+                      else if (changes.undoable &&
+                          TurnScope.of(context)?.operations != null)
+                        IconButton(
+                          tooltip: tr("撤销本轮文件修改"),
+                          visualDensity: VisualDensity.compact,
+                          onPressed: TurnScope.of(context)?.link == null
+                              ? null
+                              : () => _undo(changes),
+                          icon: const Icon(Icons.undo, size: 18),
+                        ),
                       TextButton.icon(
                         onPressed:
-                            done != null || TurnScope.of(context)?.link == null
+                            done != null ||
+                                undone == true ||
+                                TurnScope.of(context)?.link == null
                             ? null
                             : () => _commit(changes),
                         icon: done != null
@@ -195,6 +251,89 @@ class _TurnFilesCardState extends State<TurnFilesCard> {
           ),
         );
       },
+    );
+  }
+}
+
+/// Confirms, then undoes the turn and shows why when the computer refuses
+/// (for example a file changed again afterwards: nothing is touched then).
+class _UndoDialog extends StatefulWidget {
+  const _UndoDialog({required this.count, required this.run});
+  final int count;
+  final Future<void> Function() run;
+  @override
+  State<_UndoDialog> createState() => _UndoDialogState();
+}
+
+class _UndoDialogState extends State<_UndoDialog> {
+  bool busy = false;
+  String? error;
+
+  Future<void> _confirm() async {
+    setState(() {
+      busy = true;
+      error = null;
+    });
+    try {
+      await widget.run();
+      if (mounted) Navigator.of(context).pop(true);
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          busy = false;
+          error = '$e';
+        });
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    watchAppLanguage(context);
+    final c = context.dc;
+    return AlertDialog(
+      title: Text(tr("撤销本轮文件修改？")),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            tr("将这轮修改的 {0} 个文件恢复到本轮开始前的状态，包括新增和删除的文件。对话记录会保留。", [widget.count]),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            tr("如果文件有后续修改，撤销会停止，避免覆盖新内容。"),
+            style: TextStyle(color: c.secondary, fontSize: 13),
+          ),
+          if (error != null) ...[
+            const SizedBox(height: 12),
+            Text(error!, style: TextStyle(color: c.removed)),
+          ],
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: busy ? null : () => Navigator.of(context).pop(false),
+          child: Text(tr("取消")),
+        ),
+        FilledButton.icon(
+          style: FilledButton.styleFrom(
+            backgroundColor: c.removed,
+            foregroundColor: Colors.white,
+          ),
+          onPressed: busy ? null : _confirm,
+          icon: busy
+              ? const SizedBox.square(
+                  dimension: 16,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    color: Colors.white,
+                  ),
+                )
+              : const Icon(Icons.undo, size: 18),
+          label: Text(busy ? tr("正在撤销…") : tr("确认撤销")),
+        ),
+      ],
     );
   }
 }

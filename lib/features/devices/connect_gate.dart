@@ -137,6 +137,12 @@ class _Welcome extends StatelessWidget {
           textAlign: TextAlign.center,
           style: text.bodySmall,
         ),
+        const SizedBox(height: 20),
+        TextButton.icon(
+          onPressed: () => DogCodesApp.enterDemo(context),
+          icon: const Icon(Icons.visibility_outlined),
+          label: Text(tr("先看看示例")),
+        ),
       ],
     );
   }

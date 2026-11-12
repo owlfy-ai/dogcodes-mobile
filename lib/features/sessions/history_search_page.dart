@@ -60,7 +60,7 @@ class _HistorySearchPageState extends State<HistorySearchPage> {
             children: [
               Text(s.title, style: Theme.of(context).textTheme.titleMedium),
               Text(
-                '${s.projectName} · ${s.host.name}',
+                '${s.projectName} · ${s.host.placeName(s.project)}',
                 style: Theme.of(context).textTheme.bodySmall,
               ),
               const SizedBox(height: 12),
@@ -159,7 +159,7 @@ class _HistorySearchPageState extends State<HistorySearchPage> {
                           horizontal: DcSpace.page,
                         ),
                         child: Text(
-                          '${group.session.projectName} · ${group.session.host.name}',
+                          '${group.session.projectName} · ${group.session.host.placeName(group.session.project)}',
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
                       ),

@@ -106,7 +106,7 @@ class _ApprovalCardState extends State<ApprovalCard> {
                 const SizedBox(width: 6),
                 Expanded(
                   child: Text(
-                    '${item.projectName} · ${item.host.name}',
+                    '${item.projectName} · ${item.host.placeName(item.host.project(item.task['projectId'] as String?))}',
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
