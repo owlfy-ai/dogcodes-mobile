@@ -114,11 +114,19 @@ flutter {
     source = "../.."
 }
 
-val buildEndpoint by tasks.registering(Exec::class) {
-    workingDir = rootProject.projectDir.parentFile
-    commandLine("python3", "tool/build_endpoint.py", "android")
+// One native library per build type: release and profile get an optimized build.
+val endpointBuilds = listOf("debug", "profile", "release").associateWith { variant ->
+    tasks.register<Exec>("buildEndpoint${variant.replaceFirstChar { it.uppercase() }}") {
+        workingDir = rootProject.projectDir.parentFile
+        commandLine("python3", "tool/build_endpoint.py", "android", "--variant", variant)
+    }
 }
-tasks.named("preBuild") { dependsOn(buildEndpoint, generatePushManifest) }
+tasks.named("preBuild") { dependsOn(generatePushManifest) }
+tasks.configureEach {
+    endpointBuilds.forEach { (variant, build) ->
+        if (name == "pre${variant.replaceFirstChar { it.uppercase() }}Build") dependsOn(build)
+    }
+}
 
 // Own these direct SDKs explicitly instead of relying on EMAS's transitive versions.
 dependencies {

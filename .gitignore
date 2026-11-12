@@ -64,6 +64,7 @@ android/key.properties
 /native/**/target/
 
 /android/app/src/main/jniLibs/
+/android/app/src/*/jniLibs/
 /ios/Endpoint/
 
 # Android tooling reports are generated artifacts.
