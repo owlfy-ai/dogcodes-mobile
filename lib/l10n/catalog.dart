@@ -37,30 +37,40 @@ const messageCatalogs = <String, Map<String, String>>{
     "电脑 {0}": "Computer {0}",
     "电脑离线": "Computer offline",
     "已提交并推送": "Committed and pushed",
-    "电脑绑定已改变，请返回设备列表。": "Computer pairing has changed. Return to the computer list.",
+    "电脑绑定已改变，请返回设备列表。":
+        "Computer pairing has changed. Return to the computer list.",
     "任务或远控期间保持唤醒": "Keep awake during tasks or remote control",
     "电脑离线，重连后刷新设置": "Computer offline. Reconnect to refresh settings.",
-    "阻止空闲睡眠，仍可锁屏或手动睡眠": "Prevents idle sleep. You can still lock or manually sleep the computer.",
+    "阻止空闲睡眠，仍可锁屏或手动睡眠":
+        "Prevents idle sleep. You can still lock or manually sleep the computer.",
     "电脑暂未能保持唤醒：{0}": "Could not keep the computer awake: {0}",
     "刷新保持唤醒设置": "Refresh keep-awake settings",
     "电脑": "Computers",
     "扫码连接": "Scan to connect",
     "偏好设置": "Preferences",
     "把电脑上的工作带在身边": "Take your work with you",
-    "连接自己的电脑，查看会话、发送任务并处理 Agent 的权限请求。无需注册账号。": "Connect your computer to view conversations, send tasks, and handle agent permission requests. No account required.",
+    "连接自己的电脑，查看会话、发送任务并处理 Agent 的权限请求。无需注册账号。":
+        "Connect your computer to view conversations, send tasks, and handle agent permission requests. No account required.",
     "连接电脑": "Connect computer",
-    "当前内测版本尚未配置接入服务。": "The connection service is not configured in this beta build.",
-    "在电脑端打开「连接手机」，扫描二维码。": "Open “Connect phone” on your computer and scan the QR code.",
-    "扫描电脑上的二维码，或粘贴配对链接": "Scan the QR code on your computer or paste a pairing link.",
-    "当前内测版本尚未配置接入服务": "The connection service is not configured in this beta build.",
+    "当前内测版本尚未配置接入服务。":
+        "The connection service is not configured in this beta build.",
+    "在电脑端打开「连接手机」，扫描二维码。":
+        "Open “Connect phone” on your computer and scan the QR code.",
+    "扫描电脑上的二维码，或粘贴配对链接":
+        "Scan the QR code on your computer or paste a pairing link.",
+    "当前内测版本尚未配置接入服务":
+        "The connection service is not configured in this beta build.",
     "更多": "More",
     "从这部手机移除「{0}」？": "Remove “{0}” from this phone?",
-    "手机会删除这台电脑的配对凭证，之后需重新扫码才能连接。电脑上的任务不受影响；如需让电脑也拒绝这部手机，请在电脑的设备列表中撤销。": "This deletes the pairing credentials from your phone. You will need to scan again to reconnect. Tasks on your computer are unaffected. To revoke this phone’s access, also remove it from the computer’s device list.",
+    "手机会删除这台电脑的配对凭证，之后需重新扫码才能连接。电脑上的任务不受影响；如需让电脑也拒绝这部手机，请在电脑的设备列表中撤销。":
+        "This deletes the pairing credentials from your phone. You will need to scan again to reconnect. Tasks on your computer are unaffected. To revoke this phone’s access, also remove it from the computer’s device list.",
     "取消": "Cancel",
-    "移除未完成，连接已关闭，请重试或核实安全存储。": "Removal incomplete. The connection is closed. Retry or check secure storage.",
+    "移除未完成，连接已关闭，请重试或核实安全存储。":
+        "Removal incomplete. The connection is closed. Retry or check secure storage.",
     "移除": "Remove",
     "撤销绑定": "Revoke pairing",
-    "请在「{0}」的设备列表中撤销这部手机。撤销后这部手机将无法再连接该电脑；电脑上正在执行的任务不受影响。": "Revoke this phone in the device list on “{0}”. This phone will no longer be able to connect. Tasks running on the computer are unaffected.",
+    "请在「{0}」的设备列表中撤销这部手机。撤销后这部手机将无法再连接该电脑；电脑上正在执行的任务不受影响。":
+        "Revoke this phone in the device list on “{0}”. This phone will no longer be able to connect. Tasks running on the computer are unaffected.",
     "知道了": "Got it",
     "通知设置": "Notifications",
     "重新连接": "Reconnect",
@@ -83,7 +93,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "新画面解码不可用": "New video decoder unavailable",
     "换路后画面不可用": "Video unavailable after switching connections",
     "正在核实并恢复远程桌面连接": "Verifying and restoring remote desktop",
-    "连接归属暂时无法核实，正在恢复远程桌面": "Could not verify connection ownership. Restoring remote desktop.",
+    "连接归属暂时无法核实，正在恢复远程桌面":
+        "Could not verify connection ownership. Restoring remote desktop.",
     "连接暂时无法恢复，请点击重新连接。": "Could not restore the connection. Tap Reconnect.",
     "电脑离线，连接后再打开远程桌面": "Computer offline. Reconnect to open remote desktop.",
     "电脑没有可用的显示器": "No displays available on this computer",
@@ -92,12 +103,16 @@ const messageCatalogs = <String, Map<String, String>>{
     "视频画面不可用，使用图片模式": "Video unavailable. Using image mode.",
     "暂时无法连接：{0}": "Could not connect: {0}",
     "{0}，已切换图片模式": "{0}. Switched to image mode.",
-    "请在电脑上允许共享屏幕和键鼠控制": "Allow screen sharing and keyboard/mouse control on your computer.",
+    "请在电脑上允许共享屏幕和键鼠控制":
+        "Allow screen sharing and keyboard/mouse control on your computer.",
     "电脑授权回复无效，请重新连接": "Invalid authorization response. Reconnect.",
-    "电脑未能准备屏幕共享，请重新连接并授权": "The computer could not prepare screen sharing. Reconnect and authorize again.",
-    "等待电脑授权超时，请重新连接后再试": "Timed out waiting for authorization. Reconnect and try again.",
+    "电脑未能准备屏幕共享，请重新连接并授权":
+        "The computer could not prepare screen sharing. Reconnect and authorize again.",
+    "等待电脑授权超时，请重新连接后再试":
+        "Timed out waiting for authorization. Reconnect and try again.",
     "画面正在恢复": "Restoring video",
-    "电脑未确认当前画面的就绪状态": "The computer has not confirmed that the current video is ready.",
+    "电脑未确认当前画面的就绪状态":
+        "The computer has not confirmed that the current video is ready.",
     "电脑视频编码异常": "Computer video encoder error",
     "电脑画面恢复超时": "Timed out restoring computer video",
     "电脑画面正在恢复": "Restoring computer video",
@@ -116,13 +131,17 @@ const messageCatalogs = <String, Map<String, String>>{
     "发送{0}到电脑": "Send {0} to computer",
     "文字": "text",
     "图片": "image",
-    "读取手机剪贴板，按系统提示允许粘贴": "Read your phone’s clipboard. Allow paste when prompted.",
+    "读取手机剪贴板，按系统提示允许粘贴":
+        "Read your phone’s clipboard. Allow paste when prompted.",
     "从电脑获取{0}": "Get {0} from computer",
     "复制到手机剪贴板": "Copy to phone clipboard",
-    "当前连接不支持独立剪贴板传输，请更新电脑和 App 后重试": "This connection does not support separate clipboard transfers. Update the desktop app and phone app.",
-    "手机剪贴板没有图片，或尚未允许粘贴": "No image on your phone’s clipboard, or paste permission has not been granted.",
+    "当前连接不支持独立剪贴板传输，请更新电脑和 App 后重试":
+        "This connection does not support separate clipboard transfers. Update the desktop app and phone app.",
+    "手机剪贴板没有图片，或尚未允许粘贴":
+        "No image on your phone’s clipboard, or paste permission has not been granted.",
     "手机剪贴板没有文字": "No text on your phone’s clipboard",
-    "电脑尚不支持分块剪贴板传输，请更新电脑客户端": "Update the desktop app to use chunked clipboard transfers.",
+    "电脑尚不支持分块剪贴板传输，请更新电脑客户端":
+        "Update the desktop app to use chunked clipboard transfers.",
     "已发送到电脑剪贴板": "Sent to computer clipboard",
     "已复制到手机剪贴板": "Copied to phone clipboard",
     "剪贴板操作未完成": "Clipboard operation incomplete",
@@ -134,24 +153,31 @@ const messageCatalogs = <String, Map<String, String>>{
     "重新选择共享屏幕": "Choose a screen to share again",
     "正在准备剪贴板传输…": "Preparing clipboard transfer…",
     "剪贴板传输 {0}%": "Clipboard transfer {0}%",
-    "已停止等待，复制操作可能已完成，请核实剪贴板": "Stopped waiting. Copying may have completed. Check the clipboard.",
+    "已停止等待，复制操作可能已完成，请核实剪贴板":
+        "Stopped waiting. Copying may have completed. Check the clipboard.",
     "键盘": "Keyboard",
     "移动画面": "Move view",
     "操作电脑": "Control computer",
     "适应屏幕": "Fit to screen",
     "剪贴板": "Clipboard",
-    "电脑已锁定，Agent 操作仍可用。\n解锁电脑后点「重新连接」。": "Computer locked. Agent actions are still available.\nUnlock your computer, then tap Reconnect.",
+    "电脑已锁定，Agent 操作仍可用。\n解锁电脑后点「重新连接」。":
+        "Computer locked. Agent actions are still available.\nUnlock your computer, then tap Reconnect.",
     "服务连接正常": "Service connected",
     "连接失败，请重试。": "Connection failed. Try again.",
-    "接入服务只转发加密数据，会话和任务保存在你的电脑上。": "The connection service relays encrypted data. Conversations and tasks stay on your computer.",
+    "接入服务只转发加密数据，会话和任务保存在你的电脑上。":
+        "The connection service relays encrypted data. Conversations and tasks stay on your computer.",
     "尚未配置服务地址": "Service address not configured",
     "此服务尚未开放电脑配对。": "Computer pairing is not enabled on this service.",
     "正在检查": "Checking",
     "检查连接": "Check connection",
-    "后台提醒暂未启用，静音设置可提前保存。仅影响这部手机，不影响电脑任务和 Agent 审批。": "Background alerts are not enabled. You can save mute preferences now. They apply only to this phone and do not affect computer tasks or agent approvals.",
-    "通知通道已连接。提醒只影响这部手机，不会直接批准操作。": "Notifications connected. Alerts apply only to this phone and never approve actions automatically.",
-    "后台提醒暂未启用，可在这里授权系统通知。": "Background alerts are not enabled. Grant notification permission here.",
-    "此版本未配置后台提醒，静音设置可提前保存。": "Background alerts are not configured in this build. You can save mute preferences now.",
+    "后台提醒暂未启用，静音设置可提前保存。仅影响这部手机，不影响电脑任务和 Agent 审批。":
+        "Background alerts are not enabled. You can save mute preferences now. They apply only to this phone and do not affect computer tasks or agent approvals.",
+    "通知通道已连接。提醒只影响这部手机，不会直接批准操作。":
+        "Notifications connected. Alerts apply only to this phone and never approve actions automatically.",
+    "后台提醒暂未启用，可在这里授权系统通知。":
+        "Background alerts are not enabled. Grant notification permission here.",
+    "此版本未配置后台提醒，静音设置可提前保存。":
+        "Background alerts are not configured in this build. You can save mute preferences now.",
     "正在连接通知服务": "Connecting to notification service",
     "重新检测后台提醒": "Check background alerts again",
     "启用后台提醒": "Enable background alerts",
@@ -164,14 +190,17 @@ const messageCatalogs = <String, Map<String, String>>{
     "已静音会话": "Muted chats",
     "未加载的会话": "Chat not loaded",
     "取消会话静音": "Unmute chat",
-    "这台电脑已静音，取消会话静音后仍不会收到提醒。": "This computer is muted. Unmuting the chat will not enable alerts.",
+    "这台电脑已静音，取消会话静音后仍不会收到提醒。":
+        "This computer is muted. Unmuting the chat will not enable alerts.",
     "静音此会话": "Mute this chat",
     "清除离线缓存？": "Clear offline cache?",
-    "只清除此手机保存的会话缓存，保留草稿、未发送附件和电脑配对。电脑上的会话不受影响，联网后会重新缓存。": "Clears cached conversations on this phone. Drafts, unsent attachments, and pairings are kept. Conversations on your computer are unaffected and will be cached again when online.",
+    "只清除此手机保存的会话缓存，保留草稿、未发送附件和电脑配对。电脑上的会话不受影响，联网后会重新缓存。":
+        "Clears cached conversations on this phone. Drafts, unsent attachments, and pairings are kept. Conversations on your computer are unaffected and will be cached again when online.",
     "清除": "Clear",
     "未能清除缓存：{0}": "Could not clear cache: {0}",
     "最近会话离线缓存": "Recent chats offline cache",
-    "{0} 个会话 · {1} MB\n最多 30 个会话、32 MB；保存文字和附件信息。": "{0} chats · {1} MB\nUp to 30 chats and 32 MB. Stores text and attachment information.",
+    "{0} 个会话 · {1} MB\n最多 30 个会话、32 MB；保存文字和附件信息。":
+        "{0} chats · {1} MB\nUp to 30 chats and 32 MB. Stores text and attachment information.",
     "正在读取缓存大小…": "Reading cache size…",
     "正在清除…": "Clearing…",
     "清除缓存": "Clear cache",
@@ -185,15 +214,21 @@ const messageCatalogs = <String, Map<String, String>>{
     "管理已绑定设备": "Manage paired devices",
     "{0} 台": "{0} computers",
     "本机数据": "On this phone",
-    "无需注册账号：通过电脑上的配对二维码建立信任，可随时在电脑上撤销。草稿和离线缓存保存在这部手机；提醒偏好可在电脑或会话菜单中设置。": "No account required. Scan the QR code on your computer to pair, and revoke access there at any time. Drafts and offline cache stay on this phone. Configure alerts in the computer or chat menu.",
-    "项目目录不可用，请刷新项目后重试。": "Project directory unavailable. Refresh the project and try again.",
+    "无需注册账号：通过电脑上的配对二维码建立信任，可随时在电脑上撤销。草稿和离线缓存保存在这部手机；提醒偏好可在电脑或会话菜单中设置。":
+        "No account required. Scan the QR code on your computer to pair, and revoke access there at any time. Drafts and offline cache stay on this phone. Configure alerts in the computer or chat menu.",
+    "项目目录不可用，请刷新项目后重试。":
+        "Project directory unavailable. Refresh the project and try again.",
     "选择终端目录": "Choose terminal directory",
-    "连接或项目目录已改变，请重新选择终端目录。": "Connection or project directory changed. Choose the terminal directory again.",
-    "启动结果待核实，请使用原操作恢复。": "Launch result unconfirmed. Recover the original operation.",
+    "连接或项目目录已改变，请重新选择终端目录。":
+        "Connection or project directory changed. Choose the terminal directory again.",
+    "启动结果待核实，请使用原操作恢复。":
+        "Launch result unconfirmed. Recover the original operation.",
     "关闭这个终端？": "Close this terminal?",
-    "将在电脑上结束该终端及其中运行的命令。离开页面不会关闭终端。": "Ends this terminal and its running commands on your computer. Leaving this page keeps the terminal running.",
+    "将在电脑上结束该终端及其中运行的命令。离开页面不会关闭终端。":
+        "Ends this terminal and its running commands on your computer. Leaving this page keeps the terminal running.",
     "关闭终端": "Close terminal",
-    "连接已改变，请刷新后重新确认关闭。": "Connection changed. Refresh and confirm closing again.",
+    "连接已改变，请刷新后重新确认关闭。":
+        "Connection changed. Refresh and confirm closing again.",
     "终端 {0}": "Terminal {0}",
     "新建终端": "New terminal",
     "关闭当前终端": "Close current terminal",
@@ -203,13 +238,16 @@ const messageCatalogs = <String, Map<String, String>>{
     "历史提交": "Commits",
     "分支比较": "Compare branches",
     "目录": "Directory",
-    "连接或目录已改变，请重新选择比较目标。": "Connection or directory changed. Choose the comparison target again.",
+    "连接或目录已改变，请重新选择比较目标。":
+        "Connection or directory changed. Choose the comparison target again.",
     "请填写提交说明": "Enter a commit message",
     "暂存全部并提交？": "Stage all and commit?",
-    "{0}当前没有已暂存的文件，将暂存全部 {1} 个变更后提交。": "{0}No files are staged. All {1} changes will be staged and committed.",
+    "{0}当前没有已暂存的文件，将暂存全部 {1} 个变更后提交。":
+        "{0}No files are staged. All {1} changes will be staged and committed.",
     "目录：{0}。": "Directory: {0}. ",
     "暂存并提交": "Stage and commit",
-    "连接或变更已更新，请核对后重新提交。": "Connection or changes updated. Review them before committing again.",
+    "连接或变更已更新，请核对后重新提交。":
+        "Connection or changes updated. Review them before committing again.",
     "Git 操作结果待核实": "Git operation result unconfirmed",
     "变更": "Changes",
     "更多 Git 操作": "More Git actions",
@@ -223,8 +261,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "选择父提交": "Choose parent commit",
     "父提交 {0} · {1}": "Parent {0} · {1}",
     "父提交 {0} ▾": "Parent {0} ▾",
-    "只读 · 当前 HEAD 相对所选分支共同祖先的变更": "Read only · Current HEAD compared with the selected branch’s common ancestor",
-    "只读 · 首次提交相对空目录的变更": "Read only · Initial commit compared with an empty directory",
+    "只读 · 当前 HEAD 相对所选分支共同祖先的变更":
+        "Read only · Current HEAD compared with the selected branch’s common ancestor",
+    "只读 · 首次提交相对空目录的变更":
+        "Read only · Initial commit compared with an empty directory",
     "只读 · 此提交相对父提交的变更": "Read only · This commit compared with its parent",
     "{0} 个文件": "{0} files",
     "{0} 个文件 · 已暂存 {1}": "{0} files · {1} staged",
@@ -236,14 +276,16 @@ const messageCatalogs = <String, Map<String, String>>{
     "提交": "Commit",
     "提交并推送": "Commit and push",
     "二进制文件，无法显示差异": "Binary file. Diff unavailable.",
-    "内容无差异（可能仅权限或换行变化）": "No content changes (possibly permissions or line endings only)",
+    "内容无差异（可能仅权限或换行变化）":
+        "No content changes (possibly permissions or line endings only)",
     "… 差异过长，已截断": "… Diff truncated",
     "切换目录": "Switch directory",
     "选择项目目录": "Choose project directory",
     "目录 · {0}": "Directory · {0}",
     "选择项目文件": "Choose project file",
     "搜索当前目录内的文件": "Search files in this directory",
-    "搜索结果未全部返回，请输入更具体的文件名或路径。": "Some results were omitted. Enter a more specific filename or path.",
+    "搜索结果未全部返回，请输入更具体的文件名或路径。":
+        "Some results were omitted. Enter a more specific filename or path.",
     "没有匹配的文件": "No matching files",
     "此文件无法预览（二进制或过大）": "Preview unavailable (binary or too large)",
     "{0} · 只读": "{0} · Read only",
@@ -255,10 +297,13 @@ const messageCatalogs = <String, Map<String, String>>{
     "没有提交记录": "No commits",
     "没有可比较的分支": "No branches to compare",
     "预览已关闭": "Preview closed",
-    "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">预览请求失败：{0}</p>": "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">Preview request failed: {0}</p>",
+    "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">预览请求失败：{0}</p>":
+        "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">Preview request failed: {0}</p>",
     "项目 WebSocket 写入未获确认": "Project WebSocket write was not confirmed",
-    "\u001b[2m（较早的输出已被电脑释放）\u001b[0m\r\n": "\u001b[2m(Earlier output has been released by the computer)\u001b[0m\r\n",
-    "\r\n\u001b[2m… 部分较早的输出已被电脑丢弃 …\u001b[0m\r\n": "\r\n\u001b[2m… Some earlier output was discarded by the computer …\u001b[0m\r\n",
+    "\u001b[2m（较早的输出已被电脑释放）\u001b[0m\r\n":
+        "\u001b[2m(Earlier output has been released by the computer)\u001b[0m\r\n",
+    "\r\n\u001b[2m… 部分较早的输出已被电脑丢弃 …\u001b[0m\r\n":
+        "\r\n\u001b[2m… Some earlier output was discarded by the computer …\u001b[0m\r\n",
     "启动中": "Starting",
     "运行中": "Running",
     "停止中": "Stopping",
@@ -268,7 +313,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "状态未知": "Unknown status",
     "核实输入结果": "Verify input result",
     "继续输入？": "Continue typing?",
-    "请先检查终端当前状态；未确认的输入可能已部分生效。继续会清空当前输入框并丢弃未发送内容，不会重新发送原输入。": "Check the terminal first. Unconfirmed input may have partially taken effect. Continuing clears the input box and discards unsent content. Original input will not be sent again.",
+    "请先检查终端当前状态；未确认的输入可能已部分生效。继续会清空当前输入框并丢弃未发送内容，不会重新发送原输入。":
+        "Check the terminal first. Unconfirmed input may have partially taken effect. Continuing clears the input box and discards unsent content. Original input will not be sent again.",
     "已检查，继续": "Checked, continue",
     "继续输入": "Continue typing",
     "输入命令，回车发送": "Type a command, press Enter to send",
@@ -278,11 +324,14 @@ const messageCatalogs = <String, Map<String, String>>{
     "重命名运行配置": "Rename run configuration",
     "保存": "Save",
     "删除运行配置？": "Delete run configuration?",
-    "移除“{0}”的启动配置，已运行的进程不会停止。": "Removes the launch configuration for “{0}”. Running processes will continue.",
+    "移除“{0}”的启动配置，已运行的进程不会停止。":
+        "Removes the launch configuration for “{0}”. Running processes will continue.",
     "重新分析项目？": "Analyze project again?",
-    "将重新生成运行配置，覆盖未固定的自定义修改，固定项会保留。": "Regenerates run configurations and replaces unpinned custom changes. Pinned configurations are kept.",
+    "将重新生成运行配置，覆盖未固定的自定义修改，固定项会保留。":
+        "Regenerates run configurations and replaces unpinned custom changes. Pinned configurations are kept.",
     "选择分析项目的 Agent": "Choose agent to analyze project",
-    "没有可用 Agent，请先在电脑上连接。": "No agents available. Connect an agent on your computer first.",
+    "没有可用 Agent，请先在电脑上连接。":
+        "No agents available. Connect an agent on your computer first.",
     "预览端口": "Preview port",
     "例如 5173": "e.g. 5173",
     "打开": "Open",
@@ -290,9 +339,11 @@ const messageCatalogs = <String, Map<String, String>>{
     "选择运行目录": "Choose run directory",
     "分析项目": "Analyze project",
     "刷新运行配置": "Refresh run configurations",
-    "Agent 正在分析项目，可稍后刷新查看。": "An agent is analyzing the project. Refresh later to see the result.",
+    "Agent 正在分析项目，可稍后刷新查看。":
+        "An agent is analyzing the project. Refresh later to see the result.",
     "这个项目尚未关联目录。": "No directory linked to this project.",
-    "当前目录还没有运行配置，点击「分析项目」生成启动方式。": "No run configurations in this directory. Tap Analyze project to generate one.",
+    "当前目录还没有运行配置，点击「分析项目」生成启动方式。":
+        "No run configurations in this directory. Tap Analyze project to generate one.",
     "选择运行配置": "Choose run configuration",
     "选择配置": "Choose configuration",
     "未运行": "Not running",
@@ -316,55 +367,75 @@ const messageCatalogs = <String, Map<String, String>>{
     "后退": "Back",
     "刷新": "Refresh",
     "电脑离线，重新连接后再试。": "Computer offline. Reconnect and try again.",
-    "这个项目还没有会话。电脑以会话为单位授权工作区访问，请先在项目中开始一个会话。": "No chats in this project yet. Workspace access is authorized per chat. Start a chat in this project first.",
+    "这个项目还没有会话。电脑以会话为单位授权工作区访问，请先在项目中开始一个会话。":
+        "No chats in this project yet. Workspace access is authorized per chat. Start a chat in this project first.",
     "全部": "All",
     "权限": "Permissions",
     "问题": "Questions",
     "待处理": "Inbox",
     "没有需要你处理的事项": "Nothing needs your attention",
     "{0} 项需要你处理": "{0} items need your attention",
-    "{0} 台电脑离线，其待处理事项将在重新连接后显示。": "{0} computers offline. Their pending items will appear after reconnecting.",
+    "{0} 台电脑离线，其待处理事项将在重新连接后显示。":
+        "{0} computers offline. Their pending items will appear after reconnecting.",
     "查看会话": "View chat",
-    "已不再等待。如果电脑收到了这项操作，它仍会生效。": "Stopped waiting. If the computer received this operation, it will still take effect.",
+    "已不再等待。如果电脑收到了这项操作，它仍会生效。":
+        "Stopped waiting. If the computer received this operation, it will still take effect.",
     "会话已经删除。": "Chat deleted.",
     "新名称已经生效。": "New name applied.",
-    "已找到电脑上的原终端，可在终端或运行页面继续查看；未重新运行命令。": "Found the original terminal. Continue in Terminal or Run. The command was not run again.",
+    "已找到电脑上的原终端，可在终端或运行页面继续查看；未重新运行命令。":
+        "Found the original terminal. Continue in Terminal or Run. The command was not run again.",
     "分析已经开始，可在运行页面查看进度。": "Analysis started. Check progress on the Run page.",
     "原运行配置操作已完成。": "Original run configuration operation completed.",
     "原运行配置操作已结束：{0}": "Original run configuration operation ended: {0}",
-    "原启动已取消，未重新运行命令。": "Original launch canceled. The command was not run again.",
+    "原启动已取消，未重新运行命令。":
+        "Original launch canceled. The command was not run again.",
     "修复已提交给主 Agent。": "Fix submitted to the main agent.",
     "原修复已放弃。": "Original fix abandoned.",
-    "修复尚未提交，可继续原操作。{0}": "Fix not submitted yet. Continue the original operation. {0}",
-    "已找到原审查，可在对应轮次的「本轮审查」中查看。": "Found the original review. View it under Turn reviews for the corresponding turn.",
-    "电脑上还查不到这项操作，可能没收到。可以重新发送，不会重复执行。": "The computer has no record of this operation yet. It may not have arrived. Resending will not execute it twice.",
+    "修复尚未提交，可继续原操作。{0}":
+        "Fix not submitted yet. Continue the original operation. {0}",
+    "已找到原审查，可在对应轮次的「本轮审查」中查看。":
+        "Found the original review. View it under Turn reviews for the corresponding turn.",
+    "电脑上还查不到这项操作，可能没收到。可以重新发送，不会重复执行。":
+        "The computer has no record of this operation yet. It may not have arrived. Resending will not execute it twice.",
     "Fork 正在后台执行。": "Fork running in the background.",
     "Fork 尚未完成。": "Fork not completed yet.",
     "{0}：还没收到电脑确认": "{0}: No confirmation from computer yet",
     "待确认": "Awaiting confirmation",
-    "{0} · 正在确认「不再等待」。重试仅确认原操作的结束状态，已经执行的内容不会撤销。": "{0} · Confirming Stop waiting. Retrying only confirms the original operation’s final state and does not undo completed work.",
-    "{0} · 网络中断时手机没收到电脑的回复。点「重新确认」查看结果；重新发送也不会重复执行。": "{0} · The reply was lost when the connection dropped. Tap Check again for the result. Resending will not execute it twice.",
-    "{0} · 网络中断时手机没收到电脑的回复。连上电脑后会自动确认。": "{0} · The reply was lost when the connection dropped. It will be checked automatically after reconnecting.",
+    "{0} · 正在确认「不再等待」。重试仅确认原操作的结束状态，已经执行的内容不会撤销。":
+        "{0} · Confirming Stop waiting. Retrying only confirms the original operation’s final state and does not undo completed work.",
+    "{0} · 网络中断时手机没收到电脑的回复。点「重新确认」查看结果；重新发送也不会重复执行。":
+        "{0} · The reply was lost when the connection dropped. Tap Check again for the result. Resending will not execute it twice.",
+    "{0} · 网络中断时手机没收到电脑的回复。连上电脑后会自动确认。":
+        "{0} · The reply was lost when the connection dropped. It will be checked automatically after reconnecting.",
     "新名称：{0}": "New name: {0}",
-    "重新发送会继续你之前确认过的删除。": "Resending continues the deletion you previously confirmed.",
+    "重新发送会继续你之前确认过的删除。":
+        "Resending continues the deletion you previously confirmed.",
     "原终端": "Original terminal",
     "原任务": "Original task",
-    "只会停止当时那次运行，不影响之后新开始的任务。": "Only stops that specific run. Later tasks are unaffected.",
-    "电脑离线，连上后会自动确认。": "Computer offline. Will check automatically after reconnecting.",
+    "只会停止当时那次运行，不影响之后新开始的任务。":
+        "Only stops that specific run. Later tasks are unaffected.",
+    "电脑离线，连上后会自动确认。":
+        "Computer offline. Will check automatically after reconnecting.",
     "重新确认": "Check again",
     "继续确认结束": "Continue confirming completion",
     "重新发送": "Resend",
     "不再发送": "Do not resend",
     "不再等待这项操作？": "Stop waiting for this operation?",
-    "只是不再在手机上等待结果。如果电脑已经收到，改名或删除仍会生效。": "Stops waiting on this phone. If the computer already received the request, renaming or deletion will still take effect.",
+    "只是不再在手机上等待结果。如果电脑已经收到，改名或删除仍会生效。":
+        "Stops waiting on this phone. If the computer already received the request, renaming or deletion will still take effect.",
     "继续等待": "Keep waiting",
     "确定": "Confirm",
     "不再等待": "Stop waiting",
-    "只是不再在手机上等待结果。电脑上已经完成的操作会保留。": "Stops waiting on this phone. Completed operations on your computer are kept.",
-    "只是不再在手机上等待结果。如果电脑已经收到，任务仍会停下。": "Stops waiting on this phone. If the computer already received the request, the task will still stop.",
-    "只是不再在手机上等待结果。如果电脑已经收到，终端仍会关闭。终端是否还在运行，请在终端页查看。": "Stops waiting on this phone. If the computer already received the request, the terminal will still close. Check the Terminal page to see whether it is running.",
-    "如果终端还没启动，就不会再启动；已经启动的会保留，里面的命令照常运行。": "A terminal that has not started will not start. An existing terminal and its commands will keep running.",
-    "如果还没执行，就不会再提交或推送；已经完成的不会撤销。建议先在「变更」里看一下结果。": "No commit or push will be started if it has not begun. Completed operations will not be undone. Check the Changes page before continuing.",
+    "只是不再在手机上等待结果。电脑上已经完成的操作会保留。":
+        "Stops waiting on this phone. Completed operations on your computer are kept.",
+    "只是不再在手机上等待结果。如果电脑已经收到，任务仍会停下。":
+        "Stops waiting on this phone. If the computer already received the request, the task will still stop.",
+    "只是不再在手机上等待结果。如果电脑已经收到，终端仍会关闭。终端是否还在运行，请在终端页查看。":
+        "Stops waiting on this phone. If the computer already received the request, the terminal will still close. Check the Terminal page to see whether it is running.",
+    "如果终端还没启动，就不会再启动；已经启动的会保留，里面的命令照常运行。":
+        "A terminal that has not started will not start. An existing terminal and its commands will keep running.",
+    "如果还没执行，就不会再提交或推送；已经完成的不会撤销。建议先在「变更」里看一下结果。":
+        "No commit or push will be started if it has not begun. Completed operations will not be undone. Check the Changes page before continuing.",
     "发送消息": "Send message",
     "Fork 会话": "Fork chat",
     "置顶或归档": "Pin or archive",
@@ -389,16 +460,21 @@ const messageCatalogs = <String, Map<String, String>>{
     "Agent 有一个问题": "An agent has a question",
     "会话「{0}」需要你的回答。": "Chat “{0}” needs your answer.",
     "会话「{0}」请求以下操作。": "Chat “{0}” requests the following action.",
-    "这个问题的格式暂不支持在手机上回答，请在电脑上回答，回答后这里会自动更新。": "This question format cannot be answered on your phone yet. Answer on your computer; this page will update automatically.",
+    "这个问题的格式暂不支持在手机上回答，请在电脑上回答，回答后这里会自动更新。":
+        "This question format cannot be answered on your phone yet. Answer on your computer; this page will update automatically.",
     "电脑离线，重新连接后再处理。": "Computer offline. Reconnect to respond.",
-    "这台电脑有一项操作结果待核实，请先核实。": "An operation on this computer needs verification. Check it first.",
+    "这台电脑有一项操作结果待核实，请先核实。":
+        "An operation on this computer needs verification. Check it first.",
     "其他授权范围": "Other permission scopes",
     "工作区": "Workspace",
     "还没有连接电脑": "No computer connected yet",
-    "连接电脑后，在这里查看项目及其会话。": "Connect a computer to view its projects and chats here.",
+    "连接电脑后，在这里查看项目及其会话。":
+        "Connect a computer to view its projects and chats here.",
     "去连接电脑": "Connect a computer",
-    "{0} 尚未同步项目；电脑在线时会自动同步。": "{0} has not synced projects yet. They will sync automatically when online.",
-    "{0} 上还没有项目，点右上角「添加项目」选择电脑上的已有目录。": "No projects on {0} yet. Tap Add project in the top right to select an existing directory on your computer.",
+    "{0} 尚未同步项目；电脑在线时会自动同步。":
+        "{0} has not synced projects yet. They will sync automatically when online.",
+    "{0} 上还没有项目，点右上角「添加项目」选择电脑上的已有目录。":
+        "No projects on {0} yet. Tap Add project in the top right to select an existing directory on your computer.",
     "文件": "Files",
     "浏览项目文件": "Browse project files",
     "查看代码变更": "View code changes",
@@ -412,8 +488,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "分离 HEAD": "Detached HEAD",
     "工作区干净": "Working tree clean",
     "{0} 个文件待提交": "{0} files to commit",
-    "项目已添加，列表尚未同步。请重新连接后刷新结果。": "Project added. The list has not synced yet. Reconnect and refresh.",
-    "请先绑定电脑，再选择电脑上的项目目录。": "Pair a computer first, then choose a project directory on it.",
+    "项目已添加，列表尚未同步。请重新连接后刷新结果。":
+        "Project added. The list has not synced yet. Reconnect and refresh.",
+    "请先绑定电脑，再选择电脑上的项目目录。":
+        "Pair a computer first, then choose a project directory on it.",
     "选择添加项目的电脑": "Choose computer for project",
     " · 离线": " · Offline",
     "选择这台电脑上已有的目录": "Choose an existing directory on this computer",
@@ -425,14 +503,18 @@ const messageCatalogs = <String, Map<String, String>>{
     "不显示隐藏": "Hide hidden files",
     "显示隐藏": "Show hidden files",
     "电脑离线，请重新连接后浏览目录。": "Computer offline. Reconnect to browse directories.",
-    "目录路径已修改，请点箭头或回车确认后再添加。": "Path changed. Press the arrow or Enter to confirm before adding.",
+    "目录路径已修改，请点箭头或回车确认后再添加。":
+        "Path changed. Press the arrow or Enter to confirm before adding.",
     "重试读取目录": "Retry loading directory",
-    "当前目录没有子目录，可直接添加此目录。": "No subdirectories. You can add this directory directly.",
+    "当前目录没有子目录，可直接添加此目录。":
+        "No subdirectories. You can add this directory directly.",
     "加载中…": "Loading…",
     "加载更多目录": "Load more directories",
     "项目名称（可选）": "Project name (optional)",
-    "留空使用目录名；已有项目会直接复用": "Leave blank to use the directory name. Existing projects will be reused.",
-    "该目录已添加为「{0}」，将打开已有项目。": "This directory is already added as “{0}”. The existing project will open.",
+    "留空使用目录名；已有项目会直接复用":
+        "Leave blank to use the directory name. Existing projects will be reused.",
+    "该目录已添加为「{0}」，将打开已有项目。":
+        "This directory is already added as “{0}”. The existing project will open.",
     "刷新添加结果": "Refresh result",
     "正在添加…": "Adding…",
     "打开已有项目": "Open existing project",
@@ -442,8 +524,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "{0} 个会话 · 按当前电脑和项目范围": "{0} chats · Current computer and project scope",
     "搜索已保存的消息正文": "Search saved messages",
     "搜索历史正文": "Search chat history",
-    "在电脑上检索已保存的对话正文，不包含思考过程或附件内容。": "Search saved conversation text on your computer. Excludes reasoning and attachment contents.",
-    "{0} 离线，未搜索其中的会话；连接后重新搜索。": "{0} is offline and was not searched. Reconnect and search again.",
+    "在电脑上检索已保存的对话正文，不包含思考过程或附件内容。":
+        "Search saved conversation text on your computer. Excludes reasoning and attachment contents.",
+    "{0} 离线，未搜索其中的会话；连接后重新搜索。":
+        "{0} is offline and was not searched. Reconnect and search again.",
     "输入关键词开始搜索": "Enter a keyword to search",
     "没有找到匹配的历史记录": "No matching history",
     "你": "You",
@@ -453,11 +537,14 @@ const messageCatalogs = <String, Map<String, String>>{
     "重试此会话": "Retry this chat",
     "继续搜索更早的 {0} 个会话": "Search {0} earlier chats",
     "请等待当前任务结束后再 Fork。": "Wait for the current task to finish before forking.",
-    "从本轮结束时的历史创建独立会话。": "Create an independent chat from the history at the end of this turn.",
+    "从本轮结束时的历史创建独立会话。":
+        "Create an independent chat from the history at the end of this turn.",
     "当前工作区": "Current workspace",
-    "共享当前项目文件，仅复制对话历史。": "Share current project files and copy only the conversation history.",
+    "共享当前项目文件，仅复制对话历史。":
+        "Share current project files and copy only the conversation history.",
     "新 Worktree": "New worktree",
-    "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照；非 Git 项目只继承对话。": "Create a separate workspace on your computer and restore this turn’s file snapshot. Older turns may have no snapshot. Non-Git projects carry over only the conversation.",
+    "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照；非 Git 项目只继承对话。":
+        "Create a separate workspace on your computer and restore this turn’s file snapshot. Older turns may have no snapshot. Non-Git projects carry over only the conversation.",
     "正在创建…": "Creating…",
     "创建 Fork": "Create fork",
     "取消置顶": "Unpin",
@@ -467,7 +554,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "归档会话": "Archive chat",
     "会话操作": "Chat actions",
     "会话将从电脑同步": "Chats sync from your computer",
-    "连接自己的电脑后，在这里查看和续接各项目的会话。网络中断时，电脑上的任务会继续执行。": "Connect your computer to view and resume project chats here. Tasks keep running on your computer if the network drops.",
+    "连接自己的电脑后，在这里查看和续接各项目的会话。网络中断时，电脑上的任务会继续执行。":
+        "Connect your computer to view and resume project chats here. Tasks keep running on your computer if the network drops.",
     "搜索会话": "Search chats",
     "{0} 项等待处理": "{0} items pending",
     "{0} 连接中…": "{0} connecting…",
@@ -475,7 +563,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "{0} 离线 · 显示 {1} 同步的内容": "{0} offline · Showing content synced {1}",
     "没有匹配的会话": "No matching chats",
     "没有未归档的会话": "No unarchived chats",
-    "还没有会话，点右上角 + 开始新任务": "No chats yet. Tap + in the top right to start a task.",
+    "还没有会话，点右上角 + 开始新任务":
+        "No chats yet. Tap + in the top right to start a task.",
     "正在从电脑同步会话…": "Syncing chats from computer…",
     "置顶": "Pinned",
     "已归档 ({0})": "Archived ({0})",
@@ -484,50 +573,66 @@ const messageCatalogs = <String, Map<String, String>>{
     "已归档": "Archived",
     "正在核实原配对…": "Verifying original pairing…",
     "移除本机配对记录？": "Remove local pairing record?",
-    "之后需要重新扫码。电脑上可能已允许这台手机；如需撤销授权，请在电脑的「连接手机」中操作。": "You will need to scan again. Your computer may already have authorized this phone. Revoke access under Connect phone on your computer if needed.",
+    "之后需要重新扫码。电脑上可能已允许这台手机；如需撤销授权，请在电脑的「连接手机」中操作。":
+        "You will need to scan again. Your computer may already have authorized this phone. Revoke access under Connect phone on your computer if needed.",
     "保留记录": "Keep record",
     "移除本机记录": "Remove local record",
     "正在验证电脑身份并建立配对…": "Verifying computer identity and pairing…",
     "加密组件尚未准备好。": "Encryption is not ready yet.",
-    "在电脑端打开「连接手机」，扫描配对二维码。": "Open Connect phone on your computer and scan the pairing QR code.",
-    "配对后可操作这台电脑的 Agent、项目、Git 和终端，并查看、控制电脑屏幕。你可以随时在电脑上撤销授权。": "After pairing, use your computer’s agents, projects, Git, terminal, and remote desktop. Revoke access on your computer at any time.",
+    "在电脑端打开「连接手机」，扫描配对二维码。":
+        "Open Connect phone on your computer and scan the pairing QR code.",
+    "配对后可操作这台电脑的 Agent、项目、Git 和终端，并查看、控制电脑屏幕。你可以随时在电脑上撤销授权。":
+        "After pairing, use your computer’s agents, projects, Git, terminal, and remote desktop. Revoke access on your computer at any time.",
     "配对结果待核实": "Pairing result unconfirmed",
-    "保留了原配对信息，可以继续核实电脑是否已允许连接。": "Original pairing information is kept. Continue checking whether the computer authorized the connection.",
-    "恢复期限已过，请在电脑核实授权后重新扫码。": "Recovery period expired. Verify access on your computer and scan again.",
+    "保留了原配对信息，可以继续核实电脑是否已允许连接。":
+        "Original pairing information is kept. Continue checking whether the computer authorized the connection.",
+    "恢复期限已过，请在电脑核实授权后重新扫码。":
+        "Recovery period expired. Verify access on your computer and scan again.",
     "核实原配对": "Verify original pairing",
-    "无法使用相机，请检查相机权限，或在下方粘贴配对链接。": "Camera unavailable. Check camera permission or paste a pairing link below.",
+    "无法使用相机，请检查相机权限，或在下方粘贴配对链接。":
+        "Camera unavailable. Check camera permission or paste a pairing link below.",
     "扫描二维码": "Scan QR code",
     "或粘贴配对链接": "Or paste a pairing link",
     "粘贴从电脑获取的配对链接": "Paste the pairing link from your computer",
-    "二维码使用了本机地址，手机无法访问。请在电脑端使用手机可访问的服务地址并重新生成二维码。": "This QR code uses a local-only address that your phone cannot reach. Generate a new code using a service address accessible from your phone.",
-    "无法连接接入服务，请确认手机与电脑的网络、服务地址及端口。局域网调试时需连接同一 Wi-Fi。": "Could not connect to the connection service. Check networks, service address, and port. For local development, connect both devices to the same Wi-Fi.",
-    "无法验证服务证书，请检查接入服务配置。": "Could not verify the service certificate. Check service configuration.",
-    "配对未完成，请检查电脑与接入服务后重试。": "Pairing incomplete. Check your computer and the connection service, then retry.",
-    "DogCodes 手机端连接你自己的电脑：查看会话、继续交给 Agent、处理权限请求。无需注册账号。": "DogCodes connects to your own computer. View chats, give agents tasks, and handle permission requests. No account required.",
+    "二维码使用了本机地址，手机无法访问。请在电脑端使用手机可访问的服务地址并重新生成二维码。":
+        "This QR code uses a local-only address that your phone cannot reach. Generate a new code using a service address accessible from your phone.",
+    "无法连接接入服务，请确认手机与电脑的网络、服务地址及端口。局域网调试时需连接同一 Wi-Fi。":
+        "Could not connect to the connection service. Check networks, service address, and port. For local development, connect both devices to the same Wi-Fi.",
+    "无法验证服务证书，请检查接入服务配置。":
+        "Could not verify the service certificate. Check service configuration.",
+    "配对未完成，请检查电脑与接入服务后重试。":
+        "Pairing incomplete. Check your computer and the connection service, then retry.",
+    "DogCodes 手机端连接你自己的电脑：查看会话、继续交给 Agent、处理权限请求。无需注册账号。":
+        "DogCodes connects to your own computer. View chats, give agents tasks, and handle permission requests. No account required.",
     "在电脑上打开 DogCodes": "Open DogCodes on your computer",
     "点击「连接手机」，屏幕上会显示二维码": "Click Connect phone to display a QR code",
     "用这部手机扫码，或粘贴配对链接": "Scan with this phone or paste the pairing link",
     "扫码连接电脑": "Scan to connect computer",
     "粘贴配对链接": "Paste pairing link",
-    "连接经过端到端加密，手机只能访问你在电脑上授权的内容。": "End-to-end encrypted. Your phone can access only what you authorize on your computer.",
+    "连接经过端到端加密，手机只能访问你在电脑上授权的内容。":
+        "End-to-end encrypted. Your phone can access only what you authorize on your computer.",
     "正在连接{0}": "Connecting to {0}",
     "暂时连接不上{0}": "Could not connect to {0}",
     "连接时间比平时长，仍在尝试。": "Taking longer than usual. Still trying.",
-    "电脑上的任务不受影响，连接恢复后可继续操作。": "Tasks on your computer are unaffected. Continue when the connection returns.",
+    "电脑上的任务不受影响，连接恢复后可继续操作。":
+        "Tasks on your computer are unaffected. Continue when the connection returns.",
     "请检查": "Check the following",
     "电脑已开机，没有进入睡眠": "Your computer is on and awake",
     "电脑上的 DogCodes 正在运行": "DogCodes is running on your computer",
-    "手机网络可用；同一局域网下连接更快": "Your phone is online. Connections are faster on the same local network.",
+    "手机网络可用；同一局域网下连接更快":
+        "Your phone is online. Connections are faster on the same local network.",
     "管理电脑": "Manage computers",
     "连接其他电脑": "Connect another computer",
     "查看离线记录": "View offline history",
     "查看离线记录（{0} 同步）": "View offline history (synced {0})",
     "附件": "Attachment",
-    "电脑离线。已缓存附件信息，原文需连接电脑后查看。": "Computer offline. Attachment details are cached. Reconnect to view the original.",
+    "电脑离线。已缓存附件信息，原文需连接电脑后查看。":
+        "Computer offline. Attachment details are cached. Reconnect to view the original.",
     "电脑端暂不支持附件预览。": "The desktop app does not support attachment previews yet.",
     "附件读取位置未确认。": "Attachment read position unconfirmed.",
     "附件过大，请在电脑上查看。": "Attachment too large. View it on your computer.",
-    "附件内容校验失败，未展示变化后的文件。": "Attachment integrity check failed. The changed file was not displayed.",
+    "附件内容校验失败，未展示变化后的文件。":
+        "Attachment integrity check failed. The changed file was not displayed.",
     "任务附件 · 只读": "Task attachment · Read only",
     "重试读取": "Retry loading",
     "图片无法解码，请在电脑上查看。": "Could not decode image. View it on your computer.",
@@ -535,7 +640,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "默认模型": "Default model",
     "默认": "Default",
     "选择 Agent": "Choose agent",
-    "这台电脑上没有已就绪并启用的 Agent。安装或登录需在电脑上完成。": "No ready, enabled agents on this computer. Install or sign in on your computer first.",
+    "这台电脑上没有已就绪并启用的 Agent。安装或登录需在电脑上完成。":
+        "No ready, enabled agents on this computer. Install or sign in on your computer first.",
     "模型": "Model",
     "选择模型": "Choose model",
     "完成": "Done",
@@ -547,17 +653,21 @@ const messageCatalogs = <String, Map<String, String>>{
     "默认 · {0}": "Default · {0}",
     "恢复默认": "Reset to default",
     "电脑离线，连接后才能 Fork": "Computer offline. Reconnect to fork.",
-    "会话正在运行，结束后才能从本轮 Fork": "Chat is running. Wait for it to finish before forking this turn.",
+    "会话正在运行，结束后才能从本轮 Fork":
+        "Chat is running. Wait for it to finish before forking this turn.",
     "复制本轮回复": "Copy turn response",
     "已复制本轮回复": "Turn response copied",
     "复制失败，请重试": "Copy failed. Try again.",
     "本轮消耗": "Turn usage",
     "从本轮 Fork": "Fork from this turn",
-    "电脑未受理这项任务，内容已保留。": "The computer did not accept this task. Your content is kept.",
+    "电脑未受理这项任务，内容已保留。":
+        "The computer did not accept this task. Your content is kept.",
     "没有已绑定的电脑": "No paired computers",
-    "这台电脑还没有项目，点右上角「添加项目」选择电脑上的已有目录。": "No projects on this computer yet. Tap Add project in the top right to select an existing directory.",
+    "这台电脑还没有项目，点右上角「添加项目」选择电脑上的已有目录。":
+        "No projects on this computer yet. Tap Add project in the top right to select an existing directory.",
     "你想完成什么？": "What would you like to do?",
-    "电脑离线，任务和附件会保留为本机草稿。重连后请点击发送。": "Computer offline. Tasks and attachments are saved as local drafts. Tap Send after reconnecting.",
+    "电脑离线，任务和附件会保留为本机草稿。重连后请点击发送。":
+        "Computer offline. Tasks and attachments are saved as local drafts. Tap Send after reconnecting.",
     "描述你的任务…": "Describe your task…",
     "没有已就绪的 Agent": "No agents ready",
     "开始任务": "Start task",
@@ -571,9 +681,11 @@ const messageCatalogs = <String, Map<String, String>>{
     "无法核实修复状态：{0}": "Could not verify fix status: {0}",
     "审查代码证据": "Review code evidence",
     "{0} · {1}–{2} 行": "{0} · Lines {1}–{2}",
-    "这是审查时保存的版本，当前文件可能已变化。": "This is the version saved during review. The current file may have changed.",
+    "这是审查时保存的版本，当前文件可能已变化。":
+        "This is the version saved during review. The current file may have changed.",
     "读取审查代码失败：{0}": "Could not load review code: {0}",
-    "审查连接中断，本次审查未完成。请检查网络后重新检查。": "Review connection lost. Review incomplete. Check your network and run it again.",
+    "审查连接中断，本次审查未完成。请检查网络后重新检查。":
+        "Review connection lost. Review incomplete. Check your network and run it again.",
     "错误详情": "Error details",
     "审查连接中断，本次审查未完成。": "Review connection lost. Review incomplete.",
     "文件覆盖情况": "File coverage",
@@ -582,7 +694,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "未报告检查": "Not reported as checked",
     "原文不可用": "Source unavailable",
     "本次审查未报告问题。": "No issues reported in this review.",
-    "审查尚未形成完整问题报告，不能据此判断是否存在问题。": "This review did not produce a complete report. It cannot establish whether issues exist.",
+    "审查尚未形成完整问题报告，不能据此判断是否存在问题。":
+        "This review did not produce a complete report. It cannot establish whether issues exist.",
     "潜在{0}风险": "Potential {0} risk",
     "{0}{1} · {2}{3}–{4} 行": "{0}{1} · {2}Lines {3}–{4}",
     "改动前 · ": "Before change · ",
@@ -593,8 +706,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "全选问题": "Select all issues",
     "已选 {0} 项": "{0} selected",
     "开始修复": "Start fix",
-    "主对话正在回复，结束后可提交修复。": "The main chat is responding. Submit fixes when it finishes.",
-    "修复已提交给主 Agent，携带所选问题及原审查上下文。": "Fix submitted to the main agent with selected issues and original review context.",
+    "主对话正在回复，结束后可提交修复。":
+        "The main chat is responding. Submit fixes when it finishes.",
+    "修复已提交给主 Agent，携带所选问题及原审查上下文。":
+        "Fix submitted to the main agent with selected issues and original review context.",
     "有一项修复尚未提交。{0}": "A fix has not been submitted yet. {0}",
     "继续原修复": "Continue original fix",
     "放弃这次修复": "Abandon this fix",
@@ -627,8 +742,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "无法读取可用的审查 Agent。": "Could not load available review agents.",
     "已发起复审，可在修复轮次底部查看。": "New review started. View it below the fix turn.",
     "刷新审查": "Refresh reviews",
-    "电脑离线，审查会继续在电脑上运行。": "Computer offline. The review keeps running on your computer.",
-    "暂无可用的审查 Agent，请在电脑上连接或重新检测 Agent。": "No review agents available. Connect or rescan agents on your computer.",
+    "电脑离线，审查会继续在电脑上运行。":
+        "Computer offline. The review keeps running on your computer.",
+    "暂无可用的审查 Agent，请在电脑上连接或重新检测 Agent。":
+        "No review agents available. Connect or rescan agents on your computer.",
     "审查使用的 Agent": "Review agent",
     "本轮尚未发起审查。": "No review started for this turn.",
     "历史审查": "Previous reviews",
@@ -656,20 +773,24 @@ const messageCatalogs = <String, Map<String, String>>{
     "本轮变更加载失败：{0}": "Could not load turn changes: {0}",
     "本轮变更加载失败": "Could not load turn changes",
     "{0} 个文件已更改": "{0} files changed",
-    "连接中断后的恢复快照 · 仅反映检查时的文件变化，外部工具可能仍在写入": "Recovery snapshot after disconnection. Reflects changes at inspection time; external tools may still be writing.",
+    "连接中断后的恢复快照 · 仅反映检查时的文件变化，外部工具可能仍在写入":
+        "Recovery snapshot after disconnection. Reflects changes at inspection time; external tools may still be writing.",
     "二进制": "Binary",
     "本轮保存的历史 Diff": "Historical diff saved for this turn",
     "这一轮未保存该文件的内容": "File contents were not saved for this turn",
     "没有可用于生成提交说明的 Agent": "No agent available to generate a commit message",
     "已提交": "Committed",
-    "提交结果待核实，请到待处理页面核实原操作": "Commit result unconfirmed. Verify the original operation in Inbox.",
+    "提交结果待核实，请到待处理页面核实原操作":
+        "Commit result unconfirmed. Verify the original operation in Inbox.",
     "正在暂存本轮文件…": "Staging turn files…",
     "正在生成提交说明…": "Generating commit message…",
     "正在提交…": "Committing…",
     "提交本轮修改": "Commit turn changes",
-    "本轮修改已没有未提交的内容（可能已提交或已撤销）。": "No uncommitted changes remain for this turn (possibly committed or reverted).",
+    "本轮修改已没有未提交的内容（可能已提交或已撤销）。":
+        "No uncommitted changes remain for this turn (possibly committed or reverted).",
     "将提交 {0} 个文件{1}。": "Will commit {0} files{1}.",
-    "，其中 {0} 个是此前已暂存的其他更改": ", including {0} previously staged changes from other work",
+    "，其中 {0} 个是此前已暂存的其他更改":
+        ", including {0} previously staged changes from other work",
     "重新生成": "Regenerate",
     "编写提交说明的 Agent": "Commit message agent",
     "子智能体": "Subagent",
@@ -691,7 +812,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "电脑项目文件": "Computer project files",
     "需先在此项目创建一个会话": "Create a chat in this project first",
     "最多 16 个附件，总大小不超过 25 MB。": "Up to 16 attachments, 25 MB in total.",
-    "草稿目标已变化，请回到原项目重新选择附件。": "Draft destination changed. Return to the original project and select attachments again.",
+    "草稿目标已变化，请回到原项目重新选择附件。":
+        "Draft destination changed. Return to the original project and select attachments again.",
     "无法添加附件：{0}": "Could not add attachment: {0}",
     "未能移除附件：{0}": "Could not remove attachment: {0}",
     "添加附件": "Add attachment",
@@ -719,29 +841,39 @@ const messageCatalogs = <String, Map<String, String>>{
     "委派任务": "Delegated task",
     "暂无子任务结论": "No subtask result yet",
     "执行过程请在电脑上查看": "View the execution process on your computer",
-    "共 {0} 步，执行过程请在电脑上查看": "{0} steps. View the execution process on your computer.",
-    "改动内容见本轮文件变更，或在电脑上查看": "View changes in this turn’s files or on your computer",
+    "共 {0} 步，执行过程请在电脑上查看":
+        "{0} steps. View the execution process on your computer.",
+    "改动内容见本轮文件变更，或在电脑上查看":
+        "View changes in this turn’s files or on your computer",
     "完整输出请在电脑上查看": "View full output on your computer",
     "{0}\n… 内容过长，已截断": "{0}\n… Content truncated",
     "分叉": "Fork",
     "分叉上下文暂不可显示": "Fork context unavailable",
-    "请先恢复原草稿，未覆盖本机记录。": "Restore the original draft first. Local records were not overwritten.",
+    "请先恢复原草稿，未覆盖本机记录。":
+        "Restore the original draft first. Local records were not overwritten.",
     "草稿未能保存：{0}": "Could not save draft: {0}",
     "无法恢复草稿：{0}": "Could not restore draft: {0}",
-    "暂时无法读取模型，可保留草稿后重试：{0}": "Could not load models. Save your draft and retry: {0}",
+    "暂时无法读取模型，可保留草稿后重试：{0}":
+        "Could not load models. Save your draft and retry: {0}",
     "附件仍在上传。": "Attachments are still uploading.",
-    "电脑离线，附件及任务已保留为草稿。": "Computer offline. Attachments and task saved as a draft.",
+    "电脑离线，附件及任务已保留为草稿。":
+        "Computer offline. Attachments and task saved as a draft.",
     "离线会话未能保存：{0}": "Could not save offline chat: {0}",
-    "没有找到要打开的这一轮，它可能已被删除。": "This turn could not be found. It may have been deleted.",
+    "没有找到要打开的这一轮，它可能已被删除。":
+        "This turn could not be found. It may have been deleted.",
     "电脑离线，连接后再查看完整内容。": "Computer offline. Reconnect to view full content.",
     "删除这个会话？": "Delete this chat?",
-    "将在「{0}」上永久删除「{1}」及其记录，无法恢复。项目文件不会被删除。": "Permanently deletes “{1}” and its history from “{0}”. This cannot be undone. Project files are kept.",
+    "将在「{0}」上永久删除「{1}」及其记录，无法恢复。项目文件不会被删除。":
+        "Permanently deletes “{1}” and its history from “{0}”. This cannot be undone. Project files are kept.",
     "删除": "Delete",
-    "停止请求未确认：{0}。请刷新核实任务状态。": "Stop request unconfirmed: {0}. Refresh to verify task status.",
-    "电脑未受理这次发送，内容已保留。": "The computer did not accept this message. Your content is kept.",
+    "停止请求未确认：{0}。请刷新核实任务状态。":
+        "Stop request unconfirmed: {0}. Refresh to verify task status.",
+    "电脑未受理这次发送，内容已保留。":
+        "The computer did not accept this message. Your content is kept.",
     "这台电脑已不在列表中": "This computer is no longer in the list",
     "可能已在电脑上撤销配对。": "Pairing may have been revoked on your computer.",
-    "{0} · 内容同步于 {1}{2}。附件原文需电脑在线。": "{0} · Synced {1}{2}. Reconnect to view original attachments.",
+    "{0} · 内容同步于 {1}{2}。附件原文需电脑在线。":
+        "{0} · Synced {1}{2}. Reconnect to view original attachments.",
     "正在同步，先显示本机缓存": "Syncing. Showing local cache first.",
     "离线缓存": "Offline cache",
     "未知时间": "Unknown time",
@@ -755,23 +887,31 @@ const messageCatalogs = <String, Map<String, String>>{
     "电脑离线{0}。任务不会因此停止。": "Computer offline{0}. Tasks will keep running.",
     " · 最后同步 {0}": " · Last synced {0}",
     "继续交给 Agent…": "Message your agent…",
-    "这台电脑已移除，请核实电脑列表中的绑定。": "This computer was removed. Check pairing in the computer list.",
-    "电脑绑定已改变，请从电脑列表重新打开。": "Computer pairing changed. Reopen from the computer list.",
+    "这台电脑已移除，请核实电脑列表中的绑定。":
+        "This computer was removed. Check pairing in the computer list.",
+    "电脑绑定已改变，请从电脑列表重新打开。":
+        "Computer pairing changed. Reopen from the computer list.",
     "暂时无法读取电脑绑定，请稍后重试。": "Could not read computer pairing. Try again later.",
     "直连协商响应无效。": "Invalid direct connection negotiation response.",
-    "本轮变更记录过大，请在电脑上查看": "Turn change record too large. View it on your computer.",
+    "本轮变更记录过大，请在电脑上查看":
+        "Turn change record too large. View it on your computer.",
     "本轮变更记录读取不一致": "Turn change record read mismatch.",
     "本轮变更记录校验失败": "Turn change record integrity check failed.",
     "本轮变更记录格式不可用": "Turn change record format unavailable.",
     "电脑暂时离线，请稍后重连。": "Computer temporarily offline. Reconnect later.",
-    "连接请求未被接受，请核实设备授权。": "Connection request rejected. Check device authorization.",
+    "连接请求未被接受，请核实设备授权。":
+        "Connection request rejected. Check device authorization.",
     "连接响应过大。": "Connection response too large.",
-    "连接中断，操作结果待核实；请勿重复发送。": "Connection lost. Operation result unconfirmed. Do not send it again.",
+    "连接中断，操作结果待核实；请勿重复发送。":
+        "Connection lost. Operation result unconfirmed. Do not send it again.",
     "请在电脑上生成新版配对二维码。": "Generate a new pairing QR code on your computer.",
     "电脑连接身份不一致。": "Computer connection identity mismatch.",
-    "手机身份与原配对不一致，未重新申请授权。": "Phone identity differs from the original pairing. Authorization was not requested again.",
-    "原配对恢复期限已过，请在电脑核实授权后重新扫码。": "Pairing recovery period expired. Verify access on your computer and scan again.",
-    "电脑连接身份与原配对不一致。": "Computer connection identity differs from the original pairing.",
+    "手机身份与原配对不一致，未重新申请授权。":
+        "Phone identity differs from the original pairing. Authorization was not requested again.",
+    "原配对恢复期限已过，请在电脑核实授权后重新扫码。":
+        "Pairing recovery period expired. Verify access on your computer and scan again.",
+    "电脑连接身份与原配对不一致。":
+        "Computer connection identity differs from the original pairing.",
     "电脑未返回原配对回执。": "The computer did not return the original pairing receipt.",
     "直连身份验证失败。": "Direct connection authentication failed.",
     "加密数据格式无效。": "Invalid encrypted data format.",
@@ -781,65 +921,100 @@ const messageCatalogs = <String, Map<String, String>>{
     "关键词过长，请缩短后再搜索。": "Search keyword too long. Shorten it and try again.",
     "电脑离线，连接后重试搜索。": "Computer offline. Reconnect to search.",
     "连接已更换，请重试本次搜索。": "Connection changed. Try this search again.",
-    "电脑未返回可用的历史搜索结果。": "No usable history search results returned by the computer.",
+    "电脑未返回可用的历史搜索结果。":
+        "No usable history search results returned by the computer.",
     "历史搜索游标没有前进，请重新搜索。": "History search cursor did not advance. Search again.",
     "历史搜索范围发生变化，请重新搜索。": "History search scope changed. Search again.",
-    "写操作必须保留原始操作标识。": "Write operations must retain their original operation ID.",
-    "请先确认上一条消息或审批的结果。": "Confirm the previous message or approval result first.",
-    "请先确认上一项设置或工作区操作的结果。": "Confirm the previous settings or workspace operation result first.",
-    "Fork 正在电脑上执行，请等待并核实。": "Fork running on your computer. Wait and verify the result.",
+    "写操作必须保留原始操作标识。":
+        "Write operations must retain their original operation ID.",
+    "请先确认上一条消息或审批的结果。":
+        "Confirm the previous message or approval result first.",
+    "请先确认上一项设置或工作区操作的结果。":
+        "Confirm the previous settings or workspace operation result first.",
+    "Fork 正在电脑上执行，请等待并核实。":
+        "Fork running on your computer. Wait and verify the result.",
     "原决定已受理，正在核实交付结果。": "Original decision accepted. Verifying delivery.",
     "请先核实原审批决定。": "Verify the original approval decision first.",
-    "配对恢复记录无法读取，请先核实手机安全存储。": "Could not read pairing recovery records. Check secure storage on your phone.",
+    "配对恢复记录无法读取，请先核实手机安全存储。":
+        "Could not read pairing recovery records. Check secure storage on your phone.",
     "配对恢复信息未能安全保存。": "Could not securely save pairing recovery information.",
-    "待核实电脑的身份发生变化，请先核实原配对。": "The computer identity changed. Verify the original pairing first.",
-    "待核实配对过多，请先核实原记录。": "Too many unverified pairings. Check existing records first.",
-    "本机设备身份无法读取，请先恢复安全存储。": "Could not read this device’s identity. Restore secure storage first.",
-    "设备身份未能安全保存，尚未开始配对。": "Could not securely save device identity. Pairing has not started.",
-    "已保存的电脑身份无法读取，请先核实配对。": "Could not read saved computer identity. Verify pairing first.",
+    "待核实电脑的身份发生变化，请先核实原配对。":
+        "The computer identity changed. Verify the original pairing first.",
+    "待核实配对过多，请先核实原记录。":
+        "Too many unverified pairings. Check existing records first.",
+    "本机设备身份无法读取，请先恢复安全存储。":
+        "Could not read this device’s identity. Restore secure storage first.",
+    "设备身份未能安全保存，尚未开始配对。":
+        "Could not securely save device identity. Pairing has not started.",
+    "已保存的电脑身份无法读取，请先核实配对。":
+        "Could not read saved computer identity. Verify pairing first.",
     "配对回执与当前连接不一致。": "Pairing receipt does not match the current connection.",
-    "这项配对已因移除电脑而失效，请重新扫码。": "This pairing expired when the computer was removed. Scan again.",
+    "这项配对已因移除电脑而失效，请重新扫码。":
+        "This pairing expired when the computer was removed. Scan again.",
     "电脑绑定已变化，请重新扫码。": "Computer pairing changed. Scan again.",
-    "电脑身份已发生变化，需要先解除旧配对。": "Computer identity changed. Remove the old pairing first.",
-    "电脑绑定已变化，未移除新的绑定，请刷新后确认。": "Computer pairing changed. The new pairing was not removed. Refresh and confirm.",
-    "设备密钥格式无效，不能继续连接。": "Invalid device key format. Cannot continue connecting.",
+    "电脑身份已发生变化，需要先解除旧配对。":
+        "Computer identity changed. Remove the old pairing first.",
+    "电脑绑定已变化，未移除新的绑定，请刷新后确认。":
+        "Computer pairing changed. The new pairing was not removed. Refresh and confirm.",
+    "设备密钥格式无效，不能继续连接。":
+        "Invalid device key format. Cannot continue connecting.",
     "加密组件暂时不可用。": "Encryption temporarily unavailable.",
-    "设备身份验证或加密状态校验失败，请重新连接。": "Device authentication or encryption state verification failed. Reconnect.",
+    "设备身份验证或加密状态校验失败，请重新连接。":
+        "Device authentication or encryption state verification failed. Reconnect.",
     "加密连接已关闭。": "Encrypted connection closed.",
-    "电脑绑定状态无法读取，请先检查系统安全存储。": "Could not read computer pairing state. Check system secure storage.",
-    "电脑绑定状态未能安全保存，请核实原操作。": "Could not securely save computer pairing state. Verify the original operation.",
+    "电脑绑定状态无法读取，请先检查系统安全存储。":
+        "Could not read computer pairing state. Check system secure storage.",
+    "电脑绑定状态未能安全保存，请核实原操作。":
+        "Could not securely save computer pairing state. Verify the original operation.",
     "请先选择电脑上的目录。": "Choose a directory on your computer first.",
-    "原项目目录已变化，请核实原结果后重新选择。": "The original project directory changed. Verify the original result and choose again.",
-    "添加项目结果尚未确认，请核实原操作。": "Add-project result unconfirmed. Verify the original operation.",
-    "无法核实电脑上的项目，请重新连接后再试。": "Could not verify the project on your computer. Reconnect and retry.",
-    "请更新电脑端后再操作，尚未启动或修改配置。": "Update the desktop app first. No configuration has been started or changed.",
+    "原项目目录已变化，请核实原结果后重新选择。":
+        "The original project directory changed. Verify the original result and choose again.",
+    "添加项目结果尚未确认，请核实原操作。":
+        "Add-project result unconfirmed. Verify the original operation.",
+    "无法核实电脑上的项目，请重新连接后再试。":
+        "Could not verify the project on your computer. Reconnect and retry.",
+    "请更新电脑端后再操作，尚未启动或修改配置。":
+        "Update the desktop app first. No configuration has been started or changed.",
     "原启动回执不匹配。": "Original launch receipt mismatch.",
-    "原启动记录与项目或运行配置不匹配，未重新执行。": "Original launch record does not match the project or configuration. It was not executed again.",
-    "运行配置回执与原操作不匹配，请更新电脑端后核实。": "Run configuration receipt does not match the original operation. Update the desktop app and verify.",
-    "电脑没有返回可确认的运行配置结果，请核实原操作。": "The computer did not return a verifiable run configuration result. Check the original operation.",
+    "原启动记录与项目或运行配置不匹配，未重新执行。":
+        "Original launch record does not match the project or configuration. It was not executed again.",
+    "运行配置回执与原操作不匹配，请更新电脑端后核实。":
+        "Run configuration receipt does not match the original operation. Update the desktop app and verify.",
+    "电脑没有返回可确认的运行配置结果，请核实原操作。":
+        "The computer did not return a verifiable run configuration result. Check the original operation.",
     "运行配置操作未完成，请核实。": "Run configuration operation incomplete. Verify it.",
     "没有待核实的启动操作。": "No launch operation awaiting verification.",
-    "电脑未确认原启动已关闭，记录仍保留。": "The computer has not confirmed the original launch is closed. Record kept.",
+    "电脑未确认原启动已关闭，记录仍保留。":
+        "The computer has not confirmed the original launch is closed. Record kept.",
     "原启动结果尚未确认，记录仍保留。": "Original launch result unconfirmed. Record kept.",
-    "服务地址必须使用 HTTPS；调试版本可使用本机或局域网 IP。": "Service address must use HTTPS. Debug builds may use a local or LAN IP.",
+    "服务地址必须使用 HTTPS；调试版本可使用本机或局域网 IP。":
+        "Service address must use HTTPS. Debug builds may use a local or LAN IP.",
     "服务暂时不可用，请稍后重试。": "Service temporarily unavailable. Try again later.",
     "服务返回了无法识别的响应。": "Service returned an unrecognized response.",
-    "无法连接服务，请检查网络和服务地址。": "Could not connect to service. Check your network and service address.",
-    "无法验证服务证书，请检查服务配置。": "Could not verify service certificate. Check service configuration.",
+    "无法连接服务，请检查网络和服务地址。":
+        "Could not connect to service. Check your network and service address.",
+    "无法验证服务证书，请检查服务配置。":
+        "Could not verify service certificate. Check service configuration.",
     "服务响应无效或连接已中断，请重试。": "Invalid service response or connection lost. Retry.",
-    "服务版本不兼容，请更新 App 或服务端。": "Incompatible service version. Update the app or server.",
+    "服务版本不兼容，请更新 App 或服务端。":
+        "Incompatible service version. Update the app or server.",
     "二维码内容过长。": "QR code content too long.",
     "不是 DogCodes 配对二维码。": "Not a DogCodes pairing QR code.",
-    "配对二维码无效，或来自未配置的服务。": "Pairing QR code is invalid or uses an unconfigured service.",
-    "配对二维码已过期，请在电脑上重新生成。": "Pairing QR code expired. Generate a new one on your computer.",
-    "设备时间不一致，请校准手机和电脑时间后重试。": "Device clocks differ. Correct the time on both devices and retry.",
+    "配对二维码无效，或来自未配置的服务。":
+        "Pairing QR code is invalid or uses an unconfigured service.",
+    "配对二维码已过期，请在电脑上重新生成。":
+        "Pairing QR code expired. Generate a new one on your computer.",
+    "设备时间不一致，请校准手机和电脑时间后重试。":
+        "Device clocks differ. Correct the time on both devices and retry.",
     "无法读取配对二维码。": "Could not read pairing QR code.",
     "事件游标格式无效。": "Invalid event cursor format.",
     "事件游标超出范围。": "Event cursor out of range.",
     "电脑离线，重新连接后再浏览目录。": "Computer offline. Reconnect to browse directories.",
     "连接已更换，请重新读取目录。": "Connection changed. Reload the directory.",
-    "电脑未返回有效的目录列表，请更新电脑端后重试。": "No valid directory list returned. Update the desktop app and retry.",
-    "目录分页没有前进，请刷新目录。": "Directory pagination did not advance. Refresh the directory.",
+    "电脑未返回有效的目录列表，请更新电脑端后重试。":
+        "No valid directory list returned. Update the desktop app and retry.",
+    "目录分页没有前进，请刷新目录。":
+        "Directory pagination did not advance. Refresh the directory.",
     "电脑端暂不支持目录选择，请更新电脑端后重试。": "Update the desktop app to choose directories.",
     "剪贴板传输响应无效": "Invalid clipboard transfer response",
     "剪贴板传输身份不匹配": "Clipboard transfer identity mismatch",
@@ -848,124 +1023,193 @@ const messageCatalogs = <String, Map<String, String>>{
     "剪贴板文字为空或超过 1 MB": "Clipboard text is empty or exceeds 1 MB",
     "图片传输起始位置无效": "Invalid image transfer start position",
     "剪贴板上传位置不匹配": "Clipboard upload position mismatch",
-    "尚未确认电脑剪贴板是否更新，请从电脑获取核实；不会自动重发": "Computer clipboard update unconfirmed. Retrieve it to verify. It will not be sent again automatically.",
-    "未确认电脑剪贴板已更新，请从电脑获取核实；不会自动重发": "Computer clipboard update not confirmed. Retrieve it to verify. It will not be sent again automatically.",
-    "剪贴板写入回执不完整，请从电脑获取核实": "Clipboard write receipt incomplete. Retrieve the computer clipboard to verify.",
+    "尚未确认电脑剪贴板是否更新，请从电脑获取核实；不会自动重发":
+        "Computer clipboard update unconfirmed. Retrieve it to verify. It will not be sent again automatically.",
+    "未确认电脑剪贴板已更新，请从电脑获取核实；不会自动重发":
+        "Computer clipboard update not confirmed. Retrieve it to verify. It will not be sent again automatically.",
+    "剪贴板写入回执不完整，请从电脑获取核实":
+        "Clipboard write receipt incomplete. Retrieve the computer clipboard to verify.",
     "剪贴板下载数据块过大": "Clipboard download chunk too large",
     "剪贴板下载位置不匹配": "Clipboard download position mismatch",
-    "剪贴板内容校验失败，未写入手机剪贴板": "Clipboard integrity check failed. Phone clipboard unchanged.",
+    "剪贴板内容校验失败，未写入手机剪贴板":
+        "Clipboard integrity check failed. Phone clipboard unchanged.",
     "通知服务初始化失败。": "Notification service initialization failed.",
-    "此版本未配置备用通知服务。": "Backup notification service not configured in this build.",
+    "此版本未配置备用通知服务。":
+        "Backup notification service not configured in this build.",
     "系统通知权限尚未开启。": "System notification permission not granted.",
     "任务提醒": "Task alerts",
-    "待审批、待回答、完成和失败提醒": "Approval requests, questions, completion, and failure alerts",
+    "待审批、待回答、完成和失败提醒":
+        "Approval requests, questions, completion, and failure alerts",
     "未获取到通知设备身份。": "Could not obtain notification device identity.",
     "这台电脑已移除，未发送停止请求。": "This computer was removed. Stop request not sent.",
-    "这个任务已经有一个停止请求在等待确认。": "A stop request for this task is already awaiting confirmation.",
-    "等待确认的停止请求太多，请先处理待处理页里的卡片。": "Too many stop requests awaiting confirmation. Resolve the cards in Inbox first.",
+    "这个任务已经有一个停止请求在等待确认。":
+        "A stop request for this task is already awaiting confirmation.",
+    "等待确认的停止请求太多，请先处理待处理页里的卡片。":
+        "Too many stop requests awaiting confirmation. Resolve the cards in Inbox first.",
     "任务当前没有可停止的运行。": "This task has no active run to stop.",
     "暂时无法读取任务状态，请稍后再确认。": "Could not read task status. Check again later.",
-    "这台电脑已移除，未重新发送停止请求。": "This computer was removed. Stop request not sent again.",
+    "这台电脑已移除，未重新发送停止请求。":
+        "This computer was removed. Stop request not sent again.",
     "原停止请求已改变，请刷新。": "Original stop request changed. Refresh.",
     "没有待确认的停止请求。": "No stop request awaiting confirmation.",
-    "电脑已收到停止请求，任务会在停下后更新状态。": "Computer received the stop request. Status will update when the task stops.",
+    "电脑已收到停止请求，任务会在停下后更新状态。":
+        "Computer received the stop request. Status will update when the task stops.",
     "这次运行已经结束，不需要再停止。": "This run has ended. No need to stop it again.",
-    "已不再等待。如果电脑收到了这个停止请求，任务仍会停下。": "Stopped waiting. If the computer received the stop request, the task will still stop.",
-    "还不确定是否已停止，可以再发一次停止。": "Stop result unconfirmed. You can send another stop request.",
+    "已不再等待。如果电脑收到了这个停止请求，任务仍会停下。":
+        "Stopped waiting. If the computer received the stop request, the task will still stop.",
+    "还不确定是否已停止，可以再发一次停止。":
+        "Stop result unconfirmed. You can send another stop request.",
     "附件总大小不能超过 25 MB。": "Attachments cannot exceed 25 MB in total.",
     "附件文件名过长或无效。": "Attachment filename too long or invalid.",
     "图片请使用 PNG、JPEG、GIF 或 WebP 格式。": "Use PNG, JPEG, GIF, or WebP images.",
     "一次最多发送 16 个附件。": "Up to 16 attachments per message.",
     "附件上传已暂停，可继续原上传。": "Attachment upload paused. Resume the original upload.",
-    "附件回执与原文件不一致，未发送任务。": "Attachment receipt does not match the original file. Task not sent.",
-    "本机附件内容已变化，请重新添加；未上传变化后的文件。": "Local attachment changed. Add it again. The changed file was not uploaded.",
+    "附件回执与原文件不一致，未发送任务。":
+        "Attachment receipt does not match the original file. Task not sent.",
+    "本机附件内容已变化，请重新添加；未上传变化后的文件。":
+        "Local attachment changed. Add it again. The changed file was not uploaded.",
     "电脑端暂不支持附件上传，请更新电脑端。": "Update the desktop app to upload attachments.",
     "电脑返回的附件位置无效。": "The computer returned an invalid attachment position.",
-    "附件分块位置未确认，请继续原上传。": "Attachment chunk position unconfirmed. Resume the original upload.",
+    "附件分块位置未确认，请继续原上传。":
+        "Attachment chunk position unconfirmed. Resume the original upload.",
     "原草稿不可读取，请重新选择附件。": "Original draft unreadable. Choose attachments again.",
-    "上次附件选择未完成，请重新选择。": "Previous attachment selection incomplete. Choose again.",
-    "已恢复系统文件选择器返回的附件，请核对后发送。": "Recovered attachments from the system file picker. Check them before sending.",
+    "上次附件选择未完成，请重新选择。":
+        "Previous attachment selection incomplete. Choose again.",
+    "已恢复系统文件选择器返回的附件，请核对后发送。":
+        "Recovered attachments from the system file picker. Check them before sending.",
     "附件选择未完成：{0}，请重新选择。": "Attachment selection incomplete: {0}. Choose again.",
-    "上次附件选择未能恢复：{0}": "Could not recover the previous attachment selection: {0}",
-    "正在处理这台电脑的原配对，请稍后核实。": "Original pairing is being processed. Check again later.",
-    "原配对恢复记录已改变，请刷新后核实。": "Original pairing recovery record changed. Refresh and verify.",
-    "电脑绑定已移除或变化，请重新配对后连接。": "Computer pairing removed or changed. Pair again to connect.",
+    "上次附件选择未能恢复：{0}":
+        "Could not recover the previous attachment selection: {0}",
+    "正在处理这台电脑的原配对，请稍后核实。":
+        "Original pairing is being processed. Check again later.",
+    "原配对恢复记录已改变，请刷新后核实。":
+        "Original pairing recovery record changed. Refresh and verify.",
+    "电脑绑定已移除或变化，请重新配对后连接。":
+        "Computer pairing removed or changed. Pair again to connect.",
     "未命名会话": "Untitled chat",
     "离线模式": "Offline mode",
     "离线协作": "Offline collaboration",
-    "部分离线数据暂时无法读取，联网后可重新同步。": "Some offline data could not be read. Reconnect to sync again.",
-    "停止请求暂时无法读取，请检查系统安全存储。": "Could not read stop requests. Check system secure storage.",
-    "终端关闭记录暂时无法读取，请检查系统安全存储。": "Could not read terminal close records. Check system secure storage.",
-    "已配对电脑暂时无法读取，请检查系统安全存储。": "Could not read paired computers. Check system secure storage.",
-    "电脑绑定已变化，未使用旧页面接管新的连接。": "Computer pairing changed. The old page did not take over the new connection.",
-    "连接中断，正在重新连接。已发送操作不会重复执行。": "Connection lost. Reconnecting. Sent operations will not be executed again.",
-    "连接已断开。电脑上的任务不会因此停止。": "Disconnected. Tasks on your computer will keep running.",
-    "移除未完成，连接已关闭；请重试移除或核实安全存储。": "Removal incomplete. Connection closed. Retry removal or check secure storage.",
+    "部分离线数据暂时无法读取，联网后可重新同步。":
+        "Some offline data could not be read. Reconnect to sync again.",
+    "停止请求暂时无法读取，请检查系统安全存储。":
+        "Could not read stop requests. Check system secure storage.",
+    "终端关闭记录暂时无法读取，请检查系统安全存储。":
+        "Could not read terminal close records. Check system secure storage.",
+    "已配对电脑暂时无法读取，请检查系统安全存储。":
+        "Could not read paired computers. Check system secure storage.",
+    "电脑绑定已变化，未使用旧页面接管新的连接。":
+        "Computer pairing changed. The old page did not take over the new connection.",
+    "连接中断，正在重新连接。已发送操作不会重复执行。":
+        "Connection lost. Reconnecting. Sent operations will not be executed again.",
+    "连接已断开。电脑上的任务不会因此停止。":
+        "Disconnected. Tasks on your computer will keep running.",
+    "移除未完成，连接已关闭；请重试移除或核实安全存储。":
+        "Removal incomplete. Connection closed. Retry removal or check secure storage.",
     "离线缓存未能保存：{0}": "Could not save offline cache: {0}",
-    "待确认的操作暂时无法读取，请检查系统安全存储。": "Could not read unconfirmed operations. Check system secure storage.",
-    "无法读取后台提醒设置，请检查系统安全存储后重试。": "Could not read background alert settings. Check system secure storage and retry.",
-    "部分电脑的通知尚未登记，请检查网络后重新检测。": "Notifications not registered for some computers. Check your network and try again.",
-    "后台提醒尚未启用，请核实系统通知权限和通知服务配置后重试。": "Background alerts are not enabled. Check system notification permission and service configuration.",
+    "待确认的操作暂时无法读取，请检查系统安全存储。":
+        "Could not read unconfirmed operations. Check system secure storage.",
+    "无法读取后台提醒设置，请检查系统安全存储后重试。":
+        "Could not read background alert settings. Check system secure storage and retry.",
+    "部分电脑的通知尚未登记，请检查网络后重新检测。":
+        "Notifications not registered for some computers. Check your network and try again.",
+    "后台提醒尚未启用，请核实系统通知权限和通知服务配置后重试。":
+        "Background alerts are not enabled. Check system notification permission and service configuration.",
     "Git 操作已完成": "Git operation completed",
-    "已经提交，还不确定是否推送成功，可以重新发送推送。": "Committed. Push result unconfirmed. You can resend the push.",
+    "已经提交，还不确定是否推送成功，可以重新发送推送。":
+        "Committed. Push result unconfirmed. You can resend the push.",
     "提交已完成，推送失败：{0}": "Commit completed. Push failed: {0}",
     "Git 操作失败：{0}": "Git operation failed: {0}",
-    "电脑正在执行 Git 操作，稍后再确认。": "Git operation running on your computer. Check again later.",
-    "Git 操作中途中断了，请在「变更」里看一下仓库现在的状态。": "Git operation interrupted. Check the repository state in Changes.",
-    "Git 操作只完成了一部分，请先在「变更」里看一下再继续。": "Git operation only partially completed. Check Changes before continuing.",
+    "电脑正在执行 Git 操作，稍后再确认。":
+        "Git operation running on your computer. Check again later.",
+    "Git 操作中途中断了，请在「变更」里看一下仓库现在的状态。":
+        "Git operation interrupted. Check the repository state in Changes.",
+    "Git 操作只完成了一部分，请先在「变更」里看一下再继续。":
+        "Git operation only partially completed. Check Changes before continuing.",
     "已不再等待这次 Git 操作。": "Stopped waiting for this Git operation.",
-    "电脑上还查不到这次 Git 操作，可能没收到，可以重新发送。": "The computer has no record of this Git operation yet. It may not have arrived. You can resend it.",
+    "电脑上还查不到这次 Git 操作，可能没收到，可以重新发送。":
+        "The computer has no record of this Git operation yet. It may not have arrived. You can resend it.",
     "还不确定文件是否已暂存，所以没有继续提交。": "Staging unconfirmed. Commit did not continue.",
-    "暂存回执与原文件选择不一致，未重新执行。": "Staging receipt does not match the original file selection. It was not executed again.",
+    "暂存回执与原文件选择不一致，未重新执行。":
+        "Staging receipt does not match the original file selection. It was not executed again.",
     "Git 操作无效。": "Invalid Git operation.",
-    "电脑未返回有效的 Git 操作回执。": "No valid Git operation receipt returned by the computer.",
-    "Git 回执与原请求不一致，未继续操作。": "Git receipt does not match the original request. Operation did not continue.",
-    "Git 接续记录过长或存在循环，请在电脑上核实。": "Git continuation chain is too long or contains a loop. Verify on your computer.",
-    "电脑尚未确认结束原 Git 跟踪。": "The computer has not confirmed the end of original Git tracking.",
+    "电脑未返回有效的 Git 操作回执。":
+        "No valid Git operation receipt returned by the computer.",
+    "Git 回执与原请求不一致，未继续操作。":
+        "Git receipt does not match the original request. Operation did not continue.",
+    "Git 接续记录过长或存在循环，请在电脑上核实。":
+        "Git continuation chain is too long or contains a loop. Verify on your computer.",
+    "电脑尚未确认结束原 Git 跟踪。":
+        "The computer has not confirmed the end of original Git tracking.",
     "待审批": "Approval requested",
     "待回答": "Answer requested",
     "任务完成": "Task completed",
     "执行失败": "Execution failed",
     "通知设置响应无效，请重新读取。": "Invalid notification settings response. Reload.",
-    "设备授权已失效，请核实电脑绑定。": "Device authorization expired. Verify computer pairing.",
-    "通知设置已改变，请重新读取后修改。": "Notification settings changed. Reload before editing.",
+    "设备授权已失效，请核实电脑绑定。":
+        "Device authorization expired. Verify computer pairing.",
+    "通知设置已改变，请重新读取后修改。":
+        "Notification settings changed. Reload before editing.",
     "操作过于频繁，请稍后重试。": "Too many operations. Try again later.",
-    "通知服务暂时不可用，请稍后重试。": "Notification service temporarily unavailable. Try again later.",
-    "无法确认通知设置，请检查网络后重新读取。": "Could not confirm notification settings. Check your network and reload.",
-    "电脑没有收到这次设置，请再试一次。": "The computer did not receive this setting. Try again.",
+    "通知服务暂时不可用，请稍后重试。":
+        "Notification service temporarily unavailable. Try again later.",
+    "无法确认通知设置，请检查网络后重新读取。":
+        "Could not confirm notification settings. Check your network and reload.",
+    "电脑没有收到这次设置，请再试一次。":
+        "The computer did not receive this setting. Try again.",
     "电脑返回的保持唤醒状态无效。": "Invalid keep-awake state returned by the computer.",
-    "待发送的输入过多，本次未发送，请缩短输入后再试。": "Too much input queued. Nothing was sent. Shorten the input and retry.",
+    "待发送的输入过多，本次未发送，请缩短输入后再试。":
+        "Too much input queued. Nothing was sent. Shorten the input and retry.",
     "终端页面已离开，未继续发送输入。": "Terminal page closed. No more input sent.",
     "终端输入回执不匹配": "Terminal input receipt mismatch",
-    "请更新电脑端后输入；终端输出仍可查看。": "Update the desktop app to type. Terminal output is still available.",
+    "请更新电脑端后输入；终端输出仍可查看。":
+        "Update the desktop app to type. Terminal output is still available.",
     "终端正在启动，请稍后继续输入。": "Terminal starting. Continue typing later.",
-    "原终端当前不可输入，请刷新查看状态。": "Original terminal does not accept input. Refresh to check its state.",
-    "终端输入连接已改变，请检查后继续。": "Terminal input connection changed. Check it before continuing.",
-    "输入连接仍在切换，请稍后检查并继续。": "Input connection is still switching. Check again later.",
-    "上次输入结果待核实，请检查终端输出后再继续。": "Previous input result unconfirmed. Check terminal output before continuing.",
-    "输入结果尚未确认，请核实或检查终端后继续；不会重发原输入。": "Input result unconfirmed. Verify it or check the terminal before continuing. Original input will not be sent again.",
-    "终端连接中断，输入结果待核实；未发送的队列已丢弃，不会自动重发。": "Terminal disconnected. Input result unconfirmed. Unsent queue discarded and will not be sent automatically.",
-    "原输入仍未确认或通道已改变，请检查终端输出后继续；不会重发。": "Original input unconfirmed or channel changed. Check terminal output before continuing. Input will not be sent again.",
-    "暂时无法核实输入，请连接后再试；不会重发原输入。": "Could not verify input. Reconnect and retry. Original input will not be sent again.",
+    "原终端当前不可输入，请刷新查看状态。":
+        "Original terminal does not accept input. Refresh to check its state.",
+    "终端输入连接已改变，请检查后继续。":
+        "Terminal input connection changed. Check it before continuing.",
+    "输入连接仍在切换，请稍后检查并继续。":
+        "Input connection is still switching. Check again later.",
+    "上次输入结果待核实，请检查终端输出后再继续。":
+        "Previous input result unconfirmed. Check terminal output before continuing.",
+    "输入结果尚未确认，请核实或检查终端后继续；不会重发原输入。":
+        "Input result unconfirmed. Verify it or check the terminal before continuing. Original input will not be sent again.",
+    "终端连接中断，输入结果待核实；未发送的队列已丢弃，不会自动重发。":
+        "Terminal disconnected. Input result unconfirmed. Unsent queue discarded and will not be sent automatically.",
+    "原输入仍未确认或通道已改变，请检查终端输出后继续；不会重发。":
+        "Original input unconfirmed or channel changed. Check terminal output before continuing. Input will not be sent again.",
+    "暂时无法核实输入，请连接后再试；不会重发原输入。":
+        "Could not verify input. Reconnect and retry. Original input will not be sent again.",
     "输入连接尚未恢复，请稍后再试。": "Input connection not restored yet. Try again later.",
     "这台电脑已移除，未发送关闭请求。": "This computer was removed. Close request not sent.",
-    "这个终端已经有一个关闭请求在等待确认。": "A close request for this terminal is already awaiting confirmation.",
-    "等待确认的关闭请求太多，请先处理待处理页里的卡片。": "Too many close requests awaiting confirmation. Resolve the cards in Inbox first.",
-    "原终端关闭结果尚未确认，请核实结束后再启动这个运行配置。": "Original terminal close result unconfirmed. Verify it before starting this run configuration.",
-    "请更新电脑端后再关闭终端，当前版本无法核实原终端身份。": "Update the desktop app to close terminals. This version cannot verify the original terminal identity.",
+    "这个终端已经有一个关闭请求在等待确认。":
+        "A close request for this terminal is already awaiting confirmation.",
+    "等待确认的关闭请求太多，请先处理待处理页里的卡片。":
+        "Too many close requests awaiting confirmation. Resolve the cards in Inbox first.",
+    "原终端关闭结果尚未确认，请核实结束后再启动这个运行配置。":
+        "Original terminal close result unconfirmed. Verify it before starting this run configuration.",
+    "请更新电脑端后再关闭终端，当前版本无法核实原终端身份。":
+        "Update the desktop app to close terminals. This version cannot verify the original terminal identity.",
     "终端身份不完整，请刷新后再关闭。": "Terminal identity incomplete. Refresh before closing.",
-    "终端已经重新启动过，没有关闭新的终端。": "Terminal restarted. The new terminal was not closed.",
+    "终端已经重新启动过，没有关闭新的终端。":
+        "Terminal restarted. The new terminal was not closed.",
     "终端不存在": "Terminal does not exist",
     "没有待确认的终端关闭操作。": "No terminal close operation awaiting confirmation.",
     "终端已经关闭。": "Terminal closed.",
-    "已不再等待。如果电脑收到了关闭请求，终端仍会关闭。": "Stopped waiting. If the computer received the close request, the terminal will still close.",
+    "已不再等待。如果电脑收到了关闭请求，终端仍会关闭。":
+        "Stopped waiting. If the computer received the close request, the terminal will still close.",
     "终端已改变，关闭请求未执行。": "Terminal changed. Close request was not executed.",
-    "电脑已收到关闭请求，正在等终端结束。": "Computer received the close request. Waiting for the terminal to end.",
-    "还不确定终端是否已关闭，可以稍后再确认。": "Terminal close result unconfirmed. Check again later.",
+    "电脑已收到关闭请求，正在等终端结束。":
+        "Computer received the close request. Waiting for the terminal to end.",
+    "还不确定终端是否已关闭，可以稍后再确认。":
+        "Terminal close result unconfirmed. Check again later.",
     "请选择有效的审查问题。": "Choose valid review issues.",
-    "审查回执与原请求不匹配，请保留原操作并核实。": "Review receipt does not match the original request. Keep the operation and verify it.",
-    "修复回执与原请求不匹配，请先核实电脑上的原修复。": "Fix receipt does not match the original request. Verify the original fix on your computer.",
-    "无法读取审查记录，请更新电脑端后重试。": "Could not read review records. Update the desktop app and retry.",
+    "审查回执与原请求不匹配，请保留原操作并核实。":
+        "Review receipt does not match the original request. Keep the operation and verify it.",
+    "修复回执与原请求不匹配，请先核实电脑上的原修复。":
+        "Fix receipt does not match the original request. Verify the original fix on your computer.",
+    "无法读取审查记录，请更新电脑端后重试。":
+        "Could not read review records. Update the desktop app and retry.",
     "消息分片取消标识无效。": "Invalid message fragment cancellation flag.",
     "消息大小超出范围。": "Message size out of range.",
     "二进制消息格式无效。": "Invalid binary message format.",
@@ -975,25 +1219,33 @@ const messageCatalogs = <String, Map<String, String>>{
     "消息分片长度无效。": "Invalid message fragment length.",
     "不允许嵌套消息分片。": "Nested message fragments are not allowed.",
     "会话版本不可用，请刷新后重试。": "Chat version unavailable. Refresh and retry.",
-    "会话名称需为 1–120 个字符，且不能包含控制字符。": "Chat name must be 1–120 characters with no control characters.",
+    "会话名称需为 1–120 个字符，且不能包含控制字符。":
+        "Chat name must be 1–120 characters with no control characters.",
     "会话状态无效。": "Invalid chat state.",
-    "无法读取电脑的会话设置，请更新电脑端后重试。": "Could not read chat settings. Update the desktop app and retry.",
+    "无法读取电脑的会话设置，请更新电脑端后重试。":
+        "Could not read chat settings. Update the desktop app and retry.",
     "Fork 环境无效。": "Invalid fork environment.",
-    "Fork 返回的会话身份不一致，请核实原操作。": "Fork returned a different chat identity. Verify the original operation.",
+    "Fork 返回的会话身份不一致，请核实原操作。":
+        "Fork returned a different chat identity. Verify the original operation.",
     "没有待确认的会话操作。": "No chat operation awaiting confirmation.",
     "原操作已变化，请刷新。": "Original operation changed. Refresh.",
     "Fork 回执与原请求不一致。": "Fork receipt does not match the original request.",
     "这项操作需要先核实结果。": "Verify this operation’s result first.",
     "这台电脑已移除，未再发送请求。": "This computer was removed. Request not sent again.",
-    "原电脑记录尚未清理完成，请重试移除电脑后再连接。": "Original computer records have not been fully cleared. Retry removal before reconnecting.",
-    "电脑绑定已变化，未发送原操作；请重新连接后确认。": "Computer pairing changed. Original operation not sent. Reconnect and confirm.",
-    "原操作已结束或已更新，请刷新后操作。": "Original operation ended or updated. Refresh before continuing.",
+    "原电脑记录尚未清理完成，请重试移除电脑后再连接。":
+        "Original computer records have not been fully cleared. Retry removal before reconnecting.",
+    "电脑绑定已变化，未发送原操作；请重新连接后确认。":
+        "Computer pairing changed. Original operation not sent. Reconnect and confirm.",
+    "原操作已结束或已更新，请刷新后操作。":
+        "Original operation ended or updated. Refresh before continuing.",
     "中继连接中断，操作结果需要核实。": "Relay disconnected. Verify the operation result.",
     "中继探针仅供本地开发使用。": "Relay probe is for local development only.",
     "数据帧大小超出范围。": "Data frame size out of range.",
     "连接已关闭；操作结果需要核实。": "Connection closed. Verify the operation result.",
-    "暂时无法连接可用的通知服务，请稍后重试。": "Could not reach a notification service. Try again later.",
-    "电脑已结束屏幕共享，请重新连接并授权": "Screen sharing ended on your computer. Reconnect and authorize again.",
+    "暂时无法连接可用的通知服务，请稍后重试。":
+        "Could not reach a notification service. Try again later.",
+    "电脑已结束屏幕共享，请重新连接并授权":
+        "Screen sharing ended on your computer. Reconnect and authorize again.",
     "加密中继": "Encrypted relay",
     "P2P 直连": "P2P direct",
     "TURN 中继": "TURN relay",
@@ -1004,10 +1256,12 @@ const messageCatalogs = <String, Map<String, String>>{
     "工作区设备存储尚未初始化": "Workspace device store not initialized",
     "本机数据归属不一致": "Local data ownership mismatch",
     "本地绑定记录不可读取": "Could not read local pairing record",
-    "电脑绑定已变化，未覆盖原草稿。": "Computer pairing changed. Original draft not overwritten.",
+    "电脑绑定已变化，未覆盖原草稿。":
+        "Computer pairing changed. Original draft not overwritten.",
     "本机保存的数据不可读取": "Could not read locally saved data",
     "附件大小或标识无效": "Invalid attachment size or identity",
-    "手机未发送附件已超过 256 MB，请先发送或移除其他草稿中的附件。": "Unsent attachments exceed 256 MB. Send or remove attachments from other drafts first.",
+    "手机未发送附件已超过 256 MB，请先发送或移除其他草稿中的附件。":
+        "Unsent attachments exceed 256 MB. Send or remove attachments from other drafts first.",
     "附件标识无效": "Invalid attachment identity",
     "本机附件已不可读取，请重新添加。": "Local attachment unreadable. Add it again.",
     "本机附件大小已变化。": "Local attachment size changed.",
@@ -1017,14 +1271,18 @@ const messageCatalogs = <String, Map<String, String>>{
     "始终允许": "Always allow",
     "取消操作": "Cancel action",
     "{0} · {1} 个目录": "{0} · {1} directories",
-    "{0} 上还没有项目。新建项目时选择电脑上的已有目录。": "No projects on {0} yet. Create one from an existing directory on the computer.",
+    "{0} 上还没有项目。新建项目时选择电脑上的已有目录。":
+        "No projects on {0} yet. Create one from an existing directory on the computer.",
     "{0} 个会话运行中": "{0} chats running",
     "不在项目中工作": "Work outside a project",
     "主目录": "Main directory",
-    "主目录是会话默认的工作目录；附加目录同样对 Agent 可见。从项目中移除目录不会删除电脑上的文件。": "Chats start in the main directory; additional directories are visible to Agents too. Removing a directory from the project does not delete any files on the computer.",
+    "主目录是会话默认的工作目录；附加目录同样对 Agent 可见。从项目中移除目录不会删除电脑上的文件。":
+        "Chats start in the main directory; additional directories are visible to Agents too. Removing a directory from the project does not delete any files on the computer.",
     "从项目中移除": "Remove from project",
-    "保存结果待核实，请刷新后查看项目，不要重复保存。": "The save result is unconfirmed. Refresh and check the project before saving again.",
-    "保留会话和电脑上的文件，可随时恢复": "Keeps chats and files on the computer; restore anytime",
+    "保存结果待核实，请刷新后查看项目，不要重复保存。":
+        "The save result is unconfirmed. Refresh and check the project before saving again.",
+    "保留会话和电脑上的文件，可随时恢复":
+        "Keeps chats and files on the computer; restore anytime",
     "名称和目录": "Name and directories",
     "已移除项目（{0}）": "Removed projects ({0})",
     "恢复": "Restore",
@@ -1050,12 +1308,15 @@ const messageCatalogs = <String, Map<String, String>>{
     "选择此目录": "Choose this directory",
     "选择目录": "Choose directory",
     "项目不存在": "Project not found",
-    "项目会从列表中隐藏。会话和电脑上的文件都会保留，可在「已移除项目」中恢复。": "The project is hidden from the list. Its chats and the files on the computer are kept, and you can restore it under Removed projects.",
+    "项目会从列表中隐藏。会话和电脑上的文件都会保留，可在「已移除项目」中恢复。":
+        "The project is hidden from the list. Its chats and the files on the computer are kept, and you can restore it under Removed projects.",
     "项目名称": "Project name",
     "项目操作": "Project actions",
     "项目状态无效。": "Invalid project state.",
-    "会话、项目和待处理都在电脑上，连接后即可使用。": "Chats, projects, and pending items are on your computer. Connect to use them.",
-    "项目已在电脑上添加，可在「项目」中查看。": "Project added on your computer. Find it under Projects.",
+    "会话、项目和待处理都在电脑上，连接后即可使用。":
+        "Chats, projects, and pending items are on your computer. Connect to use them.",
+    "项目已在电脑上添加，可在「项目」中查看。":
+        "Project added on your computer. Find it under Projects.",
     "正在连接电脑": "Connecting to your computer",
     "暂时连接不上电脑": "Can’t reach your computer",
     "@one:{0} 台": "{0} computer",
@@ -1068,7 +1329,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "@one:{0} 个附件": "{0} attachment",
     "@one:{0} 个会话运行中": "{0} chat running",
     "@one:{0} 个步骤": "{0} step",
-    "@one:{0} 个会话 · 按当前电脑和项目范围": "{0} chat · Current computer and project scope",
+    "@one:{0} 个会话 · 按当前电脑和项目范围":
+        "{0} chat · Current computer and project scope",
     "@one:{0} 项需要你处理": "{0} item needs your attention",
     "@one:{0} 项等待处理": "{0} item pending",
     "@one:已选 {0} 项": "{0} selected",
@@ -1084,9 +1346,12 @@ const messageCatalogs = <String, Map<String, String>>{
     "仅发送": "Send only",
     "发送并粘贴": "Send and paste",
     "已粘贴到电脑": "Pasted on computer",
-    "已发送到电脑剪贴板。更新电脑端后可自动粘贴": "Sent to the computer clipboard. Update the desktop app to paste automatically",
-    "已发送到电脑剪贴板，可在电脑上粘贴": "Sent to the computer clipboard. Paste it on the computer",
-    "电脑剪贴板里没有文字，先在电脑上复制后再试": "The computer clipboard has no text. Copy something on the computer, then try again",
+    "已发送到电脑剪贴板。更新电脑端后可自动粘贴":
+        "Sent to the computer clipboard. Update the desktop app to paste automatically",
+    "已发送到电脑剪贴板，可在电脑上粘贴":
+        "Sent to the computer clipboard. Paste it on the computer",
+    "电脑剪贴板里没有文字，先在电脑上复制后再试":
+        "The computer clipboard has no text. Copy something on the computer, then try again",
     "正在发送到电脑…": "Sending to computer…",
     "正在从电脑获取…": "Getting from computer…",
     "@one:{0} 个字符": "{0} character",
@@ -1113,13 +1378,18 @@ const messageCatalogs = <String, Map<String, String>>{
     "文件内容": "File content",
     "搜索内容": "Search for",
     "请求的工具": "Requested tool",
-    "审批详情格式不完整，请让 Agent 重新发起审批。": "The approval details are incomplete. Ask the agent to request approval again.",
-    "操作详情过长，下方仅展示部分内容。请让 Agent 拆分操作后重新发起审批，以查看完整范围。": "The details are too long, so only part is shown below. Ask the agent to split the action and request approval again to see the full scope.",
-    "Agent 未提供文件修改范围，请让 Agent 补充文件路径和修改内容。": "The agent did not say which files will change. Ask it to provide the file paths and changes.",
-    "未能从审批请求中读取文件路径、命令或修改内容，请让 Agent 补充详情后重新发起审批。": "Could not read a file path, command or change from this request. Ask the agent to add details and request approval again.",
+    "审批详情格式不完整，请让 Agent 重新发起审批。":
+        "The approval details are incomplete. Ask the agent to request approval again.",
+    "操作详情过长，下方仅展示部分内容。请让 Agent 拆分操作后重新发起审批，以查看完整范围。":
+        "The details are too long, so only part is shown below. Ask the agent to split the action and request approval again to see the full scope.",
+    "Agent 未提供文件修改范围，请让 Agent 补充文件路径和修改内容。":
+        "The agent did not say which files will change. Ask it to provide the file paths and changes.",
+    "未能从审批请求中读取文件路径、命令或修改内容，请让 Agent 补充详情后重新发起审批。":
+        "Could not read a file path, command or change from this request. Ask the agent to add details and request approval again.",
     "收起": "Show less",
     "展开全部": "Show all",
-    "电脑已记录你的决定，但 Agent 已不在等待，请在会话中查看。": "Your computer recorded the decision, but the agent is no longer waiting. Check the chat.",
+    "电脑已记录你的决定，但 Agent 已不在等待，请在会话中查看。":
+        "Your computer recorded the decision, but the agent is no longer waiting. Check the chat.",
     "已取消回答": "Answer cancelled",
     "已处理": "Handled",
     "你的选择：{0}": "You chose: {0}",
@@ -1127,13 +1397,17 @@ const messageCatalogs = <String, Map<String, String>>{
     "已在电脑上处理，或请求已失效": "Handled on the computer, or the request expired",
     "清空已处理记录": "Clear handled history",
     "清空已处理记录？": "Clear handled history?",
-    "只从这部手机删除，等待处理的请求不受影响。": "Only removed from this phone. Requests still waiting are kept.",
+    "只从这部手机删除，等待处理的请求不受影响。":
+        "Only removed from this phone. Requests still waiting are kept.",
     "没有权限请求": "No permission requests",
-    "Agent 需要运行命令或修改文件时，会在这里请你确认。": "When an agent needs to run a command or change files, it will ask you here.",
+    "Agent 需要运行命令或修改文件时，会在这里请你确认。":
+        "When an agent needs to run a command or change files, it will ask you here.",
     "没有待回答的问题": "No questions",
-    "Agent 需要你做选择或补充信息时，问题会出现在这里。": "When an agent needs you to choose or add details, its question appears here.",
+    "Agent 需要你做选择或补充信息时，问题会出现在这里。":
+        "When an agent needs you to choose or add details, its question appears here.",
     "收件箱是空的": "Your inbox is empty",
-    "Agent 请求权限或向你提问时会出现在这里，处理过的记录也会保留，方便回看。": "Permission requests and questions from agents appear here. Handled ones stay too, so you can look back.",
+    "Agent 请求权限或向你提问时会出现在这里，处理过的记录也会保留，方便回看。":
+        "Permission requests and questions from agents appear here. Handled ones stay too, so you can look back.",
     "等待你回答": "Waiting for your answer",
     "等待你确认": "Waiting for your approval",
     "权限请求": "Permission request",
@@ -1141,68 +1415,96 @@ const messageCatalogs = <String, Map<String, String>>{
     "可以返回收件箱查看其它事项。": "Go back to the inbox to see other items.",
     "跳过所有权限确认。": "Skips all permission prompts.",
     "减少确认次数。": "Reduces confirmations.",
-    "仅自动读取；其他操作均需先征得你的批准。": "Reads automatically; everything else needs your approval first.",
-    "不中断任务；所有操作和决策均自动进行。": "Never interrupts; all actions and decisions run automatically.",
+    "仅自动读取；其他操作均需先征得你的批准。":
+        "Reads automatically; everything else needs your approval first.",
+    "不中断任务；所有操作和决策均自动进行。":
+        "Never interrupts; all actions and decisions run automatically.",
     "受保护的工具操作前请求审批。": "Asks for approval before protected tool actions.",
     "关闭沙箱并跳过审批。": "Turns off the sandbox and skips approvals.",
-    "每次工具执行前在此审批；审批桥不可用时拒绝执行。": "Approve each tool run here; runs are refused when the approval bridge is unavailable.",
-    "OpenCode 默认 Agent；工具按你配置的权限执行。": "OpenCode's default agent; tools follow your configured permissions.",
-    "编辑文件和其他受保护操作前请求审批。": "Asks for approval before editing files or other protected actions.",
+    "每次工具执行前在此审批；审批桥不可用时拒绝执行。":
+        "Approve each tool run here; runs are refused when the approval bridge is unavailable.",
+    "OpenCode 默认 Agent；工具按你配置的权限执行。":
+        "OpenCode's default agent; tools follow your configured permissions.",
+    "编辑文件和其他受保护操作前请求审批。":
+        "Asks for approval before editing files or other protected actions.",
     "只分析，不修改文件或执行命令。": "Analyzes without modifying files or running commands.",
     "改文件前先问我。": "Asks before changing files.",
-    "只读沙箱；需要扩大权限时请求审批。": "Read-only sandbox; asks for approval when more access is needed.",
+    "只读沙箱；需要扩大权限时请求审批。":
+        "Read-only sandbox; asks for approval when more access is needed.",
     "按需确认": "Ask when needed",
     "只读模式": "Read-only",
     "所选策略在下一轮执行时生效": "The selected policy takes effect on the next turn",
-    "从不弹出确认；只运行预先允许和安全的只读操作，其余一律拒绝。": "Never prompts; runs pre-approved and safe read-only actions and denies everything else.",
-    "Pi 不内置逐工具审批或沙箱；工具直接执行，扩展发起的询问会显示在对话中。": "Pi has no per-tool approvals or sandbox; tools run directly and extension prompts appear in the conversation.",
+    "从不弹出确认；只运行预先允许和安全的只读操作，其余一律拒绝。":
+        "Never prompts; runs pre-approved and safe read-only actions and denies everything else.",
+    "Pi 不内置逐工具审批或沙箱；工具直接执行，扩展发起的询问会显示在对话中。":
+        "Pi has no per-tool approvals or sandbox; tools run directly and extension prompts appear in the conversation.",
     "跳过审批": "Skip approvals",
     "仅限预先允许": "Pre-approved only",
     "自动判断": "Auto",
     "监督模式：工具操作前请求审批。": "Supervised: asks for approval before tool actions.",
     "由 ZCode 判断哪些操作可直接执行。": "Lets ZCode decide which actions can run directly.",
-    "只运行预先允许的工具，其余直接拒绝，不请求审批。": "Runs only pre-allowed tools and denies the rest without asking.",
-    "由 AI 审查员批准或拒绝原本需要询问的操作；审查失败只阻止该操作。": "An AI reviewer approves or denies each action that would otherwise ask; a failed review blocks only that action.",
-    "由 Claude 自动分类权限请求。": "Lets Claude classify permission requests automatically.",
+    "只运行预先允许的工具，其余直接拒绝，不请求审批。":
+        "Runs only pre-allowed tools and denies the rest without asking.",
+    "由 AI 审查员批准或拒绝原本需要询问的操作；审查失败只阻止该操作。":
+        "An AI reviewer approves or denies each action that would otherwise ask; a failed review blocks only that action.",
+    "由 Claude 自动分类权限请求。":
+        "Lets Claude classify permission requests automatically.",
     "完全访问": "Full access",
     "编辑前先出计划。": "Makes a plan before editing.",
     "默认权限": "Default permissions",
-    "允许文件编辑；其他受保护操作仍需审批。": "Allows file edits; other protected actions still need approval.",
+    "允许文件编辑；其他受保护操作仍需审批。":
+        "Allows file edits; other protected actions still need approval.",
     "权限策略": "Permission policy",
     "原生规则": "Native rules",
-    "先制定计划；需要批准的操作仍会询问。": "Makes a plan first; actions that need approval still ask.",
+    "先制定计划；需要批准的操作仍会询问。":
+        "Makes a plan first; actions that need approval still ask.",
     "操作前确认": "Ask before acting",
-    "按 Cursor 权限规则执行；需要审批的操作在此确认。": "Follows Cursor's permission rules; actions that need approval are confirmed here.",
+    "按 Cursor 权限规则执行；需要审批的操作在此确认。":
+        "Follows Cursor's permission rules; actions that need approval are confirmed here.",
     "计划模式": "Plan mode",
-    "对所有 Agent 跳过全部权限检查，包括危险命令。": "Skips all permission checks, including dangerous commands, for every agent.",
-    "此 Agent 未报告可切换的权限模式；审批请求仍会显示在对话中。": "This Agent reports no switchable permission modes; approval requests still appear in the conversation.",
-    "原 Agent、模型、思考强度或权限策略当前不可用，请重新选择后发送。": "The original agent, model, reasoning effort or permission policy is no longer available. Choose again before sending.",
+    "对所有 Agent 跳过全部权限检查，包括危险命令。":
+        "Skips all permission checks, including dangerous commands, for every agent.",
+    "此 Agent 未报告可切换的权限模式；审批请求仍会显示在对话中。":
+        "This Agent reports no switchable permission modes; approval requests still appear in the conversation.",
+    "原 Agent、模型、思考强度或权限策略当前不可用，请重新选择后发送。":
+        "The original agent, model, reasoning effort or permission policy is no longer available. Choose again before sending.",
     "计划模式；禁用所有编辑工具。": "Plan mode; all edit tools are disabled.",
     "每个工具首次使用时请求授权。": "Asks for permission the first time each tool is used.",
     "本会话内自动接受文件编辑。": "Automatically accepts file edits for this session.",
     "自动编辑文件。": "Edits files automatically.",
     "自动驾驶：工具操作无需询问直接执行。": "Autopilot: runs tool actions without asking.",
-    "由 Grok 判断哪些工具操作可自动执行。": "Lets Grok decide which tool actions can run automatically.",
+    "由 Grok 判断哪些工具操作可自动执行。":
+        "Lets Grok decide which tool actions can run automatically.",
     "跳过 Claude Code 工具权限检查。": "Skips Claude Code tool permission checks.",
     "自动允许 Antigravity 工具操作。": "Automatically allows Antigravity tool actions.",
     "接受编辑": "Accept edits",
-    "工作区写入沙箱；需要越出沙箱时请求审批。": "Workspace-write sandbox; asks for approval only to leave the sandbox.",
+    "工作区写入沙箱；需要越出沙箱时请求审批。":
+        "Workspace-write sandbox; asks for approval only to leave the sandbox.",
     "允许所有工具操作，无需审批。": "Allows all tool actions without approval.",
-    "探索并制定计划；使用 Claude 原生计划模式。": "Explore and make a plan using Claude's native plan mode.",
-    "使用 Antigravity 原生计划模式；工具执行仍在此审批。": "Uses Antigravity's native plan mode; tool runs are still approved here.",
-    "自动批准操作；明确禁止的操作和团队限制仍然生效。": "Approves actions automatically; explicitly denied actions and team restrictions still apply.",
-    "常规编辑和命令自动执行；高风险操作、提问和计划仍会询问。": "Routine edits and commands run automatically; risky actions, questions and plans still ask.",
+    "探索并制定计划；使用 Claude 原生计划模式。":
+        "Explore and make a plan using Claude's native plan mode.",
+    "使用 Antigravity 原生计划模式；工具执行仍在此审批。":
+        "Uses Antigravity's native plan mode; tool runs are still approved here.",
+    "自动批准操作；明确禁止的操作和团队限制仍然生效。":
+        "Approves actions automatically; explicitly denied actions and team restrictions still apply.",
+    "常规编辑和命令自动执行；高风险操作、提问和计划仍会询问。":
+        "Routine edits and commands run automatically; risky actions, questions and plans still ask.",
     "正在响应": "Responding",
     "分叉 · {0}": "Fork · {0}",
     "分叉自较早的会话": "Forked from an earlier conversation",
     "分叉自": "Forked from",
-    "已恢复所选轮次结束时的文件，未提交的成果可在“变更”中查看。": "Files were restored to the end of the selected turn; uncommitted work is under Changes.",
-    "此项目不是 Git 仓库，分叉只继承对话上下文，并沿用同一项目目录。": "This project isn't a Git repository, so the fork kept only the conversation and continues in the same project folder.",
-    "此会话由旧版分叉创建，未恢复历史轮次的文件。": "This session was created by an older fork and did not restore the turn's files.",
-    "沿用同一项目目录；分叉不会还原文件。": "Uses the same project folder; forking does not restore files.",
+    "已恢复所选轮次结束时的文件，未提交的成果可在“变更”中查看。":
+        "Files were restored to the end of the selected turn; uncommitted work is under Changes.",
+    "此项目不是 Git 仓库，分叉只继承对话上下文，并沿用同一项目目录。":
+        "This project isn't a Git repository, so the fork kept only the conversation and continues in the same project folder.",
+    "此会话由旧版分叉创建，未恢复历史轮次的文件。":
+        "This session was created by an older fork and did not restore the turn's files.",
+    "沿用同一项目目录；分叉不会还原文件。":
+        "Uses the same project folder; forking does not restore files.",
     "收起继承的上下文": "Hide inherited context",
     "查看继承的上下文（{0} 轮）": "Show inherited context ({0})",
-    "Agent 已获得以上上下文，在下方发送消息即可从这里继续。": "The agent already has this context. Send a message below to continue from here.",
+    "Agent 已获得以上上下文，在下方发送消息即可从这里继续。":
+        "The agent already has this context. Send a message below to continue from here.",
   },
   "zh-Hant": {
     "返回": "返回",
@@ -1251,7 +1553,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "扫码连接": "掃碼連線",
     "偏好设置": "偏好設定",
     "把电脑上的工作带在身边": "把電腦上的工作帶在身邊",
-    "连接自己的电脑，查看会话、发送任务并处理 Agent 的权限请求。无需注册账号。": "連線自己的電腦，查看對話、傳送任務並處理 Agent 的權限請求。無需註冊帳號。",
+    "连接自己的电脑，查看会话、发送任务并处理 Agent 的权限请求。无需注册账号。":
+        "連線自己的電腦，查看對話、傳送任務並處理 Agent 的權限請求。無需註冊帳號。",
     "连接电脑": "連線電腦",
     "当前内测版本尚未配置接入服务。": "目前測試版本尚未設定接入服務。",
     "在电脑端打开「连接手机」，扫描二维码。": "在電腦端開啟「連線手機」，掃描 QR 碼。",
@@ -1259,12 +1562,14 @@ const messageCatalogs = <String, Map<String, String>>{
     "当前内测版本尚未配置接入服务": "目前測試版本尚未設定接入服務",
     "更多": "更多",
     "从这部手机移除「{0}」？": "從這支手機移除「{0}」？",
-    "手机会删除这台电脑的配对凭证，之后需重新扫码才能连接。电脑上的任务不受影响；如需让电脑也拒绝这部手机，请在电脑的设备列表中撤销。": "手機會刪除這台電腦的配對憑證，之後需重新掃碼才能連線。電腦上的任務不受影響；如需讓電腦也拒絕這支手機，請在電腦的裝置列表中撤銷。",
+    "手机会删除这台电脑的配对凭证，之后需重新扫码才能连接。电脑上的任务不受影响；如需让电脑也拒绝这部手机，请在电脑的设备列表中撤销。":
+        "手機會刪除這台電腦的配對憑證，之後需重新掃碼才能連線。電腦上的任務不受影響；如需讓電腦也拒絕這支手機，請在電腦的裝置列表中撤銷。",
     "取消": "取消",
     "移除未完成，连接已关闭，请重试或核实安全存储。": "移除未完成，連線已關閉，請重試或檢查安全儲存空間。",
     "移除": "移除",
     "撤销绑定": "撤銷綁定",
-    "请在「{0}」的设备列表中撤销这部手机。撤销后这部手机将无法再连接该电脑；电脑上正在执行的任务不受影响。": "請在「{0}」的裝置列表中撤銷這支手機。撤銷後這支手機將無法再連線該電腦；電腦上正在執行的任務不受影響。",
+    "请在「{0}」的设备列表中撤销这部手机。撤销后这部手机将无法再连接该电脑；电脑上正在执行的任务不受影响。":
+        "請在「{0}」的裝置列表中撤銷這支手機。撤銷後這支手機將無法再連線該電腦；電腦上正在執行的任務不受影響。",
     "知道了": "知道了",
     "通知设置": "通知設定",
     "重新连接": "重新連線",
@@ -1352,7 +1657,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "此服务尚未开放电脑配对。": "此服務尚未開放電腦配對。",
     "正在检查": "正在檢查",
     "检查连接": "檢查連線",
-    "后台提醒暂未启用，静音设置可提前保存。仅影响这部手机，不影响电脑任务和 Agent 审批。": "背景提醒尚未啟用，可先儲存靜音設定。僅影響這支手機，不影響電腦任務和 Agent 審批。",
+    "后台提醒暂未启用，静音设置可提前保存。仅影响这部手机，不影响电脑任务和 Agent 审批。":
+        "背景提醒尚未啟用，可先儲存靜音設定。僅影響這支手機，不影響電腦任務和 Agent 審批。",
     "通知通道已连接。提醒只影响这部手机，不会直接批准操作。": "通知通道已連線。提醒只影響這支手機，不會直接核准操作。",
     "后台提醒暂未启用，可在这里授权系统通知。": "背景提醒尚未啟用，可在這裡授權系統通知。",
     "此版本未配置后台提醒，静音设置可提前保存。": "此版本未設定背景提醒，可先儲存靜音設定。",
@@ -1371,11 +1677,13 @@ const messageCatalogs = <String, Map<String, String>>{
     "这台电脑已静音，取消会话静音后仍不会收到提醒。": "這台電腦已靜音，取消對話靜音後仍不會收到提醒。",
     "静音此会话": "將此對話設為靜音",
     "清除离线缓存？": "清除離線快取？",
-    "只清除此手机保存的会话缓存，保留草稿、未发送附件和电脑配对。电脑上的会话不受影响，联网后会重新缓存。": "只清除這支手機保存的對話快取，保留草稿、未傳送附件和電腦配對。電腦上的對話不受影響，連線後會重新快取。",
+    "只清除此手机保存的会话缓存，保留草稿、未发送附件和电脑配对。电脑上的会话不受影响，联网后会重新缓存。":
+        "只清除這支手機保存的對話快取，保留草稿、未傳送附件和電腦配對。電腦上的對話不受影響，連線後會重新快取。",
     "清除": "清除",
     "未能清除缓存：{0}": "未能清除快取：{0}",
     "最近会话离线缓存": "最近對話離線快取",
-    "{0} 个会话 · {1} MB\n最多 30 个会话、32 MB；保存文字和附件信息。": "{0} 個對話 · {1} MB\n最多 30 個對話、32 MB；保存文字和附件資訊。",
+    "{0} 个会话 · {1} MB\n最多 30 个会话、32 MB；保存文字和附件信息。":
+        "{0} 個對話 · {1} MB\n最多 30 個對話、32 MB；保存文字和附件資訊。",
     "正在读取缓存大小…": "正在讀取快取大小…",
     "正在清除…": "正在清除…",
     "清除缓存": "清除快取",
@@ -1389,7 +1697,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "管理已绑定设备": "管理已綁定裝置",
     "{0} 台": "{0} 台",
     "本机数据": "本機資料",
-    "无需注册账号：通过电脑上的配对二维码建立信任，可随时在电脑上撤销。草稿和离线缓存保存在这部手机；提醒偏好可在电脑或会话菜单中设置。": "無需註冊帳號：透過電腦上的配對 QR 碼建立信任，可隨時在電腦上撤銷。草稿和離線快取保存在這支手機；提醒偏好可在電腦或對話選單中設定。",
+    "无需注册账号：通过电脑上的配对二维码建立信任，可随时在电脑上撤销。草稿和离线缓存保存在这部手机；提醒偏好可在电脑或会话菜单中设置。":
+        "無需註冊帳號：透過電腦上的配對 QR 碼建立信任，可隨時在電腦上撤銷。草稿和離線快取保存在這支手機；提醒偏好可在電腦或對話選單中設定。",
     "项目目录不可用，请刷新项目后重试。": "專案目錄無法使用，請重新整理專案後重試。",
     "选择终端目录": "選擇終端機目錄",
     "连接或项目目录已改变，请重新选择终端目录。": "連線或專案目錄已變更，請重新選擇終端機目錄。",
@@ -1459,10 +1768,13 @@ const messageCatalogs = <String, Map<String, String>>{
     "没有提交记录": "沒有提交記錄",
     "没有可比较的分支": "沒有可比較的分支",
     "预览已关闭": "預覽已關閉",
-    "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">预览请求失败：{0}</p>": "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">預覽請求失敗：{0}</p>",
+    "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">预览请求失败：{0}</p>":
+        "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">預覽請求失敗：{0}</p>",
     "项目 WebSocket 写入未获确认": "專案 WebSocket 寫入未獲確認",
-    "\u001b[2m（较早的输出已被电脑释放）\u001b[0m\r\n": "\u001b[2m（較早的輸出已被電腦釋放）\u001b[0m\r\n",
-    "\r\n\u001b[2m… 部分较早的输出已被电脑丢弃 …\u001b[0m\r\n": "\r\n\u001b[2m… 部分較早的輸出已被電腦捨棄 …\u001b[0m\r\n",
+    "\u001b[2m（较早的输出已被电脑释放）\u001b[0m\r\n":
+        "\u001b[2m（較早的輸出已被電腦釋放）\u001b[0m\r\n",
+    "\r\n\u001b[2m… 部分较早的输出已被电脑丢弃 …\u001b[0m\r\n":
+        "\r\n\u001b[2m… 部分較早的輸出已被電腦捨棄 …\u001b[0m\r\n",
     "启动中": "啟動中",
     "运行中": "執行中",
     "停止中": "停止中",
@@ -1472,7 +1784,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "状态未知": "狀態未知",
     "核实输入结果": "核實輸入結果",
     "继续输入？": "繼續輸入？",
-    "请先检查终端当前状态；未确认的输入可能已部分生效。继续会清空当前输入框并丢弃未发送内容，不会重新发送原输入。": "請先檢查終端機目前狀態；未確認的輸入可能已部分生效。繼續會清空目前輸入框並捨棄未傳送內容，不會重新傳送原輸入。",
+    "请先检查终端当前状态；未确认的输入可能已部分生效。继续会清空当前输入框并丢弃未发送内容，不会重新发送原输入。":
+        "請先檢查終端機目前狀態；未確認的輸入可能已部分生效。繼續會清空目前輸入框並捨棄未傳送內容，不會重新傳送原輸入。",
     "已检查，继续": "已檢查，繼續",
     "继续输入": "繼續輸入",
     "输入命令，回车发送": "輸入命令，按 Enter 傳送",
@@ -1520,7 +1833,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "后退": "上一頁",
     "刷新": "重新整理",
     "电脑离线，重新连接后再试。": "電腦離線，重新連線後再試。",
-    "这个项目还没有会话。电脑以会话为单位授权工作区访问，请先在项目中开始一个会话。": "這個專案還沒有對話。電腦以對話為單位授權工作區存取，請先在專案中開始一個對話。",
+    "这个项目还没有会话。电脑以会话为单位授权工作区访问，请先在项目中开始一个会话。":
+        "這個專案還沒有對話。電腦以對話為單位授權工作區存取，請先在專案中開始一個對話。",
     "全部": "全部",
     "权限": "權限",
     "问题": "問題",
@@ -1546,8 +1860,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "Fork 尚未完成。": "Fork 尚未完成。",
     "{0}：还没收到电脑确认": "{0}：還沒收到電腦確認",
     "待确认": "待確認",
-    "{0} · 正在确认「不再等待」。重试仅确认原操作的结束状态，已经执行的内容不会撤销。": "{0} · 正在確認「不再等待」。重試僅確認原操作的結束狀態，已經執行的內容不會撤銷。",
-    "{0} · 网络中断时手机没收到电脑的回复。点「重新确认」查看结果；重新发送也不会重复执行。": "{0} · 網路中斷時手機沒收到電腦的回覆。點選「重新確認」查看結果；重新傳送也不會重複執行。",
+    "{0} · 正在确认「不再等待」。重试仅确认原操作的结束状态，已经执行的内容不会撤销。":
+        "{0} · 正在確認「不再等待」。重試僅確認原操作的結束狀態，已經執行的內容不會撤銷。",
+    "{0} · 网络中断时手机没收到电脑的回复。点「重新确认」查看结果；重新发送也不会重复执行。":
+        "{0} · 網路中斷時手機沒收到電腦的回覆。點選「重新確認」查看結果；重新傳送也不會重複執行。",
     "{0} · 网络中断时手机没收到电脑的回复。连上电脑后会自动确认。": "{0} · 網路中斷時手機沒收到電腦的回覆。連上電腦後會自動確認。",
     "新名称：{0}": "新名稱：{0}",
     "重新发送会继续你之前确认过的删除。": "重新傳送會繼續你之前確認過的刪除。",
@@ -1566,9 +1882,12 @@ const messageCatalogs = <String, Map<String, String>>{
     "不再等待": "不再等待",
     "只是不再在手机上等待结果。电脑上已经完成的操作会保留。": "只是不再在手機上等待結果。電腦上已經完成的操作會保留。",
     "只是不再在手机上等待结果。如果电脑已经收到，任务仍会停下。": "只是不再在手機上等待結果。如果電腦已經收到，任務仍會停止。",
-    "只是不再在手机上等待结果。如果电脑已经收到，终端仍会关闭。终端是否还在运行，请在终端页查看。": "只是不再在手機上等待結果。如果電腦已經收到，終端機仍會關閉。終端機是否仍在執行，請在終端機頁面查看。",
-    "如果终端还没启动，就不会再启动；已经启动的会保留，里面的命令照常运行。": "如果終端機還沒啟動，就不會再啟動；已經啟動的會保留，裡面的命令照常執行。",
-    "如果还没执行，就不会再提交或推送；已经完成的不会撤销。建议先在「变更」里看一下结果。": "如果還沒執行，就不會再提交或推送；已經完成的不會撤銷。建議先在「變更」裡看一下結果。",
+    "只是不再在手机上等待结果。如果电脑已经收到，终端仍会关闭。终端是否还在运行，请在终端页查看。":
+        "只是不再在手機上等待結果。如果電腦已經收到，終端機仍會關閉。終端機是否仍在執行，請在終端機頁面查看。",
+    "如果终端还没启动，就不会再启动；已经启动的会保留，里面的命令照常运行。":
+        "如果終端機還沒啟動，就不會再啟動；已經啟動的會保留，裡面的命令照常執行。",
+    "如果还没执行，就不会再提交或推送；已经完成的不会撤销。建议先在「变更」里看一下结果。":
+        "如果還沒執行，就不會再提交或推送；已經完成的不會撤銷。建議先在「變更」裡看一下結果。",
     "发送消息": "傳送訊息",
     "Fork 会话": "Fork 對話",
     "置顶或归档": "置頂或封存",
@@ -1593,7 +1912,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "Agent 有一个问题": "Agent 有一個問題",
     "会话「{0}」需要你的回答。": "對話「{0}」需要你的回答。",
     "会话「{0}」请求以下操作。": "對話「{0}」請求以下操作。",
-    "这个问题的格式暂不支持在手机上回答，请在电脑上回答，回答后这里会自动更新。": "這個問題的格式暫不支援在手機上回答，請在電腦上回答，回答後這裡會自動更新。",
+    "这个问题的格式暂不支持在手机上回答，请在电脑上回答，回答后这里会自动更新。":
+        "這個問題的格式暫不支援在手機上回答，請在電腦上回答，回答後這裡會自動更新。",
     "电脑离线，重新连接后再处理。": "電腦離線，重新連線後再處理。",
     "这台电脑有一项操作结果待核实，请先核实。": "這台電腦有一項操作結果待核實，請先核實。",
     "其他授权范围": "其他授權範圍",
@@ -1661,7 +1981,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "当前工作区": "目前工作區",
     "共享当前项目文件，仅复制对话历史。": "共享目前專案檔案，僅複製對話歷史。",
     "新 Worktree": "新 Worktree",
-    "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照；非 Git 项目只继承对话。": "在電腦上建立獨立工作區，並恢復所選輪次的檔案快照。舊輪次可能沒有快照。非 Git 專案只繼承對話。",
+    "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照；非 Git 项目只继承对话。":
+        "在電腦上建立獨立工作區，並恢復所選輪次的檔案快照。舊輪次可能沒有快照。非 Git 專案只繼承對話。",
     "正在创建…": "正在建立…",
     "创建 Fork": "建立 Fork",
     "取消置顶": "取消置頂",
@@ -1671,7 +1992,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "归档会话": "封存對話",
     "会话操作": "對話操作",
     "会话将从电脑同步": "對話將從電腦同步",
-    "连接自己的电脑后，在这里查看和续接各项目的会话。网络中断时，电脑上的任务会继续执行。": "連線自己的電腦後，在這裡查看和接續各專案的對話。網路中斷時，電腦上的任務會繼續執行。",
+    "连接自己的电脑后，在这里查看和续接各项目的会话。网络中断时，电脑上的任务会继续执行。":
+        "連線自己的電腦後，在這裡查看和接續各專案的對話。網路中斷時，電腦上的任務會繼續執行。",
     "搜索会话": "搜尋對話",
     "{0} 项等待处理": "{0} 項等待處理",
     "{0} 连接中…": "{0} 連線中…",
@@ -1688,13 +2010,15 @@ const messageCatalogs = <String, Map<String, String>>{
     "已归档": "已封存",
     "正在核实原配对…": "正在核實原配對…",
     "移除本机配对记录？": "移除本機配對記錄？",
-    "之后需要重新扫码。电脑上可能已允许这台手机；如需撤销授权，请在电脑的「连接手机」中操作。": "之後需要重新掃碼。電腦上可能已允許這支手機；如需撤銷授權，請在電腦的「連線手機」中操作。",
+    "之后需要重新扫码。电脑上可能已允许这台手机；如需撤销授权，请在电脑的「连接手机」中操作。":
+        "之後需要重新掃碼。電腦上可能已允許這支手機；如需撤銷授權，請在電腦的「連線手機」中操作。",
     "保留记录": "保留記錄",
     "移除本机记录": "移除本機記錄",
     "正在验证电脑身份并建立配对…": "正在驗證電腦身分並建立配對…",
     "加密组件尚未准备好。": "加密元件尚未準備好。",
     "在电脑端打开「连接手机」，扫描配对二维码。": "在電腦端開啟「連線手機」，掃描配對 QR 碼。",
-    "配对后可操作这台电脑的 Agent、项目、Git 和终端，并查看、控制电脑屏幕。你可以随时在电脑上撤销授权。": "配對後可操作這台電腦的 Agent、專案、Git 和終端機，並查看、控制電腦螢幕。你可以隨時在電腦上撤銷授權。",
+    "配对后可操作这台电脑的 Agent、项目、Git 和终端，并查看、控制电脑屏幕。你可以随时在电脑上撤销授权。":
+        "配對後可操作這台電腦的 Agent、專案、Git 和終端機，並查看、控制電腦螢幕。你可以隨時在電腦上撤銷授權。",
     "配对结果待核实": "配對結果待核實",
     "保留了原配对信息，可以继续核实电脑是否已允许连接。": "保留了原配對資訊，可以繼續核實電腦是否已允許連線。",
     "恢复期限已过，请在电脑核实授权后重新扫码。": "恢復期限已過，請在電腦核實授權後重新掃碼。",
@@ -1703,11 +2027,14 @@ const messageCatalogs = <String, Map<String, String>>{
     "扫描二维码": "掃描 QR 碼",
     "或粘贴配对链接": "或貼上配對連結",
     "粘贴从电脑获取的配对链接": "貼上從電腦取得的配對連結",
-    "二维码使用了本机地址，手机无法访问。请在电脑端使用手机可访问的服务地址并重新生成二维码。": "QR 碼使用了本機位址，手機無法存取。請在電腦端使用手機可存取的服務位址並重新產生 QR 碼。",
-    "无法连接接入服务，请确认手机与电脑的网络、服务地址及端口。局域网调试时需连接同一 Wi-Fi。": "無法連線接入服務，請確認手機與電腦的網路、服務位址及連接埠。區域網路偵錯時需連線同一個 Wi-Fi。",
+    "二维码使用了本机地址，手机无法访问。请在电脑端使用手机可访问的服务地址并重新生成二维码。":
+        "QR 碼使用了本機位址，手機無法存取。請在電腦端使用手機可存取的服務位址並重新產生 QR 碼。",
+    "无法连接接入服务，请确认手机与电脑的网络、服务地址及端口。局域网调试时需连接同一 Wi-Fi。":
+        "無法連線接入服務，請確認手機與電腦的網路、服務位址及連接埠。區域網路偵錯時需連線同一個 Wi-Fi。",
     "无法验证服务证书，请检查接入服务配置。": "無法驗證服務憑證，請檢查接入服務設定。",
     "配对未完成，请检查电脑与接入服务后重试。": "配對未完成，請檢查電腦與接入服務後重試。",
-    "DogCodes 手机端连接你自己的电脑：查看会话、继续交给 Agent、处理权限请求。无需注册账号。": "DogCodes 手機端連線你自己的電腦：查看對話、繼續交給 Agent、處理權限請求。無需註冊帳號。",
+    "DogCodes 手机端连接你自己的电脑：查看会话、继续交给 Agent、处理权限请求。无需注册账号。":
+        "DogCodes 手機端連線你自己的電腦：查看對話、繼續交給 Agent、處理權限請求。無需註冊帳號。",
     "在电脑上打开 DogCodes": "在電腦上開啟 DogCodes",
     "点击「连接手机」，屏幕上会显示二维码": "點選「連線手機」，螢幕上會顯示 QR 碼",
     "用这部手机扫码，或粘贴配对链接": "用這支手機掃碼，或貼上配對連結",
@@ -1860,7 +2187,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "本轮变更加载失败：{0}": "本輪變更載入失敗：{0}",
     "本轮变更加载失败": "本輪變更載入失敗",
     "{0} 个文件已更改": "{0} 個檔案已變更",
-    "连接中断后的恢复快照 · 仅反映检查时的文件变化，外部工具可能仍在写入": "連線中斷後的恢復快照 · 僅反映檢查時的檔案變化，外部工具可能仍在寫入",
+    "连接中断后的恢复快照 · 仅反映检查时的文件变化，外部工具可能仍在写入":
+        "連線中斷後的恢復快照 · 僅反映檢查時的檔案變化，外部工具可能仍在寫入",
     "二进制": "二進位",
     "本轮保存的历史 Diff": "本輪保存的歷史 Diff",
     "这一轮未保存该文件的内容": "這一輪未保存該檔案的內容",
@@ -1939,7 +2267,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "没有找到要打开的这一轮，它可能已被删除。": "沒有找到要開啟的這一輪，它可能已被刪除。",
     "电脑离线，连接后再查看完整内容。": "電腦離線，連線後再查看完整內容。",
     "删除这个会话？": "刪除這個對話？",
-    "将在「{0}」上永久删除「{1}」及其记录，无法恢复。项目文件不会被删除。": "將在「{0}」上永久刪除「{1}」及其記錄，無法恢復。專案檔案不會被刪除。",
+    "将在「{0}」上永久删除「{1}」及其记录，无法恢复。项目文件不会被删除。":
+        "將在「{0}」上永久刪除「{1}」及其記錄，無法恢復。專案檔案不會被刪除。",
     "删除": "刪除",
     "停止请求未确认：{0}。请刷新核实任务状态。": "停止請求未確認：{0}。請重新整理核實任務狀態。",
     "电脑未受理这次发送，内容已保留。": "電腦未受理這次傳送，內容已保留。",
@@ -2225,7 +2554,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "{0} 个会话运行中": "{0} 個對話執行中",
     "不在项目中工作": "不在專案中工作",
     "主目录": "主目錄",
-    "主目录是会话默认的工作目录；附加目录同样对 Agent 可见。从项目中移除目录不会删除电脑上的文件。": "主目錄是對話預設的工作目錄；附加目錄同樣對 Agent 可見。從專案中移除目錄不會刪除電腦上的檔案。",
+    "主目录是会话默认的工作目录；附加目录同样对 Agent 可见。从项目中移除目录不会删除电脑上的文件。":
+        "主目錄是對話預設的工作目錄；附加目錄同樣對 Agent 可見。從專案中移除目錄不會刪除電腦上的檔案。",
     "从项目中移除": "從專案中移除",
     "保存结果待核实，请刷新后查看项目，不要重复保存。": "儲存結果待核實，請重新整理後查看專案，不要重複儲存。",
     "保留会话和电脑上的文件，可随时恢复": "保留對話和電腦上的檔案，可隨時恢復",
@@ -2254,7 +2584,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "选择此目录": "選擇此目錄",
     "选择目录": "選擇目錄",
     "项目不存在": "專案不存在",
-    "项目会从列表中隐藏。会话和电脑上的文件都会保留，可在「已移除项目」中恢复。": "專案會從列表中隱藏。對話和電腦上的檔案都會保留，可在「已移除專案」中恢復。",
+    "项目会从列表中隐藏。会话和电脑上的文件都会保留，可在「已移除项目」中恢复。":
+        "專案會從列表中隱藏。對話和電腦上的檔案都會保留，可在「已移除專案」中恢復。",
     "项目名称": "專案名稱",
     "项目操作": "專案操作",
     "项目状态无效。": "專案狀態無效。",
@@ -2303,9 +2634,12 @@ const messageCatalogs = <String, Map<String, String>>{
     "搜索内容": "搜尋內容",
     "请求的工具": "請求的工具",
     "审批详情格式不完整，请让 Agent 重新发起审批。": "審批詳情格式不完整，請讓 Agent 重新發起審批。",
-    "操作详情过长，下方仅展示部分内容。请让 Agent 拆分操作后重新发起审批，以查看完整范围。": "操作詳情過長，下方僅顯示部分內容。請讓 Agent 拆分操作後重新發起審批，以查看完整範圍。",
-    "Agent 未提供文件修改范围，请让 Agent 补充文件路径和修改内容。": "Agent 未提供檔案修改範圍，請讓 Agent 補充檔案路徑和修改內容。",
-    "未能从审批请求中读取文件路径、命令或修改内容，请让 Agent 补充详情后重新发起审批。": "未能從審批請求中讀取檔案路徑、命令或修改內容，請讓 Agent 補充詳情後重新發起審批。",
+    "操作详情过长，下方仅展示部分内容。请让 Agent 拆分操作后重新发起审批，以查看完整范围。":
+        "操作詳情過長，下方僅顯示部分內容。請讓 Agent 拆分操作後重新發起審批，以查看完整範圍。",
+    "Agent 未提供文件修改范围，请让 Agent 补充文件路径和修改内容。":
+        "Agent 未提供檔案修改範圍，請讓 Agent 補充檔案路徑和修改內容。",
+    "未能从审批请求中读取文件路径、命令或修改内容，请让 Agent 补充详情后重新发起审批。":
+        "未能從審批請求中讀取檔案路徑、命令或修改內容，請讓 Agent 補充詳情後重新發起審批。",
     "收起": "收起",
     "展开全部": "展開全部",
     "电脑已记录你的决定，但 Agent 已不在等待，请在会话中查看。": "電腦已記錄你的決定，但 Agent 已不在等待，請在會話中查看。",
@@ -2322,7 +2656,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "没有待回答的问题": "沒有待回答的問題",
     "Agent 需要你做选择或补充信息时，问题会出现在这里。": "Agent 需要你做選擇或補充資訊時，問題會出現在這裡。",
     "收件箱是空的": "收件匣是空的",
-    "Agent 请求权限或向你提问时会出现在这里，处理过的记录也会保留，方便回看。": "Agent 請求權限或向你提問時會出現在這裡，處理過的記錄也會保留，方便回看。",
+    "Agent 请求权限或向你提问时会出现在这里，处理过的记录也会保留，方便回看。":
+        "Agent 請求權限或向你提問時會出現在這裡，處理過的記錄也會保留，方便回看。",
     "等待你回答": "等待你回答",
     "等待你确认": "等待你確認",
     "权限请求": "權限請求",
@@ -2344,7 +2679,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "只读模式": "唯讀模式",
     "所选策略在下一轮执行时生效": "所選策略在下一輪執行時生效",
     "从不弹出确认；只运行预先允许和安全的只读操作，其余一律拒绝。": "從不彈出確認；只執行預先允許且安全的唯讀操作，其餘一律拒絕。",
-    "Pi 不内置逐工具审批或沙箱；工具直接执行，扩展发起的询问会显示在对话中。": "Pi 不內建逐工具審批或沙箱；工具直接執行，擴充功能發起的詢問會顯示在對話中。",
+    "Pi 不内置逐工具审批或沙箱；工具直接执行，扩展发起的询问会显示在对话中。":
+        "Pi 不內建逐工具審批或沙箱；工具直接執行，擴充功能發起的詢問會顯示在對話中。",
     "跳过审批": "略過審批",
     "仅限预先允许": "僅限預先允許",
     "自动判断": "自動判斷",
@@ -2365,7 +2701,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "计划模式": "計劃模式",
     "对所有 Agent 跳过全部权限检查，包括危险命令。": "對所有 Agent 略過全部權限檢查，包括危險命令。",
     "此 Agent 未报告可切换的权限模式；审批请求仍会显示在对话中。": "此 Agent 未回報可切換的權限模式；審批請求仍會顯示在對話中。",
-    "原 Agent、模型、思考强度或权限策略当前不可用，请重新选择后发送。": "原 Agent、模型、思考強度或權限策略目前不可用，請重新選擇後傳送。",
+    "原 Agent、模型、思考强度或权限策略当前不可用，请重新选择后发送。":
+        "原 Agent、模型、思考強度或權限策略目前不可用，請重新選擇後傳送。",
     "计划模式；禁用所有编辑工具。": "計畫模式；停用所有編輯工具。",
     "每个工具首次使用时请求授权。": "每個工具首次使用時請求授權。",
     "本会话内自动接受文件编辑。": "本工作階段內自動接受檔案編輯。",
@@ -2440,7 +2777,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "扫码连接": "スキャンして接続",
     "偏好设置": "設定",
     "把电脑上的工作带在身边": "PC での作業をいつでも手元に",
-    "连接自己的电脑，查看会话、发送任务并处理 Agent 的权限请求。无需注册账号。": "自分の PC に接続して、チャットの確認、タスクの送信、Agent の権限リクエストへの対応ができます。アカウント登録は不要です。",
+    "连接自己的电脑，查看会话、发送任务并处理 Agent 的权限请求。无需注册账号。":
+        "自分の PC に接続して、チャットの確認、タスクの送信、Agent の権限リクエストへの対応ができます。アカウント登録は不要です。",
     "连接电脑": "PC に接続",
     "当前内测版本尚未配置接入服务。": "このベータ版では接続サービスが設定されていません。",
     "在电脑端打开「连接手机」，扫描二维码。": "PC で「スマホと接続」を開き、QR コードをスキャンしてください。",
@@ -2448,12 +2786,15 @@ const messageCatalogs = <String, Map<String, String>>{
     "当前内测版本尚未配置接入服务": "このベータ版では接続サービスが設定されていません",
     "更多": "その他",
     "从这部手机移除「{0}」？": "「{0}」をこのスマホから削除しますか？",
-    "手机会删除这台电脑的配对凭证，之后需重新扫码才能连接。电脑上的任务不受影响；如需让电脑也拒绝这部手机，请在电脑的设备列表中撤销。": "このスマホからこの PC のペアリング情報を削除します。再接続にはもう一度スキャンが必要です。PC 上のタスクには影響しません。PC 側でもこのスマホを拒否するには、PC のデバイス一覧から取り消してください。",
+    "手机会删除这台电脑的配对凭证，之后需重新扫码才能连接。电脑上的任务不受影响；如需让电脑也拒绝这部手机，请在电脑的设备列表中撤销。":
+        "このスマホからこの PC のペアリング情報を削除します。再接続にはもう一度スキャンが必要です。PC 上のタスクには影響しません。PC 側でもこのスマホを拒否するには、PC のデバイス一覧から取り消してください。",
     "取消": "キャンセル",
-    "移除未完成，连接已关闭，请重试或核实安全存储。": "削除が完了していません。接続は閉じられました。再試行するか、セキュアストレージを確認してください。",
+    "移除未完成，连接已关闭，请重试或核实安全存储。":
+        "削除が完了していません。接続は閉じられました。再試行するか、セキュアストレージを確認してください。",
     "移除": "削除",
     "撤销绑定": "ペアリングを取り消す",
-    "请在「{0}」的设备列表中撤销这部手机。撤销后这部手机将无法再连接该电脑；电脑上正在执行的任务不受影响。": "「{0}」のデバイス一覧でこのスマホを取り消してください。取り消すとこのスマホはこの PC に接続できなくなります。PC で実行中のタスクには影響しません。",
+    "请在「{0}」的设备列表中撤销这部手机。撤销后这部手机将无法再连接该电脑；电脑上正在执行的任务不受影响。":
+        "「{0}」のデバイス一覧でこのスマホを取り消してください。取り消すとこのスマホはこの PC に接続できなくなります。PC で実行中のタスクには影響しません。",
     "知道了": "OK",
     "通知设置": "通知",
     "重新连接": "再接続",
@@ -2512,7 +2853,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "读取手机剪贴板，按系统提示允许粘贴": "スマホのクリップボードを読み取ります。表示に従って貼り付けを許可してください",
     "从电脑获取{0}": "PC から{0}を取得",
     "复制到手机剪贴板": "スマホのクリップボードにコピー",
-    "当前连接不支持独立剪贴板传输，请更新电脑和 App 后重试": "この接続はクリップボードの個別転送に対応していません。PC と App を更新して再試行してください",
+    "当前连接不支持独立剪贴板传输，请更新电脑和 App 后重试":
+        "この接続はクリップボードの個別転送に対応していません。PC と App を更新して再試行してください",
     "手机剪贴板没有图片，或尚未允许粘贴": "スマホのクリップボードに画像がないか、貼り付けが許可されていません",
     "手机剪贴板没有文字": "スマホのクリップボードにテキストがありません",
     "电脑尚不支持分块剪贴板传输，请更新电脑客户端": "PC が分割クリップボード転送に未対応です。PC のアプリを更新してください",
@@ -2533,16 +2875,20 @@ const messageCatalogs = <String, Map<String, String>>{
     "操作电脑": "PC を操作",
     "适应屏幕": "画面に合わせる",
     "剪贴板": "クリップボード",
-    "电脑已锁定，Agent 操作仍可用。\n解锁电脑后点「重新连接」。": "PC はロック中ですが、Agent の操作は引き続き使用できます。\nPC のロックを解除してから「再接続」をタップしてください。",
+    "电脑已锁定，Agent 操作仍可用。\n解锁电脑后点「重新连接」。":
+        "PC はロック中ですが、Agent の操作は引き続き使用できます。\nPC のロックを解除してから「再接続」をタップしてください。",
     "服务连接正常": "サービスに接続済み",
     "连接失败，请重试。": "接続できませんでした。再試行してください。",
-    "接入服务只转发加密数据，会话和任务保存在你的电脑上。": "接続サービスは暗号化されたデータを中継するだけです。チャットとタスクはあなたの PC に保存されます。",
+    "接入服务只转发加密数据，会话和任务保存在你的电脑上。":
+        "接続サービスは暗号化されたデータを中継するだけです。チャットとタスクはあなたの PC に保存されます。",
     "尚未配置服务地址": "サービスのアドレスが設定されていません",
     "此服务尚未开放电脑配对。": "このサービスでは PC のペアリングが有効になっていません。",
     "正在检查": "確認中",
     "检查连接": "接続を確認",
-    "后台提醒暂未启用，静音设置可提前保存。仅影响这部手机，不影响电脑任务和 Agent 审批。": "バックグラウンド通知はまだ有効ではありません。ミュート設定は先に保存できます。このスマホにのみ適用され、PC のタスクや Agent の承認には影響しません。",
-    "通知通道已连接。提醒只影响这部手机，不会直接批准操作。": "通知が接続されました。通知はこのスマホにのみ影響し、操作を自動で承認することはありません。",
+    "后台提醒暂未启用，静音设置可提前保存。仅影响这部手机，不影响电脑任务和 Agent 审批。":
+        "バックグラウンド通知はまだ有効ではありません。ミュート設定は先に保存できます。このスマホにのみ適用され、PC のタスクや Agent の承認には影響しません。",
+    "通知通道已连接。提醒只影响这部手机，不会直接批准操作。":
+        "通知が接続されました。通知はこのスマホにのみ影響し、操作を自動で承認することはありません。",
     "后台提醒暂未启用，可在这里授权系统通知。": "バックグラウンド通知はまだ有効ではありません。ここでシステム通知を許可できます。",
     "此版本未配置后台提醒，静音设置可提前保存。": "このビルドではバックグラウンド通知が設定されていません。ミュート設定は先に保存できます。",
     "正在连接通知服务": "通知サービスに接続中",
@@ -2560,11 +2906,13 @@ const messageCatalogs = <String, Map<String, String>>{
     "这台电脑已静音，取消会话静音后仍不会收到提醒。": "この PC はミュート中のため、チャットのミュートを解除しても通知されません。",
     "静音此会话": "このチャットをミュート",
     "清除离线缓存？": "オフラインキャッシュを削除しますか？",
-    "只清除此手机保存的会话缓存，保留草稿、未发送附件和电脑配对。电脑上的会话不受影响，联网后会重新缓存。": "このスマホに保存されたチャットのキャッシュのみを削除します。下書き、未送信の添付ファイル、PC のペアリングは残ります。PC 上のチャットには影響せず、オンライン時に再びキャッシュされます。",
+    "只清除此手机保存的会话缓存，保留草稿、未发送附件和电脑配对。电脑上的会话不受影响，联网后会重新缓存。":
+        "このスマホに保存されたチャットのキャッシュのみを削除します。下書き、未送信の添付ファイル、PC のペアリングは残ります。PC 上のチャットには影響せず、オンライン時に再びキャッシュされます。",
     "清除": "削除",
     "未能清除缓存：{0}": "キャッシュを削除できませんでした：{0}",
     "最近会话离线缓存": "最近のチャットのオフラインキャッシュ",
-    "{0} 个会话 · {1} MB\n最多 30 个会话、32 MB；保存文字和附件信息。": "{0} 件のチャット · {1} MB\n最大 30 件、32 MB。テキストと添付ファイルの情報を保存します。",
+    "{0} 个会话 · {1} MB\n最多 30 个会话、32 MB；保存文字和附件信息。":
+        "{0} 件のチャット · {1} MB\n最大 30 件、32 MB。テキストと添付ファイルの情報を保存します。",
     "正在读取缓存大小…": "キャッシュのサイズを読み取り中…",
     "正在清除…": "削除中…",
     "清除缓存": "キャッシュを削除",
@@ -2578,13 +2926,16 @@ const messageCatalogs = <String, Map<String, String>>{
     "管理已绑定设备": "ペアリング済みのデバイスを管理",
     "{0} 台": "{0} 台",
     "本机数据": "このスマホのデータ",
-    "无需注册账号：通过电脑上的配对二维码建立信任，可随时在电脑上撤销。草稿和离线缓存保存在这部手机；提醒偏好可在电脑或会话菜单中设置。": "アカウント登録は不要です。PC の QR コードでペアリングし、PC からいつでも取り消せます。下書きとオフラインキャッシュはこのスマホに保存されます。通知の設定は PC またはチャットのメニューで行えます。",
+    "无需注册账号：通过电脑上的配对二维码建立信任，可随时在电脑上撤销。草稿和离线缓存保存在这部手机；提醒偏好可在电脑或会话菜单中设置。":
+        "アカウント登録は不要です。PC の QR コードでペアリングし、PC からいつでも取り消せます。下書きとオフラインキャッシュはこのスマホに保存されます。通知の設定は PC またはチャットのメニューで行えます。",
     "项目目录不可用，请刷新项目后重试。": "プロジェクトのディレクトリを使用できません。プロジェクトを更新して再試行してください。",
     "选择终端目录": "ターミナルのディレクトリを選択",
-    "连接或项目目录已改变，请重新选择终端目录。": "接続またはプロジェクトのディレクトリが変わりました。ターミナルのディレクトリを選び直してください。",
+    "连接或项目目录已改变，请重新选择终端目录。":
+        "接続またはプロジェクトのディレクトリが変わりました。ターミナルのディレクトリを選び直してください。",
     "启动结果待核实，请使用原操作恢复。": "起動結果が未確認です。元の操作から復元してください。",
     "关闭这个终端？": "このターミナルを閉じますか？",
-    "将在电脑上结束该终端及其中运行的命令。离开页面不会关闭终端。": "PC でこのターミナルと実行中のコマンドを終了します。ページを離れてもターミナルは閉じません。",
+    "将在电脑上结束该终端及其中运行的命令。离开页面不会关闭终端。":
+        "PC でこのターミナルと実行中のコマンドを終了します。ページを離れてもターミナルは閉じません。",
     "关闭终端": "ターミナルを閉じる",
     "连接已改变，请刷新后重新确认关闭。": "接続が変わりました。更新してから閉じる操作を確認してください。",
     "终端 {0}": "ターミナル {0}",
@@ -2599,7 +2950,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "连接或目录已改变，请重新选择比较目标。": "接続またはディレクトリが変わりました。比較対象を選び直してください。",
     "请填写提交说明": "コミットメッセージを入力してください",
     "暂存全部并提交？": "すべてステージしてコミットしますか？",
-    "{0}当前没有已暂存的文件，将暂存全部 {1} 个变更后提交。": "{0}ステージ済みのファイルがありません。{1} 件の変更をすべてステージしてからコミットします。",
+    "{0}当前没有已暂存的文件，将暂存全部 {1} 个变更后提交。":
+        "{0}ステージ済みのファイルがありません。{1} 件の変更をすべてステージしてからコミットします。",
     "目录：{0}。": "ディレクトリ：{0}。",
     "暂存并提交": "ステージしてコミット",
     "连接或变更已更新，请核对后重新提交。": "接続または変更が更新されました。内容を確認してからコミットし直してください。",
@@ -2648,10 +3000,13 @@ const messageCatalogs = <String, Map<String, String>>{
     "没有提交记录": "コミットはありません",
     "没有可比较的分支": "比較できるブランチがありません",
     "预览已关闭": "プレビューを閉じました",
-    "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">预览请求失败：{0}</p>": "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">プレビューのリクエストに失敗しました：{0}</p>",
+    "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">预览请求失败：{0}</p>":
+        "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">プレビューのリクエストに失敗しました：{0}</p>",
     "项目 WebSocket 写入未获确认": "プロジェクトの WebSocket 書き込みが確認されていません",
-    "\u001b[2m（较早的输出已被电脑释放）\u001b[0m\r\n": "\u001b[2m（以前の出力は PC によって解放されました）\u001b[0m\r\n",
-    "\r\n\u001b[2m… 部分较早的输出已被电脑丢弃 …\u001b[0m\r\n": "\r\n\u001b[2m… 以前の出力の一部は PC によって破棄されました …\u001b[0m\r\n",
+    "\u001b[2m（较早的输出已被电脑释放）\u001b[0m\r\n":
+        "\u001b[2m（以前の出力は PC によって解放されました）\u001b[0m\r\n",
+    "\r\n\u001b[2m… 部分较早的输出已被电脑丢弃 …\u001b[0m\r\n":
+        "\r\n\u001b[2m… 以前の出力の一部は PC によって破棄されました …\u001b[0m\r\n",
     "启动中": "起動中",
     "运行中": "実行中",
     "停止中": "停止中",
@@ -2661,7 +3016,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "状态未知": "状態不明",
     "核实输入结果": "入力結果を確認",
     "继续输入？": "入力を続けますか？",
-    "请先检查终端当前状态；未确认的输入可能已部分生效。继续会清空当前输入框并丢弃未发送内容，不会重新发送原输入。": "まずターミナルの現在の状態を確認してください。未確認の入力は一部反映されている可能性があります。続行すると入力欄がクリアされ、未送信の内容は破棄されます。元の入力は再送されません。",
+    "请先检查终端当前状态；未确认的输入可能已部分生效。继续会清空当前输入框并丢弃未发送内容，不会重新发送原输入。":
+        "まずターミナルの現在の状態を確認してください。未確認の入力は一部反映されている可能性があります。続行すると入力欄がクリアされ、未送信の内容は破棄されます。元の入力は再送されません。",
     "已检查，继续": "確認したので続行",
     "继续输入": "入力を続ける",
     "输入命令，回车发送": "コマンドを入力し、Enter で送信",
@@ -2673,7 +3029,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "删除运行配置？": "実行構成を削除しますか？",
     "移除“{0}”的启动配置，已运行的进程不会停止。": "「{0}」の起動構成を削除します。実行中のプロセスは停止しません。",
     "重新分析项目？": "プロジェクトを再分析しますか？",
-    "将重新生成运行配置，覆盖未固定的自定义修改，固定项会保留。": "実行構成を再生成し、固定されていないカスタム変更を上書きします。固定された構成は残ります。",
+    "将重新生成运行配置，覆盖未固定的自定义修改，固定项会保留。":
+        "実行構成を再生成し、固定されていないカスタム変更を上書きします。固定された構成は残ります。",
     "选择分析项目的 Agent": "プロジェクトを分析する Agent を選択",
     "没有可用 Agent，请先在电脑上连接。": "使用できる Agent がありません。先に PC で接続してください。",
     "预览端口": "プレビューポート",
@@ -2685,7 +3042,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "刷新运行配置": "実行構成を更新",
     "Agent 正在分析项目，可稍后刷新查看。": "Agent がプロジェクトを分析しています。しばらくしてから更新してください。",
     "这个项目尚未关联目录。": "このプロジェクトにはディレクトリが関連付けられていません。",
-    "当前目录还没有运行配置，点击「分析项目」生成启动方式。": "このディレクトリには実行構成がありません。「プロジェクトを分析」をタップして起動方法を生成してください。",
+    "当前目录还没有运行配置，点击「分析项目」生成启动方式。":
+        "このディレクトリには実行構成がありません。「プロジェクトを分析」をタップして起動方法を生成してください。",
     "选择运行配置": "実行構成を選択",
     "选择配置": "構成を選択",
     "未运行": "未実行",
@@ -2709,7 +3067,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "后退": "戻る",
     "刷新": "更新",
     "电脑离线，重新连接后再试。": "PC はオフラインです。再接続してから再試行してください。",
-    "这个项目还没有会话。电脑以会话为单位授权工作区访问，请先在项目中开始一个会话。": "このプロジェクトにはまだチャットがありません。ワークスペースへのアクセスはチャット単位で許可されるため、まずプロジェクトでチャットを開始してください。",
+    "这个项目还没有会话。电脑以会话为单位授权工作区访问，请先在项目中开始一个会话。":
+        "このプロジェクトにはまだチャットがありません。ワークスペースへのアクセスはチャット単位で許可されるため、まずプロジェクトでチャットを開始してください。",
     "全部": "すべて",
     "权限": "権限",
     "问题": "質問",
@@ -2721,7 +3080,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "已不再等待。如果电脑收到了这项操作，它仍会生效。": "待機を停止しました。PC がこの操作を受信していれば、引き続き反映されます。",
     "会话已经删除。": "チャットは削除されました。",
     "新名称已经生效。": "新しい名前が反映されました。",
-    "已找到电脑上的原终端，可在终端或运行页面继续查看；未重新运行命令。": "PC 上の元のターミナルが見つかりました。ターミナルまたは実行ページで引き続き確認できます。コマンドは再実行されていません。",
+    "已找到电脑上的原终端，可在终端或运行页面继续查看；未重新运行命令。":
+        "PC 上の元のターミナルが見つかりました。ターミナルまたは実行ページで引き続き確認できます。コマンドは再実行されていません。",
     "分析已经开始，可在运行页面查看进度。": "分析を開始しました。進行状況は実行ページで確認できます。",
     "原运行配置操作已完成。": "元の実行構成の操作が完了しました。",
     "原运行配置操作已结束：{0}": "元の実行構成の操作が終了しました：{0}",
@@ -2730,14 +3090,18 @@ const messageCatalogs = <String, Map<String, String>>{
     "原修复已放弃。": "元の修正を破棄しました。",
     "修复尚未提交，可继续原操作。{0}": "修正はまだ送信されていません。元の操作を続けられます。{0}",
     "已找到原审查，可在对应轮次的「本轮审查」中查看。": "元のレビューが見つかりました。該当するターンの「ターンのレビュー」で確認できます。",
-    "电脑上还查不到这项操作，可能没收到。可以重新发送，不会重复执行。": "PC にこの操作の記録がまだありません。届いていない可能性があります。再送しても二重に実行されることはありません。",
+    "电脑上还查不到这项操作，可能没收到。可以重新发送，不会重复执行。":
+        "PC にこの操作の記録がまだありません。届いていない可能性があります。再送しても二重に実行されることはありません。",
     "Fork 正在后台执行。": "Fork をバックグラウンドで実行中です。",
     "Fork 尚未完成。": "Fork はまだ完了していません。",
     "{0}：还没收到电脑确认": "{0}：PC からの確認がまだありません",
     "待确认": "確認待ち",
-    "{0} · 正在确认「不再等待」。重试仅确认原操作的结束状态，已经执行的内容不会撤销。": "{0} · 「待機を停止」を確認中です。再試行は元の操作の最終状態を確認するだけで、実行済みの内容は取り消されません。",
-    "{0} · 网络中断时手机没收到电脑的回复。点「重新确认」查看结果；重新发送也不会重复执行。": "{0} · 接続が切れたため PC からの応答を受信できませんでした。「再確認」をタップして結果を確認してください。再送しても二重に実行されることはありません。",
-    "{0} · 网络中断时手机没收到电脑的回复。连上电脑后会自动确认。": "{0} · 接続が切れたため PC からの応答を受信できませんでした。PC に再接続すると自動で確認します。",
+    "{0} · 正在确认「不再等待」。重试仅确认原操作的结束状态，已经执行的内容不会撤销。":
+        "{0} · 「待機を停止」を確認中です。再試行は元の操作の最終状態を確認するだけで、実行済みの内容は取り消されません。",
+    "{0} · 网络中断时手机没收到电脑的回复。点「重新确认」查看结果；重新发送也不会重复执行。":
+        "{0} · 接続が切れたため PC からの応答を受信できませんでした。「再確認」をタップして結果を確認してください。再送しても二重に実行されることはありません。",
+    "{0} · 网络中断时手机没收到电脑的回复。连上电脑后会自动确认。":
+        "{0} · 接続が切れたため PC からの応答を受信できませんでした。PC に再接続すると自動で確認します。",
     "新名称：{0}": "新しい名前：{0}",
     "重新发送会继续你之前确认过的删除。": "再送すると、以前に確認した削除を続行します。",
     "原终端": "元のターミナル",
@@ -2749,15 +3113,20 @@ const messageCatalogs = <String, Map<String, String>>{
     "重新发送": "再送",
     "不再发送": "再送しない",
     "不再等待这项操作？": "この操作の待機を停止しますか？",
-    "只是不再在手机上等待结果。如果电脑已经收到，改名或删除仍会生效。": "このスマホで結果を待つのをやめるだけです。PC がすでに受信していれば、名前の変更や削除は反映されます。",
+    "只是不再在手机上等待结果。如果电脑已经收到，改名或删除仍会生效。":
+        "このスマホで結果を待つのをやめるだけです。PC がすでに受信していれば、名前の変更や削除は反映されます。",
     "继续等待": "待機を続ける",
     "确定": "OK",
     "不再等待": "待機を停止",
     "只是不再在手机上等待结果。电脑上已经完成的操作会保留。": "このスマホで結果を待つのをやめるだけです。PC で完了した操作はそのまま残ります。",
-    "只是不再在手机上等待结果。如果电脑已经收到，任务仍会停下。": "このスマホで結果を待つのをやめるだけです。PC がすでに受信していれば、タスクは停止します。",
-    "只是不再在手机上等待结果。如果电脑已经收到，终端仍会关闭。终端是否还在运行，请在终端页查看。": "このスマホで結果を待つのをやめるだけです。PC がすでに受信していれば、ターミナルは閉じられます。ターミナルが実行中かどうかはターミナルページで確認してください。",
-    "如果终端还没启动，就不会再启动；已经启动的会保留，里面的命令照常运行。": "ターミナルがまだ起動していなければ、起動しません。起動済みのターミナルはそのまま残り、中のコマンドも実行を続けます。",
-    "如果还没执行，就不会再提交或推送；已经完成的不会撤销。建议先在「变更」里看一下结果。": "まだ実行されていなければ、コミットやプッシュは行われません。完了済みの操作は取り消されません。先に「変更」で結果を確認することをおすすめします。",
+    "只是不再在手机上等待结果。如果电脑已经收到，任务仍会停下。":
+        "このスマホで結果を待つのをやめるだけです。PC がすでに受信していれば、タスクは停止します。",
+    "只是不再在手机上等待结果。如果电脑已经收到，终端仍会关闭。终端是否还在运行，请在终端页查看。":
+        "このスマホで結果を待つのをやめるだけです。PC がすでに受信していれば、ターミナルは閉じられます。ターミナルが実行中かどうかはターミナルページで確認してください。",
+    "如果终端还没启动，就不会再启动；已经启动的会保留，里面的命令照常运行。":
+        "ターミナルがまだ起動していなければ、起動しません。起動済みのターミナルはそのまま残り、中のコマンドも実行を続けます。",
+    "如果还没执行，就不会再提交或推送；已经完成的不会撤销。建议先在「变更」里看一下结果。":
+        "まだ実行されていなければ、コミットやプッシュは行われません。完了済みの操作は取り消されません。先に「変更」で結果を確認することをおすすめします。",
     "发送消息": "メッセージを送信",
     "Fork 会话": "チャットを Fork",
     "置顶或归档": "ピン留めまたはアーカイブ",
@@ -2782,7 +3151,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "Agent 有一个问题": "Agent からの質問",
     "会话「{0}」需要你的回答。": "チャット「{0}」で回答が必要です。",
     "会话「{0}」请求以下操作。": "チャット「{0}」が次の操作をリクエストしています。",
-    "这个问题的格式暂不支持在手机上回答，请在电脑上回答，回答后这里会自动更新。": "この形式の質問にはまだスマホで回答できません。PC で回答すると、この画面は自動で更新されます。",
+    "这个问题的格式暂不支持在手机上回答，请在电脑上回答，回答后这里会自动更新。":
+        "この形式の質問にはまだスマホで回答できません。PC で回答すると、この画面は自動で更新されます。",
     "电脑离线，重新连接后再处理。": "PC はオフラインです。再接続してから対応してください。",
     "这台电脑有一项操作结果待核实，请先核实。": "この PC には結果が未確認の操作があります。先に確認してください。",
     "其他授权范围": "その他の許可範囲",
@@ -2791,7 +3161,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "连接电脑后，在这里查看项目及其会话。": "PC を接続すると、プロジェクトとそのチャットをここで確認できます。",
     "去连接电脑": "PC を接続",
     "{0} 尚未同步项目；电脑在线时会自动同步。": "{0} のプロジェクトはまだ同期されていません。PC がオンラインになると自動で同期されます。",
-    "{0} 上还没有项目，点右上角「添加项目」选择电脑上的已有目录。": "{0} にはまだプロジェクトがありません。右上の「プロジェクトを追加」から PC 上の既存のディレクトリを選択してください。",
+    "{0} 上还没有项目，点右上角「添加项目」选择电脑上的已有目录。":
+        "{0} にはまだプロジェクトがありません。右上の「プロジェクトを追加」から PC 上の既存のディレクトリを選択してください。",
     "文件": "ファイル",
     "浏览项目文件": "プロジェクトのファイルを閲覧",
     "查看代码变更": "コードの変更を表示",
@@ -2805,7 +3176,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "分离 HEAD": "detached HEAD",
     "工作区干净": "作業ツリーはクリーンです",
     "{0} 个文件待提交": "コミット待ちのファイル {0} 件",
-    "项目已添加，列表尚未同步。请重新连接后刷新结果。": "プロジェクトを追加しましたが、一覧はまだ同期されていません。再接続して結果を更新してください。",
+    "项目已添加，列表尚未同步。请重新连接后刷新结果。":
+        "プロジェクトを追加しましたが、一覧はまだ同期されていません。再接続して結果を更新してください。",
     "请先绑定电脑，再选择电脑上的项目目录。": "先に PC をペアリングしてから、PC 上のプロジェクトのディレクトリを選択してください。",
     "选择添加项目的电脑": "プロジェクトを追加する PC を選択",
     " · 离线": " · オフライン",
@@ -2835,8 +3207,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "{0} 个会话 · 按当前电脑和项目范围": "チャット {0} 件 · 現在の PC とプロジェクトの範囲",
     "搜索已保存的消息正文": "保存されたメッセージ本文を検索",
     "搜索历史正文": "チャット履歴の本文を検索",
-    "在电脑上检索已保存的对话正文，不包含思考过程或附件内容。": "PC に保存された会話の本文を検索します。思考過程や添付ファイルの内容は含まれません。",
-    "{0} 离线，未搜索其中的会话；连接后重新搜索。": "{0} はオフラインのため、そのチャットは検索されていません。接続後にもう一度検索してください。",
+    "在电脑上检索已保存的对话正文，不包含思考过程或附件内容。":
+        "PC に保存された会話の本文を検索します。思考過程や添付ファイルの内容は含まれません。",
+    "{0} 离线，未搜索其中的会话；连接后重新搜索。":
+        "{0} はオフラインのため、そのチャットは検索されていません。接続後にもう一度検索してください。",
     "输入关键词开始搜索": "キーワードを入力して検索",
     "没有找到匹配的历史记录": "一致する履歴は見つかりませんでした",
     "你": "あなた",
@@ -2850,7 +3224,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "当前工作区": "現在のワークスペース",
     "共享当前项目文件，仅复制对话历史。": "現在のプロジェクトのファイルを共有し、会話履歴のみをコピーします。",
     "新 Worktree": "新しい Worktree",
-    "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照；非 Git 项目只继承对话。": "PC に独立したワークスペースを作成し、選択したターンのファイルのスナップショットを復元します。古いターンにはスナップショットがない場合があります。Git 以外のプロジェクトでは会話のみを引き継ぎます。",
+    "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照；非 Git 项目只继承对话。":
+        "PC に独立したワークスペースを作成し、選択したターンのファイルのスナップショットを復元します。古いターンにはスナップショットがない場合があります。Git 以外のプロジェクトでは会話のみを引き継ぎます。",
     "正在创建…": "作成中…",
     "创建 Fork": "Fork を作成",
     "取消置顶": "ピン留めを解除",
@@ -2860,7 +3235,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "归档会话": "チャットをアーカイブ",
     "会话操作": "チャットの操作",
     "会话将从电脑同步": "チャットは PC から同期されます",
-    "连接自己的电脑后，在这里查看和续接各项目的会话。网络中断时，电脑上的任务会继续执行。": "自分の PC を接続すると、各プロジェクトのチャットをここで確認・再開できます。ネットワークが切れても PC 上のタスクは実行を続けます。",
+    "连接自己的电脑后，在这里查看和续接各项目的会话。网络中断时，电脑上的任务会继续执行。":
+        "自分の PC を接続すると、各プロジェクトのチャットをここで確認・再開できます。ネットワークが切れても PC 上のタスクは実行を続けます。",
     "搜索会话": "チャットを検索",
     "{0} 项等待处理": "対応待ち {0} 件",
     "{0} 连接中…": "{0} に接続中…",
@@ -2877,32 +3253,40 @@ const messageCatalogs = <String, Map<String, String>>{
     "已归档": "アーカイブ済み",
     "正在核实原配对…": "元のペアリングを確認中…",
     "移除本机配对记录？": "このスマホのペアリング記録を削除しますか？",
-    "之后需要重新扫码。电脑上可能已允许这台手机；如需撤销授权，请在电脑的「连接手机」中操作。": "再度スキャンが必要になります。PC ではすでにこのスマホが許可されている可能性があります。許可を取り消すには、PC の「スマホと接続」で操作してください。",
+    "之后需要重新扫码。电脑上可能已允许这台手机；如需撤销授权，请在电脑的「连接手机」中操作。":
+        "再度スキャンが必要になります。PC ではすでにこのスマホが許可されている可能性があります。許可を取り消すには、PC の「スマホと接続」で操作してください。",
     "保留记录": "記録を残す",
     "移除本机记录": "このスマホの記録を削除",
     "正在验证电脑身份并建立配对…": "PC の身元を確認してペアリングしています…",
     "加密组件尚未准备好。": "暗号化コンポーネントの準備ができていません。",
     "在电脑端打开「连接手机」，扫描配对二维码。": "PC で「スマホと接続」を開き、ペアリング用の QR コードをスキャンしてください。",
-    "配对后可操作这台电脑的 Agent、项目、Git 和终端，并查看、控制电脑屏幕。你可以随时在电脑上撤销授权。": "ペアリングすると、この PC の Agent、プロジェクト、Git、ターミナルを操作し、PC の画面を表示・操作できます。許可は PC からいつでも取り消せます。",
+    "配对后可操作这台电脑的 Agent、项目、Git 和终端，并查看、控制电脑屏幕。你可以随时在电脑上撤销授权。":
+        "ペアリングすると、この PC の Agent、プロジェクト、Git、ターミナルを操作し、PC の画面を表示・操作できます。許可は PC からいつでも取り消せます。",
     "配对结果待核实": "ペアリング結果が未確認です",
-    "保留了原配对信息，可以继续核实电脑是否已允许连接。": "元のペアリング情報は保持されています。PC が接続を許可したかどうか、引き続き確認できます。",
+    "保留了原配对信息，可以继续核实电脑是否已允许连接。":
+        "元のペアリング情報は保持されています。PC が接続を許可したかどうか、引き続き確認できます。",
     "恢复期限已过，请在电脑核实授权后重新扫码。": "復元の期限が過ぎました。PC で許可を確認してから再度スキャンしてください。",
     "核实原配对": "元のペアリングを確認",
-    "无法使用相机，请检查相机权限，或在下方粘贴配对链接。": "カメラを使用できません。カメラの権限を確認するか、下にペアリングリンクを貼り付けてください。",
+    "无法使用相机，请检查相机权限，或在下方粘贴配对链接。":
+        "カメラを使用できません。カメラの権限を確認するか、下にペアリングリンクを貼り付けてください。",
     "扫描二维码": "QR コードをスキャン",
     "或粘贴配对链接": "またはペアリングリンクを貼り付け",
     "粘贴从电脑获取的配对链接": "PC で取得したペアリングリンクを貼り付け",
-    "二维码使用了本机地址，手机无法访问。请在电脑端使用手机可访问的服务地址并重新生成二维码。": "この QR コードはスマホからアクセスできないローカルアドレスを使用しています。PC でスマホからアクセスできるサービスアドレスを使って QR コードを再生成してください。",
-    "无法连接接入服务，请确认手机与电脑的网络、服务地址及端口。局域网调试时需连接同一 Wi-Fi。": "接続サービスに接続できません。スマホと PC のネットワーク、サービスのアドレスとポートを確認してください。ローカル開発時は同じ Wi-Fi に接続してください。",
+    "二维码使用了本机地址，手机无法访问。请在电脑端使用手机可访问的服务地址并重新生成二维码。":
+        "この QR コードはスマホからアクセスできないローカルアドレスを使用しています。PC でスマホからアクセスできるサービスアドレスを使って QR コードを再生成してください。",
+    "无法连接接入服务，请确认手机与电脑的网络、服务地址及端口。局域网调试时需连接同一 Wi-Fi。":
+        "接続サービスに接続できません。スマホと PC のネットワーク、サービスのアドレスとポートを確認してください。ローカル開発時は同じ Wi-Fi に接続してください。",
     "无法验证服务证书，请检查接入服务配置。": "サービスの証明書を検証できません。接続サービスの設定を確認してください。",
     "配对未完成，请检查电脑与接入服务后重试。": "ペアリングが完了していません。PC と接続サービスを確認して再試行してください。",
-    "DogCodes 手机端连接你自己的电脑：查看会话、继续交给 Agent、处理权限请求。无需注册账号。": "DogCodes は自分の PC に接続するスマホアプリです。チャットの確認、Agent への依頼、権限リクエストへの対応ができます。アカウント登録は不要です。",
+    "DogCodes 手机端连接你自己的电脑：查看会话、继续交给 Agent、处理权限请求。无需注册账号。":
+        "DogCodes は自分の PC に接続するスマホアプリです。チャットの確認、Agent への依頼、権限リクエストへの対応ができます。アカウント登録は不要です。",
     "在电脑上打开 DogCodes": "PC で DogCodes を開く",
     "点击「连接手机」，屏幕上会显示二维码": "「スマホと接続」をクリックすると QR コードが表示されます",
     "用这部手机扫码，或粘贴配对链接": "このスマホでスキャンするか、ペアリングリンクを貼り付け",
     "扫码连接电脑": "スキャンして PC に接続",
     "粘贴配对链接": "ペアリングリンクを貼り付け",
-    "连接经过端到端加密，手机只能访问你在电脑上授权的内容。": "接続はエンドツーエンドで暗号化され、スマホは PC で許可した内容にのみアクセスできます。",
+    "连接经过端到端加密，手机只能访问你在电脑上授权的内容。":
+        "接続はエンドツーエンドで暗号化され、スマホは PC で許可した内容にのみアクセスできます。",
     "正在连接{0}": "{0} に接続中",
     "暂时连接不上{0}": "{0} に接続できません",
     "连接时间比平时长，仍在尝试。": "いつもより時間がかかっています。接続を試行中です。",
@@ -2916,7 +3300,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "查看离线记录": "オフラインの記録を表示",
     "查看离线记录（{0} 同步）": "オフラインの記録を表示（{0} に同期）",
     "附件": "添付ファイル",
-    "电脑离线。已缓存附件信息，原文需连接电脑后查看。": "PC はオフラインです。添付ファイルの情報はキャッシュ済みです。元のファイルは PC に接続してから表示してください。",
+    "电脑离线。已缓存附件信息，原文需连接电脑后查看。":
+        "PC はオフラインです。添付ファイルの情報はキャッシュ済みです。元のファイルは PC に接続してから表示してください。",
     "电脑端暂不支持附件预览。": "PC のアプリは添付ファイルのプレビューにまだ対応していません。",
     "附件读取位置未确认。": "添付ファイルの読み取り位置が未確認です。",
     "附件过大，请在电脑上查看。": "添付ファイルが大きすぎます。PC で表示してください。",
@@ -2928,7 +3313,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "默认模型": "デフォルトのモデル",
     "默认": "デフォルト",
     "选择 Agent": "Agent を選択",
-    "这台电脑上没有已就绪并启用的 Agent。安装或登录需在电脑上完成。": "この PC には準備完了で有効な Agent がありません。インストールやログインは PC で行ってください。",
+    "这台电脑上没有已就绪并启用的 Agent。安装或登录需在电脑上完成。":
+        "この PC には準備完了で有効な Agent がありません。インストールやログインは PC で行ってください。",
     "模型": "モデル",
     "选择模型": "モデルを選択",
     "完成": "完了",
@@ -2948,9 +3334,11 @@ const messageCatalogs = <String, Map<String, String>>{
     "从本轮 Fork": "このターンから Fork",
     "电脑未受理这项任务，内容已保留。": "PC はこのタスクを受け付けませんでした。内容は保持されています。",
     "没有已绑定的电脑": "ペアリング済みの PC がありません",
-    "这台电脑还没有项目，点右上角「添加项目」选择电脑上的已有目录。": "この PC にはまだプロジェクトがありません。右上の「プロジェクトを追加」から PC 上の既存のディレクトリを選択してください。",
+    "这台电脑还没有项目，点右上角「添加项目」选择电脑上的已有目录。":
+        "この PC にはまだプロジェクトがありません。右上の「プロジェクトを追加」から PC 上の既存のディレクトリを選択してください。",
     "你想完成什么？": "何をしますか？",
-    "电脑离线，任务和附件会保留为本机草稿。重连后请点击发送。": "PC はオフラインです。タスクと添付ファイルはこのスマホに下書きとして保存されます。再接続後に「送信」をタップしてください。",
+    "电脑离线，任务和附件会保留为本机草稿。重连后请点击发送。":
+        "PC はオフラインです。タスクと添付ファイルはこのスマホに下書きとして保存されます。再接続後に「送信」をタップしてください。",
     "描述你的任务…": "タスクを入力…",
     "没有已就绪的 Agent": "準備完了の Agent がありません",
     "开始任务": "タスクを開始",
@@ -2966,7 +3354,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "{0} · {1}–{2} 行": "{0} · {1}–{2} 行目",
     "这是审查时保存的版本，当前文件可能已变化。": "これはレビュー時に保存された版です。現在のファイルは変更されている可能性があります。",
     "读取审查代码失败：{0}": "レビューのコードを読み込めませんでした：{0}",
-    "审查连接中断，本次审查未完成。请检查网络后重新检查。": "レビューの接続が切れたため、このレビューは完了していません。ネットワークを確認してもう一度確認してください。",
+    "审查连接中断，本次审查未完成。请检查网络后重新检查。":
+        "レビューの接続が切れたため、このレビューは完了していません。ネットワークを確認してもう一度確認してください。",
     "错误详情": "エラーの詳細",
     "审查连接中断，本次审查未完成。": "レビューの接続が切れたため、このレビューは完了していません。",
     "文件覆盖情况": "ファイルのカバー状況",
@@ -2987,7 +3376,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "已选 {0} 项": "{0} 件選択中",
     "开始修复": "修正を開始",
     "主对话正在回复，结束后可提交修复。": "メインのチャットが返答中です。終了後に修正を送信できます。",
-    "修复已提交给主 Agent，携带所选问题及原审查上下文。": "選択した問題と元のレビューの文脈を添えて、修正をメイン Agent に送信しました。",
+    "修复已提交给主 Agent，携带所选问题及原审查上下文。":
+        "選択した問題と元のレビューの文脈を添えて、修正をメイン Agent に送信しました。",
     "有一项修复尚未提交。{0}": "未送信の修正があります。{0}",
     "继续原修复": "元の修正を続ける",
     "放弃这次修复": "この修正を破棄",
@@ -3021,7 +3411,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "已发起复审，可在修复轮次底部查看。": "再レビューを開始しました。修正ターンの下で確認できます。",
     "刷新审查": "レビューを更新",
     "电脑离线，审查会继续在电脑上运行。": "PC はオフラインです。レビューは PC で引き続き実行されます。",
-    "暂无可用的审查 Agent，请在电脑上连接或重新检测 Agent。": "使用できるレビュー用の Agent がありません。PC で Agent を接続するか再検出してください。",
+    "暂无可用的审查 Agent，请在电脑上连接或重新检测 Agent。":
+        "使用できるレビュー用の Agent がありません。PC で Agent を接続するか再検出してください。",
     "审查使用的 Agent": "レビューに使用する Agent",
     "本轮尚未发起审查。": "このターンではまだレビューを開始していません。",
     "历史审查": "過去のレビュー",
@@ -3049,7 +3440,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "本轮变更加载失败：{0}": "このターンの変更を読み込めませんでした：{0}",
     "本轮变更加载失败": "このターンの変更を読み込めませんでした",
     "{0} 个文件已更改": "{0} 件のファイルを変更",
-    "连接中断后的恢复快照 · 仅反映检查时的文件变化，外部工具可能仍在写入": "接続が切れた後の復元スナップショット · 確認時点のファイルの変化のみを反映しています。外部のツールがまだ書き込み中の可能性があります",
+    "连接中断后的恢复快照 · 仅反映检查时的文件变化，外部工具可能仍在写入":
+        "接続が切れた後の復元スナップショット · 確認時点のファイルの変化のみを反映しています。外部のツールがまだ書き込み中の可能性があります",
     "二进制": "バイナリ",
     "本轮保存的历史 Diff": "このターンに保存された差分",
     "这一轮未保存该文件的内容": "このターンではこのファイルの内容は保存されていません",
@@ -3060,7 +3452,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "正在生成提交说明…": "コミットメッセージを生成中…",
     "正在提交…": "コミット中…",
     "提交本轮修改": "このターンの変更をコミット",
-    "本轮修改已没有未提交的内容（可能已提交或已撤销）。": "このターンの変更に未コミットの内容は残っていません（コミット済みまたは取り消し済みの可能性があります）。",
+    "本轮修改已没有未提交的内容（可能已提交或已撤销）。":
+        "このターンの変更に未コミットの内容は残っていません（コミット済みまたは取り消し済みの可能性があります）。",
     "将提交 {0} 个文件{1}。": "{0} 件のファイルをコミットします{1}。",
     "，其中 {0} 个是此前已暂存的其他更改": "（うち {0} 件は以前にステージされた他の変更）",
     "重新生成": "再生成",
@@ -3128,13 +3521,15 @@ const messageCatalogs = <String, Map<String, String>>{
     "没有找到要打开的这一轮，它可能已被删除。": "開こうとしたターンが見つかりません。削除された可能性があります。",
     "电脑离线，连接后再查看完整内容。": "PC はオフラインです。接続後に全文を表示してください。",
     "删除这个会话？": "このチャットを削除しますか？",
-    "将在「{0}」上永久删除「{1}」及其记录，无法恢复。项目文件不会被删除。": "「{0}」上の「{1}」とその記録を完全に削除します。元に戻すことはできません。プロジェクトのファイルは削除されません。",
+    "将在「{0}」上永久删除「{1}」及其记录，无法恢复。项目文件不会被删除。":
+        "「{0}」上の「{1}」とその記録を完全に削除します。元に戻すことはできません。プロジェクトのファイルは削除されません。",
     "删除": "削除",
     "停止请求未确认：{0}。请刷新核实任务状态。": "停止リクエストが未確認です：{0}。更新してタスクの状態を確認してください。",
     "电脑未受理这次发送，内容已保留。": "PC はこの送信を受け付けませんでした。内容は保持されています。",
     "这台电脑已不在列表中": "この PC は一覧にありません",
     "可能已在电脑上撤销配对。": "PC でペアリングが取り消された可能性があります。",
-    "{0} · 内容同步于 {1}{2}。附件原文需电脑在线。": "{0} · {1}{2} に同期した内容です。添付ファイルの原本は PC がオンラインのときに表示できます。",
+    "{0} · 内容同步于 {1}{2}。附件原文需电脑在线。":
+        "{0} · {1}{2} に同期した内容です。添付ファイルの原本は PC がオンラインのときに表示できます。",
     "正在同步，先显示本机缓存": "同期中です。先にこのスマホのキャッシュを表示しています",
     "离线缓存": "オフラインキャッシュ",
     "未知时间": "時刻不明",
@@ -3194,7 +3589,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "这项配对已因移除电脑而失效，请重新扫码。": "PC が削除されたため、このペアリングは無効になりました。再度スキャンしてください。",
     "电脑绑定已变化，请重新扫码。": "PC のペアリングが変更されました。再度スキャンしてください。",
     "电脑身份已发生变化，需要先解除旧配对。": "PC の身元が変わりました。先に古いペアリングを解除してください。",
-    "电脑绑定已变化，未移除新的绑定，请刷新后确认。": "PC のペアリングが変更されました。新しいペアリングは削除されていません。更新して確認してください。",
+    "电脑绑定已变化，未移除新的绑定，请刷新后确认。":
+        "PC のペアリングが変更されました。新しいペアリングは削除されていません。更新して確認してください。",
     "设备密钥格式无效，不能继续连接。": "デバイスキーの形式が無効なため、接続を続行できません。",
     "加密组件暂时不可用。": "暗号化コンポーネントを一時的に使用できません。",
     "设备身份验证或加密状态校验失败，请重新连接。": "デバイスの認証または暗号化状態の検証に失敗しました。再接続してください。",
@@ -3214,7 +3610,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "没有待核实的启动操作。": "確認待ちの起動操作はありません。",
     "电脑未确认原启动已关闭，记录仍保留。": "PC は元の起動が閉じられたことを確認していません。記録は残っています。",
     "原启动结果尚未确认，记录仍保留。": "元の起動結果が未確認です。記録は残っています。",
-    "服务地址必须使用 HTTPS；调试版本可使用本机或局域网 IP。": "サービスのアドレスには HTTPS を使用する必要があります。デバッグ版ではローカルまたは LAN の IP を使用できます。",
+    "服务地址必须使用 HTTPS；调试版本可使用本机或局域网 IP。":
+        "サービスのアドレスには HTTPS を使用する必要があります。デバッグ版ではローカルまたは LAN の IP を使用できます。",
     "服务暂时不可用，请稍后重试。": "サービスを一時的に利用できません。しばらくしてから再試行してください。",
     "服务返回了无法识别的响应。": "サービスから認識できない応答が返されました。",
     "无法连接服务，请检查网络和服务地址。": "サービスに接続できません。ネットワークとサービスのアドレスを確認してください。",
@@ -3231,7 +3628,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "事件游标超出范围。": "イベントカーソルが範囲外です。",
     "电脑离线，重新连接后再浏览目录。": "PC はオフラインです。再接続してからディレクトリを閲覧してください。",
     "连接已更换，请重新读取目录。": "接続が切り替わりました。ディレクトリを再読み込みしてください。",
-    "电脑未返回有效的目录列表，请更新电脑端后重试。": "PC から有効なディレクトリ一覧が返されませんでした。PC のアプリを更新して再試行してください。",
+    "电脑未返回有效的目录列表，请更新电脑端后重试。":
+        "PC から有効なディレクトリ一覧が返されませんでした。PC のアプリを更新して再試行してください。",
     "目录分页没有前进，请刷新目录。": "ディレクトリのページ送りが進みませんでした。ディレクトリを更新してください。",
     "电脑端暂不支持目录选择，请更新电脑端后重试。": "PC のアプリはディレクトリの選択に未対応です。PC のアプリを更新して再試行してください。",
     "剪贴板传输响应无效": "クリップボード転送の応答が無効です",
@@ -3241,8 +3639,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "剪贴板文字为空或超过 1 MB": "クリップボードのテキストが空か、1 MB を超えています",
     "图片传输起始位置无效": "画像転送の開始位置が無効です",
     "剪贴板上传位置不匹配": "クリップボードのアップロード位置が一致しません",
-    "尚未确认电脑剪贴板是否更新，请从电脑获取核实；不会自动重发": "PC のクリップボードが更新されたか未確認です。PC から取得して確認してください。自動で再送はしません",
-    "未确认电脑剪贴板已更新，请从电脑获取核实；不会自动重发": "PC のクリップボードの更新が確認できていません。PC から取得して確認してください。自動で再送はしません",
+    "尚未确认电脑剪贴板是否更新，请从电脑获取核实；不会自动重发":
+        "PC のクリップボードが更新されたか未確認です。PC から取得して確認してください。自動で再送はしません",
+    "未确认电脑剪贴板已更新，请从电脑获取核实；不会自动重发":
+        "PC のクリップボードの更新が確認できていません。PC から取得して確認してください。自動で再送はしません",
     "剪贴板写入回执不完整，请从电脑获取核实": "クリップボードの書き込みの受領情報が不完全です。PC から取得して確認してください",
     "剪贴板下载数据块过大": "クリップボードのダウンロードのデータブロックが大きすぎます",
     "剪贴板下载位置不匹配": "クリップボードのダウンロード位置が一致しません",
@@ -3271,7 +3671,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "一次最多发送 16 个附件。": "一度に送信できる添付ファイルは最大 16 個です。",
     "附件上传已暂停，可继续原上传。": "添付ファイルのアップロードは一時停止中です。元のアップロードを再開できます。",
     "附件回执与原文件不一致，未发送任务。": "添付ファイルの受領情報が元のファイルと一致しないため、タスクは送信されていません。",
-    "本机附件内容已变化，请重新添加；未上传变化后的文件。": "このスマホの添付ファイルの内容が変更されました。追加し直してください。変更後のファイルはアップロードされていません。",
+    "本机附件内容已变化，请重新添加；未上传变化后的文件。":
+        "このスマホの添付ファイルの内容が変更されました。追加し直してください。変更後のファイルはアップロードされていません。",
     "电脑端暂不支持附件上传，请更新电脑端。": "PC のアプリは添付ファイルのアップロードに未対応です。PC のアプリを更新してください。",
     "电脑返回的附件位置无效。": "PC から返された添付ファイルの位置が無効です。",
     "附件分块位置未确认，请继续原上传。": "添付ファイルの分割位置が未確認です。元のアップロードを再開してください。",
@@ -3293,21 +3694,26 @@ const messageCatalogs = <String, Map<String, String>>{
     "电脑绑定已变化，未使用旧页面接管新的连接。": "PC のペアリングが変更されたため、古いページは新しい接続を引き継いでいません。",
     "连接中断，正在重新连接。已发送操作不会重复执行。": "接続が切れました。再接続しています。送信済みの操作が二重に実行されることはありません。",
     "连接已断开。电脑上的任务不会因此停止。": "切断されました。PC 上のタスクは停止しません。",
-    "移除未完成，连接已关闭；请重试移除或核实安全存储。": "削除が完了していません。接続は閉じられました。削除を再試行するか、セキュアストレージを確認してください。",
+    "移除未完成，连接已关闭；请重试移除或核实安全存储。":
+        "削除が完了していません。接続は閉じられました。削除を再試行するか、セキュアストレージを確認してください。",
     "离线缓存未能保存：{0}": "オフラインキャッシュを保存できませんでした：{0}",
     "待确认的操作暂时无法读取，请检查系统安全存储。": "確認待ちの操作を読み取れません。システムのセキュアストレージを確認してください。",
-    "无法读取后台提醒设置，请检查系统安全存储后重试。": "バックグラウンド通知の設定を読み取れません。システムのセキュアストレージを確認して再試行してください。",
+    "无法读取后台提醒设置，请检查系统安全存储后重试。":
+        "バックグラウンド通知の設定を読み取れません。システムのセキュアストレージを確認して再試行してください。",
     "部分电脑的通知尚未登记，请检查网络后重新检测。": "一部の PC の通知が登録されていません。ネットワークを確認して再確認してください。",
-    "后台提醒尚未启用，请核实系统通知权限和通知服务配置后重试。": "バックグラウンド通知が有効になっていません。システムの通知権限と通知サービスの設定を確認して再試行してください。",
+    "后台提醒尚未启用，请核实系统通知权限和通知服务配置后重试。":
+        "バックグラウンド通知が有効になっていません。システムの通知権限と通知サービスの設定を確認して再試行してください。",
     "Git 操作已完成": "Git 操作が完了しました",
     "已经提交，还不确定是否推送成功，可以重新发送推送。": "コミットしましたが、プッシュが成功したかは未確認です。プッシュを再送できます。",
     "提交已完成，推送失败：{0}": "コミットは完了しましたが、プッシュに失敗しました：{0}",
     "Git 操作失败：{0}": "Git 操作に失敗しました：{0}",
     "电脑正在执行 Git 操作，稍后再确认。": "PC で Git 操作を実行中です。しばらくしてから確認してください。",
-    "Git 操作中途中断了，请在「变更」里看一下仓库现在的状态。": "Git 操作が途中で中断されました。「変更」でリポジトリの現在の状態を確認してください。",
+    "Git 操作中途中断了，请在「变更」里看一下仓库现在的状态。":
+        "Git 操作が途中で中断されました。「変更」でリポジトリの現在の状態を確認してください。",
     "Git 操作只完成了一部分，请先在「变更」里看一下再继续。": "Git 操作は一部のみ完了しました。続行する前に「変更」で確認してください。",
     "已不再等待这次 Git 操作。": "この Git 操作の待機を停止しました。",
-    "电脑上还查不到这次 Git 操作，可能没收到，可以重新发送。": "PC にこの Git 操作の記録がまだありません。届いていない可能性があるため、再送できます。",
+    "电脑上还查不到这次 Git 操作，可能没收到，可以重新发送。":
+        "PC にこの Git 操作の記録がまだありません。届いていない可能性があるため、再送できます。",
     "还不确定文件是否已暂存，所以没有继续提交。": "ファイルがステージされたか未確認のため、コミットは続行していません。",
     "暂存回执与原文件选择不一致，未重新执行。": "ステージの受領情報が元のファイル選択と一致しないため、再実行していません。",
     "Git 操作无效。": "無効な Git 操作です。",
@@ -3336,16 +3742,21 @@ const messageCatalogs = <String, Map<String, String>>{
     "终端输入连接已改变，请检查后继续。": "ターミナル入力の接続が変わりました。確認してから続けてください。",
     "输入连接仍在切换，请稍后检查并继续。": "入力の接続はまだ切り替え中です。しばらくしてから確認して続けてください。",
     "上次输入结果待核实，请检查终端输出后再继续。": "前回の入力結果が未確認です。ターミナルの出力を確認してから続けてください。",
-    "输入结果尚未确认，请核实或检查终端后继续；不会重发原输入。": "入力結果が未確認です。確認するかターミナルを確かめてから続けてください。元の入力は再送されません。",
-    "终端连接中断，输入结果待核实；未发送的队列已丢弃，不会自动重发。": "ターミナルの接続が切れたため、入力結果が未確認です。未送信のキューは破棄され、自動で再送されることはありません。",
-    "原输入仍未确认或通道已改变，请检查终端输出后继续；不会重发。": "元の入力が未確認か、チャネルが変わりました。ターミナルの出力を確認してから続けてください。再送はされません。",
+    "输入结果尚未确认，请核实或检查终端后继续；不会重发原输入。":
+        "入力結果が未確認です。確認するかターミナルを確かめてから続けてください。元の入力は再送されません。",
+    "终端连接中断，输入结果待核实；未发送的队列已丢弃，不会自动重发。":
+        "ターミナルの接続が切れたため、入力結果が未確認です。未送信のキューは破棄され、自動で再送されることはありません。",
+    "原输入仍未确认或通道已改变，请检查终端输出后继续；不会重发。":
+        "元の入力が未確認か、チャネルが変わりました。ターミナルの出力を確認してから続けてください。再送はされません。",
     "暂时无法核实输入，请连接后再试；不会重发原输入。": "入力を確認できません。接続後に再試行してください。元の入力は再送されません。",
     "输入连接尚未恢复，请稍后再试。": "入力の接続がまだ復元されていません。しばらくしてから再試行してください。",
     "这台电脑已移除，未发送关闭请求。": "この PC は削除されたため、終了リクエストは送信されていません。",
     "这个终端已经有一个关闭请求在等待确认。": "このターミナルにはすでに確認待ちの終了リクエストがあります。",
     "等待确认的关闭请求太多，请先处理待处理页里的卡片。": "確認待ちの終了リクエストが多すぎます。先に対応待ちページのカードを処理してください。",
-    "原终端关闭结果尚未确认，请核实结束后再启动这个运行配置。": "元のターミナルの終了結果が未確認です。終了を確認してからこの実行構成を起動してください。",
-    "请更新电脑端后再关闭终端，当前版本无法核实原终端身份。": "ターミナルを閉じるには PC のアプリを更新してください。現在のバージョンでは元のターミナルの身元を確認できません。",
+    "原终端关闭结果尚未确认，请核实结束后再启动这个运行配置。":
+        "元のターミナルの終了結果が未確認です。終了を確認してからこの実行構成を起動してください。",
+    "请更新电脑端后再关闭终端，当前版本无法核实原终端身份。":
+        "ターミナルを閉じるには PC のアプリを更新してください。現在のバージョンでは元のターミナルの身元を確認できません。",
     "终端身份不完整，请刷新后再关闭。": "ターミナルの身元が不完全です。更新してから閉じてください。",
     "终端已经重新启动过，没有关闭新的终端。": "ターミナルは再起動されているため、新しいターミナルは閉じていません。",
     "终端不存在": "ターミナルが存在しません",
@@ -3379,7 +3790,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "这项操作需要先核实结果。": "この操作は先に結果を確認する必要があります。",
     "这台电脑已移除，未再发送请求。": "この PC は削除されたため、リクエストは再送されていません。",
     "原电脑记录尚未清理完成，请重试移除电脑后再连接。": "元の PC の記録の削除が完了していません。PC の削除を再試行してから接続してください。",
-    "电脑绑定已变化，未发送原操作；请重新连接后确认。": "PC のペアリングが変更されたため、元の操作は送信されていません。再接続してから確認してください。",
+    "电脑绑定已变化，未发送原操作；请重新连接后确认。":
+        "PC のペアリングが変更されたため、元の操作は送信されていません。再接続してから確認してください。",
     "原操作已结束或已更新，请刷新后操作。": "元の操作は終了したか更新されました。更新してから操作してください。",
     "中继连接中断，操作结果需要核实。": "リレーの接続が切れました。操作結果を確認する必要があります。",
     "中继探针仅供本地开发使用。": "リレープローブはローカル開発専用です。",
@@ -3400,7 +3812,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "电脑绑定已变化，未覆盖原草稿。": "PC のペアリングが変更されたため、元の下書きは上書きされていません。",
     "本机保存的数据不可读取": "このスマホに保存されたデータを読み取れません",
     "附件大小或标识无效": "添付ファイルのサイズまたは ID が無効です",
-    "手机未发送附件已超过 256 MB，请先发送或移除其他草稿中的附件。": "スマホの未送信の添付ファイルが 256 MB を超えています。先に他の下書きの添付ファイルを送信するか削除してください。",
+    "手机未发送附件已超过 256 MB，请先发送或移除其他草稿中的附件。":
+        "スマホの未送信の添付ファイルが 256 MB を超えています。先に他の下書きの添付ファイルを送信するか削除してください。",
     "附件标识无效": "添付ファイルの ID が無効です",
     "本机附件已不可读取，请重新添加。": "このスマホの添付ファイルを読み取れなくなりました。追加し直してください。",
     "本机附件大小已变化。": "このスマホの添付ファイルのサイズが変更されました。",
@@ -3410,11 +3823,13 @@ const messageCatalogs = <String, Map<String, String>>{
     "始终允许": "常に許可",
     "取消操作": "操作をキャンセル",
     "{0} · {1} 个目录": "{0} · {1} 個のディレクトリ",
-    "{0} 上还没有项目。新建项目时选择电脑上的已有目录。": "{0} にはまだプロジェクトがありません。PC 上の既存のディレクトリから新しいプロジェクトを作成してください。",
+    "{0} 上还没有项目。新建项目时选择电脑上的已有目录。":
+        "{0} にはまだプロジェクトがありません。PC 上の既存のディレクトリから新しいプロジェクトを作成してください。",
     "{0} 个会话运行中": "{0} 件のチャットを実行中",
     "不在项目中工作": "プロジェクト外で作業",
     "主目录": "メインディレクトリ",
-    "主目录是会话默认的工作目录；附加目录同样对 Agent 可见。从项目中移除目录不会删除电脑上的文件。": "チャットはメインディレクトリで開始されます。追加のディレクトリも Agent から参照できます。プロジェクトからディレクトリを削除しても、PC 上のファイルは削除されません。",
+    "主目录是会话默认的工作目录；附加目录同样对 Agent 可见。从项目中移除目录不会删除电脑上的文件。":
+        "チャットはメインディレクトリで開始されます。追加のディレクトリも Agent から参照できます。プロジェクトからディレクトリを削除しても、PC 上のファイルは削除されません。",
     "从项目中移除": "プロジェクトから削除",
     "保存结果待核实，请刷新后查看项目，不要重复保存。": "保存結果が未確認です。更新してプロジェクトを確認し、二重に保存しないでください。",
     "保留会话和电脑上的文件，可随时恢复": "チャットと PC 上のファイルは残り、いつでも復元できます",
@@ -3443,7 +3858,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "选择此目录": "このディレクトリを選択",
     "选择目录": "ディレクトリを選択",
     "项目不存在": "プロジェクトが見つかりません",
-    "项目会从列表中隐藏。会话和电脑上的文件都会保留，可在「已移除项目」中恢复。": "プロジェクトは一覧から非表示になります。チャットと PC 上のファイルは残り、「削除したプロジェクト」から復元できます。",
+    "项目会从列表中隐藏。会话和电脑上的文件都会保留，可在「已移除项目」中恢复。":
+        "プロジェクトは一覧から非表示になります。チャットと PC 上のファイルは残り、「削除したプロジェクト」から復元できます。",
     "项目名称": "プロジェクト名",
     "项目操作": "プロジェクトの操作",
     "项目状态无效。": "プロジェクトの状態が無効です。",
@@ -3492,12 +3908,16 @@ const messageCatalogs = <String, Map<String, String>>{
     "搜索内容": "検索内容",
     "请求的工具": "要求されたツール",
     "审批详情格式不完整，请让 Agent 重新发起审批。": "承認の詳細が不完全です。Agent に承認を再リクエストさせてください。",
-    "操作详情过长，下方仅展示部分内容。请让 Agent 拆分操作后重新发起审批，以查看完整范围。": "詳細が長すぎるため、一部のみ表示しています。全体を確認するには、Agent に操作を分割して承認を再リクエストさせてください。",
-    "Agent 未提供文件修改范围，请让 Agent 补充文件路径和修改内容。": "Agent が変更するファイルを示していません。ファイルパスと変更内容を補足させてください。",
-    "未能从审批请求中读取文件路径、命令或修改内容，请让 Agent 补充详情后重新发起审批。": "このリクエストからファイルパス、コマンド、変更内容を読み取れませんでした。Agent に詳細を補足して承認を再リクエストさせてください。",
+    "操作详情过长，下方仅展示部分内容。请让 Agent 拆分操作后重新发起审批，以查看完整范围。":
+        "詳細が長すぎるため、一部のみ表示しています。全体を確認するには、Agent に操作を分割して承認を再リクエストさせてください。",
+    "Agent 未提供文件修改范围，请让 Agent 补充文件路径和修改内容。":
+        "Agent が変更するファイルを示していません。ファイルパスと変更内容を補足させてください。",
+    "未能从审批请求中读取文件路径、命令或修改内容，请让 Agent 补充详情后重新发起审批。":
+        "このリクエストからファイルパス、コマンド、変更内容を読み取れませんでした。Agent に詳細を補足して承認を再リクエストさせてください。",
     "收起": "閉じる",
     "展开全部": "すべて表示",
-    "电脑已记录你的决定，但 Agent 已不在等待，请在会话中查看。": "パソコンは決定を記録しましたが、Agent はもう待機していません。チャットで確認してください。",
+    "电脑已记录你的决定，但 Agent 已不在等待，请在会话中查看。":
+        "パソコンは決定を記録しましたが、Agent はもう待機していません。チャットで確認してください。",
     "已取消回答": "回答をキャンセルしました",
     "已处理": "対応済み",
     "你的选择：{0}": "あなたの選択：{0}",
@@ -3511,7 +3931,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "没有待回答的问题": "回答待ちの質問はありません",
     "Agent 需要你做选择或补充信息时，问题会出现在这里。": "Agent があなたの選択や補足を必要とするとき、質問がここに表示されます。",
     "收件箱是空的": "受信トレイは空です",
-    "Agent 请求权限或向你提问时会出现在这里，处理过的记录也会保留，方便回看。": "Agent からの権限リクエストや質問がここに届きます。対応済みのものも残るので、後から確認できます。",
+    "Agent 请求权限或向你提问时会出现在这里，处理过的记录也会保留，方便回看。":
+        "Agent からの権限リクエストや質問がここに届きます。対応済みのものも残るので、後から確認できます。",
     "等待你回答": "回答待ち",
     "等待你确认": "確認待ち",
     "权限请求": "権限リクエスト",
@@ -3532,15 +3953,18 @@ const messageCatalogs = <String, Map<String, String>>{
     "按需确认": "必要な時に確認",
     "只读模式": "読み取り専用",
     "所选策略在下一轮执行时生效": "選択したポリシーは次のターンから有効になります",
-    "从不弹出确认；只运行预先允许和安全的只读操作，其余一律拒绝。": "確認を表示しません。事前に許可された安全な読み取り操作のみ実行し、それ以外は拒否します。",
-    "Pi 不内置逐工具审批或沙箱；工具直接执行，扩展发起的询问会显示在对话中。": "Pi にはツールごとの承認やサンドボックスがありません。ツールは直接実行され、拡張機能からの質問は会話に表示されます。",
+    "从不弹出确认；只运行预先允许和安全的只读操作，其余一律拒绝。":
+        "確認を表示しません。事前に許可された安全な読み取り操作のみ実行し、それ以外は拒否します。",
+    "Pi 不内置逐工具审批或沙箱；工具直接执行，扩展发起的询问会显示在对话中。":
+        "Pi にはツールごとの承認やサンドボックスがありません。ツールは直接実行され、拡張機能からの質問は会話に表示されます。",
     "跳过审批": "承認をスキップ",
     "仅限预先允许": "事前許可のみ",
     "自动判断": "自動",
     "监督模式：工具操作前请求审批。": "監視モード：ツール操作の前に承認を求めます。",
     "由 ZCode 判断哪些操作可直接执行。": "どの操作を直接実行できるかを ZCode が判断します。",
     "只运行预先允许的工具，其余直接拒绝，不请求审批。": "事前に許可されたツールだけを実行し、それ以外は確認せずに拒否します。",
-    "由 AI 审查员批准或拒绝原本需要询问的操作；审查失败只阻止该操作。": "確認が必要な操作を AI レビュアーが承認または拒否します。レビューに失敗した場合はその操作のみブロックされます。",
+    "由 AI 审查员批准或拒绝原本需要询问的操作；审查失败只阻止该操作。":
+        "確認が必要な操作を AI レビュアーが承認または拒否します。レビューに失敗した場合はその操作のみブロックされます。",
     "由 Claude 自动分类权限请求。": "Claude が権限リクエストを自動的に分類します。",
     "完全访问": "フルアクセス",
     "编辑前先出计划。": "編集前に計画を立てます。",
@@ -3553,8 +3977,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "按 Cursor 权限规则执行；需要审批的操作在此确认。": "Cursor の権限ルールに従います。承認が必要な操作はここで確認します。",
     "计划模式": "プランモード",
     "对所有 Agent 跳过全部权限检查，包括危险命令。": "すべての Agent で、危険なコマンドを含むすべての権限チェックをスキップします。",
-    "此 Agent 未报告可切换的权限模式；审批请求仍会显示在对话中。": "この Agent は切り替え可能な権限モードを報告していません。承認リクエストは引き続き会話に表示されます。",
-    "原 Agent、模型、思考强度或权限策略当前不可用，请重新选择后发送。": "元の Agent、モデル、推論レベル、または権限ポリシーが利用できません。選び直してから送信してください。",
+    "此 Agent 未报告可切换的权限模式；审批请求仍会显示在对话中。":
+        "この Agent は切り替え可能な権限モードを報告していません。承認リクエストは引き続き会話に表示されます。",
+    "原 Agent、模型、思考强度或权限策略当前不可用，请重新选择后发送。":
+        "元の Agent、モデル、推論レベル、または権限ポリシーが利用できません。選び直してから送信してください。",
     "计划模式；禁用所有编辑工具。": "計画モード。すべての編集ツールが無効になります。",
     "每个工具首次使用时请求授权。": "各ツールの初回使用時に許可を求めます。",
     "本会话内自动接受文件编辑。": "このセッション中のファイル編集を自動で受け入れます。",
@@ -3567,20 +3993,24 @@ const messageCatalogs = <String, Map<String, String>>{
     "工作区写入沙箱；需要越出沙箱时请求审批。": "ワークスペース書き込み可能なサンドボックス。サンドボックスを出るときだけ承認を求めます。",
     "允许所有工具操作，无需审批。": "すべてのツール操作を承認なしで許可します。",
     "探索并制定计划；使用 Claude 原生计划模式。": "Claude のネイティブなプランモードで調査し、計画を立てます。",
-    "使用 Antigravity 原生计划模式；工具执行仍在此审批。": "Antigravity のネイティブなプランモードを使います。ツールの実行は引き続きここで承認します。",
+    "使用 Antigravity 原生计划模式；工具执行仍在此审批。":
+        "Antigravity のネイティブなプランモードを使います。ツールの実行は引き続きここで承認します。",
     "自动批准操作；明确禁止的操作和团队限制仍然生效。": "操作を自動で承認します。明示的に禁止された操作とチームの制限は引き続き適用されます。",
     "常规编辑和命令自动执行；高风险操作、提问和计划仍会询问。": "通常の編集とコマンドは自動実行し、危険な操作・質問・計画は引き続き確認します。",
     "正在响应": "応答中",
     "分叉 · {0}": "分岐 · {0}",
     "分叉自较早的会话": "以前の会話から分岐",
     "分叉自": "分岐元:",
-    "已恢复所选轮次结束时的文件，未提交的成果可在“变更”中查看。": "選択したターンの終了時点にファイルを復元しました。未コミットの作業は「変更」にあります。",
-    "此项目不是 Git 仓库，分叉只继承对话上下文，并沿用同一项目目录。": "このプロジェクトは Git リポジトリではないため、分岐は会話のみを引き継ぎ、同じプロジェクトフォルダで続行します。",
+    "已恢复所选轮次结束时的文件，未提交的成果可在“变更”中查看。":
+        "選択したターンの終了時点にファイルを復元しました。未コミットの作業は「変更」にあります。",
+    "此项目不是 Git 仓库，分叉只继承对话上下文，并沿用同一项目目录。":
+        "このプロジェクトは Git リポジトリではないため、分岐は会話のみを引き継ぎ、同じプロジェクトフォルダで続行します。",
     "此会话由旧版分叉创建，未恢复历史轮次的文件。": "この会話は旧バージョンの分岐で作成されたため、ターンのファイルは復元されていません。",
     "沿用同一项目目录；分叉不会还原文件。": "同じプロジェクトフォルダを使用します。分岐ではファイルは復元されません。",
     "收起继承的上下文": "引き継いだ文脈を閉じる",
     "查看继承的上下文（{0} 轮）": "引き継いだ文脈を表示（{0} ターン）",
-    "Agent 已获得以上上下文，在下方发送消息即可从这里继续。": "エージェントはこの文脈を把握済みです。下からメッセージを送ると、ここから続けられます。",
+    "Agent 已获得以上上下文，在下方发送消息即可从这里继续。":
+        "エージェントはこの文脈を把握済みです。下からメッセージを送ると、ここから続けられます。",
   },
   "ko": {
     "返回": "뒤로",
@@ -3629,7 +4059,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "扫码连接": "스캔하여 연결",
     "偏好设置": "환경설정",
     "把电脑上的工作带在身边": "컴퓨터 작업을 언제나 손안에",
-    "连接自己的电脑，查看会话、发送任务并处理 Agent 的权限请求。无需注册账号。": "내 컴퓨터에 연결해 대화를 보고, 작업을 보내고, Agent의 권한 요청을 처리하세요. 계정 가입이 필요 없습니다.",
+    "连接自己的电脑，查看会话、发送任务并处理 Agent 的权限请求。无需注册账号。":
+        "내 컴퓨터에 연결해 대화를 보고, 작업을 보내고, Agent의 권한 요청을 처리하세요. 계정 가입이 필요 없습니다.",
     "连接电脑": "컴퓨터 연결",
     "当前内测版本尚未配置接入服务。": "이 베타 버전에는 연결 서비스가 설정되지 않았습니다.",
     "在电脑端打开「连接手机」，扫描二维码。": "컴퓨터에서 '휴대폰 연결'을 열고 QR 코드를 스캔하세요.",
@@ -3637,12 +4068,15 @@ const messageCatalogs = <String, Map<String, String>>{
     "当前内测版本尚未配置接入服务": "이 베타 버전에는 연결 서비스가 설정되지 않았습니다",
     "更多": "더보기",
     "从这部手机移除「{0}」？": "이 휴대폰에서 '{0}'을(를) 제거할까요?",
-    "手机会删除这台电脑的配对凭证，之后需重新扫码才能连接。电脑上的任务不受影响；如需让电脑也拒绝这部手机，请在电脑的设备列表中撤销。": "휴대폰에서 이 컴퓨터의 페어링 정보를 삭제합니다. 다시 연결하려면 다시 스캔해야 합니다. 컴퓨터의 작업에는 영향이 없습니다. 컴퓨터에서도 이 휴대폰을 거부하려면 컴퓨터의 기기 목록에서 취소하세요.",
+    "手机会删除这台电脑的配对凭证，之后需重新扫码才能连接。电脑上的任务不受影响；如需让电脑也拒绝这部手机，请在电脑的设备列表中撤销。":
+        "휴대폰에서 이 컴퓨터의 페어링 정보를 삭제합니다. 다시 연결하려면 다시 스캔해야 합니다. 컴퓨터의 작업에는 영향이 없습니다. 컴퓨터에서도 이 휴대폰을 거부하려면 컴퓨터의 기기 목록에서 취소하세요.",
     "取消": "취소",
-    "移除未完成，连接已关闭，请重试或核实安全存储。": "제거가 완료되지 않았습니다. 연결이 닫혔습니다. 다시 시도하거나 보안 저장소를 확인하세요.",
+    "移除未完成，连接已关闭，请重试或核实安全存储。":
+        "제거가 완료되지 않았습니다. 연결이 닫혔습니다. 다시 시도하거나 보안 저장소를 확인하세요.",
     "移除": "제거",
     "撤销绑定": "페어링 취소",
-    "请在「{0}」的设备列表中撤销这部手机。撤销后这部手机将无法再连接该电脑；电脑上正在执行的任务不受影响。": "'{0}'의 기기 목록에서 이 휴대폰을 취소하세요. 취소하면 이 휴대폰은 해당 컴퓨터에 더 이상 연결할 수 없습니다. 컴퓨터에서 실행 중인 작업에는 영향이 없습니다.",
+    "请在「{0}」的设备列表中撤销这部手机。撤销后这部手机将无法再连接该电脑；电脑上正在执行的任务不受影响。":
+        "'{0}'의 기기 목록에서 이 휴대폰을 취소하세요. 취소하면 이 휴대폰은 해당 컴퓨터에 더 이상 연결할 수 없습니다. 컴퓨터에서 실행 중인 작업에는 영향이 없습니다.",
     "知道了": "확인",
     "通知设置": "알림",
     "重新连接": "다시 연결",
@@ -3701,7 +4135,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "读取手机剪贴板，按系统提示允许粘贴": "휴대폰 클립보드를 읽습니다. 안내에 따라 붙여넣기를 허용하세요",
     "从电脑获取{0}": "컴퓨터에서 {0} 가져오기",
     "复制到手机剪贴板": "휴대폰 클립보드에 복사",
-    "当前连接不支持独立剪贴板传输，请更新电脑和 App 后重试": "이 연결은 별도 클립보드 전송을 지원하지 않습니다. 컴퓨터와 앱을 업데이트한 후 다시 시도하세요",
+    "当前连接不支持独立剪贴板传输，请更新电脑和 App 后重试":
+        "이 연결은 별도 클립보드 전송을 지원하지 않습니다. 컴퓨터와 앱을 업데이트한 후 다시 시도하세요",
     "手机剪贴板没有图片，或尚未允许粘贴": "휴대폰 클립보드에 이미지가 없거나 붙여넣기가 허용되지 않았습니다",
     "手机剪贴板没有文字": "휴대폰 클립보드에 텍스트가 없습니다",
     "电脑尚不支持分块剪贴板传输，请更新电脑客户端": "컴퓨터가 분할 클립보드 전송을 지원하지 않습니다. 컴퓨터 앱을 업데이트하세요",
@@ -3722,18 +4157,23 @@ const messageCatalogs = <String, Map<String, String>>{
     "操作电脑": "컴퓨터 조작",
     "适应屏幕": "화면에 맞추기",
     "剪贴板": "클립보드",
-    "电脑已锁定，Agent 操作仍可用。\n解锁电脑后点「重新连接」。": "컴퓨터가 잠겨 있지만 Agent 작업은 계속 사용할 수 있습니다.\n컴퓨터 잠금을 해제한 후 '다시 연결'을 탭하세요.",
+    "电脑已锁定，Agent 操作仍可用。\n解锁电脑后点「重新连接」。":
+        "컴퓨터가 잠겨 있지만 Agent 작업은 계속 사용할 수 있습니다.\n컴퓨터 잠금을 해제한 후 '다시 연결'을 탭하세요.",
     "服务连接正常": "서비스 연결됨",
     "连接失败，请重试。": "연결하지 못했습니다. 다시 시도하세요.",
-    "接入服务只转发加密数据，会话和任务保存在你的电脑上。": "연결 서비스는 암호화된 데이터만 중계합니다. 대화와 작업은 내 컴퓨터에 저장됩니다.",
+    "接入服务只转发加密数据，会话和任务保存在你的电脑上。":
+        "연결 서비스는 암호화된 데이터만 중계합니다. 대화와 작업은 내 컴퓨터에 저장됩니다.",
     "尚未配置服务地址": "서비스 주소가 설정되지 않았습니다",
     "此服务尚未开放电脑配对。": "이 서비스에서는 아직 컴퓨터 페어링을 사용할 수 없습니다.",
     "正在检查": "확인 중",
     "检查连接": "연결 확인",
-    "后台提醒暂未启用，静音设置可提前保存。仅影响这部手机，不影响电脑任务和 Agent 审批。": "백그라운드 알림이 아직 켜지지 않았습니다. 무음 설정은 미리 저장할 수 있습니다. 이 휴대폰에만 적용되며 컴퓨터 작업이나 Agent 승인에는 영향이 없습니다.",
-    "通知通道已连接。提醒只影响这部手机，不会直接批准操作。": "알림이 연결되었습니다. 알림은 이 휴대폰에만 적용되며 작업을 자동으로 승인하지 않습니다.",
+    "后台提醒暂未启用，静音设置可提前保存。仅影响这部手机，不影响电脑任务和 Agent 审批。":
+        "백그라운드 알림이 아직 켜지지 않았습니다. 무음 설정은 미리 저장할 수 있습니다. 이 휴대폰에만 적용되며 컴퓨터 작업이나 Agent 승인에는 영향이 없습니다.",
+    "通知通道已连接。提醒只影响这部手机，不会直接批准操作。":
+        "알림이 연결되었습니다. 알림은 이 휴대폰에만 적용되며 작업을 자동으로 승인하지 않습니다.",
     "后台提醒暂未启用，可在这里授权系统通知。": "백그라운드 알림이 아직 켜지지 않았습니다. 여기에서 시스템 알림을 허용할 수 있습니다.",
-    "此版本未配置后台提醒，静音设置可提前保存。": "이 빌드에는 백그라운드 알림이 설정되지 않았습니다. 무음 설정은 미리 저장할 수 있습니다.",
+    "此版本未配置后台提醒，静音设置可提前保存。":
+        "이 빌드에는 백그라운드 알림이 설정되지 않았습니다. 무음 설정은 미리 저장할 수 있습니다.",
     "正在连接通知服务": "알림 서비스에 연결 중",
     "重新检测后台提醒": "백그라운드 알림 다시 확인",
     "启用后台提醒": "백그라운드 알림 켜기",
@@ -3749,11 +4189,13 @@ const messageCatalogs = <String, Map<String, String>>{
     "这台电脑已静音，取消会话静音后仍不会收到提醒。": "이 컴퓨터가 무음 상태이므로 대화 무음을 해제해도 알림을 받지 않습니다.",
     "静音此会话": "이 대화 무음",
     "清除离线缓存？": "오프라인 캐시를 지울까요?",
-    "只清除此手机保存的会话缓存，保留草稿、未发送附件和电脑配对。电脑上的会话不受影响，联网后会重新缓存。": "이 휴대폰에 저장된 대화 캐시만 지웁니다. 임시 저장, 보내지 않은 첨부 파일, 컴퓨터 페어링은 유지됩니다. 컴퓨터의 대화에는 영향이 없으며 온라인 상태가 되면 다시 캐시됩니다.",
+    "只清除此手机保存的会话缓存，保留草稿、未发送附件和电脑配对。电脑上的会话不受影响，联网后会重新缓存。":
+        "이 휴대폰에 저장된 대화 캐시만 지웁니다. 임시 저장, 보내지 않은 첨부 파일, 컴퓨터 페어링은 유지됩니다. 컴퓨터의 대화에는 영향이 없으며 온라인 상태가 되면 다시 캐시됩니다.",
     "清除": "지우기",
     "未能清除缓存：{0}": "캐시를 지우지 못했습니다: {0}",
     "最近会话离线缓存": "최근 대화 오프라인 캐시",
-    "{0} 个会话 · {1} MB\n最多 30 个会话、32 MB；保存文字和附件信息。": "대화 {0}개 · {1} MB\n최대 대화 30개, 32 MB. 텍스트와 첨부 파일 정보를 저장합니다.",
+    "{0} 个会话 · {1} MB\n最多 30 个会话、32 MB；保存文字和附件信息。":
+        "대화 {0}개 · {1} MB\n최대 대화 30개, 32 MB. 텍스트와 첨부 파일 정보를 저장합니다.",
     "正在读取缓存大小…": "캐시 크기를 읽는 중…",
     "正在清除…": "지우는 중…",
     "清除缓存": "캐시 지우기",
@@ -3767,13 +4209,15 @@ const messageCatalogs = <String, Map<String, String>>{
     "管理已绑定设备": "페어링된 기기 관리",
     "{0} 台": "{0}대",
     "本机数据": "이 휴대폰의 데이터",
-    "无需注册账号：通过电脑上的配对二维码建立信任，可随时在电脑上撤销。草稿和离线缓存保存在这部手机；提醒偏好可在电脑或会话菜单中设置。": "계정 가입이 필요 없습니다. 컴퓨터의 QR 코드로 페어링하고 컴퓨터에서 언제든지 취소할 수 있습니다. 임시 저장과 오프라인 캐시는 이 휴대폰에 저장됩니다. 알림 설정은 컴퓨터나 대화 메뉴에서 할 수 있습니다.",
+    "无需注册账号：通过电脑上的配对二维码建立信任，可随时在电脑上撤销。草稿和离线缓存保存在这部手机；提醒偏好可在电脑或会话菜单中设置。":
+        "계정 가입이 필요 없습니다. 컴퓨터의 QR 코드로 페어링하고 컴퓨터에서 언제든지 취소할 수 있습니다. 임시 저장과 오프라인 캐시는 이 휴대폰에 저장됩니다. 알림 설정은 컴퓨터나 대화 메뉴에서 할 수 있습니다.",
     "项目目录不可用，请刷新项目后重试。": "프로젝트 디렉터리를 사용할 수 없습니다. 프로젝트를 새로 고친 후 다시 시도하세요.",
     "选择终端目录": "터미널 디렉터리 선택",
     "连接或项目目录已改变，请重新选择终端目录。": "연결 또는 프로젝트 디렉터리가 변경되었습니다. 터미널 디렉터리를 다시 선택하세요.",
     "启动结果待核实，请使用原操作恢复。": "실행 결과가 확인되지 않았습니다. 원래 작업으로 복구하세요.",
     "关闭这个终端？": "이 터미널을 닫을까요?",
-    "将在电脑上结束该终端及其中运行的命令。离开页面不会关闭终端。": "컴퓨터에서 이 터미널과 실행 중인 명령을 종료합니다. 페이지를 나가도 터미널은 닫히지 않습니다.",
+    "将在电脑上结束该终端及其中运行的命令。离开页面不会关闭终端。":
+        "컴퓨터에서 이 터미널과 실행 중인 명령을 종료합니다. 페이지를 나가도 터미널은 닫히지 않습니다.",
     "关闭终端": "터미널 닫기",
     "连接已改变，请刷新后重新确认关闭。": "연결이 변경되었습니다. 새로 고친 후 닫기를 다시 확인하세요.",
     "终端 {0}": "터미널 {0}",
@@ -3788,7 +4232,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "连接或目录已改变，请重新选择比较目标。": "연결 또는 디렉터리가 변경되었습니다. 비교 대상을 다시 선택하세요.",
     "请填写提交说明": "커밋 메시지를 입력하세요",
     "暂存全部并提交？": "모두 스테이징하고 커밋할까요?",
-    "{0}当前没有已暂存的文件，将暂存全部 {1} 个变更后提交。": "{0}스테이징된 파일이 없습니다. 변경 사항 {1}개를 모두 스테이징한 후 커밋합니다.",
+    "{0}当前没有已暂存的文件，将暂存全部 {1} 个变更后提交。":
+        "{0}스테이징된 파일이 없습니다. 변경 사항 {1}개를 모두 스테이징한 후 커밋합니다.",
     "目录：{0}。": "디렉터리: {0}.",
     "暂存并提交": "스테이징하고 커밋",
     "连接或变更已更新，请核对后重新提交。": "연결 또는 변경 사항이 업데이트되었습니다. 확인한 후 다시 커밋하세요.",
@@ -3825,7 +4270,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "目录 · {0}": "디렉터리 · {0}",
     "选择项目文件": "프로젝트 파일 선택",
     "搜索当前目录内的文件": "현재 디렉터리에서 파일 검색",
-    "搜索结果未全部返回，请输入更具体的文件名或路径。": "일부 검색 결과가 반환되지 않았습니다. 더 구체적인 파일 이름이나 경로를 입력하세요.",
+    "搜索结果未全部返回，请输入更具体的文件名或路径。":
+        "일부 검색 결과가 반환되지 않았습니다. 더 구체적인 파일 이름이나 경로를 입력하세요.",
     "没有匹配的文件": "일치하는 파일 없음",
     "此文件无法预览（二进制或过大）": "이 파일은 미리 볼 수 없습니다(바이너리이거나 너무 큼)",
     "{0} · 只读": "{0} · 읽기 전용",
@@ -3837,10 +4283,13 @@ const messageCatalogs = <String, Map<String, String>>{
     "没有提交记录": "커밋 없음",
     "没有可比较的分支": "비교할 브랜치 없음",
     "预览已关闭": "미리 보기가 닫혔습니다",
-    "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">预览请求失败：{0}</p>": "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">미리 보기 요청 실패: {0}</p>",
+    "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">预览请求失败：{0}</p>":
+        "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">미리 보기 요청 실패: {0}</p>",
     "项目 WebSocket 写入未获确认": "프로젝트 WebSocket 쓰기가 확인되지 않았습니다",
-    "\u001b[2m（较早的输出已被电脑释放）\u001b[0m\r\n": "\u001b[2m(이전 출력은 컴퓨터에서 해제되었습니다)\u001b[0m\r\n",
-    "\r\n\u001b[2m… 部分较早的输出已被电脑丢弃 …\u001b[0m\r\n": "\r\n\u001b[2m… 이전 출력의 일부를 컴퓨터에서 버렸습니다 …\u001b[0m\r\n",
+    "\u001b[2m（较早的输出已被电脑释放）\u001b[0m\r\n":
+        "\u001b[2m(이전 출력은 컴퓨터에서 해제되었습니다)\u001b[0m\r\n",
+    "\r\n\u001b[2m… 部分较早的输出已被电脑丢弃 …\u001b[0m\r\n":
+        "\r\n\u001b[2m… 이전 출력의 일부를 컴퓨터에서 버렸습니다 …\u001b[0m\r\n",
     "启动中": "시작 중",
     "运行中": "실행 중",
     "停止中": "중지 중",
@@ -3850,7 +4299,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "状态未知": "상태 알 수 없음",
     "核实输入结果": "입력 결과 확인",
     "继续输入？": "계속 입력할까요?",
-    "请先检查终端当前状态；未确认的输入可能已部分生效。继续会清空当前输入框并丢弃未发送内容，不会重新发送原输入。": "먼저 터미널의 현재 상태를 확인하세요. 확인되지 않은 입력이 일부 적용되었을 수 있습니다. 계속하면 입력 상자가 비워지고 보내지 않은 내용은 삭제됩니다. 원래 입력은 다시 보내지 않습니다.",
+    "请先检查终端当前状态；未确认的输入可能已部分生效。继续会清空当前输入框并丢弃未发送内容，不会重新发送原输入。":
+        "먼저 터미널의 현재 상태를 확인하세요. 확인되지 않은 입력이 일부 적용되었을 수 있습니다. 계속하면 입력 상자가 비워지고 보내지 않은 내용은 삭제됩니다. 원래 입력은 다시 보내지 않습니다.",
     "已检查，继续": "확인함, 계속",
     "继续输入": "계속 입력",
     "输入命令，回车发送": "명령을 입력하고 Enter로 보내기",
@@ -3862,7 +4312,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "删除运行配置？": "실행 구성을 삭제할까요?",
     "移除“{0}”的启动配置，已运行的进程不会停止。": "'{0}'의 시작 구성을 삭제합니다. 실행 중인 프로세스는 중지되지 않습니다.",
     "重新分析项目？": "프로젝트를 다시 분석할까요?",
-    "将重新生成运行配置，覆盖未固定的自定义修改，固定项会保留。": "실행 구성을 다시 생성하며 고정되지 않은 사용자 변경 사항을 덮어씁니다. 고정된 구성은 유지됩니다.",
+    "将重新生成运行配置，覆盖未固定的自定义修改，固定项会保留。":
+        "실행 구성을 다시 생성하며 고정되지 않은 사용자 변경 사항을 덮어씁니다. 고정된 구성은 유지됩니다.",
     "选择分析项目的 Agent": "프로젝트를 분석할 Agent 선택",
     "没有可用 Agent，请先在电脑上连接。": "사용 가능한 Agent가 없습니다. 먼저 컴퓨터에서 연결하세요.",
     "预览端口": "미리 보기 포트",
@@ -3874,7 +4325,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "刷新运行配置": "실행 구성 새로 고침",
     "Agent 正在分析项目，可稍后刷新查看。": "Agent가 프로젝트를 분석하고 있습니다. 잠시 후 새로 고쳐 확인하세요.",
     "这个项目尚未关联目录。": "이 프로젝트에 연결된 디렉터리가 없습니다.",
-    "当前目录还没有运行配置，点击「分析项目」生成启动方式。": "현재 디렉터리에 실행 구성이 없습니다. '프로젝트 분석'을 탭하여 시작 방법을 생성하세요.",
+    "当前目录还没有运行配置，点击「分析项目」生成启动方式。":
+        "현재 디렉터리에 실행 구성이 없습니다. '프로젝트 분석'을 탭하여 시작 방법을 생성하세요.",
     "选择运行配置": "실행 구성 선택",
     "选择配置": "구성 선택",
     "未运行": "실행 안 함",
@@ -3898,19 +4350,22 @@ const messageCatalogs = <String, Map<String, String>>{
     "后退": "뒤로",
     "刷新": "새로 고침",
     "电脑离线，重新连接后再试。": "컴퓨터가 오프라인입니다. 다시 연결한 후 시도하세요.",
-    "这个项目还没有会话。电脑以会话为单位授权工作区访问，请先在项目中开始一个会话。": "이 프로젝트에는 아직 대화가 없습니다. 작업 공간 접근은 대화 단위로 허용되므로 먼저 프로젝트에서 대화를 시작하세요.",
+    "这个项目还没有会话。电脑以会话为单位授权工作区访问，请先在项目中开始一个会话。":
+        "이 프로젝트에는 아직 대화가 없습니다. 작업 공간 접근은 대화 단위로 허용되므로 먼저 프로젝트에서 대화를 시작하세요.",
     "全部": "전체",
     "权限": "권한",
     "问题": "질문",
     "待处理": "처리 대기",
     "没有需要你处理的事项": "처리할 항목이 없습니다",
     "{0} 项需要你处理": "처리할 항목 {0}개",
-    "{0} 台电脑离线，其待处理事项将在重新连接后显示。": "컴퓨터 {0}대가 오프라인입니다. 처리 대기 항목은 다시 연결한 후 표시됩니다.",
+    "{0} 台电脑离线，其待处理事项将在重新连接后显示。":
+        "컴퓨터 {0}대가 오프라인입니다. 처리 대기 항목은 다시 연결한 후 표시됩니다.",
     "查看会话": "대화 보기",
     "已不再等待。如果电脑收到了这项操作，它仍会生效。": "대기를 중지했습니다. 컴퓨터가 이 작업을 받았다면 계속 적용됩니다.",
     "会话已经删除。": "대화가 삭제되었습니다.",
     "新名称已经生效。": "새 이름이 적용되었습니다.",
-    "已找到电脑上的原终端，可在终端或运行页面继续查看；未重新运行命令。": "컴퓨터에서 원래 터미널을 찾았습니다. 터미널 또는 실행 페이지에서 계속 볼 수 있습니다. 명령은 다시 실행되지 않았습니다.",
+    "已找到电脑上的原终端，可在终端或运行页面继续查看；未重新运行命令。":
+        "컴퓨터에서 원래 터미널을 찾았습니다. 터미널 또는 실행 페이지에서 계속 볼 수 있습니다. 명령은 다시 실행되지 않았습니다.",
     "分析已经开始，可在运行页面查看进度。": "분석을 시작했습니다. 실행 페이지에서 진행 상황을 확인하세요.",
     "原运行配置操作已完成。": "원래 실행 구성 작업이 완료되었습니다.",
     "原运行配置操作已结束：{0}": "원래 실행 구성 작업이 종료되었습니다: {0}",
@@ -3919,14 +4374,18 @@ const messageCatalogs = <String, Map<String, String>>{
     "原修复已放弃。": "원래 수정을 취소했습니다.",
     "修复尚未提交，可继续原操作。{0}": "수정이 아직 제출되지 않았습니다. 원래 작업을 계속할 수 있습니다. {0}",
     "已找到原审查，可在对应轮次的「本轮审查」中查看。": "원래 검토를 찾았습니다. 해당 턴의 '턴 검토'에서 볼 수 있습니다.",
-    "电脑上还查不到这项操作，可能没收到。可以重新发送，不会重复执行。": "컴퓨터에 아직 이 작업 기록이 없습니다. 전달되지 않았을 수 있습니다. 다시 보내도 두 번 실행되지 않습니다.",
+    "电脑上还查不到这项操作，可能没收到。可以重新发送，不会重复执行。":
+        "컴퓨터에 아직 이 작업 기록이 없습니다. 전달되지 않았을 수 있습니다. 다시 보내도 두 번 실행되지 않습니다.",
     "Fork 正在后台执行。": "Fork를 백그라운드에서 실행 중입니다.",
     "Fork 尚未完成。": "Fork가 아직 완료되지 않았습니다.",
     "{0}：还没收到电脑确认": "{0}: 아직 컴퓨터의 확인을 받지 못했습니다",
     "待确认": "확인 대기",
-    "{0} · 正在确认「不再等待」。重试仅确认原操作的结束状态，已经执行的内容不会撤销。": "{0} · '대기 중지'를 확인하는 중입니다. 다시 시도는 원래 작업의 최종 상태만 확인하며, 이미 실행된 내용은 취소되지 않습니다.",
-    "{0} · 网络中断时手机没收到电脑的回复。点「重新确认」查看结果；重新发送也不会重复执行。": "{0} · 연결이 끊겨 컴퓨터의 응답을 받지 못했습니다. '다시 확인'을 탭하여 결과를 확인하세요. 다시 보내도 두 번 실행되지 않습니다.",
-    "{0} · 网络中断时手机没收到电脑的回复。连上电脑后会自动确认。": "{0} · 연결이 끊겨 컴퓨터의 응답을 받지 못했습니다. 컴퓨터에 다시 연결되면 자동으로 확인합니다.",
+    "{0} · 正在确认「不再等待」。重试仅确认原操作的结束状态，已经执行的内容不会撤销。":
+        "{0} · '대기 중지'를 확인하는 중입니다. 다시 시도는 원래 작업의 최종 상태만 확인하며, 이미 실행된 내용은 취소되지 않습니다.",
+    "{0} · 网络中断时手机没收到电脑的回复。点「重新确认」查看结果；重新发送也不会重复执行。":
+        "{0} · 연결이 끊겨 컴퓨터의 응답을 받지 못했습니다. '다시 확인'을 탭하여 결과를 확인하세요. 다시 보내도 두 번 실행되지 않습니다.",
+    "{0} · 网络中断时手机没收到电脑的回复。连上电脑后会自动确认。":
+        "{0} · 연결이 끊겨 컴퓨터의 응답을 받지 못했습니다. 컴퓨터에 다시 연결되면 자동으로 확인합니다.",
     "新名称：{0}": "새 이름: {0}",
     "重新发送会继续你之前确认过的删除。": "다시 보내면 이전에 확인한 삭제를 계속합니다.",
     "原终端": "원래 터미널",
@@ -3938,15 +4397,21 @@ const messageCatalogs = <String, Map<String, String>>{
     "重新发送": "다시 보내기",
     "不再发送": "다시 보내지 않기",
     "不再等待这项操作？": "이 작업을 더 이상 기다리지 않을까요?",
-    "只是不再在手机上等待结果。如果电脑已经收到，改名或删除仍会生效。": "이 휴대폰에서 결과를 기다리지 않을 뿐입니다. 컴퓨터가 이미 받았다면 이름 변경이나 삭제는 계속 적용됩니다.",
+    "只是不再在手机上等待结果。如果电脑已经收到，改名或删除仍会生效。":
+        "이 휴대폰에서 결과를 기다리지 않을 뿐입니다. 컴퓨터가 이미 받았다면 이름 변경이나 삭제는 계속 적용됩니다.",
     "继续等待": "계속 기다리기",
     "确定": "확인",
     "不再等待": "대기 중지",
-    "只是不再在手机上等待结果。电脑上已经完成的操作会保留。": "이 휴대폰에서 결과를 기다리지 않을 뿐입니다. 컴퓨터에서 이미 완료된 작업은 유지됩니다.",
-    "只是不再在手机上等待结果。如果电脑已经收到，任务仍会停下。": "이 휴대폰에서 결과를 기다리지 않을 뿐입니다. 컴퓨터가 이미 받았다면 작업은 계속 중지됩니다.",
-    "只是不再在手机上等待结果。如果电脑已经收到，终端仍会关闭。终端是否还在运行，请在终端页查看。": "이 휴대폰에서 결과를 기다리지 않을 뿐입니다. 컴퓨터가 이미 받았다면 터미널은 닫힙니다. 터미널이 실행 중인지는 터미널 페이지에서 확인하세요.",
-    "如果终端还没启动，就不会再启动；已经启动的会保留，里面的命令照常运行。": "터미널이 아직 시작되지 않았다면 시작하지 않습니다. 이미 시작된 터미널은 유지되며 그 안의 명령도 계속 실행됩니다.",
-    "如果还没执行，就不会再提交或推送；已经完成的不会撤销。建议先在「变更」里看一下结果。": "아직 실행되지 않았다면 커밋이나 푸시를 하지 않습니다. 이미 완료된 작업은 취소되지 않습니다. 먼저 '변경 사항'에서 결과를 확인하세요.",
+    "只是不再在手机上等待结果。电脑上已经完成的操作会保留。":
+        "이 휴대폰에서 결과를 기다리지 않을 뿐입니다. 컴퓨터에서 이미 완료된 작업은 유지됩니다.",
+    "只是不再在手机上等待结果。如果电脑已经收到，任务仍会停下。":
+        "이 휴대폰에서 결과를 기다리지 않을 뿐입니다. 컴퓨터가 이미 받았다면 작업은 계속 중지됩니다.",
+    "只是不再在手机上等待结果。如果电脑已经收到，终端仍会关闭。终端是否还在运行，请在终端页查看。":
+        "이 휴대폰에서 결과를 기다리지 않을 뿐입니다. 컴퓨터가 이미 받았다면 터미널은 닫힙니다. 터미널이 실행 중인지는 터미널 페이지에서 확인하세요.",
+    "如果终端还没启动，就不会再启动；已经启动的会保留，里面的命令照常运行。":
+        "터미널이 아직 시작되지 않았다면 시작하지 않습니다. 이미 시작된 터미널은 유지되며 그 안의 명령도 계속 실행됩니다.",
+    "如果还没执行，就不会再提交或推送；已经完成的不会撤销。建议先在「变更」里看一下结果。":
+        "아직 실행되지 않았다면 커밋이나 푸시를 하지 않습니다. 이미 완료된 작업은 취소되지 않습니다. 먼저 '변경 사항'에서 결과를 확인하세요.",
     "发送消息": "메시지 보내기",
     "Fork 会话": "대화 Fork",
     "置顶或归档": "고정 또는 보관",
@@ -3971,7 +4436,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "Agent 有一个问题": "Agent의 질문",
     "会话「{0}」需要你的回答。": "'{0}' 대화에서 답변이 필요합니다.",
     "会话「{0}」请求以下操作。": "'{0}' 대화에서 다음 작업을 요청합니다.",
-    "这个问题的格式暂不支持在手机上回答，请在电脑上回答，回答后这里会自动更新。": "이 형식의 질문은 아직 휴대폰에서 답할 수 없습니다. 컴퓨터에서 답하면 이 화면이 자동으로 업데이트됩니다.",
+    "这个问题的格式暂不支持在手机上回答，请在电脑上回答，回答后这里会自动更新。":
+        "이 형식의 질문은 아직 휴대폰에서 답할 수 없습니다. 컴퓨터에서 답하면 이 화면이 자동으로 업데이트됩니다.",
     "电脑离线，重新连接后再处理。": "컴퓨터가 오프라인입니다. 다시 연결한 후 처리하세요.",
     "这台电脑有一项操作结果待核实，请先核实。": "이 컴퓨터에 결과 확인이 필요한 작업이 있습니다. 먼저 확인하세요.",
     "其他授权范围": "기타 권한 범위",
@@ -3979,8 +4445,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "还没有连接电脑": "아직 연결된 컴퓨터가 없습니다",
     "连接电脑后，在这里查看项目及其会话。": "컴퓨터를 연결하면 여기에서 프로젝트와 대화를 볼 수 있습니다.",
     "去连接电脑": "컴퓨터 연결하기",
-    "{0} 尚未同步项目；电脑在线时会自动同步。": "{0}의 프로젝트가 아직 동기화되지 않았습니다. 컴퓨터가 온라인이 되면 자동으로 동기화됩니다.",
-    "{0} 上还没有项目，点右上角「添加项目」选择电脑上的已有目录。": "{0}에 아직 프로젝트가 없습니다. 오른쪽 위의 '프로젝트 추가'를 탭하여 컴퓨터의 기존 디렉터리를 선택하세요.",
+    "{0} 尚未同步项目；电脑在线时会自动同步。":
+        "{0}의 프로젝트가 아직 동기화되지 않았습니다. 컴퓨터가 온라인이 되면 자동으로 동기화됩니다.",
+    "{0} 上还没有项目，点右上角「添加项目」选择电脑上的已有目录。":
+        "{0}에 아직 프로젝트가 없습니다. 오른쪽 위의 '프로젝트 추가'를 탭하여 컴퓨터의 기존 디렉터리를 선택하세요.",
     "文件": "파일",
     "浏览项目文件": "프로젝트 파일 둘러보기",
     "查看代码变更": "코드 변경 사항 보기",
@@ -3994,7 +4462,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "分离 HEAD": "분리된 HEAD",
     "工作区干净": "작업 트리가 깨끗합니다",
     "{0} 个文件待提交": "커밋할 파일 {0}개",
-    "项目已添加，列表尚未同步。请重新连接后刷新结果。": "프로젝트를 추가했지만 목록이 아직 동기화되지 않았습니다. 다시 연결한 후 결과를 새로 고치세요.",
+    "项目已添加，列表尚未同步。请重新连接后刷新结果。":
+        "프로젝트를 추가했지만 목록이 아직 동기화되지 않았습니다. 다시 연결한 후 결과를 새로 고치세요.",
     "请先绑定电脑，再选择电脑上的项目目录。": "먼저 컴퓨터를 페어링한 후 컴퓨터의 프로젝트 디렉터리를 선택하세요.",
     "选择添加项目的电脑": "프로젝트를 추가할 컴퓨터 선택",
     " · 离线": " · 오프라인",
@@ -4024,8 +4493,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "{0} 个会话 · 按当前电脑和项目范围": "대화 {0}개 · 현재 컴퓨터와 프로젝트 범위",
     "搜索已保存的消息正文": "저장된 메시지 본문 검색",
     "搜索历史正文": "대화 기록 본문 검색",
-    "在电脑上检索已保存的对话正文，不包含思考过程或附件内容。": "컴퓨터에 저장된 대화 본문을 검색합니다. 사고 과정이나 첨부 파일 내용은 포함되지 않습니다.",
-    "{0} 离线，未搜索其中的会话；连接后重新搜索。": "{0}이(가) 오프라인이라 해당 대화는 검색하지 않았습니다. 연결한 후 다시 검색하세요.",
+    "在电脑上检索已保存的对话正文，不包含思考过程或附件内容。":
+        "컴퓨터에 저장된 대화 본문을 검색합니다. 사고 과정이나 첨부 파일 내용은 포함되지 않습니다.",
+    "{0} 离线，未搜索其中的会话；连接后重新搜索。":
+        "{0}이(가) 오프라인이라 해당 대화는 검색하지 않았습니다. 연결한 후 다시 검색하세요.",
     "输入关键词开始搜索": "키워드를 입력하여 검색",
     "没有找到匹配的历史记录": "일치하는 기록이 없습니다",
     "你": "나",
@@ -4039,7 +4510,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "当前工作区": "현재 작업 공간",
     "共享当前项目文件，仅复制对话历史。": "현재 프로젝트 파일을 공유하고 대화 기록만 복사합니다.",
     "新 Worktree": "새 Worktree",
-    "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照；非 Git 项目只继承对话。": "컴퓨터에 독립된 작업 공간을 만들고 선택한 턴의 파일 스냅샷을 복원합니다. 이전 턴에는 스냅샷이 없을 수 있습니다. Git이 아닌 프로젝트는 대화만 이어받습니다.",
+    "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照；非 Git 项目只继承对话。":
+        "컴퓨터에 독립된 작업 공간을 만들고 선택한 턴의 파일 스냅샷을 복원합니다. 이전 턴에는 스냅샷이 없을 수 있습니다. Git이 아닌 프로젝트는 대화만 이어받습니다.",
     "正在创建…": "만드는 중…",
     "创建 Fork": "Fork 만들기",
     "取消置顶": "고정 해제",
@@ -4049,7 +4521,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "归档会话": "대화 보관",
     "会话操作": "대화 작업",
     "会话将从电脑同步": "대화는 컴퓨터에서 동기화됩니다",
-    "连接自己的电脑后，在这里查看和续接各项目的会话。网络中断时，电脑上的任务会继续执行。": "내 컴퓨터를 연결하면 여기에서 프로젝트별 대화를 보고 이어갈 수 있습니다. 네트워크가 끊겨도 컴퓨터의 작업은 계속 실행됩니다.",
+    "连接自己的电脑后，在这里查看和续接各项目的会话。网络中断时，电脑上的任务会继续执行。":
+        "내 컴퓨터를 연결하면 여기에서 프로젝트별 대화를 보고 이어갈 수 있습니다. 네트워크가 끊겨도 컴퓨터의 작업은 계속 실행됩니다.",
     "搜索会话": "대화 검색",
     "{0} 项等待处理": "대기 중인 항목 {0}개",
     "{0} 连接中…": "{0} 연결 중…",
@@ -4066,32 +4539,40 @@ const messageCatalogs = <String, Map<String, String>>{
     "已归档": "보관됨",
     "正在核实原配对…": "원래 페어링 확인 중…",
     "移除本机配对记录？": "이 휴대폰의 페어링 기록을 제거할까요?",
-    "之后需要重新扫码。电脑上可能已允许这台手机；如需撤销授权，请在电脑的「连接手机」中操作。": "다시 스캔해야 합니다. 컴퓨터에서 이미 이 휴대폰을 허용했을 수 있습니다. 권한을 취소하려면 컴퓨터의 '휴대폰 연결'에서 하세요.",
+    "之后需要重新扫码。电脑上可能已允许这台手机；如需撤销授权，请在电脑的「连接手机」中操作。":
+        "다시 스캔해야 합니다. 컴퓨터에서 이미 이 휴대폰을 허용했을 수 있습니다. 권한을 취소하려면 컴퓨터의 '휴대폰 연결'에서 하세요.",
     "保留记录": "기록 유지",
     "移除本机记录": "이 휴대폰의 기록 제거",
     "正在验证电脑身份并建立配对…": "컴퓨터 신원을 확인하고 페어링하는 중…",
     "加密组件尚未准备好。": "암호화 구성 요소가 아직 준비되지 않았습니다.",
     "在电脑端打开「连接手机」，扫描配对二维码。": "컴퓨터에서 '휴대폰 연결'을 열고 페어링 QR 코드를 스캔하세요.",
-    "配对后可操作这台电脑的 Agent、项目、Git 和终端，并查看、控制电脑屏幕。你可以随时在电脑上撤销授权。": "페어링하면 이 컴퓨터의 Agent, 프로젝트, Git, 터미널을 사용하고 컴퓨터 화면을 보고 제어할 수 있습니다. 컴퓨터에서 언제든지 권한을 취소할 수 있습니다.",
+    "配对后可操作这台电脑的 Agent、项目、Git 和终端，并查看、控制电脑屏幕。你可以随时在电脑上撤销授权。":
+        "페어링하면 이 컴퓨터의 Agent, 프로젝트, Git, 터미널을 사용하고 컴퓨터 화면을 보고 제어할 수 있습니다. 컴퓨터에서 언제든지 권한을 취소할 수 있습니다.",
     "配对结果待核实": "페어링 결과 확인 필요",
-    "保留了原配对信息，可以继续核实电脑是否已允许连接。": "원래 페어링 정보가 유지되었습니다. 컴퓨터가 연결을 허용했는지 계속 확인할 수 있습니다.",
+    "保留了原配对信息，可以继续核实电脑是否已允许连接。":
+        "원래 페어링 정보가 유지되었습니다. 컴퓨터가 연결을 허용했는지 계속 확인할 수 있습니다.",
     "恢复期限已过，请在电脑核实授权后重新扫码。": "복구 기한이 지났습니다. 컴퓨터에서 권한을 확인한 후 다시 스캔하세요.",
     "核实原配对": "원래 페어링 확인",
-    "无法使用相机，请检查相机权限，或在下方粘贴配对链接。": "카메라를 사용할 수 없습니다. 카메라 권한을 확인하거나 아래에 페어링 링크를 붙여 넣으세요.",
+    "无法使用相机，请检查相机权限，或在下方粘贴配对链接。":
+        "카메라를 사용할 수 없습니다. 카메라 권한을 확인하거나 아래에 페어링 링크를 붙여 넣으세요.",
     "扫描二维码": "QR 코드 스캔",
     "或粘贴配对链接": "또는 페어링 링크 붙여 넣기",
     "粘贴从电脑获取的配对链接": "컴퓨터에서 받은 페어링 링크를 붙여 넣으세요",
-    "二维码使用了本机地址，手机无法访问。请在电脑端使用手机可访问的服务地址并重新生成二维码。": "이 QR 코드는 휴대폰에서 접근할 수 없는 로컬 주소를 사용합니다. 컴퓨터에서 휴대폰이 접근할 수 있는 서비스 주소로 QR 코드를 다시 생성하세요.",
-    "无法连接接入服务，请确认手机与电脑的网络、服务地址及端口。局域网调试时需连接同一 Wi-Fi。": "연결 서비스에 연결할 수 없습니다. 휴대폰과 컴퓨터의 네트워크, 서비스 주소와 포트를 확인하세요. 로컬 개발 시에는 같은 Wi-Fi에 연결하세요.",
+    "二维码使用了本机地址，手机无法访问。请在电脑端使用手机可访问的服务地址并重新生成二维码。":
+        "이 QR 코드는 휴대폰에서 접근할 수 없는 로컬 주소를 사용합니다. 컴퓨터에서 휴대폰이 접근할 수 있는 서비스 주소로 QR 코드를 다시 생성하세요.",
+    "无法连接接入服务，请确认手机与电脑的网络、服务地址及端口。局域网调试时需连接同一 Wi-Fi。":
+        "연결 서비스에 연결할 수 없습니다. 휴대폰과 컴퓨터의 네트워크, 서비스 주소와 포트를 확인하세요. 로컬 개발 시에는 같은 Wi-Fi에 연결하세요.",
     "无法验证服务证书，请检查接入服务配置。": "서비스 인증서를 확인할 수 없습니다. 연결 서비스 설정을 확인하세요.",
     "配对未完成，请检查电脑与接入服务后重试。": "페어링이 완료되지 않았습니다. 컴퓨터와 연결 서비스를 확인한 후 다시 시도하세요.",
-    "DogCodes 手机端连接你自己的电脑：查看会话、继续交给 Agent、处理权限请求。无需注册账号。": "DogCodes는 내 컴퓨터에 연결하는 휴대폰 앱입니다. 대화를 보고, Agent에게 작업을 맡기고, 권한 요청을 처리하세요. 계정 가입이 필요 없습니다.",
+    "DogCodes 手机端连接你自己的电脑：查看会话、继续交给 Agent、处理权限请求。无需注册账号。":
+        "DogCodes는 내 컴퓨터에 연결하는 휴대폰 앱입니다. 대화를 보고, Agent에게 작업을 맡기고, 권한 요청을 처리하세요. 계정 가입이 필요 없습니다.",
     "在电脑上打开 DogCodes": "컴퓨터에서 DogCodes 열기",
     "点击「连接手机」，屏幕上会显示二维码": "'휴대폰 연결'을 클릭하면 화면에 QR 코드가 표시됩니다",
     "用这部手机扫码，或粘贴配对链接": "이 휴대폰으로 스캔하거나 페어링 링크를 붙여 넣으세요",
     "扫码连接电脑": "스캔하여 컴퓨터 연결",
     "粘贴配对链接": "페어링 링크 붙여 넣기",
-    "连接经过端到端加密，手机只能访问你在电脑上授权的内容。": "연결은 종단 간 암호화되며, 휴대폰은 컴퓨터에서 허용한 내용에만 접근할 수 있습니다.",
+    "连接经过端到端加密，手机只能访问你在电脑上授权的内容。":
+        "연결은 종단 간 암호화되며, 휴대폰은 컴퓨터에서 허용한 내용에만 접근할 수 있습니다.",
     "正在连接{0}": "{0}에 연결 중",
     "暂时连接不上{0}": "{0}에 연결할 수 없음",
     "连接时间比平时长，仍在尝试。": "평소보다 오래 걸리고 있습니다. 계속 시도하는 중입니다.",
@@ -4105,7 +4586,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "查看离线记录": "오프라인 기록 보기",
     "查看离线记录（{0} 同步）": "오프라인 기록 보기({0} 동기화)",
     "附件": "첨부 파일",
-    "电脑离线。已缓存附件信息，原文需连接电脑后查看。": "컴퓨터가 오프라인입니다. 첨부 파일 정보는 캐시되어 있으며, 원본은 컴퓨터에 연결한 후 볼 수 있습니다.",
+    "电脑离线。已缓存附件信息，原文需连接电脑后查看。":
+        "컴퓨터가 오프라인입니다. 첨부 파일 정보는 캐시되어 있으며, 원본은 컴퓨터에 연결한 후 볼 수 있습니다.",
     "电脑端暂不支持附件预览。": "컴퓨터 앱에서 아직 첨부 파일 미리 보기를 지원하지 않습니다.",
     "附件读取位置未确认。": "첨부 파일 읽기 위치가 확인되지 않았습니다.",
     "附件过大，请在电脑上查看。": "첨부 파일이 너무 큽니다. 컴퓨터에서 보세요.",
@@ -4117,7 +4599,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "默认模型": "기본 모델",
     "默认": "기본값",
     "选择 Agent": "Agent 선택",
-    "这台电脑上没有已就绪并启用的 Agent。安装或登录需在电脑上完成。": "이 컴퓨터에 준비되고 활성화된 Agent가 없습니다. 설치나 로그인은 컴퓨터에서 하세요.",
+    "这台电脑上没有已就绪并启用的 Agent。安装或登录需在电脑上完成。":
+        "이 컴퓨터에 준비되고 활성화된 Agent가 없습니다. 설치나 로그인은 컴퓨터에서 하세요.",
     "模型": "모델",
     "选择模型": "모델 선택",
     "完成": "완료",
@@ -4137,9 +4620,11 @@ const messageCatalogs = <String, Map<String, String>>{
     "从本轮 Fork": "이번 턴에서 Fork",
     "电脑未受理这项任务，内容已保留。": "컴퓨터가 이 작업을 받지 않았습니다. 내용은 유지됩니다.",
     "没有已绑定的电脑": "페어링된 컴퓨터가 없습니다",
-    "这台电脑还没有项目，点右上角「添加项目」选择电脑上的已有目录。": "이 컴퓨터에는 아직 프로젝트가 없습니다. 오른쪽 위의 '프로젝트 추가'를 탭하여 컴퓨터의 기존 디렉터리를 선택하세요.",
+    "这台电脑还没有项目，点右上角「添加项目」选择电脑上的已有目录。":
+        "이 컴퓨터에는 아직 프로젝트가 없습니다. 오른쪽 위의 '프로젝트 추가'를 탭하여 컴퓨터의 기존 디렉터리를 선택하세요.",
     "你想完成什么？": "무엇을 하고 싶으세요?",
-    "电脑离线，任务和附件会保留为本机草稿。重连后请点击发送。": "컴퓨터가 오프라인입니다. 작업과 첨부 파일은 이 휴대폰에 임시 저장됩니다. 다시 연결한 후 '보내기'를 탭하세요.",
+    "电脑离线，任务和附件会保留为本机草稿。重连后请点击发送。":
+        "컴퓨터가 오프라인입니다. 작업과 첨부 파일은 이 휴대폰에 임시 저장됩니다. 다시 연결한 후 '보내기'를 탭하세요.",
     "描述你的任务…": "작업을 설명하세요…",
     "没有已就绪的 Agent": "준비된 Agent가 없습니다",
     "开始任务": "작업 시작",
@@ -4155,7 +4640,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "{0} · {1}–{2} 行": "{0} · {1}–{2}행",
     "这是审查时保存的版本，当前文件可能已变化。": "검토 시 저장된 버전입니다. 현재 파일은 변경되었을 수 있습니다.",
     "读取审查代码失败：{0}": "검토 코드를 불러오지 못했습니다: {0}",
-    "审查连接中断，本次审查未完成。请检查网络后重新检查。": "검토 연결이 끊겨 이번 검토가 완료되지 않았습니다. 네트워크를 확인한 후 다시 검사하세요.",
+    "审查连接中断，本次审查未完成。请检查网络后重新检查。":
+        "검토 연결이 끊겨 이번 검토가 완료되지 않았습니다. 네트워크를 확인한 후 다시 검사하세요.",
     "错误详情": "오류 세부 정보",
     "审查连接中断，本次审查未完成。": "검토 연결이 끊겨 이번 검토가 완료되지 않았습니다.",
     "文件覆盖情况": "파일 검사 범위",
@@ -4164,7 +4650,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "未报告检查": "검사 보고 없음",
     "原文不可用": "원문을 사용할 수 없음",
     "本次审查未报告问题。": "이번 검토에서 보고된 문제가 없습니다.",
-    "审查尚未形成完整问题报告，不能据此判断是否存在问题。": "검토에서 완전한 문제 보고서를 만들지 못했으므로 문제 유무를 판단할 수 없습니다.",
+    "审查尚未形成完整问题报告，不能据此判断是否存在问题。":
+        "검토에서 완전한 문제 보고서를 만들지 못했으므로 문제 유무를 판단할 수 없습니다.",
     "潜在{0}风险": "잠재적 {0} 위험",
     "{0}{1} · {2}{3}–{4} 行": "{0}{1} · {2}{3}–{4}행",
     "改动前 · ": "변경 전 ·",
@@ -4176,7 +4663,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "已选 {0} 项": "{0}개 선택됨",
     "开始修复": "수정 시작",
     "主对话正在回复，结束后可提交修复。": "기본 대화가 응답 중입니다. 끝난 후 수정을 제출할 수 있습니다.",
-    "修复已提交给主 Agent，携带所选问题及原审查上下文。": "선택한 문제와 원래 검토 맥락을 포함해 수정 사항을 기본 Agent에 제출했습니다.",
+    "修复已提交给主 Agent，携带所选问题及原审查上下文。":
+        "선택한 문제와 원래 검토 맥락을 포함해 수정 사항을 기본 Agent에 제출했습니다.",
     "有一项修复尚未提交。{0}": "아직 제출되지 않은 수정이 있습니다. {0}",
     "继续原修复": "원래 수정 계속",
     "放弃这次修复": "이 수정 취소",
@@ -4205,12 +4693,14 @@ const messageCatalogs = <String, Map<String, String>>{
     "已取消": "취소됨",
     "连接中断": "연결 끊김",
     "电脑离线，请重新连接后查看审查。": "컴퓨터가 오프라인입니다. 다시 연결한 후 검토를 보세요.",
-    "电脑端暂不支持本轮审查，请更新电脑端后重试。": "컴퓨터 앱이 턴 검토를 지원하지 않습니다. 컴퓨터 앱을 업데이트한 후 다시 시도하세요.",
+    "电脑端暂不支持本轮审查，请更新电脑端后重试。":
+        "컴퓨터 앱이 턴 검토를 지원하지 않습니다. 컴퓨터 앱을 업데이트한 후 다시 시도하세요.",
     "无法读取可用的审查 Agent。": "사용 가능한 검토 Agent를 불러올 수 없습니다.",
     "已发起复审，可在修复轮次底部查看。": "재검토를 시작했습니다. 수정 턴 아래에서 확인하세요.",
     "刷新审查": "검토 새로 고침",
     "电脑离线，审查会继续在电脑上运行。": "컴퓨터가 오프라인입니다. 검토는 컴퓨터에서 계속 실행됩니다.",
-    "暂无可用的审查 Agent，请在电脑上连接或重新检测 Agent。": "사용 가능한 검토 Agent가 없습니다. 컴퓨터에서 Agent를 연결하거나 다시 감지하세요.",
+    "暂无可用的审查 Agent，请在电脑上连接或重新检测 Agent。":
+        "사용 가능한 검토 Agent가 없습니다. 컴퓨터에서 Agent를 연결하거나 다시 감지하세요.",
     "审查使用的 Agent": "검토에 사용할 Agent",
     "本轮尚未发起审查。": "이번 턴에서는 아직 검토를 시작하지 않았습니다.",
     "历史审查": "이전 검토",
@@ -4238,7 +4728,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "本轮变更加载失败：{0}": "이번 턴 변경 사항을 불러오지 못했습니다: {0}",
     "本轮变更加载失败": "이번 턴 변경 사항을 불러오지 못했습니다",
     "{0} 个文件已更改": "파일 {0}개 변경됨",
-    "连接中断后的恢复快照 · 仅反映检查时的文件变化，外部工具可能仍在写入": "연결이 끊긴 후의 복구 스냅샷 · 검사 시점의 파일 변화만 반영하며, 외부 도구가 아직 쓰는 중일 수 있습니다",
+    "连接中断后的恢复快照 · 仅反映检查时的文件变化，外部工具可能仍在写入":
+        "연결이 끊긴 후의 복구 스냅샷 · 검사 시점의 파일 변화만 반영하며, 외부 도구가 아직 쓰는 중일 수 있습니다",
     "二进制": "바이너리",
     "本轮保存的历史 Diff": "이번 턴에 저장된 기록 Diff",
     "这一轮未保存该文件的内容": "이번 턴에는 이 파일의 내용이 저장되지 않았습니다",
@@ -4249,7 +4740,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "正在生成提交说明…": "커밋 메시지를 생성하는 중…",
     "正在提交…": "커밋하는 중…",
     "提交本轮修改": "이번 턴 변경 사항 커밋",
-    "本轮修改已没有未提交的内容（可能已提交或已撤销）。": "이번 턴 변경 사항에 커밋되지 않은 내용이 남아 있지 않습니다(이미 커밋되었거나 되돌렸을 수 있음).",
+    "本轮修改已没有未提交的内容（可能已提交或已撤销）。":
+        "이번 턴 변경 사항에 커밋되지 않은 내용이 남아 있지 않습니다(이미 커밋되었거나 되돌렸을 수 있음).",
     "将提交 {0} 个文件{1}。": "파일 {0}개를 커밋합니다{1}.",
     "，其中 {0} 个是此前已暂存的其他更改": "(이전에 스테이징된 다른 변경 사항 {0}개 포함)",
     "重新生成": "다시 생성",
@@ -4273,7 +4765,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "电脑项目文件": "컴퓨터 프로젝트 파일",
     "需先在此项目创建一个会话": "먼저 이 프로젝트에서 대화를 만드세요",
     "最多 16 个附件，总大小不超过 25 MB。": "첨부 파일은 최대 16개, 총 25 MB까지입니다.",
-    "草稿目标已变化，请回到原项目重新选择附件。": "임시 저장의 대상이 변경되었습니다. 원래 프로젝트로 돌아가 첨부 파일을 다시 선택하세요.",
+    "草稿目标已变化，请回到原项目重新选择附件。":
+        "임시 저장의 대상이 변경되었습니다. 원래 프로젝트로 돌아가 첨부 파일을 다시 선택하세요.",
     "无法添加附件：{0}": "첨부 파일을 추가할 수 없습니다: {0}",
     "未能移除附件：{0}": "첨부 파일을 제거하지 못했습니다: {0}",
     "添加附件": "첨부 파일 추가",
@@ -4317,13 +4810,15 @@ const messageCatalogs = <String, Map<String, String>>{
     "没有找到要打开的这一轮，它可能已被删除。": "열려는 턴을 찾을 수 없습니다. 삭제되었을 수 있습니다.",
     "电脑离线，连接后再查看完整内容。": "컴퓨터가 오프라인입니다. 연결한 후 전체 내용을 보세요.",
     "删除这个会话？": "이 대화를 삭제할까요?",
-    "将在「{0}」上永久删除「{1}」及其记录，无法恢复。项目文件不会被删除。": "'{0}'에서 '{1}'과(와) 그 기록을 영구적으로 삭제합니다. 되돌릴 수 없습니다. 프로젝트 파일은 삭제되지 않습니다.",
+    "将在「{0}」上永久删除「{1}」及其记录，无法恢复。项目文件不会被删除。":
+        "'{0}'에서 '{1}'과(와) 그 기록을 영구적으로 삭제합니다. 되돌릴 수 없습니다. 프로젝트 파일은 삭제되지 않습니다.",
     "删除": "삭제",
     "停止请求未确认：{0}。请刷新核实任务状态。": "중지 요청이 확인되지 않았습니다: {0}. 새로 고쳐 작업 상태를 확인하세요.",
     "电脑未受理这次发送，内容已保留。": "컴퓨터가 이 메시지를 받지 않았습니다. 내용은 유지됩니다.",
     "这台电脑已不在列表中": "이 컴퓨터는 더 이상 목록에 없습니다",
     "可能已在电脑上撤销配对。": "컴퓨터에서 페어링이 취소되었을 수 있습니다.",
-    "{0} · 内容同步于 {1}{2}。附件原文需电脑在线。": "{0} · {1}{2}에 동기화된 내용입니다. 첨부 파일 원본은 컴퓨터가 온라인일 때 볼 수 있습니다.",
+    "{0} · 内容同步于 {1}{2}。附件原文需电脑在线。":
+        "{0} · {1}{2}에 동기화된 내용입니다. 첨부 파일 원본은 컴퓨터가 온라인일 때 볼 수 있습니다.",
     "正在同步，先显示本机缓存": "동기화 중입니다. 먼저 이 휴대폰의 캐시를 표시합니다",
     "离线缓存": "오프라인 캐시",
     "未知时间": "알 수 없는 시간",
@@ -4352,7 +4847,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "请在电脑上生成新版配对二维码。": "컴퓨터에서 새 페어링 QR 코드를 생성하세요.",
     "电脑连接身份不一致。": "컴퓨터 연결 신원이 일치하지 않습니다.",
     "手机身份与原配对不一致，未重新申请授权。": "휴대폰 신원이 원래 페어링과 일치하지 않아 권한을 다시 요청하지 않았습니다.",
-    "原配对恢复期限已过，请在电脑核实授权后重新扫码。": "원래 페어링 복구 기한이 지났습니다. 컴퓨터에서 권한을 확인한 후 다시 스캔하세요.",
+    "原配对恢复期限已过，请在电脑核实授权后重新扫码。":
+        "원래 페어링 복구 기한이 지났습니다. 컴퓨터에서 권한을 확인한 후 다시 스캔하세요.",
     "电脑连接身份与原配对不一致。": "컴퓨터 연결 신원이 원래 페어링과 일치하지 않습니다.",
     "电脑未返回原配对回执。": "컴퓨터가 원래 페어링 영수증을 반환하지 않았습니다.",
     "直连身份验证失败。": "직접 연결 인증에 실패했습니다.",
@@ -4383,7 +4879,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "这项配对已因移除电脑而失效，请重新扫码。": "컴퓨터가 제거되어 이 페어링은 무효가 되었습니다. 다시 스캔하세요.",
     "电脑绑定已变化，请重新扫码。": "컴퓨터 페어링이 변경되었습니다. 다시 스캔하세요.",
     "电脑身份已发生变化，需要先解除旧配对。": "컴퓨터 신원이 변경되었습니다. 먼저 이전 페어링을 해제하세요.",
-    "电脑绑定已变化，未移除新的绑定，请刷新后确认。": "컴퓨터 페어링이 변경되었습니다. 새 페어링은 제거되지 않았습니다. 새로 고쳐 확인하세요.",
+    "电脑绑定已变化，未移除新的绑定，请刷新后确认。":
+        "컴퓨터 페어링이 변경되었습니다. 새 페어링은 제거되지 않았습니다. 새로 고쳐 확인하세요.",
     "设备密钥格式无效，不能继续连接。": "기기 키 형식이 올바르지 않아 연결을 계속할 수 없습니다.",
     "加密组件暂时不可用。": "암호화 구성 요소를 일시적으로 사용할 수 없습니다.",
     "设备身份验证或加密状态校验失败，请重新连接。": "기기 인증 또는 암호화 상태 검증에 실패했습니다. 다시 연결하세요.",
@@ -4397,13 +4894,16 @@ const messageCatalogs = <String, Map<String, String>>{
     "请更新电脑端后再操作，尚未启动或修改配置。": "먼저 컴퓨터 앱을 업데이트하세요. 구성은 아직 시작되거나 변경되지 않았습니다.",
     "原启动回执不匹配。": "원래 실행 영수증이 일치하지 않습니다.",
     "原启动记录与项目或运行配置不匹配，未重新执行。": "원래 실행 기록이 프로젝트나 실행 구성과 일치하지 않아 다시 실행하지 않았습니다.",
-    "运行配置回执与原操作不匹配，请更新电脑端后核实。": "실행 구성 영수증이 원래 작업과 일치하지 않습니다. 컴퓨터 앱을 업데이트한 후 확인하세요.",
-    "电脑没有返回可确认的运行配置结果，请核实原操作。": "컴퓨터가 확인 가능한 실행 구성 결과를 반환하지 않았습니다. 원래 작업을 확인하세요.",
+    "运行配置回执与原操作不匹配，请更新电脑端后核实。":
+        "실행 구성 영수증이 원래 작업과 일치하지 않습니다. 컴퓨터 앱을 업데이트한 후 확인하세요.",
+    "电脑没有返回可确认的运行配置结果，请核实原操作。":
+        "컴퓨터가 확인 가능한 실행 구성 결과를 반환하지 않았습니다. 원래 작업을 확인하세요.",
     "运行配置操作未完成，请核实。": "실행 구성 작업이 완료되지 않았습니다. 확인하세요.",
     "没有待核实的启动操作。": "확인 대기 중인 실행 작업이 없습니다.",
     "电脑未确认原启动已关闭，记录仍保留。": "컴퓨터가 원래 실행이 닫혔는지 확인하지 않았습니다. 기록은 유지됩니다.",
     "原启动结果尚未确认，记录仍保留。": "원래 실행 결과가 확인되지 않았습니다. 기록은 유지됩니다.",
-    "服务地址必须使用 HTTPS；调试版本可使用本机或局域网 IP。": "서비스 주소는 HTTPS를 사용해야 합니다. 디버그 버전은 로컬 또는 LAN IP를 사용할 수 있습니다.",
+    "服务地址必须使用 HTTPS；调试版本可使用本机或局域网 IP。":
+        "서비스 주소는 HTTPS를 사용해야 합니다. 디버그 버전은 로컬 또는 LAN IP를 사용할 수 있습니다.",
     "服务暂时不可用，请稍后重试。": "서비스를 일시적으로 사용할 수 없습니다. 잠시 후 다시 시도하세요.",
     "服务返回了无法识别的响应。": "서비스가 인식할 수 없는 응답을 반환했습니다.",
     "无法连接服务，请检查网络和服务地址。": "서비스에 연결할 수 없습니다. 네트워크와 서비스 주소를 확인하세요.",
@@ -4420,9 +4920,11 @@ const messageCatalogs = <String, Map<String, String>>{
     "事件游标超出范围。": "이벤트 커서가 범위를 벗어났습니다.",
     "电脑离线，重新连接后再浏览目录。": "컴퓨터가 오프라인입니다. 다시 연결한 후 디렉터리를 둘러보세요.",
     "连接已更换，请重新读取目录。": "연결이 변경되었습니다. 디렉터리를 다시 읽으세요.",
-    "电脑未返回有效的目录列表，请更新电脑端后重试。": "컴퓨터가 올바른 디렉터리 목록을 반환하지 않았습니다. 컴퓨터 앱을 업데이트한 후 다시 시도하세요.",
+    "电脑未返回有效的目录列表，请更新电脑端后重试。":
+        "컴퓨터가 올바른 디렉터리 목록을 반환하지 않았습니다. 컴퓨터 앱을 업데이트한 후 다시 시도하세요.",
     "目录分页没有前进，请刷新目录。": "디렉터리 페이지가 진행되지 않았습니다. 디렉터리를 새로 고치세요.",
-    "电脑端暂不支持目录选择，请更新电脑端后重试。": "컴퓨터 앱이 디렉터리 선택을 지원하지 않습니다. 컴퓨터 앱을 업데이트한 후 다시 시도하세요.",
+    "电脑端暂不支持目录选择，请更新电脑端后重试。":
+        "컴퓨터 앱이 디렉터리 선택을 지원하지 않습니다. 컴퓨터 앱을 업데이트한 후 다시 시도하세요.",
     "剪贴板传输响应无效": "클립보드 전송 응답이 올바르지 않습니다",
     "剪贴板传输身份不匹配": "클립보드 전송 ID가 일치하지 않습니다",
     "剪贴板传输校验信息不匹配": "클립보드 전송 검증 정보가 일치하지 않습니다",
@@ -4430,8 +4932,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "剪贴板文字为空或超过 1 MB": "클립보드 텍스트가 비어 있거나 1 MB를 초과합니다",
     "图片传输起始位置无效": "이미지 전송 시작 위치가 올바르지 않습니다",
     "剪贴板上传位置不匹配": "클립보드 업로드 위치가 일치하지 않습니다",
-    "尚未确认电脑剪贴板是否更新，请从电脑获取核实；不会自动重发": "컴퓨터 클립보드가 업데이트되었는지 확인되지 않았습니다. 컴퓨터에서 가져와 확인하세요. 자동으로 다시 보내지 않습니다",
-    "未确认电脑剪贴板已更新，请从电脑获取核实；不会自动重发": "컴퓨터 클립보드 업데이트가 확인되지 않았습니다. 컴퓨터에서 가져와 확인하세요. 자동으로 다시 보내지 않습니다",
+    "尚未确认电脑剪贴板是否更新，请从电脑获取核实；不会自动重发":
+        "컴퓨터 클립보드가 업데이트되었는지 확인되지 않았습니다. 컴퓨터에서 가져와 확인하세요. 자동으로 다시 보내지 않습니다",
+    "未确认电脑剪贴板已更新，请从电脑获取核实；不会自动重发":
+        "컴퓨터 클립보드 업데이트가 확인되지 않았습니다. 컴퓨터에서 가져와 확인하세요. 자동으로 다시 보내지 않습니다",
     "剪贴板写入回执不完整，请从电脑获取核实": "클립보드 쓰기 영수증이 불완전합니다. 컴퓨터에서 가져와 확인하세요",
     "剪贴板下载数据块过大": "클립보드 다운로드 데이터 블록이 너무 큽니다",
     "剪贴板下载位置不匹配": "클립보드 다운로드 위치가 일치하지 않습니다",
@@ -4444,7 +4948,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "未获取到通知设备身份。": "알림 기기 ID를 가져오지 못했습니다.",
     "这台电脑已移除，未发送停止请求。": "이 컴퓨터가 제거되어 중지 요청을 보내지 않았습니다.",
     "这个任务已经有一个停止请求在等待确认。": "이 작업에는 이미 확인 대기 중인 중지 요청이 있습니다.",
-    "等待确认的停止请求太多，请先处理待处理页里的卡片。": "확인 대기 중인 중지 요청이 너무 많습니다. 먼저 처리 대기 페이지의 카드를 처리하세요.",
+    "等待确认的停止请求太多，请先处理待处理页里的卡片。":
+        "확인 대기 중인 중지 요청이 너무 많습니다. 먼저 처리 대기 페이지의 카드를 처리하세요.",
     "任务当前没有可停止的运行。": "이 작업에는 중지할 수 있는 실행이 없습니다.",
     "暂时无法读取任务状态，请稍后再确认。": "작업 상태를 읽을 수 없습니다. 잠시 후 다시 확인하세요.",
     "这台电脑已移除，未重新发送停止请求。": "이 컴퓨터가 제거되어 중지 요청을 다시 보내지 않았습니다.",
@@ -4460,7 +4965,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "一次最多发送 16 个附件。": "한 번에 최대 16개의 첨부 파일을 보낼 수 있습니다.",
     "附件上传已暂停，可继续原上传。": "첨부 파일 업로드가 일시 중지되었습니다. 원래 업로드를 재개할 수 있습니다.",
     "附件回执与原文件不一致，未发送任务。": "첨부 파일 영수증이 원래 파일과 일치하지 않아 작업을 보내지 않았습니다.",
-    "本机附件内容已变化，请重新添加；未上传变化后的文件。": "이 휴대폰의 첨부 파일 내용이 변경되었습니다. 다시 추가하세요. 변경된 파일은 업로드되지 않았습니다.",
+    "本机附件内容已变化，请重新添加；未上传变化后的文件。":
+        "이 휴대폰의 첨부 파일 내용이 변경되었습니다. 다시 추가하세요. 변경된 파일은 업로드되지 않았습니다.",
     "电脑端暂不支持附件上传，请更新电脑端。": "컴퓨터 앱이 첨부 파일 업로드를 지원하지 않습니다. 컴퓨터 앱을 업데이트하세요.",
     "电脑返回的附件位置无效。": "컴퓨터가 반환한 첨부 파일 위치가 올바르지 않습니다.",
     "附件分块位置未确认，请继续原上传。": "첨부 파일 분할 위치가 확인되지 않았습니다. 원래 업로드를 재개하세요.",
@@ -4480,23 +4986,31 @@ const messageCatalogs = <String, Map<String, String>>{
     "终端关闭记录暂时无法读取，请检查系统安全存储。": "터미널 닫기 기록을 읽을 수 없습니다. 시스템 보안 저장소를 확인하세요.",
     "已配对电脑暂时无法读取，请检查系统安全存储。": "페어링된 컴퓨터를 읽을 수 없습니다. 시스템 보안 저장소를 확인하세요.",
     "电脑绑定已变化，未使用旧页面接管新的连接。": "컴퓨터 페어링이 변경되어 이전 페이지가 새 연결을 이어받지 않았습니다.",
-    "连接中断，正在重新连接。已发送操作不会重复执行。": "연결이 끊겼습니다. 다시 연결하는 중입니다. 보낸 작업은 두 번 실행되지 않습니다.",
+    "连接中断，正在重新连接。已发送操作不会重复执行。":
+        "연결이 끊겼습니다. 다시 연결하는 중입니다. 보낸 작업은 두 번 실행되지 않습니다.",
     "连接已断开。电脑上的任务不会因此停止。": "연결이 끊겼습니다. 컴퓨터의 작업은 계속 실행됩니다.",
-    "移除未完成，连接已关闭；请重试移除或核实安全存储。": "제거가 완료되지 않았습니다. 연결이 닫혔습니다. 제거를 다시 시도하거나 보안 저장소를 확인하세요.",
+    "移除未完成，连接已关闭；请重试移除或核实安全存储。":
+        "제거가 완료되지 않았습니다. 연결이 닫혔습니다. 제거를 다시 시도하거나 보안 저장소를 확인하세요.",
     "离线缓存未能保存：{0}": "오프라인 캐시를 저장하지 못했습니다: {0}",
     "待确认的操作暂时无法读取，请检查系统安全存储。": "확인 대기 중인 작업을 읽을 수 없습니다. 시스템 보안 저장소를 확인하세요.",
-    "无法读取后台提醒设置，请检查系统安全存储后重试。": "백그라운드 알림 설정을 읽을 수 없습니다. 시스템 보안 저장소를 확인한 후 다시 시도하세요.",
+    "无法读取后台提醒设置，请检查系统安全存储后重试。":
+        "백그라운드 알림 설정을 읽을 수 없습니다. 시스템 보안 저장소를 확인한 후 다시 시도하세요.",
     "部分电脑的通知尚未登记，请检查网络后重新检测。": "일부 컴퓨터의 알림이 등록되지 않았습니다. 네트워크를 확인한 후 다시 확인하세요.",
-    "后台提醒尚未启用，请核实系统通知权限和通知服务配置后重试。": "백그라운드 알림이 켜져 있지 않습니다. 시스템 알림 권한과 알림 서비스 설정을 확인한 후 다시 시도하세요.",
+    "后台提醒尚未启用，请核实系统通知权限和通知服务配置后重试。":
+        "백그라운드 알림이 켜져 있지 않습니다. 시스템 알림 권한과 알림 서비스 설정을 확인한 후 다시 시도하세요.",
     "Git 操作已完成": "Git 작업이 완료되었습니다",
-    "已经提交，还不确定是否推送成功，可以重新发送推送。": "커밋했지만 푸시 성공 여부가 확인되지 않았습니다. 푸시를 다시 보낼 수 있습니다.",
+    "已经提交，还不确定是否推送成功，可以重新发送推送。":
+        "커밋했지만 푸시 성공 여부가 확인되지 않았습니다. 푸시를 다시 보낼 수 있습니다.",
     "提交已完成，推送失败：{0}": "커밋은 완료되었지만 푸시에 실패했습니다: {0}",
     "Git 操作失败：{0}": "Git 작업 실패: {0}",
     "电脑正在执行 Git 操作，稍后再确认。": "컴퓨터에서 Git 작업을 실행 중입니다. 잠시 후 확인하세요.",
-    "Git 操作中途中断了，请在「变更」里看一下仓库现在的状态。": "Git 작업이 중간에 중단되었습니다. '변경 사항'에서 저장소의 현재 상태를 확인하세요.",
-    "Git 操作只完成了一部分，请先在「变更」里看一下再继续。": "Git 작업이 일부만 완료되었습니다. 계속하기 전에 '변경 사항'에서 확인하세요.",
+    "Git 操作中途中断了，请在「变更」里看一下仓库现在的状态。":
+        "Git 작업이 중간에 중단되었습니다. '변경 사항'에서 저장소의 현재 상태를 확인하세요.",
+    "Git 操作只完成了一部分，请先在「变更」里看一下再继续。":
+        "Git 작업이 일부만 완료되었습니다. 계속하기 전에 '변경 사항'에서 확인하세요.",
     "已不再等待这次 Git 操作。": "이 Git 작업 대기를 중지했습니다.",
-    "电脑上还查不到这次 Git 操作，可能没收到，可以重新发送。": "컴퓨터에 아직 이 Git 작업 기록이 없습니다. 전달되지 않았을 수 있으니 다시 보낼 수 있습니다.",
+    "电脑上还查不到这次 Git 操作，可能没收到，可以重新发送。":
+        "컴퓨터에 아직 이 Git 작업 기록이 없습니다. 전달되지 않았을 수 있으니 다시 보낼 수 있습니다.",
     "还不确定文件是否已暂存，所以没有继续提交。": "파일이 스테이징되었는지 확실하지 않아 커밋을 계속하지 않았습니다.",
     "暂存回执与原文件选择不一致，未重新执行。": "스테이징 영수증이 원래 파일 선택과 일치하지 않아 다시 실행하지 않았습니다.",
     "Git 操作无效。": "잘못된 Git 작업입니다.",
@@ -4516,7 +5030,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "无法确认通知设置，请检查网络后重新读取。": "알림 설정을 확인할 수 없습니다. 네트워크를 확인한 후 다시 불러오세요.",
     "电脑没有收到这次设置，请再试一次。": "컴퓨터가 이 설정을 받지 못했습니다. 다시 시도하세요.",
     "电脑返回的保持唤醒状态无效。": "컴퓨터가 반환한 절전 방지 상태가 올바르지 않습니다.",
-    "待发送的输入过多，本次未发送，请缩短输入后再试。": "보낼 입력이 너무 많아 이번에는 보내지 않았습니다. 입력을 줄인 후 다시 시도하세요.",
+    "待发送的输入过多，本次未发送，请缩短输入后再试。":
+        "보낼 입력이 너무 많아 이번에는 보내지 않았습니다. 입력을 줄인 후 다시 시도하세요.",
     "终端页面已离开，未继续发送输入。": "터미널 페이지를 나가 입력 전송을 중단했습니다.",
     "终端输入回执不匹配": "터미널 입력 영수증이 일치하지 않습니다",
     "请更新电脑端后输入；终端输出仍可查看。": "입력하려면 컴퓨터 앱을 업데이트하세요. 터미널 출력은 계속 볼 수 있습니다.",
@@ -4525,16 +5040,23 @@ const messageCatalogs = <String, Map<String, String>>{
     "终端输入连接已改变，请检查后继续。": "터미널 입력 연결이 변경되었습니다. 확인한 후 계속하세요.",
     "输入连接仍在切换，请稍后检查并继续。": "입력 연결이 아직 전환 중입니다. 잠시 후 확인하고 계속하세요.",
     "上次输入结果待核实，请检查终端输出后再继续。": "이전 입력 결과가 확인되지 않았습니다. 터미널 출력을 확인한 후 계속하세요.",
-    "输入结果尚未确认，请核实或检查终端后继续；不会重发原输入。": "입력 결과가 확인되지 않았습니다. 확인하거나 터미널을 점검한 후 계속하세요. 원래 입력은 다시 보내지 않습니다.",
-    "终端连接中断，输入结果待核实；未发送的队列已丢弃，不会自动重发。": "터미널 연결이 끊겨 입력 결과를 확인해야 합니다. 보내지 않은 대기열은 삭제되었으며 자동으로 다시 보내지 않습니다.",
-    "原输入仍未确认或通道已改变，请检查终端输出后继续；不会重发。": "원래 입력이 아직 확인되지 않았거나 채널이 변경되었습니다. 터미널 출력을 확인한 후 계속하세요. 다시 보내지 않습니다.",
-    "暂时无法核实输入，请连接后再试；不会重发原输入。": "입력을 확인할 수 없습니다. 연결한 후 다시 시도하세요. 원래 입력은 다시 보내지 않습니다.",
+    "输入结果尚未确认，请核实或检查终端后继续；不会重发原输入。":
+        "입력 결과가 확인되지 않았습니다. 확인하거나 터미널을 점검한 후 계속하세요. 원래 입력은 다시 보내지 않습니다.",
+    "终端连接中断，输入结果待核实；未发送的队列已丢弃，不会自动重发。":
+        "터미널 연결이 끊겨 입력 결과를 확인해야 합니다. 보내지 않은 대기열은 삭제되었으며 자동으로 다시 보내지 않습니다.",
+    "原输入仍未确认或通道已改变，请检查终端输出后继续；不会重发。":
+        "원래 입력이 아직 확인되지 않았거나 채널이 변경되었습니다. 터미널 출력을 확인한 후 계속하세요. 다시 보내지 않습니다.",
+    "暂时无法核实输入，请连接后再试；不会重发原输入。":
+        "입력을 확인할 수 없습니다. 연결한 후 다시 시도하세요. 원래 입력은 다시 보내지 않습니다.",
     "输入连接尚未恢复，请稍后再试。": "입력 연결이 아직 복구되지 않았습니다. 잠시 후 다시 시도하세요.",
     "这台电脑已移除，未发送关闭请求。": "이 컴퓨터가 제거되어 닫기 요청을 보내지 않았습니다.",
     "这个终端已经有一个关闭请求在等待确认。": "이 터미널에는 이미 확인 대기 중인 닫기 요청이 있습니다.",
-    "等待确认的关闭请求太多，请先处理待处理页里的卡片。": "확인 대기 중인 닫기 요청이 너무 많습니다. 먼저 처리 대기 페이지의 카드를 처리하세요.",
-    "原终端关闭结果尚未确认，请核实结束后再启动这个运行配置。": "원래 터미널 닫기 결과가 확인되지 않았습니다. 종료를 확인한 후 이 실행 구성을 시작하세요.",
-    "请更新电脑端后再关闭终端，当前版本无法核实原终端身份。": "터미널을 닫으려면 컴퓨터 앱을 업데이트하세요. 현재 버전으로는 원래 터미널의 신원을 확인할 수 없습니다.",
+    "等待确认的关闭请求太多，请先处理待处理页里的卡片。":
+        "확인 대기 중인 닫기 요청이 너무 많습니다. 먼저 처리 대기 페이지의 카드를 처리하세요.",
+    "原终端关闭结果尚未确认，请核实结束后再启动这个运行配置。":
+        "원래 터미널 닫기 결과가 확인되지 않았습니다. 종료를 확인한 후 이 실행 구성을 시작하세요.",
+    "请更新电脑端后再关闭终端，当前版本无法核实原终端身份。":
+        "터미널을 닫으려면 컴퓨터 앱을 업데이트하세요. 현재 버전으로는 원래 터미널의 신원을 확인할 수 없습니다.",
     "终端身份不完整，请刷新后再关闭。": "터미널 신원이 불완전합니다. 새로 고친 후 닫으세요.",
     "终端已经重新启动过，没有关闭新的终端。": "터미널이 다시 시작되어 새 터미널은 닫지 않았습니다.",
     "终端不存在": "터미널이 존재하지 않습니다",
@@ -4546,7 +5068,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "还不确定终端是否已关闭，可以稍后再确认。": "터미널이 닫혔는지 아직 확실하지 않습니다. 잠시 후 다시 확인하세요.",
     "请选择有效的审查问题。": "올바른 검토 문제를 선택하세요.",
     "审查回执与原请求不匹配，请保留原操作并核实。": "검토 영수증이 원래 요청과 일치하지 않습니다. 원래 작업을 유지하고 확인하세요.",
-    "修复回执与原请求不匹配，请先核实电脑上的原修复。": "수정 영수증이 원래 요청과 일치하지 않습니다. 먼저 컴퓨터의 원래 수정을 확인하세요.",
+    "修复回执与原请求不匹配，请先核实电脑上的原修复。":
+        "수정 영수증이 원래 요청과 일치하지 않습니다. 먼저 컴퓨터의 원래 수정을 확인하세요.",
     "无法读取审查记录，请更新电脑端后重试。": "검토 기록을 읽을 수 없습니다. 컴퓨터 앱을 업데이트한 후 다시 시도하세요.",
     "消息分片取消标识无效。": "메시지 조각 취소 플래그가 올바르지 않습니다.",
     "消息大小超出范围。": "메시지 크기가 범위를 벗어났습니다.",
@@ -4567,8 +5090,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "Fork 回执与原请求不一致。": "Fork 영수증이 원래 요청과 일치하지 않습니다.",
     "这项操作需要先核实结果。": "이 작업은 먼저 결과를 확인해야 합니다.",
     "这台电脑已移除，未再发送请求。": "이 컴퓨터가 제거되어 요청을 다시 보내지 않았습니다.",
-    "原电脑记录尚未清理完成，请重试移除电脑后再连接。": "원래 컴퓨터 기록이 아직 완전히 정리되지 않았습니다. 컴퓨터 제거를 다시 시도한 후 연결하세요.",
-    "电脑绑定已变化，未发送原操作；请重新连接后确认。": "컴퓨터 페어링이 변경되어 원래 작업을 보내지 않았습니다. 다시 연결한 후 확인하세요.",
+    "原电脑记录尚未清理完成，请重试移除电脑后再连接。":
+        "원래 컴퓨터 기록이 아직 완전히 정리되지 않았습니다. 컴퓨터 제거를 다시 시도한 후 연결하세요.",
+    "电脑绑定已变化，未发送原操作；请重新连接后确认。":
+        "컴퓨터 페어링이 변경되어 원래 작업을 보내지 않았습니다. 다시 연결한 후 확인하세요.",
     "原操作已结束或已更新，请刷新后操作。": "원래 작업이 종료되었거나 업데이트되었습니다. 새로 고친 후 진행하세요.",
     "中继连接中断，操作结果需要核实。": "릴레이 연결이 끊겼습니다. 작업 결과를 확인해야 합니다.",
     "中继探针仅供本地开发使用。": "릴레이 프로브는 로컬 개발 전용입니다.",
@@ -4589,7 +5114,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "电脑绑定已变化，未覆盖原草稿。": "컴퓨터 페어링이 변경되어 원래 임시 저장을 덮어쓰지 않았습니다.",
     "本机保存的数据不可读取": "이 휴대폰에 저장된 데이터를 읽을 수 없습니다",
     "附件大小或标识无效": "첨부 파일 크기 또는 ID가 올바르지 않습니다",
-    "手机未发送附件已超过 256 MB，请先发送或移除其他草稿中的附件。": "휴대폰에서 보내지 않은 첨부 파일이 256 MB를 넘었습니다. 먼저 다른 임시 저장의 첨부 파일을 보내거나 제거하세요.",
+    "手机未发送附件已超过 256 MB，请先发送或移除其他草稿中的附件。":
+        "휴대폰에서 보내지 않은 첨부 파일이 256 MB를 넘었습니다. 먼저 다른 임시 저장의 첨부 파일을 보내거나 제거하세요.",
     "附件标识无效": "첨부 파일 ID가 올바르지 않습니다",
     "本机附件已不可读取，请重新添加。": "이 휴대폰의 첨부 파일을 더 이상 읽을 수 없습니다. 다시 추가하세요.",
     "本机附件大小已变化。": "이 휴대폰의 첨부 파일 크기가 변경되었습니다.",
@@ -4599,13 +5125,16 @@ const messageCatalogs = <String, Map<String, String>>{
     "始终允许": "항상 허용",
     "取消操作": "작업 취소",
     "{0} · {1} 个目录": "{0} · 디렉터리 {1}개",
-    "{0} 上还没有项目。新建项目时选择电脑上的已有目录。": "{0}에 아직 프로젝트가 없습니다. 컴퓨터의 기존 디렉터리로 새 프로젝트를 만드세요.",
+    "{0} 上还没有项目。新建项目时选择电脑上的已有目录。":
+        "{0}에 아직 프로젝트가 없습니다. 컴퓨터의 기존 디렉터리로 새 프로젝트를 만드세요.",
     "{0} 个会话运行中": "대화 {0}개 실행 중",
     "不在项目中工作": "프로젝트 밖에서 작업",
     "主目录": "주 디렉터리",
-    "主目录是会话默认的工作目录；附加目录同样对 Agent 可见。从项目中移除目录不会删除电脑上的文件。": "대화는 주 디렉터리에서 시작됩니다. 추가 디렉터리도 Agent가 볼 수 있습니다. 프로젝트에서 디렉터리를 제거해도 컴퓨터의 파일은 삭제되지 않습니다.",
+    "主目录是会话默认的工作目录；附加目录同样对 Agent 可见。从项目中移除目录不会删除电脑上的文件。":
+        "대화는 주 디렉터리에서 시작됩니다. 추가 디렉터리도 Agent가 볼 수 있습니다. 프로젝트에서 디렉터리를 제거해도 컴퓨터의 파일은 삭제되지 않습니다.",
     "从项目中移除": "프로젝트에서 제거",
-    "保存结果待核实，请刷新后查看项目，不要重复保存。": "저장 결과가 확인되지 않았습니다. 새로 고친 후 프로젝트를 확인하고 다시 저장하지 마세요.",
+    "保存结果待核实，请刷新后查看项目，不要重复保存。":
+        "저장 결과가 확인되지 않았습니다. 새로 고친 후 프로젝트를 확인하고 다시 저장하지 마세요.",
     "保留会话和电脑上的文件，可随时恢复": "대화와 컴퓨터의 파일은 유지되며 언제든지 복원할 수 있습니다",
     "名称和目录": "이름 및 디렉터리",
     "已移除项目（{0}）": "제거된 프로젝트({0})",
@@ -4632,11 +5161,13 @@ const messageCatalogs = <String, Map<String, String>>{
     "选择此目录": "이 디렉터리 선택",
     "选择目录": "디렉터리 선택",
     "项目不存在": "프로젝트를 찾을 수 없습니다",
-    "项目会从列表中隐藏。会话和电脑上的文件都会保留，可在「已移除项目」中恢复。": "프로젝트가 목록에서 숨겨집니다. 대화와 컴퓨터의 파일은 유지되며 '제거된 프로젝트'에서 복원할 수 있습니다.",
+    "项目会从列表中隐藏。会话和电脑上的文件都会保留，可在「已移除项目」中恢复。":
+        "프로젝트가 목록에서 숨겨집니다. 대화와 컴퓨터의 파일은 유지되며 '제거된 프로젝트'에서 복원할 수 있습니다.",
     "项目名称": "프로젝트 이름",
     "项目操作": "프로젝트 작업",
     "项目状态无效。": "프로젝트 상태가 올바르지 않습니다.",
-    "会话、项目和待处理都在电脑上，连接后即可使用。": "대화, 프로젝트, 처리 대기 항목은 컴퓨터에 있습니다. 연결하면 사용할 수 있습니다.",
+    "会话、项目和待处理都在电脑上，连接后即可使用。":
+        "대화, 프로젝트, 처리 대기 항목은 컴퓨터에 있습니다. 연결하면 사용할 수 있습니다.",
     "项目已在电脑上添加，可在「项目」中查看。": "컴퓨터에 프로젝트를 추가했습니다. '프로젝트'에서 확인하세요.",
     "正在连接电脑": "컴퓨터에 연결하는 중",
     "暂时连接不上电脑": "컴퓨터에 연결할 수 없음",
@@ -4681,12 +5212,16 @@ const messageCatalogs = <String, Map<String, String>>{
     "搜索内容": "검색 내용",
     "请求的工具": "요청한 도구",
     "审批详情格式不完整，请让 Agent 重新发起审批。": "승인 세부 정보가 불완전합니다. Agent에게 승인을 다시 요청하게 하세요.",
-    "操作详情过长，下方仅展示部分内容。请让 Agent 拆分操作后重新发起审批，以查看完整范围。": "세부 정보가 너무 길어 일부만 표시됩니다. 전체 범위를 보려면 Agent에게 작업을 나눠 다시 승인을 요청하게 하세요.",
-    "Agent 未提供文件修改范围，请让 Agent 补充文件路径和修改内容。": "Agent가 변경할 파일을 알려 주지 않았습니다. 파일 경로와 변경 내용을 추가하게 하세요.",
-    "未能从审批请求中读取文件路径、命令或修改内容，请让 Agent 补充详情后重新发起审批。": "이 요청에서 파일 경로, 명령 또는 변경 내용을 읽지 못했습니다. Agent에게 세부 정보를 추가해 다시 승인을 요청하게 하세요.",
+    "操作详情过长，下方仅展示部分内容。请让 Agent 拆分操作后重新发起审批，以查看完整范围。":
+        "세부 정보가 너무 길어 일부만 표시됩니다. 전체 범위를 보려면 Agent에게 작업을 나눠 다시 승인을 요청하게 하세요.",
+    "Agent 未提供文件修改范围，请让 Agent 补充文件路径和修改内容。":
+        "Agent가 변경할 파일을 알려 주지 않았습니다. 파일 경로와 변경 내용을 추가하게 하세요.",
+    "未能从审批请求中读取文件路径、命令或修改内容，请让 Agent 补充详情后重新发起审批。":
+        "이 요청에서 파일 경로, 명령 또는 변경 내용을 읽지 못했습니다. Agent에게 세부 정보를 추가해 다시 승인을 요청하게 하세요.",
     "收起": "접기",
     "展开全部": "모두 보기",
-    "电脑已记录你的决定，但 Agent 已不在等待，请在会话中查看。": "컴퓨터가 결정을 기록했지만 Agent가 더 이상 기다리지 않습니다. 대화에서 확인하세요.",
+    "电脑已记录你的决定，但 Agent 已不在等待，请在会话中查看。":
+        "컴퓨터가 결정을 기록했지만 Agent가 더 이상 기다리지 않습니다. 대화에서 확인하세요.",
     "已取消回答": "답변 취소됨",
     "已处理": "처리됨",
     "你的选择：{0}": "선택: {0}",
@@ -4696,11 +5231,13 @@ const messageCatalogs = <String, Map<String, String>>{
     "清空已处理记录？": "처리된 기록을 지울까요?",
     "只从这部手机删除，等待处理的请求不受影响。": "이 휴대폰에서만 삭제되며, 대기 중인 요청은 유지됩니다.",
     "没有权限请求": "권한 요청 없음",
-    "Agent 需要运行命令或修改文件时，会在这里请你确认。": "Agent가 명령을 실행하거나 파일을 변경해야 할 때 여기에서 확인을 요청합니다.",
+    "Agent 需要运行命令或修改文件时，会在这里请你确认。":
+        "Agent가 명령을 실행하거나 파일을 변경해야 할 때 여기에서 확인을 요청합니다.",
     "没有待回答的问题": "답변할 질문 없음",
     "Agent 需要你做选择或补充信息时，问题会出现在这里。": "Agent가 선택이나 추가 정보가 필요할 때 질문이 여기에 표시됩니다.",
     "收件箱是空的": "받은편지함이 비어 있습니다",
-    "Agent 请求权限或向你提问时会出现在这里，处理过的记录也会保留，方便回看。": "Agent의 권한 요청과 질문이 여기에 표시됩니다. 처리한 항목도 남아 있어 다시 볼 수 있습니다.",
+    "Agent 请求权限或向你提问时会出现在这里，处理过的记录也会保留，方便回看。":
+        "Agent의 권한 요청과 질문이 여기에 표시됩니다. 처리한 항목도 남아 있어 다시 볼 수 있습니다.",
     "等待你回答": "답변 대기 중",
     "等待你确认": "확인 대기 중",
     "权限请求": "권한 요청",
@@ -4712,7 +5249,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "不中断任务；所有操作和决策均自动进行。": "중단하지 않고 모든 작업과 결정을 자동으로 진행합니다.",
     "受保护的工具操作前请求审批。": "보호된 도구 작업 전에 승인을 요청합니다.",
     "关闭沙箱并跳过审批。": "샌드박스를 끄고 승인을 건너뜁니다.",
-    "每次工具执行前在此审批；审批桥不可用时拒绝执行。": "도구 실행을 여기서 하나씩 승인합니다. 승인 브리지를 사용할 수 없으면 실행이 거부됩니다.",
+    "每次工具执行前在此审批；审批桥不可用时拒绝执行。":
+        "도구 실행을 여기서 하나씩 승인합니다. 승인 브리지를 사용할 수 없으면 실행이 거부됩니다.",
     "OpenCode 默认 Agent；工具按你配置的权限执行。": "OpenCode 기본 Agent입니다. 도구는 설정한 권한을 따릅니다.",
     "编辑文件和其他受保护操作前请求审批。": "파일 수정이나 기타 보호된 작업 전에 승인을 요청합니다.",
     "只分析，不修改文件或执行命令。": "파일을 수정하거나 명령을 실행하지 않고 분석합니다.",
@@ -4721,15 +5259,18 @@ const messageCatalogs = <String, Map<String, String>>{
     "按需确认": "필요할 때 확인",
     "只读模式": "읽기 전용",
     "所选策略在下一轮执行时生效": "선택한 정책은 다음 턴부터 적용됩니다",
-    "从不弹出确认；只运行预先允许和安全的只读操作，其余一律拒绝。": "확인 창을 표시하지 않습니다. 사전 허용된 안전한 읽기 작업만 실행하고 나머지는 거부합니다.",
-    "Pi 不内置逐工具审批或沙箱；工具直接执行，扩展发起的询问会显示在对话中。": "Pi에는 도구별 승인이나 샌드박스가 없습니다. 도구는 바로 실행되며 확장 프로그램의 질문은 대화에 표시됩니다.",
+    "从不弹出确认；只运行预先允许和安全的只读操作，其余一律拒绝。":
+        "확인 창을 표시하지 않습니다. 사전 허용된 안전한 읽기 작업만 실행하고 나머지는 거부합니다.",
+    "Pi 不内置逐工具审批或沙箱；工具直接执行，扩展发起的询问会显示在对话中。":
+        "Pi에는 도구별 승인이나 샌드박스가 없습니다. 도구는 바로 실행되며 확장 프로그램의 질문은 대화에 표시됩니다.",
     "跳过审批": "승인 건너뛰기",
     "仅限预先允许": "사전 허용만",
     "自动判断": "자동",
     "监督模式：工具操作前请求审批。": "감독 모드: 도구 작업 전에 승인을 요청합니다.",
     "由 ZCode 判断哪些操作可直接执行。": "어떤 작업을 바로 실행할지 ZCode가 판단합니다.",
     "只运行预先允许的工具，其余直接拒绝，不请求审批。": "미리 허용된 도구만 실행하고 나머지는 묻지 않고 거부합니다.",
-    "由 AI 审查员批准或拒绝原本需要询问的操作；审查失败只阻止该操作。": "원래 확인이 필요한 작업을 AI 검토자가 승인하거나 거부합니다. 검토에 실패하면 해당 작업만 차단됩니다.",
+    "由 AI 审查员批准或拒绝原本需要询问的操作；审查失败只阻止该操作。":
+        "원래 확인이 필요한 작업을 AI 검토자가 승인하거나 거부합니다. 검토에 실패하면 해당 작업만 차단됩니다.",
     "由 Claude 自动分类权限请求。": "Claude가 권한 요청을 자동으로 분류하게 합니다.",
     "完全访问": "전체 액세스",
     "编辑前先出计划。": "편집 전에 계획을 세웁니다.",
@@ -4742,8 +5283,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "按 Cursor 权限规则执行；需要审批的操作在此确认。": "Cursor 권한 규칙을 따르며, 승인이 필요한 작업은 여기서 확인합니다.",
     "计划模式": "계획 모드",
     "对所有 Agent 跳过全部权限检查，包括危险命令。": "모든 Agent에 대해 위험한 명령을 포함한 모든 권한 검사를 건너뜁니다.",
-    "此 Agent 未报告可切换的权限模式；审批请求仍会显示在对话中。": "이 Agent는 전환 가능한 권한 모드를 보고하지 않습니다. 승인 요청은 계속 대화에 표시됩니다.",
-    "原 Agent、模型、思考强度或权限策略当前不可用，请重新选择后发送。": "원래 Agent, 모델, 추론 강도 또는 권한 정책을 사용할 수 없습니다. 다시 선택한 후 보내세요.",
+    "此 Agent 未报告可切换的权限模式；审批请求仍会显示在对话中。":
+        "이 Agent는 전환 가능한 권한 모드를 보고하지 않습니다. 승인 요청은 계속 대화에 표시됩니다.",
+    "原 Agent、模型、思考强度或权限策略当前不可用，请重新选择后发送。":
+        "원래 Agent, 모델, 추론 강도 또는 권한 정책을 사용할 수 없습니다. 다시 선택한 후 보내세요.",
     "计划模式；禁用所有编辑工具。": "계획 모드입니다. 모든 편집 도구가 비활성화됩니다.",
     "每个工具首次使用时请求授权。": "각 도구를 처음 사용할 때 권한을 요청합니다.",
     "本会话内自动接受文件编辑。": "이 세션의 파일 편집을 자동으로 수락합니다.",
@@ -4756,20 +5299,25 @@ const messageCatalogs = <String, Map<String, String>>{
     "工作区写入沙箱；需要越出沙箱时请求审批。": "작업 공간 쓰기 샌드박스입니다. 샌드박스를 벗어날 때만 승인을 요청합니다.",
     "允许所有工具操作，无需审批。": "모든 도구 작업을 승인 없이 허용합니다.",
     "探索并制定计划；使用 Claude 原生计划模式。": "Claude의 기본 계획 모드로 탐색하고 계획을 세웁니다.",
-    "使用 Antigravity 原生计划模式；工具执行仍在此审批。": "Antigravity의 기본 계획 모드를 사용합니다. 도구 실행은 계속 여기서 승인합니다.",
+    "使用 Antigravity 原生计划模式；工具执行仍在此审批。":
+        "Antigravity의 기본 계획 모드를 사용합니다. 도구 실행은 계속 여기서 승인합니다.",
     "自动批准操作；明确禁止的操作和团队限制仍然生效。": "작업을 자동으로 승인합니다. 명시적으로 금지된 작업과 팀 제한은 계속 적용됩니다.",
-    "常规编辑和命令自动执行；高风险操作、提问和计划仍会询问。": "일반 편집과 명령은 자동 실행하고, 위험한 작업·질문·계획은 계속 묻습니다.",
+    "常规编辑和命令自动执行；高风险操作、提问和计划仍会询问。":
+        "일반 편집과 명령은 자동 실행하고, 위험한 작업·질문·계획은 계속 묻습니다.",
     "正在响应": "응답 중",
     "分叉 · {0}": "분기 · {0}",
     "分叉自较早的会话": "이전 대화에서 분기됨",
     "分叉自": "분기 원본:",
-    "已恢复所选轮次结束时的文件，未提交的成果可在“变更”中查看。": "선택한 턴이 끝난 시점으로 파일을 복원했습니다. 커밋되지 않은 작업은 변경 사항에서 볼 수 있습니다.",
-    "此项目不是 Git 仓库，分叉只继承对话上下文，并沿用同一项目目录。": "이 프로젝트는 Git 저장소가 아니므로 분기는 대화만 이어받고 같은 프로젝트 폴더에서 계속합니다.",
+    "已恢复所选轮次结束时的文件，未提交的成果可在“变更”中查看。":
+        "선택한 턴이 끝난 시점으로 파일을 복원했습니다. 커밋되지 않은 작업은 변경 사항에서 볼 수 있습니다.",
+    "此项目不是 Git 仓库，分叉只继承对话上下文，并沿用同一项目目录。":
+        "이 프로젝트는 Git 저장소가 아니므로 분기는 대화만 이어받고 같은 프로젝트 폴더에서 계속합니다.",
     "此会话由旧版分叉创建，未恢复历史轮次的文件。": "이 대화는 이전 버전의 분기로 생성되어 해당 턴의 파일이 복원되지 않았습니다.",
     "沿用同一项目目录；分叉不会还原文件。": "같은 프로젝트 폴더를 사용하며, 분기해도 파일은 복원되지 않습니다.",
     "收起继承的上下文": "이어받은 맥락 숨기기",
     "查看继承的上下文（{0} 轮）": "이어받은 맥락 보기 ({0}턴)",
-    "Agent 已获得以上上下文，在下方发送消息即可从这里继续。": "에이전트가 이미 이 맥락을 알고 있습니다. 아래에 메시지를 보내 여기서부터 이어가세요.",
+    "Agent 已获得以上上下文，在下方发送消息即可从这里继续。":
+        "에이전트가 이미 이 맥락을 알고 있습니다. 아래에 메시지를 보내 여기서부터 이어가세요.",
   },
   "fr": {
     "返回": "Retour",
@@ -4804,34 +5352,47 @@ const messageCatalogs = <String, Map<String, String>>{
     "连接中": "Connexion",
     "离线": "Hors ligne",
     "终端": "Terminal",
-    "连接超时，请检查网络后重试。": "La connexion a expiré. Vérifiez votre réseau et réessayez.",
+    "连接超时，请检查网络后重试。":
+        "La connexion a expiré. Vérifiez votre réseau et réessayez.",
     "电脑 {0}": "Ordinateur {0}",
     "电脑离线": "Ordinateur hors ligne",
     "已提交并推送": "Commit et push effectués",
-    "电脑绑定已改变，请返回设备列表。": "L’appairage de l’ordinateur a changé. Revenez à la liste des appareils.",
-    "任务或远控期间保持唤醒": "Rester éveillé pendant les tâches ou le contrôle à distance",
-    "电脑离线，重连后刷新设置": "Ordinateur hors ligne. Reconnectez-vous pour actualiser les réglages.",
-    "阻止空闲睡眠，仍可锁屏或手动睡眠": "Empêche la mise en veille automatique. Vous pouvez toujours verrouiller ou mettre en veille manuellement.",
+    "电脑绑定已改变，请返回设备列表。":
+        "L’appairage de l’ordinateur a changé. Revenez à la liste des appareils.",
+    "任务或远控期间保持唤醒":
+        "Rester éveillé pendant les tâches ou le contrôle à distance",
+    "电脑离线，重连后刷新设置":
+        "Ordinateur hors ligne. Reconnectez-vous pour actualiser les réglages.",
+    "阻止空闲睡眠，仍可锁屏或手动睡眠":
+        "Empêche la mise en veille automatique. Vous pouvez toujours verrouiller ou mettre en veille manuellement.",
     "电脑暂未能保持唤醒：{0}": "Impossible de garder l’ordinateur éveillé : {0}",
     "刷新保持唤醒设置": "Actualiser le réglage de maintien en éveil",
     "电脑": "Ordinateurs",
     "扫码连接": "Scanner pour se connecter",
     "偏好设置": "Préférences",
     "把电脑上的工作带在身边": "Emportez votre travail partout",
-    "连接自己的电脑，查看会话、发送任务并处理 Agent 的权限请求。无需注册账号。": "Connectez votre ordinateur pour consulter les conversations, envoyer des tâches et répondre aux demandes d’autorisation des Agents. Aucun compte requis.",
+    "连接自己的电脑，查看会话、发送任务并处理 Agent 的权限请求。无需注册账号。":
+        "Connectez votre ordinateur pour consulter les conversations, envoyer des tâches et répondre aux demandes d’autorisation des Agents. Aucun compte requis.",
     "连接电脑": "Connecter un ordinateur",
-    "当前内测版本尚未配置接入服务。": "Le service de connexion n’est pas configuré dans cette version bêta.",
-    "在电脑端打开「连接手机」，扫描二维码。": "Ouvrez « Connecter le téléphone » sur votre ordinateur et scannez le QR code.",
-    "扫描电脑上的二维码，或粘贴配对链接": "Scannez le QR code de votre ordinateur ou collez un lien d’appairage.",
-    "当前内测版本尚未配置接入服务": "Le service de connexion n’est pas configuré dans cette version bêta",
+    "当前内测版本尚未配置接入服务。":
+        "Le service de connexion n’est pas configuré dans cette version bêta.",
+    "在电脑端打开「连接手机」，扫描二维码。":
+        "Ouvrez « Connecter le téléphone » sur votre ordinateur et scannez le QR code.",
+    "扫描电脑上的二维码，或粘贴配对链接":
+        "Scannez le QR code de votre ordinateur ou collez un lien d’appairage.",
+    "当前内测版本尚未配置接入服务":
+        "Le service de connexion n’est pas configuré dans cette version bêta",
     "更多": "Plus",
     "从这部手机移除「{0}」？": "Retirer « {0} » de ce téléphone ?",
-    "手机会删除这台电脑的配对凭证，之后需重新扫码才能连接。电脑上的任务不受影响；如需让电脑也拒绝这部手机，请在电脑的设备列表中撤销。": "Les identifiants d’appairage de cet ordinateur seront supprimés du téléphone. Vous devrez scanner à nouveau pour vous reconnecter. Les tâches sur l’ordinateur ne sont pas affectées. Pour que l’ordinateur refuse aussi ce téléphone, révoquez-le dans la liste des appareils de l’ordinateur.",
+    "手机会删除这台电脑的配对凭证，之后需重新扫码才能连接。电脑上的任务不受影响；如需让电脑也拒绝这部手机，请在电脑的设备列表中撤销。":
+        "Les identifiants d’appairage de cet ordinateur seront supprimés du téléphone. Vous devrez scanner à nouveau pour vous reconnecter. Les tâches sur l’ordinateur ne sont pas affectées. Pour que l’ordinateur refuse aussi ce téléphone, révoquez-le dans la liste des appareils de l’ordinateur.",
     "取消": "Annuler",
-    "移除未完成，连接已关闭，请重试或核实安全存储。": "Retrait incomplet. La connexion est fermée. Réessayez ou vérifiez le stockage sécurisé.",
+    "移除未完成，连接已关闭，请重试或核实安全存储。":
+        "Retrait incomplet. La connexion est fermée. Réessayez ou vérifiez le stockage sécurisé.",
     "移除": "Retirer",
     "撤销绑定": "Révoquer l’appairage",
-    "请在「{0}」的设备列表中撤销这部手机。撤销后这部手机将无法再连接该电脑；电脑上正在执行的任务不受影响。": "Révoquez ce téléphone dans la liste des appareils de « {0} ». Il ne pourra plus se connecter à cet ordinateur. Les tâches en cours sur l’ordinateur ne sont pas affectées.",
+    "请在「{0}」的设备列表中撤销这部手机。撤销后这部手机将无法再连接该电脑；电脑上正在执行的任务不受影响。":
+        "Révoquez ce téléphone dans la liste des appareils de « {0} ». Il ne pourra plus se connecter à cet ordinateur. Les tâches en cours sur l’ordinateur ne sont pas affectées.",
     "知道了": "Compris",
     "通知设置": "Notifications",
     "重新连接": "Se reconnecter",
@@ -4840,35 +5401,45 @@ const messageCatalogs = <String, Map<String, String>>{
     "最后同步 {0}": "Dernière synchronisation {0}",
     "远程桌面": "Bureau à distance",
     "远程桌面 · 电脑离线": "Bureau à distance · Ordinateur hors ligne",
-    "这台电脑上还没有检测到 Agent。": "Aucun Agent détecté sur cet ordinateur pour le moment.",
+    "这台电脑上还没有检测到 Agent。":
+        "Aucun Agent détecté sur cet ordinateur pour le moment.",
     "已就绪": "Prêt",
     "已安装 · 未就绪": "Installé · Pas prêt",
     "需要在电脑上配置": "À configurer sur l’ordinateur",
     "版本不支持": "Version non prise en charge",
     "异常": "Erreur",
     "不可用": "Indisponible",
-    "直连未建立，使用加密中继": "Connexion directe impossible. Utilisation d’un relais chiffré.",
-    "连接已变化，正在恢复远程桌面": "La connexion a changé. Restauration du bureau à distance.",
+    "直连未建立，使用加密中继":
+        "Connexion directe impossible. Utilisation d’un relais chiffré.",
+    "连接已变化，正在恢复远程桌面":
+        "La connexion a changé. Restauration du bureau à distance.",
     "连接中断，正在恢复远程桌面": "Connexion perdue. Restauration du bureau à distance.",
     "无法准备新解码器": "Impossible de préparer un nouveau décodeur",
     "新画面解码不可用": "Nouveau décodeur vidéo indisponible",
     "换路后画面不可用": "Vidéo indisponible après le changement de connexion",
     "正在核实并恢复远程桌面连接": "Vérification et restauration du bureau à distance",
-    "连接归属暂时无法核实，正在恢复远程桌面": "Impossible de vérifier le propriétaire de la connexion. Restauration du bureau à distance.",
-    "连接暂时无法恢复，请点击重新连接。": "Impossible de restaurer la connexion. Touchez Se reconnecter.",
-    "电脑离线，连接后再打开远程桌面": "Ordinateur hors ligne. Reconnectez-vous pour ouvrir le bureau à distance.",
+    "连接归属暂时无法核实，正在恢复远程桌面":
+        "Impossible de vérifier le propriétaire de la connexion. Restauration du bureau à distance.",
+    "连接暂时无法恢复，请点击重新连接。":
+        "Impossible de restaurer la connexion. Touchez Se reconnecter.",
+    "电脑离线，连接后再打开远程桌面":
+        "Ordinateur hors ligne. Reconnectez-vous pour ouvrir le bureau à distance.",
     "电脑没有可用的显示器": "Aucun écran disponible sur cet ordinateur",
     "手机解码器不可用": "Décodeur du téléphone indisponible",
     "手机视频画面不可用": "Vidéo indisponible sur le téléphone",
     "视频画面不可用，使用图片模式": "Vidéo indisponible. Mode image utilisé.",
     "暂时无法连接：{0}": "Connexion impossible : {0}",
     "{0}，已切换图片模式": "{0}. Passage en mode image.",
-    "请在电脑上允许共享屏幕和键鼠控制": "Autorisez le partage d’écran et le contrôle clavier/souris sur votre ordinateur.",
+    "请在电脑上允许共享屏幕和键鼠控制":
+        "Autorisez le partage d’écran et le contrôle clavier/souris sur votre ordinateur.",
     "电脑授权回复无效，请重新连接": "Réponse d’autorisation invalide. Reconnectez-vous.",
-    "电脑未能准备屏幕共享，请重新连接并授权": "L’ordinateur n’a pas pu préparer le partage d’écran. Reconnectez-vous et autorisez à nouveau.",
-    "等待电脑授权超时，请重新连接后再试": "Délai d’attente de l’autorisation dépassé. Reconnectez-vous et réessayez.",
+    "电脑未能准备屏幕共享，请重新连接并授权":
+        "L’ordinateur n’a pas pu préparer le partage d’écran. Reconnectez-vous et autorisez à nouveau.",
+    "等待电脑授权超时，请重新连接后再试":
+        "Délai d’attente de l’autorisation dépassé. Reconnectez-vous et réessayez.",
     "画面正在恢复": "Restauration de la vidéo",
-    "电脑未确认当前画面的就绪状态": "L’ordinateur n’a pas confirmé que la vidéo actuelle est prête.",
+    "电脑未确认当前画面的就绪状态":
+        "L’ordinateur n’a pas confirmé que la vidéo actuelle est prête.",
     "电脑视频编码异常": "Erreur de l’encodeur vidéo de l’ordinateur",
     "电脑画面恢复超时": "Délai de restauration de la vidéo de l’ordinateur dépassé",
     "电脑画面正在恢复": "Restauration de la vidéo de l’ordinateur",
@@ -4883,17 +5454,22 @@ const messageCatalogs = <String, Map<String, String>>{
     "过于频繁": "Trop de requêtes",
     "画面连接中断，正在重新连接": "Vidéo déconnectée. Reconnexion.",
     "切屏后解码器不可用": "Décodeur indisponible après le changement d’écran",
-    "切换屏幕失败，正在恢复连接": "Impossible de changer d’écran. Restauration de la connexion.",
+    "切换屏幕失败，正在恢复连接":
+        "Impossible de changer d’écran. Restauration de la connexion.",
     "发送{0}到电脑": "Envoyer {0} à l’ordinateur",
     "文字": "le texte",
     "图片": "l’image",
-    "读取手机剪贴板，按系统提示允许粘贴": "Lire le presse-papiers du téléphone. Autorisez le collage lorsque vous y êtes invité.",
+    "读取手机剪贴板，按系统提示允许粘贴":
+        "Lire le presse-papiers du téléphone. Autorisez le collage lorsque vous y êtes invité.",
     "从电脑获取{0}": "Récupérer {0} depuis l’ordinateur",
     "复制到手机剪贴板": "Copier dans le presse-papiers du téléphone",
-    "当前连接不支持独立剪贴板传输，请更新电脑和 App 后重试": "Cette connexion ne prend pas en charge les transferts de presse-papiers séparés. Mettez à jour l’application de bureau et l’application mobile.",
-    "手机剪贴板没有图片，或尚未允许粘贴": "Aucune image dans le presse-papiers du téléphone, ou l’autorisation de coller n’a pas été accordée.",
+    "当前连接不支持独立剪贴板传输，请更新电脑和 App 后重试":
+        "Cette connexion ne prend pas en charge les transferts de presse-papiers séparés. Mettez à jour l’application de bureau et l’application mobile.",
+    "手机剪贴板没有图片，或尚未允许粘贴":
+        "Aucune image dans le presse-papiers du téléphone, ou l’autorisation de coller n’a pas été accordée.",
     "手机剪贴板没有文字": "Aucun texte dans le presse-papiers du téléphone",
-    "电脑尚不支持分块剪贴板传输，请更新电脑客户端": "Mettez à jour l’application de bureau pour utiliser les transferts de presse-papiers fragmentés.",
+    "电脑尚不支持分块剪贴板传输，请更新电脑客户端":
+        "Mettez à jour l’application de bureau pour utiliser les transferts de presse-papiers fragmentés.",
     "已发送到电脑剪贴板": "Envoyé au presse-papiers de l’ordinateur",
     "已复制到手机剪贴板": "Copié dans le presse-papiers du téléphone",
     "剪贴板操作未完成": "Opération de presse-papiers incomplète",
@@ -4905,29 +5481,38 @@ const messageCatalogs = <String, Map<String, String>>{
     "重新选择共享屏幕": "Choisir à nouveau l’écran à partager",
     "正在准备剪贴板传输…": "Préparation du transfert du presse-papiers…",
     "剪贴板传输 {0}%": "Transfert du presse-papiers {0} %",
-    "已停止等待，复制操作可能已完成，请核实剪贴板": "Attente arrêtée. La copie est peut-être terminée. Vérifiez le presse-papiers.",
+    "已停止等待，复制操作可能已完成，请核实剪贴板":
+        "Attente arrêtée. La copie est peut-être terminée. Vérifiez le presse-papiers.",
     "键盘": "Clavier",
     "移动画面": "Déplacer la vue",
     "操作电脑": "Contrôler l’ordinateur",
     "适应屏幕": "Ajuster à l’écran",
     "剪贴板": "Presse-papiers",
-    "电脑已锁定，Agent 操作仍可用。\n解锁电脑后点「重新连接」。": "Ordinateur verrouillé. Les actions des Agents restent disponibles.\nDéverrouillez votre ordinateur, puis touchez Se reconnecter.",
+    "电脑已锁定，Agent 操作仍可用。\n解锁电脑后点「重新连接」。":
+        "Ordinateur verrouillé. Les actions des Agents restent disponibles.\nDéverrouillez votre ordinateur, puis touchez Se reconnecter.",
     "服务连接正常": "Service connecté",
     "连接失败，请重试。": "Échec de la connexion. Réessayez.",
-    "接入服务只转发加密数据，会话和任务保存在你的电脑上。": "Le service de connexion relaie uniquement des données chiffrées. Les conversations et les tâches restent sur votre ordinateur.",
+    "接入服务只转发加密数据，会话和任务保存在你的电脑上。":
+        "Le service de connexion relaie uniquement des données chiffrées. Les conversations et les tâches restent sur votre ordinateur.",
     "尚未配置服务地址": "Adresse du service non configurée",
-    "此服务尚未开放电脑配对。": "L’appairage d’ordinateurs n’est pas activé sur ce service.",
+    "此服务尚未开放电脑配对。":
+        "L’appairage d’ordinateurs n’est pas activé sur ce service.",
     "正在检查": "Vérification",
     "检查连接": "Vérifier la connexion",
-    "后台提醒暂未启用，静音设置可提前保存。仅影响这部手机，不影响电脑任务和 Agent 审批。": "Les alertes en arrière-plan ne sont pas activées. Vous pouvez déjà enregistrer vos préférences de silence. Elles s’appliquent uniquement à ce téléphone, sans effet sur les tâches de l’ordinateur ni sur les approbations des Agents.",
-    "通知通道已连接。提醒只影响这部手机，不会直接批准操作。": "Notifications connectées. Les alertes concernent uniquement ce téléphone et n’approuvent jamais d’actions automatiquement.",
-    "后台提醒暂未启用，可在这里授权系统通知。": "Les alertes en arrière-plan ne sont pas activées. Autorisez les notifications système ici.",
-    "此版本未配置后台提醒，静音设置可提前保存。": "Les alertes en arrière-plan ne sont pas configurées dans cette version. Vous pouvez déjà enregistrer vos préférences de silence.",
+    "后台提醒暂未启用，静音设置可提前保存。仅影响这部手机，不影响电脑任务和 Agent 审批。":
+        "Les alertes en arrière-plan ne sont pas activées. Vous pouvez déjà enregistrer vos préférences de silence. Elles s’appliquent uniquement à ce téléphone, sans effet sur les tâches de l’ordinateur ni sur les approbations des Agents.",
+    "通知通道已连接。提醒只影响这部手机，不会直接批准操作。":
+        "Notifications connectées. Les alertes concernent uniquement ce téléphone et n’approuvent jamais d’actions automatiquement.",
+    "后台提醒暂未启用，可在这里授权系统通知。":
+        "Les alertes en arrière-plan ne sont pas activées. Autorisez les notifications système ici.",
+    "此版本未配置后台提醒，静音设置可提前保存。":
+        "Les alertes en arrière-plan ne sont pas configurées dans cette version. Vous pouvez déjà enregistrer vos préférences de silence.",
     "正在连接通知服务": "Connexion au service de notifications",
     "重新检测后台提醒": "Revérifier les alertes en arrière-plan",
     "启用后台提醒": "Activer les alertes en arrière-plan",
     "通知设置暂不可用。": "Réglages de notification indisponibles.",
-    "保存结果未确认，请检查网络后重新读取。": "Enregistrement non confirmé. Vérifiez votre réseau et rechargez.",
+    "保存结果未确认，请检查网络后重新读取。":
+        "Enregistrement non confirmé. Vérifiez votre réseau et rechargez.",
     "会话": "Conversations",
     "重新读取": "Recharger",
     "静音这台电脑": "Mettre cet ordinateur en sourdine",
@@ -4935,14 +5520,17 @@ const messageCatalogs = <String, Map<String, String>>{
     "已静音会话": "Conversations en sourdine",
     "未加载的会话": "Conversation non chargée",
     "取消会话静音": "Réactiver la conversation",
-    "这台电脑已静音，取消会话静音后仍不会收到提醒。": "Cet ordinateur est en sourdine. Réactiver la conversation n’activera pas les alertes.",
+    "这台电脑已静音，取消会话静音后仍不会收到提醒。":
+        "Cet ordinateur est en sourdine. Réactiver la conversation n’activera pas les alertes.",
     "静音此会话": "Mettre cette conversation en sourdine",
     "清除离线缓存？": "Effacer le cache hors ligne ?",
-    "只清除此手机保存的会话缓存，保留草稿、未发送附件和电脑配对。电脑上的会话不受影响，联网后会重新缓存。": "Efface uniquement les conversations en cache sur ce téléphone. Les brouillons, les pièces jointes non envoyées et les appairages sont conservés. Les conversations sur votre ordinateur ne sont pas affectées et seront remises en cache une fois en ligne.",
+    "只清除此手机保存的会话缓存，保留草稿、未发送附件和电脑配对。电脑上的会话不受影响，联网后会重新缓存。":
+        "Efface uniquement les conversations en cache sur ce téléphone. Les brouillons, les pièces jointes non envoyées et les appairages sont conservés. Les conversations sur votre ordinateur ne sont pas affectées et seront remises en cache une fois en ligne.",
     "清除": "Effacer",
     "未能清除缓存：{0}": "Impossible d’effacer le cache : {0}",
     "最近会话离线缓存": "Cache hors ligne des conversations récentes",
-    "{0} 个会话 · {1} MB\n最多 30 个会话、32 MB；保存文字和附件信息。": "{0} conversations · {1} Mo\nJusqu’à 30 conversations et 32 Mo. Stocke le texte et les informations des pièces jointes.",
+    "{0} 个会话 · {1} MB\n最多 30 个会话、32 MB；保存文字和附件信息。":
+        "{0} conversations · {1} Mo\nJusqu’à 30 conversations et 32 Mo. Stocke le texte et les informations des pièces jointes.",
     "正在读取缓存大小…": "Lecture de la taille du cache…",
     "正在清除…": "Effacement…",
     "清除缓存": "Effacer le cache",
@@ -4956,15 +5544,21 @@ const messageCatalogs = <String, Map<String, String>>{
     "管理已绑定设备": "Gérer les appareils appairés",
     "{0} 台": "{0} ordinateurs",
     "本机数据": "Sur ce téléphone",
-    "无需注册账号：通过电脑上的配对二维码建立信任，可随时在电脑上撤销。草稿和离线缓存保存在这部手机；提醒偏好可在电脑或会话菜单中设置。": "Aucun compte requis. Scannez le QR code de votre ordinateur pour l’appairer, et révoquez l’accès depuis celui-ci à tout moment. Les brouillons et le cache hors ligne restent sur ce téléphone. Configurez les alertes depuis l’ordinateur ou le menu d’une conversation.",
-    "项目目录不可用，请刷新项目后重试。": "Dossier du projet indisponible. Actualisez le projet et réessayez.",
+    "无需注册账号：通过电脑上的配对二维码建立信任，可随时在电脑上撤销。草稿和离线缓存保存在这部手机；提醒偏好可在电脑或会话菜单中设置。":
+        "Aucun compte requis. Scannez le QR code de votre ordinateur pour l’appairer, et révoquez l’accès depuis celui-ci à tout moment. Les brouillons et le cache hors ligne restent sur ce téléphone. Configurez les alertes depuis l’ordinateur ou le menu d’une conversation.",
+    "项目目录不可用，请刷新项目后重试。":
+        "Dossier du projet indisponible. Actualisez le projet et réessayez.",
     "选择终端目录": "Choisir le dossier du terminal",
-    "连接或项目目录已改变，请重新选择终端目录。": "La connexion ou le dossier du projet a changé. Choisissez à nouveau le dossier du terminal.",
-    "启动结果待核实，请使用原操作恢复。": "Résultat du lancement non confirmé. Récupérez l’opération d’origine.",
+    "连接或项目目录已改变，请重新选择终端目录。":
+        "La connexion ou le dossier du projet a changé. Choisissez à nouveau le dossier du terminal.",
+    "启动结果待核实，请使用原操作恢复。":
+        "Résultat du lancement non confirmé. Récupérez l’opération d’origine.",
     "关闭这个终端？": "Fermer ce terminal ?",
-    "将在电脑上结束该终端及其中运行的命令。离开页面不会关闭终端。": "Termine ce terminal et ses commandes en cours sur votre ordinateur. Quitter cette page laisse le terminal ouvert.",
+    "将在电脑上结束该终端及其中运行的命令。离开页面不会关闭终端。":
+        "Termine ce terminal et ses commandes en cours sur votre ordinateur. Quitter cette page laisse le terminal ouvert.",
     "关闭终端": "Fermer le terminal",
-    "连接已改变，请刷新后重新确认关闭。": "La connexion a changé. Actualisez et confirmez à nouveau la fermeture.",
+    "连接已改变，请刷新后重新确认关闭。":
+        "La connexion a changé. Actualisez et confirmez à nouveau la fermeture.",
     "终端 {0}": "Terminal {0}",
     "新建终端": "Nouveau terminal",
     "关闭当前终端": "Fermer le terminal actuel",
@@ -4974,13 +5568,16 @@ const messageCatalogs = <String, Map<String, String>>{
     "历史提交": "Commits",
     "分支比较": "Comparer des branches",
     "目录": "Dossier",
-    "连接或目录已改变，请重新选择比较目标。": "La connexion ou le dossier a changé. Choisissez à nouveau la cible de comparaison.",
+    "连接或目录已改变，请重新选择比较目标。":
+        "La connexion ou le dossier a changé. Choisissez à nouveau la cible de comparaison.",
     "请填写提交说明": "Saisissez un message de commit",
     "暂存全部并提交？": "Tout indexer et commiter ?",
-    "{0}当前没有已暂存的文件，将暂存全部 {1} 个变更后提交。": "{0}Aucun fichier indexé. Les {1} modifications seront toutes indexées puis commitées.",
+    "{0}当前没有已暂存的文件，将暂存全部 {1} 个变更后提交。":
+        "{0}Aucun fichier indexé. Les {1} modifications seront toutes indexées puis commitées.",
     "目录：{0}。": "Dossier : {0}.",
     "暂存并提交": "Indexer et commiter",
-    "连接或变更已更新，请核对后重新提交。": "La connexion ou les modifications ont été mises à jour. Vérifiez-les avant de commiter à nouveau.",
+    "连接或变更已更新，请核对后重新提交。":
+        "La connexion ou les modifications ont été mises à jour. Vérifiez-les avant de commiter à nouveau.",
     "Git 操作结果待核实": "Résultat de l’opération Git non confirmé",
     "变更": "Modifications",
     "更多 Git 操作": "Autres actions Git",
@@ -4994,8 +5591,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "选择父提交": "Choisir le commit parent",
     "父提交 {0} · {1}": "Parent {0} · {1}",
     "父提交 {0} ▾": "Parent {0} ▾",
-    "只读 · 当前 HEAD 相对所选分支共同祖先的变更": "Lecture seule · HEAD actuel comparé à l’ancêtre commun de la branche sélectionnée",
-    "只读 · 首次提交相对空目录的变更": "Lecture seule · Commit initial comparé à un dossier vide",
+    "只读 · 当前 HEAD 相对所选分支共同祖先的变更":
+        "Lecture seule · HEAD actuel comparé à l’ancêtre commun de la branche sélectionnée",
+    "只读 · 首次提交相对空目录的变更":
+        "Lecture seule · Commit initial comparé à un dossier vide",
     "只读 · 此提交相对父提交的变更": "Lecture seule · Ce commit comparé à son parent",
     "{0} 个文件": "{0} fichiers",
     "{0} 个文件 · 已暂存 {1}": "{0} fichiers · {1} indexés",
@@ -5007,14 +5606,16 @@ const messageCatalogs = <String, Map<String, String>>{
     "提交": "Commiter",
     "提交并推送": "Commiter et pousser",
     "二进制文件，无法显示差异": "Fichier binaire. Diff indisponible.",
-    "内容无差异（可能仅权限或换行变化）": "Aucune modification du contenu (peut-être seulement les permissions ou les fins de ligne)",
+    "内容无差异（可能仅权限或换行变化）":
+        "Aucune modification du contenu (peut-être seulement les permissions ou les fins de ligne)",
     "… 差异过长，已截断": "… Diff tronqué",
     "切换目录": "Changer de dossier",
     "选择项目目录": "Choisir le dossier du projet",
     "目录 · {0}": "Dossier · {0}",
     "选择项目文件": "Choisir un fichier du projet",
     "搜索当前目录内的文件": "Rechercher des fichiers dans ce dossier",
-    "搜索结果未全部返回，请输入更具体的文件名或路径。": "Certains résultats ont été omis. Saisissez un nom de fichier ou un chemin plus précis.",
+    "搜索结果未全部返回，请输入更具体的文件名或路径。":
+        "Certains résultats ont été omis. Saisissez un nom de fichier ou un chemin plus précis.",
     "没有匹配的文件": "Aucun fichier correspondant",
     "此文件无法预览（二进制或过大）": "Aperçu indisponible (binaire ou trop volumineux)",
     "{0} · 只读": "{0} · Lecture seule",
@@ -5026,10 +5627,13 @@ const messageCatalogs = <String, Map<String, String>>{
     "没有提交记录": "Aucun commit",
     "没有可比较的分支": "Aucune branche à comparer",
     "预览已关闭": "Aperçu fermé",
-    "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">预览请求失败：{0}</p>": "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">Échec de la requête d’aperçu : {0}</p>",
+    "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">预览请求失败：{0}</p>":
+        "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">Échec de la requête d’aperçu : {0}</p>",
     "项目 WebSocket 写入未获确认": "Écriture WebSocket du projet non confirmée",
-    "\u001b[2m（较早的输出已被电脑释放）\u001b[0m\r\n": "\u001b[2m(La sortie plus ancienne a été libérée par l’ordinateur)\u001b[0m\r\n",
-    "\r\n\u001b[2m… 部分较早的输出已被电脑丢弃 …\u001b[0m\r\n": "\r\n\u001b[2m… Une partie de la sortie plus ancienne a été supprimée par l’ordinateur …\u001b[0m\r\n",
+    "\u001b[2m（较早的输出已被电脑释放）\u001b[0m\r\n":
+        "\u001b[2m(La sortie plus ancienne a été libérée par l’ordinateur)\u001b[0m\r\n",
+    "\r\n\u001b[2m… 部分较早的输出已被电脑丢弃 …\u001b[0m\r\n":
+        "\r\n\u001b[2m… Une partie de la sortie plus ancienne a été supprimée par l’ordinateur …\u001b[0m\r\n",
     "启动中": "Démarrage",
     "运行中": "En cours",
     "停止中": "Arrêt",
@@ -5039,21 +5643,26 @@ const messageCatalogs = <String, Map<String, String>>{
     "状态未知": "État inconnu",
     "核实输入结果": "Vérifier le résultat de la saisie",
     "继续输入？": "Continuer la saisie ?",
-    "请先检查终端当前状态；未确认的输入可能已部分生效。继续会清空当前输入框并丢弃未发送内容，不会重新发送原输入。": "Vérifiez d’abord le terminal. Une saisie non confirmée a peut-être été partiellement appliquée. Continuer vide le champ de saisie et supprime le contenu non envoyé. La saisie d’origine ne sera pas renvoyée.",
+    "请先检查终端当前状态；未确认的输入可能已部分生效。继续会清空当前输入框并丢弃未发送内容，不会重新发送原输入。":
+        "Vérifiez d’abord le terminal. Une saisie non confirmée a peut-être été partiellement appliquée. Continuer vide le champ de saisie et supprime le contenu non envoyé. La saisie d’origine ne sera pas renvoyée.",
     "已检查，继续": "Vérifié, continuer",
     "继续输入": "Continuer la saisie",
     "输入命令，回车发送": "Saisissez une commande, Entrée pour envoyer",
     "发送": "Envoyer",
-    "运行配置已改变，请确认后再启动。": "La configuration d’exécution a changé. Vérifiez-la avant de lancer.",
+    "运行配置已改变，请确认后再启动。":
+        "La configuration d’exécution a changé. Vérifiez-la avant de lancer.",
     "继续": "Continuer",
     "重命名运行配置": "Renommer la configuration d’exécution",
     "保存": "Enregistrer",
     "删除运行配置？": "Supprimer la configuration d’exécution ?",
-    "移除“{0}”的启动配置，已运行的进程不会停止。": "Supprime la configuration de lancement de « {0} ». Les processus en cours continueront.",
+    "移除“{0}”的启动配置，已运行的进程不会停止。":
+        "Supprime la configuration de lancement de « {0} ». Les processus en cours continueront.",
     "重新分析项目？": "Analyser à nouveau le projet ?",
-    "将重新生成运行配置，覆盖未固定的自定义修改，固定项会保留。": "Régénère les configurations d’exécution et remplace les modifications personnalisées non épinglées. Les configurations épinglées sont conservées.",
+    "将重新生成运行配置，覆盖未固定的自定义修改，固定项会保留。":
+        "Régénère les configurations d’exécution et remplace les modifications personnalisées non épinglées. Les configurations épinglées sont conservées.",
     "选择分析项目的 Agent": "Choisir l’Agent qui analysera le projet",
-    "没有可用 Agent，请先在电脑上连接。": "Aucun Agent disponible. Connectez d’abord un Agent sur votre ordinateur.",
+    "没有可用 Agent，请先在电脑上连接。":
+        "Aucun Agent disponible. Connectez d’abord un Agent sur votre ordinateur.",
     "预览端口": "Port d’aperçu",
     "例如 5173": "ex. 5173",
     "打开": "Ouvrir",
@@ -5061,9 +5670,11 @@ const messageCatalogs = <String, Map<String, String>>{
     "选择运行目录": "Choisir le dossier d’exécution",
     "分析项目": "Analyser le projet",
     "刷新运行配置": "Actualiser les configurations d’exécution",
-    "Agent 正在分析项目，可稍后刷新查看。": "Un Agent analyse le projet. Actualisez plus tard pour voir le résultat.",
+    "Agent 正在分析项目，可稍后刷新查看。":
+        "Un Agent analyse le projet. Actualisez plus tard pour voir le résultat.",
     "这个项目尚未关联目录。": "Aucun dossier associé à ce projet.",
-    "当前目录还没有运行配置，点击「分析项目」生成启动方式。": "Aucune configuration d’exécution dans ce dossier. Touchez Analyser le projet pour en générer une.",
+    "当前目录还没有运行配置，点击「分析项目」生成启动方式。":
+        "Aucune configuration d’exécution dans ce dossier. Touchez Analyser le projet pour en générer une.",
     "选择运行配置": "Choisir une configuration d’exécution",
     "选择配置": "Choisir une configuration",
     "未运行": "Non lancé",
@@ -5087,55 +5698,78 @@ const messageCatalogs = <String, Map<String, String>>{
     "后退": "Retour",
     "刷新": "Actualiser",
     "电脑离线，重新连接后再试。": "Ordinateur hors ligne. Reconnectez-vous et réessayez.",
-    "这个项目还没有会话。电脑以会话为单位授权工作区访问，请先在项目中开始一个会话。": "Aucune conversation dans ce projet. L’accès à l’espace de travail est autorisé par conversation. Commencez d’abord une conversation dans ce projet.",
+    "这个项目还没有会话。电脑以会话为单位授权工作区访问，请先在项目中开始一个会话。":
+        "Aucune conversation dans ce projet. L’accès à l’espace de travail est autorisé par conversation. Commencez d’abord une conversation dans ce projet.",
     "全部": "Tout",
     "权限": "Autorisations",
     "问题": "Questions",
     "待处理": "À traiter",
     "没有需要你处理的事项": "Rien ne requiert votre attention",
     "{0} 项需要你处理": "{0} éléments requièrent votre attention",
-    "{0} 台电脑离线，其待处理事项将在重新连接后显示。": "{0} ordinateurs hors ligne. Leurs éléments en attente s’afficheront après la reconnexion.",
+    "{0} 台电脑离线，其待处理事项将在重新连接后显示。":
+        "{0} ordinateurs hors ligne. Leurs éléments en attente s’afficheront après la reconnexion.",
     "查看会话": "Voir la conversation",
-    "已不再等待。如果电脑收到了这项操作，它仍会生效。": "Attente arrêtée. Si l’ordinateur a reçu cette opération, elle prendra quand même effet.",
+    "已不再等待。如果电脑收到了这项操作，它仍会生效。":
+        "Attente arrêtée. Si l’ordinateur a reçu cette opération, elle prendra quand même effet.",
     "会话已经删除。": "Conversation supprimée.",
     "新名称已经生效。": "Nouveau nom appliqué.",
-    "已找到电脑上的原终端，可在终端或运行页面继续查看；未重新运行命令。": "Terminal d’origine retrouvé. Continuez dans Terminal ou Exécuter. La commande n’a pas été relancée.",
-    "分析已经开始，可在运行页面查看进度。": "Analyse démarrée. Suivez la progression sur la page Exécuter.",
-    "原运行配置操作已完成。": "Opération d’origine sur la configuration d’exécution terminée.",
-    "原运行配置操作已结束：{0}": "Opération d’origine sur la configuration d’exécution terminée : {0}",
-    "原启动已取消，未重新运行命令。": "Lancement d’origine annulé. La commande n’a pas été relancée.",
+    "已找到电脑上的原终端，可在终端或运行页面继续查看；未重新运行命令。":
+        "Terminal d’origine retrouvé. Continuez dans Terminal ou Exécuter. La commande n’a pas été relancée.",
+    "分析已经开始，可在运行页面查看进度。":
+        "Analyse démarrée. Suivez la progression sur la page Exécuter.",
+    "原运行配置操作已完成。":
+        "Opération d’origine sur la configuration d’exécution terminée.",
+    "原运行配置操作已结束：{0}":
+        "Opération d’origine sur la configuration d’exécution terminée : {0}",
+    "原启动已取消，未重新运行命令。":
+        "Lancement d’origine annulé. La commande n’a pas été relancée.",
     "修复已提交给主 Agent。": "Correctif soumis à l’Agent principal.",
     "原修复已放弃。": "Correctif d’origine abandonné.",
-    "修复尚未提交，可继续原操作。{0}": "Correctif pas encore soumis. Poursuivez l’opération d’origine. {0}",
-    "已找到原审查，可在对应轮次的「本轮审查」中查看。": "Revue d’origine retrouvée. Consultez-la dans Revues du tour pour le tour concerné.",
-    "电脑上还查不到这项操作，可能没收到。可以重新发送，不会重复执行。": "L’ordinateur n’a encore aucune trace de cette opération. Elle n’est peut-être pas arrivée. La renvoyer ne l’exécutera pas deux fois.",
+    "修复尚未提交，可继续原操作。{0}":
+        "Correctif pas encore soumis. Poursuivez l’opération d’origine. {0}",
+    "已找到原审查，可在对应轮次的「本轮审查」中查看。":
+        "Revue d’origine retrouvée. Consultez-la dans Revues du tour pour le tour concerné.",
+    "电脑上还查不到这项操作，可能没收到。可以重新发送，不会重复执行。":
+        "L’ordinateur n’a encore aucune trace de cette opération. Elle n’est peut-être pas arrivée. La renvoyer ne l’exécutera pas deux fois.",
     "Fork 正在后台执行。": "Fork en cours en arrière-plan.",
     "Fork 尚未完成。": "Fork pas encore terminé.",
     "{0}：还没收到电脑确认": "{0} : pas encore de confirmation de l’ordinateur",
     "待确认": "En attente de confirmation",
-    "{0} · 正在确认「不再等待」。重试仅确认原操作的结束状态，已经执行的内容不会撤销。": "{0} · Confirmation de « Arrêter d’attendre ». Réessayer confirme seulement l’état final de l’opération d’origine et n’annule pas le travail effectué.",
-    "{0} · 网络中断时手机没收到电脑的回复。点「重新确认」查看结果；重新发送也不会重复执行。": "{0} · La réponse a été perdue lors de la coupure de connexion. Touchez Vérifier à nouveau pour voir le résultat. La renvoyer ne l’exécutera pas deux fois.",
-    "{0} · 网络中断时手机没收到电脑的回复。连上电脑后会自动确认。": "{0} · La réponse a été perdue lors de la coupure de connexion. La vérification se fera automatiquement après la reconnexion.",
+    "{0} · 正在确认「不再等待」。重试仅确认原操作的结束状态，已经执行的内容不会撤销。":
+        "{0} · Confirmation de « Arrêter d’attendre ». Réessayer confirme seulement l’état final de l’opération d’origine et n’annule pas le travail effectué.",
+    "{0} · 网络中断时手机没收到电脑的回复。点「重新确认」查看结果；重新发送也不会重复执行。":
+        "{0} · La réponse a été perdue lors de la coupure de connexion. Touchez Vérifier à nouveau pour voir le résultat. La renvoyer ne l’exécutera pas deux fois.",
+    "{0} · 网络中断时手机没收到电脑的回复。连上电脑后会自动确认。":
+        "{0} · La réponse a été perdue lors de la coupure de connexion. La vérification se fera automatiquement après la reconnexion.",
     "新名称：{0}": "Nouveau nom : {0}",
-    "重新发送会继续你之前确认过的删除。": "Renvoyer poursuit la suppression que vous avez confirmée.",
+    "重新发送会继续你之前确认过的删除。":
+        "Renvoyer poursuit la suppression que vous avez confirmée.",
     "原终端": "Terminal d’origine",
     "原任务": "Tâche d’origine",
-    "只会停止当时那次运行，不影响之后新开始的任务。": "Arrête uniquement cette exécution précise. Les tâches lancées ensuite ne sont pas affectées.",
-    "电脑离线，连上后会自动确认。": "Ordinateur hors ligne. La vérification se fera automatiquement après la reconnexion.",
+    "只会停止当时那次运行，不影响之后新开始的任务。":
+        "Arrête uniquement cette exécution précise. Les tâches lancées ensuite ne sont pas affectées.",
+    "电脑离线，连上后会自动确认。":
+        "Ordinateur hors ligne. La vérification se fera automatiquement après la reconnexion.",
     "重新确认": "Vérifier à nouveau",
     "继续确认结束": "Continuer à confirmer la fin",
     "重新发送": "Renvoyer",
     "不再发送": "Ne pas renvoyer",
     "不再等待这项操作？": "Arrêter d’attendre cette opération ?",
-    "只是不再在手机上等待结果。如果电脑已经收到，改名或删除仍会生效。": "Arrête seulement l’attente sur ce téléphone. Si l’ordinateur a déjà reçu la demande, le renommage ou la suppression prendra quand même effet.",
+    "只是不再在手机上等待结果。如果电脑已经收到，改名或删除仍会生效。":
+        "Arrête seulement l’attente sur ce téléphone. Si l’ordinateur a déjà reçu la demande, le renommage ou la suppression prendra quand même effet.",
     "继续等待": "Continuer d’attendre",
     "确定": "Confirmer",
     "不再等待": "Arrêter d’attendre",
-    "只是不再在手机上等待结果。电脑上已经完成的操作会保留。": "Arrête seulement l’attente sur ce téléphone. Les opérations terminées sur votre ordinateur sont conservées.",
-    "只是不再在手机上等待结果。如果电脑已经收到，任务仍会停下。": "Arrête seulement l’attente sur ce téléphone. Si l’ordinateur a déjà reçu la demande, la tâche s’arrêtera quand même.",
-    "只是不再在手机上等待结果。如果电脑已经收到，终端仍会关闭。终端是否还在运行，请在终端页查看。": "Arrête seulement l’attente sur ce téléphone. Si l’ordinateur a déjà reçu la demande, le terminal sera quand même fermé. Consultez la page Terminal pour savoir s’il est encore actif.",
-    "如果终端还没启动，就不会再启动；已经启动的会保留，里面的命令照常运行。": "Un terminal qui n’a pas démarré ne démarrera pas. Un terminal déjà ouvert et ses commandes continueront de tourner.",
-    "如果还没执行，就不会再提交或推送；已经完成的不会撤销。建议先在「变更」里看一下结果。": "Aucun commit ni push ne sera lancé s’il n’a pas commencé. Les opérations terminées ne seront pas annulées. Consultez d’abord la page Modifications.",
+    "只是不再在手机上等待结果。电脑上已经完成的操作会保留。":
+        "Arrête seulement l’attente sur ce téléphone. Les opérations terminées sur votre ordinateur sont conservées.",
+    "只是不再在手机上等待结果。如果电脑已经收到，任务仍会停下。":
+        "Arrête seulement l’attente sur ce téléphone. Si l’ordinateur a déjà reçu la demande, la tâche s’arrêtera quand même.",
+    "只是不再在手机上等待结果。如果电脑已经收到，终端仍会关闭。终端是否还在运行，请在终端页查看。":
+        "Arrête seulement l’attente sur ce téléphone. Si l’ordinateur a déjà reçu la demande, le terminal sera quand même fermé. Consultez la page Terminal pour savoir s’il est encore actif.",
+    "如果终端还没启动，就不会再启动；已经启动的会保留，里面的命令照常运行。":
+        "Un terminal qui n’a pas démarré ne démarrera pas. Un terminal déjà ouvert et ses commandes continueront de tourner.",
+    "如果还没执行，就不会再提交或推送；已经完成的不会撤销。建议先在「变更」里看一下结果。":
+        "Aucun commit ni push ne sera lancé s’il n’a pas commencé. Les opérations terminées ne seront pas annulées. Consultez d’abord la page Modifications.",
     "发送消息": "Envoyer un message",
     "Fork 会话": "Forker la conversation",
     "置顶或归档": "Épingler ou archiver",
@@ -5160,16 +5794,21 @@ const messageCatalogs = <String, Map<String, String>>{
     "Agent 有一个问题": "Un Agent a une question",
     "会话「{0}」需要你的回答。": "La conversation « {0} » attend votre réponse.",
     "会话「{0}」请求以下操作。": "La conversation « {0} » demande l’action suivante.",
-    "这个问题的格式暂不支持在手机上回答，请在电脑上回答，回答后这里会自动更新。": "Ce format de question n’est pas encore pris en charge sur le téléphone. Répondez sur votre ordinateur ; cette page se mettra à jour automatiquement.",
+    "这个问题的格式暂不支持在手机上回答，请在电脑上回答，回答后这里会自动更新。":
+        "Ce format de question n’est pas encore pris en charge sur le téléphone. Répondez sur votre ordinateur ; cette page se mettra à jour automatiquement.",
     "电脑离线，重新连接后再处理。": "Ordinateur hors ligne. Reconnectez-vous pour répondre.",
-    "这台电脑有一项操作结果待核实，请先核实。": "Une opération sur cet ordinateur doit être vérifiée. Vérifiez-la d’abord.",
+    "这台电脑有一项操作结果待核实，请先核实。":
+        "Une opération sur cet ordinateur doit être vérifiée. Vérifiez-la d’abord.",
     "其他授权范围": "Autres portées d’autorisation",
     "工作区": "Espace de travail",
     "还没有连接电脑": "Aucun ordinateur connecté",
-    "连接电脑后，在这里查看项目及其会话。": "Connectez un ordinateur pour voir ici ses projets et leurs conversations.",
+    "连接电脑后，在这里查看项目及其会话。":
+        "Connectez un ordinateur pour voir ici ses projets et leurs conversations.",
     "去连接电脑": "Connecter un ordinateur",
-    "{0} 尚未同步项目；电脑在线时会自动同步。": "{0} n’a pas encore synchronisé ses projets. La synchronisation se fera automatiquement une fois en ligne.",
-    "{0} 上还没有项目，点右上角「添加项目」选择电脑上的已有目录。": "Aucun projet sur {0} pour le moment. Touchez Ajouter un projet en haut à droite pour choisir un dossier existant sur votre ordinateur.",
+    "{0} 尚未同步项目；电脑在线时会自动同步。":
+        "{0} n’a pas encore synchronisé ses projets. La synchronisation se fera automatiquement une fois en ligne.",
+    "{0} 上还没有项目，点右上角「添加项目」选择电脑上的已有目录。":
+        "Aucun projet sur {0} pour le moment. Touchez Ajouter un projet en haut à droite pour choisir un dossier existant sur votre ordinateur.",
     "文件": "Fichiers",
     "浏览项目文件": "Parcourir les fichiers du projet",
     "查看代码变更": "Voir les modifications du code",
@@ -5183,8 +5822,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "分离 HEAD": "HEAD détaché",
     "工作区干净": "Arbre de travail propre",
     "{0} 个文件待提交": "{0} fichiers à commiter",
-    "项目已添加，列表尚未同步。请重新连接后刷新结果。": "Projet ajouté. La liste n’est pas encore synchronisée. Reconnectez-vous et actualisez.",
-    "请先绑定电脑，再选择电脑上的项目目录。": "Appairez d’abord un ordinateur, puis choisissez-y un dossier de projet.",
+    "项目已添加，列表尚未同步。请重新连接后刷新结果。":
+        "Projet ajouté. La liste n’est pas encore synchronisée. Reconnectez-vous et actualisez.",
+    "请先绑定电脑，再选择电脑上的项目目录。":
+        "Appairez d’abord un ordinateur, puis choisissez-y un dossier de projet.",
     "选择添加项目的电脑": "Choisir l’ordinateur du projet",
     " · 离线": " · Hors ligne",
     "选择这台电脑上已有的目录": "Choisissez un dossier existant sur cet ordinateur",
@@ -5195,15 +5836,20 @@ const messageCatalogs = <String, Map<String, String>>{
     "上一级": "Dossier parent",
     "不显示隐藏": "Masquer les fichiers cachés",
     "显示隐藏": "Afficher les fichiers cachés",
-    "电脑离线，请重新连接后浏览目录。": "Ordinateur hors ligne. Reconnectez-vous pour parcourir les dossiers.",
-    "目录路径已修改，请点箭头或回车确认后再添加。": "Chemin modifié. Appuyez sur la flèche ou sur Entrée pour confirmer avant d’ajouter.",
+    "电脑离线，请重新连接后浏览目录。":
+        "Ordinateur hors ligne. Reconnectez-vous pour parcourir les dossiers.",
+    "目录路径已修改，请点箭头或回车确认后再添加。":
+        "Chemin modifié. Appuyez sur la flèche ou sur Entrée pour confirmer avant d’ajouter.",
     "重试读取目录": "Recharger le dossier",
-    "当前目录没有子目录，可直接添加此目录。": "Aucun sous-dossier. Vous pouvez ajouter ce dossier directement.",
+    "当前目录没有子目录，可直接添加此目录。":
+        "Aucun sous-dossier. Vous pouvez ajouter ce dossier directement.",
     "加载中…": "Chargement…",
     "加载更多目录": "Charger plus de dossiers",
     "项目名称（可选）": "Nom du projet (facultatif)",
-    "留空使用目录名；已有项目会直接复用": "Laissez vide pour utiliser le nom du dossier. Les projets existants seront réutilisés.",
-    "该目录已添加为「{0}」，将打开已有项目。": "Ce dossier est déjà ajouté sous le nom « {0} ». Le projet existant va s’ouvrir.",
+    "留空使用目录名；已有项目会直接复用":
+        "Laissez vide pour utiliser le nom du dossier. Les projets existants seront réutilisés.",
+    "该目录已添加为「{0}」，将打开已有项目。":
+        "Ce dossier est déjà ajouté sous le nom « {0} ». Le projet existant va s’ouvrir.",
     "刷新添加结果": "Actualiser le résultat",
     "正在添加…": "Ajout…",
     "打开已有项目": "Ouvrir le projet existant",
@@ -5213,8 +5859,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "{0} 个会话 · 按当前电脑和项目范围": "{0} conversations · Ordinateur et projet actuels",
     "搜索已保存的消息正文": "Rechercher dans les messages enregistrés",
     "搜索历史正文": "Rechercher dans l’historique des conversations",
-    "在电脑上检索已保存的对话正文，不包含思考过程或附件内容。": "Recherche dans le texte des conversations enregistrées sur votre ordinateur. N’inclut ni le raisonnement ni le contenu des pièces jointes.",
-    "{0} 离线，未搜索其中的会话；连接后重新搜索。": "{0} est hors ligne et n’a pas été inclus dans la recherche. Reconnectez-vous et relancez la recherche.",
+    "在电脑上检索已保存的对话正文，不包含思考过程或附件内容。":
+        "Recherche dans le texte des conversations enregistrées sur votre ordinateur. N’inclut ni le raisonnement ni le contenu des pièces jointes.",
+    "{0} 离线，未搜索其中的会话；连接后重新搜索。":
+        "{0} est hors ligne et n’a pas été inclus dans la recherche. Reconnectez-vous et relancez la recherche.",
     "输入关键词开始搜索": "Saisissez un mot-clé pour rechercher",
     "没有找到匹配的历史记录": "Aucun historique correspondant",
     "你": "Vous",
@@ -5223,12 +5871,16 @@ const messageCatalogs = <String, Map<String, String>>{
     "加载更多记录": "Charger plus de résultats",
     "重试此会话": "Réessayer cette conversation",
     "继续搜索更早的 {0} 个会话": "Rechercher dans {0} conversations plus anciennes",
-    "请等待当前任务结束后再 Fork。": "Attendez la fin de la tâche en cours avant de forker.",
-    "从本轮结束时的历史创建独立会话。": "Crée une conversation indépendante à partir de l’historique à la fin de ce tour.",
+    "请等待当前任务结束后再 Fork。":
+        "Attendez la fin de la tâche en cours avant de forker.",
+    "从本轮结束时的历史创建独立会话。":
+        "Crée une conversation indépendante à partir de l’historique à la fin de ce tour.",
     "当前工作区": "Espace de travail actuel",
-    "共享当前项目文件，仅复制对话历史。": "Partage les fichiers du projet actuel et copie uniquement l’historique de la conversation.",
+    "共享当前项目文件，仅复制对话历史。":
+        "Partage les fichiers du projet actuel et copie uniquement l’historique de la conversation.",
     "新 Worktree": "Nouveau worktree",
-    "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照；非 Git 项目只继承对话。": "Crée un espace de travail séparé sur votre ordinateur et restaure l’instantané des fichiers de ce tour. Les tours anciens peuvent ne pas avoir d’instantané. Les projets hors Git ne reprennent que la conversation.",
+    "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照；非 Git 项目只继承对话。":
+        "Crée un espace de travail séparé sur votre ordinateur et restaure l’instantané des fichiers de ce tour. Les tours anciens peuvent ne pas avoir d’instantané. Les projets hors Git ne reprennent que la conversation.",
     "正在创建…": "Création…",
     "创建 Fork": "Créer le fork",
     "取消置顶": "Désépingler",
@@ -5238,7 +5890,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "归档会话": "Archiver la conversation",
     "会话操作": "Actions de la conversation",
     "会话将从电脑同步": "Les conversations se synchronisent depuis votre ordinateur",
-    "连接自己的电脑后，在这里查看和续接各项目的会话。网络中断时，电脑上的任务会继续执行。": "Connectez votre ordinateur pour consulter et reprendre ici les conversations de vos projets. Les tâches continuent sur votre ordinateur même si le réseau est coupé.",
+    "连接自己的电脑后，在这里查看和续接各项目的会话。网络中断时，电脑上的任务会继续执行。":
+        "Connectez votre ordinateur pour consulter et reprendre ici les conversations de vos projets. Les tâches continuent sur votre ordinateur même si le réseau est coupé.",
     "搜索会话": "Rechercher des conversations",
     "{0} 项等待处理": "{0} éléments en attente",
     "{0} 连接中…": "{0} connexion…",
@@ -5246,7 +5899,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "{0} 离线 · 显示 {1} 同步的内容": "{0} hors ligne · Contenu synchronisé {1}",
     "没有匹配的会话": "Aucune conversation correspondante",
     "没有未归档的会话": "Aucune conversation non archivée",
-    "还没有会话，点右上角 + 开始新任务": "Aucune conversation. Touchez + en haut à droite pour lancer une tâche.",
+    "还没有会话，点右上角 + 开始新任务":
+        "Aucune conversation. Touchez + en haut à droite pour lancer une tâche.",
     "正在从电脑同步会话…": "Synchronisation des conversations depuis l’ordinateur…",
     "置顶": "Épinglées",
     "已归档 ({0})": "Archivées ({0})",
@@ -5255,58 +5909,82 @@ const messageCatalogs = <String, Map<String, String>>{
     "已归档": "Archivée",
     "正在核实原配对…": "Vérification de l’appairage d’origine…",
     "移除本机配对记录？": "Supprimer l’appairage local ?",
-    "之后需要重新扫码。电脑上可能已允许这台手机；如需撤销授权，请在电脑的「连接手机」中操作。": "Vous devrez scanner à nouveau. Votre ordinateur a peut-être déjà autorisé ce téléphone. Si besoin, révoquez l’accès depuis Connecter le téléphone sur votre ordinateur.",
+    "之后需要重新扫码。电脑上可能已允许这台手机；如需撤销授权，请在电脑的「连接手机」中操作。":
+        "Vous devrez scanner à nouveau. Votre ordinateur a peut-être déjà autorisé ce téléphone. Si besoin, révoquez l’accès depuis Connecter le téléphone sur votre ordinateur.",
     "保留记录": "Conserver",
     "移除本机记录": "Supprimer l’enregistrement local",
-    "正在验证电脑身份并建立配对…": "Vérification de l’identité de l’ordinateur et appairage…",
+    "正在验证电脑身份并建立配对…":
+        "Vérification de l’identité de l’ordinateur et appairage…",
     "加密组件尚未准备好。": "Le chiffrement n’est pas encore prêt.",
-    "在电脑端打开「连接手机」，扫描配对二维码。": "Ouvrez Connecter le téléphone sur votre ordinateur et scannez le QR code d’appairage.",
-    "配对后可操作这台电脑的 Agent、项目、Git 和终端，并查看、控制电脑屏幕。你可以随时在电脑上撤销授权。": "Une fois appairé, utilisez les Agents, projets, Git et terminal de votre ordinateur, et affichez ou contrôlez son écran. Révoquez l’accès depuis votre ordinateur à tout moment.",
+    "在电脑端打开「连接手机」，扫描配对二维码。":
+        "Ouvrez Connecter le téléphone sur votre ordinateur et scannez le QR code d’appairage.",
+    "配对后可操作这台电脑的 Agent、项目、Git 和终端，并查看、控制电脑屏幕。你可以随时在电脑上撤销授权。":
+        "Une fois appairé, utilisez les Agents, projets, Git et terminal de votre ordinateur, et affichez ou contrôlez son écran. Révoquez l’accès depuis votre ordinateur à tout moment.",
     "配对结果待核实": "Résultat de l’appairage non confirmé",
-    "保留了原配对信息，可以继续核实电脑是否已允许连接。": "Les informations d’appairage d’origine sont conservées. Continuez à vérifier si l’ordinateur a autorisé la connexion.",
-    "恢复期限已过，请在电脑核实授权后重新扫码。": "Délai de récupération expiré. Vérifiez l’accès sur votre ordinateur et scannez à nouveau.",
+    "保留了原配对信息，可以继续核实电脑是否已允许连接。":
+        "Les informations d’appairage d’origine sont conservées. Continuez à vérifier si l’ordinateur a autorisé la connexion.",
+    "恢复期限已过，请在电脑核实授权后重新扫码。":
+        "Délai de récupération expiré. Vérifiez l’accès sur votre ordinateur et scannez à nouveau.",
     "核实原配对": "Vérifier l’appairage d’origine",
-    "无法使用相机，请检查相机权限，或在下方粘贴配对链接。": "Appareil photo indisponible. Vérifiez l’autorisation de l’appareil photo ou collez un lien d’appairage ci-dessous.",
+    "无法使用相机，请检查相机权限，或在下方粘贴配对链接。":
+        "Appareil photo indisponible. Vérifiez l’autorisation de l’appareil photo ou collez un lien d’appairage ci-dessous.",
     "扫描二维码": "Scanner le QR code",
     "或粘贴配对链接": "Ou collez un lien d’appairage",
     "粘贴从电脑获取的配对链接": "Collez le lien d’appairage obtenu sur votre ordinateur",
-    "二维码使用了本机地址，手机无法访问。请在电脑端使用手机可访问的服务地址并重新生成二维码。": "Ce QR code utilise une adresse locale inaccessible depuis votre téléphone. Générez un nouveau code avec une adresse de service accessible depuis le téléphone.",
-    "无法连接接入服务，请确认手机与电脑的网络、服务地址及端口。局域网调试时需连接同一 Wi-Fi。": "Impossible de joindre le service de connexion. Vérifiez les réseaux, l’adresse et le port du service. En développement local, connectez les deux appareils au même Wi-Fi.",
-    "无法验证服务证书，请检查接入服务配置。": "Impossible de vérifier le certificat du service. Vérifiez la configuration du service de connexion.",
-    "配对未完成，请检查电脑与接入服务后重试。": "Appairage incomplet. Vérifiez votre ordinateur et le service de connexion, puis réessayez.",
-    "DogCodes 手机端连接你自己的电脑：查看会话、继续交给 Agent、处理权限请求。无需注册账号。": "DogCodes se connecte à votre propre ordinateur. Consultez les conversations, confiez des tâches aux Agents et répondez aux demandes d’autorisation. Aucun compte requis.",
+    "二维码使用了本机地址，手机无法访问。请在电脑端使用手机可访问的服务地址并重新生成二维码。":
+        "Ce QR code utilise une adresse locale inaccessible depuis votre téléphone. Générez un nouveau code avec une adresse de service accessible depuis le téléphone.",
+    "无法连接接入服务，请确认手机与电脑的网络、服务地址及端口。局域网调试时需连接同一 Wi-Fi。":
+        "Impossible de joindre le service de connexion. Vérifiez les réseaux, l’adresse et le port du service. En développement local, connectez les deux appareils au même Wi-Fi.",
+    "无法验证服务证书，请检查接入服务配置。":
+        "Impossible de vérifier le certificat du service. Vérifiez la configuration du service de connexion.",
+    "配对未完成，请检查电脑与接入服务后重试。":
+        "Appairage incomplet. Vérifiez votre ordinateur et le service de connexion, puis réessayez.",
+    "DogCodes 手机端连接你自己的电脑：查看会话、继续交给 Agent、处理权限请求。无需注册账号。":
+        "DogCodes se connecte à votre propre ordinateur. Consultez les conversations, confiez des tâches aux Agents et répondez aux demandes d’autorisation. Aucun compte requis.",
     "在电脑上打开 DogCodes": "Ouvrez DogCodes sur votre ordinateur",
-    "点击「连接手机」，屏幕上会显示二维码": "Cliquez sur Connecter le téléphone pour afficher un QR code",
-    "用这部手机扫码，或粘贴配对链接": "Scannez-le avec ce téléphone ou collez le lien d’appairage",
+    "点击「连接手机」，屏幕上会显示二维码":
+        "Cliquez sur Connecter le téléphone pour afficher un QR code",
+    "用这部手机扫码，或粘贴配对链接":
+        "Scannez-le avec ce téléphone ou collez le lien d’appairage",
     "扫码连接电脑": "Scanner pour connecter l’ordinateur",
     "粘贴配对链接": "Coller le lien d’appairage",
-    "连接经过端到端加密，手机只能访问你在电脑上授权的内容。": "Chiffré de bout en bout. Votre téléphone n’accède qu’à ce que vous autorisez sur votre ordinateur.",
+    "连接经过端到端加密，手机只能访问你在电脑上授权的内容。":
+        "Chiffré de bout en bout. Votre téléphone n’accède qu’à ce que vous autorisez sur votre ordinateur.",
     "正在连接{0}": "Connexion à {0}",
     "暂时连接不上{0}": "Impossible de joindre {0}",
     "连接时间比平时长，仍在尝试。": "Plus long que d’habitude. Nouvelle tentative en cours.",
-    "电脑上的任务不受影响，连接恢复后可继续操作。": "Les tâches sur votre ordinateur ne sont pas affectées. Reprenez quand la connexion revient.",
+    "电脑上的任务不受影响，连接恢复后可继续操作。":
+        "Les tâches sur votre ordinateur ne sont pas affectées. Reprenez quand la connexion revient.",
     "请检查": "Vérifiez les points suivants",
     "电脑已开机，没有进入睡眠": "Votre ordinateur est allumé et n’est pas en veille",
     "电脑上的 DogCodes 正在运行": "DogCodes est ouvert sur votre ordinateur",
-    "手机网络可用；同一局域网下连接更快": "Votre téléphone est en ligne. La connexion est plus rapide sur le même réseau local.",
+    "手机网络可用；同一局域网下连接更快":
+        "Votre téléphone est en ligne. La connexion est plus rapide sur le même réseau local.",
     "管理电脑": "Gérer les ordinateurs",
     "连接其他电脑": "Connecter un autre ordinateur",
     "查看离线记录": "Voir l’historique hors ligne",
     "查看离线记录（{0} 同步）": "Voir l’historique hors ligne (synchronisé {0})",
     "附件": "Pièce jointe",
-    "电脑离线。已缓存附件信息，原文需连接电脑后查看。": "Ordinateur hors ligne. Les informations de la pièce jointe sont en cache. Reconnectez-vous pour voir l’original.",
-    "电脑端暂不支持附件预览。": "L’application de bureau ne prend pas encore en charge l’aperçu des pièces jointes.",
+    "电脑离线。已缓存附件信息，原文需连接电脑后查看。":
+        "Ordinateur hors ligne. Les informations de la pièce jointe sont en cache. Reconnectez-vous pour voir l’original.",
+    "电脑端暂不支持附件预览。":
+        "L’application de bureau ne prend pas encore en charge l’aperçu des pièces jointes.",
     "附件读取位置未确认。": "Position de lecture de la pièce jointe non confirmée.",
-    "附件过大，请在电脑上查看。": "Pièce jointe trop volumineuse. Consultez-la sur votre ordinateur.",
-    "附件内容校验失败，未展示变化后的文件。": "Échec du contrôle d’intégrité de la pièce jointe. Le fichier modifié n’a pas été affiché.",
+    "附件过大，请在电脑上查看。":
+        "Pièce jointe trop volumineuse. Consultez-la sur votre ordinateur.",
+    "附件内容校验失败，未展示变化后的文件。":
+        "Échec du contrôle d’intégrité de la pièce jointe. Le fichier modifié n’a pas été affiché.",
     "任务附件 · 只读": "Pièce jointe de la tâche · Lecture seule",
     "重试读取": "Recharger",
-    "图片无法解码，请在电脑上查看。": "Impossible de décoder l’image. Consultez-la sur votre ordinateur.",
-    "该附件格式请在电脑上查看。": "Consultez ce format de pièce jointe sur votre ordinateur.",
+    "图片无法解码，请在电脑上查看。":
+        "Impossible de décoder l’image. Consultez-la sur votre ordinateur.",
+    "该附件格式请在电脑上查看。":
+        "Consultez ce format de pièce jointe sur votre ordinateur.",
     "默认模型": "Modèle par défaut",
     "默认": "Par défaut",
     "选择 Agent": "Choisir un Agent",
-    "这台电脑上没有已就绪并启用的 Agent。安装或登录需在电脑上完成。": "Aucun Agent prêt et activé sur cet ordinateur. Installez-le ou connectez-vous d’abord sur votre ordinateur.",
+    "这台电脑上没有已就绪并启用的 Agent。安装或登录需在电脑上完成。":
+        "Aucun Agent prêt et activé sur cet ordinateur. Installez-le ou connectez-vous d’abord sur votre ordinateur.",
     "模型": "Modèle",
     "选择模型": "Choisir un modèle",
     "完成": "OK",
@@ -5318,17 +5996,21 @@ const messageCatalogs = <String, Map<String, String>>{
     "默认 · {0}": "Par défaut · {0}",
     "恢复默认": "Rétablir la valeur par défaut",
     "电脑离线，连接后才能 Fork": "Ordinateur hors ligne. Reconnectez-vous pour forker.",
-    "会话正在运行，结束后才能从本轮 Fork": "La conversation est en cours. Attendez la fin pour forker ce tour.",
+    "会话正在运行，结束后才能从本轮 Fork":
+        "La conversation est en cours. Attendez la fin pour forker ce tour.",
     "复制本轮回复": "Copier la réponse du tour",
     "已复制本轮回复": "Réponse du tour copiée",
     "复制失败，请重试": "Échec de la copie. Réessayez.",
     "本轮消耗": "Consommation du tour",
     "从本轮 Fork": "Forker à partir de ce tour",
-    "电脑未受理这项任务，内容已保留。": "L’ordinateur n’a pas accepté cette tâche. Votre contenu est conservé.",
+    "电脑未受理这项任务，内容已保留。":
+        "L’ordinateur n’a pas accepté cette tâche. Votre contenu est conservé.",
     "没有已绑定的电脑": "Aucun ordinateur appairé",
-    "这台电脑还没有项目，点右上角「添加项目」选择电脑上的已有目录。": "Aucun projet sur cet ordinateur. Touchez Ajouter un projet en haut à droite pour choisir un dossier existant.",
+    "这台电脑还没有项目，点右上角「添加项目」选择电脑上的已有目录。":
+        "Aucun projet sur cet ordinateur. Touchez Ajouter un projet en haut à droite pour choisir un dossier existant.",
     "你想完成什么？": "Que voulez-vous faire ?",
-    "电脑离线，任务和附件会保留为本机草稿。重连后请点击发送。": "Ordinateur hors ligne. Les tâches et pièces jointes sont enregistrées comme brouillons locaux. Touchez Envoyer après la reconnexion.",
+    "电脑离线，任务和附件会保留为本机草稿。重连后请点击发送。":
+        "Ordinateur hors ligne. Les tâches et pièces jointes sont enregistrées comme brouillons locaux. Touchez Envoyer après la reconnexion.",
     "描述你的任务…": "Décrivez votre tâche…",
     "没有已就绪的 Agent": "Aucun Agent prêt",
     "开始任务": "Lancer la tâche",
@@ -5342,9 +6024,11 @@ const messageCatalogs = <String, Map<String, String>>{
     "无法核实修复状态：{0}": "Impossible de vérifier l’état du correctif : {0}",
     "审查代码证据": "Éléments de code de la revue",
     "{0} · {1}–{2} 行": "{0} · Lignes {1}–{2}",
-    "这是审查时保存的版本，当前文件可能已变化。": "Version enregistrée lors de la revue. Le fichier actuel a peut-être changé.",
+    "这是审查时保存的版本，当前文件可能已变化。":
+        "Version enregistrée lors de la revue. Le fichier actuel a peut-être changé.",
     "读取审查代码失败：{0}": "Impossible de charger le code de la revue : {0}",
-    "审查连接中断，本次审查未完成。请检查网络后重新检查。": "Connexion de la revue perdue. Revue incomplète. Vérifiez votre réseau et relancez-la.",
+    "审查连接中断，本次审查未完成。请检查网络后重新检查。":
+        "Connexion de la revue perdue. Revue incomplète. Vérifiez votre réseau et relancez-la.",
     "错误详情": "Détails de l’erreur",
     "审查连接中断，本次审查未完成。": "Connexion de la revue perdue. Revue incomplète.",
     "文件覆盖情况": "Couverture des fichiers",
@@ -5353,7 +6037,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "未报告检查": "Vérification non signalée",
     "原文不可用": "Source indisponible",
     "本次审查未报告问题。": "Aucun problème signalé dans cette revue.",
-    "审查尚未形成完整问题报告，不能据此判断是否存在问题。": "Cette revue n’a pas produit de rapport complet. Elle ne permet pas de savoir s’il existe des problèmes.",
+    "审查尚未形成完整问题报告，不能据此判断是否存在问题。":
+        "Cette revue n’a pas produit de rapport complet. Elle ne permet pas de savoir s’il existe des problèmes.",
     "潜在{0}风险": "Risque potentiel de {0}",
     "{0}{1} · {2}{3}–{4} 行": "{0}{1} · {2}Lignes {3}–{4}",
     "改动前 · ": "Avant modification ·",
@@ -5364,8 +6049,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "全选问题": "Sélectionner tous les problèmes",
     "已选 {0} 项": "{0} sélectionnés",
     "开始修复": "Lancer le correctif",
-    "主对话正在回复，结束后可提交修复。": "La conversation principale répond. Soumettez les correctifs une fois terminé.",
-    "修复已提交给主 Agent，携带所选问题及原审查上下文。": "Correctif soumis à l’Agent principal avec les problèmes sélectionnés et le contexte de la revue d’origine.",
+    "主对话正在回复，结束后可提交修复。":
+        "La conversation principale répond. Soumettez les correctifs une fois terminé.",
+    "修复已提交给主 Agent，携带所选问题及原审查上下文。":
+        "Correctif soumis à l’Agent principal avec les problèmes sélectionnés et le contexte de la revue d’origine.",
     "有一项修复尚未提交。{0}": "Un correctif n’a pas encore été soumis. {0}",
     "继续原修复": "Poursuivre le correctif d’origine",
     "放弃这次修复": "Abandonner ce correctif",
@@ -5393,13 +6080,19 @@ const messageCatalogs = <String, Map<String, String>>{
     "失败": "Échec",
     "已取消": "Annulé",
     "连接中断": "Déconnecté",
-    "电脑离线，请重新连接后查看审查。": "Ordinateur hors ligne. Reconnectez-vous pour voir la revue.",
-    "电脑端暂不支持本轮审查，请更新电脑端后重试。": "Mettez à jour l’application de bureau pour utiliser les revues de tour.",
-    "无法读取可用的审查 Agent。": "Impossible de charger les Agents de revue disponibles.",
-    "已发起复审，可在修复轮次底部查看。": "Nouvelle revue lancée. Consultez-la sous le tour de correction.",
+    "电脑离线，请重新连接后查看审查。":
+        "Ordinateur hors ligne. Reconnectez-vous pour voir la revue.",
+    "电脑端暂不支持本轮审查，请更新电脑端后重试。":
+        "Mettez à jour l’application de bureau pour utiliser les revues de tour.",
+    "无法读取可用的审查 Agent。":
+        "Impossible de charger les Agents de revue disponibles.",
+    "已发起复审，可在修复轮次底部查看。":
+        "Nouvelle revue lancée. Consultez-la sous le tour de correction.",
     "刷新审查": "Actualiser les revues",
-    "电脑离线，审查会继续在电脑上运行。": "Ordinateur hors ligne. La revue continue sur votre ordinateur.",
-    "暂无可用的审查 Agent，请在电脑上连接或重新检测 Agent。": "Aucun Agent de revue disponible. Connectez ou redétectez les Agents sur votre ordinateur.",
+    "电脑离线，审查会继续在电脑上运行。":
+        "Ordinateur hors ligne. La revue continue sur votre ordinateur.",
+    "暂无可用的审查 Agent，请在电脑上连接或重新检测 Agent。":
+        "Aucun Agent de revue disponible. Connectez ou redétectez les Agents sur votre ordinateur.",
     "审查使用的 Agent": "Agent de revue",
     "本轮尚未发起审查。": "Aucune revue lancée pour ce tour.",
     "历史审查": "Revues précédentes",
@@ -5427,20 +6120,26 @@ const messageCatalogs = <String, Map<String, String>>{
     "本轮变更加载失败：{0}": "Impossible de charger les modifications du tour : {0}",
     "本轮变更加载失败": "Impossible de charger les modifications du tour",
     "{0} 个文件已更改": "{0} fichiers modifiés",
-    "连接中断后的恢复快照 · 仅反映检查时的文件变化，外部工具可能仍在写入": "Instantané de récupération après déconnexion. Reflète les modifications au moment de la vérification ; des outils externes écrivent peut-être encore.",
+    "连接中断后的恢复快照 · 仅反映检查时的文件变化，外部工具可能仍在写入":
+        "Instantané de récupération après déconnexion. Reflète les modifications au moment de la vérification ; des outils externes écrivent peut-être encore.",
     "二进制": "Binaire",
     "本轮保存的历史 Diff": "Diff historique enregistré pour ce tour",
-    "这一轮未保存该文件的内容": "Le contenu de ce fichier n’a pas été enregistré pour ce tour",
-    "没有可用于生成提交说明的 Agent": "Aucun Agent disponible pour générer un message de commit",
+    "这一轮未保存该文件的内容":
+        "Le contenu de ce fichier n’a pas été enregistré pour ce tour",
+    "没有可用于生成提交说明的 Agent":
+        "Aucun Agent disponible pour générer un message de commit",
     "已提交": "Commité",
-    "提交结果待核实，请到待处理页面核实原操作": "Résultat du commit non confirmé. Vérifiez l’opération d’origine dans À traiter.",
+    "提交结果待核实，请到待处理页面核实原操作":
+        "Résultat du commit non confirmé. Vérifiez l’opération d’origine dans À traiter.",
     "正在暂存本轮文件…": "Indexation des fichiers du tour…",
     "正在生成提交说明…": "Génération du message de commit…",
     "正在提交…": "Commit en cours…",
     "提交本轮修改": "Commiter les modifications du tour",
-    "本轮修改已没有未提交的内容（可能已提交或已撤销）。": "Il ne reste aucune modification non commitée pour ce tour (déjà commitée ou annulée).",
+    "本轮修改已没有未提交的内容（可能已提交或已撤销）。":
+        "Il ne reste aucune modification non commitée pour ce tour (déjà commitée ou annulée).",
     "将提交 {0} 个文件{1}。": "{0} fichiers seront commités{1}.",
-    "，其中 {0} 个是此前已暂存的其他更改": ", dont {0} modifications indexées auparavant par un autre travail",
+    "，其中 {0} 个是此前已暂存的其他更改":
+        ", dont {0} modifications indexées auparavant par un autre travail",
     "重新生成": "Régénérer",
     "编写提交说明的 Agent": "Agent du message de commit",
     "子智能体": "Sous-agent",
@@ -5462,7 +6161,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "电脑项目文件": "Fichiers du projet sur l’ordinateur",
     "需先在此项目创建一个会话": "Créez d’abord une conversation dans ce projet",
     "最多 16 个附件，总大小不超过 25 MB。": "Jusqu’à 16 pièces jointes, 25 Mo au total.",
-    "草稿目标已变化，请回到原项目重新选择附件。": "La destination du brouillon a changé. Revenez au projet d’origine et sélectionnez à nouveau les pièces jointes.",
+    "草稿目标已变化，请回到原项目重新选择附件。":
+        "La destination du brouillon a changé. Revenez au projet d’origine et sélectionnez à nouveau les pièces jointes.",
     "无法添加附件：{0}": "Impossible d’ajouter la pièce jointe : {0}",
     "未能移除附件：{0}": "Impossible de retirer la pièce jointe : {0}",
     "添加附件": "Ajouter une pièce jointe",
@@ -5490,29 +6190,40 @@ const messageCatalogs = <String, Map<String, String>>{
     "委派任务": "Tâche déléguée",
     "暂无子任务结论": "Pas encore de résultat de sous-tâche",
     "执行过程请在电脑上查看": "Consultez le déroulement sur votre ordinateur",
-    "共 {0} 步，执行过程请在电脑上查看": "{0} étapes. Consultez le déroulement sur votre ordinateur.",
-    "改动内容见本轮文件变更，或在电脑上查看": "Consultez les modifications dans les fichiers de ce tour ou sur votre ordinateur",
+    "共 {0} 步，执行过程请在电脑上查看":
+        "{0} étapes. Consultez le déroulement sur votre ordinateur.",
+    "改动内容见本轮文件变更，或在电脑上查看":
+        "Consultez les modifications dans les fichiers de ce tour ou sur votre ordinateur",
     "完整输出请在电脑上查看": "Consultez la sortie complète sur votre ordinateur",
     "{0}\n… 内容过长，已截断": "{0}\n… Contenu tronqué",
     "分叉": "Fork",
     "分叉上下文暂不可显示": "Contexte du fork indisponible",
-    "请先恢复原草稿，未覆盖本机记录。": "Restaurez d’abord le brouillon d’origine. Les enregistrements locaux n’ont pas été écrasés.",
+    "请先恢复原草稿，未覆盖本机记录。":
+        "Restaurez d’abord le brouillon d’origine. Les enregistrements locaux n’ont pas été écrasés.",
     "草稿未能保存：{0}": "Impossible d’enregistrer le brouillon : {0}",
     "无法恢复草稿：{0}": "Impossible de restaurer le brouillon : {0}",
-    "暂时无法读取模型，可保留草稿后重试：{0}": "Impossible de charger les modèles. Conservez votre brouillon et réessayez : {0}",
+    "暂时无法读取模型，可保留草稿后重试：{0}":
+        "Impossible de charger les modèles. Conservez votre brouillon et réessayez : {0}",
     "附件仍在上传。": "Les pièces jointes sont encore en cours d’envoi.",
-    "电脑离线，附件及任务已保留为草稿。": "Ordinateur hors ligne. Pièces jointes et tâche enregistrées comme brouillon.",
+    "电脑离线，附件及任务已保留为草稿。":
+        "Ordinateur hors ligne. Pièces jointes et tâche enregistrées comme brouillon.",
     "离线会话未能保存：{0}": "Impossible d’enregistrer la conversation hors ligne : {0}",
-    "没有找到要打开的这一轮，它可能已被删除。": "Ce tour est introuvable. Il a peut-être été supprimé.",
-    "电脑离线，连接后再查看完整内容。": "Ordinateur hors ligne. Reconnectez-vous pour voir le contenu complet.",
+    "没有找到要打开的这一轮，它可能已被删除。":
+        "Ce tour est introuvable. Il a peut-être été supprimé.",
+    "电脑离线，连接后再查看完整内容。":
+        "Ordinateur hors ligne. Reconnectez-vous pour voir le contenu complet.",
     "删除这个会话？": "Supprimer cette conversation ?",
-    "将在「{0}」上永久删除「{1}」及其记录，无法恢复。项目文件不会被删除。": "Supprime définitivement « {1} » et son historique de « {0} ». Action irréversible. Les fichiers du projet sont conservés.",
+    "将在「{0}」上永久删除「{1}」及其记录，无法恢复。项目文件不会被删除。":
+        "Supprime définitivement « {1} » et son historique de « {0} ». Action irréversible. Les fichiers du projet sont conservés.",
     "删除": "Supprimer",
-    "停止请求未确认：{0}。请刷新核实任务状态。": "Demande d’arrêt non confirmée : {0}. Actualisez pour vérifier l’état de la tâche.",
-    "电脑未受理这次发送，内容已保留。": "L’ordinateur n’a pas accepté ce message. Votre contenu est conservé.",
+    "停止请求未确认：{0}。请刷新核实任务状态。":
+        "Demande d’arrêt non confirmée : {0}. Actualisez pour vérifier l’état de la tâche.",
+    "电脑未受理这次发送，内容已保留。":
+        "L’ordinateur n’a pas accepté ce message. Votre contenu est conservé.",
     "这台电脑已不在列表中": "Cet ordinateur ne figure plus dans la liste",
     "可能已在电脑上撤销配对。": "L’appairage a peut-être été révoqué sur votre ordinateur.",
-    "{0} · 内容同步于 {1}{2}。附件原文需电脑在线。": "{0} · Synchronisé {1}{2}. Reconnectez-vous pour voir les pièces jointes d’origine.",
+    "{0} · 内容同步于 {1}{2}。附件原文需电脑在线。":
+        "{0} · Synchronisé {1}{2}. Reconnectez-vous pour voir les pièces jointes d’origine.",
     "正在同步，先显示本机缓存": "Synchronisation. Affichage du cache local en attendant.",
     "离线缓存": "Cache hors ligne",
     "未知时间": "Heure inconnue",
@@ -5526,24 +6237,39 @@ const messageCatalogs = <String, Map<String, String>>{
     "电脑离线{0}。任务不会因此停止。": "Ordinateur hors ligne{0}. Les tâches continuent.",
     " · 最后同步 {0}": " · Dernière synchronisation {0}",
     "继续交给 Agent…": "Écrire à votre Agent…",
-    "这台电脑已移除，请核实电脑列表中的绑定。": "Cet ordinateur a été retiré. Vérifiez l’appairage dans la liste des ordinateurs.",
-    "电脑绑定已改变，请从电脑列表重新打开。": "L’appairage de l’ordinateur a changé. Rouvrez depuis la liste des ordinateurs.",
-    "暂时无法读取电脑绑定，请稍后重试。": "Impossible de lire l’appairage de l’ordinateur. Réessayez plus tard.",
+    "这台电脑已移除，请核实电脑列表中的绑定。":
+        "Cet ordinateur a été retiré. Vérifiez l’appairage dans la liste des ordinateurs.",
+    "电脑绑定已改变，请从电脑列表重新打开。":
+        "L’appairage de l’ordinateur a changé. Rouvrez depuis la liste des ordinateurs.",
+    "暂时无法读取电脑绑定，请稍后重试。":
+        "Impossible de lire l’appairage de l’ordinateur. Réessayez plus tard.",
     "直连协商响应无效。": "Réponse de négociation de connexion directe invalide.",
-    "本轮变更记录过大，请在电脑上查看": "Historique des modifications du tour trop volumineux. Consultez-le sur votre ordinateur.",
-    "本轮变更记录读取不一致": "Lecture incohérente de l’historique des modifications du tour.",
-    "本轮变更记录校验失败": "Échec du contrôle d’intégrité de l’historique des modifications du tour.",
-    "本轮变更记录格式不可用": "Format de l’historique des modifications du tour indisponible.",
-    "电脑暂时离线，请稍后重连。": "Ordinateur temporairement hors ligne. Reconnectez-vous plus tard.",
-    "连接请求未被接受，请核实设备授权。": "Demande de connexion refusée. Vérifiez l’autorisation de l’appareil.",
+    "本轮变更记录过大，请在电脑上查看":
+        "Historique des modifications du tour trop volumineux. Consultez-le sur votre ordinateur.",
+    "本轮变更记录读取不一致":
+        "Lecture incohérente de l’historique des modifications du tour.",
+    "本轮变更记录校验失败":
+        "Échec du contrôle d’intégrité de l’historique des modifications du tour.",
+    "本轮变更记录格式不可用":
+        "Format de l’historique des modifications du tour indisponible.",
+    "电脑暂时离线，请稍后重连。":
+        "Ordinateur temporairement hors ligne. Reconnectez-vous plus tard.",
+    "连接请求未被接受，请核实设备授权。":
+        "Demande de connexion refusée. Vérifiez l’autorisation de l’appareil.",
     "连接响应过大。": "Réponse de connexion trop volumineuse.",
-    "连接中断，操作结果待核实；请勿重复发送。": "Connexion perdue. Résultat de l’opération non confirmé. Ne la renvoyez pas.",
-    "请在电脑上生成新版配对二维码。": "Générez un nouveau QR code d’appairage sur votre ordinateur.",
+    "连接中断，操作结果待核实；请勿重复发送。":
+        "Connexion perdue. Résultat de l’opération non confirmé. Ne la renvoyez pas.",
+    "请在电脑上生成新版配对二维码。":
+        "Générez un nouveau QR code d’appairage sur votre ordinateur.",
     "电脑连接身份不一致。": "Identité de connexion de l’ordinateur incohérente.",
-    "手机身份与原配对不一致，未重新申请授权。": "L’identité du téléphone diffère de l’appairage d’origine. L’autorisation n’a pas été redemandée.",
-    "原配对恢复期限已过，请在电脑核实授权后重新扫码。": "Délai de récupération de l’appairage expiré. Vérifiez l’accès sur votre ordinateur et scannez à nouveau.",
-    "电脑连接身份与原配对不一致。": "L’identité de connexion de l’ordinateur diffère de l’appairage d’origine.",
-    "电脑未返回原配对回执。": "L’ordinateur n’a pas renvoyé l’accusé de l’appairage d’origine.",
+    "手机身份与原配对不一致，未重新申请授权。":
+        "L’identité du téléphone diffère de l’appairage d’origine. L’autorisation n’a pas été redemandée.",
+    "原配对恢复期限已过，请在电脑核实授权后重新扫码。":
+        "Délai de récupération de l’appairage expiré. Vérifiez l’accès sur votre ordinateur et scannez à nouveau.",
+    "电脑连接身份与原配对不一致。":
+        "L’identité de connexion de l’ordinateur diffère de l’appairage d’origine.",
+    "电脑未返回原配对回执。":
+        "L’ordinateur n’a pas renvoyé l’accusé de l’appairage d’origine.",
     "直连身份验证失败。": "Échec de l’authentification de la connexion directe.",
     "加密数据格式无效。": "Format de données chiffrées invalide.",
     "请求较多，请稍后重试。": "Trop de requêtes. Réessayez plus tard.",
@@ -5552,191 +6278,325 @@ const messageCatalogs = <String, Map<String, String>>{
     "关键词过长，请缩短后再搜索。": "Mot-clé trop long. Raccourcissez-le et réessayez.",
     "电脑离线，连接后重试搜索。": "Ordinateur hors ligne. Reconnectez-vous pour rechercher.",
     "连接已更换，请重试本次搜索。": "La connexion a changé. Relancez cette recherche.",
-    "电脑未返回可用的历史搜索结果。": "L’ordinateur n’a renvoyé aucun résultat de recherche exploitable.",
-    "历史搜索游标没有前进，请重新搜索。": "Le curseur de recherche n’a pas avancé. Relancez la recherche.",
-    "历史搜索范围发生变化，请重新搜索。": "La portée de la recherche a changé. Relancez la recherche.",
-    "写操作必须保留原始操作标识。": "Les opérations d’écriture doivent conserver leur identifiant d’origine.",
-    "请先确认上一条消息或审批的结果。": "Confirmez d’abord le résultat du message ou de l’approbation précédent.",
-    "请先确认上一项设置或工作区操作的结果。": "Confirmez d’abord le résultat du réglage ou de l’opération d’espace de travail précédent.",
-    "Fork 正在电脑上执行，请等待并核实。": "Fork en cours sur votre ordinateur. Attendez et vérifiez le résultat.",
-    "原决定已受理，正在核实交付结果。": "Décision d’origine acceptée. Vérification de la transmission.",
+    "电脑未返回可用的历史搜索结果。":
+        "L’ordinateur n’a renvoyé aucun résultat de recherche exploitable.",
+    "历史搜索游标没有前进，请重新搜索。":
+        "Le curseur de recherche n’a pas avancé. Relancez la recherche.",
+    "历史搜索范围发生变化，请重新搜索。":
+        "La portée de la recherche a changé. Relancez la recherche.",
+    "写操作必须保留原始操作标识。":
+        "Les opérations d’écriture doivent conserver leur identifiant d’origine.",
+    "请先确认上一条消息或审批的结果。":
+        "Confirmez d’abord le résultat du message ou de l’approbation précédent.",
+    "请先确认上一项设置或工作区操作的结果。":
+        "Confirmez d’abord le résultat du réglage ou de l’opération d’espace de travail précédent.",
+    "Fork 正在电脑上执行，请等待并核实。":
+        "Fork en cours sur votre ordinateur. Attendez et vérifiez le résultat.",
+    "原决定已受理，正在核实交付结果。":
+        "Décision d’origine acceptée. Vérification de la transmission.",
     "请先核实原审批决定。": "Vérifiez d’abord la décision d’approbation d’origine.",
-    "配对恢复记录无法读取，请先核实手机安全存储。": "Impossible de lire les données de récupération d’appairage. Vérifiez le stockage sécurisé de votre téléphone.",
-    "配对恢复信息未能安全保存。": "Impossible d’enregistrer de façon sécurisée les informations de récupération d’appairage.",
-    "待核实电脑的身份发生变化，请先核实原配对。": "L’identité de l’ordinateur a changé. Vérifiez d’abord l’appairage d’origine.",
-    "待核实配对过多，请先核实原记录。": "Trop d’appairages non vérifiés. Vérifiez d’abord les enregistrements existants.",
-    "本机设备身份无法读取，请先恢复安全存储。": "Impossible de lire l’identité de cet appareil. Restaurez d’abord le stockage sécurisé.",
-    "设备身份未能安全保存，尚未开始配对。": "Impossible d’enregistrer de façon sécurisée l’identité de l’appareil. L’appairage n’a pas commencé.",
-    "已保存的电脑身份无法读取，请先核实配对。": "Impossible de lire l’identité enregistrée de l’ordinateur. Vérifiez d’abord l’appairage.",
-    "配对回执与当前连接不一致。": "L’accusé d’appairage ne correspond pas à la connexion actuelle.",
-    "这项配对已因移除电脑而失效，请重新扫码。": "Cet appairage a expiré lors du retrait de l’ordinateur. Scannez à nouveau.",
-    "电脑绑定已变化，请重新扫码。": "L’appairage de l’ordinateur a changé. Scannez à nouveau.",
-    "电脑身份已发生变化，需要先解除旧配对。": "L’identité de l’ordinateur a changé. Supprimez d’abord l’ancien appairage.",
-    "电脑绑定已变化，未移除新的绑定，请刷新后确认。": "L’appairage de l’ordinateur a changé. Le nouvel appairage n’a pas été supprimé. Actualisez et confirmez.",
-    "设备密钥格式无效，不能继续连接。": "Format de clé d’appareil invalide. Impossible de poursuivre la connexion.",
+    "配对恢复记录无法读取，请先核实手机安全存储。":
+        "Impossible de lire les données de récupération d’appairage. Vérifiez le stockage sécurisé de votre téléphone.",
+    "配对恢复信息未能安全保存。":
+        "Impossible d’enregistrer de façon sécurisée les informations de récupération d’appairage.",
+    "待核实电脑的身份发生变化，请先核实原配对。":
+        "L’identité de l’ordinateur a changé. Vérifiez d’abord l’appairage d’origine.",
+    "待核实配对过多，请先核实原记录。":
+        "Trop d’appairages non vérifiés. Vérifiez d’abord les enregistrements existants.",
+    "本机设备身份无法读取，请先恢复安全存储。":
+        "Impossible de lire l’identité de cet appareil. Restaurez d’abord le stockage sécurisé.",
+    "设备身份未能安全保存，尚未开始配对。":
+        "Impossible d’enregistrer de façon sécurisée l’identité de l’appareil. L’appairage n’a pas commencé.",
+    "已保存的电脑身份无法读取，请先核实配对。":
+        "Impossible de lire l’identité enregistrée de l’ordinateur. Vérifiez d’abord l’appairage.",
+    "配对回执与当前连接不一致。":
+        "L’accusé d’appairage ne correspond pas à la connexion actuelle.",
+    "这项配对已因移除电脑而失效，请重新扫码。":
+        "Cet appairage a expiré lors du retrait de l’ordinateur. Scannez à nouveau.",
+    "电脑绑定已变化，请重新扫码。":
+        "L’appairage de l’ordinateur a changé. Scannez à nouveau.",
+    "电脑身份已发生变化，需要先解除旧配对。":
+        "L’identité de l’ordinateur a changé. Supprimez d’abord l’ancien appairage.",
+    "电脑绑定已变化，未移除新的绑定，请刷新后确认。":
+        "L’appairage de l’ordinateur a changé. Le nouvel appairage n’a pas été supprimé. Actualisez et confirmez.",
+    "设备密钥格式无效，不能继续连接。":
+        "Format de clé d’appareil invalide. Impossible de poursuivre la connexion.",
     "加密组件暂时不可用。": "Chiffrement temporairement indisponible.",
-    "设备身份验证或加密状态校验失败，请重新连接。": "Échec de l’authentification de l’appareil ou de la vérification du chiffrement. Reconnectez-vous.",
+    "设备身份验证或加密状态校验失败，请重新连接。":
+        "Échec de l’authentification de l’appareil ou de la vérification du chiffrement. Reconnectez-vous.",
     "加密连接已关闭。": "Connexion chiffrée fermée.",
-    "电脑绑定状态无法读取，请先检查系统安全存储。": "Impossible de lire l’état d’appairage de l’ordinateur. Vérifiez le stockage sécurisé du système.",
-    "电脑绑定状态未能安全保存，请核实原操作。": "Impossible d’enregistrer de façon sécurisée l’état d’appairage de l’ordinateur. Vérifiez l’opération d’origine.",
+    "电脑绑定状态无法读取，请先检查系统安全存储。":
+        "Impossible de lire l’état d’appairage de l’ordinateur. Vérifiez le stockage sécurisé du système.",
+    "电脑绑定状态未能安全保存，请核实原操作。":
+        "Impossible d’enregistrer de façon sécurisée l’état d’appairage de l’ordinateur. Vérifiez l’opération d’origine.",
     "请先选择电脑上的目录。": "Choisissez d’abord un dossier sur votre ordinateur.",
-    "原项目目录已变化，请核实原结果后重新选择。": "Le dossier du projet d’origine a changé. Vérifiez le résultat d’origine et choisissez à nouveau.",
-    "添加项目结果尚未确认，请核实原操作。": "Résultat de l’ajout du projet non confirmé. Vérifiez l’opération d’origine.",
-    "无法核实电脑上的项目，请重新连接后再试。": "Impossible de vérifier le projet sur votre ordinateur. Reconnectez-vous et réessayez.",
-    "请更新电脑端后再操作，尚未启动或修改配置。": "Mettez d’abord à jour l’application de bureau. Aucune configuration n’a été lancée ni modifiée.",
+    "原项目目录已变化，请核实原结果后重新选择。":
+        "Le dossier du projet d’origine a changé. Vérifiez le résultat d’origine et choisissez à nouveau.",
+    "添加项目结果尚未确认，请核实原操作。":
+        "Résultat de l’ajout du projet non confirmé. Vérifiez l’opération d’origine.",
+    "无法核实电脑上的项目，请重新连接后再试。":
+        "Impossible de vérifier le projet sur votre ordinateur. Reconnectez-vous et réessayez.",
+    "请更新电脑端后再操作，尚未启动或修改配置。":
+        "Mettez d’abord à jour l’application de bureau. Aucune configuration n’a été lancée ni modifiée.",
     "原启动回执不匹配。": "L’accusé du lancement d’origine ne correspond pas.",
-    "原启动记录与项目或运行配置不匹配，未重新执行。": "L’enregistrement du lancement d’origine ne correspond pas au projet ou à la configuration. Il n’a pas été relancé.",
-    "运行配置回执与原操作不匹配，请更新电脑端后核实。": "L’accusé de la configuration d’exécution ne correspond pas à l’opération d’origine. Mettez à jour l’application de bureau et vérifiez.",
-    "电脑没有返回可确认的运行配置结果，请核实原操作。": "L’ordinateur n’a renvoyé aucun résultat vérifiable pour la configuration d’exécution. Vérifiez l’opération d’origine.",
-    "运行配置操作未完成，请核实。": "Opération sur la configuration d’exécution incomplète. Vérifiez-la.",
+    "原启动记录与项目或运行配置不匹配，未重新执行。":
+        "L’enregistrement du lancement d’origine ne correspond pas au projet ou à la configuration. Il n’a pas été relancé.",
+    "运行配置回执与原操作不匹配，请更新电脑端后核实。":
+        "L’accusé de la configuration d’exécution ne correspond pas à l’opération d’origine. Mettez à jour l’application de bureau et vérifiez.",
+    "电脑没有返回可确认的运行配置结果，请核实原操作。":
+        "L’ordinateur n’a renvoyé aucun résultat vérifiable pour la configuration d’exécution. Vérifiez l’opération d’origine.",
+    "运行配置操作未完成，请核实。":
+        "Opération sur la configuration d’exécution incomplète. Vérifiez-la.",
     "没有待核实的启动操作。": "Aucun lancement en attente de vérification.",
-    "电脑未确认原启动已关闭，记录仍保留。": "L’ordinateur n’a pas confirmé la fermeture du lancement d’origine. L’enregistrement est conservé.",
-    "原启动结果尚未确认，记录仍保留。": "Résultat du lancement d’origine non confirmé. L’enregistrement est conservé.",
-    "服务地址必须使用 HTTPS；调试版本可使用本机或局域网 IP。": "L’adresse du service doit utiliser HTTPS. Les versions de débogage peuvent utiliser une IP locale ou du réseau local.",
-    "服务暂时不可用，请稍后重试。": "Service temporairement indisponible. Réessayez plus tard.",
+    "电脑未确认原启动已关闭，记录仍保留。":
+        "L’ordinateur n’a pas confirmé la fermeture du lancement d’origine. L’enregistrement est conservé.",
+    "原启动结果尚未确认，记录仍保留。":
+        "Résultat du lancement d’origine non confirmé. L’enregistrement est conservé.",
+    "服务地址必须使用 HTTPS；调试版本可使用本机或局域网 IP。":
+        "L’adresse du service doit utiliser HTTPS. Les versions de débogage peuvent utiliser une IP locale ou du réseau local.",
+    "服务暂时不可用，请稍后重试。":
+        "Service temporairement indisponible. Réessayez plus tard.",
     "服务返回了无法识别的响应。": "Le service a renvoyé une réponse non reconnue.",
-    "无法连接服务，请检查网络和服务地址。": "Impossible de joindre le service. Vérifiez votre réseau et l’adresse du service.",
-    "无法验证服务证书，请检查服务配置。": "Impossible de vérifier le certificat du service. Vérifiez la configuration du service.",
-    "服务响应无效或连接已中断，请重试。": "Réponse du service invalide ou connexion perdue. Réessayez.",
-    "服务版本不兼容，请更新 App 或服务端。": "Version du service incompatible. Mettez à jour l’application ou le serveur.",
+    "无法连接服务，请检查网络和服务地址。":
+        "Impossible de joindre le service. Vérifiez votre réseau et l’adresse du service.",
+    "无法验证服务证书，请检查服务配置。":
+        "Impossible de vérifier le certificat du service. Vérifiez la configuration du service.",
+    "服务响应无效或连接已中断，请重试。":
+        "Réponse du service invalide ou connexion perdue. Réessayez.",
+    "服务版本不兼容，请更新 App 或服务端。":
+        "Version du service incompatible. Mettez à jour l’application ou le serveur.",
     "二维码内容过长。": "Contenu du QR code trop long.",
     "不是 DogCodes 配对二维码。": "Ce n’est pas un QR code d’appairage DogCodes.",
-    "配对二维码无效，或来自未配置的服务。": "QR code d’appairage invalide ou provenant d’un service non configuré.",
-    "配对二维码已过期，请在电脑上重新生成。": "QR code d’appairage expiré. Générez-en un nouveau sur votre ordinateur.",
-    "设备时间不一致，请校准手机和电脑时间后重试。": "Les horloges des appareils diffèrent. Corrigez l’heure sur les deux appareils et réessayez.",
+    "配对二维码无效，或来自未配置的服务。":
+        "QR code d’appairage invalide ou provenant d’un service non configuré.",
+    "配对二维码已过期，请在电脑上重新生成。":
+        "QR code d’appairage expiré. Générez-en un nouveau sur votre ordinateur.",
+    "设备时间不一致，请校准手机和电脑时间后重试。":
+        "Les horloges des appareils diffèrent. Corrigez l’heure sur les deux appareils et réessayez.",
     "无法读取配对二维码。": "Impossible de lire le QR code d’appairage.",
     "事件游标格式无效。": "Format de curseur d’événements invalide.",
     "事件游标超出范围。": "Curseur d’événements hors limites.",
-    "电脑离线，重新连接后再浏览目录。": "Ordinateur hors ligne. Reconnectez-vous pour parcourir les dossiers.",
+    "电脑离线，重新连接后再浏览目录。":
+        "Ordinateur hors ligne. Reconnectez-vous pour parcourir les dossiers.",
     "连接已更换，请重新读取目录。": "La connexion a changé. Rechargez le dossier.",
-    "电脑未返回有效的目录列表，请更新电脑端后重试。": "Aucune liste de dossiers valide renvoyée. Mettez à jour l’application de bureau et réessayez.",
-    "目录分页没有前进，请刷新目录。": "La pagination des dossiers n’a pas avancé. Actualisez le dossier.",
-    "电脑端暂不支持目录选择，请更新电脑端后重试。": "Mettez à jour l’application de bureau pour choisir des dossiers.",
+    "电脑未返回有效的目录列表，请更新电脑端后重试。":
+        "Aucune liste de dossiers valide renvoyée. Mettez à jour l’application de bureau et réessayez.",
+    "目录分页没有前进，请刷新目录。":
+        "La pagination des dossiers n’a pas avancé. Actualisez le dossier.",
+    "电脑端暂不支持目录选择，请更新电脑端后重试。":
+        "Mettez à jour l’application de bureau pour choisir des dossiers.",
     "剪贴板传输响应无效": "Réponse de transfert du presse-papiers invalide",
     "剪贴板传输身份不匹配": "Identité du transfert du presse-papiers incohérente",
-    "剪贴板传输校验信息不匹配": "Informations d’intégrité du transfert du presse-papiers incohérentes",
-    "图片需小于 16 MB，请缩小图片后重试": "L’image doit faire moins de 16 Mo. Réduisez-la et réessayez.",
+    "剪贴板传输校验信息不匹配":
+        "Informations d’intégrité du transfert du presse-papiers incohérentes",
+    "图片需小于 16 MB，请缩小图片后重试":
+        "L’image doit faire moins de 16 Mo. Réduisez-la et réessayez.",
     "剪贴板文字为空或超过 1 MB": "Le texte du presse-papiers est vide ou dépasse 1 Mo",
     "图片传输起始位置无效": "Position de départ du transfert d’image invalide",
     "剪贴板上传位置不匹配": "Position d’envoi du presse-papiers incohérente",
-    "尚未确认电脑剪贴板是否更新，请从电脑获取核实；不会自动重发": "Mise à jour du presse-papiers de l’ordinateur non confirmée. Récupérez-le pour vérifier. Il ne sera pas renvoyé automatiquement.",
-    "未确认电脑剪贴板已更新，请从电脑获取核实；不会自动重发": "Mise à jour du presse-papiers de l’ordinateur non confirmée. Récupérez-le pour vérifier. Il ne sera pas renvoyé automatiquement.",
-    "剪贴板写入回执不完整，请从电脑获取核实": "Accusé d’écriture du presse-papiers incomplet. Récupérez le presse-papiers de l’ordinateur pour vérifier.",
+    "尚未确认电脑剪贴板是否更新，请从电脑获取核实；不会自动重发":
+        "Mise à jour du presse-papiers de l’ordinateur non confirmée. Récupérez-le pour vérifier. Il ne sera pas renvoyé automatiquement.",
+    "未确认电脑剪贴板已更新，请从电脑获取核实；不会自动重发":
+        "Mise à jour du presse-papiers de l’ordinateur non confirmée. Récupérez-le pour vérifier. Il ne sera pas renvoyé automatiquement.",
+    "剪贴板写入回执不完整，请从电脑获取核实":
+        "Accusé d’écriture du presse-papiers incomplet. Récupérez le presse-papiers de l’ordinateur pour vérifier.",
     "剪贴板下载数据块过大": "Bloc de téléchargement du presse-papiers trop volumineux",
     "剪贴板下载位置不匹配": "Position de téléchargement du presse-papiers incohérente",
-    "剪贴板内容校验失败，未写入手机剪贴板": "Échec du contrôle d’intégrité du presse-papiers. Le presse-papiers du téléphone n’a pas été modifié.",
+    "剪贴板内容校验失败，未写入手机剪贴板":
+        "Échec du contrôle d’intégrité du presse-papiers. Le presse-papiers du téléphone n’a pas été modifié.",
     "通知服务初始化失败。": "Échec de l’initialisation du service de notifications.",
-    "此版本未配置备用通知服务。": "Service de notifications de secours non configuré dans cette version.",
+    "此版本未配置备用通知服务。":
+        "Service de notifications de secours non configuré dans cette version.",
     "系统通知权限尚未开启。": "Autorisation de notification système non accordée.",
     "任务提醒": "Alertes de tâche",
     "待审批、待回答、完成和失败提醒": "Alertes d’approbation, de question, de fin et d’échec",
-    "未获取到通知设备身份。": "Impossible d’obtenir l’identité de notification de l’appareil.",
-    "这台电脑已移除，未发送停止请求。": "Cet ordinateur a été retiré. Demande d’arrêt non envoyée.",
-    "这个任务已经有一个停止请求在等待确认。": "Une demande d’arrêt pour cette tâche attend déjà une confirmation.",
-    "等待确认的停止请求太多，请先处理待处理页里的卡片。": "Trop de demandes d’arrêt en attente de confirmation. Traitez d’abord les cartes dans À traiter.",
+    "未获取到通知设备身份。":
+        "Impossible d’obtenir l’identité de notification de l’appareil.",
+    "这台电脑已移除，未发送停止请求。":
+        "Cet ordinateur a été retiré. Demande d’arrêt non envoyée.",
+    "这个任务已经有一个停止请求在等待确认。":
+        "Une demande d’arrêt pour cette tâche attend déjà une confirmation.",
+    "等待确认的停止请求太多，请先处理待处理页里的卡片。":
+        "Trop de demandes d’arrêt en attente de confirmation. Traitez d’abord les cartes dans À traiter.",
     "任务当前没有可停止的运行。": "Cette tâche n’a aucune exécution active à arrêter.",
-    "暂时无法读取任务状态，请稍后再确认。": "Impossible de lire l’état de la tâche. Réessayez plus tard.",
-    "这台电脑已移除，未重新发送停止请求。": "Cet ordinateur a été retiré. Demande d’arrêt non renvoyée.",
+    "暂时无法读取任务状态，请稍后再确认。":
+        "Impossible de lire l’état de la tâche. Réessayez plus tard.",
+    "这台电脑已移除，未重新发送停止请求。":
+        "Cet ordinateur a été retiré. Demande d’arrêt non renvoyée.",
     "原停止请求已改变，请刷新。": "La demande d’arrêt d’origine a changé. Actualisez.",
     "没有待确认的停止请求。": "Aucune demande d’arrêt en attente de confirmation.",
-    "电脑已收到停止请求，任务会在停下后更新状态。": "L’ordinateur a reçu la demande d’arrêt. L’état sera mis à jour quand la tâche s’arrêtera.",
-    "这次运行已经结束，不需要再停止。": "Cette exécution est terminée. Inutile de l’arrêter à nouveau.",
-    "已不再等待。如果电脑收到了这个停止请求，任务仍会停下。": "Attente arrêtée. Si l’ordinateur a reçu la demande d’arrêt, la tâche s’arrêtera quand même.",
-    "还不确定是否已停止，可以再发一次停止。": "Résultat de l’arrêt non confirmé. Vous pouvez envoyer une nouvelle demande d’arrêt.",
-    "附件总大小不能超过 25 MB。": "Les pièces jointes ne peuvent pas dépasser 25 Mo au total.",
+    "电脑已收到停止请求，任务会在停下后更新状态。":
+        "L’ordinateur a reçu la demande d’arrêt. L’état sera mis à jour quand la tâche s’arrêtera.",
+    "这次运行已经结束，不需要再停止。":
+        "Cette exécution est terminée. Inutile de l’arrêter à nouveau.",
+    "已不再等待。如果电脑收到了这个停止请求，任务仍会停下。":
+        "Attente arrêtée. Si l’ordinateur a reçu la demande d’arrêt, la tâche s’arrêtera quand même.",
+    "还不确定是否已停止，可以再发一次停止。":
+        "Résultat de l’arrêt non confirmé. Vous pouvez envoyer une nouvelle demande d’arrêt.",
+    "附件总大小不能超过 25 MB。":
+        "Les pièces jointes ne peuvent pas dépasser 25 Mo au total.",
     "附件文件名过长或无效。": "Nom de fichier de la pièce jointe trop long ou invalide.",
-    "图片请使用 PNG、JPEG、GIF 或 WebP 格式。": "Utilisez des images PNG, JPEG, GIF ou WebP.",
+    "图片请使用 PNG、JPEG、GIF 或 WebP 格式。":
+        "Utilisez des images PNG, JPEG, GIF ou WebP.",
     "一次最多发送 16 个附件。": "Jusqu’à 16 pièces jointes par message.",
-    "附件上传已暂停，可继续原上传。": "Envoi de la pièce jointe suspendu. Reprenez l’envoi d’origine.",
-    "附件回执与原文件不一致，未发送任务。": "L’accusé de la pièce jointe ne correspond pas au fichier d’origine. Tâche non envoyée.",
-    "本机附件内容已变化，请重新添加；未上传变化后的文件。": "La pièce jointe locale a changé. Ajoutez-la à nouveau. Le fichier modifié n’a pas été envoyé.",
-    "电脑端暂不支持附件上传，请更新电脑端。": "Mettez à jour l’application de bureau pour envoyer des pièces jointes.",
-    "电脑返回的附件位置无效。": "L’ordinateur a renvoyé une position de pièce jointe invalide.",
-    "附件分块位置未确认，请继续原上传。": "Position du fragment de pièce jointe non confirmée. Reprenez l’envoi d’origine.",
-    "原草稿不可读取，请重新选择附件。": "Brouillon d’origine illisible. Sélectionnez à nouveau les pièces jointes.",
-    "上次附件选择未完成，请重新选择。": "Sélection précédente de pièces jointes incomplète. Sélectionnez à nouveau.",
-    "已恢复系统文件选择器返回的附件，请核对后发送。": "Pièces jointes récupérées depuis le sélecteur de fichiers du système. Vérifiez-les avant d’envoyer.",
-    "附件选择未完成：{0}，请重新选择。": "Sélection de pièces jointes incomplète : {0}. Sélectionnez à nouveau.",
-    "上次附件选择未能恢复：{0}": "Impossible de récupérer la sélection précédente de pièces jointes : {0}",
-    "正在处理这台电脑的原配对，请稍后核实。": "L’appairage d’origine de cet ordinateur est en cours de traitement. Vérifiez plus tard.",
-    "原配对恢复记录已改变，请刷新后核实。": "L’enregistrement de récupération de l’appairage d’origine a changé. Actualisez et vérifiez.",
-    "电脑绑定已移除或变化，请重新配对后连接。": "L’appairage de l’ordinateur a été supprimé ou modifié. Appairez à nouveau pour vous connecter.",
+    "附件上传已暂停，可继续原上传。":
+        "Envoi de la pièce jointe suspendu. Reprenez l’envoi d’origine.",
+    "附件回执与原文件不一致，未发送任务。":
+        "L’accusé de la pièce jointe ne correspond pas au fichier d’origine. Tâche non envoyée.",
+    "本机附件内容已变化，请重新添加；未上传变化后的文件。":
+        "La pièce jointe locale a changé. Ajoutez-la à nouveau. Le fichier modifié n’a pas été envoyé.",
+    "电脑端暂不支持附件上传，请更新电脑端。":
+        "Mettez à jour l’application de bureau pour envoyer des pièces jointes.",
+    "电脑返回的附件位置无效。":
+        "L’ordinateur a renvoyé une position de pièce jointe invalide.",
+    "附件分块位置未确认，请继续原上传。":
+        "Position du fragment de pièce jointe non confirmée. Reprenez l’envoi d’origine.",
+    "原草稿不可读取，请重新选择附件。":
+        "Brouillon d’origine illisible. Sélectionnez à nouveau les pièces jointes.",
+    "上次附件选择未完成，请重新选择。":
+        "Sélection précédente de pièces jointes incomplète. Sélectionnez à nouveau.",
+    "已恢复系统文件选择器返回的附件，请核对后发送。":
+        "Pièces jointes récupérées depuis le sélecteur de fichiers du système. Vérifiez-les avant d’envoyer.",
+    "附件选择未完成：{0}，请重新选择。":
+        "Sélection de pièces jointes incomplète : {0}. Sélectionnez à nouveau.",
+    "上次附件选择未能恢复：{0}":
+        "Impossible de récupérer la sélection précédente de pièces jointes : {0}",
+    "正在处理这台电脑的原配对，请稍后核实。":
+        "L’appairage d’origine de cet ordinateur est en cours de traitement. Vérifiez plus tard.",
+    "原配对恢复记录已改变，请刷新后核实。":
+        "L’enregistrement de récupération de l’appairage d’origine a changé. Actualisez et vérifiez.",
+    "电脑绑定已移除或变化，请重新配对后连接。":
+        "L’appairage de l’ordinateur a été supprimé ou modifié. Appairez à nouveau pour vous connecter.",
     "未命名会话": "Conversation sans titre",
     "离线模式": "Mode hors ligne",
     "离线协作": "Collaboration hors ligne",
-    "部分离线数据暂时无法读取，联网后可重新同步。": "Certaines données hors ligne sont illisibles. Reconnectez-vous pour resynchroniser.",
-    "停止请求暂时无法读取，请检查系统安全存储。": "Impossible de lire les demandes d’arrêt. Vérifiez le stockage sécurisé du système.",
-    "终端关闭记录暂时无法读取，请检查系统安全存储。": "Impossible de lire les enregistrements de fermeture des terminaux. Vérifiez le stockage sécurisé du système.",
-    "已配对电脑暂时无法读取，请检查系统安全存储。": "Impossible de lire les ordinateurs appairés. Vérifiez le stockage sécurisé du système.",
-    "电脑绑定已变化，未使用旧页面接管新的连接。": "L’appairage de l’ordinateur a changé. L’ancienne page n’a pas repris la nouvelle connexion.",
-    "连接中断，正在重新连接。已发送操作不会重复执行。": "Connexion perdue. Reconnexion. Les opérations envoyées ne seront pas exécutées deux fois.",
-    "连接已断开。电脑上的任务不会因此停止。": "Déconnecté. Les tâches continuent sur votre ordinateur.",
-    "移除未完成，连接已关闭；请重试移除或核实安全存储。": "Retrait incomplet. Connexion fermée. Réessayez le retrait ou vérifiez le stockage sécurisé.",
+    "部分离线数据暂时无法读取，联网后可重新同步。":
+        "Certaines données hors ligne sont illisibles. Reconnectez-vous pour resynchroniser.",
+    "停止请求暂时无法读取，请检查系统安全存储。":
+        "Impossible de lire les demandes d’arrêt. Vérifiez le stockage sécurisé du système.",
+    "终端关闭记录暂时无法读取，请检查系统安全存储。":
+        "Impossible de lire les enregistrements de fermeture des terminaux. Vérifiez le stockage sécurisé du système.",
+    "已配对电脑暂时无法读取，请检查系统安全存储。":
+        "Impossible de lire les ordinateurs appairés. Vérifiez le stockage sécurisé du système.",
+    "电脑绑定已变化，未使用旧页面接管新的连接。":
+        "L’appairage de l’ordinateur a changé. L’ancienne page n’a pas repris la nouvelle connexion.",
+    "连接中断，正在重新连接。已发送操作不会重复执行。":
+        "Connexion perdue. Reconnexion. Les opérations envoyées ne seront pas exécutées deux fois.",
+    "连接已断开。电脑上的任务不会因此停止。":
+        "Déconnecté. Les tâches continuent sur votre ordinateur.",
+    "移除未完成，连接已关闭；请重试移除或核实安全存储。":
+        "Retrait incomplet. Connexion fermée. Réessayez le retrait ou vérifiez le stockage sécurisé.",
     "离线缓存未能保存：{0}": "Impossible d’enregistrer le cache hors ligne : {0}",
-    "待确认的操作暂时无法读取，请检查系统安全存储。": "Impossible de lire les opérations non confirmées. Vérifiez le stockage sécurisé du système.",
-    "无法读取后台提醒设置，请检查系统安全存储后重试。": "Impossible de lire les réglages des alertes en arrière-plan. Vérifiez le stockage sécurisé du système et réessayez.",
-    "部分电脑的通知尚未登记，请检查网络后重新检测。": "Notifications non enregistrées pour certains ordinateurs. Vérifiez votre réseau et réessayez.",
-    "后台提醒尚未启用，请核实系统通知权限和通知服务配置后重试。": "Les alertes en arrière-plan ne sont pas activées. Vérifiez l’autorisation de notification système et la configuration du service.",
+    "待确认的操作暂时无法读取，请检查系统安全存储。":
+        "Impossible de lire les opérations non confirmées. Vérifiez le stockage sécurisé du système.",
+    "无法读取后台提醒设置，请检查系统安全存储后重试。":
+        "Impossible de lire les réglages des alertes en arrière-plan. Vérifiez le stockage sécurisé du système et réessayez.",
+    "部分电脑的通知尚未登记，请检查网络后重新检测。":
+        "Notifications non enregistrées pour certains ordinateurs. Vérifiez votre réseau et réessayez.",
+    "后台提醒尚未启用，请核实系统通知权限和通知服务配置后重试。":
+        "Les alertes en arrière-plan ne sont pas activées. Vérifiez l’autorisation de notification système et la configuration du service.",
     "Git 操作已完成": "Opération Git terminée",
-    "已经提交，还不确定是否推送成功，可以重新发送推送。": "Commité. Résultat du push non confirmé. Vous pouvez renvoyer le push.",
+    "已经提交，还不确定是否推送成功，可以重新发送推送。":
+        "Commité. Résultat du push non confirmé. Vous pouvez renvoyer le push.",
     "提交已完成，推送失败：{0}": "Commit terminé. Échec du push : {0}",
     "Git 操作失败：{0}": "Échec de l’opération Git : {0}",
-    "电脑正在执行 Git 操作，稍后再确认。": "Opération Git en cours sur votre ordinateur. Vérifiez plus tard.",
-    "Git 操作中途中断了，请在「变更」里看一下仓库现在的状态。": "Opération Git interrompue. Vérifiez l’état du dépôt dans Modifications.",
-    "Git 操作只完成了一部分，请先在「变更」里看一下再继续。": "Opération Git partiellement terminée. Consultez Modifications avant de continuer.",
+    "电脑正在执行 Git 操作，稍后再确认。":
+        "Opération Git en cours sur votre ordinateur. Vérifiez plus tard.",
+    "Git 操作中途中断了，请在「变更」里看一下仓库现在的状态。":
+        "Opération Git interrompue. Vérifiez l’état du dépôt dans Modifications.",
+    "Git 操作只完成了一部分，请先在「变更」里看一下再继续。":
+        "Opération Git partiellement terminée. Consultez Modifications avant de continuer.",
     "已不再等待这次 Git 操作。": "Attente de cette opération Git arrêtée.",
-    "电脑上还查不到这次 Git 操作，可能没收到，可以重新发送。": "L’ordinateur n’a encore aucune trace de cette opération Git. Elle n’est peut-être pas arrivée. Vous pouvez la renvoyer.",
-    "还不确定文件是否已暂存，所以没有继续提交。": "Indexation non confirmée. Le commit n’a pas continué.",
-    "暂存回执与原文件选择不一致，未重新执行。": "L’accusé d’indexation ne correspond pas à la sélection de fichiers d’origine. Elle n’a pas été relancée.",
+    "电脑上还查不到这次 Git 操作，可能没收到，可以重新发送。":
+        "L’ordinateur n’a encore aucune trace de cette opération Git. Elle n’est peut-être pas arrivée. Vous pouvez la renvoyer.",
+    "还不确定文件是否已暂存，所以没有继续提交。":
+        "Indexation non confirmée. Le commit n’a pas continué.",
+    "暂存回执与原文件选择不一致，未重新执行。":
+        "L’accusé d’indexation ne correspond pas à la sélection de fichiers d’origine. Elle n’a pas été relancée.",
     "Git 操作无效。": "Opération Git invalide.",
-    "电脑未返回有效的 Git 操作回执。": "L’ordinateur n’a renvoyé aucun accusé d’opération Git valide.",
-    "Git 回执与原请求不一致，未继续操作。": "L’accusé Git ne correspond pas à la requête d’origine. L’opération n’a pas continué.",
-    "Git 接续记录过长或存在循环，请在电脑上核实。": "La chaîne de continuation Git est trop longue ou contient une boucle. Vérifiez sur votre ordinateur.",
-    "电脑尚未确认结束原 Git 跟踪。": "L’ordinateur n’a pas confirmé la fin du suivi Git d’origine.",
+    "电脑未返回有效的 Git 操作回执。":
+        "L’ordinateur n’a renvoyé aucun accusé d’opération Git valide.",
+    "Git 回执与原请求不一致，未继续操作。":
+        "L’accusé Git ne correspond pas à la requête d’origine. L’opération n’a pas continué.",
+    "Git 接续记录过长或存在循环，请在电脑上核实。":
+        "La chaîne de continuation Git est trop longue ou contient une boucle. Vérifiez sur votre ordinateur.",
+    "电脑尚未确认结束原 Git 跟踪。":
+        "L’ordinateur n’a pas confirmé la fin du suivi Git d’origine.",
     "待审批": "Approbation demandée",
     "待回答": "Réponse demandée",
     "任务完成": "Tâche terminée",
     "执行失败": "Échec de l’exécution",
-    "通知设置响应无效，请重新读取。": "Réponse des réglages de notification invalide. Rechargez.",
-    "设备授权已失效，请核实电脑绑定。": "Autorisation de l’appareil expirée. Vérifiez l’appairage de l’ordinateur.",
-    "通知设置已改变，请重新读取后修改。": "Les réglages de notification ont changé. Rechargez avant de modifier.",
+    "通知设置响应无效，请重新读取。":
+        "Réponse des réglages de notification invalide. Rechargez.",
+    "设备授权已失效，请核实电脑绑定。":
+        "Autorisation de l’appareil expirée. Vérifiez l’appairage de l’ordinateur.",
+    "通知设置已改变，请重新读取后修改。":
+        "Les réglages de notification ont changé. Rechargez avant de modifier.",
     "操作过于频繁，请稍后重试。": "Trop d’opérations. Réessayez plus tard.",
-    "通知服务暂时不可用，请稍后重试。": "Service de notifications temporairement indisponible. Réessayez plus tard.",
-    "无法确认通知设置，请检查网络后重新读取。": "Impossible de confirmer les réglages de notification. Vérifiez votre réseau et rechargez.",
+    "通知服务暂时不可用，请稍后重试。":
+        "Service de notifications temporairement indisponible. Réessayez plus tard.",
+    "无法确认通知设置，请检查网络后重新读取。":
+        "Impossible de confirmer les réglages de notification. Vérifiez votre réseau et rechargez.",
     "电脑没有收到这次设置，请再试一次。": "L’ordinateur n’a pas reçu ce réglage. Réessayez.",
-    "电脑返回的保持唤醒状态无效。": "État de maintien en éveil renvoyé par l’ordinateur invalide.",
-    "待发送的输入过多，本次未发送，请缩短输入后再试。": "Trop de saisies en file d’attente. Rien n’a été envoyé. Raccourcissez la saisie et réessayez.",
+    "电脑返回的保持唤醒状态无效。":
+        "État de maintien en éveil renvoyé par l’ordinateur invalide.",
+    "待发送的输入过多，本次未发送，请缩短输入后再试。":
+        "Trop de saisies en file d’attente. Rien n’a été envoyé. Raccourcissez la saisie et réessayez.",
     "终端页面已离开，未继续发送输入。": "Page Terminal fermée. Aucune autre saisie envoyée.",
     "终端输入回执不匹配": "Accusé de saisie du terminal incohérent",
-    "请更新电脑端后输入；终端输出仍可查看。": "Mettez à jour l’application de bureau pour saisir. La sortie du terminal reste disponible.",
+    "请更新电脑端后输入；终端输出仍可查看。":
+        "Mettez à jour l’application de bureau pour saisir. La sortie du terminal reste disponible.",
     "终端正在启动，请稍后继续输入。": "Démarrage du terminal. Continuez la saisie plus tard.",
-    "原终端当前不可输入，请刷新查看状态。": "Le terminal d’origine n’accepte pas de saisie. Actualisez pour vérifier son état.",
-    "终端输入连接已改变，请检查后继续。": "La connexion de saisie du terminal a changé. Vérifiez-la avant de continuer.",
-    "输入连接仍在切换，请稍后检查并继续。": "La connexion de saisie change encore. Vérifiez plus tard.",
-    "上次输入结果待核实，请检查终端输出后再继续。": "Résultat de la saisie précédente non confirmé. Vérifiez la sortie du terminal avant de continuer.",
-    "输入结果尚未确认，请核实或检查终端后继续；不会重发原输入。": "Résultat de la saisie non confirmé. Vérifiez-le ou contrôlez le terminal avant de continuer. La saisie d’origine ne sera pas renvoyée.",
-    "终端连接中断，输入结果待核实；未发送的队列已丢弃，不会自动重发。": "Terminal déconnecté. Résultat de la saisie non confirmé. La file non envoyée a été supprimée et ne sera pas renvoyée automatiquement.",
-    "原输入仍未确认或通道已改变，请检查终端输出后继续；不会重发。": "Saisie d’origine non confirmée ou canal modifié. Vérifiez la sortie du terminal avant de continuer. La saisie ne sera pas renvoyée.",
-    "暂时无法核实输入，请连接后再试；不会重发原输入。": "Impossible de vérifier la saisie. Reconnectez-vous et réessayez. La saisie d’origine ne sera pas renvoyée.",
-    "输入连接尚未恢复，请稍后再试。": "La connexion de saisie n’est pas encore rétablie. Réessayez plus tard.",
-    "这台电脑已移除，未发送关闭请求。": "Cet ordinateur a été retiré. Demande de fermeture non envoyée.",
-    "这个终端已经有一个关闭请求在等待确认。": "Une demande de fermeture pour ce terminal attend déjà une confirmation.",
-    "等待确认的关闭请求太多，请先处理待处理页里的卡片。": "Trop de demandes de fermeture en attente de confirmation. Traitez d’abord les cartes dans À traiter.",
-    "原终端关闭结果尚未确认，请核实结束后再启动这个运行配置。": "Résultat de la fermeture du terminal d’origine non confirmé. Vérifiez-le avant de lancer cette configuration d’exécution.",
-    "请更新电脑端后再关闭终端，当前版本无法核实原终端身份。": "Mettez à jour l’application de bureau pour fermer les terminaux. Cette version ne peut pas vérifier l’identité du terminal d’origine.",
-    "终端身份不完整，请刷新后再关闭。": "Identité du terminal incomplète. Actualisez avant de fermer.",
-    "终端已经重新启动过，没有关闭新的终端。": "Le terminal a redémarré. Le nouveau terminal n’a pas été fermé.",
+    "原终端当前不可输入，请刷新查看状态。":
+        "Le terminal d’origine n’accepte pas de saisie. Actualisez pour vérifier son état.",
+    "终端输入连接已改变，请检查后继续。":
+        "La connexion de saisie du terminal a changé. Vérifiez-la avant de continuer.",
+    "输入连接仍在切换，请稍后检查并继续。":
+        "La connexion de saisie change encore. Vérifiez plus tard.",
+    "上次输入结果待核实，请检查终端输出后再继续。":
+        "Résultat de la saisie précédente non confirmé. Vérifiez la sortie du terminal avant de continuer.",
+    "输入结果尚未确认，请核实或检查终端后继续；不会重发原输入。":
+        "Résultat de la saisie non confirmé. Vérifiez-le ou contrôlez le terminal avant de continuer. La saisie d’origine ne sera pas renvoyée.",
+    "终端连接中断，输入结果待核实；未发送的队列已丢弃，不会自动重发。":
+        "Terminal déconnecté. Résultat de la saisie non confirmé. La file non envoyée a été supprimée et ne sera pas renvoyée automatiquement.",
+    "原输入仍未确认或通道已改变，请检查终端输出后继续；不会重发。":
+        "Saisie d’origine non confirmée ou canal modifié. Vérifiez la sortie du terminal avant de continuer. La saisie ne sera pas renvoyée.",
+    "暂时无法核实输入，请连接后再试；不会重发原输入。":
+        "Impossible de vérifier la saisie. Reconnectez-vous et réessayez. La saisie d’origine ne sera pas renvoyée.",
+    "输入连接尚未恢复，请稍后再试。":
+        "La connexion de saisie n’est pas encore rétablie. Réessayez plus tard.",
+    "这台电脑已移除，未发送关闭请求。":
+        "Cet ordinateur a été retiré. Demande de fermeture non envoyée.",
+    "这个终端已经有一个关闭请求在等待确认。":
+        "Une demande de fermeture pour ce terminal attend déjà une confirmation.",
+    "等待确认的关闭请求太多，请先处理待处理页里的卡片。":
+        "Trop de demandes de fermeture en attente de confirmation. Traitez d’abord les cartes dans À traiter.",
+    "原终端关闭结果尚未确认，请核实结束后再启动这个运行配置。":
+        "Résultat de la fermeture du terminal d’origine non confirmé. Vérifiez-le avant de lancer cette configuration d’exécution.",
+    "请更新电脑端后再关闭终端，当前版本无法核实原终端身份。":
+        "Mettez à jour l’application de bureau pour fermer les terminaux. Cette version ne peut pas vérifier l’identité du terminal d’origine.",
+    "终端身份不完整，请刷新后再关闭。":
+        "Identité du terminal incomplète. Actualisez avant de fermer.",
+    "终端已经重新启动过，没有关闭新的终端。":
+        "Le terminal a redémarré. Le nouveau terminal n’a pas été fermé.",
     "终端不存在": "Le terminal n’existe pas",
     "没有待确认的终端关闭操作。": "Aucune fermeture de terminal en attente de confirmation.",
     "终端已经关闭。": "Terminal fermé.",
-    "已不再等待。如果电脑收到了关闭请求，终端仍会关闭。": "Attente arrêtée. Si l’ordinateur a reçu la demande de fermeture, le terminal sera quand même fermé.",
-    "终端已改变，关闭请求未执行。": "Le terminal a changé. La demande de fermeture n’a pas été exécutée.",
-    "电脑已收到关闭请求，正在等终端结束。": "L’ordinateur a reçu la demande de fermeture. En attente de la fin du terminal.",
-    "还不确定终端是否已关闭，可以稍后再确认。": "Résultat de la fermeture du terminal non confirmé. Vérifiez plus tard.",
+    "已不再等待。如果电脑收到了关闭请求，终端仍会关闭。":
+        "Attente arrêtée. Si l’ordinateur a reçu la demande de fermeture, le terminal sera quand même fermé.",
+    "终端已改变，关闭请求未执行。":
+        "Le terminal a changé. La demande de fermeture n’a pas été exécutée.",
+    "电脑已收到关闭请求，正在等终端结束。":
+        "L’ordinateur a reçu la demande de fermeture. En attente de la fin du terminal.",
+    "还不确定终端是否已关闭，可以稍后再确认。":
+        "Résultat de la fermeture du terminal non confirmé. Vérifiez plus tard.",
     "请选择有效的审查问题。": "Choisissez des problèmes de revue valides.",
-    "审查回执与原请求不匹配，请保留原操作并核实。": "L’accusé de la revue ne correspond pas à la requête d’origine. Conservez l’opération et vérifiez-la.",
-    "修复回执与原请求不匹配，请先核实电脑上的原修复。": "L’accusé du correctif ne correspond pas à la requête d’origine. Vérifiez d’abord le correctif d’origine sur votre ordinateur.",
-    "无法读取审查记录，请更新电脑端后重试。": "Impossible de lire les revues. Mettez à jour l’application de bureau et réessayez.",
+    "审查回执与原请求不匹配，请保留原操作并核实。":
+        "L’accusé de la revue ne correspond pas à la requête d’origine. Conservez l’opération et vérifiez-la.",
+    "修复回执与原请求不匹配，请先核实电脑上的原修复。":
+        "L’accusé du correctif ne correspond pas à la requête d’origine. Vérifiez d’abord le correctif d’origine sur votre ordinateur.",
+    "无法读取审查记录，请更新电脑端后重试。":
+        "Impossible de lire les revues. Mettez à jour l’application de bureau et réessayez.",
     "消息分片取消标识无效。": "Indicateur d’annulation de fragment de message invalide.",
     "消息大小超出范围。": "Taille du message hors limites.",
     "二进制消息格式无效。": "Format de message binaire invalide.",
@@ -5745,40 +6605,55 @@ const messageCatalogs = <String, Map<String, String>>{
     "消息分片不连续。": "Les fragments de message ne sont pas contigus.",
     "消息分片长度无效。": "Longueur de fragment de message invalide.",
     "不允许嵌套消息分片。": "Les fragments de message imbriqués ne sont pas autorisés.",
-    "会话版本不可用，请刷新后重试。": "Version de la conversation indisponible. Actualisez et réessayez.",
-    "会话名称需为 1–120 个字符，且不能包含控制字符。": "Le nom de la conversation doit comporter de 1 à 120 caractères, sans caractères de contrôle.",
+    "会话版本不可用，请刷新后重试。":
+        "Version de la conversation indisponible. Actualisez et réessayez.",
+    "会话名称需为 1–120 个字符，且不能包含控制字符。":
+        "Le nom de la conversation doit comporter de 1 à 120 caractères, sans caractères de contrôle.",
     "会话状态无效。": "État de conversation invalide.",
-    "无法读取电脑的会话设置，请更新电脑端后重试。": "Impossible de lire les réglages des conversations. Mettez à jour l’application de bureau et réessayez.",
+    "无法读取电脑的会话设置，请更新电脑端后重试。":
+        "Impossible de lire les réglages des conversations. Mettez à jour l’application de bureau et réessayez.",
     "Fork 环境无效。": "Environnement de fork invalide.",
-    "Fork 返回的会话身份不一致，请核实原操作。": "Le fork a renvoyé une identité de conversation différente. Vérifiez l’opération d’origine.",
-    "没有待确认的会话操作。": "Aucune opération de conversation en attente de confirmation.",
+    "Fork 返回的会话身份不一致，请核实原操作。":
+        "Le fork a renvoyé une identité de conversation différente. Vérifiez l’opération d’origine.",
+    "没有待确认的会话操作。":
+        "Aucune opération de conversation en attente de confirmation.",
     "原操作已变化，请刷新。": "L’opération d’origine a changé. Actualisez.",
-    "Fork 回执与原请求不一致。": "L’accusé du fork ne correspond pas à la requête d’origine.",
+    "Fork 回执与原请求不一致。":
+        "L’accusé du fork ne correspond pas à la requête d’origine.",
     "这项操作需要先核实结果。": "Vérifiez d’abord le résultat de cette opération.",
     "这台电脑已移除，未再发送请求。": "Cet ordinateur a été retiré. Requête non renvoyée.",
-    "原电脑记录尚未清理完成，请重试移除电脑后再连接。": "Les données de l’ordinateur d’origine n’ont pas été entièrement effacées. Réessayez le retrait avant de vous reconnecter.",
-    "电脑绑定已变化，未发送原操作；请重新连接后确认。": "L’appairage de l’ordinateur a changé. Opération d’origine non envoyée. Reconnectez-vous et confirmez.",
-    "原操作已结束或已更新，请刷新后操作。": "L’opération d’origine est terminée ou a été mise à jour. Actualisez avant de continuer.",
-    "中继连接中断，操作结果需要核实。": "Relais déconnecté. Vérifiez le résultat de l’opération.",
+    "原电脑记录尚未清理完成，请重试移除电脑后再连接。":
+        "Les données de l’ordinateur d’origine n’ont pas été entièrement effacées. Réessayez le retrait avant de vous reconnecter.",
+    "电脑绑定已变化，未发送原操作；请重新连接后确认。":
+        "L’appairage de l’ordinateur a changé. Opération d’origine non envoyée. Reconnectez-vous et confirmez.",
+    "原操作已结束或已更新，请刷新后操作。":
+        "L’opération d’origine est terminée ou a été mise à jour. Actualisez avant de continuer.",
+    "中继连接中断，操作结果需要核实。":
+        "Relais déconnecté. Vérifiez le résultat de l’opération.",
     "中继探针仅供本地开发使用。": "La sonde de relais est réservée au développement local.",
     "数据帧大小超出范围。": "Taille de trame de données hors limites.",
     "连接已关闭；操作结果需要核实。": "Connexion fermée. Vérifiez le résultat de l’opération.",
-    "暂时无法连接可用的通知服务，请稍后重试。": "Impossible de joindre un service de notifications. Réessayez plus tard.",
-    "电脑已结束屏幕共享，请重新连接并授权": "Le partage d’écran s’est arrêté sur votre ordinateur. Reconnectez-vous et autorisez à nouveau.",
+    "暂时无法连接可用的通知服务，请稍后重试。":
+        "Impossible de joindre un service de notifications. Réessayez plus tard.",
+    "电脑已结束屏幕共享，请重新连接并授权":
+        "Le partage d’écran s’est arrêté sur votre ordinateur. Reconnectez-vous et autorisez à nouveau.",
     "加密中继": "Relais chiffré",
     "P2P 直连": "Connexion directe P2P",
     "TURN 中继": "Relais TURN",
     "WebRTC · 路径待确认": "WebRTC · Chemin non confirmé",
     "连接的电脑身份不一致。": "Identité de l’ordinateur connecté incohérente.",
     "草稿归属不可读取": "Impossible de lire la propriété du brouillon",
-    "工作区已属于另一份设备存储": "L’espace de travail appartient à un autre stockage d’appareil",
+    "工作区已属于另一份设备存储":
+        "L’espace de travail appartient à un autre stockage d’appareil",
     "工作区设备存储尚未初始化": "Stockage d’appareil de l’espace de travail non initialisé",
     "本机数据归属不一致": "Propriété des données locales incohérente",
     "本地绑定记录不可读取": "Impossible de lire l’enregistrement d’appairage local",
-    "电脑绑定已变化，未覆盖原草稿。": "L’appairage de l’ordinateur a changé. Le brouillon d’origine n’a pas été écrasé.",
+    "电脑绑定已变化，未覆盖原草稿。":
+        "L’appairage de l’ordinateur a changé. Le brouillon d’origine n’a pas été écrasé.",
     "本机保存的数据不可读取": "Impossible de lire les données enregistrées localement",
     "附件大小或标识无效": "Taille ou identité de la pièce jointe invalide",
-    "手机未发送附件已超过 256 MB，请先发送或移除其他草稿中的附件。": "Les pièces jointes non envoyées dépassent 256 Mo. Envoyez ou retirez d’abord les pièces jointes d’autres brouillons.",
+    "手机未发送附件已超过 256 MB，请先发送或移除其他草稿中的附件。":
+        "Les pièces jointes non envoyées dépassent 256 Mo. Envoyez ou retirez d’abord les pièces jointes d’autres brouillons.",
     "附件标识无效": "Identité de la pièce jointe invalide",
     "本机附件已不可读取，请重新添加。": "Pièce jointe locale illisible. Ajoutez-la à nouveau.",
     "本机附件大小已变化。": "La taille de la pièce jointe locale a changé.",
@@ -5788,14 +6663,18 @@ const messageCatalogs = <String, Map<String, String>>{
     "始终允许": "Toujours autoriser",
     "取消操作": "Annuler l’action",
     "{0} · {1} 个目录": "{0} · {1} dossiers",
-    "{0} 上还没有项目。新建项目时选择电脑上的已有目录。": "Aucun projet sur {0} pour le moment. Créez-en un à partir d’un dossier existant sur l’ordinateur.",
+    "{0} 上还没有项目。新建项目时选择电脑上的已有目录。":
+        "Aucun projet sur {0} pour le moment. Créez-en un à partir d’un dossier existant sur l’ordinateur.",
     "{0} 个会话运行中": "{0} conversations en cours",
     "不在项目中工作": "Travailler hors projet",
     "主目录": "Dossier principal",
-    "主目录是会话默认的工作目录；附加目录同样对 Agent 可见。从项目中移除目录不会删除电脑上的文件。": "Les conversations démarrent dans le dossier principal ; les dossiers supplémentaires sont aussi visibles par les Agents. Retirer un dossier du projet ne supprime aucun fichier sur l’ordinateur.",
+    "主目录是会话默认的工作目录；附加目录同样对 Agent 可见。从项目中移除目录不会删除电脑上的文件。":
+        "Les conversations démarrent dans le dossier principal ; les dossiers supplémentaires sont aussi visibles par les Agents. Retirer un dossier du projet ne supprime aucun fichier sur l’ordinateur.",
     "从项目中移除": "Retirer du projet",
-    "保存结果待核实，请刷新后查看项目，不要重复保存。": "Résultat de l’enregistrement non confirmé. Actualisez et vérifiez le projet avant d’enregistrer à nouveau.",
-    "保留会话和电脑上的文件，可随时恢复": "Conserve les conversations et les fichiers sur l’ordinateur ; restauration possible à tout moment",
+    "保存结果待核实，请刷新后查看项目，不要重复保存。":
+        "Résultat de l’enregistrement non confirmé. Actualisez et vérifiez le projet avant d’enregistrer à nouveau.",
+    "保留会话和电脑上的文件，可随时恢复":
+        "Conserve les conversations et les fichiers sur l’ordinateur ; restauration possible à tout moment",
     "名称和目录": "Nom et dossiers",
     "已移除项目（{0}）": "Projets retirés ({0})",
     "恢复": "Restaurer",
@@ -5807,7 +6686,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "没有匹配的项目": "Aucun projet correspondant",
     "没有未提交的更改": "Aucune modification non commitée",
     "添加目录": "Ajouter un dossier",
-    "电脑离线，重新连接后才能保存。": "L’ordinateur est hors ligne. Reconnectez-vous pour enregistrer.",
+    "电脑离线，重新连接后才能保存。":
+        "L’ordinateur est hors ligne. Reconnectez-vous pour enregistrer.",
     "目录操作": "Actions sur le dossier",
     "移除「{0}」？": "Retirer « {0} » ?",
     "移除项目": "Retirer le projet",
@@ -5821,12 +6701,15 @@ const messageCatalogs = <String, Map<String, String>>{
     "选择此目录": "Choisir ce dossier",
     "选择目录": "Choisir un dossier",
     "项目不存在": "Projet introuvable",
-    "项目会从列表中隐藏。会话和电脑上的文件都会保留，可在「已移除项目」中恢复。": "Le projet est masqué dans la liste. Ses conversations et les fichiers sur l’ordinateur sont conservés, et vous pouvez le restaurer sous Projets retirés.",
+    "项目会从列表中隐藏。会话和电脑上的文件都会保留，可在「已移除项目」中恢复。":
+        "Le projet est masqué dans la liste. Ses conversations et les fichiers sur l’ordinateur sont conservés, et vous pouvez le restaurer sous Projets retirés.",
     "项目名称": "Nom du projet",
     "项目操作": "Actions du projet",
     "项目状态无效。": "État de projet invalide.",
-    "会话、项目和待处理都在电脑上，连接后即可使用。": "Les conversations, projets et éléments en attente se trouvent sur votre ordinateur. Connectez-vous pour y accéder.",
-    "项目已在电脑上添加，可在「项目」中查看。": "Projet ajouté sur votre ordinateur. Retrouvez-le dans Projets.",
+    "会话、项目和待处理都在电脑上，连接后即可使用。":
+        "Les conversations, projets et éléments en attente se trouvent sur votre ordinateur. Connectez-vous pour y accéder.",
+    "项目已在电脑上添加，可在「项目」中查看。":
+        "Projet ajouté sur votre ordinateur. Retrouvez-le dans Projets.",
     "正在连接电脑": "Connexion à votre ordinateur",
     "暂时连接不上电脑": "Impossible de joindre votre ordinateur",
     "@one:{0} 分钟": "{0} minute",
@@ -5835,7 +6718,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "@one:{0} 个文件 · 已暂存 {1}": "{0} fichier · {1} indexé",
     "@one:{0} 项需要你处理": "{0} élément requiert votre attention",
     "@one:{0} 个文件待提交": "{0} fichier à commiter",
-    "@one:{0} 个会话 · 按当前电脑和项目范围": "{0} conversation · Ordinateur et projet actuels",
+    "@one:{0} 个会话 · 按当前电脑和项目范围":
+        "{0} conversation · Ordinateur et projet actuels",
     "@one:{0} 项等待处理": "{0} élément en attente",
     "@one:已选 {0} 项": "{0} sélectionné",
     "@one:{0} 秒": "{0} seconde",
@@ -5846,8 +6730,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "语言": "Langue",
     "发送文字到电脑": "Envoyer du texte à l’ordinateur",
     "从电脑获取文字": "Récupérer le texte de l’ordinateur",
-    "编辑后发送到电脑剪贴板": "Modifier puis envoyer dans le presse-papiers de l’ordinateur",
-    "读取电脑剪贴板，复制到这部手机": "Lire le presse-papiers de l’ordinateur et le copier sur ce téléphone",
+    "编辑后发送到电脑剪贴板":
+        "Modifier puis envoyer dans le presse-papiers de l’ordinateur",
+    "读取电脑剪贴板，复制到这部手机":
+        "Lire le presse-papiers de l’ordinateur et le copier sur ce téléphone",
     "粘贴或输入要发送到电脑的文字": "Collez ou saisissez le texte à envoyer à l’ordinateur",
     "文字超过 1 MB，无法发送": "Le texte dépasse 1 Mo et ne peut pas être envoyé",
     "{0} 个字符": "{0} caractères",
@@ -5855,9 +6741,12 @@ const messageCatalogs = <String, Map<String, String>>{
     "仅发送": "Envoyer seulement",
     "发送并粘贴": "Envoyer et coller",
     "已粘贴到电脑": "Collé sur l’ordinateur",
-    "已发送到电脑剪贴板。更新电脑端后可自动粘贴": "Envoyé dans le presse-papiers de l’ordinateur. Mettez à jour l’app de bureau pour coller automatiquement",
-    "已发送到电脑剪贴板，可在电脑上粘贴": "Envoyé dans le presse-papiers de l’ordinateur. Collez-le sur l’ordinateur",
-    "电脑剪贴板里没有文字，先在电脑上复制后再试": "Le presse-papiers de l’ordinateur ne contient pas de texte. Copiez quelque chose sur l’ordinateur, puis réessayez",
+    "已发送到电脑剪贴板。更新电脑端后可自动粘贴":
+        "Envoyé dans le presse-papiers de l’ordinateur. Mettez à jour l’app de bureau pour coller automatiquement",
+    "已发送到电脑剪贴板，可在电脑上粘贴":
+        "Envoyé dans le presse-papiers de l’ordinateur. Collez-le sur l’ordinateur",
+    "电脑剪贴板里没有文字，先在电脑上复制后再试":
+        "Le presse-papiers de l’ordinateur ne contient pas de texte. Copiez quelque chose sur l’ordinateur, puis réessayez",
     "正在发送到电脑…": "Envoi vers l’ordinateur…",
     "正在从电脑获取…": "Récupération depuis l’ordinateur…",
     "@one:{0} 个字符": "{0} caractère",
@@ -5884,13 +6773,18 @@ const messageCatalogs = <String, Map<String, String>>{
     "文件内容": "Contenu du fichier",
     "搜索内容": "Recherche",
     "请求的工具": "Outil demandé",
-    "审批详情格式不完整，请让 Agent 重新发起审批。": "Les détails de l’approbation sont incomplets. Demandez à l’agent de relancer la demande.",
-    "操作详情过长，下方仅展示部分内容。请让 Agent 拆分操作后重新发起审批，以查看完整范围。": "Les détails sont trop longs ; seule une partie est affichée ci-dessous. Demandez à l’agent de diviser l’action et de relancer la demande pour voir toute la portée.",
-    "Agent 未提供文件修改范围，请让 Agent 补充文件路径和修改内容。": "L’agent n’a pas indiqué les fichiers modifiés. Demandez-lui les chemins et les modifications.",
-    "未能从审批请求中读取文件路径、命令或修改内容，请让 Agent 补充详情后重新发起审批。": "Impossible de lire un chemin, une commande ou une modification dans cette demande. Demandez à l’agent d’ajouter des détails et de relancer la demande.",
+    "审批详情格式不完整，请让 Agent 重新发起审批。":
+        "Les détails de l’approbation sont incomplets. Demandez à l’agent de relancer la demande.",
+    "操作详情过长，下方仅展示部分内容。请让 Agent 拆分操作后重新发起审批，以查看完整范围。":
+        "Les détails sont trop longs ; seule une partie est affichée ci-dessous. Demandez à l’agent de diviser l’action et de relancer la demande pour voir toute la portée.",
+    "Agent 未提供文件修改范围，请让 Agent 补充文件路径和修改内容。":
+        "L’agent n’a pas indiqué les fichiers modifiés. Demandez-lui les chemins et les modifications.",
+    "未能从审批请求中读取文件路径、命令或修改内容，请让 Agent 补充详情后重新发起审批。":
+        "Impossible de lire un chemin, une commande ou une modification dans cette demande. Demandez à l’agent d’ajouter des détails et de relancer la demande.",
     "收起": "Réduire",
     "展开全部": "Tout afficher",
-    "电脑已记录你的决定，但 Agent 已不在等待，请在会话中查看。": "L’ordinateur a enregistré votre décision, mais l’agent n’attend plus. Consultez la conversation.",
+    "电脑已记录你的决定，但 Agent 已不在等待，请在会话中查看。":
+        "L’ordinateur a enregistré votre décision, mais l’agent n’attend plus. Consultez la conversation.",
     "已取消回答": "Réponse annulée",
     "已处理": "Traité",
     "你的选择：{0}": "Votre choix : {0}",
@@ -5898,13 +6792,17 @@ const messageCatalogs = <String, Map<String, String>>{
     "已在电脑上处理，或请求已失效": "Traité sur l’ordinateur, ou la demande a expiré",
     "清空已处理记录": "Effacer l’historique traité",
     "清空已处理记录？": "Effacer l’historique traité ?",
-    "只从这部手机删除，等待处理的请求不受影响。": "Supprimé de ce téléphone uniquement. Les demandes en attente sont conservées.",
+    "只从这部手机删除，等待处理的请求不受影响。":
+        "Supprimé de ce téléphone uniquement. Les demandes en attente sont conservées.",
     "没有权限请求": "Aucune demande d’autorisation",
-    "Agent 需要运行命令或修改文件时，会在这里请你确认。": "Quand un agent doit lancer une commande ou modifier des fichiers, il vous le demandera ici.",
+    "Agent 需要运行命令或修改文件时，会在这里请你确认。":
+        "Quand un agent doit lancer une commande ou modifier des fichiers, il vous le demandera ici.",
     "没有待回答的问题": "Aucune question",
-    "Agent 需要你做选择或补充信息时，问题会出现在这里。": "Quand un agent a besoin d’un choix ou de précisions, sa question apparaît ici.",
+    "Agent 需要你做选择或补充信息时，问题会出现在这里。":
+        "Quand un agent a besoin d’un choix ou de précisions, sa question apparaît ici.",
     "收件箱是空的": "Votre boîte est vide",
-    "Agent 请求权限或向你提问时会出现在这里，处理过的记录也会保留，方便回看。": "Les demandes d’autorisation et questions des agents arrivent ici. Celles traitées restent pour que vous puissiez les revoir.",
+    "Agent 请求权限或向你提问时会出现在这里，处理过的记录也会保留，方便回看。":
+        "Les demandes d’autorisation et questions des agents arrivent ici. Celles traitées restent pour que vous puissiez les revoir.",
     "等待你回答": "En attente de votre réponse",
     "等待你确认": "En attente de votre accord",
     "权限请求": "Demande d’autorisation",
@@ -5912,68 +6810,106 @@ const messageCatalogs = <String, Map<String, String>>{
     "可以返回收件箱查看其它事项。": "Revenez à la boîte pour voir les autres éléments.",
     "跳过所有权限确认。": "Ignore toutes les demandes d'autorisation.",
     "减少确认次数。": "Réduit les confirmations.",
-    "仅自动读取；其他操作均需先征得你的批准。": "Lit automatiquement ; tout le reste nécessite d'abord votre approbation.",
-    "不中断任务；所有操作和决策均自动进行。": "N'interrompt jamais ; toutes les actions et décisions sont automatiques.",
-    "受保护的工具操作前请求审批。": "Demande une approbation avant les actions d'outils protégées.",
+    "仅自动读取；其他操作均需先征得你的批准。":
+        "Lit automatiquement ; tout le reste nécessite d'abord votre approbation.",
+    "不中断任务；所有操作和决策均自动进行。":
+        "N'interrompt jamais ; toutes les actions et décisions sont automatiques.",
+    "受保护的工具操作前请求审批。":
+        "Demande une approbation avant les actions d'outils protégées.",
     "关闭沙箱并跳过审批。": "Désactive le bac à sable et ignore les approbations.",
-    "每次工具执行前在此审批；审批桥不可用时拒绝执行。": "Approuvez ici chaque exécution d’outil ; les exécutions sont refusées si le pont d’approbation est indisponible.",
-    "OpenCode 默认 Agent；工具按你配置的权限执行。": "Agent par défaut d'OpenCode ; les outils suivent vos autorisations configurées.",
-    "编辑文件和其他受保护操作前请求审批。": "Demande une approbation avant de modifier des fichiers ou d’effectuer d’autres actions protégées.",
-    "只分析，不修改文件或执行命令。": "Analyse sans modifier de fichiers ni exécuter de commandes.",
+    "每次工具执行前在此审批；审批桥不可用时拒绝执行。":
+        "Approuvez ici chaque exécution d’outil ; les exécutions sont refusées si le pont d’approbation est indisponible.",
+    "OpenCode 默认 Agent；工具按你配置的权限执行。":
+        "Agent par défaut d'OpenCode ; les outils suivent vos autorisations configurées.",
+    "编辑文件和其他受保护操作前请求审批。":
+        "Demande une approbation avant de modifier des fichiers ou d’effectuer d’autres actions protégées.",
+    "只分析，不修改文件或执行命令。":
+        "Analyse sans modifier de fichiers ni exécuter de commandes.",
     "改文件前先问我。": "Demande avant de modifier des fichiers.",
-    "只读沙箱；需要扩大权限时请求审批。": "Bac à sable en lecture seule ; demande une approbation lorsqu’un accès supplémentaire est nécessaire.",
+    "只读沙箱；需要扩大权限时请求审批。":
+        "Bac à sable en lecture seule ; demande une approbation lorsqu’un accès supplémentaire est nécessaire.",
     "按需确认": "Demander si nécessaire",
     "只读模式": "Lecture seule",
     "所选策略在下一轮执行时生效": "La politique sélectionnée prendra effet au prochain tour",
-    "从不弹出确认；只运行预先允许和安全的只读操作，其余一律拒绝。": "Ne demande jamais ; exécute les actions préapprouvées et en lecture seule sûres, et refuse tout le reste.",
-    "Pi 不内置逐工具审批或沙箱；工具直接执行，扩展发起的询问会显示在对话中。": "Pi n'a ni approbation par outil ni sandbox ; les outils s'exécutent directement et les questions des extensions apparaissent dans la conversation.",
+    "从不弹出确认；只运行预先允许和安全的只读操作，其余一律拒绝。":
+        "Ne demande jamais ; exécute les actions préapprouvées et en lecture seule sûres, et refuse tout le reste.",
+    "Pi 不内置逐工具审批或沙箱；工具直接执行，扩展发起的询问会显示在对话中。":
+        "Pi n'a ni approbation par outil ni sandbox ; les outils s'exécutent directement et les questions des extensions apparaissent dans la conversation.",
     "跳过审批": "Ignorer les approbations",
     "仅限预先允许": "Préapprouvé uniquement",
     "自动判断": "Auto",
-    "监督模式：工具操作前请求审批。": "Supervisé : demande une approbation avant les actions d'outils.",
-    "由 ZCode 判断哪些操作可直接执行。": "Laisse ZCode décider quelles actions peuvent s'exécuter directement.",
-    "只运行预先允许的工具，其余直接拒绝，不请求审批。": "Exécute uniquement les outils déjà autorisés et refuse les autres sans demander.",
-    "由 AI 审查员批准或拒绝原本需要询问的操作；审查失败只阻止该操作。": "Un réviseur IA approuve ou refuse chaque action qui demanderait sinon ; un échec de révision ne bloque que cette action.",
-    "由 Claude 自动分类权限请求。": "Laisse Claude classer automatiquement les demandes d’autorisation.",
+    "监督模式：工具操作前请求审批。":
+        "Supervisé : demande une approbation avant les actions d'outils.",
+    "由 ZCode 判断哪些操作可直接执行。":
+        "Laisse ZCode décider quelles actions peuvent s'exécuter directement.",
+    "只运行预先允许的工具，其余直接拒绝，不请求审批。":
+        "Exécute uniquement les outils déjà autorisés et refuse les autres sans demander.",
+    "由 AI 审查员批准或拒绝原本需要询问的操作；审查失败只阻止该操作。":
+        "Un réviseur IA approuve ou refuse chaque action qui demanderait sinon ; un échec de révision ne bloque que cette action.",
+    "由 Claude 自动分类权限请求。":
+        "Laisse Claude classer automatiquement les demandes d’autorisation.",
     "完全访问": "Accès complet",
     "编辑前先出计划。": "Établit un plan avant de modifier.",
     "默认权限": "Autorisations par défaut",
-    "允许文件编辑；其他受保护操作仍需审批。": "Autorise les modifications de fichiers ; les autres actions protégées nécessitent toujours une approbation.",
+    "允许文件编辑；其他受保护操作仍需审批。":
+        "Autorise les modifications de fichiers ; les autres actions protégées nécessitent toujours une approbation.",
     "权限策略": "Politique d’autorisations",
     "原生规则": "Règles natives",
-    "先制定计划；需要批准的操作仍会询问。": "Établit d'abord un plan ; les actions qui nécessitent une approbation demandent toujours.",
+    "先制定计划；需要批准的操作仍会询问。":
+        "Établit d'abord un plan ; les actions qui nécessitent une approbation demandent toujours.",
     "操作前确认": "Demander avant d’agir",
-    "按 Cursor 权限规则执行；需要审批的操作在此确认。": "Suit les règles d'autorisation de Cursor ; les actions qui nécessitent une approbation sont confirmées ici.",
+    "按 Cursor 权限规则执行；需要审批的操作在此确认。":
+        "Suit les règles d'autorisation de Cursor ; les actions qui nécessitent une approbation sont confirmées ici.",
     "计划模式": "Mode plan",
-    "对所有 Agent 跳过全部权限检查，包括危险命令。": "Ignore toutes les vérifications d'autorisation, y compris pour les commandes dangereuses, pour tous les agents.",
-    "此 Agent 未报告可切换的权限模式；审批请求仍会显示在对话中。": "Cet agent ne signale aucun mode d'autorisation modifiable ; les demandes d'approbation apparaissent toujours dans la conversation.",
-    "原 Agent、模型、思考强度或权限策略当前不可用，请重新选择后发送。": "L’agent, le modèle, l’effort de réflexion ou la politique d’autorisation d’origine n’est plus disponible. Choisissez à nouveau avant d’envoyer.",
-    "计划模式；禁用所有编辑工具。": "Mode plan ; tous les outils de modification sont désactivés.",
-    "每个工具首次使用时请求授权。": "Demande l'autorisation à la première utilisation de chaque outil.",
-    "本会话内自动接受文件编辑。": "Accepte automatiquement les modifications de fichiers pour cette session.",
+    "对所有 Agent 跳过全部权限检查，包括危险命令。":
+        "Ignore toutes les vérifications d'autorisation, y compris pour les commandes dangereuses, pour tous les agents.",
+    "此 Agent 未报告可切换的权限模式；审批请求仍会显示在对话中。":
+        "Cet agent ne signale aucun mode d'autorisation modifiable ; les demandes d'approbation apparaissent toujours dans la conversation.",
+    "原 Agent、模型、思考强度或权限策略当前不可用，请重新选择后发送。":
+        "L’agent, le modèle, l’effort de réflexion ou la politique d’autorisation d’origine n’est plus disponible. Choisissez à nouveau avant d’envoyer.",
+    "计划模式；禁用所有编辑工具。":
+        "Mode plan ; tous les outils de modification sont désactivés.",
+    "每个工具首次使用时请求授权。":
+        "Demande l'autorisation à la première utilisation de chaque outil.",
+    "本会话内自动接受文件编辑。":
+        "Accepte automatiquement les modifications de fichiers pour cette session.",
     "自动编辑文件。": "Modifie les fichiers automatiquement.",
-    "自动驾驶：工具操作无需询问直接执行。": "Pilote automatique : exécute les actions d'outils sans demander.",
-    "由 Grok 判断哪些工具操作可自动执行。": "Laisse Grok décider quelles actions d'outils peuvent s'exécuter automatiquement.",
-    "跳过 Claude Code 工具权限检查。": "Ignore les vérifications d’autorisation des outils de Claude Code.",
-    "自动允许 Antigravity 工具操作。": "Autorise automatiquement les actions d’outils d’Antigravity.",
+    "自动驾驶：工具操作无需询问直接执行。":
+        "Pilote automatique : exécute les actions d'outils sans demander.",
+    "由 Grok 判断哪些工具操作可自动执行。":
+        "Laisse Grok décider quelles actions d'outils peuvent s'exécuter automatiquement.",
+    "跳过 Claude Code 工具权限检查。":
+        "Ignore les vérifications d’autorisation des outils de Claude Code.",
+    "自动允许 Antigravity 工具操作。":
+        "Autorise automatiquement les actions d’outils d’Antigravity.",
     "接受编辑": "Accepter les modifications",
-    "工作区写入沙箱；需要越出沙箱时请求审批。": "Bac à sable en écriture dans l’espace de travail ; demande une approbation uniquement pour quitter le bac à sable.",
+    "工作区写入沙箱；需要越出沙箱时请求审批。":
+        "Bac à sable en écriture dans l’espace de travail ; demande une approbation uniquement pour quitter le bac à sable.",
     "允许所有工具操作，无需审批。": "Autorise toutes les actions d'outils sans approbation.",
-    "探索并制定计划；使用 Claude 原生计划模式。": "Explorer et établir un plan avec le mode plan natif de Claude.",
-    "使用 Antigravity 原生计划模式；工具执行仍在此审批。": "Utilise le mode plan natif d’Antigravity ; les exécutions d’outils sont toujours approuvées ici.",
-    "自动批准操作；明确禁止的操作和团队限制仍然生效。": "Approuve les actions automatiquement ; les actions explicitement interdites et les restrictions d'équipe restent appliquées.",
-    "常规编辑和命令自动执行；高风险操作、提问和计划仍会询问。": "Les modifications et commandes courantes s'exécutent automatiquement ; les actions risquées, questions et plans demandent toujours.",
+    "探索并制定计划；使用 Claude 原生计划模式。":
+        "Explorer et établir un plan avec le mode plan natif de Claude.",
+    "使用 Antigravity 原生计划模式；工具执行仍在此审批。":
+        "Utilise le mode plan natif d’Antigravity ; les exécutions d’outils sont toujours approuvées ici.",
+    "自动批准操作；明确禁止的操作和团队限制仍然生效。":
+        "Approuve les actions automatiquement ; les actions explicitement interdites et les restrictions d'équipe restent appliquées.",
+    "常规编辑和命令自动执行；高风险操作、提问和计划仍会询问。":
+        "Les modifications et commandes courantes s'exécutent automatiquement ; les actions risquées, questions et plans demandent toujours.",
     "正在响应": "Réponse en cours",
     "分叉 · {0}": "Fork · {0}",
     "分叉自较早的会话": "Forké depuis une conversation précédente",
     "分叉自": "Forké depuis",
-    "已恢复所选轮次结束时的文件，未提交的成果可在“变更”中查看。": "Les fichiers ont été restaurés à la fin du tour choisi ; le travail non validé se trouve dans Modifications.",
-    "此项目不是 Git 仓库，分叉只继承对话上下文，并沿用同一项目目录。": "Ce projet n’est pas un dépôt Git ; le fork ne conserve que la conversation et continue dans le même dossier.",
-    "此会话由旧版分叉创建，未恢复历史轮次的文件。": "Cette conversation a été créée par un ancien fork et n’a pas restauré les fichiers du tour.",
-    "沿用同一项目目录；分叉不会还原文件。": "Utilise le même dossier de projet ; le fork ne restaure pas les fichiers.",
+    "已恢复所选轮次结束时的文件，未提交的成果可在“变更”中查看。":
+        "Les fichiers ont été restaurés à la fin du tour choisi ; le travail non validé se trouve dans Modifications.",
+    "此项目不是 Git 仓库，分叉只继承对话上下文，并沿用同一项目目录。":
+        "Ce projet n’est pas un dépôt Git ; le fork ne conserve que la conversation et continue dans le même dossier.",
+    "此会话由旧版分叉创建，未恢复历史轮次的文件。":
+        "Cette conversation a été créée par un ancien fork et n’a pas restauré les fichiers du tour.",
+    "沿用同一项目目录；分叉不会还原文件。":
+        "Utilise le même dossier de projet ; le fork ne restaure pas les fichiers.",
     "收起继承的上下文": "Masquer le contexte hérité",
     "查看继承的上下文（{0} 轮）": "Afficher le contexte hérité ({0})",
-    "Agent 已获得以上上下文，在下方发送消息即可从这里继续。": "L’agent dispose déjà de ce contexte. Envoyez un message ci-dessous pour continuer d’ici.",
+    "Agent 已获得以上上下文，在下方发送消息即可从这里继续。":
+        "L’agent dispose déjà de ce contexte. Envoyez un message ci-dessous pour continuer d’ici.",
   },
   "de": {
     "返回": "Zurück",
@@ -6008,34 +6944,46 @@ const messageCatalogs = <String, Map<String, String>>{
     "连接中": "Verbindung wird hergestellt",
     "离线": "Offline",
     "终端": "Terminal",
-    "连接超时，请检查网络后重试。": "Zeitüberschreitung der Verbindung. Prüfe dein Netzwerk und versuche es erneut.",
+    "连接超时，请检查网络后重试。":
+        "Zeitüberschreitung der Verbindung. Prüfe dein Netzwerk und versuche es erneut.",
     "电脑 {0}": "Computer {0}",
     "电脑离线": "Computer offline",
     "已提交并推送": "Committet und gepusht",
-    "电脑绑定已改变，请返回设备列表。": "Die Kopplung des Computers hat sich geändert. Kehre zur Geräteliste zurück.",
+    "电脑绑定已改变，请返回设备列表。":
+        "Die Kopplung des Computers hat sich geändert. Kehre zur Geräteliste zurück.",
     "任务或远控期间保持唤醒": "Während Aufgaben oder Fernsteuerung wach bleiben",
-    "电脑离线，重连后刷新设置": "Computer offline. Verbinde dich erneut, um die Einstellungen zu aktualisieren.",
-    "阻止空闲睡眠，仍可锁屏或手动睡眠": "Verhindert Ruhezustand bei Inaktivität. Sperren oder manuelles Schlafen bleibt möglich.",
+    "电脑离线，重连后刷新设置":
+        "Computer offline. Verbinde dich erneut, um die Einstellungen zu aktualisieren.",
+    "阻止空闲睡眠，仍可锁屏或手动睡眠":
+        "Verhindert Ruhezustand bei Inaktivität. Sperren oder manuelles Schlafen bleibt möglich.",
     "电脑暂未能保持唤醒：{0}": "Computer konnte nicht wach gehalten werden: {0}",
     "刷新保持唤醒设置": "Wachhalte-Einstellung aktualisieren",
     "电脑": "Computer",
     "扫码连接": "Zum Verbinden scannen",
     "偏好设置": "Einstellungen",
     "把电脑上的工作带在身边": "Deine Arbeit immer dabei",
-    "连接自己的电脑，查看会话、发送任务并处理 Agent 的权限请求。无需注册账号。": "Verbinde deinen Computer, um Chats anzusehen, Aufgaben zu senden und Berechtigungsanfragen von Agents zu beantworten. Kein Konto nötig.",
+    "连接自己的电脑，查看会话、发送任务并处理 Agent 的权限请求。无需注册账号。":
+        "Verbinde deinen Computer, um Chats anzusehen, Aufgaben zu senden und Berechtigungsanfragen von Agents zu beantworten. Kein Konto nötig.",
     "连接电脑": "Computer verbinden",
-    "当前内测版本尚未配置接入服务。": "Der Verbindungsdienst ist in dieser Beta-Version nicht konfiguriert.",
-    "在电脑端打开「连接手机」，扫描二维码。": "Öffne „Smartphone verbinden“ auf deinem Computer und scanne den QR-Code.",
-    "扫描电脑上的二维码，或粘贴配对链接": "Scanne den QR-Code auf deinem Computer oder füge einen Kopplungslink ein.",
-    "当前内测版本尚未配置接入服务": "Der Verbindungsdienst ist in dieser Beta-Version nicht konfiguriert",
+    "当前内测版本尚未配置接入服务。":
+        "Der Verbindungsdienst ist in dieser Beta-Version nicht konfiguriert.",
+    "在电脑端打开「连接手机」，扫描二维码。":
+        "Öffne „Smartphone verbinden“ auf deinem Computer und scanne den QR-Code.",
+    "扫描电脑上的二维码，或粘贴配对链接":
+        "Scanne den QR-Code auf deinem Computer oder füge einen Kopplungslink ein.",
+    "当前内测版本尚未配置接入服务":
+        "Der Verbindungsdienst ist in dieser Beta-Version nicht konfiguriert",
     "更多": "Mehr",
     "从这部手机移除「{0}」？": "„{0}“ von diesem Smartphone entfernen?",
-    "手机会删除这台电脑的配对凭证，之后需重新扫码才能连接。电脑上的任务不受影响；如需让电脑也拒绝这部手机，请在电脑的设备列表中撤销。": "Die Kopplungsdaten dieses Computers werden vom Smartphone gelöscht. Zum erneuten Verbinden musst du wieder scannen. Aufgaben auf dem Computer sind nicht betroffen. Damit auch der Computer dieses Smartphone ablehnt, widerrufe es in der Geräteliste des Computers.",
+    "手机会删除这台电脑的配对凭证，之后需重新扫码才能连接。电脑上的任务不受影响；如需让电脑也拒绝这部手机，请在电脑的设备列表中撤销。":
+        "Die Kopplungsdaten dieses Computers werden vom Smartphone gelöscht. Zum erneuten Verbinden musst du wieder scannen. Aufgaben auf dem Computer sind nicht betroffen. Damit auch der Computer dieses Smartphone ablehnt, widerrufe es in der Geräteliste des Computers.",
     "取消": "Abbrechen",
-    "移除未完成，连接已关闭，请重试或核实安全存储。": "Entfernen unvollständig. Die Verbindung ist geschlossen. Versuche es erneut oder prüfe den sicheren Speicher.",
+    "移除未完成，连接已关闭，请重试或核实安全存储。":
+        "Entfernen unvollständig. Die Verbindung ist geschlossen. Versuche es erneut oder prüfe den sicheren Speicher.",
     "移除": "Entfernen",
     "撤销绑定": "Kopplung widerrufen",
-    "请在「{0}」的设备列表中撤销这部手机。撤销后这部手机将无法再连接该电脑；电脑上正在执行的任务不受影响。": "Widerrufe dieses Smartphone in der Geräteliste von „{0}“. Danach kann es sich nicht mehr mit diesem Computer verbinden. Laufende Aufgaben auf dem Computer sind nicht betroffen.",
+    "请在「{0}」的设备列表中撤销这部手机。撤销后这部手机将无法再连接该电脑；电脑上正在执行的任务不受影响。":
+        "Widerrufe dieses Smartphone in der Geräteliste von „{0}“. Danach kann es sich nicht mehr mit diesem Computer verbinden. Laufende Aufgaben auf dem Computer sind nicht betroffen.",
     "知道了": "Verstanden",
     "通知设置": "Benachrichtigungen",
     "重新连接": "Erneut verbinden",
@@ -6051,28 +6999,38 @@ const messageCatalogs = <String, Map<String, String>>{
     "版本不支持": "Nicht unterstützte Version",
     "异常": "Fehler",
     "不可用": "Nicht verfügbar",
-    "直连未建立，使用加密中继": "Direktverbindung nicht möglich. Verschlüsseltes Relay wird verwendet.",
-    "连接已变化，正在恢复远程桌面": "Verbindung geändert. Remotedesktop wird wiederhergestellt.",
-    "连接中断，正在恢复远程桌面": "Verbindung unterbrochen. Remotedesktop wird wiederhergestellt.",
+    "直连未建立，使用加密中继":
+        "Direktverbindung nicht möglich. Verschlüsseltes Relay wird verwendet.",
+    "连接已变化，正在恢复远程桌面":
+        "Verbindung geändert. Remotedesktop wird wiederhergestellt.",
+    "连接中断，正在恢复远程桌面":
+        "Verbindung unterbrochen. Remotedesktop wird wiederhergestellt.",
     "无法准备新解码器": "Neuer Decoder konnte nicht vorbereitet werden",
     "新画面解码不可用": "Neuer Videodecoder nicht verfügbar",
     "换路后画面不可用": "Video nach dem Verbindungswechsel nicht verfügbar",
     "正在核实并恢复远程桌面连接": "Remotedesktop wird geprüft und wiederhergestellt",
-    "连接归属暂时无法核实，正在恢复远程桌面": "Zuordnung der Verbindung kann nicht geprüft werden. Remotedesktop wird wiederhergestellt.",
-    "连接暂时无法恢复，请点击重新连接。": "Verbindung kann nicht wiederhergestellt werden. Tippe auf Erneut verbinden.",
-    "电脑离线，连接后再打开远程桌面": "Computer offline. Verbinde dich erneut, um den Remotedesktop zu öffnen.",
+    "连接归属暂时无法核实，正在恢复远程桌面":
+        "Zuordnung der Verbindung kann nicht geprüft werden. Remotedesktop wird wiederhergestellt.",
+    "连接暂时无法恢复，请点击重新连接。":
+        "Verbindung kann nicht wiederhergestellt werden. Tippe auf Erneut verbinden.",
+    "电脑离线，连接后再打开远程桌面":
+        "Computer offline. Verbinde dich erneut, um den Remotedesktop zu öffnen.",
     "电脑没有可用的显示器": "Auf diesem Computer sind keine Bildschirme verfügbar",
     "手机解码器不可用": "Decoder des Smartphones nicht verfügbar",
     "手机视频画面不可用": "Video auf dem Smartphone nicht verfügbar",
     "视频画面不可用，使用图片模式": "Video nicht verfügbar. Bildmodus wird verwendet.",
     "暂时无法连接：{0}": "Verbindung nicht möglich: {0}",
     "{0}，已切换图片模式": "{0}. Zum Bildmodus gewechselt.",
-    "请在电脑上允许共享屏幕和键鼠控制": "Erlaube auf deinem Computer Bildschirmfreigabe und Tastatur-/Maussteuerung.",
+    "请在电脑上允许共享屏幕和键鼠控制":
+        "Erlaube auf deinem Computer Bildschirmfreigabe und Tastatur-/Maussteuerung.",
     "电脑授权回复无效，请重新连接": "Ungültige Autorisierungsantwort. Verbinde dich erneut.",
-    "电脑未能准备屏幕共享，请重新连接并授权": "Der Computer konnte die Bildschirmfreigabe nicht vorbereiten. Verbinde dich erneut und erteile die Berechtigung.",
-    "等待电脑授权超时，请重新连接后再试": "Zeitüberschreitung beim Warten auf die Berechtigung. Verbinde dich erneut und versuche es noch einmal.",
+    "电脑未能准备屏幕共享，请重新连接并授权":
+        "Der Computer konnte die Bildschirmfreigabe nicht vorbereiten. Verbinde dich erneut und erteile die Berechtigung.",
+    "等待电脑授权超时，请重新连接后再试":
+        "Zeitüberschreitung beim Warten auf die Berechtigung. Verbinde dich erneut und versuche es noch einmal.",
     "画面正在恢复": "Video wird wiederhergestellt",
-    "电脑未确认当前画面的就绪状态": "Der Computer hat nicht bestätigt, dass das aktuelle Video bereit ist.",
+    "电脑未确认当前画面的就绪状态":
+        "Der Computer hat nicht bestätigt, dass das aktuelle Video bereit ist.",
     "电脑视频编码异常": "Fehler im Videoencoder des Computers",
     "电脑画面恢复超时": "Zeitüberschreitung beim Wiederherstellen des Computervideos",
     "电脑画面正在恢复": "Computervideo wird wiederhergestellt",
@@ -6083,21 +7041,27 @@ const messageCatalogs = <String, Map<String, String>>{
     "视频解码停止响应": "Videodecodierung reagiert nicht mehr",
     "视频首帧等待超时": "Zeitüberschreitung beim Warten auf das erste Bild",
     "锁定": "Gesperrt",
-    "远控连接中断，正在重新连接": "Fernsteuerung getrennt. Verbindung wird wiederhergestellt.",
+    "远控连接中断，正在重新连接":
+        "Fernsteuerung getrennt. Verbindung wird wiederhergestellt.",
     "过于频繁": "Zu viele Anfragen",
     "画面连接中断，正在重新连接": "Video getrennt. Verbindung wird wiederhergestellt.",
     "切屏后解码器不可用": "Decoder nach Bildschirmwechsel nicht verfügbar",
-    "切换屏幕失败，正在恢复连接": "Bildschirm konnte nicht gewechselt werden. Verbindung wird wiederhergestellt.",
+    "切换屏幕失败，正在恢复连接":
+        "Bildschirm konnte nicht gewechselt werden. Verbindung wird wiederhergestellt.",
     "发送{0}到电脑": "{0} an Computer senden",
     "文字": "Text",
     "图片": "Bild",
-    "读取手机剪贴板，按系统提示允许粘贴": "Zwischenablage des Smartphones lesen. Erlaube das Einfügen, wenn du gefragt wirst.",
+    "读取手机剪贴板，按系统提示允许粘贴":
+        "Zwischenablage des Smartphones lesen. Erlaube das Einfügen, wenn du gefragt wirst.",
     "从电脑获取{0}": "{0} vom Computer holen",
     "复制到手机剪贴板": "In die Zwischenablage des Smartphones kopieren",
-    "当前连接不支持独立剪贴板传输，请更新电脑和 App 后重试": "Diese Verbindung unterstützt keine separate Übertragung der Zwischenablage. Aktualisiere die Desktop-App und die mobile App.",
-    "手机剪贴板没有图片，或尚未允许粘贴": "Kein Bild in der Zwischenablage des Smartphones oder Einfügen nicht erlaubt.",
+    "当前连接不支持独立剪贴板传输，请更新电脑和 App 后重试":
+        "Diese Verbindung unterstützt keine separate Übertragung der Zwischenablage. Aktualisiere die Desktop-App und die mobile App.",
+    "手机剪贴板没有图片，或尚未允许粘贴":
+        "Kein Bild in der Zwischenablage des Smartphones oder Einfügen nicht erlaubt.",
     "手机剪贴板没有文字": "Kein Text in der Zwischenablage des Smartphones",
-    "电脑尚不支持分块剪贴板传输，请更新电脑客户端": "Aktualisiere die Desktop-App, um die Zwischenablage in Teilen zu übertragen.",
+    "电脑尚不支持分块剪贴板传输，请更新电脑客户端":
+        "Aktualisiere die Desktop-App, um die Zwischenablage in Teilen zu übertragen.",
     "已发送到电脑剪贴板": "An die Zwischenablage des Computers gesendet",
     "已复制到手机剪贴板": "In die Zwischenablage des Smartphones kopiert",
     "剪贴板操作未完成": "Vorgang in der Zwischenablage unvollständig",
@@ -6109,29 +7073,37 @@ const messageCatalogs = <String, Map<String, String>>{
     "重新选择共享屏幕": "Freizugebenden Bildschirm neu wählen",
     "正在准备剪贴板传输…": "Übertragung der Zwischenablage wird vorbereitet…",
     "剪贴板传输 {0}%": "Übertragung der Zwischenablage {0} %",
-    "已停止等待，复制操作可能已完成，请核实剪贴板": "Warten beendet. Das Kopieren wurde möglicherweise abgeschlossen. Prüfe die Zwischenablage.",
+    "已停止等待，复制操作可能已完成，请核实剪贴板":
+        "Warten beendet. Das Kopieren wurde möglicherweise abgeschlossen. Prüfe die Zwischenablage.",
     "键盘": "Tastatur",
     "移动画面": "Ansicht verschieben",
     "操作电脑": "Computer steuern",
     "适应屏幕": "An Bildschirm anpassen",
     "剪贴板": "Zwischenablage",
-    "电脑已锁定，Agent 操作仍可用。\n解锁电脑后点「重新连接」。": "Computer gesperrt. Agent-Aktionen sind weiterhin verfügbar.\nEntsperre deinen Computer und tippe dann auf Erneut verbinden.",
+    "电脑已锁定，Agent 操作仍可用。\n解锁电脑后点「重新连接」。":
+        "Computer gesperrt. Agent-Aktionen sind weiterhin verfügbar.\nEntsperre deinen Computer und tippe dann auf Erneut verbinden.",
     "服务连接正常": "Dienst verbunden",
     "连接失败，请重试。": "Verbindung fehlgeschlagen. Versuche es erneut.",
-    "接入服务只转发加密数据，会话和任务保存在你的电脑上。": "Der Verbindungsdienst leitet nur verschlüsselte Daten weiter. Chats und Aufgaben bleiben auf deinem Computer.",
+    "接入服务只转发加密数据，会话和任务保存在你的电脑上。":
+        "Der Verbindungsdienst leitet nur verschlüsselte Daten weiter. Chats und Aufgaben bleiben auf deinem Computer.",
     "尚未配置服务地址": "Dienstadresse nicht konfiguriert",
     "此服务尚未开放电脑配对。": "Computer-Kopplung ist für diesen Dienst nicht aktiviert.",
     "正在检查": "Wird geprüft",
     "检查连接": "Verbindung prüfen",
-    "后台提醒暂未启用，静音设置可提前保存。仅影响这部手机，不影响电脑任务和 Agent 审批。": "Hintergrundbenachrichtigungen sind nicht aktiviert. Stummschaltungen kannst du schon speichern. Sie gelten nur für dieses Smartphone und wirken sich nicht auf Computeraufgaben oder Agent-Freigaben aus.",
-    "通知通道已连接。提醒只影响这部手机，不会直接批准操作。": "Benachrichtigungen verbunden. Hinweise betreffen nur dieses Smartphone und genehmigen nie automatisch Aktionen.",
-    "后台提醒暂未启用，可在这里授权系统通知。": "Hintergrundbenachrichtigungen sind nicht aktiviert. Erteile hier die Benachrichtigungsberechtigung.",
-    "此版本未配置后台提醒，静音设置可提前保存。": "Hintergrundbenachrichtigungen sind in diesem Build nicht konfiguriert. Stummschaltungen kannst du schon speichern.",
+    "后台提醒暂未启用，静音设置可提前保存。仅影响这部手机，不影响电脑任务和 Agent 审批。":
+        "Hintergrundbenachrichtigungen sind nicht aktiviert. Stummschaltungen kannst du schon speichern. Sie gelten nur für dieses Smartphone und wirken sich nicht auf Computeraufgaben oder Agent-Freigaben aus.",
+    "通知通道已连接。提醒只影响这部手机，不会直接批准操作。":
+        "Benachrichtigungen verbunden. Hinweise betreffen nur dieses Smartphone und genehmigen nie automatisch Aktionen.",
+    "后台提醒暂未启用，可在这里授权系统通知。":
+        "Hintergrundbenachrichtigungen sind nicht aktiviert. Erteile hier die Benachrichtigungsberechtigung.",
+    "此版本未配置后台提醒，静音设置可提前保存。":
+        "Hintergrundbenachrichtigungen sind in diesem Build nicht konfiguriert. Stummschaltungen kannst du schon speichern.",
     "正在连接通知服务": "Verbindung zum Benachrichtigungsdienst wird hergestellt",
     "重新检测后台提醒": "Hintergrundbenachrichtigungen erneut prüfen",
     "启用后台提醒": "Hintergrundbenachrichtigungen aktivieren",
     "通知设置暂不可用。": "Benachrichtigungseinstellungen nicht verfügbar.",
-    "保存结果未确认，请检查网络后重新读取。": "Speichern nicht bestätigt. Prüfe dein Netzwerk und lade neu.",
+    "保存结果未确认，请检查网络后重新读取。":
+        "Speichern nicht bestätigt. Prüfe dein Netzwerk und lade neu.",
     "会话": "Chats",
     "重新读取": "Neu laden",
     "静音这台电脑": "Diesen Computer stummschalten",
@@ -6139,14 +7111,17 @@ const messageCatalogs = <String, Map<String, String>>{
     "已静音会话": "Stummgeschaltete Chats",
     "未加载的会话": "Chat nicht geladen",
     "取消会话静音": "Stummschaltung des Chats aufheben",
-    "这台电脑已静音，取消会话静音后仍不会收到提醒。": "Dieser Computer ist stummgeschaltet. Das Aufheben der Chat-Stummschaltung aktiviert keine Benachrichtigungen.",
+    "这台电脑已静音，取消会话静音后仍不会收到提醒。":
+        "Dieser Computer ist stummgeschaltet. Das Aufheben der Chat-Stummschaltung aktiviert keine Benachrichtigungen.",
     "静音此会话": "Diesen Chat stummschalten",
     "清除离线缓存？": "Offline-Cache leeren?",
-    "只清除此手机保存的会话缓存，保留草稿、未发送附件和电脑配对。电脑上的会话不受影响，联网后会重新缓存。": "Leert nur die auf diesem Smartphone zwischengespeicherten Chats. Entwürfe, nicht gesendete Anhänge und Kopplungen bleiben erhalten. Chats auf deinem Computer sind nicht betroffen und werden online erneut zwischengespeichert.",
+    "只清除此手机保存的会话缓存，保留草稿、未发送附件和电脑配对。电脑上的会话不受影响，联网后会重新缓存。":
+        "Leert nur die auf diesem Smartphone zwischengespeicherten Chats. Entwürfe, nicht gesendete Anhänge und Kopplungen bleiben erhalten. Chats auf deinem Computer sind nicht betroffen und werden online erneut zwischengespeichert.",
     "清除": "Leeren",
     "未能清除缓存：{0}": "Cache konnte nicht geleert werden: {0}",
     "最近会话离线缓存": "Offline-Cache der letzten Chats",
-    "{0} 个会话 · {1} MB\n最多 30 个会话、32 MB；保存文字和附件信息。": "{0} Chats · {1} MB\nBis zu 30 Chats und 32 MB. Speichert Text und Anhangsinformationen.",
+    "{0} 个会话 · {1} MB\n最多 30 个会话、32 MB；保存文字和附件信息。":
+        "{0} Chats · {1} MB\nBis zu 30 Chats und 32 MB. Speichert Text und Anhangsinformationen.",
     "正在读取缓存大小…": "Cachegröße wird gelesen…",
     "正在清除…": "Wird geleert…",
     "清除缓存": "Cache leeren",
@@ -6160,15 +7135,21 @@ const messageCatalogs = <String, Map<String, String>>{
     "管理已绑定设备": "Gekoppelte Geräte verwalten",
     "{0} 台": "{0} Computer",
     "本机数据": "Auf diesem Smartphone",
-    "无需注册账号：通过电脑上的配对二维码建立信任，可随时在电脑上撤销。草稿和离线缓存保存在这部手机；提醒偏好可在电脑或会话菜单中设置。": "Kein Konto nötig. Scanne zum Koppeln den QR-Code auf deinem Computer und widerrufe den Zugriff dort jederzeit. Entwürfe und Offline-Cache bleiben auf diesem Smartphone. Benachrichtigungen stellst du am Computer oder im Chatmenü ein.",
-    "项目目录不可用，请刷新项目后重试。": "Projektverzeichnis nicht verfügbar. Aktualisiere das Projekt und versuche es erneut.",
+    "无需注册账号：通过电脑上的配对二维码建立信任，可随时在电脑上撤销。草稿和离线缓存保存在这部手机；提醒偏好可在电脑或会话菜单中设置。":
+        "Kein Konto nötig. Scanne zum Koppeln den QR-Code auf deinem Computer und widerrufe den Zugriff dort jederzeit. Entwürfe und Offline-Cache bleiben auf diesem Smartphone. Benachrichtigungen stellst du am Computer oder im Chatmenü ein.",
+    "项目目录不可用，请刷新项目后重试。":
+        "Projektverzeichnis nicht verfügbar. Aktualisiere das Projekt und versuche es erneut.",
     "选择终端目录": "Terminalverzeichnis auswählen",
-    "连接或项目目录已改变，请重新选择终端目录。": "Verbindung oder Projektverzeichnis hat sich geändert. Wähle das Terminalverzeichnis erneut.",
-    "启动结果待核实，请使用原操作恢复。": "Startergebnis nicht bestätigt. Stelle den ursprünglichen Vorgang wieder her.",
+    "连接或项目目录已改变，请重新选择终端目录。":
+        "Verbindung oder Projektverzeichnis hat sich geändert. Wähle das Terminalverzeichnis erneut.",
+    "启动结果待核实，请使用原操作恢复。":
+        "Startergebnis nicht bestätigt. Stelle den ursprünglichen Vorgang wieder her.",
     "关闭这个终端？": "Dieses Terminal schließen?",
-    "将在电脑上结束该终端及其中运行的命令。离开页面不会关闭终端。": "Beendet dieses Terminal und seine laufenden Befehle auf deinem Computer. Beim Verlassen dieser Seite läuft das Terminal weiter.",
+    "将在电脑上结束该终端及其中运行的命令。离开页面不会关闭终端。":
+        "Beendet dieses Terminal und seine laufenden Befehle auf deinem Computer. Beim Verlassen dieser Seite läuft das Terminal weiter.",
     "关闭终端": "Terminal schließen",
-    "连接已改变，请刷新后重新确认关闭。": "Verbindung geändert. Aktualisiere und bestätige das Schließen erneut.",
+    "连接已改变，请刷新后重新确认关闭。":
+        "Verbindung geändert. Aktualisiere und bestätige das Schließen erneut.",
     "终端 {0}": "Terminal {0}",
     "新建终端": "Neues Terminal",
     "关闭当前终端": "Aktuelles Terminal schließen",
@@ -6178,13 +7159,16 @@ const messageCatalogs = <String, Map<String, String>>{
     "历史提交": "Commits",
     "分支比较": "Branches vergleichen",
     "目录": "Verzeichnis",
-    "连接或目录已改变，请重新选择比较目标。": "Verbindung oder Verzeichnis hat sich geändert. Wähle das Vergleichsziel erneut.",
+    "连接或目录已改变，请重新选择比较目标。":
+        "Verbindung oder Verzeichnis hat sich geändert. Wähle das Vergleichsziel erneut.",
     "请填写提交说明": "Gib eine Commit-Nachricht ein",
     "暂存全部并提交？": "Alles stagen und committen?",
-    "{0}当前没有已暂存的文件，将暂存全部 {1} 个变更后提交。": "{0}Keine Dateien gestagt. Alle {1} Änderungen werden gestagt und committet.",
+    "{0}当前没有已暂存的文件，将暂存全部 {1} 个变更后提交。":
+        "{0}Keine Dateien gestagt. Alle {1} Änderungen werden gestagt und committet.",
     "目录：{0}。": "Verzeichnis: {0}.",
     "暂存并提交": "Stagen und committen",
-    "连接或变更已更新，请核对后重新提交。": "Verbindung oder Änderungen aktualisiert. Prüfe sie, bevor du erneut committest.",
+    "连接或变更已更新，请核对后重新提交。":
+        "Verbindung oder Änderungen aktualisiert. Prüfe sie, bevor du erneut committest.",
     "Git 操作结果待核实": "Ergebnis des Git-Vorgangs nicht bestätigt",
     "变更": "Änderungen",
     "更多 Git 操作": "Weitere Git-Aktionen",
@@ -6198,9 +7182,12 @@ const messageCatalogs = <String, Map<String, String>>{
     "选择父提交": "Eltern-Commit auswählen",
     "父提交 {0} · {1}": "Eltern-Commit {0} · {1}",
     "父提交 {0} ▾": "Eltern-Commit {0} ▾",
-    "只读 · 当前 HEAD 相对所选分支共同祖先的变更": "Schreibgeschützt · Aktueller HEAD verglichen mit dem gemeinsamen Vorfahren des gewählten Branches",
-    "只读 · 首次提交相对空目录的变更": "Schreibgeschützt · Erster Commit verglichen mit leerem Verzeichnis",
-    "只读 · 此提交相对父提交的变更": "Schreibgeschützt · Dieser Commit verglichen mit seinem Eltern-Commit",
+    "只读 · 当前 HEAD 相对所选分支共同祖先的变更":
+        "Schreibgeschützt · Aktueller HEAD verglichen mit dem gemeinsamen Vorfahren des gewählten Branches",
+    "只读 · 首次提交相对空目录的变更":
+        "Schreibgeschützt · Erster Commit verglichen mit leerem Verzeichnis",
+    "只读 · 此提交相对父提交的变更":
+        "Schreibgeschützt · Dieser Commit verglichen mit seinem Eltern-Commit",
     "{0} 个文件": "{0} Dateien",
     "{0} 个文件 · 已暂存 {1}": "{0} Dateien · {1} gestagt",
     "取消暂存": "Unstagen",
@@ -6211,14 +7198,16 @@ const messageCatalogs = <String, Map<String, String>>{
     "提交": "Committen",
     "提交并推送": "Committen und pushen",
     "二进制文件，无法显示差异": "Binärdatei. Diff nicht verfügbar.",
-    "内容无差异（可能仅权限或换行变化）": "Keine inhaltlichen Änderungen (eventuell nur Berechtigungen oder Zeilenenden)",
+    "内容无差异（可能仅权限或换行变化）":
+        "Keine inhaltlichen Änderungen (eventuell nur Berechtigungen oder Zeilenenden)",
     "… 差异过长，已截断": "… Diff gekürzt",
     "切换目录": "Verzeichnis wechseln",
     "选择项目目录": "Projektverzeichnis auswählen",
     "目录 · {0}": "Verzeichnis · {0}",
     "选择项目文件": "Projektdatei auswählen",
     "搜索当前目录内的文件": "Dateien in diesem Verzeichnis suchen",
-    "搜索结果未全部返回，请输入更具体的文件名或路径。": "Einige Ergebnisse wurden ausgelassen. Gib einen genaueren Dateinamen oder Pfad ein.",
+    "搜索结果未全部返回，请输入更具体的文件名或路径。":
+        "Einige Ergebnisse wurden ausgelassen. Gib einen genaueren Dateinamen oder Pfad ein.",
     "没有匹配的文件": "Keine passenden Dateien",
     "此文件无法预览（二进制或过大）": "Vorschau nicht verfügbar (binär oder zu groß)",
     "{0} · 只读": "{0} · Schreibgeschützt",
@@ -6230,10 +7219,14 @@ const messageCatalogs = <String, Map<String, String>>{
     "没有提交记录": "Keine Commits",
     "没有可比较的分支": "Keine Branches zum Vergleichen",
     "预览已关闭": "Vorschau geschlossen",
-    "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">预览请求失败：{0}</p>": "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">Vorschauanfrage fehlgeschlagen: {0}</p>",
-    "项目 WebSocket 写入未获确认": "WebSocket-Schreibvorgang des Projekts nicht bestätigt",
-    "\u001b[2m（较早的输出已被电脑释放）\u001b[0m\r\n": "\u001b[2m(Ältere Ausgabe wurde vom Computer freigegeben)\u001b[0m\r\n",
-    "\r\n\u001b[2m… 部分较早的输出已被电脑丢弃 …\u001b[0m\r\n": "\r\n\u001b[2m… Ein Teil der älteren Ausgabe wurde vom Computer verworfen …\u001b[0m\r\n",
+    "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">预览请求失败：{0}</p>":
+        "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">Vorschauanfrage fehlgeschlagen: {0}</p>",
+    "项目 WebSocket 写入未获确认":
+        "WebSocket-Schreibvorgang des Projekts nicht bestätigt",
+    "\u001b[2m（较早的输出已被电脑释放）\u001b[0m\r\n":
+        "\u001b[2m(Ältere Ausgabe wurde vom Computer freigegeben)\u001b[0m\r\n",
+    "\r\n\u001b[2m… 部分较早的输出已被电脑丢弃 …\u001b[0m\r\n":
+        "\r\n\u001b[2m… Ein Teil der älteren Ausgabe wurde vom Computer verworfen …\u001b[0m\r\n",
     "启动中": "Wird gestartet",
     "运行中": "Läuft",
     "停止中": "Wird gestoppt",
@@ -6243,21 +7236,26 @@ const messageCatalogs = <String, Map<String, String>>{
     "状态未知": "Status unbekannt",
     "核实输入结果": "Eingabeergebnis prüfen",
     "继续输入？": "Weiter eingeben?",
-    "请先检查终端当前状态；未确认的输入可能已部分生效。继续会清空当前输入框并丢弃未发送内容，不会重新发送原输入。": "Prüfe zuerst das Terminal. Unbestätigte Eingaben wurden eventuell teilweise ausgeführt. Fortfahren leert das Eingabefeld und verwirft nicht gesendete Inhalte. Die ursprüngliche Eingabe wird nicht erneut gesendet.",
+    "请先检查终端当前状态；未确认的输入可能已部分生效。继续会清空当前输入框并丢弃未发送内容，不会重新发送原输入。":
+        "Prüfe zuerst das Terminal. Unbestätigte Eingaben wurden eventuell teilweise ausgeführt. Fortfahren leert das Eingabefeld und verwirft nicht gesendete Inhalte. Die ursprüngliche Eingabe wird nicht erneut gesendet.",
     "已检查，继续": "Geprüft, weiter",
     "继续输入": "Weiter eingeben",
     "输入命令，回车发送": "Befehl eingeben, Enter zum Senden",
     "发送": "Senden",
-    "运行配置已改变，请确认后再启动。": "Ausführungskonfiguration geändert. Prüfe sie vor dem Start.",
+    "运行配置已改变，请确认后再启动。":
+        "Ausführungskonfiguration geändert. Prüfe sie vor dem Start.",
     "继续": "Weiter",
     "重命名运行配置": "Ausführungskonfiguration umbenennen",
     "保存": "Speichern",
     "删除运行配置？": "Ausführungskonfiguration löschen?",
-    "移除“{0}”的启动配置，已运行的进程不会停止。": "Entfernt die Startkonfiguration für „{0}“. Laufende Prozesse laufen weiter.",
+    "移除“{0}”的启动配置，已运行的进程不会停止。":
+        "Entfernt die Startkonfiguration für „{0}“. Laufende Prozesse laufen weiter.",
     "重新分析项目？": "Projekt erneut analysieren?",
-    "将重新生成运行配置，覆盖未固定的自定义修改，固定项会保留。": "Erstellt die Ausführungskonfigurationen neu und ersetzt nicht angeheftete eigene Änderungen. Angeheftete Konfigurationen bleiben erhalten.",
+    "将重新生成运行配置，覆盖未固定的自定义修改，固定项会保留。":
+        "Erstellt die Ausführungskonfigurationen neu und ersetzt nicht angeheftete eigene Änderungen. Angeheftete Konfigurationen bleiben erhalten.",
     "选择分析项目的 Agent": "Agent für die Projektanalyse auswählen",
-    "没有可用 Agent，请先在电脑上连接。": "Keine Agents verfügbar. Verbinde zuerst einen Agent auf deinem Computer.",
+    "没有可用 Agent，请先在电脑上连接。":
+        "Keine Agents verfügbar. Verbinde zuerst einen Agent auf deinem Computer.",
     "预览端口": "Vorschauport",
     "例如 5173": "z. B. 5173",
     "打开": "Öffnen",
@@ -6265,9 +7263,11 @@ const messageCatalogs = <String, Map<String, String>>{
     "选择运行目录": "Ausführungsverzeichnis auswählen",
     "分析项目": "Projekt analysieren",
     "刷新运行配置": "Ausführungskonfigurationen aktualisieren",
-    "Agent 正在分析项目，可稍后刷新查看。": "Ein Agent analysiert das Projekt. Aktualisiere später, um das Ergebnis zu sehen.",
+    "Agent 正在分析项目，可稍后刷新查看。":
+        "Ein Agent analysiert das Projekt. Aktualisiere später, um das Ergebnis zu sehen.",
     "这个项目尚未关联目录。": "Diesem Projekt ist kein Verzeichnis zugeordnet.",
-    "当前目录还没有运行配置，点击「分析项目」生成启动方式。": "Keine Ausführungskonfigurationen in diesem Verzeichnis. Tippe auf Projekt analysieren, um eine zu erstellen.",
+    "当前目录还没有运行配置，点击「分析项目」生成启动方式。":
+        "Keine Ausführungskonfigurationen in diesem Verzeichnis. Tippe auf Projekt analysieren, um eine zu erstellen.",
     "选择运行配置": "Ausführungskonfiguration auswählen",
     "选择配置": "Konfiguration auswählen",
     "未运行": "Nicht gestartet",
@@ -6290,56 +7290,80 @@ const messageCatalogs = <String, Map<String, String>>{
     "预览": "Vorschau",
     "后退": "Zurück",
     "刷新": "Aktualisieren",
-    "电脑离线，重新连接后再试。": "Computer offline. Verbinde dich erneut und versuche es noch einmal.",
-    "这个项目还没有会话。电脑以会话为单位授权工作区访问，请先在项目中开始一个会话。": "Noch keine Chats in diesem Projekt. Der Zugriff auf den Arbeitsbereich wird pro Chat erteilt. Starte zuerst einen Chat in diesem Projekt.",
+    "电脑离线，重新连接后再试。":
+        "Computer offline. Verbinde dich erneut und versuche es noch einmal.",
+    "这个项目还没有会话。电脑以会话为单位授权工作区访问，请先在项目中开始一个会话。":
+        "Noch keine Chats in diesem Projekt. Der Zugriff auf den Arbeitsbereich wird pro Chat erteilt. Starte zuerst einen Chat in diesem Projekt.",
     "全部": "Alle",
     "权限": "Berechtigungen",
     "问题": "Fragen",
     "待处理": "Ausstehend",
     "没有需要你处理的事项": "Nichts erfordert deine Aufmerksamkeit",
     "{0} 项需要你处理": "{0} Einträge erfordern deine Aufmerksamkeit",
-    "{0} 台电脑离线，其待处理事项将在重新连接后显示。": "{0} Computer offline. Ihre ausstehenden Einträge erscheinen nach dem erneuten Verbinden.",
+    "{0} 台电脑离线，其待处理事项将在重新连接后显示。":
+        "{0} Computer offline. Ihre ausstehenden Einträge erscheinen nach dem erneuten Verbinden.",
     "查看会话": "Chat ansehen",
-    "已不再等待。如果电脑收到了这项操作，它仍会生效。": "Warten beendet. Falls der Computer diesen Vorgang erhalten hat, wird er trotzdem ausgeführt.",
+    "已不再等待。如果电脑收到了这项操作，它仍会生效。":
+        "Warten beendet. Falls der Computer diesen Vorgang erhalten hat, wird er trotzdem ausgeführt.",
     "会话已经删除。": "Chat gelöscht.",
     "新名称已经生效。": "Neuer Name übernommen.",
-    "已找到电脑上的原终端，可在终端或运行页面继续查看；未重新运行命令。": "Ursprüngliches Terminal gefunden. Mach unter Terminal oder Ausführen weiter. Der Befehl wurde nicht erneut ausgeführt.",
-    "分析已经开始，可在运行页面查看进度。": "Analyse gestartet. Den Fortschritt siehst du auf der Seite Ausführen.",
-    "原运行配置操作已完成。": "Ursprünglicher Vorgang an der Ausführungskonfiguration abgeschlossen.",
-    "原运行配置操作已结束：{0}": "Ursprünglicher Vorgang an der Ausführungskonfiguration beendet: {0}",
-    "原启动已取消，未重新运行命令。": "Ursprünglicher Start abgebrochen. Der Befehl wurde nicht erneut ausgeführt.",
+    "已找到电脑上的原终端，可在终端或运行页面继续查看；未重新运行命令。":
+        "Ursprüngliches Terminal gefunden. Mach unter Terminal oder Ausführen weiter. Der Befehl wurde nicht erneut ausgeführt.",
+    "分析已经开始，可在运行页面查看进度。":
+        "Analyse gestartet. Den Fortschritt siehst du auf der Seite Ausführen.",
+    "原运行配置操作已完成。":
+        "Ursprünglicher Vorgang an der Ausführungskonfiguration abgeschlossen.",
+    "原运行配置操作已结束：{0}":
+        "Ursprünglicher Vorgang an der Ausführungskonfiguration beendet: {0}",
+    "原启动已取消，未重新运行命令。":
+        "Ursprünglicher Start abgebrochen. Der Befehl wurde nicht erneut ausgeführt.",
     "修复已提交给主 Agent。": "Korrektur an den Haupt-Agent übermittelt.",
     "原修复已放弃。": "Ursprüngliche Korrektur verworfen.",
-    "修复尚未提交，可继续原操作。{0}": "Korrektur noch nicht übermittelt. Setze den ursprünglichen Vorgang fort. {0}",
-    "已找到原审查，可在对应轮次的「本轮审查」中查看。": "Ursprüngliches Review gefunden. Du findest es unter Runden-Reviews der entsprechenden Runde.",
-    "电脑上还查不到这项操作，可能没收到。可以重新发送，不会重复执行。": "Der Computer hat noch keinen Eintrag zu diesem Vorgang. Er ist möglicherweise nicht angekommen. Erneutes Senden führt ihn nicht doppelt aus.",
+    "修复尚未提交，可继续原操作。{0}":
+        "Korrektur noch nicht übermittelt. Setze den ursprünglichen Vorgang fort. {0}",
+    "已找到原审查，可在对应轮次的「本轮审查」中查看。":
+        "Ursprüngliches Review gefunden. Du findest es unter Runden-Reviews der entsprechenden Runde.",
+    "电脑上还查不到这项操作，可能没收到。可以重新发送，不会重复执行。":
+        "Der Computer hat noch keinen Eintrag zu diesem Vorgang. Er ist möglicherweise nicht angekommen. Erneutes Senden führt ihn nicht doppelt aus.",
     "Fork 正在后台执行。": "Fork läuft im Hintergrund.",
     "Fork 尚未完成。": "Fork noch nicht abgeschlossen.",
     "{0}：还没收到电脑确认": "{0}: Noch keine Bestätigung vom Computer",
     "待确认": "Wartet auf Bestätigung",
-    "{0} · 正在确认「不再等待」。重试仅确认原操作的结束状态，已经执行的内容不会撤销。": "{0} · „Warten beenden“ wird bestätigt. Erneutes Versuchen bestätigt nur den Endzustand des ursprünglichen Vorgangs und macht erledigte Arbeit nicht rückgängig.",
-    "{0} · 网络中断时手机没收到电脑的回复。点「重新确认」查看结果；重新发送也不会重复执行。": "{0} · Die Antwort ging beim Verbindungsabbruch verloren. Tippe auf Erneut prüfen, um das Ergebnis zu sehen. Erneutes Senden führt ihn nicht doppelt aus.",
-    "{0} · 网络中断时手机没收到电脑的回复。连上电脑后会自动确认。": "{0} · Die Antwort ging beim Verbindungsabbruch verloren. Nach dem erneuten Verbinden wird automatisch geprüft.",
+    "{0} · 正在确认「不再等待」。重试仅确认原操作的结束状态，已经执行的内容不会撤销。":
+        "{0} · „Warten beenden“ wird bestätigt. Erneutes Versuchen bestätigt nur den Endzustand des ursprünglichen Vorgangs und macht erledigte Arbeit nicht rückgängig.",
+    "{0} · 网络中断时手机没收到电脑的回复。点「重新确认」查看结果；重新发送也不会重复执行。":
+        "{0} · Die Antwort ging beim Verbindungsabbruch verloren. Tippe auf Erneut prüfen, um das Ergebnis zu sehen. Erneutes Senden führt ihn nicht doppelt aus.",
+    "{0} · 网络中断时手机没收到电脑的回复。连上电脑后会自动确认。":
+        "{0} · Die Antwort ging beim Verbindungsabbruch verloren. Nach dem erneuten Verbinden wird automatisch geprüft.",
     "新名称：{0}": "Neuer Name: {0}",
-    "重新发送会继续你之前确认过的删除。": "Erneutes Senden setzt das zuvor bestätigte Löschen fort.",
+    "重新发送会继续你之前确认过的删除。":
+        "Erneutes Senden setzt das zuvor bestätigte Löschen fort.",
     "原终端": "Ursprüngliches Terminal",
     "原任务": "Ursprüngliche Aufgabe",
-    "只会停止当时那次运行，不影响之后新开始的任务。": "Stoppt nur diese eine Ausführung. Spätere Aufgaben sind nicht betroffen.",
-    "电脑离线，连上后会自动确认。": "Computer offline. Nach dem erneuten Verbinden wird automatisch geprüft.",
+    "只会停止当时那次运行，不影响之后新开始的任务。":
+        "Stoppt nur diese eine Ausführung. Spätere Aufgaben sind nicht betroffen.",
+    "电脑离线，连上后会自动确认。":
+        "Computer offline. Nach dem erneuten Verbinden wird automatisch geprüft.",
     "重新确认": "Erneut prüfen",
     "继续确认结束": "Bestätigung des Endes fortsetzen",
     "重新发送": "Erneut senden",
     "不再发送": "Nicht erneut senden",
     "不再等待这项操作？": "Nicht mehr auf diesen Vorgang warten?",
-    "只是不再在手机上等待结果。如果电脑已经收到，改名或删除仍会生效。": "Beendet nur das Warten auf diesem Smartphone. Hat der Computer die Anfrage bereits erhalten, wird Umbenennen oder Löschen trotzdem ausgeführt.",
+    "只是不再在手机上等待结果。如果电脑已经收到，改名或删除仍会生效。":
+        "Beendet nur das Warten auf diesem Smartphone. Hat der Computer die Anfrage bereits erhalten, wird Umbenennen oder Löschen trotzdem ausgeführt.",
     "继续等待": "Weiter warten",
     "确定": "Bestätigen",
     "不再等待": "Warten beenden",
-    "只是不再在手机上等待结果。电脑上已经完成的操作会保留。": "Beendet nur das Warten auf diesem Smartphone. Abgeschlossene Vorgänge auf deinem Computer bleiben erhalten.",
-    "只是不再在手机上等待结果。如果电脑已经收到，任务仍会停下。": "Beendet nur das Warten auf diesem Smartphone. Hat der Computer die Anfrage bereits erhalten, stoppt die Aufgabe trotzdem.",
-    "只是不再在手机上等待结果。如果电脑已经收到，终端仍会关闭。终端是否还在运行，请在终端页查看。": "Beendet nur das Warten auf diesem Smartphone. Hat der Computer die Anfrage bereits erhalten, wird das Terminal trotzdem geschlossen. Ob es noch läuft, siehst du auf der Terminal-Seite.",
-    "如果终端还没启动，就不会再启动；已经启动的会保留，里面的命令照常运行。": "Ein noch nicht gestartetes Terminal wird nicht gestartet. Ein bereits laufendes Terminal und seine Befehle laufen weiter.",
-    "如果还没执行，就不会再提交或推送；已经完成的不会撤销。建议先在「变更」里看一下结果。": "Hat der Vorgang noch nicht begonnen, wird weder committet noch gepusht. Abgeschlossene Vorgänge werden nicht rückgängig gemacht. Prüfe zuerst die Seite Änderungen.",
+    "只是不再在手机上等待结果。电脑上已经完成的操作会保留。":
+        "Beendet nur das Warten auf diesem Smartphone. Abgeschlossene Vorgänge auf deinem Computer bleiben erhalten.",
+    "只是不再在手机上等待结果。如果电脑已经收到，任务仍会停下。":
+        "Beendet nur das Warten auf diesem Smartphone. Hat der Computer die Anfrage bereits erhalten, stoppt die Aufgabe trotzdem.",
+    "只是不再在手机上等待结果。如果电脑已经收到，终端仍会关闭。终端是否还在运行，请在终端页查看。":
+        "Beendet nur das Warten auf diesem Smartphone. Hat der Computer die Anfrage bereits erhalten, wird das Terminal trotzdem geschlossen. Ob es noch läuft, siehst du auf der Terminal-Seite.",
+    "如果终端还没启动，就不会再启动；已经启动的会保留，里面的命令照常运行。":
+        "Ein noch nicht gestartetes Terminal wird nicht gestartet. Ein bereits laufendes Terminal und seine Befehle laufen weiter.",
+    "如果还没执行，就不会再提交或推送；已经完成的不会撤销。建议先在「变更」里看一下结果。":
+        "Hat der Vorgang noch nicht begonnen, wird weder committet noch gepusht. Abgeschlossene Vorgänge werden nicht rückgängig gemacht. Prüfe zuerst die Seite Änderungen.",
     "发送消息": "Nachricht senden",
     "Fork 会话": "Chat forken",
     "置顶或归档": "Anheften oder archivieren",
@@ -6364,16 +7388,22 @@ const messageCatalogs = <String, Map<String, String>>{
     "Agent 有一个问题": "Ein Agent hat eine Frage",
     "会话「{0}」需要你的回答。": "Der Chat „{0}“ wartet auf deine Antwort.",
     "会话「{0}」请求以下操作。": "Der Chat „{0}“ fordert folgende Aktion an.",
-    "这个问题的格式暂不支持在手机上回答，请在电脑上回答，回答后这里会自动更新。": "Dieses Fragenformat kann auf dem Smartphone noch nicht beantwortet werden. Antworte auf deinem Computer; diese Seite aktualisiert sich automatisch.",
-    "电脑离线，重新连接后再处理。": "Computer offline. Verbinde dich erneut, um zu antworten.",
-    "这台电脑有一项操作结果待核实，请先核实。": "Ein Vorgang auf diesem Computer muss geprüft werden. Prüfe ihn zuerst.",
+    "这个问题的格式暂不支持在手机上回答，请在电脑上回答，回答后这里会自动更新。":
+        "Dieses Fragenformat kann auf dem Smartphone noch nicht beantwortet werden. Antworte auf deinem Computer; diese Seite aktualisiert sich automatisch.",
+    "电脑离线，重新连接后再处理。":
+        "Computer offline. Verbinde dich erneut, um zu antworten.",
+    "这台电脑有一项操作结果待核实，请先核实。":
+        "Ein Vorgang auf diesem Computer muss geprüft werden. Prüfe ihn zuerst.",
     "其他授权范围": "Weitere Berechtigungsbereiche",
     "工作区": "Arbeitsbereich",
     "还没有连接电脑": "Noch kein Computer verbunden",
-    "连接电脑后，在这里查看项目及其会话。": "Verbinde einen Computer, um hier seine Projekte und Chats zu sehen.",
+    "连接电脑后，在这里查看项目及其会话。":
+        "Verbinde einen Computer, um hier seine Projekte und Chats zu sehen.",
     "去连接电脑": "Computer verbinden",
-    "{0} 尚未同步项目；电脑在线时会自动同步。": "{0} hat noch keine Projekte synchronisiert. Sie werden automatisch synchronisiert, sobald er online ist.",
-    "{0} 上还没有项目，点右上角「添加项目」选择电脑上的已有目录。": "Noch keine Projekte auf {0}. Tippe oben rechts auf Projekt hinzufügen, um ein vorhandenes Verzeichnis auf deinem Computer auszuwählen.",
+    "{0} 尚未同步项目；电脑在线时会自动同步。":
+        "{0} hat noch keine Projekte synchronisiert. Sie werden automatisch synchronisiert, sobald er online ist.",
+    "{0} 上还没有项目，点右上角「添加项目」选择电脑上的已有目录。":
+        "Noch keine Projekte auf {0}. Tippe oben rechts auf Projekt hinzufügen, um ein vorhandenes Verzeichnis auf deinem Computer auszuwählen.",
     "文件": "Dateien",
     "浏览项目文件": "Projektdateien durchsuchen",
     "查看代码变更": "Codeänderungen ansehen",
@@ -6387,8 +7417,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "分离 HEAD": "Losgelöster HEAD",
     "工作区干净": "Arbeitsverzeichnis sauber",
     "{0} 个文件待提交": "{0} Dateien zum Committen",
-    "项目已添加，列表尚未同步。请重新连接后刷新结果。": "Projekt hinzugefügt. Die Liste ist noch nicht synchronisiert. Verbinde dich erneut und aktualisiere.",
-    "请先绑定电脑，再选择电脑上的项目目录。": "Kopple zuerst einen Computer und wähle dann dort ein Projektverzeichnis.",
+    "项目已添加，列表尚未同步。请重新连接后刷新结果。":
+        "Projekt hinzugefügt. Die Liste ist noch nicht synchronisiert. Verbinde dich erneut und aktualisiere.",
+    "请先绑定电脑，再选择电脑上的项目目录。":
+        "Kopple zuerst einen Computer und wähle dann dort ein Projektverzeichnis.",
     "选择添加项目的电脑": "Computer für das Projekt auswählen",
     " · 离线": " · Offline",
     "选择这台电脑上已有的目录": "Wähle ein vorhandenes Verzeichnis auf diesem Computer",
@@ -6399,26 +7431,34 @@ const messageCatalogs = <String, Map<String, String>>{
     "上一级": "Eine Ebene höher",
     "不显示隐藏": "Versteckte Dateien ausblenden",
     "显示隐藏": "Versteckte Dateien anzeigen",
-    "电脑离线，请重新连接后浏览目录。": "Computer offline. Verbinde dich erneut, um Verzeichnisse zu durchsuchen.",
-    "目录路径已修改，请点箭头或回车确认后再添加。": "Pfad geändert. Bestätige mit dem Pfeil oder Enter, bevor du hinzufügst.",
+    "电脑离线，请重新连接后浏览目录。":
+        "Computer offline. Verbinde dich erneut, um Verzeichnisse zu durchsuchen.",
+    "目录路径已修改，请点箭头或回车确认后再添加。":
+        "Pfad geändert. Bestätige mit dem Pfeil oder Enter, bevor du hinzufügst.",
     "重试读取目录": "Verzeichnis erneut laden",
-    "当前目录没有子目录，可直接添加此目录。": "Keine Unterverzeichnisse. Du kannst dieses Verzeichnis direkt hinzufügen.",
+    "当前目录没有子目录，可直接添加此目录。":
+        "Keine Unterverzeichnisse. Du kannst dieses Verzeichnis direkt hinzufügen.",
     "加载中…": "Wird geladen…",
     "加载更多目录": "Weitere Verzeichnisse laden",
     "项目名称（可选）": "Projektname (optional)",
-    "留空使用目录名；已有项目会直接复用": "Leer lassen, um den Verzeichnisnamen zu verwenden. Vorhandene Projekte werden wiederverwendet.",
-    "该目录已添加为「{0}」，将打开已有项目。": "Dieses Verzeichnis ist bereits als „{0}“ hinzugefügt. Das vorhandene Projekt wird geöffnet.",
+    "留空使用目录名；已有项目会直接复用":
+        "Leer lassen, um den Verzeichnisnamen zu verwenden. Vorhandene Projekte werden wiederverwendet.",
+    "该目录已添加为「{0}」，将打开已有项目。":
+        "Dieses Verzeichnis ist bereits als „{0}“ hinzugefügt. Das vorhandene Projekt wird geöffnet.",
     "刷新添加结果": "Ergebnis aktualisieren",
     "正在添加…": "Wird hinzugefügt…",
     "打开已有项目": "Vorhandenes Projekt öffnen",
     "添加此目录": "Dieses Verzeichnis hinzufügen",
     "打开对应会话": "Chat öffnen",
     "搜索历史": "Verlauf durchsuchen",
-    "{0} 个会话 · 按当前电脑和项目范围": "{0} Chats · Aktueller Computer und aktuelles Projekt",
+    "{0} 个会话 · 按当前电脑和项目范围":
+        "{0} Chats · Aktueller Computer und aktuelles Projekt",
     "搜索已保存的消息正文": "Gespeicherte Nachrichten durchsuchen",
     "搜索历史正文": "Chatverlauf durchsuchen",
-    "在电脑上检索已保存的对话正文，不包含思考过程或附件内容。": "Durchsucht den gespeicherten Text der Unterhaltungen auf deinem Computer. Ohne Denkprozess und Anhangsinhalte.",
-    "{0} 离线，未搜索其中的会话；连接后重新搜索。": "{0} ist offline und wurde nicht durchsucht. Verbinde dich erneut und suche noch einmal.",
+    "在电脑上检索已保存的对话正文，不包含思考过程或附件内容。":
+        "Durchsucht den gespeicherten Text der Unterhaltungen auf deinem Computer. Ohne Denkprozess und Anhangsinhalte.",
+    "{0} 离线，未搜索其中的会话；连接后重新搜索。":
+        "{0} ist offline und wurde nicht durchsucht. Verbinde dich erneut und suche noch einmal.",
     "输入关键词开始搜索": "Gib zum Suchen ein Stichwort ein",
     "没有找到匹配的历史记录": "Kein passender Verlauf",
     "你": "Du",
@@ -6427,12 +7467,16 @@ const messageCatalogs = <String, Map<String, String>>{
     "加载更多记录": "Weitere Ergebnisse laden",
     "重试此会话": "Diesen Chat erneut versuchen",
     "继续搜索更早的 {0} 个会话": "{0} ältere Chats durchsuchen",
-    "请等待当前任务结束后再 Fork。": "Warte, bis die aktuelle Aufgabe fertig ist, bevor du forkst.",
-    "从本轮结束时的历史创建独立会话。": "Erstellt einen unabhängigen Chat aus dem Verlauf am Ende dieser Runde.",
+    "请等待当前任务结束后再 Fork。":
+        "Warte, bis die aktuelle Aufgabe fertig ist, bevor du forkst.",
+    "从本轮结束时的历史创建独立会话。":
+        "Erstellt einen unabhängigen Chat aus dem Verlauf am Ende dieser Runde.",
     "当前工作区": "Aktueller Arbeitsbereich",
-    "共享当前项目文件，仅复制对话历史。": "Teilt die aktuellen Projektdateien und kopiert nur den Chatverlauf.",
+    "共享当前项目文件，仅复制对话历史。":
+        "Teilt die aktuellen Projektdateien und kopiert nur den Chatverlauf.",
     "新 Worktree": "Neuer Worktree",
-    "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照；非 Git 项目只继承对话。": "Erstellt einen separaten Arbeitsbereich auf deinem Computer und stellt den Datei-Snapshot dieser Runde wieder her. Ältere Runden haben eventuell keinen Snapshot. Projekte ohne Git übernehmen nur das Gespräch.",
+    "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照；非 Git 项目只继承对话。":
+        "Erstellt einen separaten Arbeitsbereich auf deinem Computer und stellt den Datei-Snapshot dieser Runde wieder her. Ältere Runden haben eventuell keinen Snapshot. Projekte ohne Git übernehmen nur das Gespräch.",
     "正在创建…": "Wird erstellt…",
     "创建 Fork": "Fork erstellen",
     "取消置顶": "Loslösen",
@@ -6442,7 +7486,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "归档会话": "Chat archivieren",
     "会话操作": "Chat-Aktionen",
     "会话将从电脑同步": "Chats werden von deinem Computer synchronisiert",
-    "连接自己的电脑后，在这里查看和续接各项目的会话。网络中断时，电脑上的任务会继续执行。": "Verbinde deinen Computer, um hier Projekt-Chats anzusehen und fortzusetzen. Aufgaben laufen auf deinem Computer weiter, auch wenn das Netzwerk ausfällt.",
+    "连接自己的电脑后，在这里查看和续接各项目的会话。网络中断时，电脑上的任务会继续执行。":
+        "Verbinde deinen Computer, um hier Projekt-Chats anzusehen und fortzusetzen. Aufgaben laufen auf deinem Computer weiter, auch wenn das Netzwerk ausfällt.",
     "搜索会话": "Chats durchsuchen",
     "{0} 项等待处理": "{0} ausstehende Einträge",
     "{0} 连接中…": "{0} wird verbunden…",
@@ -6450,7 +7495,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "{0} 离线 · 显示 {1} 同步的内容": "{0} offline · Inhalt synchronisiert {1}",
     "没有匹配的会话": "Keine passenden Chats",
     "没有未归档的会话": "Keine nicht archivierten Chats",
-    "还没有会话，点右上角 + 开始新任务": "Noch keine Chats. Tippe oben rechts auf +, um eine Aufgabe zu starten.",
+    "还没有会话，点右上角 + 开始新任务":
+        "Noch keine Chats. Tippe oben rechts auf +, um eine Aufgabe zu starten.",
     "正在从电脑同步会话…": "Chats werden vom Computer synchronisiert…",
     "置顶": "Angeheftet",
     "已归档 ({0})": "Archiviert ({0})",
@@ -6459,58 +7505,78 @@ const messageCatalogs = <String, Map<String, String>>{
     "已归档": "Archiviert",
     "正在核实原配对…": "Ursprüngliche Kopplung wird geprüft…",
     "移除本机配对记录？": "Lokale Kopplung entfernen?",
-    "之后需要重新扫码。电脑上可能已允许这台手机；如需撤销授权，请在电脑的「连接手机」中操作。": "Du musst erneut scannen. Dein Computer hat dieses Smartphone eventuell schon zugelassen. Widerrufe den Zugriff bei Bedarf unter „Smartphone verbinden“ auf deinem Computer.",
+    "之后需要重新扫码。电脑上可能已允许这台手机；如需撤销授权，请在电脑的「连接手机」中操作。":
+        "Du musst erneut scannen. Dein Computer hat dieses Smartphone eventuell schon zugelassen. Widerrufe den Zugriff bei Bedarf unter „Smartphone verbinden“ auf deinem Computer.",
     "保留记录": "Behalten",
     "移除本机记录": "Lokalen Eintrag entfernen",
     "正在验证电脑身份并建立配对…": "Identität des Computers wird geprüft und gekoppelt…",
     "加密组件尚未准备好。": "Verschlüsselung ist noch nicht bereit.",
-    "在电脑端打开「连接手机」，扫描配对二维码。": "Öffne „Smartphone verbinden“ auf deinem Computer und scanne den Kopplungs-QR-Code.",
-    "配对后可操作这台电脑的 Agent、项目、Git 和终端，并查看、控制电脑屏幕。你可以随时在电脑上撤销授权。": "Nach dem Koppeln nutzt du die Agents, Projekte, Git und das Terminal deines Computers und siehst und steuerst seinen Bildschirm. Den Zugriff kannst du am Computer jederzeit widerrufen.",
+    "在电脑端打开「连接手机」，扫描配对二维码。":
+        "Öffne „Smartphone verbinden“ auf deinem Computer und scanne den Kopplungs-QR-Code.",
+    "配对后可操作这台电脑的 Agent、项目、Git 和终端，并查看、控制电脑屏幕。你可以随时在电脑上撤销授权。":
+        "Nach dem Koppeln nutzt du die Agents, Projekte, Git und das Terminal deines Computers und siehst und steuerst seinen Bildschirm. Den Zugriff kannst du am Computer jederzeit widerrufen.",
     "配对结果待核实": "Kopplungsergebnis nicht bestätigt",
-    "保留了原配对信息，可以继续核实电脑是否已允许连接。": "Die ursprünglichen Kopplungsdaten bleiben erhalten. Prüfe weiter, ob der Computer die Verbindung zugelassen hat.",
-    "恢复期限已过，请在电脑核实授权后重新扫码。": "Wiederherstellungsfrist abgelaufen. Prüfe den Zugriff auf deinem Computer und scanne erneut.",
+    "保留了原配对信息，可以继续核实电脑是否已允许连接。":
+        "Die ursprünglichen Kopplungsdaten bleiben erhalten. Prüfe weiter, ob der Computer die Verbindung zugelassen hat.",
+    "恢复期限已过，请在电脑核实授权后重新扫码。":
+        "Wiederherstellungsfrist abgelaufen. Prüfe den Zugriff auf deinem Computer und scanne erneut.",
     "核实原配对": "Ursprüngliche Kopplung prüfen",
-    "无法使用相机，请检查相机权限，或在下方粘贴配对链接。": "Kamera nicht verfügbar. Prüfe die Kameraberechtigung oder füge unten einen Kopplungslink ein.",
+    "无法使用相机，请检查相机权限，或在下方粘贴配对链接。":
+        "Kamera nicht verfügbar. Prüfe die Kameraberechtigung oder füge unten einen Kopplungslink ein.",
     "扫描二维码": "QR-Code scannen",
     "或粘贴配对链接": "Oder Kopplungslink einfügen",
     "粘贴从电脑获取的配对链接": "Füge den Kopplungslink von deinem Computer ein",
-    "二维码使用了本机地址，手机无法访问。请在电脑端使用手机可访问的服务地址并重新生成二维码。": "Dieser QR-Code nutzt eine lokale Adresse, die dein Smartphone nicht erreicht. Erstelle einen neuen Code mit einer Dienstadresse, die vom Smartphone erreichbar ist.",
-    "无法连接接入服务，请确认手机与电脑的网络、服务地址及端口。局域网调试时需连接同一 Wi-Fi。": "Verbindungsdienst nicht erreichbar. Prüfe Netzwerke, Dienstadresse und Port. Verbinde für lokale Entwicklung beide Geräte mit demselben WLAN.",
-    "无法验证服务证书，请检查接入服务配置。": "Dienstzertifikat kann nicht geprüft werden. Prüfe die Konfiguration des Verbindungsdienstes.",
-    "配对未完成，请检查电脑与接入服务后重试。": "Kopplung unvollständig. Prüfe deinen Computer und den Verbindungsdienst und versuche es erneut.",
-    "DogCodes 手机端连接你自己的电脑：查看会话、继续交给 Agent、处理权限请求。无需注册账号。": "DogCodes verbindet sich mit deinem eigenen Computer. Sieh dir Chats an, gib Agents Aufgaben und beantworte Berechtigungsanfragen. Kein Konto nötig.",
+    "二维码使用了本机地址，手机无法访问。请在电脑端使用手机可访问的服务地址并重新生成二维码。":
+        "Dieser QR-Code nutzt eine lokale Adresse, die dein Smartphone nicht erreicht. Erstelle einen neuen Code mit einer Dienstadresse, die vom Smartphone erreichbar ist.",
+    "无法连接接入服务，请确认手机与电脑的网络、服务地址及端口。局域网调试时需连接同一 Wi-Fi。":
+        "Verbindungsdienst nicht erreichbar. Prüfe Netzwerke, Dienstadresse und Port. Verbinde für lokale Entwicklung beide Geräte mit demselben WLAN.",
+    "无法验证服务证书，请检查接入服务配置。":
+        "Dienstzertifikat kann nicht geprüft werden. Prüfe die Konfiguration des Verbindungsdienstes.",
+    "配对未完成，请检查电脑与接入服务后重试。":
+        "Kopplung unvollständig. Prüfe deinen Computer und den Verbindungsdienst und versuche es erneut.",
+    "DogCodes 手机端连接你自己的电脑：查看会话、继续交给 Agent、处理权限请求。无需注册账号。":
+        "DogCodes verbindet sich mit deinem eigenen Computer. Sieh dir Chats an, gib Agents Aufgaben und beantworte Berechtigungsanfragen. Kein Konto nötig.",
     "在电脑上打开 DogCodes": "Öffne DogCodes auf deinem Computer",
-    "点击「连接手机」，屏幕上会显示二维码": "Klicke auf „Smartphone verbinden“, um einen QR-Code anzuzeigen",
-    "用这部手机扫码，或粘贴配对链接": "Scanne ihn mit diesem Smartphone oder füge den Kopplungslink ein",
+    "点击「连接手机」，屏幕上会显示二维码":
+        "Klicke auf „Smartphone verbinden“, um einen QR-Code anzuzeigen",
+    "用这部手机扫码，或粘贴配对链接":
+        "Scanne ihn mit diesem Smartphone oder füge den Kopplungslink ein",
     "扫码连接电脑": "Zum Verbinden scannen",
     "粘贴配对链接": "Kopplungslink einfügen",
-    "连接经过端到端加密，手机只能访问你在电脑上授权的内容。": "Ende-zu-Ende-verschlüsselt. Dein Smartphone sieht nur, was du auf deinem Computer freigibst.",
+    "连接经过端到端加密，手机只能访问你在电脑上授权的内容。":
+        "Ende-zu-Ende-verschlüsselt. Dein Smartphone sieht nur, was du auf deinem Computer freigibst.",
     "正在连接{0}": "Verbindung zu {0} wird hergestellt",
     "暂时连接不上{0}": "{0} nicht erreichbar",
     "连接时间比平时长，仍在尝试。": "Dauert länger als üblich. Es wird weiter versucht.",
-    "电脑上的任务不受影响，连接恢复后可继续操作。": "Aufgaben auf deinem Computer sind nicht betroffen. Mach weiter, sobald die Verbindung wieder steht.",
+    "电脑上的任务不受影响，连接恢复后可继续操作。":
+        "Aufgaben auf deinem Computer sind nicht betroffen. Mach weiter, sobald die Verbindung wieder steht.",
     "请检查": "Prüfe Folgendes",
     "电脑已开机，没有进入睡眠": "Dein Computer ist eingeschaltet und nicht im Ruhezustand",
     "电脑上的 DogCodes 正在运行": "DogCodes läuft auf deinem Computer",
-    "手机网络可用；同一局域网下连接更快": "Dein Smartphone ist online. Im selben lokalen Netzwerk geht es schneller.",
+    "手机网络可用；同一局域网下连接更快":
+        "Dein Smartphone ist online. Im selben lokalen Netzwerk geht es schneller.",
     "管理电脑": "Computer verwalten",
     "连接其他电脑": "Anderen Computer verbinden",
     "查看离线记录": "Offline-Verlauf ansehen",
     "查看离线记录（{0} 同步）": "Offline-Verlauf ansehen (synchronisiert {0})",
     "附件": "Anhang",
-    "电脑离线。已缓存附件信息，原文需连接电脑后查看。": "Computer offline. Die Anhangsinformationen sind zwischengespeichert. Verbinde dich erneut, um das Original zu sehen.",
+    "电脑离线。已缓存附件信息，原文需连接电脑后查看。":
+        "Computer offline. Die Anhangsinformationen sind zwischengespeichert. Verbinde dich erneut, um das Original zu sehen.",
     "电脑端暂不支持附件预览。": "Die Desktop-App unterstützt noch keine Anhangsvorschau.",
     "附件读取位置未确认。": "Leseposition des Anhangs nicht bestätigt.",
     "附件过大，请在电脑上查看。": "Anhang zu groß. Sieh ihn dir auf deinem Computer an.",
-    "附件内容校验失败，未展示变化后的文件。": "Integritätsprüfung des Anhangs fehlgeschlagen. Die geänderte Datei wurde nicht angezeigt.",
+    "附件内容校验失败，未展示变化后的文件。":
+        "Integritätsprüfung des Anhangs fehlgeschlagen. Die geänderte Datei wurde nicht angezeigt.",
     "任务附件 · 只读": "Aufgabenanhang · Schreibgeschützt",
     "重试读取": "Erneut laden",
-    "图片无法解码，请在电脑上查看。": "Bild kann nicht decodiert werden. Sieh es dir auf deinem Computer an.",
+    "图片无法解码，请在电脑上查看。":
+        "Bild kann nicht decodiert werden. Sieh es dir auf deinem Computer an.",
     "该附件格式请在电脑上查看。": "Sieh dir dieses Anhangsformat auf deinem Computer an.",
     "默认模型": "Standardmodell",
     "默认": "Standard",
     "选择 Agent": "Agent auswählen",
-    "这台电脑上没有已就绪并启用的 Agent。安装或登录需在电脑上完成。": "Auf diesem Computer ist kein bereiter, aktivierter Agent. Installiere ihn oder melde dich zuerst auf deinem Computer an.",
+    "这台电脑上没有已就绪并启用的 Agent。安装或登录需在电脑上完成。":
+        "Auf diesem Computer ist kein bereiter, aktivierter Agent. Installiere ihn oder melde dich zuerst auf deinem Computer an.",
     "模型": "Modell",
     "选择模型": "Modell auswählen",
     "完成": "Fertig",
@@ -6522,17 +7588,21 @@ const messageCatalogs = <String, Map<String, String>>{
     "默认 · {0}": "Standard · {0}",
     "恢复默认": "Auf Standard zurücksetzen",
     "电脑离线，连接后才能 Fork": "Computer offline. Verbinde dich erneut, um zu forken.",
-    "会话正在运行，结束后才能从本轮 Fork": "Der Chat läuft. Warte, bis er fertig ist, um von dieser Runde zu forken.",
+    "会话正在运行，结束后才能从本轮 Fork":
+        "Der Chat läuft. Warte, bis er fertig ist, um von dieser Runde zu forken.",
     "复制本轮回复": "Antwort der Runde kopieren",
     "已复制本轮回复": "Antwort der Runde kopiert",
     "复制失败，请重试": "Kopieren fehlgeschlagen. Versuche es erneut.",
     "本轮消耗": "Verbrauch der Runde",
     "从本轮 Fork": "Von dieser Runde forken",
-    "电脑未受理这项任务，内容已保留。": "Der Computer hat diese Aufgabe nicht angenommen. Dein Inhalt bleibt erhalten.",
+    "电脑未受理这项任务，内容已保留。":
+        "Der Computer hat diese Aufgabe nicht angenommen. Dein Inhalt bleibt erhalten.",
     "没有已绑定的电脑": "Keine gekoppelten Computer",
-    "这台电脑还没有项目，点右上角「添加项目」选择电脑上的已有目录。": "Noch keine Projekte auf diesem Computer. Tippe oben rechts auf Projekt hinzufügen, um ein vorhandenes Verzeichnis auszuwählen.",
+    "这台电脑还没有项目，点右上角「添加项目」选择电脑上的已有目录。":
+        "Noch keine Projekte auf diesem Computer. Tippe oben rechts auf Projekt hinzufügen, um ein vorhandenes Verzeichnis auszuwählen.",
     "你想完成什么？": "Was möchtest du tun?",
-    "电脑离线，任务和附件会保留为本机草稿。重连后请点击发送。": "Computer offline. Aufgaben und Anhänge werden als lokale Entwürfe gespeichert. Tippe nach dem erneuten Verbinden auf Senden.",
+    "电脑离线，任务和附件会保留为本机草稿。重连后请点击发送。":
+        "Computer offline. Aufgaben und Anhänge werden als lokale Entwürfe gespeichert. Tippe nach dem erneuten Verbinden auf Senden.",
     "描述你的任务…": "Beschreibe deine Aufgabe…",
     "没有已就绪的 Agent": "Keine Agents bereit",
     "开始任务": "Aufgabe starten",
@@ -6546,9 +7616,11 @@ const messageCatalogs = <String, Map<String, String>>{
     "无法核实修复状态：{0}": "Korrekturstatus kann nicht geprüft werden: {0}",
     "审查代码证据": "Code-Belege des Reviews",
     "{0} · {1}–{2} 行": "{0} · Zeilen {1}–{2}",
-    "这是审查时保存的版本，当前文件可能已变化。": "Dies ist die beim Review gespeicherte Version. Die aktuelle Datei hat sich eventuell geändert.",
+    "这是审查时保存的版本，当前文件可能已变化。":
+        "Dies ist die beim Review gespeicherte Version. Die aktuelle Datei hat sich eventuell geändert.",
     "读取审查代码失败：{0}": "Review-Code konnte nicht geladen werden: {0}",
-    "审查连接中断，本次审查未完成。请检查网络后重新检查。": "Review-Verbindung unterbrochen. Review unvollständig. Prüfe dein Netzwerk und starte es erneut.",
+    "审查连接中断，本次审查未完成。请检查网络后重新检查。":
+        "Review-Verbindung unterbrochen. Review unvollständig. Prüfe dein Netzwerk und starte es erneut.",
     "错误详情": "Fehlerdetails",
     "审查连接中断，本次审查未完成。": "Review-Verbindung unterbrochen. Review unvollständig.",
     "文件覆盖情况": "Dateiabdeckung",
@@ -6557,7 +7629,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "未报告检查": "Nicht als geprüft gemeldet",
     "原文不可用": "Quelle nicht verfügbar",
     "本次审查未报告问题。": "In diesem Review wurden keine Probleme gemeldet.",
-    "审查尚未形成完整问题报告，不能据此判断是否存在问题。": "Dieses Review hat keinen vollständigen Bericht erstellt. Ob Probleme bestehen, lässt sich nicht feststellen.",
+    "审查尚未形成完整问题报告，不能据此判断是否存在问题。":
+        "Dieses Review hat keinen vollständigen Bericht erstellt. Ob Probleme bestehen, lässt sich nicht feststellen.",
     "潜在{0}风险": "Mögliches {0}-Risiko",
     "{0}{1} · {2}{3}–{4} 行": "{0}{1} · {2}Zeilen {3}–{4}",
     "改动前 · ": "Vor der Änderung ·",
@@ -6568,8 +7641,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "全选问题": "Alle Probleme auswählen",
     "已选 {0} 项": "{0} ausgewählt",
     "开始修复": "Korrektur starten",
-    "主对话正在回复，结束后可提交修复。": "Der Haupt-Chat antwortet. Reiche Korrekturen ein, wenn er fertig ist.",
-    "修复已提交给主 Agent，携带所选问题及原审查上下文。": "Korrektur mit den ausgewählten Problemen und dem Kontext des ursprünglichen Reviews an den Haupt-Agent übermittelt.",
+    "主对话正在回复，结束后可提交修复。":
+        "Der Haupt-Chat antwortet. Reiche Korrekturen ein, wenn er fertig ist.",
+    "修复已提交给主 Agent，携带所选问题及原审查上下文。":
+        "Korrektur mit den ausgewählten Problemen und dem Kontext des ursprünglichen Reviews an den Haupt-Agent übermittelt.",
     "有一项修复尚未提交。{0}": "Eine Korrektur wurde noch nicht übermittelt. {0}",
     "继续原修复": "Ursprüngliche Korrektur fortsetzen",
     "放弃这次修复": "Diese Korrektur verwerfen",
@@ -6597,13 +7672,19 @@ const messageCatalogs = <String, Map<String, String>>{
     "失败": "Fehlgeschlagen",
     "已取消": "Abgebrochen",
     "连接中断": "Getrennt",
-    "电脑离线，请重新连接后查看审查。": "Computer offline. Verbinde dich erneut, um das Review anzusehen.",
-    "电脑端暂不支持本轮审查，请更新电脑端后重试。": "Aktualisiere die Desktop-App, um Runden-Reviews zu nutzen.",
-    "无法读取可用的审查 Agent。": "Verfügbare Review-Agents konnten nicht geladen werden.",
-    "已发起复审，可在修复轮次底部查看。": "Neues Review gestartet. Du findest es unter der Korrekturrunde.",
+    "电脑离线，请重新连接后查看审查。":
+        "Computer offline. Verbinde dich erneut, um das Review anzusehen.",
+    "电脑端暂不支持本轮审查，请更新电脑端后重试。":
+        "Aktualisiere die Desktop-App, um Runden-Reviews zu nutzen.",
+    "无法读取可用的审查 Agent。":
+        "Verfügbare Review-Agents konnten nicht geladen werden.",
+    "已发起复审，可在修复轮次底部查看。":
+        "Neues Review gestartet. Du findest es unter der Korrekturrunde.",
     "刷新审查": "Reviews aktualisieren",
-    "电脑离线，审查会继续在电脑上运行。": "Computer offline. Das Review läuft auf deinem Computer weiter.",
-    "暂无可用的审查 Agent，请在电脑上连接或重新检测 Agent。": "Keine Review-Agents verfügbar. Verbinde Agents auf deinem Computer oder suche erneut nach ihnen.",
+    "电脑离线，审查会继续在电脑上运行。":
+        "Computer offline. Das Review läuft auf deinem Computer weiter.",
+    "暂无可用的审查 Agent，请在电脑上连接或重新检测 Agent。":
+        "Keine Review-Agents verfügbar. Verbinde Agents auf deinem Computer oder suche erneut nach ihnen.",
     "审查使用的 Agent": "Review-Agent",
     "本轮尚未发起审查。": "Für diese Runde wurde noch kein Review gestartet.",
     "历史审查": "Frühere Reviews",
@@ -6631,20 +7712,25 @@ const messageCatalogs = <String, Map<String, String>>{
     "本轮变更加载失败：{0}": "Änderungen der Runde konnten nicht geladen werden: {0}",
     "本轮变更加载失败": "Änderungen der Runde konnten nicht geladen werden",
     "{0} 个文件已更改": "{0} Dateien geändert",
-    "连接中断后的恢复快照 · 仅反映检查时的文件变化，外部工具可能仍在写入": "Wiederherstellungs-Snapshot nach Verbindungsabbruch. Zeigt Änderungen zum Prüfzeitpunkt; externe Tools schreiben eventuell noch.",
+    "连接中断后的恢复快照 · 仅反映检查时的文件变化，外部工具可能仍在写入":
+        "Wiederherstellungs-Snapshot nach Verbindungsabbruch. Zeigt Änderungen zum Prüfzeitpunkt; externe Tools schreiben eventuell noch.",
     "二进制": "Binär",
     "本轮保存的历史 Diff": "Für diese Runde gespeicherter Diff",
     "这一轮未保存该文件的内容": "Der Dateiinhalt wurde für diese Runde nicht gespeichert",
-    "没有可用于生成提交说明的 Agent": "Kein Agent zum Erstellen einer Commit-Nachricht verfügbar",
+    "没有可用于生成提交说明的 Agent":
+        "Kein Agent zum Erstellen einer Commit-Nachricht verfügbar",
     "已提交": "Committet",
-    "提交结果待核实，请到待处理页面核实原操作": "Commit-Ergebnis nicht bestätigt. Prüfe den ursprünglichen Vorgang unter Ausstehend.",
+    "提交结果待核实，请到待处理页面核实原操作":
+        "Commit-Ergebnis nicht bestätigt. Prüfe den ursprünglichen Vorgang unter Ausstehend.",
     "正在暂存本轮文件…": "Dateien der Runde werden gestagt…",
     "正在生成提交说明…": "Commit-Nachricht wird erstellt…",
     "正在提交…": "Wird committet…",
     "提交本轮修改": "Änderungen der Runde committen",
-    "本轮修改已没有未提交的内容（可能已提交或已撤销）。": "Für diese Runde sind keine nicht committeten Änderungen mehr übrig (eventuell bereits committet oder zurückgesetzt).",
+    "本轮修改已没有未提交的内容（可能已提交或已撤销）。":
+        "Für diese Runde sind keine nicht committeten Änderungen mehr übrig (eventuell bereits committet oder zurückgesetzt).",
     "将提交 {0} 个文件{1}。": "{0} Dateien werden committet{1}.",
-    "，其中 {0} 个是此前已暂存的其他更改": ", darunter {0} zuvor gestagte Änderungen aus anderer Arbeit",
+    "，其中 {0} 个是此前已暂存的其他更改":
+        ", darunter {0} zuvor gestagte Änderungen aus anderer Arbeit",
     "重新生成": "Neu erstellen",
     "编写提交说明的 Agent": "Agent für die Commit-Nachricht",
     "子智能体": "Sub-Agent",
@@ -6666,7 +7752,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "电脑项目文件": "Projektdateien auf dem Computer",
     "需先在此项目创建一个会话": "Erstelle zuerst einen Chat in diesem Projekt",
     "最多 16 个附件，总大小不超过 25 MB。": "Bis zu 16 Anhänge, insgesamt 25 MB.",
-    "草稿目标已变化，请回到原项目重新选择附件。": "Ziel des Entwurfs geändert. Kehre zum ursprünglichen Projekt zurück und wähle die Anhänge erneut.",
+    "草稿目标已变化，请回到原项目重新选择附件。":
+        "Ziel des Entwurfs geändert. Kehre zum ursprünglichen Projekt zurück und wähle die Anhänge erneut.",
     "无法添加附件：{0}": "Anhang konnte nicht hinzugefügt werden: {0}",
     "未能移除附件：{0}": "Anhang konnte nicht entfernt werden: {0}",
     "添加附件": "Anhang hinzufügen",
@@ -6682,7 +7769,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "过程": "Ablauf",
     "{0} 个步骤": "{0} Schritte",
     "用时 {0}": "Dauer: {0}",
-    "内容较长已截断，显示完整内容{0}": "Langer Inhalt gekürzt. Vollständigen Inhalt anzeigen{0}",
+    "内容较长已截断，显示完整内容{0}":
+        "Langer Inhalt gekürzt. Vollständigen Inhalt anzeigen{0}",
     "{0} 个附件": "{0} Anhänge",
     "思考中": "Denkt nach",
     "思考已中断": "Denken unterbrochen",
@@ -6694,34 +7782,48 @@ const messageCatalogs = <String, Map<String, String>>{
     "委派任务": "Delegierte Aufgabe",
     "暂无子任务结论": "Noch kein Ergebnis der Teilaufgabe",
     "执行过程请在电脑上查看": "Den Ablauf siehst du auf deinem Computer",
-    "共 {0} 步，执行过程请在电脑上查看": "{0} Schritte. Den Ablauf siehst du auf deinem Computer.",
-    "改动内容见本轮文件变更，或在电脑上查看": "Änderungen siehst du in den Dateien dieser Runde oder auf deinem Computer",
+    "共 {0} 步，执行过程请在电脑上查看":
+        "{0} Schritte. Den Ablauf siehst du auf deinem Computer.",
+    "改动内容见本轮文件变更，或在电脑上查看":
+        "Änderungen siehst du in den Dateien dieser Runde oder auf deinem Computer",
     "完整输出请在电脑上查看": "Die vollständige Ausgabe siehst du auf deinem Computer",
     "{0}\n… 内容过长，已截断": "{0}\n… Inhalt gekürzt",
     "分叉": "Fork",
     "分叉上下文暂不可显示": "Fork-Kontext nicht verfügbar",
-    "请先恢复原草稿，未覆盖本机记录。": "Stelle zuerst den ursprünglichen Entwurf wieder her. Lokale Einträge wurden nicht überschrieben.",
+    "请先恢复原草稿，未覆盖本机记录。":
+        "Stelle zuerst den ursprünglichen Entwurf wieder her. Lokale Einträge wurden nicht überschrieben.",
     "草稿未能保存：{0}": "Entwurf konnte nicht gespeichert werden: {0}",
     "无法恢复草稿：{0}": "Entwurf kann nicht wiederhergestellt werden: {0}",
-    "暂时无法读取模型，可保留草稿后重试：{0}": "Modelle konnten nicht geladen werden. Behalte deinen Entwurf und versuche es erneut: {0}",
+    "暂时无法读取模型，可保留草稿后重试：{0}":
+        "Modelle konnten nicht geladen werden. Behalte deinen Entwurf und versuche es erneut: {0}",
     "附件仍在上传。": "Anhänge werden noch hochgeladen.",
-    "电脑离线，附件及任务已保留为草稿。": "Computer offline. Anhänge und Aufgabe als Entwurf gespeichert.",
+    "电脑离线，附件及任务已保留为草稿。":
+        "Computer offline. Anhänge und Aufgabe als Entwurf gespeichert.",
     "离线会话未能保存：{0}": "Offline-Chat konnte nicht gespeichert werden: {0}",
-    "没有找到要打开的这一轮，它可能已被删除。": "Diese Runde wurde nicht gefunden. Sie wurde möglicherweise gelöscht.",
-    "电脑离线，连接后再查看完整内容。": "Computer offline. Verbinde dich erneut, um den vollständigen Inhalt zu sehen.",
+    "没有找到要打开的这一轮，它可能已被删除。":
+        "Diese Runde wurde nicht gefunden. Sie wurde möglicherweise gelöscht.",
+    "电脑离线，连接后再查看完整内容。":
+        "Computer offline. Verbinde dich erneut, um den vollständigen Inhalt zu sehen.",
     "删除这个会话？": "Diesen Chat löschen?",
-    "将在「{0}」上永久删除「{1}」及其记录，无法恢复。项目文件不会被删除。": "Löscht „{1}“ und seinen Verlauf dauerhaft von „{0}“. Dies kann nicht rückgängig gemacht werden. Projektdateien bleiben erhalten.",
+    "将在「{0}」上永久删除「{1}」及其记录，无法恢复。项目文件不会被删除。":
+        "Löscht „{1}“ und seinen Verlauf dauerhaft von „{0}“. Dies kann nicht rückgängig gemacht werden. Projektdateien bleiben erhalten.",
     "删除": "Löschen",
-    "停止请求未确认：{0}。请刷新核实任务状态。": "Stoppanfrage nicht bestätigt: {0}. Aktualisiere, um den Aufgabenstatus zu prüfen.",
-    "电脑未受理这次发送，内容已保留。": "Der Computer hat diese Nachricht nicht angenommen. Dein Inhalt bleibt erhalten.",
+    "停止请求未确认：{0}。请刷新核实任务状态。":
+        "Stoppanfrage nicht bestätigt: {0}. Aktualisiere, um den Aufgabenstatus zu prüfen.",
+    "电脑未受理这次发送，内容已保留。":
+        "Der Computer hat diese Nachricht nicht angenommen. Dein Inhalt bleibt erhalten.",
     "这台电脑已不在列表中": "Dieser Computer ist nicht mehr in der Liste",
-    "可能已在电脑上撤销配对。": "Die Kopplung wurde eventuell auf deinem Computer widerrufen.",
-    "{0} · 内容同步于 {1}{2}。附件原文需电脑在线。": "{0} · Synchronisiert {1}{2}. Verbinde dich erneut, um Originalanhänge zu sehen.",
-    "正在同步，先显示本机缓存": "Wird synchronisiert. Zunächst wird der lokale Cache angezeigt.",
+    "可能已在电脑上撤销配对。":
+        "Die Kopplung wurde eventuell auf deinem Computer widerrufen.",
+    "{0} · 内容同步于 {1}{2}。附件原文需电脑在线。":
+        "{0} · Synchronisiert {1}{2}. Verbinde dich erneut, um Originalanhänge zu sehen.",
+    "正在同步，先显示本机缓存":
+        "Wird synchronisiert. Zunächst wird der lokale Cache angezeigt.",
     "离线缓存": "Offline-Cache",
     "未知时间": "Unbekannte Zeit",
     " · 仅缓存最近部分内容": " · Nur neuere Inhalte zwischengespeichert",
-    "电脑离线，暂无已缓存的对话内容。": "Computer offline. Kein zwischengespeicherter Chat verfügbar.",
+    "电脑离线，暂无已缓存的对话内容。":
+        "Computer offline. Kein zwischengespeicherter Chat verfügbar.",
     "正在定位到该轮…": "Diese Runde wird gesucht…",
     "正在定位到该轮…已加载 {0} 页": "Diese Runde wird gesucht… {0} Seiten geladen",
     "加载更早的消息": "Ältere Nachrichten laden",
@@ -6730,24 +7832,37 @@ const messageCatalogs = <String, Map<String, String>>{
     "电脑离线{0}。任务不会因此停止。": "Computer offline{0}. Aufgaben laufen weiter.",
     " · 最后同步 {0}": " · Zuletzt synchronisiert {0}",
     "继续交给 Agent…": "Nachricht an deinen Agent…",
-    "这台电脑已移除，请核实电脑列表中的绑定。": "Dieser Computer wurde entfernt. Prüfe die Kopplung in der Computerliste.",
-    "电脑绑定已改变，请从电脑列表重新打开。": "Kopplung des Computers geändert. Öffne ihn erneut aus der Computerliste.",
-    "暂时无法读取电脑绑定，请稍后重试。": "Kopplung des Computers kann nicht gelesen werden. Versuche es später erneut.",
+    "这台电脑已移除，请核实电脑列表中的绑定。":
+        "Dieser Computer wurde entfernt. Prüfe die Kopplung in der Computerliste.",
+    "电脑绑定已改变，请从电脑列表重新打开。":
+        "Kopplung des Computers geändert. Öffne ihn erneut aus der Computerliste.",
+    "暂时无法读取电脑绑定，请稍后重试。":
+        "Kopplung des Computers kann nicht gelesen werden. Versuche es später erneut.",
     "直连协商响应无效。": "Ungültige Antwort bei der Aushandlung der Direktverbindung.",
-    "本轮变更记录过大，请在电脑上查看": "Änderungsprotokoll der Runde zu groß. Sieh es dir auf deinem Computer an.",
+    "本轮变更记录过大，请在电脑上查看":
+        "Änderungsprotokoll der Runde zu groß. Sieh es dir auf deinem Computer an.",
     "本轮变更记录读取不一致": "Änderungsprotokoll der Runde inkonsistent gelesen.",
-    "本轮变更记录校验失败": "Integritätsprüfung des Änderungsprotokolls der Runde fehlgeschlagen.",
+    "本轮变更记录校验失败":
+        "Integritätsprüfung des Änderungsprotokolls der Runde fehlgeschlagen.",
     "本轮变更记录格式不可用": "Format des Änderungsprotokolls der Runde nicht verfügbar.",
-    "电脑暂时离线，请稍后重连。": "Computer vorübergehend offline. Verbinde dich später erneut.",
-    "连接请求未被接受，请核实设备授权。": "Verbindungsanfrage abgelehnt. Prüfe die Geräteberechtigung.",
+    "电脑暂时离线，请稍后重连。":
+        "Computer vorübergehend offline. Verbinde dich später erneut.",
+    "连接请求未被接受，请核实设备授权。":
+        "Verbindungsanfrage abgelehnt. Prüfe die Geräteberechtigung.",
     "连接响应过大。": "Verbindungsantwort zu groß.",
-    "连接中断，操作结果待核实；请勿重复发送。": "Verbindung unterbrochen. Ergebnis des Vorgangs nicht bestätigt. Sende ihn nicht erneut.",
-    "请在电脑上生成新版配对二维码。": "Erstelle auf deinem Computer einen neuen Kopplungs-QR-Code.",
+    "连接中断，操作结果待核实；请勿重复发送。":
+        "Verbindung unterbrochen. Ergebnis des Vorgangs nicht bestätigt. Sende ihn nicht erneut.",
+    "请在电脑上生成新版配对二维码。":
+        "Erstelle auf deinem Computer einen neuen Kopplungs-QR-Code.",
     "电脑连接身份不一致。": "Verbindungsidentität des Computers stimmt nicht überein.",
-    "手机身份与原配对不一致，未重新申请授权。": "Die Identität des Smartphones weicht von der ursprünglichen Kopplung ab. Die Berechtigung wurde nicht erneut angefordert.",
-    "原配对恢复期限已过，请在电脑核实授权后重新扫码。": "Wiederherstellungsfrist der Kopplung abgelaufen. Prüfe den Zugriff auf deinem Computer und scanne erneut.",
-    "电脑连接身份与原配对不一致。": "Die Verbindungsidentität des Computers weicht von der ursprünglichen Kopplung ab.",
-    "电脑未返回原配对回执。": "Der Computer hat die Bestätigung der ursprünglichen Kopplung nicht zurückgegeben.",
+    "手机身份与原配对不一致，未重新申请授权。":
+        "Die Identität des Smartphones weicht von der ursprünglichen Kopplung ab. Die Berechtigung wurde nicht erneut angefordert.",
+    "原配对恢复期限已过，请在电脑核实授权后重新扫码。":
+        "Wiederherstellungsfrist der Kopplung abgelaufen. Prüfe den Zugriff auf deinem Computer und scanne erneut.",
+    "电脑连接身份与原配对不一致。":
+        "Die Verbindungsidentität des Computers weicht von der ursprünglichen Kopplung ab.",
+    "电脑未返回原配对回执。":
+        "Der Computer hat die Bestätigung der ursprünglichen Kopplung nicht zurückgegeben.",
     "直连身份验证失败。": "Authentifizierung der Direktverbindung fehlgeschlagen.",
     "加密数据格式无效。": "Ungültiges Format verschlüsselter Daten.",
     "请求较多，请稍后重试。": "Zu viele Anfragen. Versuche es später erneut.",
@@ -6756,191 +7871,325 @@ const messageCatalogs = <String, Map<String, String>>{
     "关键词过长，请缩短后再搜索。": "Suchbegriff zu lang. Kürze ihn und versuche es erneut.",
     "电脑离线，连接后重试搜索。": "Computer offline. Verbinde dich erneut, um zu suchen.",
     "连接已更换，请重试本次搜索。": "Verbindung geändert. Wiederhole diese Suche.",
-    "电脑未返回可用的历史搜索结果。": "Der Computer hat keine verwendbaren Suchergebnisse zurückgegeben.",
-    "历史搜索游标没有前进，请重新搜索。": "Der Suchcursor ist nicht weitergerückt. Suche erneut.",
+    "电脑未返回可用的历史搜索结果。":
+        "Der Computer hat keine verwendbaren Suchergebnisse zurückgegeben.",
+    "历史搜索游标没有前进，请重新搜索。":
+        "Der Suchcursor ist nicht weitergerückt. Suche erneut.",
     "历史搜索范围发生变化，请重新搜索。": "Der Suchbereich hat sich geändert. Suche erneut.",
-    "写操作必须保留原始操作标识。": "Schreibvorgänge müssen ihre ursprüngliche Vorgangs-ID behalten.",
-    "请先确认上一条消息或审批的结果。": "Bestätige zuerst das Ergebnis der vorherigen Nachricht oder Freigabe.",
-    "请先确认上一项设置或工作区操作的结果。": "Bestätige zuerst das Ergebnis der vorherigen Einstellung oder Arbeitsbereichsaktion.",
-    "Fork 正在电脑上执行，请等待并核实。": "Fork läuft auf deinem Computer. Warte und prüfe das Ergebnis.",
-    "原决定已受理，正在核实交付结果。": "Ursprüngliche Entscheidung angenommen. Zustellung wird geprüft.",
+    "写操作必须保留原始操作标识。":
+        "Schreibvorgänge müssen ihre ursprüngliche Vorgangs-ID behalten.",
+    "请先确认上一条消息或审批的结果。":
+        "Bestätige zuerst das Ergebnis der vorherigen Nachricht oder Freigabe.",
+    "请先确认上一项设置或工作区操作的结果。":
+        "Bestätige zuerst das Ergebnis der vorherigen Einstellung oder Arbeitsbereichsaktion.",
+    "Fork 正在电脑上执行，请等待并核实。":
+        "Fork läuft auf deinem Computer. Warte und prüfe das Ergebnis.",
+    "原决定已受理，正在核实交付结果。":
+        "Ursprüngliche Entscheidung angenommen. Zustellung wird geprüft.",
     "请先核实原审批决定。": "Prüfe zuerst die ursprüngliche Freigabeentscheidung.",
-    "配对恢复记录无法读取，请先核实手机安全存储。": "Wiederherstellungsdaten der Kopplung können nicht gelesen werden. Prüfe den sicheren Speicher deines Smartphones.",
-    "配对恢复信息未能安全保存。": "Wiederherstellungsdaten der Kopplung konnten nicht sicher gespeichert werden.",
-    "待核实电脑的身份发生变化，请先核实原配对。": "Die Identität des Computers hat sich geändert. Prüfe zuerst die ursprüngliche Kopplung.",
-    "待核实配对过多，请先核实原记录。": "Zu viele ungeprüfte Kopplungen. Prüfe zuerst die vorhandenen Einträge.",
-    "本机设备身份无法读取，请先恢复安全存储。": "Identität dieses Geräts kann nicht gelesen werden. Stelle zuerst den sicheren Speicher wieder her.",
-    "设备身份未能安全保存，尚未开始配对。": "Geräteidentität konnte nicht sicher gespeichert werden. Die Kopplung wurde nicht gestartet.",
-    "已保存的电脑身份无法读取，请先核实配对。": "Gespeicherte Identität des Computers kann nicht gelesen werden. Prüfe zuerst die Kopplung.",
-    "配对回执与当前连接不一致。": "Die Kopplungsbestätigung passt nicht zur aktuellen Verbindung.",
-    "这项配对已因移除电脑而失效，请重新扫码。": "Diese Kopplung ist mit dem Entfernen des Computers abgelaufen. Scanne erneut.",
+    "配对恢复记录无法读取，请先核实手机安全存储。":
+        "Wiederherstellungsdaten der Kopplung können nicht gelesen werden. Prüfe den sicheren Speicher deines Smartphones.",
+    "配对恢复信息未能安全保存。":
+        "Wiederherstellungsdaten der Kopplung konnten nicht sicher gespeichert werden.",
+    "待核实电脑的身份发生变化，请先核实原配对。":
+        "Die Identität des Computers hat sich geändert. Prüfe zuerst die ursprüngliche Kopplung.",
+    "待核实配对过多，请先核实原记录。":
+        "Zu viele ungeprüfte Kopplungen. Prüfe zuerst die vorhandenen Einträge.",
+    "本机设备身份无法读取，请先恢复安全存储。":
+        "Identität dieses Geräts kann nicht gelesen werden. Stelle zuerst den sicheren Speicher wieder her.",
+    "设备身份未能安全保存，尚未开始配对。":
+        "Geräteidentität konnte nicht sicher gespeichert werden. Die Kopplung wurde nicht gestartet.",
+    "已保存的电脑身份无法读取，请先核实配对。":
+        "Gespeicherte Identität des Computers kann nicht gelesen werden. Prüfe zuerst die Kopplung.",
+    "配对回执与当前连接不一致。":
+        "Die Kopplungsbestätigung passt nicht zur aktuellen Verbindung.",
+    "这项配对已因移除电脑而失效，请重新扫码。":
+        "Diese Kopplung ist mit dem Entfernen des Computers abgelaufen. Scanne erneut.",
     "电脑绑定已变化，请重新扫码。": "Kopplung des Computers geändert. Scanne erneut.",
-    "电脑身份已发生变化，需要先解除旧配对。": "Identität des Computers geändert. Entferne zuerst die alte Kopplung.",
-    "电脑绑定已变化，未移除新的绑定，请刷新后确认。": "Kopplung des Computers geändert. Die neue Kopplung wurde nicht entfernt. Aktualisiere und bestätige.",
-    "设备密钥格式无效，不能继续连接。": "Ungültiges Format des Geräteschlüssels. Verbindung kann nicht fortgesetzt werden.",
+    "电脑身份已发生变化，需要先解除旧配对。":
+        "Identität des Computers geändert. Entferne zuerst die alte Kopplung.",
+    "电脑绑定已变化，未移除新的绑定，请刷新后确认。":
+        "Kopplung des Computers geändert. Die neue Kopplung wurde nicht entfernt. Aktualisiere und bestätige.",
+    "设备密钥格式无效，不能继续连接。":
+        "Ungültiges Format des Geräteschlüssels. Verbindung kann nicht fortgesetzt werden.",
     "加密组件暂时不可用。": "Verschlüsselung vorübergehend nicht verfügbar.",
-    "设备身份验证或加密状态校验失败，请重新连接。": "Geräteauthentifizierung oder Prüfung des Verschlüsselungsstatus fehlgeschlagen. Verbinde dich erneut.",
+    "设备身份验证或加密状态校验失败，请重新连接。":
+        "Geräteauthentifizierung oder Prüfung des Verschlüsselungsstatus fehlgeschlagen. Verbinde dich erneut.",
     "加密连接已关闭。": "Verschlüsselte Verbindung geschlossen.",
-    "电脑绑定状态无法读取，请先检查系统安全存储。": "Kopplungsstatus des Computers kann nicht gelesen werden. Prüfe den sicheren Speicher des Systems.",
-    "电脑绑定状态未能安全保存，请核实原操作。": "Kopplungsstatus des Computers konnte nicht sicher gespeichert werden. Prüfe den ursprünglichen Vorgang.",
+    "电脑绑定状态无法读取，请先检查系统安全存储。":
+        "Kopplungsstatus des Computers kann nicht gelesen werden. Prüfe den sicheren Speicher des Systems.",
+    "电脑绑定状态未能安全保存，请核实原操作。":
+        "Kopplungsstatus des Computers konnte nicht sicher gespeichert werden. Prüfe den ursprünglichen Vorgang.",
     "请先选择电脑上的目录。": "Wähle zuerst ein Verzeichnis auf deinem Computer.",
-    "原项目目录已变化，请核实原结果后重新选择。": "Das ursprüngliche Projektverzeichnis hat sich geändert. Prüfe das ursprüngliche Ergebnis und wähle erneut.",
-    "添加项目结果尚未确认，请核实原操作。": "Ergebnis des Hinzufügens nicht bestätigt. Prüfe den ursprünglichen Vorgang.",
-    "无法核实电脑上的项目，请重新连接后再试。": "Projekt auf deinem Computer kann nicht geprüft werden. Verbinde dich erneut und versuche es noch einmal.",
-    "请更新电脑端后再操作，尚未启动或修改配置。": "Aktualisiere zuerst die Desktop-App. Es wurde keine Konfiguration gestartet oder geändert.",
+    "原项目目录已变化，请核实原结果后重新选择。":
+        "Das ursprüngliche Projektverzeichnis hat sich geändert. Prüfe das ursprüngliche Ergebnis und wähle erneut.",
+    "添加项目结果尚未确认，请核实原操作。":
+        "Ergebnis des Hinzufügens nicht bestätigt. Prüfe den ursprünglichen Vorgang.",
+    "无法核实电脑上的项目，请重新连接后再试。":
+        "Projekt auf deinem Computer kann nicht geprüft werden. Verbinde dich erneut und versuche es noch einmal.",
+    "请更新电脑端后再操作，尚未启动或修改配置。":
+        "Aktualisiere zuerst die Desktop-App. Es wurde keine Konfiguration gestartet oder geändert.",
     "原启动回执不匹配。": "Bestätigung des ursprünglichen Starts stimmt nicht überein.",
-    "原启动记录与项目或运行配置不匹配，未重新执行。": "Der ursprüngliche Starteintrag passt nicht zum Projekt oder zur Konfiguration. Er wurde nicht erneut ausgeführt.",
-    "运行配置回执与原操作不匹配，请更新电脑端后核实。": "Bestätigung der Ausführungskonfiguration passt nicht zum ursprünglichen Vorgang. Aktualisiere die Desktop-App und prüfe.",
-    "电脑没有返回可确认的运行配置结果，请核实原操作。": "Der Computer hat kein prüfbares Ergebnis der Ausführungskonfiguration zurückgegeben. Prüfe den ursprünglichen Vorgang.",
-    "运行配置操作未完成，请核实。": "Vorgang an der Ausführungskonfiguration unvollständig. Prüfe ihn.",
+    "原启动记录与项目或运行配置不匹配，未重新执行。":
+        "Der ursprüngliche Starteintrag passt nicht zum Projekt oder zur Konfiguration. Er wurde nicht erneut ausgeführt.",
+    "运行配置回执与原操作不匹配，请更新电脑端后核实。":
+        "Bestätigung der Ausführungskonfiguration passt nicht zum ursprünglichen Vorgang. Aktualisiere die Desktop-App und prüfe.",
+    "电脑没有返回可确认的运行配置结果，请核实原操作。":
+        "Der Computer hat kein prüfbares Ergebnis der Ausführungskonfiguration zurückgegeben. Prüfe den ursprünglichen Vorgang.",
+    "运行配置操作未完成，请核实。":
+        "Vorgang an der Ausführungskonfiguration unvollständig. Prüfe ihn.",
     "没有待核实的启动操作。": "Kein Start wartet auf Prüfung.",
-    "电脑未确认原启动已关闭，记录仍保留。": "Der Computer hat nicht bestätigt, dass der ursprüngliche Start geschlossen ist. Eintrag bleibt erhalten.",
-    "原启动结果尚未确认，记录仍保留。": "Ergebnis des ursprünglichen Starts nicht bestätigt. Eintrag bleibt erhalten.",
-    "服务地址必须使用 HTTPS；调试版本可使用本机或局域网 IP。": "Die Dienstadresse muss HTTPS verwenden. Debug-Builds dürfen eine lokale oder LAN-IP verwenden.",
-    "服务暂时不可用，请稍后重试。": "Dienst vorübergehend nicht verfügbar. Versuche es später erneut.",
+    "电脑未确认原启动已关闭，记录仍保留。":
+        "Der Computer hat nicht bestätigt, dass der ursprüngliche Start geschlossen ist. Eintrag bleibt erhalten.",
+    "原启动结果尚未确认，记录仍保留。":
+        "Ergebnis des ursprünglichen Starts nicht bestätigt. Eintrag bleibt erhalten.",
+    "服务地址必须使用 HTTPS；调试版本可使用本机或局域网 IP。":
+        "Die Dienstadresse muss HTTPS verwenden. Debug-Builds dürfen eine lokale oder LAN-IP verwenden.",
+    "服务暂时不可用，请稍后重试。":
+        "Dienst vorübergehend nicht verfügbar. Versuche es später erneut.",
     "服务返回了无法识别的响应。": "Der Dienst hat eine unbekannte Antwort zurückgegeben.",
-    "无法连接服务，请检查网络和服务地址。": "Dienst nicht erreichbar. Prüfe dein Netzwerk und die Dienstadresse.",
-    "无法验证服务证书，请检查服务配置。": "Dienstzertifikat kann nicht geprüft werden. Prüfe die Dienstkonfiguration.",
-    "服务响应无效或连接已中断，请重试。": "Ungültige Dienstantwort oder Verbindung unterbrochen. Versuche es erneut.",
-    "服务版本不兼容，请更新 App 或服务端。": "Inkompatible Dienstversion. Aktualisiere die App oder den Server.",
+    "无法连接服务，请检查网络和服务地址。":
+        "Dienst nicht erreichbar. Prüfe dein Netzwerk und die Dienstadresse.",
+    "无法验证服务证书，请检查服务配置。":
+        "Dienstzertifikat kann nicht geprüft werden. Prüfe die Dienstkonfiguration.",
+    "服务响应无效或连接已中断，请重试。":
+        "Ungültige Dienstantwort oder Verbindung unterbrochen. Versuche es erneut.",
+    "服务版本不兼容，请更新 App 或服务端。":
+        "Inkompatible Dienstversion. Aktualisiere die App oder den Server.",
     "二维码内容过长。": "Inhalt des QR-Codes zu lang.",
     "不是 DogCodes 配对二维码。": "Kein DogCodes-Kopplungs-QR-Code.",
-    "配对二维码无效，或来自未配置的服务。": "Kopplungs-QR-Code ungültig oder von einem nicht konfigurierten Dienst.",
-    "配对二维码已过期，请在电脑上重新生成。": "Kopplungs-QR-Code abgelaufen. Erstelle auf deinem Computer einen neuen.",
-    "设备时间不一致，请校准手机和电脑时间后重试。": "Die Uhren der Geräte weichen ab. Stelle die Zeit auf beiden Geräten richtig und versuche es erneut.",
+    "配对二维码无效，或来自未配置的服务。":
+        "Kopplungs-QR-Code ungültig oder von einem nicht konfigurierten Dienst.",
+    "配对二维码已过期，请在电脑上重新生成。":
+        "Kopplungs-QR-Code abgelaufen. Erstelle auf deinem Computer einen neuen.",
+    "设备时间不一致，请校准手机和电脑时间后重试。":
+        "Die Uhren der Geräte weichen ab. Stelle die Zeit auf beiden Geräten richtig und versuche es erneut.",
     "无法读取配对二维码。": "Kopplungs-QR-Code kann nicht gelesen werden.",
     "事件游标格式无效。": "Ungültiges Format des Ereigniscursors.",
     "事件游标超出范围。": "Ereigniscursor außerhalb des Bereichs.",
-    "电脑离线，重新连接后再浏览目录。": "Computer offline. Verbinde dich erneut, um Verzeichnisse zu durchsuchen.",
+    "电脑离线，重新连接后再浏览目录。":
+        "Computer offline. Verbinde dich erneut, um Verzeichnisse zu durchsuchen.",
     "连接已更换，请重新读取目录。": "Verbindung geändert. Lade das Verzeichnis neu.",
-    "电脑未返回有效的目录列表，请更新电脑端后重试。": "Keine gültige Verzeichnisliste zurückgegeben. Aktualisiere die Desktop-App und versuche es erneut.",
-    "目录分页没有前进，请刷新目录。": "Die Verzeichnisseiten sind nicht weitergerückt. Aktualisiere das Verzeichnis.",
-    "电脑端暂不支持目录选择，请更新电脑端后重试。": "Aktualisiere die Desktop-App, um Verzeichnisse auszuwählen.",
+    "电脑未返回有效的目录列表，请更新电脑端后重试。":
+        "Keine gültige Verzeichnisliste zurückgegeben. Aktualisiere die Desktop-App und versuche es erneut.",
+    "目录分页没有前进，请刷新目录。":
+        "Die Verzeichnisseiten sind nicht weitergerückt. Aktualisiere das Verzeichnis.",
+    "电脑端暂不支持目录选择，请更新电脑端后重试。":
+        "Aktualisiere die Desktop-App, um Verzeichnisse auszuwählen.",
     "剪贴板传输响应无效": "Ungültige Antwort bei der Übertragung der Zwischenablage",
-    "剪贴板传输身份不匹配": "Identität der Zwischenablage-Übertragung stimmt nicht überein",
-    "剪贴板传输校验信息不匹配": "Integritätsdaten der Zwischenablage-Übertragung stimmen nicht überein",
-    "图片需小于 16 MB，请缩小图片后重试": "Bild muss kleiner als 16 MB sein. Verkleinere es und versuche es erneut.",
-    "剪贴板文字为空或超过 1 MB": "Text in der Zwischenablage ist leer oder größer als 1 MB",
+    "剪贴板传输身份不匹配":
+        "Identität der Zwischenablage-Übertragung stimmt nicht überein",
+    "剪贴板传输校验信息不匹配":
+        "Integritätsdaten der Zwischenablage-Übertragung stimmen nicht überein",
+    "图片需小于 16 MB，请缩小图片后重试":
+        "Bild muss kleiner als 16 MB sein. Verkleinere es und versuche es erneut.",
+    "剪贴板文字为空或超过 1 MB":
+        "Text in der Zwischenablage ist leer oder größer als 1 MB",
     "图片传输起始位置无效": "Ungültige Startposition der Bildübertragung",
     "剪贴板上传位置不匹配": "Upload-Position der Zwischenablage stimmt nicht überein",
-    "尚未确认电脑剪贴板是否更新，请从电脑获取核实；不会自动重发": "Aktualisierung der Zwischenablage des Computers nicht bestätigt. Hole sie zur Prüfung ab. Es wird nicht automatisch erneut gesendet.",
-    "未确认电脑剪贴板已更新，请从电脑获取核实；不会自动重发": "Aktualisierung der Zwischenablage des Computers nicht bestätigt. Hole sie zur Prüfung ab. Es wird nicht automatisch erneut gesendet.",
-    "剪贴板写入回执不完整，请从电脑获取核实": "Schreibbestätigung der Zwischenablage unvollständig. Hole die Zwischenablage des Computers zur Prüfung ab.",
+    "尚未确认电脑剪贴板是否更新，请从电脑获取核实；不会自动重发":
+        "Aktualisierung der Zwischenablage des Computers nicht bestätigt. Hole sie zur Prüfung ab. Es wird nicht automatisch erneut gesendet.",
+    "未确认电脑剪贴板已更新，请从电脑获取核实；不会自动重发":
+        "Aktualisierung der Zwischenablage des Computers nicht bestätigt. Hole sie zur Prüfung ab. Es wird nicht automatisch erneut gesendet.",
+    "剪贴板写入回执不完整，请从电脑获取核实":
+        "Schreibbestätigung der Zwischenablage unvollständig. Hole die Zwischenablage des Computers zur Prüfung ab.",
     "剪贴板下载数据块过大": "Download-Block der Zwischenablage zu groß",
     "剪贴板下载位置不匹配": "Download-Position der Zwischenablage stimmt nicht überein",
-    "剪贴板内容校验失败，未写入手机剪贴板": "Integritätsprüfung der Zwischenablage fehlgeschlagen. Zwischenablage des Smartphones unverändert.",
-    "通知服务初始化失败。": "Initialisierung des Benachrichtigungsdienstes fehlgeschlagen.",
-    "此版本未配置备用通知服务。": "Ersatz-Benachrichtigungsdienst in diesem Build nicht konfiguriert.",
+    "剪贴板内容校验失败，未写入手机剪贴板":
+        "Integritätsprüfung der Zwischenablage fehlgeschlagen. Zwischenablage des Smartphones unverändert.",
+    "通知服务初始化失败。":
+        "Initialisierung des Benachrichtigungsdienstes fehlgeschlagen.",
+    "此版本未配置备用通知服务。":
+        "Ersatz-Benachrichtigungsdienst in diesem Build nicht konfiguriert.",
     "系统通知权限尚未开启。": "Systemberechtigung für Benachrichtigungen nicht erteilt.",
     "任务提醒": "Aufgabenbenachrichtigungen",
     "待审批、待回答、完成和失败提醒": "Hinweise zu Freigaben, Fragen, Abschluss und Fehlern",
-    "未获取到通知设备身份。": "Benachrichtigungsidentität des Geräts konnte nicht abgerufen werden.",
-    "这台电脑已移除，未发送停止请求。": "Dieser Computer wurde entfernt. Stoppanfrage nicht gesendet.",
-    "这个任务已经有一个停止请求在等待确认。": "Für diese Aufgabe wartet bereits eine Stoppanfrage auf Bestätigung.",
-    "等待确认的停止请求太多，请先处理待处理页里的卡片。": "Zu viele Stoppanfragen warten auf Bestätigung. Erledige zuerst die Karten unter Ausstehend.",
+    "未获取到通知设备身份。":
+        "Benachrichtigungsidentität des Geräts konnte nicht abgerufen werden.",
+    "这台电脑已移除，未发送停止请求。":
+        "Dieser Computer wurde entfernt. Stoppanfrage nicht gesendet.",
+    "这个任务已经有一个停止请求在等待确认。":
+        "Für diese Aufgabe wartet bereits eine Stoppanfrage auf Bestätigung.",
+    "等待确认的停止请求太多，请先处理待处理页里的卡片。":
+        "Zu viele Stoppanfragen warten auf Bestätigung. Erledige zuerst die Karten unter Ausstehend.",
     "任务当前没有可停止的运行。": "Diese Aufgabe hat keine aktive Ausführung zum Stoppen.",
-    "暂时无法读取任务状态，请稍后再确认。": "Aufgabenstatus kann nicht gelesen werden. Prüfe es später erneut.",
-    "这台电脑已移除，未重新发送停止请求。": "Dieser Computer wurde entfernt. Stoppanfrage nicht erneut gesendet.",
-    "原停止请求已改变，请刷新。": "Die ursprüngliche Stoppanfrage hat sich geändert. Aktualisiere.",
+    "暂时无法读取任务状态，请稍后再确认。":
+        "Aufgabenstatus kann nicht gelesen werden. Prüfe es später erneut.",
+    "这台电脑已移除，未重新发送停止请求。":
+        "Dieser Computer wurde entfernt. Stoppanfrage nicht erneut gesendet.",
+    "原停止请求已改变，请刷新。":
+        "Die ursprüngliche Stoppanfrage hat sich geändert. Aktualisiere.",
     "没有待确认的停止请求。": "Keine Stoppanfrage wartet auf Bestätigung.",
-    "电脑已收到停止请求，任务会在停下后更新状态。": "Der Computer hat die Stoppanfrage erhalten. Der Status wird aktualisiert, sobald die Aufgabe stoppt.",
-    "这次运行已经结束，不需要再停止。": "Diese Ausführung ist beendet. Du musst sie nicht erneut stoppen.",
-    "已不再等待。如果电脑收到了这个停止请求，任务仍会停下。": "Warten beendet. Falls der Computer die Stoppanfrage erhalten hat, stoppt die Aufgabe trotzdem.",
-    "还不确定是否已停止，可以再发一次停止。": "Stoppergebnis nicht bestätigt. Du kannst eine weitere Stoppanfrage senden.",
+    "电脑已收到停止请求，任务会在停下后更新状态。":
+        "Der Computer hat die Stoppanfrage erhalten. Der Status wird aktualisiert, sobald die Aufgabe stoppt.",
+    "这次运行已经结束，不需要再停止。":
+        "Diese Ausführung ist beendet. Du musst sie nicht erneut stoppen.",
+    "已不再等待。如果电脑收到了这个停止请求，任务仍会停下。":
+        "Warten beendet. Falls der Computer die Stoppanfrage erhalten hat, stoppt die Aufgabe trotzdem.",
+    "还不确定是否已停止，可以再发一次停止。":
+        "Stoppergebnis nicht bestätigt. Du kannst eine weitere Stoppanfrage senden.",
     "附件总大小不能超过 25 MB。": "Anhänge dürfen insgesamt 25 MB nicht überschreiten.",
     "附件文件名过长或无效。": "Dateiname des Anhangs zu lang oder ungültig.",
-    "图片请使用 PNG、JPEG、GIF 或 WebP 格式。": "Verwende Bilder im Format PNG, JPEG, GIF oder WebP.",
+    "图片请使用 PNG、JPEG、GIF 或 WebP 格式。":
+        "Verwende Bilder im Format PNG, JPEG, GIF oder WebP.",
     "一次最多发送 16 个附件。": "Bis zu 16 Anhänge pro Nachricht.",
-    "附件上传已暂停，可继续原上传。": "Hochladen des Anhangs pausiert. Setze den ursprünglichen Upload fort.",
-    "附件回执与原文件不一致，未发送任务。": "Die Bestätigung des Anhangs passt nicht zur ursprünglichen Datei. Aufgabe nicht gesendet.",
-    "本机附件内容已变化，请重新添加；未上传变化后的文件。": "Der lokale Anhang hat sich geändert. Füge ihn erneut hinzu. Die geänderte Datei wurde nicht hochgeladen.",
-    "电脑端暂不支持附件上传，请更新电脑端。": "Aktualisiere die Desktop-App, um Anhänge hochzuladen.",
-    "电脑返回的附件位置无效。": "Der Computer hat eine ungültige Anhangsposition zurückgegeben.",
-    "附件分块位置未确认，请继续原上传。": "Position des Anhangsteils nicht bestätigt. Setze den ursprünglichen Upload fort.",
-    "原草稿不可读取，请重新选择附件。": "Ursprünglicher Entwurf nicht lesbar. Wähle die Anhänge erneut.",
+    "附件上传已暂停，可继续原上传。":
+        "Hochladen des Anhangs pausiert. Setze den ursprünglichen Upload fort.",
+    "附件回执与原文件不一致，未发送任务。":
+        "Die Bestätigung des Anhangs passt nicht zur ursprünglichen Datei. Aufgabe nicht gesendet.",
+    "本机附件内容已变化，请重新添加；未上传变化后的文件。":
+        "Der lokale Anhang hat sich geändert. Füge ihn erneut hinzu. Die geänderte Datei wurde nicht hochgeladen.",
+    "电脑端暂不支持附件上传，请更新电脑端。":
+        "Aktualisiere die Desktop-App, um Anhänge hochzuladen.",
+    "电脑返回的附件位置无效。":
+        "Der Computer hat eine ungültige Anhangsposition zurückgegeben.",
+    "附件分块位置未确认，请继续原上传。":
+        "Position des Anhangsteils nicht bestätigt. Setze den ursprünglichen Upload fort.",
+    "原草稿不可读取，请重新选择附件。":
+        "Ursprünglicher Entwurf nicht lesbar. Wähle die Anhänge erneut.",
     "上次附件选择未完成，请重新选择。": "Vorherige Anhangsauswahl unvollständig. Wähle erneut.",
-    "已恢复系统文件选择器返回的附件，请核对后发送。": "Anhänge aus der Dateiauswahl des Systems wiederhergestellt. Prüfe sie vor dem Senden.",
+    "已恢复系统文件选择器返回的附件，请核对后发送。":
+        "Anhänge aus der Dateiauswahl des Systems wiederhergestellt. Prüfe sie vor dem Senden.",
     "附件选择未完成：{0}，请重新选择。": "Anhangsauswahl unvollständig: {0}. Wähle erneut.",
-    "上次附件选择未能恢复：{0}": "Vorherige Anhangsauswahl konnte nicht wiederhergestellt werden: {0}",
-    "正在处理这台电脑的原配对，请稍后核实。": "Die ursprüngliche Kopplung dieses Computers wird verarbeitet. Prüfe es später.",
-    "原配对恢复记录已改变，请刷新后核实。": "Der Wiederherstellungseintrag der ursprünglichen Kopplung hat sich geändert. Aktualisiere und prüfe.",
-    "电脑绑定已移除或变化，请重新配对后连接。": "Kopplung des Computers entfernt oder geändert. Kopple erneut, um dich zu verbinden.",
+    "上次附件选择未能恢复：{0}":
+        "Vorherige Anhangsauswahl konnte nicht wiederhergestellt werden: {0}",
+    "正在处理这台电脑的原配对，请稍后核实。":
+        "Die ursprüngliche Kopplung dieses Computers wird verarbeitet. Prüfe es später.",
+    "原配对恢复记录已改变，请刷新后核实。":
+        "Der Wiederherstellungseintrag der ursprünglichen Kopplung hat sich geändert. Aktualisiere und prüfe.",
+    "电脑绑定已移除或变化，请重新配对后连接。":
+        "Kopplung des Computers entfernt oder geändert. Kopple erneut, um dich zu verbinden.",
     "未命名会话": "Unbenannter Chat",
     "离线模式": "Offline-Modus",
     "离线协作": "Offline-Zusammenarbeit",
-    "部分离线数据暂时无法读取，联网后可重新同步。": "Einige Offline-Daten konnten nicht gelesen werden. Verbinde dich erneut, um neu zu synchronisieren.",
-    "停止请求暂时无法读取，请检查系统安全存储。": "Stoppanfragen können nicht gelesen werden. Prüfe den sicheren Speicher des Systems.",
-    "终端关闭记录暂时无法读取，请检查系统安全存储。": "Einträge zum Schließen von Terminals können nicht gelesen werden. Prüfe den sicheren Speicher des Systems.",
-    "已配对电脑暂时无法读取，请检查系统安全存储。": "Gekoppelte Computer können nicht gelesen werden. Prüfe den sicheren Speicher des Systems.",
-    "电脑绑定已变化，未使用旧页面接管新的连接。": "Kopplung des Computers geändert. Die alte Seite hat die neue Verbindung nicht übernommen.",
-    "连接中断，正在重新连接。已发送操作不会重复执行。": "Verbindung unterbrochen. Verbindung wird wiederhergestellt. Gesendete Vorgänge werden nicht doppelt ausgeführt.",
-    "连接已断开。电脑上的任务不会因此停止。": "Getrennt. Aufgaben laufen auf deinem Computer weiter.",
-    "移除未完成，连接已关闭；请重试移除或核实安全存储。": "Entfernen unvollständig. Verbindung geschlossen. Wiederhole das Entfernen oder prüfe den sicheren Speicher.",
+    "部分离线数据暂时无法读取，联网后可重新同步。":
+        "Einige Offline-Daten konnten nicht gelesen werden. Verbinde dich erneut, um neu zu synchronisieren.",
+    "停止请求暂时无法读取，请检查系统安全存储。":
+        "Stoppanfragen können nicht gelesen werden. Prüfe den sicheren Speicher des Systems.",
+    "终端关闭记录暂时无法读取，请检查系统安全存储。":
+        "Einträge zum Schließen von Terminals können nicht gelesen werden. Prüfe den sicheren Speicher des Systems.",
+    "已配对电脑暂时无法读取，请检查系统安全存储。":
+        "Gekoppelte Computer können nicht gelesen werden. Prüfe den sicheren Speicher des Systems.",
+    "电脑绑定已变化，未使用旧页面接管新的连接。":
+        "Kopplung des Computers geändert. Die alte Seite hat die neue Verbindung nicht übernommen.",
+    "连接中断，正在重新连接。已发送操作不会重复执行。":
+        "Verbindung unterbrochen. Verbindung wird wiederhergestellt. Gesendete Vorgänge werden nicht doppelt ausgeführt.",
+    "连接已断开。电脑上的任务不会因此停止。":
+        "Getrennt. Aufgaben laufen auf deinem Computer weiter.",
+    "移除未完成，连接已关闭；请重试移除或核实安全存储。":
+        "Entfernen unvollständig. Verbindung geschlossen. Wiederhole das Entfernen oder prüfe den sicheren Speicher.",
     "离线缓存未能保存：{0}": "Offline-Cache konnte nicht gespeichert werden: {0}",
-    "待确认的操作暂时无法读取，请检查系统安全存储。": "Unbestätigte Vorgänge können nicht gelesen werden. Prüfe den sicheren Speicher des Systems.",
-    "无法读取后台提醒设置，请检查系统安全存储后重试。": "Einstellungen für Hintergrundbenachrichtigungen können nicht gelesen werden. Prüfe den sicheren Speicher des Systems und versuche es erneut.",
-    "部分电脑的通知尚未登记，请检查网络后重新检测。": "Benachrichtigungen für einige Computer nicht registriert. Prüfe dein Netzwerk und versuche es erneut.",
-    "后台提醒尚未启用，请核实系统通知权限和通知服务配置后重试。": "Hintergrundbenachrichtigungen sind nicht aktiviert. Prüfe die Systemberechtigung und die Dienstkonfiguration.",
+    "待确认的操作暂时无法读取，请检查系统安全存储。":
+        "Unbestätigte Vorgänge können nicht gelesen werden. Prüfe den sicheren Speicher des Systems.",
+    "无法读取后台提醒设置，请检查系统安全存储后重试。":
+        "Einstellungen für Hintergrundbenachrichtigungen können nicht gelesen werden. Prüfe den sicheren Speicher des Systems und versuche es erneut.",
+    "部分电脑的通知尚未登记，请检查网络后重新检测。":
+        "Benachrichtigungen für einige Computer nicht registriert. Prüfe dein Netzwerk und versuche es erneut.",
+    "后台提醒尚未启用，请核实系统通知权限和通知服务配置后重试。":
+        "Hintergrundbenachrichtigungen sind nicht aktiviert. Prüfe die Systemberechtigung und die Dienstkonfiguration.",
     "Git 操作已完成": "Git-Vorgang abgeschlossen",
-    "已经提交，还不确定是否推送成功，可以重新发送推送。": "Committet. Push-Ergebnis nicht bestätigt. Du kannst den Push erneut senden.",
+    "已经提交，还不确定是否推送成功，可以重新发送推送。":
+        "Committet. Push-Ergebnis nicht bestätigt. Du kannst den Push erneut senden.",
     "提交已完成，推送失败：{0}": "Commit abgeschlossen. Push fehlgeschlagen: {0}",
     "Git 操作失败：{0}": "Git-Vorgang fehlgeschlagen: {0}",
-    "电脑正在执行 Git 操作，稍后再确认。": "Git-Vorgang läuft auf deinem Computer. Prüfe es später.",
-    "Git 操作中途中断了，请在「变更」里看一下仓库现在的状态。": "Git-Vorgang unterbrochen. Prüfe den Zustand des Repositorys unter Änderungen.",
-    "Git 操作只完成了一部分，请先在「变更」里看一下再继续。": "Git-Vorgang nur teilweise abgeschlossen. Prüfe Änderungen, bevor du fortfährst.",
+    "电脑正在执行 Git 操作，稍后再确认。":
+        "Git-Vorgang läuft auf deinem Computer. Prüfe es später.",
+    "Git 操作中途中断了，请在「变更」里看一下仓库现在的状态。":
+        "Git-Vorgang unterbrochen. Prüfe den Zustand des Repositorys unter Änderungen.",
+    "Git 操作只完成了一部分，请先在「变更」里看一下再继续。":
+        "Git-Vorgang nur teilweise abgeschlossen. Prüfe Änderungen, bevor du fortfährst.",
     "已不再等待这次 Git 操作。": "Warten auf diesen Git-Vorgang beendet.",
-    "电脑上还查不到这次 Git 操作，可能没收到，可以重新发送。": "Der Computer hat noch keinen Eintrag zu diesem Git-Vorgang. Er ist möglicherweise nicht angekommen. Du kannst ihn erneut senden.",
-    "还不确定文件是否已暂存，所以没有继续提交。": "Stagen nicht bestätigt. Commit wurde nicht fortgesetzt.",
-    "暂存回执与原文件选择不一致，未重新执行。": "Die Stage-Bestätigung passt nicht zur ursprünglichen Dateiauswahl. Sie wurde nicht erneut ausgeführt.",
+    "电脑上还查不到这次 Git 操作，可能没收到，可以重新发送。":
+        "Der Computer hat noch keinen Eintrag zu diesem Git-Vorgang. Er ist möglicherweise nicht angekommen. Du kannst ihn erneut senden.",
+    "还不确定文件是否已暂存，所以没有继续提交。":
+        "Stagen nicht bestätigt. Commit wurde nicht fortgesetzt.",
+    "暂存回执与原文件选择不一致，未重新执行。":
+        "Die Stage-Bestätigung passt nicht zur ursprünglichen Dateiauswahl. Sie wurde nicht erneut ausgeführt.",
     "Git 操作无效。": "Ungültiger Git-Vorgang.",
-    "电脑未返回有效的 Git 操作回执。": "Der Computer hat keine gültige Bestätigung des Git-Vorgangs zurückgegeben.",
-    "Git 回执与原请求不一致，未继续操作。": "Die Git-Bestätigung passt nicht zur ursprünglichen Anfrage. Der Vorgang wurde nicht fortgesetzt.",
-    "Git 接续记录过长或存在循环，请在电脑上核实。": "Die Git-Fortsetzungskette ist zu lang oder enthält eine Schleife. Prüfe es auf deinem Computer.",
-    "电脑尚未确认结束原 Git 跟踪。": "Der Computer hat das Ende der ursprünglichen Git-Verfolgung nicht bestätigt.",
+    "电脑未返回有效的 Git 操作回执。":
+        "Der Computer hat keine gültige Bestätigung des Git-Vorgangs zurückgegeben.",
+    "Git 回执与原请求不一致，未继续操作。":
+        "Die Git-Bestätigung passt nicht zur ursprünglichen Anfrage. Der Vorgang wurde nicht fortgesetzt.",
+    "Git 接续记录过长或存在循环，请在电脑上核实。":
+        "Die Git-Fortsetzungskette ist zu lang oder enthält eine Schleife. Prüfe es auf deinem Computer.",
+    "电脑尚未确认结束原 Git 跟踪。":
+        "Der Computer hat das Ende der ursprünglichen Git-Verfolgung nicht bestätigt.",
     "待审批": "Freigabe angefordert",
     "待回答": "Antwort angefordert",
     "任务完成": "Aufgabe abgeschlossen",
     "执行失败": "Ausführung fehlgeschlagen",
-    "通知设置响应无效，请重新读取。": "Ungültige Antwort zu Benachrichtigungseinstellungen. Lade neu.",
-    "设备授权已失效，请核实电脑绑定。": "Geräteberechtigung abgelaufen. Prüfe die Kopplung des Computers.",
-    "通知设置已改变，请重新读取后修改。": "Benachrichtigungseinstellungen geändert. Lade vor dem Bearbeiten neu.",
+    "通知设置响应无效，请重新读取。":
+        "Ungültige Antwort zu Benachrichtigungseinstellungen. Lade neu.",
+    "设备授权已失效，请核实电脑绑定。":
+        "Geräteberechtigung abgelaufen. Prüfe die Kopplung des Computers.",
+    "通知设置已改变，请重新读取后修改。":
+        "Benachrichtigungseinstellungen geändert. Lade vor dem Bearbeiten neu.",
     "操作过于频繁，请稍后重试。": "Zu viele Vorgänge. Versuche es später erneut.",
-    "通知服务暂时不可用，请稍后重试。": "Benachrichtigungsdienst vorübergehend nicht verfügbar. Versuche es später erneut.",
-    "无法确认通知设置，请检查网络后重新读取。": "Benachrichtigungseinstellungen können nicht bestätigt werden. Prüfe dein Netzwerk und lade neu.",
-    "电脑没有收到这次设置，请再试一次。": "Der Computer hat diese Einstellung nicht erhalten. Versuche es erneut.",
+    "通知服务暂时不可用，请稍后重试。":
+        "Benachrichtigungsdienst vorübergehend nicht verfügbar. Versuche es später erneut.",
+    "无法确认通知设置，请检查网络后重新读取。":
+        "Benachrichtigungseinstellungen können nicht bestätigt werden. Prüfe dein Netzwerk und lade neu.",
+    "电脑没有收到这次设置，请再试一次。":
+        "Der Computer hat diese Einstellung nicht erhalten. Versuche es erneut.",
     "电脑返回的保持唤醒状态无效。": "Ungültiger Wachhalte-Status vom Computer.",
-    "待发送的输入过多，本次未发送，请缩短输入后再试。": "Zu viele Eingaben in der Warteschlange. Es wurde nichts gesendet. Kürze die Eingabe und versuche es erneut.",
-    "终端页面已离开，未继续发送输入。": "Terminal-Seite geschlossen. Keine weiteren Eingaben gesendet.",
+    "待发送的输入过多，本次未发送，请缩短输入后再试。":
+        "Zu viele Eingaben in der Warteschlange. Es wurde nichts gesendet. Kürze die Eingabe und versuche es erneut.",
+    "终端页面已离开，未继续发送输入。":
+        "Terminal-Seite geschlossen. Keine weiteren Eingaben gesendet.",
     "终端输入回执不匹配": "Bestätigung der Terminaleingabe stimmt nicht überein",
-    "请更新电脑端后输入；终端输出仍可查看。": "Aktualisiere die Desktop-App, um zu tippen. Die Terminalausgabe bleibt verfügbar.",
+    "请更新电脑端后输入；终端输出仍可查看。":
+        "Aktualisiere die Desktop-App, um zu tippen. Die Terminalausgabe bleibt verfügbar.",
     "终端正在启动，请稍后继续输入。": "Terminal wird gestartet. Tippe später weiter.",
-    "原终端当前不可输入，请刷新查看状态。": "Das ursprüngliche Terminal nimmt keine Eingaben an. Aktualisiere, um seinen Status zu prüfen.",
-    "终端输入连接已改变，请检查后继续。": "Verbindung der Terminaleingabe geändert. Prüfe sie, bevor du fortfährst.",
-    "输入连接仍在切换，请稍后检查并继续。": "Die Eingabeverbindung wechselt noch. Prüfe es später erneut.",
-    "上次输入结果待核实，请检查终端输出后再继续。": "Ergebnis der vorherigen Eingabe nicht bestätigt. Prüfe die Terminalausgabe, bevor du fortfährst.",
-    "输入结果尚未确认，请核实或检查终端后继续；不会重发原输入。": "Eingabeergebnis nicht bestätigt. Prüfe es oder das Terminal, bevor du fortfährst. Die ursprüngliche Eingabe wird nicht erneut gesendet.",
-    "终端连接中断，输入结果待核实；未发送的队列已丢弃，不会自动重发。": "Terminal getrennt. Eingabeergebnis nicht bestätigt. Die nicht gesendete Warteschlange wurde verworfen und wird nicht automatisch gesendet.",
-    "原输入仍未确认或通道已改变，请检查终端输出后继续；不会重发。": "Ursprüngliche Eingabe nicht bestätigt oder Kanal geändert. Prüfe die Terminalausgabe, bevor du fortfährst. Die Eingabe wird nicht erneut gesendet.",
-    "暂时无法核实输入，请连接后再试；不会重发原输入。": "Eingabe kann nicht geprüft werden. Verbinde dich erneut und versuche es noch einmal. Die ursprüngliche Eingabe wird nicht erneut gesendet.",
-    "输入连接尚未恢复，请稍后再试。": "Eingabeverbindung noch nicht wiederhergestellt. Versuche es später erneut.",
-    "这台电脑已移除，未发送关闭请求。": "Dieser Computer wurde entfernt. Schließanfrage nicht gesendet.",
-    "这个终端已经有一个关闭请求在等待确认。": "Für dieses Terminal wartet bereits eine Schließanfrage auf Bestätigung.",
-    "等待确认的关闭请求太多，请先处理待处理页里的卡片。": "Zu viele Schließanfragen warten auf Bestätigung. Erledige zuerst die Karten unter Ausstehend.",
-    "原终端关闭结果尚未确认，请核实结束后再启动这个运行配置。": "Ergebnis des Schließens des ursprünglichen Terminals nicht bestätigt. Prüfe es, bevor du diese Ausführungskonfiguration startest.",
-    "请更新电脑端后再关闭终端，当前版本无法核实原终端身份。": "Aktualisiere die Desktop-App, um Terminals zu schließen. Diese Version kann die Identität des ursprünglichen Terminals nicht prüfen.",
-    "终端身份不完整，请刷新后再关闭。": "Terminalidentität unvollständig. Aktualisiere vor dem Schließen.",
-    "终端已经重新启动过，没有关闭新的终端。": "Das Terminal wurde neu gestartet. Das neue Terminal wurde nicht geschlossen.",
+    "原终端当前不可输入，请刷新查看状态。":
+        "Das ursprüngliche Terminal nimmt keine Eingaben an. Aktualisiere, um seinen Status zu prüfen.",
+    "终端输入连接已改变，请检查后继续。":
+        "Verbindung der Terminaleingabe geändert. Prüfe sie, bevor du fortfährst.",
+    "输入连接仍在切换，请稍后检查并继续。":
+        "Die Eingabeverbindung wechselt noch. Prüfe es später erneut.",
+    "上次输入结果待核实，请检查终端输出后再继续。":
+        "Ergebnis der vorherigen Eingabe nicht bestätigt. Prüfe die Terminalausgabe, bevor du fortfährst.",
+    "输入结果尚未确认，请核实或检查终端后继续；不会重发原输入。":
+        "Eingabeergebnis nicht bestätigt. Prüfe es oder das Terminal, bevor du fortfährst. Die ursprüngliche Eingabe wird nicht erneut gesendet.",
+    "终端连接中断，输入结果待核实；未发送的队列已丢弃，不会自动重发。":
+        "Terminal getrennt. Eingabeergebnis nicht bestätigt. Die nicht gesendete Warteschlange wurde verworfen und wird nicht automatisch gesendet.",
+    "原输入仍未确认或通道已改变，请检查终端输出后继续；不会重发。":
+        "Ursprüngliche Eingabe nicht bestätigt oder Kanal geändert. Prüfe die Terminalausgabe, bevor du fortfährst. Die Eingabe wird nicht erneut gesendet.",
+    "暂时无法核实输入，请连接后再试；不会重发原输入。":
+        "Eingabe kann nicht geprüft werden. Verbinde dich erneut und versuche es noch einmal. Die ursprüngliche Eingabe wird nicht erneut gesendet.",
+    "输入连接尚未恢复，请稍后再试。":
+        "Eingabeverbindung noch nicht wiederhergestellt. Versuche es später erneut.",
+    "这台电脑已移除，未发送关闭请求。":
+        "Dieser Computer wurde entfernt. Schließanfrage nicht gesendet.",
+    "这个终端已经有一个关闭请求在等待确认。":
+        "Für dieses Terminal wartet bereits eine Schließanfrage auf Bestätigung.",
+    "等待确认的关闭请求太多，请先处理待处理页里的卡片。":
+        "Zu viele Schließanfragen warten auf Bestätigung. Erledige zuerst die Karten unter Ausstehend.",
+    "原终端关闭结果尚未确认，请核实结束后再启动这个运行配置。":
+        "Ergebnis des Schließens des ursprünglichen Terminals nicht bestätigt. Prüfe es, bevor du diese Ausführungskonfiguration startest.",
+    "请更新电脑端后再关闭终端，当前版本无法核实原终端身份。":
+        "Aktualisiere die Desktop-App, um Terminals zu schließen. Diese Version kann die Identität des ursprünglichen Terminals nicht prüfen.",
+    "终端身份不完整，请刷新后再关闭。":
+        "Terminalidentität unvollständig. Aktualisiere vor dem Schließen.",
+    "终端已经重新启动过，没有关闭新的终端。":
+        "Das Terminal wurde neu gestartet. Das neue Terminal wurde nicht geschlossen.",
     "终端不存在": "Terminal existiert nicht",
     "没有待确认的终端关闭操作。": "Kein Schließen eines Terminals wartet auf Bestätigung.",
     "终端已经关闭。": "Terminal geschlossen.",
-    "已不再等待。如果电脑收到了关闭请求，终端仍会关闭。": "Warten beendet. Falls der Computer die Schließanfrage erhalten hat, wird das Terminal trotzdem geschlossen.",
-    "终端已改变，关闭请求未执行。": "Terminal geändert. Die Schließanfrage wurde nicht ausgeführt.",
-    "电脑已收到关闭请求，正在等终端结束。": "Der Computer hat die Schließanfrage erhalten. Es wird gewartet, bis das Terminal endet.",
-    "还不确定终端是否已关闭，可以稍后再确认。": "Ergebnis des Schließens nicht bestätigt. Prüfe es später.",
+    "已不再等待。如果电脑收到了关闭请求，终端仍会关闭。":
+        "Warten beendet. Falls der Computer die Schließanfrage erhalten hat, wird das Terminal trotzdem geschlossen.",
+    "终端已改变，关闭请求未执行。":
+        "Terminal geändert. Die Schließanfrage wurde nicht ausgeführt.",
+    "电脑已收到关闭请求，正在等终端结束。":
+        "Der Computer hat die Schließanfrage erhalten. Es wird gewartet, bis das Terminal endet.",
+    "还不确定终端是否已关闭，可以稍后再确认。":
+        "Ergebnis des Schließens nicht bestätigt. Prüfe es später.",
     "请选择有效的审查问题。": "Wähle gültige Review-Probleme aus.",
-    "审查回执与原请求不匹配，请保留原操作并核实。": "Die Review-Bestätigung passt nicht zur ursprünglichen Anfrage. Behalte den Vorgang und prüfe ihn.",
-    "修复回执与原请求不匹配，请先核实电脑上的原修复。": "Die Korrekturbestätigung passt nicht zur ursprünglichen Anfrage. Prüfe zuerst die ursprüngliche Korrektur auf deinem Computer.",
-    "无法读取审查记录，请更新电脑端后重试。": "Review-Einträge können nicht gelesen werden. Aktualisiere die Desktop-App und versuche es erneut.",
+    "审查回执与原请求不匹配，请保留原操作并核实。":
+        "Die Review-Bestätigung passt nicht zur ursprünglichen Anfrage. Behalte den Vorgang und prüfe ihn.",
+    "修复回执与原请求不匹配，请先核实电脑上的原修复。":
+        "Die Korrekturbestätigung passt nicht zur ursprünglichen Anfrage. Prüfe zuerst die ursprüngliche Korrektur auf deinem Computer.",
+    "无法读取审查记录，请更新电脑端后重试。":
+        "Review-Einträge können nicht gelesen werden. Aktualisiere die Desktop-App und versuche es erneut.",
     "消息分片取消标识无效。": "Ungültiges Abbruchkennzeichen für Nachrichtenteile.",
     "消息大小超出范围。": "Nachrichtengröße außerhalb des Bereichs.",
     "二进制消息格式无效。": "Ungültiges Binärnachrichtenformat.",
@@ -6949,40 +8198,55 @@ const messageCatalogs = <String, Map<String, String>>{
     "消息分片不连续。": "Nachrichtenteile sind nicht zusammenhängend.",
     "消息分片长度无效。": "Ungültige Länge eines Nachrichtenteils.",
     "不允许嵌套消息分片。": "Verschachtelte Nachrichtenteile sind nicht erlaubt.",
-    "会话版本不可用，请刷新后重试。": "Chatversion nicht verfügbar. Aktualisiere und versuche es erneut.",
-    "会话名称需为 1–120 个字符，且不能包含控制字符。": "Der Chatname muss 1–120 Zeichen lang sein und darf keine Steuerzeichen enthalten.",
+    "会话版本不可用，请刷新后重试。":
+        "Chatversion nicht verfügbar. Aktualisiere und versuche es erneut.",
+    "会话名称需为 1–120 个字符，且不能包含控制字符。":
+        "Der Chatname muss 1–120 Zeichen lang sein und darf keine Steuerzeichen enthalten.",
     "会话状态无效。": "Ungültiger Chatstatus.",
-    "无法读取电脑的会话设置，请更新电脑端后重试。": "Chat-Einstellungen können nicht gelesen werden. Aktualisiere die Desktop-App und versuche es erneut.",
+    "无法读取电脑的会话设置，请更新电脑端后重试。":
+        "Chat-Einstellungen können nicht gelesen werden. Aktualisiere die Desktop-App und versuche es erneut.",
     "Fork 环境无效。": "Ungültige Fork-Umgebung.",
-    "Fork 返回的会话身份不一致，请核实原操作。": "Der Fork hat eine abweichende Chat-Identität zurückgegeben. Prüfe den ursprünglichen Vorgang.",
+    "Fork 返回的会话身份不一致，请核实原操作。":
+        "Der Fork hat eine abweichende Chat-Identität zurückgegeben. Prüfe den ursprünglichen Vorgang.",
     "没有待确认的会话操作。": "Kein Chat-Vorgang wartet auf Bestätigung.",
     "原操作已变化，请刷新。": "Der ursprüngliche Vorgang hat sich geändert. Aktualisiere.",
-    "Fork 回执与原请求不一致。": "Die Fork-Bestätigung passt nicht zur ursprünglichen Anfrage.",
+    "Fork 回执与原请求不一致。":
+        "Die Fork-Bestätigung passt nicht zur ursprünglichen Anfrage.",
     "这项操作需要先核实结果。": "Prüfe zuerst das Ergebnis dieses Vorgangs.",
-    "这台电脑已移除，未再发送请求。": "Dieser Computer wurde entfernt. Anfrage nicht erneut gesendet.",
-    "原电脑记录尚未清理完成，请重试移除电脑后再连接。": "Die Daten des ursprünglichen Computers wurden nicht vollständig gelöscht. Wiederhole das Entfernen, bevor du dich erneut verbindest.",
-    "电脑绑定已变化，未发送原操作；请重新连接后确认。": "Kopplung des Computers geändert. Ursprünglicher Vorgang nicht gesendet. Verbinde dich erneut und bestätige.",
-    "原操作已结束或已更新，请刷新后操作。": "Der ursprüngliche Vorgang wurde beendet oder aktualisiert. Aktualisiere, bevor du fortfährst.",
+    "这台电脑已移除，未再发送请求。":
+        "Dieser Computer wurde entfernt. Anfrage nicht erneut gesendet.",
+    "原电脑记录尚未清理完成，请重试移除电脑后再连接。":
+        "Die Daten des ursprünglichen Computers wurden nicht vollständig gelöscht. Wiederhole das Entfernen, bevor du dich erneut verbindest.",
+    "电脑绑定已变化，未发送原操作；请重新连接后确认。":
+        "Kopplung des Computers geändert. Ursprünglicher Vorgang nicht gesendet. Verbinde dich erneut und bestätige.",
+    "原操作已结束或已更新，请刷新后操作。":
+        "Der ursprüngliche Vorgang wurde beendet oder aktualisiert. Aktualisiere, bevor du fortfährst.",
     "中继连接中断，操作结果需要核实。": "Relay getrennt. Prüfe das Ergebnis des Vorgangs.",
     "中继探针仅供本地开发使用。": "Die Relay-Sonde ist nur für die lokale Entwicklung.",
     "数据帧大小超出范围。": "Datenrahmengröße außerhalb des Bereichs.",
-    "连接已关闭；操作结果需要核实。": "Verbindung geschlossen. Prüfe das Ergebnis des Vorgangs.",
-    "暂时无法连接可用的通知服务，请稍后重试。": "Kein Benachrichtigungsdienst erreichbar. Versuche es später erneut.",
-    "电脑已结束屏幕共享，请重新连接并授权": "Die Bildschirmfreigabe auf deinem Computer wurde beendet. Verbinde dich erneut und erteile die Berechtigung.",
+    "连接已关闭；操作结果需要核实。":
+        "Verbindung geschlossen. Prüfe das Ergebnis des Vorgangs.",
+    "暂时无法连接可用的通知服务，请稍后重试。":
+        "Kein Benachrichtigungsdienst erreichbar. Versuche es später erneut.",
+    "电脑已结束屏幕共享，请重新连接并授权":
+        "Die Bildschirmfreigabe auf deinem Computer wurde beendet. Verbinde dich erneut und erteile die Berechtigung.",
     "加密中继": "Verschlüsseltes Relay",
     "P2P 直连": "P2P-Direktverbindung",
     "TURN 中继": "TURN-Relay",
     "WebRTC · 路径待确认": "WebRTC · Pfad nicht bestätigt",
     "连接的电脑身份不一致。": "Identität des verbundenen Computers stimmt nicht überein.",
     "草稿归属不可读取": "Zuordnung des Entwurfs kann nicht gelesen werden",
-    "工作区已属于另一份设备存储": "Der Arbeitsbereich gehört zu einem anderen Gerätespeicher",
+    "工作区已属于另一份设备存储":
+        "Der Arbeitsbereich gehört zu einem anderen Gerätespeicher",
     "工作区设备存储尚未初始化": "Gerätespeicher des Arbeitsbereichs nicht initialisiert",
     "本机数据归属不一致": "Zuordnung der lokalen Daten stimmt nicht überein",
     "本地绑定记录不可读取": "Lokaler Kopplungseintrag kann nicht gelesen werden",
-    "电脑绑定已变化，未覆盖原草稿。": "Kopplung des Computers geändert. Ursprünglicher Entwurf nicht überschrieben.",
+    "电脑绑定已变化，未覆盖原草稿。":
+        "Kopplung des Computers geändert. Ursprünglicher Entwurf nicht überschrieben.",
     "本机保存的数据不可读取": "Lokal gespeicherte Daten können nicht gelesen werden",
     "附件大小或标识无效": "Ungültige Größe oder Identität des Anhangs",
-    "手机未发送附件已超过 256 MB，请先发送或移除其他草稿中的附件。": "Nicht gesendete Anhänge überschreiten 256 MB. Sende oder entferne zuerst Anhänge aus anderen Entwürfen.",
+    "手机未发送附件已超过 256 MB，请先发送或移除其他草稿中的附件。":
+        "Nicht gesendete Anhänge überschreiten 256 MB. Sende oder entferne zuerst Anhänge aus anderen Entwürfen.",
     "附件标识无效": "Ungültige Anhangsidentität",
     "本机附件已不可读取，请重新添加。": "Lokaler Anhang nicht lesbar. Füge ihn erneut hinzu.",
     "本机附件大小已变化。": "Größe des lokalen Anhangs hat sich geändert.",
@@ -6992,14 +8256,18 @@ const messageCatalogs = <String, Map<String, String>>{
     "始终允许": "Immer erlauben",
     "取消操作": "Aktion abbrechen",
     "{0} · {1} 个目录": "{0} · {1} Verzeichnisse",
-    "{0} 上还没有项目。新建项目时选择电脑上的已有目录。": "Noch keine Projekte auf {0}. Erstelle eines aus einem vorhandenen Verzeichnis auf dem Computer.",
+    "{0} 上还没有项目。新建项目时选择电脑上的已有目录。":
+        "Noch keine Projekte auf {0}. Erstelle eines aus einem vorhandenen Verzeichnis auf dem Computer.",
     "{0} 个会话运行中": "{0} Chats laufen",
     "不在项目中工作": "Außerhalb eines Projekts arbeiten",
     "主目录": "Hauptverzeichnis",
-    "主目录是会话默认的工作目录；附加目录同样对 Agent 可见。从项目中移除目录不会删除电脑上的文件。": "Chats starten im Hauptverzeichnis; zusätzliche Verzeichnisse sind für Agents ebenfalls sichtbar. Das Entfernen eines Verzeichnisses aus dem Projekt löscht keine Dateien auf dem Computer.",
+    "主目录是会话默认的工作目录；附加目录同样对 Agent 可见。从项目中移除目录不会删除电脑上的文件。":
+        "Chats starten im Hauptverzeichnis; zusätzliche Verzeichnisse sind für Agents ebenfalls sichtbar. Das Entfernen eines Verzeichnisses aus dem Projekt löscht keine Dateien auf dem Computer.",
     "从项目中移除": "Aus dem Projekt entfernen",
-    "保存结果待核实，请刷新后查看项目，不要重复保存。": "Speicherergebnis nicht bestätigt. Aktualisiere und prüfe das Projekt, bevor du erneut speicherst.",
-    "保留会话和电脑上的文件，可随时恢复": "Behält Chats und Dateien auf dem Computer; jederzeit wiederherstellbar",
+    "保存结果待核实，请刷新后查看项目，不要重复保存。":
+        "Speicherergebnis nicht bestätigt. Aktualisiere und prüfe das Projekt, bevor du erneut speicherst.",
+    "保留会话和电脑上的文件，可随时恢复":
+        "Behält Chats und Dateien auf dem Computer; jederzeit wiederherstellbar",
     "名称和目录": "Name und Verzeichnisse",
     "已移除项目（{0}）": "Entfernte Projekte ({0})",
     "恢复": "Wiederherstellen",
@@ -7011,7 +8279,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "没有匹配的项目": "Keine passenden Projekte",
     "没有未提交的更改": "Keine nicht committeten Änderungen",
     "添加目录": "Verzeichnis hinzufügen",
-    "电脑离线，重新连接后才能保存。": "Der Computer ist offline. Verbinde dich erneut, um zu speichern.",
+    "电脑离线，重新连接后才能保存。":
+        "Der Computer ist offline. Verbinde dich erneut, um zu speichern.",
     "目录操作": "Verzeichnisaktionen",
     "移除「{0}」？": "„{0}“ entfernen?",
     "移除项目": "Projekt entfernen",
@@ -7020,17 +8289,21 @@ const messageCatalogs = <String, Map<String, String>>{
     "设为主目录": "Als Hauptverzeichnis festlegen",
     "请填写项目名称。": "Gib einen Projektnamen ein.",
     "这个目录已经在项目中。": "Dieses Verzeichnis ist bereits im Projekt.",
-    "这个项目可能已在电脑上被移除。": "Dieses Projekt wurde eventuell auf dem Computer entfernt.",
+    "这个项目可能已在电脑上被移除。":
+        "Dieses Projekt wurde eventuell auf dem Computer entfernt.",
     "这台电脑上还没有项目。": "Noch keine Projekte auf diesem Computer.",
     "选择此目录": "Dieses Verzeichnis wählen",
     "选择目录": "Verzeichnis wählen",
     "项目不存在": "Projekt nicht gefunden",
-    "项目会从列表中隐藏。会话和电脑上的文件都会保留，可在「已移除项目」中恢复。": "Das Projekt wird in der Liste ausgeblendet. Seine Chats und die Dateien auf dem Computer bleiben erhalten, und du kannst es unter Entfernte Projekte wiederherstellen.",
+    "项目会从列表中隐藏。会话和电脑上的文件都会保留，可在「已移除项目」中恢复。":
+        "Das Projekt wird in der Liste ausgeblendet. Seine Chats und die Dateien auf dem Computer bleiben erhalten, und du kannst es unter Entfernte Projekte wiederherstellen.",
     "项目名称": "Projektname",
     "项目操作": "Projektaktionen",
     "项目状态无效。": "Ungültiger Projektstatus.",
-    "会话、项目和待处理都在电脑上，连接后即可使用。": "Chats, Projekte und ausstehende Einträge liegen auf deinem Computer. Verbinde dich, um sie zu nutzen.",
-    "项目已在电脑上添加，可在「项目」中查看。": "Projekt auf deinem Computer hinzugefügt. Du findest es unter Projekte.",
+    "会话、项目和待处理都在电脑上，连接后即可使用。":
+        "Chats, Projekte und ausstehende Einträge liegen auf deinem Computer. Verbinde dich, um sie zu nutzen.",
+    "项目已在电脑上添加，可在「项目」中查看。":
+        "Projekt auf deinem Computer hinzugefügt. Du findest es unter Projekte.",
     "正在连接电脑": "Verbindung mit deinem Computer",
     "暂时连接不上电脑": "Dein Computer ist nicht erreichbar",
     "@one:{0} 分钟": "{0} Minute",
@@ -7038,7 +8311,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "@one:{0} 个文件 · 已暂存 {1}": "{0} Datei · {1} gestagt",
     "@one:{0} 项需要你处理": "{0} Eintrag erfordert deine Aufmerksamkeit",
     "@one:{0} 个文件待提交": "{0} Datei zum Committen",
-    "@one:{0} 个会话 · 按当前电脑和项目范围": "{0} Chat · Aktueller Computer und aktuelles Projekt",
+    "@one:{0} 个会话 · 按当前电脑和项目范围":
+        "{0} Chat · Aktueller Computer und aktuelles Projekt",
     "@one:{0} 项等待处理": "{0} ausstehender Eintrag",
     "@one:{0} 秒": "{0} Sekunde",
     "@one:{0} 个文件已更改": "{0} Datei geändert",
@@ -7049,17 +8323,22 @@ const messageCatalogs = <String, Map<String, String>>{
     "发送文字到电脑": "Text an Computer senden",
     "从电脑获取文字": "Text vom Computer holen",
     "编辑后发送到电脑剪贴板": "Bearbeiten und an die Zwischenablage des Computers senden",
-    "读取电脑剪贴板，复制到这部手机": "Zwischenablage des Computers lesen und auf dieses Telefon kopieren",
+    "读取电脑剪贴板，复制到这部手机":
+        "Zwischenablage des Computers lesen und auf dieses Telefon kopieren",
     "粘贴或输入要发送到电脑的文字": "Text zum Senden an den Computer einfügen oder eingeben",
-    "文字超过 1 MB，无法发送": "Der Text ist größer als 1 MB und kann nicht gesendet werden",
+    "文字超过 1 MB，无法发送":
+        "Der Text ist größer als 1 MB und kann nicht gesendet werden",
     "{0} 个字符": "{0} Zeichen",
     "清空": "Leeren",
     "仅发送": "Nur senden",
     "发送并粘贴": "Senden und einfügen",
     "已粘贴到电脑": "Auf dem Computer eingefügt",
-    "已发送到电脑剪贴板。更新电脑端后可自动粘贴": "An die Zwischenablage des Computers gesendet. Aktualisiere die Desktop-App, um automatisch einzufügen",
-    "已发送到电脑剪贴板，可在电脑上粘贴": "An die Zwischenablage des Computers gesendet. Füge den Text auf dem Computer ein",
-    "电脑剪贴板里没有文字，先在电脑上复制后再试": "Die Zwischenablage des Computers enthält keinen Text. Kopiere etwas auf dem Computer und versuche es erneut",
+    "已发送到电脑剪贴板。更新电脑端后可自动粘贴":
+        "An die Zwischenablage des Computers gesendet. Aktualisiere die Desktop-App, um automatisch einzufügen",
+    "已发送到电脑剪贴板，可在电脑上粘贴":
+        "An die Zwischenablage des Computers gesendet. Füge den Text auf dem Computer ein",
+    "电脑剪贴板里没有文字，先在电脑上复制后再试":
+        "Die Zwischenablage des Computers enthält keinen Text. Kopiere etwas auf dem Computer und versuche es erneut",
     "正在发送到电脑…": "Wird an den Computer gesendet…",
     "正在从电脑获取…": "Wird vom Computer geholt…",
     "是否允许运行以下命令？": "Ausführen dieses Befehls erlauben?",
@@ -7085,13 +8364,18 @@ const messageCatalogs = <String, Map<String, String>>{
     "文件内容": "Dateiinhalt",
     "搜索内容": "Suche nach",
     "请求的工具": "Angefordertes Werkzeug",
-    "审批详情格式不完整，请让 Agent 重新发起审批。": "Die Freigabedetails sind unvollständig. Bitte den Agent, die Freigabe erneut anzufordern.",
-    "操作详情过长，下方仅展示部分内容。请让 Agent 拆分操作后重新发起审批，以查看完整范围。": "Die Details sind zu lang, daher wird unten nur ein Teil angezeigt. Bitte den Agent, die Aktion aufzuteilen und die Freigabe erneut anzufordern.",
-    "Agent 未提供文件修改范围，请让 Agent 补充文件路径和修改内容。": "Der Agent hat nicht angegeben, welche Dateien sich ändern. Bitte ihn um Dateipfade und Änderungen.",
-    "未能从审批请求中读取文件路径、命令或修改内容，请让 Agent 补充详情后重新发起审批。": "Aus dieser Anfrage ließ sich kein Dateipfad, Befehl oder keine Änderung lesen. Bitte den Agent, Details zu ergänzen und die Freigabe erneut anzufordern.",
+    "审批详情格式不完整，请让 Agent 重新发起审批。":
+        "Die Freigabedetails sind unvollständig. Bitte den Agent, die Freigabe erneut anzufordern.",
+    "操作详情过长，下方仅展示部分内容。请让 Agent 拆分操作后重新发起审批，以查看完整范围。":
+        "Die Details sind zu lang, daher wird unten nur ein Teil angezeigt. Bitte den Agent, die Aktion aufzuteilen und die Freigabe erneut anzufordern.",
+    "Agent 未提供文件修改范围，请让 Agent 补充文件路径和修改内容。":
+        "Der Agent hat nicht angegeben, welche Dateien sich ändern. Bitte ihn um Dateipfade und Änderungen.",
+    "未能从审批请求中读取文件路径、命令或修改内容，请让 Agent 补充详情后重新发起审批。":
+        "Aus dieser Anfrage ließ sich kein Dateipfad, Befehl oder keine Änderung lesen. Bitte den Agent, Details zu ergänzen und die Freigabe erneut anzufordern.",
     "收起": "Weniger anzeigen",
     "展开全部": "Alles anzeigen",
-    "电脑已记录你的决定，但 Agent 已不在等待，请在会话中查看。": "Der Computer hat deine Entscheidung gespeichert, aber der Agent wartet nicht mehr. Sieh im Chat nach.",
+    "电脑已记录你的决定，但 Agent 已不在等待，请在会话中查看。":
+        "Der Computer hat deine Entscheidung gespeichert, aber der Agent wartet nicht mehr. Sieh im Chat nach.",
     "已取消回答": "Antwort abgebrochen",
     "已处理": "Erledigt",
     "你的选择：{0}": "Deine Wahl: {0}",
@@ -7099,13 +8383,17 @@ const messageCatalogs = <String, Map<String, String>>{
     "已在电脑上处理，或请求已失效": "Am Computer erledigt oder die Anfrage ist abgelaufen",
     "清空已处理记录": "Erledigten Verlauf löschen",
     "清空已处理记录？": "Erledigten Verlauf löschen?",
-    "只从这部手机删除，等待处理的请求不受影响。": "Nur auf diesem Telefon entfernt. Wartende Anfragen bleiben.",
+    "只从这部手机删除，等待处理的请求不受影响。":
+        "Nur auf diesem Telefon entfernt. Wartende Anfragen bleiben.",
     "没有权限请求": "Keine Berechtigungsanfragen",
-    "Agent 需要运行命令或修改文件时，会在这里请你确认。": "Wenn ein Agent einen Befehl ausführen oder Dateien ändern will, fragt er hier nach.",
+    "Agent 需要运行命令或修改文件时，会在这里请你确认。":
+        "Wenn ein Agent einen Befehl ausführen oder Dateien ändern will, fragt er hier nach.",
     "没有待回答的问题": "Keine offenen Fragen",
-    "Agent 需要你做选择或补充信息时，问题会出现在这里。": "Wenn ein Agent eine Auswahl oder Angaben braucht, erscheint die Frage hier.",
+    "Agent 需要你做选择或补充信息时，问题会出现在这里。":
+        "Wenn ein Agent eine Auswahl oder Angaben braucht, erscheint die Frage hier.",
     "收件箱是空的": "Dein Posteingang ist leer",
-    "Agent 请求权限或向你提问时会出现在这里，处理过的记录也会保留，方便回看。": "Berechtigungsanfragen und Fragen von Agents erscheinen hier. Erledigte bleiben zum Nachsehen erhalten.",
+    "Agent 请求权限或向你提问时会出现在这里，处理过的记录也会保留，方便回看。":
+        "Berechtigungsanfragen und Fragen von Agents erscheinen hier. Erledigte bleiben zum Nachsehen erhalten.",
     "等待你回答": "Wartet auf deine Antwort",
     "等待你确认": "Wartet auf deine Freigabe",
     "权限请求": "Berechtigungsanfrage",
@@ -7113,68 +8401,104 @@ const messageCatalogs = <String, Map<String, String>>{
     "可以返回收件箱查看其它事项。": "Zurück zum Posteingang, um andere Einträge zu sehen.",
     "跳过所有权限确认。": "Überspringt alle Berechtigungsabfragen.",
     "减少确认次数。": "Reduziert Bestätigungen.",
-    "仅自动读取；其他操作均需先征得你的批准。": "Liest automatisch; alles andere braucht zuerst deine Freigabe.",
-    "不中断任务；所有操作和决策均自动进行。": "Unterbricht nie; alle Aktionen und Entscheidungen laufen automatisch.",
-    "受保护的工具操作前请求审批。": "Fragt vor geschützten Werkzeugaktionen nach einer Freigabe.",
+    "仅自动读取；其他操作均需先征得你的批准。":
+        "Liest automatisch; alles andere braucht zuerst deine Freigabe.",
+    "不中断任务；所有操作和决策均自动进行。":
+        "Unterbricht nie; alle Aktionen und Entscheidungen laufen automatisch.",
+    "受保护的工具操作前请求审批。":
+        "Fragt vor geschützten Werkzeugaktionen nach einer Freigabe.",
     "关闭沙箱并跳过审批。": "Schaltet die Sandbox aus und überspringt Freigaben.",
-    "每次工具执行前在此审批；审批桥不可用时拒绝执行。": "Jede Tool-Ausführung hier freigeben; Ausführungen werden abgelehnt, wenn die Freigabe-Bridge nicht verfügbar ist.",
-    "OpenCode 默认 Agent；工具按你配置的权限执行。": "Standard-Agent von OpenCode; Werkzeuge folgen deinen konfigurierten Berechtigungen.",
-    "编辑文件和其他受保护操作前请求审批。": "Fragt vor Dateibearbeitungen oder anderen geschützten Aktionen nach Freigabe.",
-    "只分析，不修改文件或执行命令。": "Analysiert, ohne Dateien zu ändern oder Befehle auszuführen.",
+    "每次工具执行前在此审批；审批桥不可用时拒绝执行。":
+        "Jede Tool-Ausführung hier freigeben; Ausführungen werden abgelehnt, wenn die Freigabe-Bridge nicht verfügbar ist.",
+    "OpenCode 默认 Agent；工具按你配置的权限执行。":
+        "Standard-Agent von OpenCode; Werkzeuge folgen deinen konfigurierten Berechtigungen.",
+    "编辑文件和其他受保护操作前请求审批。":
+        "Fragt vor Dateibearbeitungen oder anderen geschützten Aktionen nach Freigabe.",
+    "只分析，不修改文件或执行命令。":
+        "Analysiert, ohne Dateien zu ändern oder Befehle auszuführen.",
     "改文件前先问我。": "Fragt vor Dateiänderungen nach.",
-    "只读沙箱；需要扩大权限时请求审批。": "Schreibgeschützte Sandbox; fragt nach Freigabe, wenn mehr Zugriff nötig ist.",
+    "只读沙箱；需要扩大权限时请求审批。":
+        "Schreibgeschützte Sandbox; fragt nach Freigabe, wenn mehr Zugriff nötig ist.",
     "按需确认": "Bei Bedarf fragen",
     "只读模式": "Schreibgeschützt",
     "所选策略在下一轮执行时生效": "Die gewählte Richtlinie gilt ab dem nächsten Durchgang",
-    "从不弹出确认；只运行预先允许和安全的只读操作，其余一律拒绝。": "Fragt nie nach; führt vorab erlaubte und sichere Leseaktionen aus und verweigert alles andere.",
-    "Pi 不内置逐工具审批或沙箱；工具直接执行，扩展发起的询问会显示在对话中。": "Pi hat keine Freigaben pro Werkzeug und keine Sandbox; Werkzeuge laufen direkt, Nachfragen von Erweiterungen erscheinen im Gespräch.",
+    "从不弹出确认；只运行预先允许和安全的只读操作，其余一律拒绝。":
+        "Fragt nie nach; führt vorab erlaubte und sichere Leseaktionen aus und verweigert alles andere.",
+    "Pi 不内置逐工具审批或沙箱；工具直接执行，扩展发起的询问会显示在对话中。":
+        "Pi hat keine Freigaben pro Werkzeug und keine Sandbox; Werkzeuge laufen direkt, Nachfragen von Erweiterungen erscheinen im Gespräch.",
     "跳过审批": "Freigaben überspringen",
     "仅限预先允许": "Nur vorab erlaubt",
     "自动判断": "Automatisch",
-    "监督模式：工具操作前请求审批。": "Überwacht: fragt vor Werkzeugaktionen nach einer Freigabe.",
-    "由 ZCode 判断哪些操作可直接执行。": "ZCode entscheidet, welche Aktionen direkt laufen dürfen.",
-    "只运行预先允许的工具，其余直接拒绝，不请求审批。": "Führt nur vorab erlaubte Tools aus und lehnt den Rest ohne Nachfrage ab.",
-    "由 AI 审查员批准或拒绝原本需要询问的操作；审查失败只阻止该操作。": "Ein KI-Prüfer genehmigt oder verweigert jede Aktion, die sonst nachfragen würde; eine fehlgeschlagene Prüfung blockiert nur diese Aktion.",
-    "由 Claude 自动分类权限请求。": "Lässt Claude Berechtigungsanfragen automatisch einordnen.",
+    "监督模式：工具操作前请求审批。":
+        "Überwacht: fragt vor Werkzeugaktionen nach einer Freigabe.",
+    "由 ZCode 判断哪些操作可直接执行。":
+        "ZCode entscheidet, welche Aktionen direkt laufen dürfen.",
+    "只运行预先允许的工具，其余直接拒绝，不请求审批。":
+        "Führt nur vorab erlaubte Tools aus und lehnt den Rest ohne Nachfrage ab.",
+    "由 AI 审查员批准或拒绝原本需要询问的操作；审查失败只阻止该操作。":
+        "Ein KI-Prüfer genehmigt oder verweigert jede Aktion, die sonst nachfragen würde; eine fehlgeschlagene Prüfung blockiert nur diese Aktion.",
+    "由 Claude 自动分类权限请求。":
+        "Lässt Claude Berechtigungsanfragen automatisch einordnen.",
     "完全访问": "Vollzugriff",
     "编辑前先出计划。": "Erstellt vor dem Bearbeiten einen Plan.",
     "默认权限": "Standardberechtigungen",
-    "允许文件编辑；其他受保护操作仍需审批。": "Erlaubt Dateibearbeitungen; andere geschützte Aktionen erfordern weiterhin eine Freigabe.",
+    "允许文件编辑；其他受保护操作仍需审批。":
+        "Erlaubt Dateibearbeitungen; andere geschützte Aktionen erfordern weiterhin eine Freigabe.",
     "权限策略": "Berechtigungsrichtlinie",
     "原生规则": "Native Regeln",
-    "先制定计划；需要批准的操作仍会询问。": "Erstellt zuerst einen Plan; freigabepflichtige Aktionen fragen weiterhin nach.",
+    "先制定计划；需要批准的操作仍会询问。":
+        "Erstellt zuerst einen Plan; freigabepflichtige Aktionen fragen weiterhin nach.",
     "操作前确认": "Vor Aktionen fragen",
-    "按 Cursor 权限规则执行；需要审批的操作在此确认。": "Folgt den Berechtigungsregeln von Cursor; freigabepflichtige Aktionen werden hier bestätigt.",
+    "按 Cursor 权限规则执行；需要审批的操作在此确认。":
+        "Folgt den Berechtigungsregeln von Cursor; freigabepflichtige Aktionen werden hier bestätigt.",
     "计划模式": "Planmodus",
-    "对所有 Agent 跳过全部权限检查，包括危险命令。": "Überspringt für alle Agenten sämtliche Berechtigungsprüfungen, auch bei gefährlichen Befehlen.",
-    "此 Agent 未报告可切换的权限模式；审批请求仍会显示在对话中。": "Dieser Agent meldet keine umschaltbaren Berechtigungsmodi; Freigabeanfragen erscheinen weiterhin im Gespräch.",
-    "原 Agent、模型、思考强度或权限策略当前不可用，请重新选择后发送。": "Der ursprüngliche Agent, das Modell, der Denkaufwand oder die Berechtigungsrichtlinie ist nicht mehr verfügbar. Wähle vor dem Senden erneut.",
+    "对所有 Agent 跳过全部权限检查，包括危险命令。":
+        "Überspringt für alle Agenten sämtliche Berechtigungsprüfungen, auch bei gefährlichen Befehlen.",
+    "此 Agent 未报告可切换的权限模式；审批请求仍会显示在对话中。":
+        "Dieser Agent meldet keine umschaltbaren Berechtigungsmodi; Freigabeanfragen erscheinen weiterhin im Gespräch.",
+    "原 Agent、模型、思考强度或权限策略当前不可用，请重新选择后发送。":
+        "Der ursprüngliche Agent, das Modell, der Denkaufwand oder die Berechtigungsrichtlinie ist nicht mehr verfügbar. Wähle vor dem Senden erneut.",
     "计划模式；禁用所有编辑工具。": "Planmodus; alle Bearbeitungswerkzeuge sind deaktiviert.",
-    "每个工具首次使用时请求授权。": "Fragt bei der ersten Nutzung jedes Werkzeugs nach einer Berechtigung.",
-    "本会话内自动接受文件编辑。": "Akzeptiert Dateiänderungen in dieser Sitzung automatisch.",
+    "每个工具首次使用时请求授权。":
+        "Fragt bei der ersten Nutzung jedes Werkzeugs nach einer Berechtigung.",
+    "本会话内自动接受文件编辑。":
+        "Akzeptiert Dateiänderungen in dieser Sitzung automatisch.",
     "自动编辑文件。": "Bearbeitet Dateien automatisch.",
-    "自动驾驶：工具操作无需询问直接执行。": "Autopilot: führt Werkzeugaktionen ohne Nachfrage aus.",
-    "由 Grok 判断哪些工具操作可自动执行。": "Grok entscheidet, welche Werkzeugaktionen automatisch laufen dürfen.",
-    "跳过 Claude Code 工具权限检查。": "Überspringt die Tool-Berechtigungsprüfungen von Claude Code.",
+    "自动驾驶：工具操作无需询问直接执行。":
+        "Autopilot: führt Werkzeugaktionen ohne Nachfrage aus.",
+    "由 Grok 判断哪些工具操作可自动执行。":
+        "Grok entscheidet, welche Werkzeugaktionen automatisch laufen dürfen.",
+    "跳过 Claude Code 工具权限检查。":
+        "Überspringt die Tool-Berechtigungsprüfungen von Claude Code.",
     "自动允许 Antigravity 工具操作。": "Erlaubt Antigravity-Tool-Aktionen automatisch.",
     "接受编辑": "Bearbeitungen akzeptieren",
-    "工作区写入沙箱；需要越出沙箱时请求审批。": "Sandbox mit Schreibzugriff auf den Arbeitsbereich; Freigabe nur beim Verlassen der Sandbox.",
+    "工作区写入沙箱；需要越出沙箱时请求审批。":
+        "Sandbox mit Schreibzugriff auf den Arbeitsbereich; Freigabe nur beim Verlassen der Sandbox.",
     "允许所有工具操作，无需审批。": "Erlaubt alle Werkzeugaktionen ohne Freigabe.",
-    "探索并制定计划；使用 Claude 原生计划模式。": "Erkunden und planen mit dem nativen Planmodus von Claude.",
-    "使用 Antigravity 原生计划模式；工具执行仍在此审批。": "Verwendet den nativen Planmodus von Antigravity; Tool-Ausführungen werden weiterhin hier freigegeben.",
-    "自动批准操作；明确禁止的操作和团队限制仍然生效。": "Genehmigt Aktionen automatisch; ausdrücklich verbotene Aktionen und Teamvorgaben gelten weiterhin.",
-    "常规编辑和命令自动执行；高风险操作、提问和计划仍会询问。": "Übliche Änderungen und Befehle laufen automatisch; riskante Aktionen, Fragen und Pläne fragen weiterhin nach.",
+    "探索并制定计划；使用 Claude 原生计划模式。":
+        "Erkunden und planen mit dem nativen Planmodus von Claude.",
+    "使用 Antigravity 原生计划模式；工具执行仍在此审批。":
+        "Verwendet den nativen Planmodus von Antigravity; Tool-Ausführungen werden weiterhin hier freigegeben.",
+    "自动批准操作；明确禁止的操作和团队限制仍然生效。":
+        "Genehmigt Aktionen automatisch; ausdrücklich verbotene Aktionen und Teamvorgaben gelten weiterhin.",
+    "常规编辑和命令自动执行；高风险操作、提问和计划仍会询问。":
+        "Übliche Änderungen und Befehle laufen automatisch; riskante Aktionen, Fragen und Pläne fragen weiterhin nach.",
     "正在响应": "Antwortet",
     "分叉 · {0}": "Fork · {0}",
     "分叉自较早的会话": "Von einem früheren Gespräch abgezweigt",
     "分叉自": "Abgezweigt von",
-    "已恢复所选轮次结束时的文件，未提交的成果可在“变更”中查看。": "Die Dateien wurden auf das Ende der gewählten Runde zurückgesetzt; nicht committete Arbeit steht unter Änderungen.",
-    "此项目不是 Git 仓库，分叉只继承对话上下文，并沿用同一项目目录。": "Dieses Projekt ist kein Git-Repository; der Fork übernimmt nur das Gespräch und arbeitet im selben Ordner weiter.",
-    "此会话由旧版分叉创建，未恢复历史轮次的文件。": "Dieses Gespräch stammt von einem älteren Fork und hat die Dateien der Runde nicht wiederhergestellt.",
-    "沿用同一项目目录；分叉不会还原文件。": "Verwendet denselben Projektordner; ein Fork stellt keine Dateien wieder her.",
+    "已恢复所选轮次结束时的文件，未提交的成果可在“变更”中查看。":
+        "Die Dateien wurden auf das Ende der gewählten Runde zurückgesetzt; nicht committete Arbeit steht unter Änderungen.",
+    "此项目不是 Git 仓库，分叉只继承对话上下文，并沿用同一项目目录。":
+        "Dieses Projekt ist kein Git-Repository; der Fork übernimmt nur das Gespräch und arbeitet im selben Ordner weiter.",
+    "此会话由旧版分叉创建，未恢复历史轮次的文件。":
+        "Dieses Gespräch stammt von einem älteren Fork und hat die Dateien der Runde nicht wiederhergestellt.",
+    "沿用同一项目目录；分叉不会还原文件。":
+        "Verwendet denselben Projektordner; ein Fork stellt keine Dateien wieder her.",
     "收起继承的上下文": "Übernommenen Kontext ausblenden",
     "查看继承的上下文（{0} 轮）": "Übernommenen Kontext anzeigen ({0})",
-    "Agent 已获得以上上下文，在下方发送消息即可从这里继续。": "Der Agent kennt diesen Kontext bereits. Sende unten eine Nachricht, um hier weiterzumachen.",
+    "Agent 已获得以上上下文，在下方发送消息即可从这里继续。":
+        "Der Agent kennt diesen Kontext bereits. Sende unten eine Nachricht, um hier weiterzumachen.",
   },
   "es": {
     "返回": "Atrás",
@@ -7209,34 +8533,46 @@ const messageCatalogs = <String, Map<String, String>>{
     "连接中": "Conectando",
     "离线": "Sin conexión",
     "终端": "Terminal",
-    "连接超时，请检查网络后重试。": "Se agotó el tiempo de conexión. Revisa tu red e inténtalo de nuevo.",
+    "连接超时，请检查网络后重试。":
+        "Se agotó el tiempo de conexión. Revisa tu red e inténtalo de nuevo.",
     "电脑 {0}": "Computadora {0}",
     "电脑离线": "Computadora sin conexión",
     "已提交并推送": "Commit y push realizados",
-    "电脑绑定已改变，请返回设备列表。": "La vinculación de la computadora cambió. Vuelve a la lista de dispositivos.",
+    "电脑绑定已改变，请返回设备列表。":
+        "La vinculación de la computadora cambió. Vuelve a la lista de dispositivos.",
     "任务或远控期间保持唤醒": "Mantener activa durante tareas o control remoto",
-    "电脑离线，重连后刷新设置": "Computadora sin conexión. Vuelve a conectarte para actualizar la configuración.",
-    "阻止空闲睡眠，仍可锁屏或手动睡眠": "Evita la suspensión por inactividad. Aún puedes bloquear o suspender manualmente.",
+    "电脑离线，重连后刷新设置":
+        "Computadora sin conexión. Vuelve a conectarte para actualizar la configuración.",
+    "阻止空闲睡眠，仍可锁屏或手动睡眠":
+        "Evita la suspensión por inactividad. Aún puedes bloquear o suspender manualmente.",
     "电脑暂未能保持唤醒：{0}": "No se pudo mantener activa la computadora: {0}",
     "刷新保持唤醒设置": "Actualizar la configuración de mantener activa",
     "电脑": "Computadoras",
     "扫码连接": "Escanear para conectar",
     "偏好设置": "Preferencias",
     "把电脑上的工作带在身边": "Lleva tu trabajo contigo",
-    "连接自己的电脑，查看会话、发送任务并处理 Agent 的权限请求。无需注册账号。": "Conecta tu computadora para ver conversaciones, enviar tareas y responder a las solicitudes de permisos de los Agents. No necesitas cuenta.",
+    "连接自己的电脑，查看会话、发送任务并处理 Agent 的权限请求。无需注册账号。":
+        "Conecta tu computadora para ver conversaciones, enviar tareas y responder a las solicitudes de permisos de los Agents. No necesitas cuenta.",
     "连接电脑": "Conectar computadora",
-    "当前内测版本尚未配置接入服务。": "El servicio de conexión no está configurado en esta versión beta.",
-    "在电脑端打开「连接手机」，扫描二维码。": "Abre «Conectar teléfono» en tu computadora y escanea el código QR.",
-    "扫描电脑上的二维码，或粘贴配对链接": "Escanea el código QR de tu computadora o pega un enlace de vinculación.",
-    "当前内测版本尚未配置接入服务": "El servicio de conexión no está configurado en esta versión beta",
+    "当前内测版本尚未配置接入服务。":
+        "El servicio de conexión no está configurado en esta versión beta.",
+    "在电脑端打开「连接手机」，扫描二维码。":
+        "Abre «Conectar teléfono» en tu computadora y escanea el código QR.",
+    "扫描电脑上的二维码，或粘贴配对链接":
+        "Escanea el código QR de tu computadora o pega un enlace de vinculación.",
+    "当前内测版本尚未配置接入服务":
+        "El servicio de conexión no está configurado en esta versión beta",
     "更多": "Más",
     "从这部手机移除「{0}」？": "¿Quitar «{0}» de este teléfono?",
-    "手机会删除这台电脑的配对凭证，之后需重新扫码才能连接。电脑上的任务不受影响；如需让电脑也拒绝这部手机，请在电脑的设备列表中撤销。": "Se eliminarán del teléfono las credenciales de vinculación de esta computadora. Tendrás que volver a escanear para conectarte. Las tareas en la computadora no se verán afectadas. Para que la computadora también rechace este teléfono, revócalo en su lista de dispositivos.",
+    "手机会删除这台电脑的配对凭证，之后需重新扫码才能连接。电脑上的任务不受影响；如需让电脑也拒绝这部手机，请在电脑的设备列表中撤销。":
+        "Se eliminarán del teléfono las credenciales de vinculación de esta computadora. Tendrás que volver a escanear para conectarte. Las tareas en la computadora no se verán afectadas. Para que la computadora también rechace este teléfono, revócalo en su lista de dispositivos.",
     "取消": "Cancelar",
-    "移除未完成，连接已关闭，请重试或核实安全存储。": "No se completó la eliminación. La conexión está cerrada. Vuelve a intentarlo o revisa el almacenamiento seguro.",
+    "移除未完成，连接已关闭，请重试或核实安全存储。":
+        "No se completó la eliminación. La conexión está cerrada. Vuelve a intentarlo o revisa el almacenamiento seguro.",
     "移除": "Quitar",
     "撤销绑定": "Revocar vinculación",
-    "请在「{0}」的设备列表中撤销这部手机。撤销后这部手机将无法再连接该电脑；电脑上正在执行的任务不受影响。": "Revoca este teléfono en la lista de dispositivos de «{0}». Ya no podrá conectarse a esa computadora. Las tareas en ejecución en la computadora no se verán afectadas.",
+    "请在「{0}」的设备列表中撤销这部手机。撤销后这部手机将无法再连接该电脑；电脑上正在执行的任务不受影响。":
+        "Revoca este teléfono en la lista de dispositivos de «{0}». Ya no podrá conectarse a esa computadora. Las tareas en ejecución en la computadora no se verán afectadas.",
     "知道了": "Entendido",
     "通知设置": "Notificaciones",
     "重新连接": "Volver a conectar",
@@ -7245,7 +8581,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "最后同步 {0}": "Última sincronización {0}",
     "远程桌面": "Escritorio remoto",
     "远程桌面 · 电脑离线": "Escritorio remoto · Computadora sin conexión",
-    "这台电脑上还没有检测到 Agent。": "Todavía no se detectó ningún Agent en esta computadora.",
+    "这台电脑上还没有检测到 Agent。":
+        "Todavía no se detectó ningún Agent en esta computadora.",
     "已就绪": "Listo",
     "已安装 · 未就绪": "Instalado · No listo",
     "需要在电脑上配置": "Configúralo en la computadora",
@@ -7259,21 +8596,29 @@ const messageCatalogs = <String, Map<String, String>>{
     "新画面解码不可用": "Nuevo decodificador de video no disponible",
     "换路后画面不可用": "Video no disponible tras cambiar de conexión",
     "正在核实并恢复远程桌面连接": "Verificando y restaurando el escritorio remoto",
-    "连接归属暂时无法核实，正在恢复远程桌面": "No se pudo verificar a quién pertenece la conexión. Restaurando el escritorio remoto.",
-    "连接暂时无法恢复，请点击重新连接。": "No se pudo restaurar la conexión. Toca Volver a conectar.",
-    "电脑离线，连接后再打开远程桌面": "Computadora sin conexión. Vuelve a conectarte para abrir el escritorio remoto.",
+    "连接归属暂时无法核实，正在恢复远程桌面":
+        "No se pudo verificar a quién pertenece la conexión. Restaurando el escritorio remoto.",
+    "连接暂时无法恢复，请点击重新连接。":
+        "No se pudo restaurar la conexión. Toca Volver a conectar.",
+    "电脑离线，连接后再打开远程桌面":
+        "Computadora sin conexión. Vuelve a conectarte para abrir el escritorio remoto.",
     "电脑没有可用的显示器": "No hay pantallas disponibles en esta computadora",
     "手机解码器不可用": "Decodificador del teléfono no disponible",
     "手机视频画面不可用": "Video no disponible en el teléfono",
     "视频画面不可用，使用图片模式": "Video no disponible. Se usa el modo de imagen.",
     "暂时无法连接：{0}": "No se pudo conectar: {0}",
     "{0}，已切换图片模式": "{0}. Se cambió al modo de imagen.",
-    "请在电脑上允许共享屏幕和键鼠控制": "Permite compartir pantalla y el control de teclado y ratón en tu computadora.",
-    "电脑授权回复无效，请重新连接": "Respuesta de autorización no válida. Vuelve a conectarte.",
-    "电脑未能准备屏幕共享，请重新连接并授权": "La computadora no pudo preparar el uso compartido de pantalla. Vuelve a conectarte y autoriza de nuevo.",
-    "等待电脑授权超时，请重新连接后再试": "Se agotó el tiempo de espera de la autorización. Vuelve a conectarte e inténtalo de nuevo.",
+    "请在电脑上允许共享屏幕和键鼠控制":
+        "Permite compartir pantalla y el control de teclado y ratón en tu computadora.",
+    "电脑授权回复无效，请重新连接":
+        "Respuesta de autorización no válida. Vuelve a conectarte.",
+    "电脑未能准备屏幕共享，请重新连接并授权":
+        "La computadora no pudo preparar el uso compartido de pantalla. Vuelve a conectarte y autoriza de nuevo.",
+    "等待电脑授权超时，请重新连接后再试":
+        "Se agotó el tiempo de espera de la autorización. Vuelve a conectarte e inténtalo de nuevo.",
     "画面正在恢复": "Restaurando el video",
-    "电脑未确认当前画面的就绪状态": "La computadora no confirmó que el video actual esté listo.",
+    "电脑未确认当前画面的就绪状态":
+        "La computadora no confirmó que el video actual esté listo.",
     "电脑视频编码异常": "Error del codificador de video de la computadora",
     "电脑画面恢复超时": "Se agotó el tiempo al restaurar el video de la computadora",
     "电脑画面正在恢复": "Restaurando el video de la computadora",
@@ -7292,13 +8637,17 @@ const messageCatalogs = <String, Map<String, String>>{
     "发送{0}到电脑": "Enviar {0} a la computadora",
     "文字": "texto",
     "图片": "imagen",
-    "读取手机剪贴板，按系统提示允许粘贴": "Leer el portapapeles del teléfono. Permite pegar cuando se te pida.",
+    "读取手机剪贴板，按系统提示允许粘贴":
+        "Leer el portapapeles del teléfono. Permite pegar cuando se te pida.",
     "从电脑获取{0}": "Obtener {0} de la computadora",
     "复制到手机剪贴板": "Copiar al portapapeles del teléfono",
-    "当前连接不支持独立剪贴板传输，请更新电脑和 App 后重试": "Esta conexión no admite transferencias de portapapeles separadas. Actualiza la app de escritorio y la app del teléfono.",
-    "手机剪贴板没有图片，或尚未允许粘贴": "No hay ninguna imagen en el portapapeles del teléfono o no se concedió permiso para pegar.",
+    "当前连接不支持独立剪贴板传输，请更新电脑和 App 后重试":
+        "Esta conexión no admite transferencias de portapapeles separadas. Actualiza la app de escritorio y la app del teléfono.",
+    "手机剪贴板没有图片，或尚未允许粘贴":
+        "No hay ninguna imagen en el portapapeles del teléfono o no se concedió permiso para pegar.",
     "手机剪贴板没有文字": "No hay texto en el portapapeles del teléfono",
-    "电脑尚不支持分块剪贴板传输，请更新电脑客户端": "Actualiza la app de escritorio para usar transferencias de portapapeles por partes.",
+    "电脑尚不支持分块剪贴板传输，请更新电脑客户端":
+        "Actualiza la app de escritorio para usar transferencias de portapapeles por partes.",
     "已发送到电脑剪贴板": "Enviado al portapapeles de la computadora",
     "已复制到手机剪贴板": "Copiado al portapapeles del teléfono",
     "剪贴板操作未完成": "Operación del portapapeles incompleta",
@@ -7310,29 +8659,38 @@ const messageCatalogs = <String, Map<String, String>>{
     "重新选择共享屏幕": "Volver a elegir la pantalla compartida",
     "正在准备剪贴板传输…": "Preparando la transferencia del portapapeles…",
     "剪贴板传输 {0}%": "Transferencia del portapapeles {0} %",
-    "已停止等待，复制操作可能已完成，请核实剪贴板": "Se dejó de esperar. Es posible que la copia se haya completado. Revisa el portapapeles.",
+    "已停止等待，复制操作可能已完成，请核实剪贴板":
+        "Se dejó de esperar. Es posible que la copia se haya completado. Revisa el portapapeles.",
     "键盘": "Teclado",
     "移动画面": "Mover vista",
     "操作电脑": "Controlar la computadora",
     "适应屏幕": "Ajustar a la pantalla",
     "剪贴板": "Portapapeles",
-    "电脑已锁定，Agent 操作仍可用。\n解锁电脑后点「重新连接」。": "Computadora bloqueada. Las acciones de los Agents siguen disponibles.\nDesbloquea tu computadora y toca Volver a conectar.",
+    "电脑已锁定，Agent 操作仍可用。\n解锁电脑后点「重新连接」。":
+        "Computadora bloqueada. Las acciones de los Agents siguen disponibles.\nDesbloquea tu computadora y toca Volver a conectar.",
     "服务连接正常": "Servicio conectado",
     "连接失败，请重试。": "No se pudo conectar. Inténtalo de nuevo.",
-    "接入服务只转发加密数据，会话和任务保存在你的电脑上。": "El servicio de conexión solo retransmite datos cifrados. Las conversaciones y tareas se quedan en tu computadora.",
+    "接入服务只转发加密数据，会话和任务保存在你的电脑上。":
+        "El servicio de conexión solo retransmite datos cifrados. Las conversaciones y tareas se quedan en tu computadora.",
     "尚未配置服务地址": "Dirección del servicio no configurada",
-    "此服务尚未开放电脑配对。": "La vinculación de computadoras no está habilitada en este servicio.",
+    "此服务尚未开放电脑配对。":
+        "La vinculación de computadoras no está habilitada en este servicio.",
     "正在检查": "Comprobando",
     "检查连接": "Comprobar conexión",
-    "后台提醒暂未启用，静音设置可提前保存。仅影响这部手机，不影响电脑任务和 Agent 审批。": "Las alertas en segundo plano no están activadas. Puedes guardar ya tus preferencias de silencio. Solo afectan a este teléfono, no a las tareas de la computadora ni a las aprobaciones de los Agents.",
-    "通知通道已连接。提醒只影响这部手机，不会直接批准操作。": "Notificaciones conectadas. Las alertas solo afectan a este teléfono y nunca aprueban acciones automáticamente.",
-    "后台提醒暂未启用，可在这里授权系统通知。": "Las alertas en segundo plano no están activadas. Concede aquí el permiso de notificaciones.",
-    "此版本未配置后台提醒，静音设置可提前保存。": "Las alertas en segundo plano no están configuradas en esta compilación. Puedes guardar ya tus preferencias de silencio.",
+    "后台提醒暂未启用，静音设置可提前保存。仅影响这部手机，不影响电脑任务和 Agent 审批。":
+        "Las alertas en segundo plano no están activadas. Puedes guardar ya tus preferencias de silencio. Solo afectan a este teléfono, no a las tareas de la computadora ni a las aprobaciones de los Agents.",
+    "通知通道已连接。提醒只影响这部手机，不会直接批准操作。":
+        "Notificaciones conectadas. Las alertas solo afectan a este teléfono y nunca aprueban acciones automáticamente.",
+    "后台提醒暂未启用，可在这里授权系统通知。":
+        "Las alertas en segundo plano no están activadas. Concede aquí el permiso de notificaciones.",
+    "此版本未配置后台提醒，静音设置可提前保存。":
+        "Las alertas en segundo plano no están configuradas en esta compilación. Puedes guardar ya tus preferencias de silencio.",
     "正在连接通知服务": "Conectando con el servicio de notificaciones",
     "重新检测后台提醒": "Volver a comprobar las alertas en segundo plano",
     "启用后台提醒": "Activar alertas en segundo plano",
     "通知设置暂不可用。": "La configuración de notificaciones no está disponible.",
-    "保存结果未确认，请检查网络后重新读取。": "No se confirmó el guardado. Revisa tu red y vuelve a cargar.",
+    "保存结果未确认，请检查网络后重新读取。":
+        "No se confirmó el guardado. Revisa tu red y vuelve a cargar.",
     "会话": "Conversaciones",
     "重新读取": "Volver a cargar",
     "静音这台电脑": "Silenciar esta computadora",
@@ -7340,14 +8698,17 @@ const messageCatalogs = <String, Map<String, String>>{
     "已静音会话": "Conversaciones silenciadas",
     "未加载的会话": "Conversación no cargada",
     "取消会话静音": "Dejar de silenciar la conversación",
-    "这台电脑已静音，取消会话静音后仍不会收到提醒。": "Esta computadora está silenciada. Dejar de silenciar la conversación no activará las alertas.",
+    "这台电脑已静音，取消会话静音后仍不会收到提醒。":
+        "Esta computadora está silenciada. Dejar de silenciar la conversación no activará las alertas.",
     "静音此会话": "Silenciar esta conversación",
     "清除离线缓存？": "¿Borrar la caché sin conexión?",
-    "只清除此手机保存的会话缓存，保留草稿、未发送附件和电脑配对。电脑上的会话不受影响，联网后会重新缓存。": "Solo borra las conversaciones guardadas en caché en este teléfono. Se conservan los borradores, los adjuntos no enviados y las vinculaciones. Las conversaciones de tu computadora no se ven afectadas y se volverán a guardar en caché cuando haya conexión.",
+    "只清除此手机保存的会话缓存，保留草稿、未发送附件和电脑配对。电脑上的会话不受影响，联网后会重新缓存。":
+        "Solo borra las conversaciones guardadas en caché en este teléfono. Se conservan los borradores, los adjuntos no enviados y las vinculaciones. Las conversaciones de tu computadora no se ven afectadas y se volverán a guardar en caché cuando haya conexión.",
     "清除": "Borrar",
     "未能清除缓存：{0}": "No se pudo borrar la caché: {0}",
     "最近会话离线缓存": "Caché sin conexión de conversaciones recientes",
-    "{0} 个会话 · {1} MB\n最多 30 个会话、32 MB；保存文字和附件信息。": "{0} conversaciones · {1} MB\nHasta 30 conversaciones y 32 MB. Guarda el texto y la información de los adjuntos.",
+    "{0} 个会话 · {1} MB\n最多 30 个会话、32 MB；保存文字和附件信息。":
+        "{0} conversaciones · {1} MB\nHasta 30 conversaciones y 32 MB. Guarda el texto y la información de los adjuntos.",
     "正在读取缓存大小…": "Leyendo el tamaño de la caché…",
     "正在清除…": "Borrando…",
     "清除缓存": "Borrar caché",
@@ -7361,15 +8722,21 @@ const messageCatalogs = <String, Map<String, String>>{
     "管理已绑定设备": "Administrar dispositivos vinculados",
     "{0} 台": "{0} computadoras",
     "本机数据": "En este teléfono",
-    "无需注册账号：通过电脑上的配对二维码建立信任，可随时在电脑上撤销。草稿和离线缓存保存在这部手机；提醒偏好可在电脑或会话菜单中设置。": "No necesitas cuenta. Escanea el código QR de tu computadora para vincularla y revoca el acceso desde ella cuando quieras. Los borradores y la caché sin conexión se quedan en este teléfono. Configura las alertas en la computadora o en el menú de una conversación.",
-    "项目目录不可用，请刷新项目后重试。": "Directorio del proyecto no disponible. Actualiza el proyecto e inténtalo de nuevo.",
+    "无需注册账号：通过电脑上的配对二维码建立信任，可随时在电脑上撤销。草稿和离线缓存保存在这部手机；提醒偏好可在电脑或会话菜单中设置。":
+        "No necesitas cuenta. Escanea el código QR de tu computadora para vincularla y revoca el acceso desde ella cuando quieras. Los borradores y la caché sin conexión se quedan en este teléfono. Configura las alertas en la computadora o en el menú de una conversación.",
+    "项目目录不可用，请刷新项目后重试。":
+        "Directorio del proyecto no disponible. Actualiza el proyecto e inténtalo de nuevo.",
     "选择终端目录": "Elegir directorio del terminal",
-    "连接或项目目录已改变，请重新选择终端目录。": "La conexión o el directorio del proyecto cambió. Vuelve a elegir el directorio del terminal.",
-    "启动结果待核实，请使用原操作恢复。": "Resultado del inicio sin confirmar. Recupera la operación original.",
+    "连接或项目目录已改变，请重新选择终端目录。":
+        "La conexión o el directorio del proyecto cambió. Vuelve a elegir el directorio del terminal.",
+    "启动结果待核实，请使用原操作恢复。":
+        "Resultado del inicio sin confirmar. Recupera la operación original.",
     "关闭这个终端？": "¿Cerrar este terminal?",
-    "将在电脑上结束该终端及其中运行的命令。离开页面不会关闭终端。": "Finaliza este terminal y sus comandos en ejecución en tu computadora. Salir de esta página no cierra el terminal.",
+    "将在电脑上结束该终端及其中运行的命令。离开页面不会关闭终端。":
+        "Finaliza este terminal y sus comandos en ejecución en tu computadora. Salir de esta página no cierra el terminal.",
     "关闭终端": "Cerrar terminal",
-    "连接已改变，请刷新后重新确认关闭。": "La conexión cambió. Actualiza y vuelve a confirmar el cierre.",
+    "连接已改变，请刷新后重新确认关闭。":
+        "La conexión cambió. Actualiza y vuelve a confirmar el cierre.",
     "终端 {0}": "Terminal {0}",
     "新建终端": "Nuevo terminal",
     "关闭当前终端": "Cerrar el terminal actual",
@@ -7379,13 +8746,16 @@ const messageCatalogs = <String, Map<String, String>>{
     "历史提交": "Commits",
     "分支比较": "Comparar ramas",
     "目录": "Directorio",
-    "连接或目录已改变，请重新选择比较目标。": "La conexión o el directorio cambió. Vuelve a elegir el destino de la comparación.",
+    "连接或目录已改变，请重新选择比较目标。":
+        "La conexión o el directorio cambió. Vuelve a elegir el destino de la comparación.",
     "请填写提交说明": "Escribe un mensaje de commit",
     "暂存全部并提交？": "¿Preparar todo y hacer commit?",
-    "{0}当前没有已暂存的文件，将暂存全部 {1} 个变更后提交。": "{0}No hay archivos preparados. Se prepararán los {1} cambios y se hará commit.",
+    "{0}当前没有已暂存的文件，将暂存全部 {1} 个变更后提交。":
+        "{0}No hay archivos preparados. Se prepararán los {1} cambios y se hará commit.",
     "目录：{0}。": "Directorio: {0}.",
     "暂存并提交": "Preparar y hacer commit",
-    "连接或变更已更新，请核对后重新提交。": "La conexión o los cambios se actualizaron. Revísalos antes de volver a hacer commit.",
+    "连接或变更已更新，请核对后重新提交。":
+        "La conexión o los cambios se actualizaron. Revísalos antes de volver a hacer commit.",
     "Git 操作结果待核实": "Resultado de la operación de Git sin confirmar",
     "变更": "Cambios",
     "更多 Git 操作": "Más acciones de Git",
@@ -7399,8 +8769,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "选择父提交": "Elegir commit padre",
     "父提交 {0} · {1}": "Padre {0} · {1}",
     "父提交 {0} ▾": "Padre {0} ▾",
-    "只读 · 当前 HEAD 相对所选分支共同祖先的变更": "Solo lectura · HEAD actual comparado con el ancestro común de la rama seleccionada",
-    "只读 · 首次提交相对空目录的变更": "Solo lectura · Commit inicial comparado con un directorio vacío",
+    "只读 · 当前 HEAD 相对所选分支共同祖先的变更":
+        "Solo lectura · HEAD actual comparado con el ancestro común de la rama seleccionada",
+    "只读 · 首次提交相对空目录的变更":
+        "Solo lectura · Commit inicial comparado con un directorio vacío",
     "只读 · 此提交相对父提交的变更": "Solo lectura · Este commit comparado con su padre",
     "{0} 个文件": "{0} archivos",
     "{0} 个文件 · 已暂存 {1}": "{0} archivos · {1} preparados",
@@ -7412,16 +8784,19 @@ const messageCatalogs = <String, Map<String, String>>{
     "提交": "Hacer commit",
     "提交并推送": "Commit y push",
     "二进制文件，无法显示差异": "Archivo binario. Diff no disponible.",
-    "内容无差异（可能仅权限或换行变化）": "Sin cambios de contenido (quizá solo permisos o finales de línea)",
+    "内容无差异（可能仅权限或换行变化）":
+        "Sin cambios de contenido (quizá solo permisos o finales de línea)",
     "… 差异过长，已截断": "… Diff truncado",
     "切换目录": "Cambiar de directorio",
     "选择项目目录": "Elegir directorio del proyecto",
     "目录 · {0}": "Directorio · {0}",
     "选择项目文件": "Elegir archivo del proyecto",
     "搜索当前目录内的文件": "Buscar archivos en este directorio",
-    "搜索结果未全部返回，请输入更具体的文件名或路径。": "Se omitieron algunos resultados. Escribe un nombre de archivo o una ruta más precisos.",
+    "搜索结果未全部返回，请输入更具体的文件名或路径。":
+        "Se omitieron algunos resultados. Escribe un nombre de archivo o una ruta más precisos.",
     "没有匹配的文件": "No hay archivos coincidentes",
-    "此文件无法预览（二进制或过大）": "Vista previa no disponible (binario o demasiado grande)",
+    "此文件无法预览（二进制或过大）":
+        "Vista previa no disponible (binario o demasiado grande)",
     "{0} · 只读": "{0} · Solo lectura",
     "选择历史提交": "Elegir commit",
     "选择比较分支": "Elegir rama de comparación",
@@ -7431,10 +8806,13 @@ const messageCatalogs = <String, Map<String, String>>{
     "没有提交记录": "No hay commits",
     "没有可比较的分支": "No hay ramas para comparar",
     "预览已关闭": "Vista previa cerrada",
-    "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">预览请求失败：{0}</p>": "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">Falló la solicitud de vista previa: {0}</p>",
+    "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">预览请求失败：{0}</p>":
+        "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">Falló la solicitud de vista previa: {0}</p>",
     "项目 WebSocket 写入未获确认": "Escritura WebSocket del proyecto sin confirmar",
-    "\u001b[2m（较早的输出已被电脑释放）\u001b[0m\r\n": "\u001b[2m(La computadora liberó la salida anterior)\u001b[0m\r\n",
-    "\r\n\u001b[2m… 部分较早的输出已被电脑丢弃 …\u001b[0m\r\n": "\r\n\u001b[2m… La computadora descartó parte de la salida anterior …\u001b[0m\r\n",
+    "\u001b[2m（较早的输出已被电脑释放）\u001b[0m\r\n":
+        "\u001b[2m(La computadora liberó la salida anterior)\u001b[0m\r\n",
+    "\r\n\u001b[2m… 部分较早的输出已被电脑丢弃 …\u001b[0m\r\n":
+        "\r\n\u001b[2m… La computadora descartó parte de la salida anterior …\u001b[0m\r\n",
     "启动中": "Iniciando",
     "运行中": "En ejecución",
     "停止中": "Deteniendo",
@@ -7444,21 +8822,26 @@ const messageCatalogs = <String, Map<String, String>>{
     "状态未知": "Estado desconocido",
     "核实输入结果": "Verificar el resultado de la entrada",
     "继续输入？": "¿Seguir escribiendo?",
-    "请先检查终端当前状态；未确认的输入可能已部分生效。继续会清空当前输入框并丢弃未发送内容，不会重新发送原输入。": "Primero revisa el terminal. Una entrada sin confirmar puede haberse aplicado en parte. Continuar vacía el cuadro de entrada y descarta el contenido no enviado. La entrada original no se volverá a enviar.",
+    "请先检查终端当前状态；未确认的输入可能已部分生效。继续会清空当前输入框并丢弃未发送内容，不会重新发送原输入。":
+        "Primero revisa el terminal. Una entrada sin confirmar puede haberse aplicado en parte. Continuar vacía el cuadro de entrada y descarta el contenido no enviado. La entrada original no se volverá a enviar.",
     "已检查，继续": "Revisado, continuar",
     "继续输入": "Seguir escribiendo",
     "输入命令，回车发送": "Escribe un comando y pulsa Intro para enviar",
     "发送": "Enviar",
-    "运行配置已改变，请确认后再启动。": "La configuración de ejecución cambió. Revísala antes de iniciar.",
+    "运行配置已改变，请确认后再启动。":
+        "La configuración de ejecución cambió. Revísala antes de iniciar.",
     "继续": "Continuar",
     "重命名运行配置": "Renombrar configuración de ejecución",
     "保存": "Guardar",
     "删除运行配置？": "¿Eliminar la configuración de ejecución?",
-    "移除“{0}”的启动配置，已运行的进程不会停止。": "Elimina la configuración de inicio de «{0}». Los procesos en ejecución continuarán.",
+    "移除“{0}”的启动配置，已运行的进程不会停止。":
+        "Elimina la configuración de inicio de «{0}». Los procesos en ejecución continuarán.",
     "重新分析项目？": "¿Analizar de nuevo el proyecto?",
-    "将重新生成运行配置，覆盖未固定的自定义修改，固定项会保留。": "Regenera las configuraciones de ejecución y reemplaza los cambios personalizados no fijados. Las configuraciones fijadas se conservan.",
+    "将重新生成运行配置，覆盖未固定的自定义修改，固定项会保留。":
+        "Regenera las configuraciones de ejecución y reemplaza los cambios personalizados no fijados. Las configuraciones fijadas se conservan.",
     "选择分析项目的 Agent": "Elegir el Agent que analizará el proyecto",
-    "没有可用 Agent，请先在电脑上连接。": "No hay Agents disponibles. Conecta primero un Agent en tu computadora.",
+    "没有可用 Agent，请先在电脑上连接。":
+        "No hay Agents disponibles. Conecta primero un Agent en tu computadora.",
     "预览端口": "Puerto de vista previa",
     "例如 5173": "p. ej. 5173",
     "打开": "Abrir",
@@ -7466,9 +8849,11 @@ const messageCatalogs = <String, Map<String, String>>{
     "选择运行目录": "Elegir directorio de ejecución",
     "分析项目": "Analizar proyecto",
     "刷新运行配置": "Actualizar configuraciones de ejecución",
-    "Agent 正在分析项目，可稍后刷新查看。": "Un Agent está analizando el proyecto. Actualiza más tarde para ver el resultado.",
+    "Agent 正在分析项目，可稍后刷新查看。":
+        "Un Agent está analizando el proyecto. Actualiza más tarde para ver el resultado.",
     "这个项目尚未关联目录。": "Este proyecto no tiene ningún directorio vinculado.",
-    "当前目录还没有运行配置，点击「分析项目」生成启动方式。": "No hay configuraciones de ejecución en este directorio. Toca Analizar proyecto para generar una.",
+    "当前目录还没有运行配置，点击「分析项目」生成启动方式。":
+        "No hay configuraciones de ejecución en este directorio. Toca Analizar proyecto para generar una.",
     "选择运行配置": "Elegir configuración de ejecución",
     "选择配置": "Elegir configuración",
     "未运行": "Sin ejecutar",
@@ -7491,56 +8876,80 @@ const messageCatalogs = <String, Map<String, String>>{
     "预览": "Vista previa",
     "后退": "Atrás",
     "刷新": "Actualizar",
-    "电脑离线，重新连接后再试。": "Computadora sin conexión. Vuelve a conectarte e inténtalo de nuevo.",
-    "这个项目还没有会话。电脑以会话为单位授权工作区访问，请先在项目中开始一个会话。": "Este proyecto aún no tiene conversaciones. El acceso al espacio de trabajo se autoriza por conversación. Inicia primero una conversación en este proyecto.",
+    "电脑离线，重新连接后再试。":
+        "Computadora sin conexión. Vuelve a conectarte e inténtalo de nuevo.",
+    "这个项目还没有会话。电脑以会话为单位授权工作区访问，请先在项目中开始一个会话。":
+        "Este proyecto aún no tiene conversaciones. El acceso al espacio de trabajo se autoriza por conversación. Inicia primero una conversación en este proyecto.",
     "全部": "Todo",
     "权限": "Permisos",
     "问题": "Preguntas",
     "待处理": "Pendientes",
     "没有需要你处理的事项": "No hay nada que requiera tu atención",
     "{0} 项需要你处理": "{0} elementos requieren tu atención",
-    "{0} 台电脑离线，其待处理事项将在重新连接后显示。": "{0} computadoras sin conexión. Sus pendientes aparecerán al volver a conectarse.",
+    "{0} 台电脑离线，其待处理事项将在重新连接后显示。":
+        "{0} computadoras sin conexión. Sus pendientes aparecerán al volver a conectarse.",
     "查看会话": "Ver conversación",
-    "已不再等待。如果电脑收到了这项操作，它仍会生效。": "Se dejó de esperar. Si la computadora recibió esta operación, se aplicará igualmente.",
+    "已不再等待。如果电脑收到了这项操作，它仍会生效。":
+        "Se dejó de esperar. Si la computadora recibió esta operación, se aplicará igualmente.",
     "会话已经删除。": "Conversación eliminada.",
     "新名称已经生效。": "Nuevo nombre aplicado.",
-    "已找到电脑上的原终端，可在终端或运行页面继续查看；未重新运行命令。": "Se encontró el terminal original. Continúa en Terminal o Ejecutar. El comando no se volvió a ejecutar.",
-    "分析已经开始，可在运行页面查看进度。": "Análisis iniciado. Consulta el progreso en la página Ejecutar.",
-    "原运行配置操作已完成。": "La operación original sobre la configuración de ejecución se completó.",
-    "原运行配置操作已结束：{0}": "La operación original sobre la configuración de ejecución terminó: {0}",
-    "原启动已取消，未重新运行命令。": "Inicio original cancelado. El comando no se volvió a ejecutar.",
+    "已找到电脑上的原终端，可在终端或运行页面继续查看；未重新运行命令。":
+        "Se encontró el terminal original. Continúa en Terminal o Ejecutar. El comando no se volvió a ejecutar.",
+    "分析已经开始，可在运行页面查看进度。":
+        "Análisis iniciado. Consulta el progreso en la página Ejecutar.",
+    "原运行配置操作已完成。":
+        "La operación original sobre la configuración de ejecución se completó.",
+    "原运行配置操作已结束：{0}":
+        "La operación original sobre la configuración de ejecución terminó: {0}",
+    "原启动已取消，未重新运行命令。":
+        "Inicio original cancelado. El comando no se volvió a ejecutar.",
     "修复已提交给主 Agent。": "Corrección enviada al Agent principal.",
     "原修复已放弃。": "Corrección original descartada.",
-    "修复尚未提交，可继续原操作。{0}": "La corrección aún no se envió. Continúa la operación original. {0}",
-    "已找到原审查，可在对应轮次的「本轮审查」中查看。": "Se encontró la revisión original. Consúltala en Revisiones del turno del turno correspondiente.",
-    "电脑上还查不到这项操作，可能没收到。可以重新发送，不会重复执行。": "La computadora aún no tiene registro de esta operación. Puede que no haya llegado. Reenviarla no la ejecutará dos veces.",
+    "修复尚未提交，可继续原操作。{0}":
+        "La corrección aún no se envió. Continúa la operación original. {0}",
+    "已找到原审查，可在对应轮次的「本轮审查」中查看。":
+        "Se encontró la revisión original. Consúltala en Revisiones del turno del turno correspondiente.",
+    "电脑上还查不到这项操作，可能没收到。可以重新发送，不会重复执行。":
+        "La computadora aún no tiene registro de esta operación. Puede que no haya llegado. Reenviarla no la ejecutará dos veces.",
     "Fork 正在后台执行。": "Fork en ejecución en segundo plano.",
     "Fork 尚未完成。": "El fork aún no se ha completado.",
     "{0}：还没收到电脑确认": "{0}: aún sin confirmación de la computadora",
     "待确认": "Pendiente de confirmación",
-    "{0} · 正在确认「不再等待」。重试仅确认原操作的结束状态，已经执行的内容不会撤销。": "{0} · Confirmando «Dejar de esperar». Reintentar solo confirma el estado final de la operación original y no deshace lo ya hecho.",
-    "{0} · 网络中断时手机没收到电脑的回复。点「重新确认」查看结果；重新发送也不会重复执行。": "{0} · La respuesta se perdió al caerse la conexión. Toca Comprobar de nuevo para ver el resultado. Reenviarla no la ejecutará dos veces.",
-    "{0} · 网络中断时手机没收到电脑的回复。连上电脑后会自动确认。": "{0} · La respuesta se perdió al caerse la conexión. Se comprobará automáticamente al volver a conectarse.",
+    "{0} · 正在确认「不再等待」。重试仅确认原操作的结束状态，已经执行的内容不会撤销。":
+        "{0} · Confirmando «Dejar de esperar». Reintentar solo confirma el estado final de la operación original y no deshace lo ya hecho.",
+    "{0} · 网络中断时手机没收到电脑的回复。点「重新确认」查看结果；重新发送也不会重复执行。":
+        "{0} · La respuesta se perdió al caerse la conexión. Toca Comprobar de nuevo para ver el resultado. Reenviarla no la ejecutará dos veces.",
+    "{0} · 网络中断时手机没收到电脑的回复。连上电脑后会自动确认。":
+        "{0} · La respuesta se perdió al caerse la conexión. Se comprobará automáticamente al volver a conectarse.",
     "新名称：{0}": "Nuevo nombre: {0}",
-    "重新发送会继续你之前确认过的删除。": "Reenviar continúa la eliminación que confirmaste antes.",
+    "重新发送会继续你之前确认过的删除。":
+        "Reenviar continúa la eliminación que confirmaste antes.",
     "原终端": "Terminal original",
     "原任务": "Tarea original",
-    "只会停止当时那次运行，不影响之后新开始的任务。": "Solo detiene esa ejecución concreta. Las tareas posteriores no se ven afectadas.",
-    "电脑离线，连上后会自动确认。": "Computadora sin conexión. Se comprobará automáticamente al volver a conectarse.",
+    "只会停止当时那次运行，不影响之后新开始的任务。":
+        "Solo detiene esa ejecución concreta. Las tareas posteriores no se ven afectadas.",
+    "电脑离线，连上后会自动确认。":
+        "Computadora sin conexión. Se comprobará automáticamente al volver a conectarse.",
     "重新确认": "Comprobar de nuevo",
     "继续确认结束": "Seguir confirmando la finalización",
     "重新发送": "Reenviar",
     "不再发送": "No reenviar",
     "不再等待这项操作？": "¿Dejar de esperar esta operación?",
-    "只是不再在手机上等待结果。如果电脑已经收到，改名或删除仍会生效。": "Solo deja de esperar en este teléfono. Si la computadora ya recibió la solicitud, el cambio de nombre o la eliminación se aplicarán igualmente.",
+    "只是不再在手机上等待结果。如果电脑已经收到，改名或删除仍会生效。":
+        "Solo deja de esperar en este teléfono. Si la computadora ya recibió la solicitud, el cambio de nombre o la eliminación se aplicarán igualmente.",
     "继续等待": "Seguir esperando",
     "确定": "Confirmar",
     "不再等待": "Dejar de esperar",
-    "只是不再在手机上等待结果。电脑上已经完成的操作会保留。": "Solo deja de esperar en este teléfono. Las operaciones completadas en tu computadora se conservan.",
-    "只是不再在手机上等待结果。如果电脑已经收到，任务仍会停下。": "Solo deja de esperar en este teléfono. Si la computadora ya recibió la solicitud, la tarea se detendrá igualmente.",
-    "只是不再在手机上等待结果。如果电脑已经收到，终端仍会关闭。终端是否还在运行，请在终端页查看。": "Solo deja de esperar en este teléfono. Si la computadora ya recibió la solicitud, el terminal se cerrará igualmente. Consulta la página Terminal para ver si sigue en ejecución.",
-    "如果终端还没启动，就不会再启动；已经启动的会保留，里面的命令照常运行。": "Un terminal que no se ha iniciado no se iniciará. Un terminal ya abierto y sus comandos seguirán ejecutándose.",
-    "如果还没执行，就不会再提交或推送；已经完成的不会撤销。建议先在「变更」里看一下结果。": "Si aún no ha empezado, no se hará commit ni push. Las operaciones completadas no se desharán. Revisa primero la página Cambios.",
+    "只是不再在手机上等待结果。电脑上已经完成的操作会保留。":
+        "Solo deja de esperar en este teléfono. Las operaciones completadas en tu computadora se conservan.",
+    "只是不再在手机上等待结果。如果电脑已经收到，任务仍会停下。":
+        "Solo deja de esperar en este teléfono. Si la computadora ya recibió la solicitud, la tarea se detendrá igualmente.",
+    "只是不再在手机上等待结果。如果电脑已经收到，终端仍会关闭。终端是否还在运行，请在终端页查看。":
+        "Solo deja de esperar en este teléfono. Si la computadora ya recibió la solicitud, el terminal se cerrará igualmente. Consulta la página Terminal para ver si sigue en ejecución.",
+    "如果终端还没启动，就不会再启动；已经启动的会保留，里面的命令照常运行。":
+        "Un terminal que no se ha iniciado no se iniciará. Un terminal ya abierto y sus comandos seguirán ejecutándose.",
+    "如果还没执行，就不会再提交或推送；已经完成的不会撤销。建议先在「变更」里看一下结果。":
+        "Si aún no ha empezado, no se hará commit ni push. Las operaciones completadas no se desharán. Revisa primero la página Cambios.",
     "发送消息": "Enviar mensaje",
     "Fork 会话": "Hacer fork de la conversación",
     "置顶或归档": "Fijar o archivar",
@@ -7565,16 +8974,22 @@ const messageCatalogs = <String, Map<String, String>>{
     "Agent 有一个问题": "Un Agent tiene una pregunta",
     "会话「{0}」需要你的回答。": "La conversación «{0}» necesita tu respuesta.",
     "会话「{0}」请求以下操作。": "La conversación «{0}» solicita la siguiente acción.",
-    "这个问题的格式暂不支持在手机上回答，请在电脑上回答，回答后这里会自动更新。": "Este formato de pregunta aún no se puede responder en el teléfono. Responde en tu computadora; esta página se actualizará automáticamente.",
-    "电脑离线，重新连接后再处理。": "Computadora sin conexión. Vuelve a conectarte para responder.",
-    "这台电脑有一项操作结果待核实，请先核实。": "Hay una operación en esta computadora que necesita verificación. Verifícala primero.",
+    "这个问题的格式暂不支持在手机上回答，请在电脑上回答，回答后这里会自动更新。":
+        "Este formato de pregunta aún no se puede responder en el teléfono. Responde en tu computadora; esta página se actualizará automáticamente.",
+    "电脑离线，重新连接后再处理。":
+        "Computadora sin conexión. Vuelve a conectarte para responder.",
+    "这台电脑有一项操作结果待核实，请先核实。":
+        "Hay una operación en esta computadora que necesita verificación. Verifícala primero.",
     "其他授权范围": "Otros alcances de permiso",
     "工作区": "Espacio de trabajo",
     "还没有连接电脑": "Aún no hay ninguna computadora conectada",
-    "连接电脑后，在这里查看项目及其会话。": "Conecta una computadora para ver aquí sus proyectos y conversaciones.",
+    "连接电脑后，在这里查看项目及其会话。":
+        "Conecta una computadora para ver aquí sus proyectos y conversaciones.",
     "去连接电脑": "Conectar una computadora",
-    "{0} 尚未同步项目；电脑在线时会自动同步。": "{0} aún no ha sincronizado sus proyectos. Se sincronizarán automáticamente cuando esté en línea.",
-    "{0} 上还没有项目，点右上角「添加项目」选择电脑上的已有目录。": "Aún no hay proyectos en {0}. Toca Añadir proyecto arriba a la derecha para elegir un directorio existente de tu computadora.",
+    "{0} 尚未同步项目；电脑在线时会自动同步。":
+        "{0} aún no ha sincronizado sus proyectos. Se sincronizarán automáticamente cuando esté en línea.",
+    "{0} 上还没有项目，点右上角「添加项目」选择电脑上的已有目录。":
+        "Aún no hay proyectos en {0}. Toca Añadir proyecto arriba a la derecha para elegir un directorio existente de tu computadora.",
     "文件": "Archivos",
     "浏览项目文件": "Explorar archivos del proyecto",
     "查看代码变更": "Ver cambios de código",
@@ -7588,8 +9003,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "分离 HEAD": "HEAD separado",
     "工作区干净": "Árbol de trabajo limpio",
     "{0} 个文件待提交": "{0} archivos por confirmar",
-    "项目已添加，列表尚未同步。请重新连接后刷新结果。": "Proyecto añadido. La lista aún no se ha sincronizado. Vuelve a conectarte y actualiza.",
-    "请先绑定电脑，再选择电脑上的项目目录。": "Vincula primero una computadora y luego elige en ella un directorio de proyecto.",
+    "项目已添加，列表尚未同步。请重新连接后刷新结果。":
+        "Proyecto añadido. La lista aún no se ha sincronizado. Vuelve a conectarte y actualiza.",
+    "请先绑定电脑，再选择电脑上的项目目录。":
+        "Vincula primero una computadora y luego elige en ella un directorio de proyecto.",
     "选择添加项目的电脑": "Elegir la computadora del proyecto",
     " · 离线": " · Sin conexión",
     "选择这台电脑上已有的目录": "Elige un directorio existente en esta computadora",
@@ -7600,26 +9017,34 @@ const messageCatalogs = <String, Map<String, String>>{
     "上一级": "Subir un nivel",
     "不显示隐藏": "Ocultar archivos ocultos",
     "显示隐藏": "Mostrar archivos ocultos",
-    "电脑离线，请重新连接后浏览目录。": "Computadora sin conexión. Vuelve a conectarte para explorar directorios.",
-    "目录路径已修改，请点箭头或回车确认后再添加。": "La ruta cambió. Pulsa la flecha o Intro para confirmar antes de añadir.",
+    "电脑离线，请重新连接后浏览目录。":
+        "Computadora sin conexión. Vuelve a conectarte para explorar directorios.",
+    "目录路径已修改，请点箭头或回车确认后再添加。":
+        "La ruta cambió. Pulsa la flecha o Intro para confirmar antes de añadir.",
     "重试读取目录": "Volver a cargar el directorio",
-    "当前目录没有子目录，可直接添加此目录。": "No hay subdirectorios. Puedes añadir este directorio directamente.",
+    "当前目录没有子目录，可直接添加此目录。":
+        "No hay subdirectorios. Puedes añadir este directorio directamente.",
     "加载中…": "Cargando…",
     "加载更多目录": "Cargar más directorios",
     "项目名称（可选）": "Nombre del proyecto (opcional)",
-    "留空使用目录名；已有项目会直接复用": "Déjalo vacío para usar el nombre del directorio. Se reutilizarán los proyectos existentes.",
-    "该目录已添加为「{0}」，将打开已有项目。": "Este directorio ya está añadido como «{0}». Se abrirá el proyecto existente.",
+    "留空使用目录名；已有项目会直接复用":
+        "Déjalo vacío para usar el nombre del directorio. Se reutilizarán los proyectos existentes.",
+    "该目录已添加为「{0}」，将打开已有项目。":
+        "Este directorio ya está añadido como «{0}». Se abrirá el proyecto existente.",
     "刷新添加结果": "Actualizar el resultado",
     "正在添加…": "Añadiendo…",
     "打开已有项目": "Abrir proyecto existente",
     "添加此目录": "Añadir este directorio",
     "打开对应会话": "Abrir conversación",
     "搜索历史": "Buscar en el historial",
-    "{0} 个会话 · 按当前电脑和项目范围": "{0} conversaciones · Computadora y proyecto actuales",
+    "{0} 个会话 · 按当前电脑和项目范围":
+        "{0} conversaciones · Computadora y proyecto actuales",
     "搜索已保存的消息正文": "Buscar en mensajes guardados",
     "搜索历史正文": "Buscar en el historial de conversaciones",
-    "在电脑上检索已保存的对话正文，不包含思考过程或附件内容。": "Busca en el texto de las conversaciones guardadas en tu computadora. No incluye el razonamiento ni el contenido de los adjuntos.",
-    "{0} 离线，未搜索其中的会话；连接后重新搜索。": "{0} está sin conexión y no se incluyó en la búsqueda. Vuelve a conectarte y busca de nuevo.",
+    "在电脑上检索已保存的对话正文，不包含思考过程或附件内容。":
+        "Busca en el texto de las conversaciones guardadas en tu computadora. No incluye el razonamiento ni el contenido de los adjuntos.",
+    "{0} 离线，未搜索其中的会话；连接后重新搜索。":
+        "{0} está sin conexión y no se incluyó en la búsqueda. Vuelve a conectarte y busca de nuevo.",
     "输入关键词开始搜索": "Escribe una palabra clave para buscar",
     "没有找到匹配的历史记录": "No hay historial coincidente",
     "你": "Tú",
@@ -7628,12 +9053,16 @@ const messageCatalogs = <String, Map<String, String>>{
     "加载更多记录": "Cargar más resultados",
     "重试此会话": "Reintentar esta conversación",
     "继续搜索更早的 {0} 个会话": "Buscar en {0} conversaciones anteriores",
-    "请等待当前任务结束后再 Fork。": "Espera a que termine la tarea actual antes de hacer fork.",
-    "从本轮结束时的历史创建独立会话。": "Crea una conversación independiente a partir del historial al final de este turno.",
+    "请等待当前任务结束后再 Fork。":
+        "Espera a que termine la tarea actual antes de hacer fork.",
+    "从本轮结束时的历史创建独立会话。":
+        "Crea una conversación independiente a partir del historial al final de este turno.",
     "当前工作区": "Espacio de trabajo actual",
-    "共享当前项目文件，仅复制对话历史。": "Comparte los archivos del proyecto actual y copia solo el historial de la conversación.",
+    "共享当前项目文件，仅复制对话历史。":
+        "Comparte los archivos del proyecto actual y copia solo el historial de la conversación.",
     "新 Worktree": "Nuevo worktree",
-    "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照；非 Git 项目只继承对话。": "Crea un espacio de trabajo separado en tu computadora y restaura la instantánea de archivos de este turno. Los turnos antiguos pueden no tener instantánea. Los proyectos sin Git solo heredan la conversación.",
+    "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照；非 Git 项目只继承对话。":
+        "Crea un espacio de trabajo separado en tu computadora y restaura la instantánea de archivos de este turno. Los turnos antiguos pueden no tener instantánea. Los proyectos sin Git solo heredan la conversación.",
     "正在创建…": "Creando…",
     "创建 Fork": "Crear fork",
     "取消置顶": "Desfijar",
@@ -7643,7 +9072,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "归档会话": "Archivar conversación",
     "会话操作": "Acciones de la conversación",
     "会话将从电脑同步": "Las conversaciones se sincronizan desde tu computadora",
-    "连接自己的电脑后，在这里查看和续接各项目的会话。网络中断时，电脑上的任务会继续执行。": "Conecta tu computadora para ver y retomar aquí las conversaciones de tus proyectos. Las tareas siguen ejecutándose en tu computadora aunque se caiga la red.",
+    "连接自己的电脑后，在这里查看和续接各项目的会话。网络中断时，电脑上的任务会继续执行。":
+        "Conecta tu computadora para ver y retomar aquí las conversaciones de tus proyectos. Las tareas siguen ejecutándose en tu computadora aunque se caiga la red.",
     "搜索会话": "Buscar conversaciones",
     "{0} 项等待处理": "{0} elementos pendientes",
     "{0} 连接中…": "{0} conectando…",
@@ -7651,7 +9081,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "{0} 离线 · 显示 {1} 同步的内容": "{0} sin conexión · Contenido sincronizado {1}",
     "没有匹配的会话": "No hay conversaciones coincidentes",
     "没有未归档的会话": "No hay conversaciones sin archivar",
-    "还没有会话，点右上角 + 开始新任务": "Aún no hay conversaciones. Toca + arriba a la derecha para iniciar una tarea.",
+    "还没有会话，点右上角 + 开始新任务":
+        "Aún no hay conversaciones. Toca + arriba a la derecha para iniciar una tarea.",
     "正在从电脑同步会话…": "Sincronizando conversaciones desde la computadora…",
     "置顶": "Fijadas",
     "已归档 ({0})": "Archivadas ({0})",
@@ -7660,58 +9091,82 @@ const messageCatalogs = <String, Map<String, String>>{
     "已归档": "Archivada",
     "正在核实原配对…": "Verificando la vinculación original…",
     "移除本机配对记录？": "¿Quitar el registro de vinculación local?",
-    "之后需要重新扫码。电脑上可能已允许这台手机；如需撤销授权，请在电脑的「连接手机」中操作。": "Tendrás que volver a escanear. Es posible que tu computadora ya haya autorizado este teléfono. Si es necesario, revoca el acceso en Conectar teléfono en tu computadora.",
+    "之后需要重新扫码。电脑上可能已允许这台手机；如需撤销授权，请在电脑的「连接手机」中操作。":
+        "Tendrás que volver a escanear. Es posible que tu computadora ya haya autorizado este teléfono. Si es necesario, revoca el acceso en Conectar teléfono en tu computadora.",
     "保留记录": "Conservar registro",
     "移除本机记录": "Quitar registro local",
-    "正在验证电脑身份并建立配对…": "Verificando la identidad de la computadora y vinculando…",
+    "正在验证电脑身份并建立配对…":
+        "Verificando la identidad de la computadora y vinculando…",
     "加密组件尚未准备好。": "El cifrado aún no está listo.",
-    "在电脑端打开「连接手机」，扫描配对二维码。": "Abre Conectar teléfono en tu computadora y escanea el código QR de vinculación.",
-    "配对后可操作这台电脑的 Agent、项目、Git 和终端，并查看、控制电脑屏幕。你可以随时在电脑上撤销授权。": "Tras vincularla, usa los Agents, proyectos, Git y terminal de tu computadora, y ve y controla su pantalla. Revoca el acceso desde tu computadora cuando quieras.",
+    "在电脑端打开「连接手机」，扫描配对二维码。":
+        "Abre Conectar teléfono en tu computadora y escanea el código QR de vinculación.",
+    "配对后可操作这台电脑的 Agent、项目、Git 和终端，并查看、控制电脑屏幕。你可以随时在电脑上撤销授权。":
+        "Tras vincularla, usa los Agents, proyectos, Git y terminal de tu computadora, y ve y controla su pantalla. Revoca el acceso desde tu computadora cuando quieras.",
     "配对结果待核实": "Resultado de la vinculación sin confirmar",
-    "保留了原配对信息，可以继续核实电脑是否已允许连接。": "Se conserva la información de vinculación original. Sigue comprobando si la computadora autorizó la conexión.",
-    "恢复期限已过，请在电脑核实授权后重新扫码。": "El plazo de recuperación venció. Verifica el acceso en tu computadora y vuelve a escanear.",
+    "保留了原配对信息，可以继续核实电脑是否已允许连接。":
+        "Se conserva la información de vinculación original. Sigue comprobando si la computadora autorizó la conexión.",
+    "恢复期限已过，请在电脑核实授权后重新扫码。":
+        "El plazo de recuperación venció. Verifica el acceso en tu computadora y vuelve a escanear.",
     "核实原配对": "Verificar la vinculación original",
-    "无法使用相机，请检查相机权限，或在下方粘贴配对链接。": "Cámara no disponible. Revisa el permiso de la cámara o pega abajo un enlace de vinculación.",
+    "无法使用相机，请检查相机权限，或在下方粘贴配对链接。":
+        "Cámara no disponible. Revisa el permiso de la cámara o pega abajo un enlace de vinculación.",
     "扫描二维码": "Escanear código QR",
     "或粘贴配对链接": "O pega un enlace de vinculación",
-    "粘贴从电脑获取的配对链接": "Pega el enlace de vinculación que obtuviste en tu computadora",
-    "二维码使用了本机地址，手机无法访问。请在电脑端使用手机可访问的服务地址并重新生成二维码。": "Este código QR usa una dirección local a la que tu teléfono no puede acceder. Genera uno nuevo con una dirección de servicio accesible desde el teléfono.",
-    "无法连接接入服务，请确认手机与电脑的网络、服务地址及端口。局域网调试时需连接同一 Wi-Fi。": "No se pudo conectar con el servicio de conexión. Revisa las redes, la dirección y el puerto del servicio. Para desarrollo local, conecta ambos dispositivos a la misma red Wi-Fi.",
-    "无法验证服务证书，请检查接入服务配置。": "No se pudo verificar el certificado del servicio. Revisa la configuración del servicio de conexión.",
-    "配对未完成，请检查电脑与接入服务后重试。": "Vinculación incompleta. Revisa tu computadora y el servicio de conexión e inténtalo de nuevo.",
-    "DogCodes 手机端连接你自己的电脑：查看会话、继续交给 Agent、处理权限请求。无需注册账号。": "DogCodes se conecta a tu propia computadora. Consulta conversaciones, encarga tareas a los Agents y responde a solicitudes de permisos. No necesitas cuenta.",
+    "粘贴从电脑获取的配对链接":
+        "Pega el enlace de vinculación que obtuviste en tu computadora",
+    "二维码使用了本机地址，手机无法访问。请在电脑端使用手机可访问的服务地址并重新生成二维码。":
+        "Este código QR usa una dirección local a la que tu teléfono no puede acceder. Genera uno nuevo con una dirección de servicio accesible desde el teléfono.",
+    "无法连接接入服务，请确认手机与电脑的网络、服务地址及端口。局域网调试时需连接同一 Wi-Fi。":
+        "No se pudo conectar con el servicio de conexión. Revisa las redes, la dirección y el puerto del servicio. Para desarrollo local, conecta ambos dispositivos a la misma red Wi-Fi.",
+    "无法验证服务证书，请检查接入服务配置。":
+        "No se pudo verificar el certificado del servicio. Revisa la configuración del servicio de conexión.",
+    "配对未完成，请检查电脑与接入服务后重试。":
+        "Vinculación incompleta. Revisa tu computadora y el servicio de conexión e inténtalo de nuevo.",
+    "DogCodes 手机端连接你自己的电脑：查看会话、继续交给 Agent、处理权限请求。无需注册账号。":
+        "DogCodes se conecta a tu propia computadora. Consulta conversaciones, encarga tareas a los Agents y responde a solicitudes de permisos. No necesitas cuenta.",
     "在电脑上打开 DogCodes": "Abre DogCodes en tu computadora",
-    "点击「连接手机」，屏幕上会显示二维码": "Haz clic en Conectar teléfono para mostrar un código QR",
-    "用这部手机扫码，或粘贴配对链接": "Escanéalo con este teléfono o pega el enlace de vinculación",
+    "点击「连接手机」，屏幕上会显示二维码":
+        "Haz clic en Conectar teléfono para mostrar un código QR",
+    "用这部手机扫码，或粘贴配对链接":
+        "Escanéalo con este teléfono o pega el enlace de vinculación",
     "扫码连接电脑": "Escanear para conectar la computadora",
     "粘贴配对链接": "Pegar enlace de vinculación",
-    "连接经过端到端加密，手机只能访问你在电脑上授权的内容。": "Cifrado de extremo a extremo. Tu teléfono solo accede a lo que autorices en tu computadora.",
+    "连接经过端到端加密，手机只能访问你在电脑上授权的内容。":
+        "Cifrado de extremo a extremo. Tu teléfono solo accede a lo que autorices en tu computadora.",
     "正在连接{0}": "Conectando con {0}",
     "暂时连接不上{0}": "No se puede conectar con {0}",
-    "连接时间比平时长，仍在尝试。": "Está tardando más de lo habitual. Seguimos intentándolo.",
-    "电脑上的任务不受影响，连接恢复后可继续操作。": "Las tareas de tu computadora no se ven afectadas. Continúa cuando vuelva la conexión.",
+    "连接时间比平时长，仍在尝试。":
+        "Está tardando más de lo habitual. Seguimos intentándolo.",
+    "电脑上的任务不受影响，连接恢复后可继续操作。":
+        "Las tareas de tu computadora no se ven afectadas. Continúa cuando vuelva la conexión.",
     "请检查": "Comprueba lo siguiente",
     "电脑已开机，没有进入睡眠": "Tu computadora está encendida y no está suspendida",
     "电脑上的 DogCodes 正在运行": "DogCodes se está ejecutando en tu computadora",
-    "手机网络可用；同一局域网下连接更快": "Tu teléfono tiene conexión. En la misma red local la conexión es más rápida.",
+    "手机网络可用；同一局域网下连接更快":
+        "Tu teléfono tiene conexión. En la misma red local la conexión es más rápida.",
     "管理电脑": "Administrar computadoras",
     "连接其他电脑": "Conectar otra computadora",
     "查看离线记录": "Ver historial sin conexión",
     "查看离线记录（{0} 同步）": "Ver historial sin conexión (sincronizado {0})",
     "附件": "Adjunto",
-    "电脑离线。已缓存附件信息，原文需连接电脑后查看。": "Computadora sin conexión. La información del adjunto está en caché. Vuelve a conectarte para ver el original.",
-    "电脑端暂不支持附件预览。": "La app de escritorio aún no admite la vista previa de adjuntos.",
+    "电脑离线。已缓存附件信息，原文需连接电脑后查看。":
+        "Computadora sin conexión. La información del adjunto está en caché. Vuelve a conectarte para ver el original.",
+    "电脑端暂不支持附件预览。":
+        "La app de escritorio aún no admite la vista previa de adjuntos.",
     "附件读取位置未确认。": "Posición de lectura del adjunto sin confirmar.",
     "附件过大，请在电脑上查看。": "Adjunto demasiado grande. Míralo en tu computadora.",
-    "附件内容校验失败，未展示变化后的文件。": "Falló la comprobación de integridad del adjunto. No se mostró el archivo modificado.",
+    "附件内容校验失败，未展示变化后的文件。":
+        "Falló la comprobación de integridad del adjunto. No se mostró el archivo modificado.",
     "任务附件 · 只读": "Adjunto de la tarea · Solo lectura",
     "重试读取": "Volver a cargar",
-    "图片无法解码，请在电脑上查看。": "No se pudo decodificar la imagen. Mírala en tu computadora.",
+    "图片无法解码，请在电脑上查看。":
+        "No se pudo decodificar la imagen. Mírala en tu computadora.",
     "该附件格式请在电脑上查看。": "Mira este formato de adjunto en tu computadora.",
     "默认模型": "Modelo predeterminado",
     "默认": "Predeterminado",
     "选择 Agent": "Elegir Agent",
-    "这台电脑上没有已就绪并启用的 Agent。安装或登录需在电脑上完成。": "No hay ningún Agent listo y activado en esta computadora. Instálalo o inicia sesión primero en tu computadora.",
+    "这台电脑上没有已就绪并启用的 Agent。安装或登录需在电脑上完成。":
+        "No hay ningún Agent listo y activado en esta computadora. Instálalo o inicia sesión primero en tu computadora.",
     "模型": "Modelo",
     "选择模型": "Elegir modelo",
     "完成": "Listo",
@@ -7722,18 +9177,23 @@ const messageCatalogs = <String, Map<String, String>>{
     "思考强度": "Nivel de razonamiento",
     "默认 · {0}": "Predeterminado · {0}",
     "恢复默认": "Restablecer predeterminado",
-    "电脑离线，连接后才能 Fork": "Computadora sin conexión. Vuelve a conectarte para hacer fork.",
-    "会话正在运行，结束后才能从本轮 Fork": "La conversación está en ejecución. Espera a que termine para hacer fork de este turno.",
+    "电脑离线，连接后才能 Fork":
+        "Computadora sin conexión. Vuelve a conectarte para hacer fork.",
+    "会话正在运行，结束后才能从本轮 Fork":
+        "La conversación está en ejecución. Espera a que termine para hacer fork de este turno.",
     "复制本轮回复": "Copiar la respuesta del turno",
     "已复制本轮回复": "Respuesta del turno copiada",
     "复制失败，请重试": "No se pudo copiar. Inténtalo de nuevo.",
     "本轮消耗": "Consumo del turno",
     "从本轮 Fork": "Hacer fork desde este turno",
-    "电脑未受理这项任务，内容已保留。": "La computadora no aceptó esta tarea. Tu contenido se conserva.",
+    "电脑未受理这项任务，内容已保留。":
+        "La computadora no aceptó esta tarea. Tu contenido se conserva.",
     "没有已绑定的电脑": "No hay computadoras vinculadas",
-    "这台电脑还没有项目，点右上角「添加项目」选择电脑上的已有目录。": "Aún no hay proyectos en esta computadora. Toca Añadir proyecto arriba a la derecha para elegir un directorio existente.",
+    "这台电脑还没有项目，点右上角「添加项目」选择电脑上的已有目录。":
+        "Aún no hay proyectos en esta computadora. Toca Añadir proyecto arriba a la derecha para elegir un directorio existente.",
     "你想完成什么？": "¿Qué quieres hacer?",
-    "电脑离线，任务和附件会保留为本机草稿。重连后请点击发送。": "Computadora sin conexión. Las tareas y los adjuntos se guardan como borradores locales. Toca Enviar al volver a conectarte.",
+    "电脑离线，任务和附件会保留为本机草稿。重连后请点击发送。":
+        "Computadora sin conexión. Las tareas y los adjuntos se guardan como borradores locales. Toca Enviar al volver a conectarte.",
     "描述你的任务…": "Describe tu tarea…",
     "没有已就绪的 Agent": "No hay Agents listos",
     "开始任务": "Iniciar tarea",
@@ -7747,18 +9207,22 @@ const messageCatalogs = <String, Map<String, String>>{
     "无法核实修复状态：{0}": "No se pudo verificar el estado de la corrección: {0}",
     "审查代码证据": "Evidencia de código de la revisión",
     "{0} · {1}–{2} 行": "{0} · Líneas {1}–{2}",
-    "这是审查时保存的版本，当前文件可能已变化。": "Es la versión guardada durante la revisión. El archivo actual puede haber cambiado.",
+    "这是审查时保存的版本，当前文件可能已变化。":
+        "Es la versión guardada durante la revisión. El archivo actual puede haber cambiado.",
     "读取审查代码失败：{0}": "No se pudo cargar el código de la revisión: {0}",
-    "审查连接中断，本次审查未完成。请检查网络后重新检查。": "Se perdió la conexión de la revisión. Revisión incompleta. Revisa tu red y vuelve a ejecutarla.",
+    "审查连接中断，本次审查未完成。请检查网络后重新检查。":
+        "Se perdió la conexión de la revisión. Revisión incompleta. Revisa tu red y vuelve a ejecutarla.",
     "错误详情": "Detalles del error",
-    "审查连接中断，本次审查未完成。": "Se perdió la conexión de la revisión. Revisión incompleta.",
+    "审查连接中断，本次审查未完成。":
+        "Se perdió la conexión de la revisión. Revisión incompleta.",
     "文件覆盖情况": "Cobertura de archivos",
     "已检查": "Revisado",
     "部分原文缺失": "Falta parte del original",
     "未报告检查": "No se informó como revisado",
     "原文不可用": "Original no disponible",
     "本次审查未报告问题。": "Esta revisión no informó problemas.",
-    "审查尚未形成完整问题报告，不能据此判断是否存在问题。": "Esta revisión no generó un informe completo. No permite saber si hay problemas.",
+    "审查尚未形成完整问题报告，不能据此判断是否存在问题。":
+        "Esta revisión no generó un informe completo. No permite saber si hay problemas.",
     "潜在{0}风险": "Posible riesgo de {0}",
     "{0}{1} · {2}{3}–{4} 行": "{0}{1} · {2}Líneas {3}–{4}",
     "改动前 · ": "Antes del cambio ·",
@@ -7769,8 +9233,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "全选问题": "Seleccionar todos los problemas",
     "已选 {0} 项": "{0} seleccionados",
     "开始修复": "Iniciar corrección",
-    "主对话正在回复，结束后可提交修复。": "La conversación principal está respondiendo. Envía las correcciones cuando termine.",
-    "修复已提交给主 Agent，携带所选问题及原审查上下文。": "Corrección enviada al Agent principal con los problemas seleccionados y el contexto de la revisión original.",
+    "主对话正在回复，结束后可提交修复。":
+        "La conversación principal está respondiendo. Envía las correcciones cuando termine.",
+    "修复已提交给主 Agent，携带所选问题及原审查上下文。":
+        "Corrección enviada al Agent principal con los problemas seleccionados y el contexto de la revisión original.",
     "有一项修复尚未提交。{0}": "Hay una corrección sin enviar. {0}",
     "继续原修复": "Continuar la corrección original",
     "放弃这次修复": "Descartar esta corrección",
@@ -7798,13 +9264,19 @@ const messageCatalogs = <String, Map<String, String>>{
     "失败": "Error",
     "已取消": "Cancelado",
     "连接中断": "Desconectado",
-    "电脑离线，请重新连接后查看审查。": "Computadora sin conexión. Vuelve a conectarte para ver la revisión.",
-    "电脑端暂不支持本轮审查，请更新电脑端后重试。": "Actualiza la app de escritorio para usar las revisiones del turno.",
-    "无法读取可用的审查 Agent。": "No se pudieron cargar los Agents de revisión disponibles.",
-    "已发起复审，可在修复轮次底部查看。": "Nueva revisión iniciada. Consúltala debajo del turno de corrección.",
+    "电脑离线，请重新连接后查看审查。":
+        "Computadora sin conexión. Vuelve a conectarte para ver la revisión.",
+    "电脑端暂不支持本轮审查，请更新电脑端后重试。":
+        "Actualiza la app de escritorio para usar las revisiones del turno.",
+    "无法读取可用的审查 Agent。":
+        "No se pudieron cargar los Agents de revisión disponibles.",
+    "已发起复审，可在修复轮次底部查看。":
+        "Nueva revisión iniciada. Consúltala debajo del turno de corrección.",
     "刷新审查": "Actualizar revisiones",
-    "电脑离线，审查会继续在电脑上运行。": "Computadora sin conexión. La revisión sigue ejecutándose en tu computadora.",
-    "暂无可用的审查 Agent，请在电脑上连接或重新检测 Agent。": "No hay Agents de revisión disponibles. Conecta o vuelve a detectar los Agents en tu computadora.",
+    "电脑离线，审查会继续在电脑上运行。":
+        "Computadora sin conexión. La revisión sigue ejecutándose en tu computadora.",
+    "暂无可用的审查 Agent，请在电脑上连接或重新检测 Agent。":
+        "No hay Agents de revisión disponibles. Conecta o vuelve a detectar los Agents en tu computadora.",
     "审查使用的 Agent": "Agent de revisión",
     "本轮尚未发起审查。": "Aún no se ha iniciado ninguna revisión para este turno.",
     "历史审查": "Revisiones anteriores",
@@ -7832,20 +9304,25 @@ const messageCatalogs = <String, Map<String, String>>{
     "本轮变更加载失败：{0}": "No se pudieron cargar los cambios del turno: {0}",
     "本轮变更加载失败": "No se pudieron cargar los cambios del turno",
     "{0} 个文件已更改": "{0} archivos modificados",
-    "连接中断后的恢复快照 · 仅反映检查时的文件变化，外部工具可能仍在写入": "Instantánea de recuperación tras la desconexión. Refleja los cambios en el momento de la revisión; puede que herramientas externas sigan escribiendo.",
+    "连接中断后的恢复快照 · 仅反映检查时的文件变化，外部工具可能仍在写入":
+        "Instantánea de recuperación tras la desconexión. Refleja los cambios en el momento de la revisión; puede que herramientas externas sigan escribiendo.",
     "二进制": "Binario",
     "本轮保存的历史 Diff": "Diff histórico guardado para este turno",
     "这一轮未保存该文件的内容": "El contenido de este archivo no se guardó en este turno",
-    "没有可用于生成提交说明的 Agent": "No hay ningún Agent disponible para generar un mensaje de commit",
+    "没有可用于生成提交说明的 Agent":
+        "No hay ningún Agent disponible para generar un mensaje de commit",
     "已提交": "Commit realizado",
-    "提交结果待核实，请到待处理页面核实原操作": "Resultado del commit sin confirmar. Verifica la operación original en Pendientes.",
+    "提交结果待核实，请到待处理页面核实原操作":
+        "Resultado del commit sin confirmar. Verifica la operación original en Pendientes.",
     "正在暂存本轮文件…": "Preparando los archivos del turno…",
     "正在生成提交说明…": "Generando el mensaje de commit…",
     "正在提交…": "Haciendo commit…",
     "提交本轮修改": "Hacer commit de los cambios del turno",
-    "本轮修改已没有未提交的内容（可能已提交或已撤销）。": "No quedan cambios sin confirmar en este turno (quizá ya se hizo commit o se revirtieron).",
+    "本轮修改已没有未提交的内容（可能已提交或已撤销）。":
+        "No quedan cambios sin confirmar en este turno (quizá ya se hizo commit o se revirtieron).",
     "将提交 {0} 个文件{1}。": "Se hará commit de {0} archivos{1}.",
-    "，其中 {0} 个是此前已暂存的其他更改": ", incluidos {0} cambios preparados antes de otro trabajo",
+    "，其中 {0} 个是此前已暂存的其他更改":
+        ", incluidos {0} cambios preparados antes de otro trabajo",
     "重新生成": "Regenerar",
     "编写提交说明的 Agent": "Agent del mensaje de commit",
     "子智能体": "Subagente",
@@ -7867,7 +9344,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "电脑项目文件": "Archivos del proyecto en la computadora",
     "需先在此项目创建一个会话": "Crea primero una conversación en este proyecto",
     "最多 16 个附件，总大小不超过 25 MB。": "Hasta 16 adjuntos, 25 MB en total.",
-    "草稿目标已变化，请回到原项目重新选择附件。": "El destino del borrador cambió. Vuelve al proyecto original y elige de nuevo los adjuntos.",
+    "草稿目标已变化，请回到原项目重新选择附件。":
+        "El destino del borrador cambió. Vuelve al proyecto original y elige de nuevo los adjuntos.",
     "无法添加附件：{0}": "No se pudo añadir el adjunto: {0}",
     "未能移除附件：{0}": "No se pudo quitar el adjunto: {0}",
     "添加附件": "Añadir adjunto",
@@ -7883,7 +9361,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "过程": "Proceso",
     "{0} 个步骤": "{0} pasos",
     "用时 {0}": "Duración: {0}",
-    "内容较长已截断，显示完整内容{0}": "Contenido largo truncado. Mostrar todo el contenido{0}",
+    "内容较长已截断，显示完整内容{0}":
+        "Contenido largo truncado. Mostrar todo el contenido{0}",
     "{0} 个附件": "{0} adjuntos",
     "思考中": "Pensando",
     "思考已中断": "Razonamiento interrumpido",
@@ -7896,253 +9375,417 @@ const messageCatalogs = <String, Map<String, String>>{
     "暂无子任务结论": "Aún no hay resultado de la subtarea",
     "执行过程请在电脑上查看": "Consulta el proceso en tu computadora",
     "共 {0} 步，执行过程请在电脑上查看": "{0} pasos. Consulta el proceso en tu computadora.",
-    "改动内容见本轮文件变更，或在电脑上查看": "Consulta los cambios en los archivos de este turno o en tu computadora",
+    "改动内容见本轮文件变更，或在电脑上查看":
+        "Consulta los cambios en los archivos de este turno o en tu computadora",
     "完整输出请在电脑上查看": "Consulta la salida completa en tu computadora",
     "{0}\n… 内容过长，已截断": "{0}\n… Contenido truncado",
     "分叉": "Fork",
     "分叉上下文暂不可显示": "Contexto del fork no disponible",
-    "请先恢复原草稿，未覆盖本机记录。": "Restaura primero el borrador original. Los registros locales no se sobrescribieron.",
+    "请先恢复原草稿，未覆盖本机记录。":
+        "Restaura primero el borrador original. Los registros locales no se sobrescribieron.",
     "草稿未能保存：{0}": "No se pudo guardar el borrador: {0}",
     "无法恢复草稿：{0}": "No se pudo restaurar el borrador: {0}",
-    "暂时无法读取模型，可保留草稿后重试：{0}": "No se pudieron cargar los modelos. Conserva tu borrador y vuelve a intentarlo: {0}",
+    "暂时无法读取模型，可保留草稿后重试：{0}":
+        "No se pudieron cargar los modelos. Conserva tu borrador y vuelve a intentarlo: {0}",
     "附件仍在上传。": "Los adjuntos aún se están subiendo.",
-    "电脑离线，附件及任务已保留为草稿。": "Computadora sin conexión. Adjuntos y tarea guardados como borrador.",
+    "电脑离线，附件及任务已保留为草稿。":
+        "Computadora sin conexión. Adjuntos y tarea guardados como borrador.",
     "离线会话未能保存：{0}": "No se pudo guardar la conversación sin conexión: {0}",
-    "没有找到要打开的这一轮，它可能已被删除。": "No se encontró este turno. Puede que se haya eliminado.",
-    "电脑离线，连接后再查看完整内容。": "Computadora sin conexión. Vuelve a conectarte para ver el contenido completo.",
+    "没有找到要打开的这一轮，它可能已被删除。":
+        "No se encontró este turno. Puede que se haya eliminado.",
+    "电脑离线，连接后再查看完整内容。":
+        "Computadora sin conexión. Vuelve a conectarte para ver el contenido completo.",
     "删除这个会话？": "¿Eliminar esta conversación?",
-    "将在「{0}」上永久删除「{1}」及其记录，无法恢复。项目文件不会被删除。": "Elimina de forma permanente «{1}» y su historial de «{0}». No se puede deshacer. Los archivos del proyecto se conservan.",
+    "将在「{0}」上永久删除「{1}」及其记录，无法恢复。项目文件不会被删除。":
+        "Elimina de forma permanente «{1}» y su historial de «{0}». No se puede deshacer. Los archivos del proyecto se conservan.",
     "删除": "Eliminar",
-    "停止请求未确认：{0}。请刷新核实任务状态。": "Solicitud de detención sin confirmar: {0}. Actualiza para verificar el estado de la tarea.",
-    "电脑未受理这次发送，内容已保留。": "La computadora no aceptó este mensaje. Tu contenido se conserva.",
+    "停止请求未确认：{0}。请刷新核实任务状态。":
+        "Solicitud de detención sin confirmar: {0}. Actualiza para verificar el estado de la tarea.",
+    "电脑未受理这次发送，内容已保留。":
+        "La computadora no aceptó este mensaje. Tu contenido se conserva.",
     "这台电脑已不在列表中": "Esta computadora ya no está en la lista",
-    "可能已在电脑上撤销配对。": "Es posible que la vinculación se haya revocado en tu computadora.",
-    "{0} · 内容同步于 {1}{2}。附件原文需电脑在线。": "{0} · Sincronizado {1}{2}. Vuelve a conectarte para ver los adjuntos originales.",
+    "可能已在电脑上撤销配对。":
+        "Es posible que la vinculación se haya revocado en tu computadora.",
+    "{0} · 内容同步于 {1}{2}。附件原文需电脑在线。":
+        "{0} · Sincronizado {1}{2}. Vuelve a conectarte para ver los adjuntos originales.",
     "正在同步，先显示本机缓存": "Sincronizando. Primero se muestra la caché local.",
     "离线缓存": "Caché sin conexión",
     "未知时间": "Hora desconocida",
     " · 仅缓存最近部分内容": " · Solo el contenido reciente está en caché",
-    "电脑离线，暂无已缓存的对话内容。": "Computadora sin conexión. No hay conversaciones en caché.",
+    "电脑离线，暂无已缓存的对话内容。":
+        "Computadora sin conexión. No hay conversaciones en caché.",
     "正在定位到该轮…": "Buscando este turno…",
     "正在定位到该轮…已加载 {0} 页": "Buscando este turno… {0} páginas cargadas",
     "加载更早的消息": "Cargar mensajes anteriores",
     "Agent 正在电脑上工作…": "El Agent está trabajando en tu computadora…",
     "正在连接电脑…": "Conectando con la computadora…",
-    "电脑离线{0}。任务不会因此停止。": "Computadora sin conexión{0}. Las tareas siguen ejecutándose.",
+    "电脑离线{0}。任务不会因此停止。":
+        "Computadora sin conexión{0}. Las tareas siguen ejecutándose.",
     " · 最后同步 {0}": " · Última sincronización {0}",
     "继续交给 Agent…": "Escribe a tu Agent…",
-    "这台电脑已移除，请核实电脑列表中的绑定。": "Esta computadora se quitó. Revisa la vinculación en la lista de computadoras.",
-    "电脑绑定已改变，请从电脑列表重新打开。": "La vinculación de la computadora cambió. Vuelve a abrirla desde la lista de computadoras.",
-    "暂时无法读取电脑绑定，请稍后重试。": "No se pudo leer la vinculación de la computadora. Inténtalo más tarde.",
+    "这台电脑已移除，请核实电脑列表中的绑定。":
+        "Esta computadora se quitó. Revisa la vinculación en la lista de computadoras.",
+    "电脑绑定已改变，请从电脑列表重新打开。":
+        "La vinculación de la computadora cambió. Vuelve a abrirla desde la lista de computadoras.",
+    "暂时无法读取电脑绑定，请稍后重试。":
+        "No se pudo leer la vinculación de la computadora. Inténtalo más tarde.",
     "直连协商响应无效。": "Respuesta de negociación de conexión directa no válida.",
-    "本轮变更记录过大，请在电脑上查看": "Registro de cambios del turno demasiado grande. Míralo en tu computadora.",
+    "本轮变更记录过大，请在电脑上查看":
+        "Registro de cambios del turno demasiado grande. Míralo en tu computadora.",
     "本轮变更记录读取不一致": "Lectura inconsistente del registro de cambios del turno.",
-    "本轮变更记录校验失败": "Falló la comprobación de integridad del registro de cambios del turno.",
+    "本轮变更记录校验失败":
+        "Falló la comprobación de integridad del registro de cambios del turno.",
     "本轮变更记录格式不可用": "Formato del registro de cambios del turno no disponible.",
-    "电脑暂时离线，请稍后重连。": "Computadora sin conexión temporalmente. Vuelve a conectarte más tarde.",
-    "连接请求未被接受，请核实设备授权。": "Solicitud de conexión rechazada. Revisa la autorización del dispositivo.",
+    "电脑暂时离线，请稍后重连。":
+        "Computadora sin conexión temporalmente. Vuelve a conectarte más tarde.",
+    "连接请求未被接受，请核实设备授权。":
+        "Solicitud de conexión rechazada. Revisa la autorización del dispositivo.",
     "连接响应过大。": "Respuesta de conexión demasiado grande.",
-    "连接中断，操作结果待核实；请勿重复发送。": "Se perdió la conexión. Resultado de la operación sin confirmar. No la vuelvas a enviar.",
-    "请在电脑上生成新版配对二维码。": "Genera un nuevo código QR de vinculación en tu computadora.",
+    "连接中断，操作结果待核实；请勿重复发送。":
+        "Se perdió la conexión. Resultado de la operación sin confirmar. No la vuelvas a enviar.",
+    "请在电脑上生成新版配对二维码。":
+        "Genera un nuevo código QR de vinculación en tu computadora.",
     "电脑连接身份不一致。": "La identidad de conexión de la computadora no coincide.",
-    "手机身份与原配对不一致，未重新申请授权。": "La identidad del teléfono no coincide con la vinculación original. No se volvió a solicitar autorización.",
-    "原配对恢复期限已过，请在电脑核实授权后重新扫码。": "El plazo de recuperación de la vinculación venció. Verifica el acceso en tu computadora y vuelve a escanear.",
-    "电脑连接身份与原配对不一致。": "La identidad de conexión de la computadora no coincide con la vinculación original.",
-    "电脑未返回原配对回执。": "La computadora no devolvió el comprobante de la vinculación original.",
+    "手机身份与原配对不一致，未重新申请授权。":
+        "La identidad del teléfono no coincide con la vinculación original. No se volvió a solicitar autorización.",
+    "原配对恢复期限已过，请在电脑核实授权后重新扫码。":
+        "El plazo de recuperación de la vinculación venció. Verifica el acceso en tu computadora y vuelve a escanear.",
+    "电脑连接身份与原配对不一致。":
+        "La identidad de conexión de la computadora no coincide con la vinculación original.",
+    "电脑未返回原配对回执。":
+        "La computadora no devolvió el comprobante de la vinculación original.",
     "直连身份验证失败。": "Falló la autenticación de la conexión directa.",
     "加密数据格式无效。": "Formato de datos cifrados no válido.",
     "请求较多，请稍后重试。": "Demasiadas solicitudes. Inténtalo más tarde.",
     "请求过大。": "Solicitud demasiado grande.",
-    "配对连接中断，结果需要核实。": "Se perdió la conexión de vinculación. Verifica el resultado.",
-    "关键词过长，请缩短后再搜索。": "Palabra clave demasiado larga. Acórtala e inténtalo de nuevo.",
-    "电脑离线，连接后重试搜索。": "Computadora sin conexión. Vuelve a conectarte para buscar.",
+    "配对连接中断，结果需要核实。":
+        "Se perdió la conexión de vinculación. Verifica el resultado.",
+    "关键词过长，请缩短后再搜索。":
+        "Palabra clave demasiado larga. Acórtala e inténtalo de nuevo.",
+    "电脑离线，连接后重试搜索。":
+        "Computadora sin conexión. Vuelve a conectarte para buscar.",
     "连接已更换，请重试本次搜索。": "La conexión cambió. Repite esta búsqueda.",
-    "电脑未返回可用的历史搜索结果。": "La computadora no devolvió resultados de búsqueda utilizables.",
+    "电脑未返回可用的历史搜索结果。":
+        "La computadora no devolvió resultados de búsqueda utilizables.",
     "历史搜索游标没有前进，请重新搜索。": "El cursor de búsqueda no avanzó. Busca de nuevo.",
     "历史搜索范围发生变化，请重新搜索。": "El alcance de la búsqueda cambió. Busca de nuevo.",
-    "写操作必须保留原始操作标识。": "Las operaciones de escritura deben conservar su ID de operación original.",
-    "请先确认上一条消息或审批的结果。": "Confirma primero el resultado del mensaje o la aprobación anterior.",
-    "请先确认上一项设置或工作区操作的结果。": "Confirma primero el resultado del ajuste o la operación de espacio de trabajo anterior.",
-    "Fork 正在电脑上执行，请等待并核实。": "Fork en ejecución en tu computadora. Espera y verifica el resultado.",
+    "写操作必须保留原始操作标识。":
+        "Las operaciones de escritura deben conservar su ID de operación original.",
+    "请先确认上一条消息或审批的结果。":
+        "Confirma primero el resultado del mensaje o la aprobación anterior.",
+    "请先确认上一项设置或工作区操作的结果。":
+        "Confirma primero el resultado del ajuste o la operación de espacio de trabajo anterior.",
+    "Fork 正在电脑上执行，请等待并核实。":
+        "Fork en ejecución en tu computadora. Espera y verifica el resultado.",
     "原决定已受理，正在核实交付结果。": "Decisión original aceptada. Verificando la entrega.",
     "请先核实原审批决定。": "Verifica primero la decisión de aprobación original.",
-    "配对恢复记录无法读取，请先核实手机安全存储。": "No se pudieron leer los registros de recuperación de vinculación. Revisa el almacenamiento seguro de tu teléfono.",
-    "配对恢复信息未能安全保存。": "No se pudo guardar de forma segura la información de recuperación de vinculación.",
-    "待核实电脑的身份发生变化，请先核实原配对。": "La identidad de la computadora cambió. Verifica primero la vinculación original.",
-    "待核实配对过多，请先核实原记录。": "Demasiadas vinculaciones sin verificar. Revisa primero los registros existentes.",
-    "本机设备身份无法读取，请先恢复安全存储。": "No se pudo leer la identidad de este dispositivo. Restaura primero el almacenamiento seguro.",
-    "设备身份未能安全保存，尚未开始配对。": "No se pudo guardar de forma segura la identidad del dispositivo. La vinculación no se inició.",
-    "已保存的电脑身份无法读取，请先核实配对。": "No se pudo leer la identidad guardada de la computadora. Verifica primero la vinculación.",
-    "配对回执与当前连接不一致。": "El comprobante de vinculación no coincide con la conexión actual.",
-    "这项配对已因移除电脑而失效，请重新扫码。": "Esta vinculación caducó al quitar la computadora. Vuelve a escanear.",
-    "电脑绑定已变化，请重新扫码。": "La vinculación de la computadora cambió. Vuelve a escanear.",
-    "电脑身份已发生变化，需要先解除旧配对。": "La identidad de la computadora cambió. Quita primero la vinculación anterior.",
-    "电脑绑定已变化，未移除新的绑定，请刷新后确认。": "La vinculación de la computadora cambió. No se quitó la nueva vinculación. Actualiza y confirma.",
-    "设备密钥格式无效，不能继续连接。": "Formato de clave del dispositivo no válido. No se puede continuar la conexión.",
+    "配对恢复记录无法读取，请先核实手机安全存储。":
+        "No se pudieron leer los registros de recuperación de vinculación. Revisa el almacenamiento seguro de tu teléfono.",
+    "配对恢复信息未能安全保存。":
+        "No se pudo guardar de forma segura la información de recuperación de vinculación.",
+    "待核实电脑的身份发生变化，请先核实原配对。":
+        "La identidad de la computadora cambió. Verifica primero la vinculación original.",
+    "待核实配对过多，请先核实原记录。":
+        "Demasiadas vinculaciones sin verificar. Revisa primero los registros existentes.",
+    "本机设备身份无法读取，请先恢复安全存储。":
+        "No se pudo leer la identidad de este dispositivo. Restaura primero el almacenamiento seguro.",
+    "设备身份未能安全保存，尚未开始配对。":
+        "No se pudo guardar de forma segura la identidad del dispositivo. La vinculación no se inició.",
+    "已保存的电脑身份无法读取，请先核实配对。":
+        "No se pudo leer la identidad guardada de la computadora. Verifica primero la vinculación.",
+    "配对回执与当前连接不一致。":
+        "El comprobante de vinculación no coincide con la conexión actual.",
+    "这项配对已因移除电脑而失效，请重新扫码。":
+        "Esta vinculación caducó al quitar la computadora. Vuelve a escanear.",
+    "电脑绑定已变化，请重新扫码。":
+        "La vinculación de la computadora cambió. Vuelve a escanear.",
+    "电脑身份已发生变化，需要先解除旧配对。":
+        "La identidad de la computadora cambió. Quita primero la vinculación anterior.",
+    "电脑绑定已变化，未移除新的绑定，请刷新后确认。":
+        "La vinculación de la computadora cambió. No se quitó la nueva vinculación. Actualiza y confirma.",
+    "设备密钥格式无效，不能继续连接。":
+        "Formato de clave del dispositivo no válido. No se puede continuar la conexión.",
     "加密组件暂时不可用。": "Cifrado no disponible temporalmente.",
-    "设备身份验证或加密状态校验失败，请重新连接。": "Falló la autenticación del dispositivo o la verificación del cifrado. Vuelve a conectarte.",
+    "设备身份验证或加密状态校验失败，请重新连接。":
+        "Falló la autenticación del dispositivo o la verificación del cifrado. Vuelve a conectarte.",
     "加密连接已关闭。": "Conexión cifrada cerrada.",
-    "电脑绑定状态无法读取，请先检查系统安全存储。": "No se pudo leer el estado de vinculación de la computadora. Revisa el almacenamiento seguro del sistema.",
-    "电脑绑定状态未能安全保存，请核实原操作。": "No se pudo guardar de forma segura el estado de vinculación de la computadora. Verifica la operación original.",
+    "电脑绑定状态无法读取，请先检查系统安全存储。":
+        "No se pudo leer el estado de vinculación de la computadora. Revisa el almacenamiento seguro del sistema.",
+    "电脑绑定状态未能安全保存，请核实原操作。":
+        "No se pudo guardar de forma segura el estado de vinculación de la computadora. Verifica la operación original.",
     "请先选择电脑上的目录。": "Elige primero un directorio en tu computadora.",
-    "原项目目录已变化，请核实原结果后重新选择。": "El directorio del proyecto original cambió. Verifica el resultado original y vuelve a elegir.",
-    "添加项目结果尚未确认，请核实原操作。": "Resultado de añadir el proyecto sin confirmar. Verifica la operación original.",
-    "无法核实电脑上的项目，请重新连接后再试。": "No se pudo verificar el proyecto en tu computadora. Vuelve a conectarte e inténtalo de nuevo.",
-    "请更新电脑端后再操作，尚未启动或修改配置。": "Actualiza primero la app de escritorio. No se inició ni modificó ninguna configuración.",
+    "原项目目录已变化，请核实原结果后重新选择。":
+        "El directorio del proyecto original cambió. Verifica el resultado original y vuelve a elegir.",
+    "添加项目结果尚未确认，请核实原操作。":
+        "Resultado de añadir el proyecto sin confirmar. Verifica la operación original.",
+    "无法核实电脑上的项目，请重新连接后再试。":
+        "No se pudo verificar el proyecto en tu computadora. Vuelve a conectarte e inténtalo de nuevo.",
+    "请更新电脑端后再操作，尚未启动或修改配置。":
+        "Actualiza primero la app de escritorio. No se inició ni modificó ninguna configuración.",
     "原启动回执不匹配。": "El comprobante del inicio original no coincide.",
-    "原启动记录与项目或运行配置不匹配，未重新执行。": "El registro del inicio original no coincide con el proyecto o la configuración. No se volvió a ejecutar.",
-    "运行配置回执与原操作不匹配，请更新电脑端后核实。": "El comprobante de la configuración de ejecución no coincide con la operación original. Actualiza la app de escritorio y verifica.",
-    "电脑没有返回可确认的运行配置结果，请核实原操作。": "La computadora no devolvió un resultado verificable de la configuración de ejecución. Revisa la operación original.",
-    "运行配置操作未完成，请核实。": "Operación sobre la configuración de ejecución incompleta. Verifícala.",
+    "原启动记录与项目或运行配置不匹配，未重新执行。":
+        "El registro del inicio original no coincide con el proyecto o la configuración. No se volvió a ejecutar.",
+    "运行配置回执与原操作不匹配，请更新电脑端后核实。":
+        "El comprobante de la configuración de ejecución no coincide con la operación original. Actualiza la app de escritorio y verifica.",
+    "电脑没有返回可确认的运行配置结果，请核实原操作。":
+        "La computadora no devolvió un resultado verificable de la configuración de ejecución. Revisa la operación original.",
+    "运行配置操作未完成，请核实。":
+        "Operación sobre la configuración de ejecución incompleta. Verifícala.",
     "没有待核实的启动操作。": "No hay inicios pendientes de verificación.",
-    "电脑未确认原启动已关闭，记录仍保留。": "La computadora no confirmó que el inicio original se cerró. El registro se conserva.",
-    "原启动结果尚未确认，记录仍保留。": "Resultado del inicio original sin confirmar. El registro se conserva.",
-    "服务地址必须使用 HTTPS；调试版本可使用本机或局域网 IP。": "La dirección del servicio debe usar HTTPS. Las compilaciones de depuración pueden usar una IP local o de la LAN.",
-    "服务暂时不可用，请稍后重试。": "Servicio no disponible temporalmente. Inténtalo más tarde.",
+    "电脑未确认原启动已关闭，记录仍保留。":
+        "La computadora no confirmó que el inicio original se cerró. El registro se conserva.",
+    "原启动结果尚未确认，记录仍保留。":
+        "Resultado del inicio original sin confirmar. El registro se conserva.",
+    "服务地址必须使用 HTTPS；调试版本可使用本机或局域网 IP。":
+        "La dirección del servicio debe usar HTTPS. Las compilaciones de depuración pueden usar una IP local o de la LAN.",
+    "服务暂时不可用，请稍后重试。":
+        "Servicio no disponible temporalmente. Inténtalo más tarde.",
     "服务返回了无法识别的响应。": "El servicio devolvió una respuesta no reconocida.",
-    "无法连接服务，请检查网络和服务地址。": "No se pudo conectar con el servicio. Revisa tu red y la dirección del servicio.",
-    "无法验证服务证书，请检查服务配置。": "No se pudo verificar el certificado del servicio. Revisa la configuración del servicio.",
-    "服务响应无效或连接已中断，请重试。": "Respuesta del servicio no válida o conexión perdida. Inténtalo de nuevo.",
-    "服务版本不兼容，请更新 App 或服务端。": "Versión del servicio incompatible. Actualiza la app o el servidor.",
+    "无法连接服务，请检查网络和服务地址。":
+        "No se pudo conectar con el servicio. Revisa tu red y la dirección del servicio.",
+    "无法验证服务证书，请检查服务配置。":
+        "No se pudo verificar el certificado del servicio. Revisa la configuración del servicio.",
+    "服务响应无效或连接已中断，请重试。":
+        "Respuesta del servicio no válida o conexión perdida. Inténtalo de nuevo.",
+    "服务版本不兼容，请更新 App 或服务端。":
+        "Versión del servicio incompatible. Actualiza la app o el servidor.",
     "二维码内容过长。": "Contenido del código QR demasiado largo.",
     "不是 DogCodes 配对二维码。": "No es un código QR de vinculación de DogCodes.",
-    "配对二维码无效，或来自未配置的服务。": "Código QR de vinculación no válido o de un servicio no configurado.",
-    "配对二维码已过期，请在电脑上重新生成。": "El código QR de vinculación caducó. Genera uno nuevo en tu computadora.",
-    "设备时间不一致，请校准手机和电脑时间后重试。": "Los relojes de los dispositivos no coinciden. Corrige la hora en ambos e inténtalo de nuevo.",
+    "配对二维码无效，或来自未配置的服务。":
+        "Código QR de vinculación no válido o de un servicio no configurado.",
+    "配对二维码已过期，请在电脑上重新生成。":
+        "El código QR de vinculación caducó. Genera uno nuevo en tu computadora.",
+    "设备时间不一致，请校准手机和电脑时间后重试。":
+        "Los relojes de los dispositivos no coinciden. Corrige la hora en ambos e inténtalo de nuevo.",
     "无法读取配对二维码。": "No se pudo leer el código QR de vinculación.",
     "事件游标格式无效。": "Formato de cursor de eventos no válido.",
     "事件游标超出范围。": "Cursor de eventos fuera de rango.",
-    "电脑离线，重新连接后再浏览目录。": "Computadora sin conexión. Vuelve a conectarte para explorar directorios.",
+    "电脑离线，重新连接后再浏览目录。":
+        "Computadora sin conexión. Vuelve a conectarte para explorar directorios.",
     "连接已更换，请重新读取目录。": "La conexión cambió. Vuelve a cargar el directorio.",
-    "电脑未返回有效的目录列表，请更新电脑端后重试。": "No se devolvió una lista de directorios válida. Actualiza la app de escritorio e inténtalo de nuevo.",
-    "目录分页没有前进，请刷新目录。": "La paginación de directorios no avanzó. Actualiza el directorio.",
-    "电脑端暂不支持目录选择，请更新电脑端后重试。": "Actualiza la app de escritorio para elegir directorios.",
+    "电脑未返回有效的目录列表，请更新电脑端后重试。":
+        "No se devolvió una lista de directorios válida. Actualiza la app de escritorio e inténtalo de nuevo.",
+    "目录分页没有前进，请刷新目录。":
+        "La paginación de directorios no avanzó. Actualiza el directorio.",
+    "电脑端暂不支持目录选择，请更新电脑端后重试。":
+        "Actualiza la app de escritorio para elegir directorios.",
     "剪贴板传输响应无效": "Respuesta de transferencia del portapapeles no válida",
-    "剪贴板传输身份不匹配": "La identidad de la transferencia del portapapeles no coincide",
-    "剪贴板传输校验信息不匹配": "La información de integridad de la transferencia del portapapeles no coincide",
-    "图片需小于 16 MB，请缩小图片后重试": "La imagen debe pesar menos de 16 MB. Redúcela e inténtalo de nuevo.",
+    "剪贴板传输身份不匹配":
+        "La identidad de la transferencia del portapapeles no coincide",
+    "剪贴板传输校验信息不匹配":
+        "La información de integridad de la transferencia del portapapeles no coincide",
+    "图片需小于 16 MB，请缩小图片后重试":
+        "La imagen debe pesar menos de 16 MB. Redúcela e inténtalo de nuevo.",
     "剪贴板文字为空或超过 1 MB": "El texto del portapapeles está vacío o supera 1 MB",
     "图片传输起始位置无效": "Posición inicial de la transferencia de imagen no válida",
     "剪贴板上传位置不匹配": "La posición de subida del portapapeles no coincide",
-    "尚未确认电脑剪贴板是否更新，请从电脑获取核实；不会自动重发": "No se confirmó la actualización del portapapeles de la computadora. Obtenlo para verificarlo. No se reenviará automáticamente.",
-    "未确认电脑剪贴板已更新，请从电脑获取核实；不会自动重发": "No se confirmó la actualización del portapapeles de la computadora. Obtenlo para verificarlo. No se reenviará automáticamente.",
-    "剪贴板写入回执不完整，请从电脑获取核实": "Comprobante de escritura del portapapeles incompleto. Obtén el portapapeles de la computadora para verificarlo.",
+    "尚未确认电脑剪贴板是否更新，请从电脑获取核实；不会自动重发":
+        "No se confirmó la actualización del portapapeles de la computadora. Obtenlo para verificarlo. No se reenviará automáticamente.",
+    "未确认电脑剪贴板已更新，请从电脑获取核实；不会自动重发":
+        "No se confirmó la actualización del portapapeles de la computadora. Obtenlo para verificarlo. No se reenviará automáticamente.",
+    "剪贴板写入回执不完整，请从电脑获取核实":
+        "Comprobante de escritura del portapapeles incompleto. Obtén el portapapeles de la computadora para verificarlo.",
     "剪贴板下载数据块过大": "Bloque de descarga del portapapeles demasiado grande",
     "剪贴板下载位置不匹配": "La posición de descarga del portapapeles no coincide",
-    "剪贴板内容校验失败，未写入手机剪贴板": "Falló la comprobación de integridad del portapapeles. El portapapeles del teléfono no cambió.",
+    "剪贴板内容校验失败，未写入手机剪贴板":
+        "Falló la comprobación de integridad del portapapeles. El portapapeles del teléfono no cambió.",
     "通知服务初始化失败。": "Falló la inicialización del servicio de notificaciones.",
-    "此版本未配置备用通知服务。": "Servicio de notificaciones de respaldo no configurado en esta compilación.",
+    "此版本未配置备用通知服务。":
+        "Servicio de notificaciones de respaldo no configurado en esta compilación.",
     "系统通知权限尚未开启。": "No se concedió el permiso de notificaciones del sistema.",
     "任务提醒": "Alertas de tareas",
-    "待审批、待回答、完成和失败提醒": "Alertas de aprobaciones, preguntas, finalización y errores",
-    "未获取到通知设备身份。": "No se pudo obtener la identidad de notificación del dispositivo.",
-    "这台电脑已移除，未发送停止请求。": "Esta computadora se quitó. No se envió la solicitud de detención.",
-    "这个任务已经有一个停止请求在等待确认。": "Ya hay una solicitud de detención de esta tarea pendiente de confirmación.",
-    "等待确认的停止请求太多，请先处理待处理页里的卡片。": "Demasiadas solicitudes de detención pendientes de confirmación. Resuelve primero las tarjetas en Pendientes.",
-    "任务当前没有可停止的运行。": "Esta tarea no tiene ninguna ejecución activa que detener.",
-    "暂时无法读取任务状态，请稍后再确认。": "No se pudo leer el estado de la tarea. Vuelve a comprobarlo más tarde.",
-    "这台电脑已移除，未重新发送停止请求。": "Esta computadora se quitó. No se reenvió la solicitud de detención.",
+    "待审批、待回答、完成和失败提醒":
+        "Alertas de aprobaciones, preguntas, finalización y errores",
+    "未获取到通知设备身份。":
+        "No se pudo obtener la identidad de notificación del dispositivo.",
+    "这台电脑已移除，未发送停止请求。":
+        "Esta computadora se quitó. No se envió la solicitud de detención.",
+    "这个任务已经有一个停止请求在等待确认。":
+        "Ya hay una solicitud de detención de esta tarea pendiente de confirmación.",
+    "等待确认的停止请求太多，请先处理待处理页里的卡片。":
+        "Demasiadas solicitudes de detención pendientes de confirmación. Resuelve primero las tarjetas en Pendientes.",
+    "任务当前没有可停止的运行。":
+        "Esta tarea no tiene ninguna ejecución activa que detener.",
+    "暂时无法读取任务状态，请稍后再确认。":
+        "No se pudo leer el estado de la tarea. Vuelve a comprobarlo más tarde.",
+    "这台电脑已移除，未重新发送停止请求。":
+        "Esta computadora se quitó. No se reenvió la solicitud de detención.",
     "原停止请求已改变，请刷新。": "La solicitud de detención original cambió. Actualiza.",
-    "没有待确认的停止请求。": "No hay solicitudes de detención pendientes de confirmación.",
-    "电脑已收到停止请求，任务会在停下后更新状态。": "La computadora recibió la solicitud de detención. El estado se actualizará cuando la tarea se detenga.",
-    "这次运行已经结束，不需要再停止。": "Esta ejecución ya terminó. No hace falta detenerla de nuevo.",
-    "已不再等待。如果电脑收到了这个停止请求，任务仍会停下。": "Se dejó de esperar. Si la computadora recibió la solicitud de detención, la tarea se detendrá igualmente.",
-    "还不确定是否已停止，可以再发一次停止。": "Resultado de la detención sin confirmar. Puedes enviar otra solicitud de detención.",
+    "没有待确认的停止请求。":
+        "No hay solicitudes de detención pendientes de confirmación.",
+    "电脑已收到停止请求，任务会在停下后更新状态。":
+        "La computadora recibió la solicitud de detención. El estado se actualizará cuando la tarea se detenga.",
+    "这次运行已经结束，不需要再停止。":
+        "Esta ejecución ya terminó. No hace falta detenerla de nuevo.",
+    "已不再等待。如果电脑收到了这个停止请求，任务仍会停下。":
+        "Se dejó de esperar. Si la computadora recibió la solicitud de detención, la tarea se detendrá igualmente.",
+    "还不确定是否已停止，可以再发一次停止。":
+        "Resultado de la detención sin confirmar. Puedes enviar otra solicitud de detención.",
     "附件总大小不能超过 25 MB。": "Los adjuntos no pueden superar 25 MB en total.",
     "附件文件名过长或无效。": "Nombre de archivo del adjunto demasiado largo o no válido.",
     "图片请使用 PNG、JPEG、GIF 或 WebP 格式。": "Usa imágenes PNG, JPEG, GIF o WebP.",
     "一次最多发送 16 个附件。": "Hasta 16 adjuntos por mensaje.",
-    "附件上传已暂停，可继续原上传。": "Subida del adjunto en pausa. Reanuda la subida original.",
-    "附件回执与原文件不一致，未发送任务。": "El comprobante del adjunto no coincide con el archivo original. No se envió la tarea.",
-    "本机附件内容已变化，请重新添加；未上传变化后的文件。": "El adjunto local cambió. Añádelo de nuevo. No se subió el archivo modificado.",
-    "电脑端暂不支持附件上传，请更新电脑端。": "Actualiza la app de escritorio para subir adjuntos.",
-    "电脑返回的附件位置无效。": "La computadora devolvió una posición de adjunto no válida.",
-    "附件分块位置未确认，请继续原上传。": "Posición del fragmento del adjunto sin confirmar. Reanuda la subida original.",
-    "原草稿不可读取，请重新选择附件。": "No se puede leer el borrador original. Vuelve a elegir los adjuntos.",
-    "上次附件选择未完成，请重新选择。": "La selección anterior de adjuntos no se completó. Vuelve a elegirlos.",
-    "已恢复系统文件选择器返回的附件，请核对后发送。": "Se recuperaron los adjuntos del selector de archivos del sistema. Revísalos antes de enviar.",
-    "附件选择未完成：{0}，请重新选择。": "Selección de adjuntos incompleta: {0}. Vuelve a elegirlos.",
-    "上次附件选择未能恢复：{0}": "No se pudo recuperar la selección anterior de adjuntos: {0}",
-    "正在处理这台电脑的原配对，请稍后核实。": "Se está procesando la vinculación original de esta computadora. Vuelve a comprobarlo más tarde.",
-    "原配对恢复记录已改变，请刷新后核实。": "El registro de recuperación de la vinculación original cambió. Actualiza y verifica.",
-    "电脑绑定已移除或变化，请重新配对后连接。": "La vinculación de la computadora se quitó o cambió. Vuelve a vincularla para conectarte.",
+    "附件上传已暂停，可继续原上传。":
+        "Subida del adjunto en pausa. Reanuda la subida original.",
+    "附件回执与原文件不一致，未发送任务。":
+        "El comprobante del adjunto no coincide con el archivo original. No se envió la tarea.",
+    "本机附件内容已变化，请重新添加；未上传变化后的文件。":
+        "El adjunto local cambió. Añádelo de nuevo. No se subió el archivo modificado.",
+    "电脑端暂不支持附件上传，请更新电脑端。":
+        "Actualiza la app de escritorio para subir adjuntos.",
+    "电脑返回的附件位置无效。":
+        "La computadora devolvió una posición de adjunto no válida.",
+    "附件分块位置未确认，请继续原上传。":
+        "Posición del fragmento del adjunto sin confirmar. Reanuda la subida original.",
+    "原草稿不可读取，请重新选择附件。":
+        "No se puede leer el borrador original. Vuelve a elegir los adjuntos.",
+    "上次附件选择未完成，请重新选择。":
+        "La selección anterior de adjuntos no se completó. Vuelve a elegirlos.",
+    "已恢复系统文件选择器返回的附件，请核对后发送。":
+        "Se recuperaron los adjuntos del selector de archivos del sistema. Revísalos antes de enviar.",
+    "附件选择未完成：{0}，请重新选择。":
+        "Selección de adjuntos incompleta: {0}. Vuelve a elegirlos.",
+    "上次附件选择未能恢复：{0}":
+        "No se pudo recuperar la selección anterior de adjuntos: {0}",
+    "正在处理这台电脑的原配对，请稍后核实。":
+        "Se está procesando la vinculación original de esta computadora. Vuelve a comprobarlo más tarde.",
+    "原配对恢复记录已改变，请刷新后核实。":
+        "El registro de recuperación de la vinculación original cambió. Actualiza y verifica.",
+    "电脑绑定已移除或变化，请重新配对后连接。":
+        "La vinculación de la computadora se quitó o cambió. Vuelve a vincularla para conectarte.",
     "未命名会话": "Conversación sin título",
     "离线模式": "Modo sin conexión",
     "离线协作": "Colaboración sin conexión",
-    "部分离线数据暂时无法读取，联网后可重新同步。": "No se pudieron leer algunos datos sin conexión. Vuelve a conectarte para sincronizar de nuevo.",
-    "停止请求暂时无法读取，请检查系统安全存储。": "No se pudieron leer las solicitudes de detención. Revisa el almacenamiento seguro del sistema.",
-    "终端关闭记录暂时无法读取，请检查系统安全存储。": "No se pudieron leer los registros de cierre de terminales. Revisa el almacenamiento seguro del sistema.",
-    "已配对电脑暂时无法读取，请检查系统安全存储。": "No se pudieron leer las computadoras vinculadas. Revisa el almacenamiento seguro del sistema.",
-    "电脑绑定已变化，未使用旧页面接管新的连接。": "La vinculación de la computadora cambió. La página anterior no asumió la nueva conexión.",
-    "连接中断，正在重新连接。已发送操作不会重复执行。": "Se perdió la conexión. Volviendo a conectar. Las operaciones enviadas no se ejecutarán dos veces.",
-    "连接已断开。电脑上的任务不会因此停止。": "Desconectado. Las tareas siguen ejecutándose en tu computadora.",
-    "移除未完成，连接已关闭；请重试移除或核实安全存储。": "No se completó la eliminación. Conexión cerrada. Repite la eliminación o revisa el almacenamiento seguro.",
+    "部分离线数据暂时无法读取，联网后可重新同步。":
+        "No se pudieron leer algunos datos sin conexión. Vuelve a conectarte para sincronizar de nuevo.",
+    "停止请求暂时无法读取，请检查系统安全存储。":
+        "No se pudieron leer las solicitudes de detención. Revisa el almacenamiento seguro del sistema.",
+    "终端关闭记录暂时无法读取，请检查系统安全存储。":
+        "No se pudieron leer los registros de cierre de terminales. Revisa el almacenamiento seguro del sistema.",
+    "已配对电脑暂时无法读取，请检查系统安全存储。":
+        "No se pudieron leer las computadoras vinculadas. Revisa el almacenamiento seguro del sistema.",
+    "电脑绑定已变化，未使用旧页面接管新的连接。":
+        "La vinculación de la computadora cambió. La página anterior no asumió la nueva conexión.",
+    "连接中断，正在重新连接。已发送操作不会重复执行。":
+        "Se perdió la conexión. Volviendo a conectar. Las operaciones enviadas no se ejecutarán dos veces.",
+    "连接已断开。电脑上的任务不会因此停止。":
+        "Desconectado. Las tareas siguen ejecutándose en tu computadora.",
+    "移除未完成，连接已关闭；请重试移除或核实安全存储。":
+        "No se completó la eliminación. Conexión cerrada. Repite la eliminación o revisa el almacenamiento seguro.",
     "离线缓存未能保存：{0}": "No se pudo guardar la caché sin conexión: {0}",
-    "待确认的操作暂时无法读取，请检查系统安全存储。": "No se pudieron leer las operaciones sin confirmar. Revisa el almacenamiento seguro del sistema.",
-    "无法读取后台提醒设置，请检查系统安全存储后重试。": "No se pudo leer la configuración de alertas en segundo plano. Revisa el almacenamiento seguro del sistema e inténtalo de nuevo.",
-    "部分电脑的通知尚未登记，请检查网络后重新检测。": "Las notificaciones no están registradas para algunas computadoras. Revisa tu red e inténtalo de nuevo.",
-    "后台提醒尚未启用，请核实系统通知权限和通知服务配置后重试。": "Las alertas en segundo plano no están activadas. Revisa el permiso de notificaciones del sistema y la configuración del servicio.",
+    "待确认的操作暂时无法读取，请检查系统安全存储。":
+        "No se pudieron leer las operaciones sin confirmar. Revisa el almacenamiento seguro del sistema.",
+    "无法读取后台提醒设置，请检查系统安全存储后重试。":
+        "No se pudo leer la configuración de alertas en segundo plano. Revisa el almacenamiento seguro del sistema e inténtalo de nuevo.",
+    "部分电脑的通知尚未登记，请检查网络后重新检测。":
+        "Las notificaciones no están registradas para algunas computadoras. Revisa tu red e inténtalo de nuevo.",
+    "后台提醒尚未启用，请核实系统通知权限和通知服务配置后重试。":
+        "Las alertas en segundo plano no están activadas. Revisa el permiso de notificaciones del sistema y la configuración del servicio.",
     "Git 操作已完成": "Operación de Git completada",
-    "已经提交，还不确定是否推送成功，可以重新发送推送。": "Commit realizado. Resultado del push sin confirmar. Puedes reenviar el push.",
+    "已经提交，还不确定是否推送成功，可以重新发送推送。":
+        "Commit realizado. Resultado del push sin confirmar. Puedes reenviar el push.",
     "提交已完成，推送失败：{0}": "Commit completado. Falló el push: {0}",
     "Git 操作失败：{0}": "Falló la operación de Git: {0}",
-    "电脑正在执行 Git 操作，稍后再确认。": "Operación de Git en ejecución en tu computadora. Vuelve a comprobarlo más tarde.",
-    "Git 操作中途中断了，请在「变更」里看一下仓库现在的状态。": "Operación de Git interrumpida. Revisa el estado del repositorio en Cambios.",
-    "Git 操作只完成了一部分，请先在「变更」里看一下再继续。": "La operación de Git solo se completó en parte. Revisa Cambios antes de continuar.",
+    "电脑正在执行 Git 操作，稍后再确认。":
+        "Operación de Git en ejecución en tu computadora. Vuelve a comprobarlo más tarde.",
+    "Git 操作中途中断了，请在「变更」里看一下仓库现在的状态。":
+        "Operación de Git interrumpida. Revisa el estado del repositorio en Cambios.",
+    "Git 操作只完成了一部分，请先在「变更」里看一下再继续。":
+        "La operación de Git solo se completó en parte. Revisa Cambios antes de continuar.",
     "已不再等待这次 Git 操作。": "Se dejó de esperar esta operación de Git.",
-    "电脑上还查不到这次 Git 操作，可能没收到，可以重新发送。": "La computadora aún no tiene registro de esta operación de Git. Puede que no haya llegado. Puedes reenviarla.",
-    "还不确定文件是否已暂存，所以没有继续提交。": "No se confirmó la preparación. El commit no continuó.",
-    "暂存回执与原文件选择不一致，未重新执行。": "El comprobante de preparación no coincide con la selección de archivos original. No se volvió a ejecutar.",
+    "电脑上还查不到这次 Git 操作，可能没收到，可以重新发送。":
+        "La computadora aún no tiene registro de esta operación de Git. Puede que no haya llegado. Puedes reenviarla.",
+    "还不确定文件是否已暂存，所以没有继续提交。":
+        "No se confirmó la preparación. El commit no continuó.",
+    "暂存回执与原文件选择不一致，未重新执行。":
+        "El comprobante de preparación no coincide con la selección de archivos original. No se volvió a ejecutar.",
     "Git 操作无效。": "Operación de Git no válida.",
-    "电脑未返回有效的 Git 操作回执。": "La computadora no devolvió un comprobante válido de la operación de Git.",
-    "Git 回执与原请求不一致，未继续操作。": "El comprobante de Git no coincide con la solicitud original. La operación no continuó.",
-    "Git 接续记录过长或存在循环，请在电脑上核实。": "La cadena de continuación de Git es demasiado larga o tiene un bucle. Verifícalo en tu computadora.",
-    "电脑尚未确认结束原 Git 跟踪。": "La computadora no confirmó el fin del seguimiento de Git original.",
+    "电脑未返回有效的 Git 操作回执。":
+        "La computadora no devolvió un comprobante válido de la operación de Git.",
+    "Git 回执与原请求不一致，未继续操作。":
+        "El comprobante de Git no coincide con la solicitud original. La operación no continuó.",
+    "Git 接续记录过长或存在循环，请在电脑上核实。":
+        "La cadena de continuación de Git es demasiado larga o tiene un bucle. Verifícalo en tu computadora.",
+    "电脑尚未确认结束原 Git 跟踪。":
+        "La computadora no confirmó el fin del seguimiento de Git original.",
     "待审批": "Aprobación solicitada",
     "待回答": "Respuesta solicitada",
     "任务完成": "Tarea completada",
     "执行失败": "Error en la ejecución",
-    "通知设置响应无效，请重新读取。": "Respuesta de la configuración de notificaciones no válida. Vuelve a cargar.",
-    "设备授权已失效，请核实电脑绑定。": "La autorización del dispositivo caducó. Verifica la vinculación de la computadora.",
-    "通知设置已改变，请重新读取后修改。": "La configuración de notificaciones cambió. Vuelve a cargar antes de editar.",
+    "通知设置响应无效，请重新读取。":
+        "Respuesta de la configuración de notificaciones no válida. Vuelve a cargar.",
+    "设备授权已失效，请核实电脑绑定。":
+        "La autorización del dispositivo caducó. Verifica la vinculación de la computadora.",
+    "通知设置已改变，请重新读取后修改。":
+        "La configuración de notificaciones cambió. Vuelve a cargar antes de editar.",
     "操作过于频繁，请稍后重试。": "Demasiadas operaciones. Inténtalo más tarde.",
-    "通知服务暂时不可用，请稍后重试。": "Servicio de notificaciones no disponible temporalmente. Inténtalo más tarde.",
-    "无法确认通知设置，请检查网络后重新读取。": "No se pudo confirmar la configuración de notificaciones. Revisa tu red y vuelve a cargar.",
-    "电脑没有收到这次设置，请再试一次。": "La computadora no recibió este ajuste. Inténtalo de nuevo.",
-    "电脑返回的保持唤醒状态无效。": "Estado de mantener activa devuelto por la computadora no válido.",
-    "待发送的输入过多，本次未发送，请缩短输入后再试。": "Demasiada entrada en cola. No se envió nada. Acorta la entrada e inténtalo de nuevo.",
+    "通知服务暂时不可用，请稍后重试。":
+        "Servicio de notificaciones no disponible temporalmente. Inténtalo más tarde.",
+    "无法确认通知设置，请检查网络后重新读取。":
+        "No se pudo confirmar la configuración de notificaciones. Revisa tu red y vuelve a cargar.",
+    "电脑没有收到这次设置，请再试一次。":
+        "La computadora no recibió este ajuste. Inténtalo de nuevo.",
+    "电脑返回的保持唤醒状态无效。":
+        "Estado de mantener activa devuelto por la computadora no válido.",
+    "待发送的输入过多，本次未发送，请缩短输入后再试。":
+        "Demasiada entrada en cola. No se envió nada. Acorta la entrada e inténtalo de nuevo.",
     "终端页面已离开，未继续发送输入。": "Se cerró la página Terminal. No se envió más entrada.",
     "终端输入回执不匹配": "El comprobante de entrada del terminal no coincide",
-    "请更新电脑端后输入；终端输出仍可查看。": "Actualiza la app de escritorio para escribir. La salida del terminal sigue disponible.",
+    "请更新电脑端后输入；终端输出仍可查看。":
+        "Actualiza la app de escritorio para escribir. La salida del terminal sigue disponible.",
     "终端正在启动，请稍后继续输入。": "Iniciando el terminal. Sigue escribiendo más tarde.",
-    "原终端当前不可输入，请刷新查看状态。": "El terminal original no acepta entrada. Actualiza para ver su estado.",
-    "终端输入连接已改变，请检查后继续。": "La conexión de entrada del terminal cambió. Revísala antes de continuar.",
-    "输入连接仍在切换，请稍后检查并继续。": "La conexión de entrada aún está cambiando. Vuelve a comprobarlo más tarde.",
-    "上次输入结果待核实，请检查终端输出后再继续。": "Resultado de la entrada anterior sin confirmar. Revisa la salida del terminal antes de continuar.",
-    "输入结果尚未确认，请核实或检查终端后继续；不会重发原输入。": "Resultado de la entrada sin confirmar. Verifícalo o revisa el terminal antes de continuar. La entrada original no se volverá a enviar.",
-    "终端连接中断，输入结果待核实；未发送的队列已丢弃，不会自动重发。": "Terminal desconectado. Resultado de la entrada sin confirmar. La cola no enviada se descartó y no se enviará automáticamente.",
-    "原输入仍未确认或通道已改变，请检查终端输出后继续；不会重发。": "Entrada original sin confirmar o canal cambiado. Revisa la salida del terminal antes de continuar. La entrada no se volverá a enviar.",
-    "暂时无法核实输入，请连接后再试；不会重发原输入。": "No se pudo verificar la entrada. Vuelve a conectarte e inténtalo de nuevo. La entrada original no se volverá a enviar.",
-    "输入连接尚未恢复，请稍后再试。": "La conexión de entrada aún no se ha restablecido. Inténtalo más tarde.",
-    "这台电脑已移除，未发送关闭请求。": "Esta computadora se quitó. No se envió la solicitud de cierre.",
-    "这个终端已经有一个关闭请求在等待确认。": "Ya hay una solicitud de cierre de este terminal pendiente de confirmación.",
-    "等待确认的关闭请求太多，请先处理待处理页里的卡片。": "Demasiadas solicitudes de cierre pendientes de confirmación. Resuelve primero las tarjetas en Pendientes.",
-    "原终端关闭结果尚未确认，请核实结束后再启动这个运行配置。": "Resultado del cierre del terminal original sin confirmar. Verifícalo antes de iniciar esta configuración de ejecución.",
-    "请更新电脑端后再关闭终端，当前版本无法核实原终端身份。": "Actualiza la app de escritorio para cerrar terminales. Esta versión no puede verificar la identidad del terminal original.",
-    "终端身份不完整，请刷新后再关闭。": "Identidad del terminal incompleta. Actualiza antes de cerrar.",
-    "终端已经重新启动过，没有关闭新的终端。": "El terminal se reinició. No se cerró el nuevo terminal.",
+    "原终端当前不可输入，请刷新查看状态。":
+        "El terminal original no acepta entrada. Actualiza para ver su estado.",
+    "终端输入连接已改变，请检查后继续。":
+        "La conexión de entrada del terminal cambió. Revísala antes de continuar.",
+    "输入连接仍在切换，请稍后检查并继续。":
+        "La conexión de entrada aún está cambiando. Vuelve a comprobarlo más tarde.",
+    "上次输入结果待核实，请检查终端输出后再继续。":
+        "Resultado de la entrada anterior sin confirmar. Revisa la salida del terminal antes de continuar.",
+    "输入结果尚未确认，请核实或检查终端后继续；不会重发原输入。":
+        "Resultado de la entrada sin confirmar. Verifícalo o revisa el terminal antes de continuar. La entrada original no se volverá a enviar.",
+    "终端连接中断，输入结果待核实；未发送的队列已丢弃，不会自动重发。":
+        "Terminal desconectado. Resultado de la entrada sin confirmar. La cola no enviada se descartó y no se enviará automáticamente.",
+    "原输入仍未确认或通道已改变，请检查终端输出后继续；不会重发。":
+        "Entrada original sin confirmar o canal cambiado. Revisa la salida del terminal antes de continuar. La entrada no se volverá a enviar.",
+    "暂时无法核实输入，请连接后再试；不会重发原输入。":
+        "No se pudo verificar la entrada. Vuelve a conectarte e inténtalo de nuevo. La entrada original no se volverá a enviar.",
+    "输入连接尚未恢复，请稍后再试。":
+        "La conexión de entrada aún no se ha restablecido. Inténtalo más tarde.",
+    "这台电脑已移除，未发送关闭请求。":
+        "Esta computadora se quitó. No se envió la solicitud de cierre.",
+    "这个终端已经有一个关闭请求在等待确认。":
+        "Ya hay una solicitud de cierre de este terminal pendiente de confirmación.",
+    "等待确认的关闭请求太多，请先处理待处理页里的卡片。":
+        "Demasiadas solicitudes de cierre pendientes de confirmación. Resuelve primero las tarjetas en Pendientes.",
+    "原终端关闭结果尚未确认，请核实结束后再启动这个运行配置。":
+        "Resultado del cierre del terminal original sin confirmar. Verifícalo antes de iniciar esta configuración de ejecución.",
+    "请更新电脑端后再关闭终端，当前版本无法核实原终端身份。":
+        "Actualiza la app de escritorio para cerrar terminales. Esta versión no puede verificar la identidad del terminal original.",
+    "终端身份不完整，请刷新后再关闭。":
+        "Identidad del terminal incompleta. Actualiza antes de cerrar.",
+    "终端已经重新启动过，没有关闭新的终端。":
+        "El terminal se reinició. No se cerró el nuevo terminal.",
     "终端不存在": "El terminal no existe",
     "没有待确认的终端关闭操作。": "No hay cierres de terminal pendientes de confirmación.",
     "终端已经关闭。": "Terminal cerrado.",
-    "已不再等待。如果电脑收到了关闭请求，终端仍会关闭。": "Se dejó de esperar. Si la computadora recibió la solicitud de cierre, el terminal se cerrará igualmente.",
-    "终端已改变，关闭请求未执行。": "El terminal cambió. No se ejecutó la solicitud de cierre.",
-    "电脑已收到关闭请求，正在等终端结束。": "La computadora recibió la solicitud de cierre. Esperando a que el terminal termine.",
-    "还不确定终端是否已关闭，可以稍后再确认。": "Resultado del cierre del terminal sin confirmar. Vuelve a comprobarlo más tarde.",
+    "已不再等待。如果电脑收到了关闭请求，终端仍会关闭。":
+        "Se dejó de esperar. Si la computadora recibió la solicitud de cierre, el terminal se cerrará igualmente.",
+    "终端已改变，关闭请求未执行。":
+        "El terminal cambió. No se ejecutó la solicitud de cierre.",
+    "电脑已收到关闭请求，正在等终端结束。":
+        "La computadora recibió la solicitud de cierre. Esperando a que el terminal termine.",
+    "还不确定终端是否已关闭，可以稍后再确认。":
+        "Resultado del cierre del terminal sin confirmar. Vuelve a comprobarlo más tarde.",
     "请选择有效的审查问题。": "Elige problemas de revisión válidos.",
-    "审查回执与原请求不匹配，请保留原操作并核实。": "El comprobante de la revisión no coincide con la solicitud original. Conserva la operación y verifícala.",
-    "修复回执与原请求不匹配，请先核实电脑上的原修复。": "El comprobante de la corrección no coincide con la solicitud original. Verifica primero la corrección original en tu computadora.",
-    "无法读取审查记录，请更新电脑端后重试。": "No se pudieron leer las revisiones. Actualiza la app de escritorio e inténtalo de nuevo.",
-    "消息分片取消标识无效。": "Indicador de cancelación de fragmento de mensaje no válido.",
+    "审查回执与原请求不匹配，请保留原操作并核实。":
+        "El comprobante de la revisión no coincide con la solicitud original. Conserva la operación y verifícala.",
+    "修复回执与原请求不匹配，请先核实电脑上的原修复。":
+        "El comprobante de la corrección no coincide con la solicitud original. Verifica primero la corrección original en tu computadora.",
+    "无法读取审查记录，请更新电脑端后重试。":
+        "No se pudieron leer las revisiones. Actualiza la app de escritorio e inténtalo de nuevo.",
+    "消息分片取消标识无效。":
+        "Indicador de cancelación de fragmento de mensaje no válido.",
     "消息大小超出范围。": "Tamaño del mensaje fuera de rango.",
     "二进制消息格式无效。": "Formato de mensaje binario no válido.",
     "消息分片格式无效。": "Formato de fragmento de mensaje no válido.",
@@ -8150,40 +9793,57 @@ const messageCatalogs = <String, Map<String, String>>{
     "消息分片不连续。": "Los fragmentos de mensaje no son contiguos.",
     "消息分片长度无效。": "Longitud de fragmento de mensaje no válida.",
     "不允许嵌套消息分片。": "No se permiten fragmentos de mensaje anidados.",
-    "会话版本不可用，请刷新后重试。": "Versión de la conversación no disponible. Actualiza e inténtalo de nuevo.",
-    "会话名称需为 1–120 个字符，且不能包含控制字符。": "El nombre de la conversación debe tener entre 1 y 120 caracteres y no incluir caracteres de control.",
+    "会话版本不可用，请刷新后重试。":
+        "Versión de la conversación no disponible. Actualiza e inténtalo de nuevo.",
+    "会话名称需为 1–120 个字符，且不能包含控制字符。":
+        "El nombre de la conversación debe tener entre 1 y 120 caracteres y no incluir caracteres de control.",
     "会话状态无效。": "Estado de la conversación no válido.",
-    "无法读取电脑的会话设置，请更新电脑端后重试。": "No se pudo leer la configuración de las conversaciones. Actualiza la app de escritorio e inténtalo de nuevo.",
+    "无法读取电脑的会话设置，请更新电脑端后重试。":
+        "No se pudo leer la configuración de las conversaciones. Actualiza la app de escritorio e inténtalo de nuevo.",
     "Fork 环境无效。": "Entorno de fork no válido.",
-    "Fork 返回的会话身份不一致，请核实原操作。": "El fork devolvió una identidad de conversación distinta. Verifica la operación original.",
-    "没有待确认的会话操作。": "No hay operaciones de conversación pendientes de confirmación.",
+    "Fork 返回的会话身份不一致，请核实原操作。":
+        "El fork devolvió una identidad de conversación distinta. Verifica la operación original.",
+    "没有待确认的会话操作。":
+        "No hay operaciones de conversación pendientes de confirmación.",
     "原操作已变化，请刷新。": "La operación original cambió. Actualiza.",
-    "Fork 回执与原请求不一致。": "El comprobante del fork no coincide con la solicitud original.",
+    "Fork 回执与原请求不一致。":
+        "El comprobante del fork no coincide con la solicitud original.",
     "这项操作需要先核实结果。": "Verifica primero el resultado de esta operación.",
     "这台电脑已移除，未再发送请求。": "Esta computadora se quitó. No se reenvió la solicitud.",
-    "原电脑记录尚未清理完成，请重试移除电脑后再连接。": "Los registros de la computadora original no se borraron por completo. Repite la eliminación antes de volver a conectarte.",
-    "电脑绑定已变化，未发送原操作；请重新连接后确认。": "La vinculación de la computadora cambió. No se envió la operación original. Vuelve a conectarte y confirma.",
-    "原操作已结束或已更新，请刷新后操作。": "La operación original terminó o se actualizó. Actualiza antes de continuar.",
-    "中继连接中断，操作结果需要核实。": "Relé desconectado. Verifica el resultado de la operación.",
+    "原电脑记录尚未清理完成，请重试移除电脑后再连接。":
+        "Los registros de la computadora original no se borraron por completo. Repite la eliminación antes de volver a conectarte.",
+    "电脑绑定已变化，未发送原操作；请重新连接后确认。":
+        "La vinculación de la computadora cambió. No se envió la operación original. Vuelve a conectarte y confirma.",
+    "原操作已结束或已更新，请刷新后操作。":
+        "La operación original terminó o se actualizó. Actualiza antes de continuar.",
+    "中继连接中断，操作结果需要核实。":
+        "Relé desconectado. Verifica el resultado de la operación.",
     "中继探针仅供本地开发使用。": "La sonda de relé es solo para desarrollo local.",
     "数据帧大小超出范围。": "Tamaño de trama de datos fuera de rango.",
-    "连接已关闭；操作结果需要核实。": "Conexión cerrada. Verifica el resultado de la operación.",
-    "暂时无法连接可用的通知服务，请稍后重试。": "No se pudo conectar con ningún servicio de notificaciones. Inténtalo más tarde.",
-    "电脑已结束屏幕共享，请重新连接并授权": "El uso compartido de pantalla terminó en tu computadora. Vuelve a conectarte y autoriza de nuevo.",
+    "连接已关闭；操作结果需要核实。":
+        "Conexión cerrada. Verifica el resultado de la operación.",
+    "暂时无法连接可用的通知服务，请稍后重试。":
+        "No se pudo conectar con ningún servicio de notificaciones. Inténtalo más tarde.",
+    "电脑已结束屏幕共享，请重新连接并授权":
+        "El uso compartido de pantalla terminó en tu computadora. Vuelve a conectarte y autoriza de nuevo.",
     "加密中继": "Relé cifrado",
     "P2P 直连": "Conexión directa P2P",
     "TURN 中继": "Relé TURN",
     "WebRTC · 路径待确认": "WebRTC · Ruta sin confirmar",
     "连接的电脑身份不一致。": "La identidad de la computadora conectada no coincide.",
     "草稿归属不可读取": "No se pudo leer la propiedad del borrador",
-    "工作区已属于另一份设备存储": "El espacio de trabajo pertenece a otro almacenamiento de dispositivo",
-    "工作区设备存储尚未初始化": "Almacenamiento de dispositivo del espacio de trabajo sin inicializar",
+    "工作区已属于另一份设备存储":
+        "El espacio de trabajo pertenece a otro almacenamiento de dispositivo",
+    "工作区设备存储尚未初始化":
+        "Almacenamiento de dispositivo del espacio de trabajo sin inicializar",
     "本机数据归属不一致": "La propiedad de los datos locales no coincide",
     "本地绑定记录不可读取": "No se pudo leer el registro de vinculación local",
-    "电脑绑定已变化，未覆盖原草稿。": "La vinculación de la computadora cambió. El borrador original no se sobrescribió.",
+    "电脑绑定已变化，未覆盖原草稿。":
+        "La vinculación de la computadora cambió. El borrador original no se sobrescribió.",
     "本机保存的数据不可读取": "No se pudieron leer los datos guardados localmente",
     "附件大小或标识无效": "Tamaño o identidad del adjunto no válidos",
-    "手机未发送附件已超过 256 MB，请先发送或移除其他草稿中的附件。": "Los adjuntos no enviados superan 256 MB. Envía o quita primero los adjuntos de otros borradores.",
+    "手机未发送附件已超过 256 MB，请先发送或移除其他草稿中的附件。":
+        "Los adjuntos no enviados superan 256 MB. Envía o quita primero los adjuntos de otros borradores.",
     "附件标识无效": "Identidad del adjunto no válida",
     "本机附件已不可读取，请重新添加。": "No se puede leer el adjunto local. Añádelo de nuevo.",
     "本机附件大小已变化。": "El tamaño del adjunto local cambió.",
@@ -8193,14 +9853,18 @@ const messageCatalogs = <String, Map<String, String>>{
     "始终允许": "Permitir siempre",
     "取消操作": "Cancelar acción",
     "{0} · {1} 个目录": "{0} · {1} directorios",
-    "{0} 上还没有项目。新建项目时选择电脑上的已有目录。": "Aún no hay proyectos en {0}. Crea uno a partir de un directorio existente de la computadora.",
+    "{0} 上还没有项目。新建项目时选择电脑上的已有目录。":
+        "Aún no hay proyectos en {0}. Crea uno a partir de un directorio existente de la computadora.",
     "{0} 个会话运行中": "{0} conversaciones en ejecución",
     "不在项目中工作": "Trabajar fuera de un proyecto",
     "主目录": "Directorio principal",
-    "主目录是会话默认的工作目录；附加目录同样对 Agent 可见。从项目中移除目录不会删除电脑上的文件。": "Las conversaciones empiezan en el directorio principal; los directorios adicionales también son visibles para los Agents. Quitar un directorio del proyecto no elimina ningún archivo de la computadora.",
+    "主目录是会话默认的工作目录；附加目录同样对 Agent 可见。从项目中移除目录不会删除电脑上的文件。":
+        "Las conversaciones empiezan en el directorio principal; los directorios adicionales también son visibles para los Agents. Quitar un directorio del proyecto no elimina ningún archivo de la computadora.",
     "从项目中移除": "Quitar del proyecto",
-    "保存结果待核实，请刷新后查看项目，不要重复保存。": "Resultado del guardado sin confirmar. Actualiza y revisa el proyecto antes de volver a guardar.",
-    "保留会话和电脑上的文件，可随时恢复": "Conserva las conversaciones y los archivos de la computadora; se puede restaurar cuando quieras",
+    "保存结果待核实，请刷新后查看项目，不要重复保存。":
+        "Resultado del guardado sin confirmar. Actualiza y revisa el proyecto antes de volver a guardar.",
+    "保留会话和电脑上的文件，可随时恢复":
+        "Conserva las conversaciones y los archivos de la computadora; se puede restaurar cuando quieras",
     "名称和目录": "Nombre y directorios",
     "已移除项目（{0}）": "Proyectos quitados ({0})",
     "恢复": "Restaurar",
@@ -8212,7 +9876,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "没有匹配的项目": "No hay proyectos coincidentes",
     "没有未提交的更改": "No hay cambios sin confirmar",
     "添加目录": "Añadir directorio",
-    "电脑离线，重新连接后才能保存。": "La computadora está sin conexión. Vuelve a conectarte para guardar.",
+    "电脑离线，重新连接后才能保存。":
+        "La computadora está sin conexión. Vuelve a conectarte para guardar.",
     "目录操作": "Acciones del directorio",
     "移除「{0}」？": "¿Quitar «{0}»?",
     "移除项目": "Quitar proyecto",
@@ -8221,17 +9886,21 @@ const messageCatalogs = <String, Map<String, String>>{
     "设为主目录": "Establecer como directorio principal",
     "请填写项目名称。": "Escribe un nombre de proyecto.",
     "这个目录已经在项目中。": "Este directorio ya está en el proyecto.",
-    "这个项目可能已在电脑上被移除。": "Es posible que este proyecto se haya quitado en la computadora.",
+    "这个项目可能已在电脑上被移除。":
+        "Es posible que este proyecto se haya quitado en la computadora.",
     "这台电脑上还没有项目。": "Aún no hay proyectos en esta computadora.",
     "选择此目录": "Elegir este directorio",
     "选择目录": "Elegir directorio",
     "项目不存在": "Proyecto no encontrado",
-    "项目会从列表中隐藏。会话和电脑上的文件都会保留，可在「已移除项目」中恢复。": "El proyecto se oculta de la lista. Se conservan sus conversaciones y los archivos de la computadora, y puedes restaurarlo en Proyectos quitados.",
+    "项目会从列表中隐藏。会话和电脑上的文件都会保留，可在「已移除项目」中恢复。":
+        "El proyecto se oculta de la lista. Se conservan sus conversaciones y los archivos de la computadora, y puedes restaurarlo en Proyectos quitados.",
     "项目名称": "Nombre del proyecto",
     "项目操作": "Acciones del proyecto",
     "项目状态无效。": "Estado del proyecto no válido.",
-    "会话、项目和待处理都在电脑上，连接后即可使用。": "Las conversaciones, los proyectos y los pendientes están en tu computadora. Conéctate para usarlos.",
-    "项目已在电脑上添加，可在「项目」中查看。": "Proyecto añadido en tu computadora. Encuéntralo en Proyectos.",
+    "会话、项目和待处理都在电脑上，连接后即可使用。":
+        "Las conversaciones, los proyectos y los pendientes están en tu computadora. Conéctate para usarlos.",
+    "项目已在电脑上添加，可在「项目」中查看。":
+        "Proyecto añadido en tu computadora. Encuéntralo en Proyectos.",
     "正在连接电脑": "Conectando con tu computadora",
     "暂时连接不上电脑": "No se puede conectar con tu computadora",
     "@one:{0} 分钟": "{0} minuto",
@@ -8240,7 +9909,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "@one:{0} 个文件 · 已暂存 {1}": "{0} archivo · {1} preparado",
     "@one:{0} 项需要你处理": "{0} elemento requiere tu atención",
     "@one:{0} 个文件待提交": "{0} archivo por confirmar",
-    "@one:{0} 个会话 · 按当前电脑和项目范围": "{0} conversación · Computadora y proyecto actuales",
+    "@one:{0} 个会话 · 按当前电脑和项目范围":
+        "{0} conversación · Computadora y proyecto actuales",
     "@one:{0} 项等待处理": "{0} elemento pendiente",
     "@one:已选 {0} 项": "{0} seleccionado",
     "@one:{0} 秒": "{0} segundo",
@@ -8252,7 +9922,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "发送文字到电脑": "Enviar texto al ordenador",
     "从电脑获取文字": "Obtener texto del ordenador",
     "编辑后发送到电脑剪贴板": "Editar y enviar al portapapeles del ordenador",
-    "读取电脑剪贴板，复制到这部手机": "Leer el portapapeles del ordenador y copiarlo en este teléfono",
+    "读取电脑剪贴板，复制到这部手机":
+        "Leer el portapapeles del ordenador y copiarlo en este teléfono",
     "粘贴或输入要发送到电脑的文字": "Pega o escribe el texto que quieres enviar al ordenador",
     "文字超过 1 MB，无法发送": "El texto supera 1 MB y no se puede enviar",
     "{0} 个字符": "{0} caracteres",
@@ -8260,9 +9931,12 @@ const messageCatalogs = <String, Map<String, String>>{
     "仅发送": "Solo enviar",
     "发送并粘贴": "Enviar y pegar",
     "已粘贴到电脑": "Pegado en el ordenador",
-    "已发送到电脑剪贴板。更新电脑端后可自动粘贴": "Enviado al portapapeles del ordenador. Actualiza la app de escritorio para pegar automáticamente",
-    "已发送到电脑剪贴板，可在电脑上粘贴": "Enviado al portapapeles del ordenador. Pégalo en el ordenador",
-    "电脑剪贴板里没有文字，先在电脑上复制后再试": "El portapapeles del ordenador no tiene texto. Copia algo en el ordenador y vuelve a intentarlo",
+    "已发送到电脑剪贴板。更新电脑端后可自动粘贴":
+        "Enviado al portapapeles del ordenador. Actualiza la app de escritorio para pegar automáticamente",
+    "已发送到电脑剪贴板，可在电脑上粘贴":
+        "Enviado al portapapeles del ordenador. Pégalo en el ordenador",
+    "电脑剪贴板里没有文字，先在电脑上复制后再试":
+        "El portapapeles del ordenador no tiene texto. Copia algo en el ordenador y vuelve a intentarlo",
     "正在发送到电脑…": "Enviando al ordenador…",
     "正在从电脑获取…": "Obteniendo del ordenador…",
     "@one:{0} 个字符": "{0} carácter",
@@ -8289,13 +9963,18 @@ const messageCatalogs = <String, Map<String, String>>{
     "文件内容": "Contenido del archivo",
     "搜索内容": "Buscar",
     "请求的工具": "Herramienta solicitada",
-    "审批详情格式不完整，请让 Agent 重新发起审批。": "Los detalles de la aprobación están incompletos. Pide al agente que vuelva a solicitarla.",
-    "操作详情过长，下方仅展示部分内容。请让 Agent 拆分操作后重新发起审批，以查看完整范围。": "Los detalles son demasiado largos y solo se muestra una parte. Pide al agente que divida la acción y vuelva a solicitar la aprobación para ver el alcance completo.",
-    "Agent 未提供文件修改范围，请让 Agent 补充文件路径和修改内容。": "El agente no indicó qué archivos cambiarán. Pídele las rutas y los cambios.",
-    "未能从审批请求中读取文件路径、命令或修改内容，请让 Agent 补充详情后重新发起审批。": "No se pudo leer una ruta, un comando ni un cambio en esta solicitud. Pide al agente que añada detalles y vuelva a solicitar la aprobación.",
+    "审批详情格式不完整，请让 Agent 重新发起审批。":
+        "Los detalles de la aprobación están incompletos. Pide al agente que vuelva a solicitarla.",
+    "操作详情过长，下方仅展示部分内容。请让 Agent 拆分操作后重新发起审批，以查看完整范围。":
+        "Los detalles son demasiado largos y solo se muestra una parte. Pide al agente que divida la acción y vuelva a solicitar la aprobación para ver el alcance completo.",
+    "Agent 未提供文件修改范围，请让 Agent 补充文件路径和修改内容。":
+        "El agente no indicó qué archivos cambiarán. Pídele las rutas y los cambios.",
+    "未能从审批请求中读取文件路径、命令或修改内容，请让 Agent 补充详情后重新发起审批。":
+        "No se pudo leer una ruta, un comando ni un cambio en esta solicitud. Pide al agente que añada detalles y vuelva a solicitar la aprobación.",
     "收起": "Mostrar menos",
     "展开全部": "Mostrar todo",
-    "电脑已记录你的决定，但 Agent 已不在等待，请在会话中查看。": "El ordenador registró tu decisión, pero el agente ya no espera. Revisa el chat.",
+    "电脑已记录你的决定，但 Agent 已不在等待，请在会话中查看。":
+        "El ordenador registró tu decisión, pero el agente ya no espera. Revisa el chat.",
     "已取消回答": "Respuesta cancelada",
     "已处理": "Atendido",
     "你的选择：{0}": "Elegiste: {0}",
@@ -8303,13 +9982,17 @@ const messageCatalogs = <String, Map<String, String>>{
     "已在电脑上处理，或请求已失效": "Atendido en el ordenador o la solicitud caducó",
     "清空已处理记录": "Borrar historial atendido",
     "清空已处理记录？": "¿Borrar el historial atendido?",
-    "只从这部手机删除，等待处理的请求不受影响。": "Solo se borra de este teléfono. Las solicitudes pendientes se conservan.",
+    "只从这部手机删除，等待处理的请求不受影响。":
+        "Solo se borra de este teléfono. Las solicitudes pendientes se conservan.",
     "没有权限请求": "Sin solicitudes de permiso",
-    "Agent 需要运行命令或修改文件时，会在这里请你确认。": "Cuando un agente necesite ejecutar un comando o cambiar archivos, te lo pedirá aquí.",
+    "Agent 需要运行命令或修改文件时，会在这里请你确认。":
+        "Cuando un agente necesite ejecutar un comando o cambiar archivos, te lo pedirá aquí.",
     "没有待回答的问题": "Sin preguntas",
-    "Agent 需要你做选择或补充信息时，问题会出现在这里。": "Cuando un agente necesite que elijas o añadas datos, su pregunta aparecerá aquí.",
+    "Agent 需要你做选择或补充信息时，问题会出现在这里。":
+        "Cuando un agente necesite que elijas o añadas datos, su pregunta aparecerá aquí.",
     "收件箱是空的": "Tu bandeja está vacía",
-    "Agent 请求权限或向你提问时会出现在这里，处理过的记录也会保留，方便回看。": "Aquí llegan las solicitudes de permiso y preguntas de los agentes. Las atendidas se quedan para que puedas revisarlas.",
+    "Agent 请求权限或向你提问时会出现在这里，处理过的记录也会保留，方便回看。":
+        "Aquí llegan las solicitudes de permiso y preguntas de los agentes. Las atendidas se quedan para que puedas revisarlas.",
     "等待你回答": "Esperando tu respuesta",
     "等待你确认": "Esperando tu aprobación",
     "权限请求": "Solicitud de permiso",
@@ -8317,68 +10000,106 @@ const messageCatalogs = <String, Map<String, String>>{
     "可以返回收件箱查看其它事项。": "Vuelve a la bandeja para ver otros elementos.",
     "跳过所有权限确认。": "Omite todas las solicitudes de permiso.",
     "减少确认次数。": "Reduce las confirmaciones.",
-    "仅自动读取；其他操作均需先征得你的批准。": "Lee automáticamente; todo lo demás necesita primero tu aprobación.",
-    "不中断任务；所有操作和决策均自动进行。": "Nunca interrumpe; todas las acciones y decisiones se toman automáticamente.",
-    "受保护的工具操作前请求审批。": "Pide aprobación antes de acciones de herramientas protegidas.",
+    "仅自动读取；其他操作均需先征得你的批准。":
+        "Lee automáticamente; todo lo demás necesita primero tu aprobación.",
+    "不中断任务；所有操作和决策均自动进行。":
+        "Nunca interrumpe; todas las acciones y decisiones se toman automáticamente.",
+    "受保护的工具操作前请求审批。":
+        "Pide aprobación antes de acciones de herramientas protegidas.",
     "关闭沙箱并跳过审批。": "Desactiva el sandbox y omite las aprobaciones.",
-    "每次工具执行前在此审批；审批桥不可用时拒绝执行。": "Aprueba aquí cada ejecución de herramienta; se rechaza si el puente de aprobación no está disponible.",
-    "OpenCode 默认 Agent；工具按你配置的权限执行。": "Agente predeterminado de OpenCode; las herramientas siguen los permisos que configuraste.",
-    "编辑文件和其他受保护操作前请求审批。": "Pide aprobación antes de editar archivos u otras acciones protegidas.",
+    "每次工具执行前在此审批；审批桥不可用时拒绝执行。":
+        "Aprueba aquí cada ejecución de herramienta; se rechaza si el puente de aprobación no está disponible.",
+    "OpenCode 默认 Agent；工具按你配置的权限执行。":
+        "Agente predeterminado de OpenCode; las herramientas siguen los permisos que configuraste.",
+    "编辑文件和其他受保护操作前请求审批。":
+        "Pide aprobación antes de editar archivos u otras acciones protegidas.",
     "只分析，不修改文件或执行命令。": "Analiza sin modificar archivos ni ejecutar comandos.",
     "改文件前先问我。": "Pregunta antes de cambiar archivos.",
-    "只读沙箱；需要扩大权限时请求审批。": "Sandbox de solo lectura; pide aprobación cuando se necesita más acceso.",
+    "只读沙箱；需要扩大权限时请求审批。":
+        "Sandbox de solo lectura; pide aprobación cuando se necesita más acceso.",
     "按需确认": "Preguntar si hace falta",
     "只读模式": "Solo lectura",
     "所选策略在下一轮执行时生效": "La política seleccionada se aplica en el siguiente turno",
-    "从不弹出确认；只运行预先允许和安全的只读操作，其余一律拒绝。": "Nunca pregunta; ejecuta acciones preaprobadas y de solo lectura seguras y rechaza todo lo demás.",
-    "Pi 不内置逐工具审批或沙箱；工具直接执行，扩展发起的询问会显示在对话中。": "Pi no tiene aprobaciones por herramienta ni sandbox; las herramientas se ejecutan directamente y las preguntas de extensiones aparecen en la conversación.",
+    "从不弹出确认；只运行预先允许和安全的只读操作，其余一律拒绝。":
+        "Nunca pregunta; ejecuta acciones preaprobadas y de solo lectura seguras y rechaza todo lo demás.",
+    "Pi 不内置逐工具审批或沙箱；工具直接执行，扩展发起的询问会显示在对话中。":
+        "Pi no tiene aprobaciones por herramienta ni sandbox; las herramientas se ejecutan directamente y las preguntas de extensiones aparecen en la conversación.",
     "跳过审批": "Omitir aprobaciones",
     "仅限预先允许": "Solo preaprobado",
     "自动判断": "Automático",
-    "监督模式：工具操作前请求审批。": "Supervisado: pide aprobación antes de acciones de herramientas.",
-    "由 ZCode 判断哪些操作可直接执行。": "ZCode decide qué acciones pueden ejecutarse directamente.",
-    "只运行预先允许的工具，其余直接拒绝，不请求审批。": "Ejecuta solo las herramientas ya permitidas y rechaza el resto sin preguntar.",
-    "由 AI 审查员批准或拒绝原本需要询问的操作；审查失败只阻止该操作。": "Un revisor de IA aprueba o rechaza cada acción que de otro modo preguntaría; una revisión fallida solo bloquea esa acción.",
-    "由 Claude 自动分类权限请求。": "Permite que Claude clasifique automáticamente las solicitudes de permiso.",
+    "监督模式：工具操作前请求审批。":
+        "Supervisado: pide aprobación antes de acciones de herramientas.",
+    "由 ZCode 判断哪些操作可直接执行。":
+        "ZCode decide qué acciones pueden ejecutarse directamente.",
+    "只运行预先允许的工具，其余直接拒绝，不请求审批。":
+        "Ejecuta solo las herramientas ya permitidas y rechaza el resto sin preguntar.",
+    "由 AI 审查员批准或拒绝原本需要询问的操作；审查失败只阻止该操作。":
+        "Un revisor de IA aprueba o rechaza cada acción que de otro modo preguntaría; una revisión fallida solo bloquea esa acción.",
+    "由 Claude 自动分类权限请求。":
+        "Permite que Claude clasifique automáticamente las solicitudes de permiso.",
     "完全访问": "Acceso total",
     "编辑前先出计划。": "Hace un plan antes de editar.",
     "默认权限": "Permisos predeterminados",
-    "允许文件编辑；其他受保护操作仍需审批。": "Permite editar archivos; las demás acciones protegidas siguen requiriendo aprobación.",
+    "允许文件编辑；其他受保护操作仍需审批。":
+        "Permite editar archivos; las demás acciones protegidas siguen requiriendo aprobación.",
     "权限策略": "Política de permisos",
     "原生规则": "Reglas nativas",
-    "先制定计划；需要批准的操作仍会询问。": "Primero hace un plan; las acciones que requieren aprobación siguen preguntando.",
+    "先制定计划；需要批准的操作仍会询问。":
+        "Primero hace un plan; las acciones que requieren aprobación siguen preguntando.",
     "操作前确认": "Preguntar antes de actuar",
-    "按 Cursor 权限规则执行；需要审批的操作在此确认。": "Sigue las reglas de permisos de Cursor; las acciones que requieren aprobación se confirman aquí.",
+    "按 Cursor 权限规则执行；需要审批的操作在此确认。":
+        "Sigue las reglas de permisos de Cursor; las acciones que requieren aprobación se confirman aquí.",
     "计划模式": "Modo de plan",
-    "对所有 Agent 跳过全部权限检查，包括危险命令。": "Omite todas las comprobaciones de permisos, incluidos comandos peligrosos, para todos los agentes.",
-    "此 Agent 未报告可切换的权限模式；审批请求仍会显示在对话中。": "Este agente no informa modos de permisos intercambiables; las solicitudes de aprobación siguen apareciendo en la conversación.",
-    "原 Agent、模型、思考强度或权限策略当前不可用，请重新选择后发送。": "El agente, modelo, nivel de razonamiento o política de permisos original ya no está disponible. Vuelve a elegir antes de enviar.",
-    "计划模式；禁用所有编辑工具。": "Modo plan; todas las herramientas de edición están desactivadas.",
-    "每个工具首次使用时请求授权。": "Pide permiso la primera vez que se usa cada herramienta.",
-    "本会话内自动接受文件编辑。": "Acepta automáticamente las ediciones de archivos en esta sesión.",
+    "对所有 Agent 跳过全部权限检查，包括危险命令。":
+        "Omite todas las comprobaciones de permisos, incluidos comandos peligrosos, para todos los agentes.",
+    "此 Agent 未报告可切换的权限模式；审批请求仍会显示在对话中。":
+        "Este agente no informa modos de permisos intercambiables; las solicitudes de aprobación siguen apareciendo en la conversación.",
+    "原 Agent、模型、思考强度或权限策略当前不可用，请重新选择后发送。":
+        "El agente, modelo, nivel de razonamiento o política de permisos original ya no está disponible. Vuelve a elegir antes de enviar.",
+    "计划模式；禁用所有编辑工具。":
+        "Modo plan; todas las herramientas de edición están desactivadas.",
+    "每个工具首次使用时请求授权。":
+        "Pide permiso la primera vez que se usa cada herramienta.",
+    "本会话内自动接受文件编辑。":
+        "Acepta automáticamente las ediciones de archivos en esta sesión.",
     "自动编辑文件。": "Edita archivos automáticamente.",
-    "自动驾驶：工具操作无需询问直接执行。": "Piloto automático: ejecuta acciones de herramientas sin preguntar.",
-    "由 Grok 判断哪些工具操作可自动执行。": "Grok decide qué acciones de herramientas pueden ejecutarse automáticamente.",
-    "跳过 Claude Code 工具权限检查。": "Omite las comprobaciones de permisos de herramientas de Claude Code.",
-    "自动允许 Antigravity 工具操作。": "Permite automáticamente las acciones de herramientas de Antigravity.",
+    "自动驾驶：工具操作无需询问直接执行。":
+        "Piloto automático: ejecuta acciones de herramientas sin preguntar.",
+    "由 Grok 判断哪些工具操作可自动执行。":
+        "Grok decide qué acciones de herramientas pueden ejecutarse automáticamente.",
+    "跳过 Claude Code 工具权限检查。":
+        "Omite las comprobaciones de permisos de herramientas de Claude Code.",
+    "自动允许 Antigravity 工具操作。":
+        "Permite automáticamente las acciones de herramientas de Antigravity.",
     "接受编辑": "Aceptar ediciones",
-    "工作区写入沙箱；需要越出沙箱时请求审批。": "Sandbox con escritura en el espacio de trabajo; pide aprobación solo para salir del sandbox.",
-    "允许所有工具操作，无需审批。": "Permite todas las acciones de herramientas sin aprobación.",
-    "探索并制定计划；使用 Claude 原生计划模式。": "Explora y crea un plan con el modo de plan nativo de Claude.",
-    "使用 Antigravity 原生计划模式；工具执行仍在此审批。": "Usa el modo de plan nativo de Antigravity; las ejecuciones de herramientas se siguen aprobando aquí.",
-    "自动批准操作；明确禁止的操作和团队限制仍然生效。": "Aprueba acciones automáticamente; las acciones prohibidas explícitamente y las restricciones del equipo siguen vigentes.",
-    "常规编辑和命令自动执行；高风险操作、提问和计划仍会询问。": "Las ediciones y comandos habituales se ejecutan automáticamente; las acciones arriesgadas, preguntas y planes siguen preguntando.",
+    "工作区写入沙箱；需要越出沙箱时请求审批。":
+        "Sandbox con escritura en el espacio de trabajo; pide aprobación solo para salir del sandbox.",
+    "允许所有工具操作，无需审批。":
+        "Permite todas las acciones de herramientas sin aprobación.",
+    "探索并制定计划；使用 Claude 原生计划模式。":
+        "Explora y crea un plan con el modo de plan nativo de Claude.",
+    "使用 Antigravity 原生计划模式；工具执行仍在此审批。":
+        "Usa el modo de plan nativo de Antigravity; las ejecuciones de herramientas se siguen aprobando aquí.",
+    "自动批准操作；明确禁止的操作和团队限制仍然生效。":
+        "Aprueba acciones automáticamente; las acciones prohibidas explícitamente y las restricciones del equipo siguen vigentes.",
+    "常规编辑和命令自动执行；高风险操作、提问和计划仍会询问。":
+        "Las ediciones y comandos habituales se ejecutan automáticamente; las acciones arriesgadas, preguntas y planes siguen preguntando.",
     "正在响应": "Respondiendo",
     "分叉 · {0}": "Fork · {0}",
     "分叉自较早的会话": "Bifurcado de una conversación anterior",
     "分叉自": "Bifurcado de",
-    "已恢复所选轮次结束时的文件，未提交的成果可在“变更”中查看。": "Los archivos se restauraron al final del turno elegido; el trabajo sin confirmar está en Cambios.",
-    "此项目不是 Git 仓库，分叉只继承对话上下文，并沿用同一项目目录。": "Este proyecto no es un repositorio Git; el fork solo conserva la conversación y continúa en la misma carpeta.",
-    "此会话由旧版分叉创建，未恢复历史轮次的文件。": "Esta conversación se creó con un fork antiguo y no restauró los archivos del turno.",
-    "沿用同一项目目录；分叉不会还原文件。": "Usa la misma carpeta del proyecto; el fork no restaura archivos.",
+    "已恢复所选轮次结束时的文件，未提交的成果可在“变更”中查看。":
+        "Los archivos se restauraron al final del turno elegido; el trabajo sin confirmar está en Cambios.",
+    "此项目不是 Git 仓库，分叉只继承对话上下文，并沿用同一项目目录。":
+        "Este proyecto no es un repositorio Git; el fork solo conserva la conversación y continúa en la misma carpeta.",
+    "此会话由旧版分叉创建，未恢复历史轮次的文件。":
+        "Esta conversación se creó con un fork antiguo y no restauró los archivos del turno.",
+    "沿用同一项目目录；分叉不会还原文件。":
+        "Usa la misma carpeta del proyecto; el fork no restaura archivos.",
     "收起继承的上下文": "Ocultar el contexto heredado",
     "查看继承的上下文（{0} 轮）": "Ver el contexto heredado ({0})",
-    "Agent 已获得以上上下文，在下方发送消息即可从这里继续。": "El agente ya tiene este contexto. Envía un mensaje abajo para continuar desde aquí.",
+    "Agent 已获得以上上下文，在下方发送消息即可从这里继续。":
+        "El agente ya tiene este contexto. Envía un mensaje abajo para continuar desde aquí.",
   },
   "pt-BR": {
     "返回": "Voltar",
@@ -8413,34 +10134,46 @@ const messageCatalogs = <String, Map<String, String>>{
     "连接中": "Conectando",
     "离线": "Offline",
     "终端": "Terminal",
-    "连接超时，请检查网络后重试。": "A conexão expirou. Verifique sua rede e tente novamente.",
+    "连接超时，请检查网络后重试。":
+        "A conexão expirou. Verifique sua rede e tente novamente.",
     "电脑 {0}": "Computador {0}",
     "电脑离线": "Computador offline",
     "已提交并推送": "Commit e push feitos",
-    "电脑绑定已改变，请返回设备列表。": "O pareamento do computador mudou. Volte para a lista de dispositivos.",
+    "电脑绑定已改变，请返回设备列表。":
+        "O pareamento do computador mudou. Volte para a lista de dispositivos.",
     "任务或远控期间保持唤醒": "Manter ativo durante tarefas ou controle remoto",
-    "电脑离线，重连后刷新设置": "Computador offline. Reconecte para atualizar as configurações.",
-    "阻止空闲睡眠，仍可锁屏或手动睡眠": "Impede a suspensão por inatividade. Ainda é possível bloquear ou suspender manualmente.",
+    "电脑离线，重连后刷新设置":
+        "Computador offline. Reconecte para atualizar as configurações.",
+    "阻止空闲睡眠，仍可锁屏或手动睡眠":
+        "Impede a suspensão por inatividade. Ainda é possível bloquear ou suspender manualmente.",
     "电脑暂未能保持唤醒：{0}": "Não foi possível manter o computador ativo: {0}",
     "刷新保持唤醒设置": "Atualizar a configuração de manter ativo",
     "电脑": "Computadores",
     "扫码连接": "Escanear para conectar",
     "偏好设置": "Preferências",
     "把电脑上的工作带在身边": "Leve seu trabalho com você",
-    "连接自己的电脑，查看会话、发送任务并处理 Agent 的权限请求。无需注册账号。": "Conecte seu computador para ver conversas, enviar tarefas e responder às solicitações de permissão dos Agents. Não é preciso criar conta.",
+    "连接自己的电脑，查看会话、发送任务并处理 Agent 的权限请求。无需注册账号。":
+        "Conecte seu computador para ver conversas, enviar tarefas e responder às solicitações de permissão dos Agents. Não é preciso criar conta.",
     "连接电脑": "Conectar computador",
-    "当前内测版本尚未配置接入服务。": "O serviço de conexão não está configurado nesta versão beta.",
-    "在电脑端打开「连接手机」，扫描二维码。": "Abra “Conectar celular” no computador e escaneie o QR code.",
-    "扫描电脑上的二维码，或粘贴配对链接": "Escaneie o QR code do computador ou cole um link de pareamento.",
-    "当前内测版本尚未配置接入服务": "O serviço de conexão não está configurado nesta versão beta",
+    "当前内测版本尚未配置接入服务。":
+        "O serviço de conexão não está configurado nesta versão beta.",
+    "在电脑端打开「连接手机」，扫描二维码。":
+        "Abra “Conectar celular” no computador e escaneie o QR code.",
+    "扫描电脑上的二维码，或粘贴配对链接":
+        "Escaneie o QR code do computador ou cole um link de pareamento.",
+    "当前内测版本尚未配置接入服务":
+        "O serviço de conexão não está configurado nesta versão beta",
     "更多": "Mais",
     "从这部手机移除「{0}」？": "Remover “{0}” deste celular?",
-    "手机会删除这台电脑的配对凭证，之后需重新扫码才能连接。电脑上的任务不受影响；如需让电脑也拒绝这部手机，请在电脑的设备列表中撤销。": "As credenciais de pareamento deste computador serão apagadas do celular. Será preciso escanear de novo para reconectar. As tarefas no computador não são afetadas. Para que o computador também recuse este celular, revogue-o na lista de dispositivos do computador.",
+    "手机会删除这台电脑的配对凭证，之后需重新扫码才能连接。电脑上的任务不受影响；如需让电脑也拒绝这部手机，请在电脑的设备列表中撤销。":
+        "As credenciais de pareamento deste computador serão apagadas do celular. Será preciso escanear de novo para reconectar. As tarefas no computador não são afetadas. Para que o computador também recuse este celular, revogue-o na lista de dispositivos do computador.",
     "取消": "Cancelar",
-    "移除未完成，连接已关闭，请重试或核实安全存储。": "Remoção incompleta. A conexão foi fechada. Tente novamente ou verifique o armazenamento seguro.",
+    "移除未完成，连接已关闭，请重试或核实安全存储。":
+        "Remoção incompleta. A conexão foi fechada. Tente novamente ou verifique o armazenamento seguro.",
     "移除": "Remover",
     "撤销绑定": "Revogar pareamento",
-    "请在「{0}」的设备列表中撤销这部手机。撤销后这部手机将无法再连接该电脑；电脑上正在执行的任务不受影响。": "Revogue este celular na lista de dispositivos de “{0}”. Ele não poderá mais se conectar a esse computador. As tarefas em execução no computador não são afetadas.",
+    "请在「{0}」的设备列表中撤销这部手机。撤销后这部手机将无法再连接该电脑；电脑上正在执行的任务不受影响。":
+        "Revogue este celular na lista de dispositivos de “{0}”. Ele não poderá mais se conectar a esse computador. As tarefas em execução no computador não são afetadas.",
     "知道了": "Entendi",
     "通知设置": "Notificações",
     "重新连接": "Reconectar",
@@ -8456,28 +10189,36 @@ const messageCatalogs = <String, Map<String, String>>{
     "版本不支持": "Versão não compatível",
     "异常": "Erro",
     "不可用": "Indisponível",
-    "直连未建立，使用加密中继": "Não foi possível conectar diretamente. Usando relay criptografado.",
+    "直连未建立，使用加密中继":
+        "Não foi possível conectar diretamente. Usando relay criptografado.",
     "连接已变化，正在恢复远程桌面": "A conexão mudou. Restaurando a área de trabalho remota.",
     "连接中断，正在恢复远程桌面": "Conexão perdida. Restaurando a área de trabalho remota.",
     "无法准备新解码器": "Não foi possível preparar um novo decodificador",
     "新画面解码不可用": "Novo decodificador de vídeo indisponível",
     "换路后画面不可用": "Vídeo indisponível após trocar de conexão",
     "正在核实并恢复远程桌面连接": "Verificando e restaurando a área de trabalho remota",
-    "连接归属暂时无法核实，正在恢复远程桌面": "Não foi possível verificar a quem pertence a conexão. Restaurando a área de trabalho remota.",
-    "连接暂时无法恢复，请点击重新连接。": "Não foi possível restaurar a conexão. Toque em Reconectar.",
-    "电脑离线，连接后再打开远程桌面": "Computador offline. Reconecte para abrir a área de trabalho remota.",
+    "连接归属暂时无法核实，正在恢复远程桌面":
+        "Não foi possível verificar a quem pertence a conexão. Restaurando a área de trabalho remota.",
+    "连接暂时无法恢复，请点击重新连接。":
+        "Não foi possível restaurar a conexão. Toque em Reconectar.",
+    "电脑离线，连接后再打开远程桌面":
+        "Computador offline. Reconecte para abrir a área de trabalho remota.",
     "电脑没有可用的显示器": "Nenhuma tela disponível neste computador",
     "手机解码器不可用": "Decodificador do celular indisponível",
     "手机视频画面不可用": "Vídeo indisponível no celular",
     "视频画面不可用，使用图片模式": "Vídeo indisponível. Usando o modo de imagem.",
     "暂时无法连接：{0}": "Não foi possível conectar: {0}",
     "{0}，已切换图片模式": "{0}. Mudou para o modo de imagem.",
-    "请在电脑上允许共享屏幕和键鼠控制": "Permita o compartilhamento de tela e o controle de teclado e mouse no computador.",
+    "请在电脑上允许共享屏幕和键鼠控制":
+        "Permita o compartilhamento de tela e o controle de teclado e mouse no computador.",
     "电脑授权回复无效，请重新连接": "Resposta de autorização inválida. Reconecte.",
-    "电脑未能准备屏幕共享，请重新连接并授权": "O computador não conseguiu preparar o compartilhamento de tela. Reconecte e autorize novamente.",
-    "等待电脑授权超时，请重新连接后再试": "O tempo de espera pela autorização esgotou. Reconecte e tente novamente.",
+    "电脑未能准备屏幕共享，请重新连接并授权":
+        "O computador não conseguiu preparar o compartilhamento de tela. Reconecte e autorize novamente.",
+    "等待电脑授权超时，请重新连接后再试":
+        "O tempo de espera pela autorização esgotou. Reconecte e tente novamente.",
     "画面正在恢复": "Restaurando o vídeo",
-    "电脑未确认当前画面的就绪状态": "O computador não confirmou que o vídeo atual está pronto.",
+    "电脑未确认当前画面的就绪状态":
+        "O computador não confirmou que o vídeo atual está pronto.",
     "电脑视频编码异常": "Erro no codificador de vídeo do computador",
     "电脑画面恢复超时": "O tempo para restaurar o vídeo do computador esgotou",
     "电脑画面正在恢复": "Restaurando o vídeo do computador",
@@ -8496,13 +10237,17 @@ const messageCatalogs = <String, Map<String, String>>{
     "发送{0}到电脑": "Enviar {0} ao computador",
     "文字": "texto",
     "图片": "imagem",
-    "读取手机剪贴板，按系统提示允许粘贴": "Ler a área de transferência do celular. Permita colar quando solicitado.",
+    "读取手机剪贴板，按系统提示允许粘贴":
+        "Ler a área de transferência do celular. Permita colar quando solicitado.",
     "从电脑获取{0}": "Obter {0} do computador",
     "复制到手机剪贴板": "Copiar para a área de transferência do celular",
-    "当前连接不支持独立剪贴板传输，请更新电脑和 App 后重试": "Esta conexão não oferece suporte a transferências separadas da área de transferência. Atualize o app para desktop e o app do celular.",
-    "手机剪贴板没有图片，或尚未允许粘贴": "Não há imagem na área de transferência do celular ou a permissão para colar não foi concedida.",
+    "当前连接不支持独立剪贴板传输，请更新电脑和 App 后重试":
+        "Esta conexão não oferece suporte a transferências separadas da área de transferência. Atualize o app para desktop e o app do celular.",
+    "手机剪贴板没有图片，或尚未允许粘贴":
+        "Não há imagem na área de transferência do celular ou a permissão para colar não foi concedida.",
     "手机剪贴板没有文字": "Não há texto na área de transferência do celular",
-    "电脑尚不支持分块剪贴板传输，请更新电脑客户端": "Atualize o app para desktop para usar transferências da área de transferência em partes.",
+    "电脑尚不支持分块剪贴板传输，请更新电脑客户端":
+        "Atualize o app para desktop para usar transferências da área de transferência em partes.",
     "已发送到电脑剪贴板": "Enviado à área de transferência do computador",
     "已复制到手机剪贴板": "Copiado para a área de transferência do celular",
     "剪贴板操作未完成": "Operação da área de transferência incompleta",
@@ -8514,29 +10259,38 @@ const messageCatalogs = <String, Map<String, String>>{
     "重新选择共享屏幕": "Escolher novamente a tela compartilhada",
     "正在准备剪贴板传输…": "Preparando a transferência da área de transferência…",
     "剪贴板传输 {0}%": "Transferência da área de transferência {0}%",
-    "已停止等待，复制操作可能已完成，请核实剪贴板": "Parou de esperar. A cópia pode ter sido concluída. Verifique a área de transferência.",
+    "已停止等待，复制操作可能已完成，请核实剪贴板":
+        "Parou de esperar. A cópia pode ter sido concluída. Verifique a área de transferência.",
     "键盘": "Teclado",
     "移动画面": "Mover visualização",
     "操作电脑": "Controlar o computador",
     "适应屏幕": "Ajustar à tela",
     "剪贴板": "Área de transferência",
-    "电脑已锁定，Agent 操作仍可用。\n解锁电脑后点「重新连接」。": "Computador bloqueado. As ações dos Agents continuam disponíveis.\nDesbloqueie o computador e toque em Reconectar.",
+    "电脑已锁定，Agent 操作仍可用。\n解锁电脑后点「重新连接」。":
+        "Computador bloqueado. As ações dos Agents continuam disponíveis.\nDesbloqueie o computador e toque em Reconectar.",
     "服务连接正常": "Serviço conectado",
     "连接失败，请重试。": "Falha na conexão. Tente novamente.",
-    "接入服务只转发加密数据，会话和任务保存在你的电脑上。": "O serviço de conexão apenas retransmite dados criptografados. As conversas e tarefas ficam no seu computador.",
+    "接入服务只转发加密数据，会话和任务保存在你的电脑上。":
+        "O serviço de conexão apenas retransmite dados criptografados. As conversas e tarefas ficam no seu computador.",
     "尚未配置服务地址": "Endereço do serviço não configurado",
-    "此服务尚未开放电脑配对。": "O pareamento de computadores não está ativado neste serviço.",
+    "此服务尚未开放电脑配对。":
+        "O pareamento de computadores não está ativado neste serviço.",
     "正在检查": "Verificando",
     "检查连接": "Verificar conexão",
-    "后台提醒暂未启用，静音设置可提前保存。仅影响这部手机，不影响电脑任务和 Agent 审批。": "Os alertas em segundo plano não estão ativados. Você já pode salvar as preferências de silêncio. Elas valem só para este celular e não afetam as tarefas do computador nem as aprovações dos Agents.",
-    "通知通道已连接。提醒只影响这部手机，不会直接批准操作。": "Notificações conectadas. Os alertas valem só para este celular e nunca aprovam ações automaticamente.",
-    "后台提醒暂未启用，可在这里授权系统通知。": "Os alertas em segundo plano não estão ativados. Conceda aqui a permissão de notificações.",
-    "此版本未配置后台提醒，静音设置可提前保存。": "Os alertas em segundo plano não estão configurados nesta versão. Você já pode salvar as preferências de silêncio.",
+    "后台提醒暂未启用，静音设置可提前保存。仅影响这部手机，不影响电脑任务和 Agent 审批。":
+        "Os alertas em segundo plano não estão ativados. Você já pode salvar as preferências de silêncio. Elas valem só para este celular e não afetam as tarefas do computador nem as aprovações dos Agents.",
+    "通知通道已连接。提醒只影响这部手机，不会直接批准操作。":
+        "Notificações conectadas. Os alertas valem só para este celular e nunca aprovam ações automaticamente.",
+    "后台提醒暂未启用，可在这里授权系统通知。":
+        "Os alertas em segundo plano não estão ativados. Conceda aqui a permissão de notificações.",
+    "此版本未配置后台提醒，静音设置可提前保存。":
+        "Os alertas em segundo plano não estão configurados nesta versão. Você já pode salvar as preferências de silêncio.",
     "正在连接通知服务": "Conectando ao serviço de notificações",
     "重新检测后台提醒": "Verificar os alertas em segundo plano de novo",
     "启用后台提醒": "Ativar alertas em segundo plano",
     "通知设置暂不可用。": "Configurações de notificação indisponíveis.",
-    "保存结果未确认，请检查网络后重新读取。": "Salvamento não confirmado. Verifique sua rede e recarregue.",
+    "保存结果未确认，请检查网络后重新读取。":
+        "Salvamento não confirmado. Verifique sua rede e recarregue.",
     "会话": "Conversas",
     "重新读取": "Recarregar",
     "静音这台电脑": "Silenciar este computador",
@@ -8544,14 +10298,17 @@ const messageCatalogs = <String, Map<String, String>>{
     "已静音会话": "Conversas silenciadas",
     "未加载的会话": "Conversa não carregada",
     "取消会话静音": "Reativar som da conversa",
-    "这台电脑已静音，取消会话静音后仍不会收到提醒。": "Este computador está silenciado. Reativar o som da conversa não ativará os alertas.",
+    "这台电脑已静音，取消会话静音后仍不会收到提醒。":
+        "Este computador está silenciado. Reativar o som da conversa não ativará os alertas.",
     "静音此会话": "Silenciar esta conversa",
     "清除离线缓存？": "Limpar o cache offline?",
-    "只清除此手机保存的会话缓存，保留草稿、未发送附件和电脑配对。电脑上的会话不受影响，联网后会重新缓存。": "Limpa apenas as conversas em cache neste celular. Rascunhos, anexos não enviados e pareamentos são mantidos. As conversas no computador não são afetadas e voltam ao cache quando houver conexão.",
+    "只清除此手机保存的会话缓存，保留草稿、未发送附件和电脑配对。电脑上的会话不受影响，联网后会重新缓存。":
+        "Limpa apenas as conversas em cache neste celular. Rascunhos, anexos não enviados e pareamentos são mantidos. As conversas no computador não são afetadas e voltam ao cache quando houver conexão.",
     "清除": "Limpar",
     "未能清除缓存：{0}": "Não foi possível limpar o cache: {0}",
     "最近会话离线缓存": "Cache offline das conversas recentes",
-    "{0} 个会话 · {1} MB\n最多 30 个会话、32 MB；保存文字和附件信息。": "{0} conversas · {1} MB\nAté 30 conversas e 32 MB. Armazena texto e informações dos anexos.",
+    "{0} 个会话 · {1} MB\n最多 30 个会话、32 MB；保存文字和附件信息。":
+        "{0} conversas · {1} MB\nAté 30 conversas e 32 MB. Armazena texto e informações dos anexos.",
     "正在读取缓存大小…": "Lendo o tamanho do cache…",
     "正在清除…": "Limpando…",
     "清除缓存": "Limpar cache",
@@ -8565,15 +10322,21 @@ const messageCatalogs = <String, Map<String, String>>{
     "管理已绑定设备": "Gerenciar dispositivos pareados",
     "{0} 台": "{0} computadores",
     "本机数据": "Neste celular",
-    "无需注册账号：通过电脑上的配对二维码建立信任，可随时在电脑上撤销。草稿和离线缓存保存在这部手机；提醒偏好可在电脑或会话菜单中设置。": "Não é preciso criar conta. Escaneie o QR code do computador para parear e revogue o acesso por ele a qualquer momento. Rascunhos e cache offline ficam neste celular. Configure os alertas no computador ou no menu da conversa.",
-    "项目目录不可用，请刷新项目后重试。": "Diretório do projeto indisponível. Atualize o projeto e tente novamente.",
+    "无需注册账号：通过电脑上的配对二维码建立信任，可随时在电脑上撤销。草稿和离线缓存保存在这部手机；提醒偏好可在电脑或会话菜单中设置。":
+        "Não é preciso criar conta. Escaneie o QR code do computador para parear e revogue o acesso por ele a qualquer momento. Rascunhos e cache offline ficam neste celular. Configure os alertas no computador ou no menu da conversa.",
+    "项目目录不可用，请刷新项目后重试。":
+        "Diretório do projeto indisponível. Atualize o projeto e tente novamente.",
     "选择终端目录": "Escolher diretório do terminal",
-    "连接或项目目录已改变，请重新选择终端目录。": "A conexão ou o diretório do projeto mudou. Escolha o diretório do terminal novamente.",
-    "启动结果待核实，请使用原操作恢复。": "Resultado da inicialização não confirmado. Recupere a operação original.",
+    "连接或项目目录已改变，请重新选择终端目录。":
+        "A conexão ou o diretório do projeto mudou. Escolha o diretório do terminal novamente.",
+    "启动结果待核实，请使用原操作恢复。":
+        "Resultado da inicialização não confirmado. Recupere a operação original.",
     "关闭这个终端？": "Fechar este terminal?",
-    "将在电脑上结束该终端及其中运行的命令。离开页面不会关闭终端。": "Encerra este terminal e os comandos em execução no computador. Sair desta página não fecha o terminal.",
+    "将在电脑上结束该终端及其中运行的命令。离开页面不会关闭终端。":
+        "Encerra este terminal e os comandos em execução no computador. Sair desta página não fecha o terminal.",
     "关闭终端": "Fechar terminal",
-    "连接已改变，请刷新后重新确认关闭。": "A conexão mudou. Atualize e confirme o fechamento novamente.",
+    "连接已改变，请刷新后重新确认关闭。":
+        "A conexão mudou. Atualize e confirme o fechamento novamente.",
     "终端 {0}": "Terminal {0}",
     "新建终端": "Novo terminal",
     "关闭当前终端": "Fechar o terminal atual",
@@ -8583,13 +10346,16 @@ const messageCatalogs = <String, Map<String, String>>{
     "历史提交": "Commits",
     "分支比较": "Comparar branches",
     "目录": "Diretório",
-    "连接或目录已改变，请重新选择比较目标。": "A conexão ou o diretório mudou. Escolha o alvo da comparação novamente.",
+    "连接或目录已改变，请重新选择比较目标。":
+        "A conexão ou o diretório mudou. Escolha o alvo da comparação novamente.",
     "请填写提交说明": "Digite uma mensagem de commit",
     "暂存全部并提交？": "Preparar tudo e fazer commit?",
-    "{0}当前没有已暂存的文件，将暂存全部 {1} 个变更后提交。": "{0}Nenhum arquivo preparado. Todas as {1} alterações serão preparadas e incluídas no commit.",
+    "{0}当前没有已暂存的文件，将暂存全部 {1} 个变更后提交。":
+        "{0}Nenhum arquivo preparado. Todas as {1} alterações serão preparadas e incluídas no commit.",
     "目录：{0}。": "Diretório: {0}.",
     "暂存并提交": "Preparar e fazer commit",
-    "连接或变更已更新，请核对后重新提交。": "A conexão ou as alterações foram atualizadas. Revise-as antes de fazer commit novamente.",
+    "连接或变更已更新，请核对后重新提交。":
+        "A conexão ou as alterações foram atualizadas. Revise-as antes de fazer commit novamente.",
     "Git 操作结果待核实": "Resultado da operação Git não confirmado",
     "变更": "Alterações",
     "更多 Git 操作": "Mais ações do Git",
@@ -8603,8 +10369,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "选择父提交": "Escolher commit pai",
     "父提交 {0} · {1}": "Pai {0} · {1}",
     "父提交 {0} ▾": "Pai {0} ▾",
-    "只读 · 当前 HEAD 相对所选分支共同祖先的变更": "Somente leitura · HEAD atual comparado ao ancestral comum do branch selecionado",
-    "只读 · 首次提交相对空目录的变更": "Somente leitura · Commit inicial comparado a um diretório vazio",
+    "只读 · 当前 HEAD 相对所选分支共同祖先的变更":
+        "Somente leitura · HEAD atual comparado ao ancestral comum do branch selecionado",
+    "只读 · 首次提交相对空目录的变更":
+        "Somente leitura · Commit inicial comparado a um diretório vazio",
     "只读 · 此提交相对父提交的变更": "Somente leitura · Este commit comparado ao pai",
     "{0} 个文件": "{0} arquivos",
     "{0} 个文件 · 已暂存 {1}": "{0} arquivos · {1} preparados",
@@ -8616,14 +10384,16 @@ const messageCatalogs = <String, Map<String, String>>{
     "提交": "Fazer commit",
     "提交并推送": "Commit e push",
     "二进制文件，无法显示差异": "Arquivo binário. Diff indisponível.",
-    "内容无差异（可能仅权限或换行变化）": "Sem alterações de conteúdo (talvez apenas permissões ou finais de linha)",
+    "内容无差异（可能仅权限或换行变化）":
+        "Sem alterações de conteúdo (talvez apenas permissões ou finais de linha)",
     "… 差异过长，已截断": "… Diff truncado",
     "切换目录": "Trocar de diretório",
     "选择项目目录": "Escolher diretório do projeto",
     "目录 · {0}": "Diretório · {0}",
     "选择项目文件": "Escolher arquivo do projeto",
     "搜索当前目录内的文件": "Buscar arquivos neste diretório",
-    "搜索结果未全部返回，请输入更具体的文件名或路径。": "Alguns resultados foram omitidos. Digite um nome de arquivo ou caminho mais específico.",
+    "搜索结果未全部返回，请输入更具体的文件名或路径。":
+        "Alguns resultados foram omitidos. Digite um nome de arquivo ou caminho mais específico.",
     "没有匹配的文件": "Nenhum arquivo correspondente",
     "此文件无法预览（二进制或过大）": "Visualização indisponível (binário ou grande demais)",
     "{0} · 只读": "{0} · Somente leitura",
@@ -8635,10 +10405,13 @@ const messageCatalogs = <String, Map<String, String>>{
     "没有提交记录": "Nenhum commit",
     "没有可比较的分支": "Nenhum branch para comparar",
     "预览已关闭": "Visualização fechada",
-    "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">预览请求失败：{0}</p>": "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">Falha na solicitação de visualização: {0}</p>",
+    "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">预览请求失败：{0}</p>":
+        "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">Falha na solicitação de visualização: {0}</p>",
     "项目 WebSocket 写入未获确认": "Gravação WebSocket do projeto não confirmada",
-    "\u001b[2m（较早的输出已被电脑释放）\u001b[0m\r\n": "\u001b[2m(A saída anterior foi liberada pelo computador)\u001b[0m\r\n",
-    "\r\n\u001b[2m… 部分较早的输出已被电脑丢弃 …\u001b[0m\r\n": "\r\n\u001b[2m… Parte da saída anterior foi descartada pelo computador …\u001b[0m\r\n",
+    "\u001b[2m（较早的输出已被电脑释放）\u001b[0m\r\n":
+        "\u001b[2m(A saída anterior foi liberada pelo computador)\u001b[0m\r\n",
+    "\r\n\u001b[2m… 部分较早的输出已被电脑丢弃 …\u001b[0m\r\n":
+        "\r\n\u001b[2m… Parte da saída anterior foi descartada pelo computador …\u001b[0m\r\n",
     "启动中": "Iniciando",
     "运行中": "Em execução",
     "停止中": "Parando",
@@ -8648,21 +10421,26 @@ const messageCatalogs = <String, Map<String, String>>{
     "状态未知": "Status desconhecido",
     "核实输入结果": "Verificar o resultado da entrada",
     "继续输入？": "Continuar digitando?",
-    "请先检查终端当前状态；未确认的输入可能已部分生效。继续会清空当前输入框并丢弃未发送内容，不会重新发送原输入。": "Verifique o terminal primeiro. Uma entrada não confirmada pode ter sido aplicada em parte. Continuar limpa o campo de entrada e descarta o conteúdo não enviado. A entrada original não será reenviada.",
+    "请先检查终端当前状态；未确认的输入可能已部分生效。继续会清空当前输入框并丢弃未发送内容，不会重新发送原输入。":
+        "Verifique o terminal primeiro. Uma entrada não confirmada pode ter sido aplicada em parte. Continuar limpa o campo de entrada e descarta o conteúdo não enviado. A entrada original não será reenviada.",
     "已检查，继续": "Verificado, continuar",
     "继续输入": "Continuar digitando",
     "输入命令，回车发送": "Digite um comando e pressione Enter para enviar",
     "发送": "Enviar",
-    "运行配置已改变，请确认后再启动。": "A configuração de execução mudou. Revise antes de iniciar.",
+    "运行配置已改变，请确认后再启动。":
+        "A configuração de execução mudou. Revise antes de iniciar.",
     "继续": "Continuar",
     "重命名运行配置": "Renomear configuração de execução",
     "保存": "Salvar",
     "删除运行配置？": "Excluir a configuração de execução?",
-    "移除“{0}”的启动配置，已运行的进程不会停止。": "Remove a configuração de inicialização de “{0}”. Os processos em execução continuam.",
+    "移除“{0}”的启动配置，已运行的进程不会停止。":
+        "Remove a configuração de inicialização de “{0}”. Os processos em execução continuam.",
     "重新分析项目？": "Analisar o projeto de novo?",
-    "将重新生成运行配置，覆盖未固定的自定义修改，固定项会保留。": "Gera novamente as configurações de execução e substitui alterações personalizadas não fixadas. As configurações fixadas são mantidas.",
+    "将重新生成运行配置，覆盖未固定的自定义修改，固定项会保留。":
+        "Gera novamente as configurações de execução e substitui alterações personalizadas não fixadas. As configurações fixadas são mantidas.",
     "选择分析项目的 Agent": "Escolher o Agent que vai analisar o projeto",
-    "没有可用 Agent，请先在电脑上连接。": "Nenhum Agent disponível. Conecte um Agent no computador primeiro.",
+    "没有可用 Agent，请先在电脑上连接。":
+        "Nenhum Agent disponível. Conecte um Agent no computador primeiro.",
     "预览端口": "Porta de visualização",
     "例如 5173": "ex.: 5173",
     "打开": "Abrir",
@@ -8670,9 +10448,11 @@ const messageCatalogs = <String, Map<String, String>>{
     "选择运行目录": "Escolher diretório de execução",
     "分析项目": "Analisar projeto",
     "刷新运行配置": "Atualizar configurações de execução",
-    "Agent 正在分析项目，可稍后刷新查看。": "Um Agent está analisando o projeto. Atualize mais tarde para ver o resultado.",
+    "Agent 正在分析项目，可稍后刷新查看。":
+        "Um Agent está analisando o projeto. Atualize mais tarde para ver o resultado.",
     "这个项目尚未关联目录。": "Nenhum diretório vinculado a este projeto.",
-    "当前目录还没有运行配置，点击「分析项目」生成启动方式。": "Não há configurações de execução neste diretório. Toque em Analisar projeto para gerar uma.",
+    "当前目录还没有运行配置，点击「分析项目」生成启动方式。":
+        "Não há configurações de execução neste diretório. Toque em Analisar projeto para gerar uma.",
     "选择运行配置": "Escolher configuração de execução",
     "选择配置": "Escolher configuração",
     "未运行": "Não iniciado",
@@ -8696,55 +10476,78 @@ const messageCatalogs = <String, Map<String, String>>{
     "后退": "Voltar",
     "刷新": "Atualizar",
     "电脑离线，重新连接后再试。": "Computador offline. Reconecte e tente novamente.",
-    "这个项目还没有会话。电脑以会话为单位授权工作区访问，请先在项目中开始一个会话。": "Este projeto ainda não tem conversas. O acesso ao espaço de trabalho é autorizado por conversa. Inicie uma conversa neste projeto primeiro.",
+    "这个项目还没有会话。电脑以会话为单位授权工作区访问，请先在项目中开始一个会话。":
+        "Este projeto ainda não tem conversas. O acesso ao espaço de trabalho é autorizado por conversa. Inicie uma conversa neste projeto primeiro.",
     "全部": "Tudo",
     "权限": "Permissões",
     "问题": "Perguntas",
     "待处理": "Pendentes",
     "没有需要你处理的事项": "Nada precisa da sua atenção",
     "{0} 项需要你处理": "{0} itens precisam da sua atenção",
-    "{0} 台电脑离线，其待处理事项将在重新连接后显示。": "{0} computadores offline. Os pendentes deles aparecerão após reconectar.",
+    "{0} 台电脑离线，其待处理事项将在重新连接后显示。":
+        "{0} computadores offline. Os pendentes deles aparecerão após reconectar.",
     "查看会话": "Ver conversa",
-    "已不再等待。如果电脑收到了这项操作，它仍会生效。": "Parou de esperar. Se o computador recebeu esta operação, ela ainda será aplicada.",
+    "已不再等待。如果电脑收到了这项操作，它仍会生效。":
+        "Parou de esperar. Se o computador recebeu esta operação, ela ainda será aplicada.",
     "会话已经删除。": "Conversa excluída.",
     "新名称已经生效。": "Novo nome aplicado.",
-    "已找到电脑上的原终端，可在终端或运行页面继续查看；未重新运行命令。": "Terminal original encontrado. Continue em Terminal ou Executar. O comando não foi executado de novo.",
-    "分析已经开始，可在运行页面查看进度。": "Análise iniciada. Acompanhe o progresso na página Executar.",
-    "原运行配置操作已完成。": "A operação original na configuração de execução foi concluída.",
-    "原运行配置操作已结束：{0}": "A operação original na configuração de execução terminou: {0}",
-    "原启动已取消，未重新运行命令。": "Inicialização original cancelada. O comando não foi executado de novo.",
+    "已找到电脑上的原终端，可在终端或运行页面继续查看；未重新运行命令。":
+        "Terminal original encontrado. Continue em Terminal ou Executar. O comando não foi executado de novo.",
+    "分析已经开始，可在运行页面查看进度。":
+        "Análise iniciada. Acompanhe o progresso na página Executar.",
+    "原运行配置操作已完成。":
+        "A operação original na configuração de execução foi concluída.",
+    "原运行配置操作已结束：{0}":
+        "A operação original na configuração de execução terminou: {0}",
+    "原启动已取消，未重新运行命令。":
+        "Inicialização original cancelada. O comando não foi executado de novo.",
     "修复已提交给主 Agent。": "Correção enviada ao Agent principal.",
     "原修复已放弃。": "Correção original descartada.",
-    "修复尚未提交，可继续原操作。{0}": "A correção ainda não foi enviada. Continue a operação original. {0}",
-    "已找到原审查，可在对应轮次的「本轮审查」中查看。": "Revisão original encontrada. Veja em Revisões da rodada da rodada correspondente.",
-    "电脑上还查不到这项操作，可能没收到。可以重新发送，不会重复执行。": "O computador ainda não tem registro desta operação. Talvez ela não tenha chegado. Reenviar não a executará duas vezes.",
+    "修复尚未提交，可继续原操作。{0}":
+        "A correção ainda não foi enviada. Continue a operação original. {0}",
+    "已找到原审查，可在对应轮次的「本轮审查」中查看。":
+        "Revisão original encontrada. Veja em Revisões da rodada da rodada correspondente.",
+    "电脑上还查不到这项操作，可能没收到。可以重新发送，不会重复执行。":
+        "O computador ainda não tem registro desta operação. Talvez ela não tenha chegado. Reenviar não a executará duas vezes.",
     "Fork 正在后台执行。": "Fork em execução em segundo plano.",
     "Fork 尚未完成。": "O fork ainda não foi concluído.",
     "{0}：还没收到电脑确认": "{0}: ainda sem confirmação do computador",
     "待确认": "Aguardando confirmação",
-    "{0} · 正在确认「不再等待」。重试仅确认原操作的结束状态，已经执行的内容不会撤销。": "{0} · Confirmando “Parar de esperar”. Tentar novamente só confirma o estado final da operação original e não desfaz o trabalho concluído.",
-    "{0} · 网络中断时手机没收到电脑的回复。点「重新确认」查看结果；重新发送也不会重复执行。": "{0} · A resposta se perdeu quando a conexão caiu. Toque em Verificar de novo para ver o resultado. Reenviar não a executará duas vezes.",
-    "{0} · 网络中断时手机没收到电脑的回复。连上电脑后会自动确认。": "{0} · A resposta se perdeu quando a conexão caiu. A verificação será automática após reconectar.",
+    "{0} · 正在确认「不再等待」。重试仅确认原操作的结束状态，已经执行的内容不会撤销。":
+        "{0} · Confirmando “Parar de esperar”. Tentar novamente só confirma o estado final da operação original e não desfaz o trabalho concluído.",
+    "{0} · 网络中断时手机没收到电脑的回复。点「重新确认」查看结果；重新发送也不会重复执行。":
+        "{0} · A resposta se perdeu quando a conexão caiu. Toque em Verificar de novo para ver o resultado. Reenviar não a executará duas vezes.",
+    "{0} · 网络中断时手机没收到电脑的回复。连上电脑后会自动确认。":
+        "{0} · A resposta se perdeu quando a conexão caiu. A verificação será automática após reconectar.",
     "新名称：{0}": "Novo nome: {0}",
-    "重新发送会继续你之前确认过的删除。": "Reenviar continua a exclusão que você confirmou antes.",
+    "重新发送会继续你之前确认过的删除。":
+        "Reenviar continua a exclusão que você confirmou antes.",
     "原终端": "Terminal original",
     "原任务": "Tarefa original",
-    "只会停止当时那次运行，不影响之后新开始的任务。": "Para apenas aquela execução específica. Tarefas posteriores não são afetadas.",
-    "电脑离线，连上后会自动确认。": "Computador offline. A verificação será automática após reconectar.",
+    "只会停止当时那次运行，不影响之后新开始的任务。":
+        "Para apenas aquela execução específica. Tarefas posteriores não são afetadas.",
+    "电脑离线，连上后会自动确认。":
+        "Computador offline. A verificação será automática após reconectar.",
     "重新确认": "Verificar de novo",
     "继续确认结束": "Continuar confirmando a conclusão",
     "重新发送": "Reenviar",
     "不再发送": "Não reenviar",
     "不再等待这项操作？": "Parar de esperar por esta operação?",
-    "只是不再在手机上等待结果。如果电脑已经收到，改名或删除仍会生效。": "Apenas para de esperar neste celular. Se o computador já recebeu a solicitação, a renomeação ou a exclusão ainda serão aplicadas.",
+    "只是不再在手机上等待结果。如果电脑已经收到，改名或删除仍会生效。":
+        "Apenas para de esperar neste celular. Se o computador já recebeu a solicitação, a renomeação ou a exclusão ainda serão aplicadas.",
     "继续等待": "Continuar esperando",
     "确定": "Confirmar",
     "不再等待": "Parar de esperar",
-    "只是不再在手机上等待结果。电脑上已经完成的操作会保留。": "Apenas para de esperar neste celular. As operações concluídas no computador são mantidas.",
-    "只是不再在手机上等待结果。如果电脑已经收到，任务仍会停下。": "Apenas para de esperar neste celular. Se o computador já recebeu a solicitação, a tarefa ainda vai parar.",
-    "只是不再在手机上等待结果。如果电脑已经收到，终端仍会关闭。终端是否还在运行，请在终端页查看。": "Apenas para de esperar neste celular. Se o computador já recebeu a solicitação, o terminal ainda será fechado. Veja na página Terminal se ele continua em execução.",
-    "如果终端还没启动，就不会再启动；已经启动的会保留，里面的命令照常运行。": "Um terminal que ainda não iniciou não vai iniciar. Um terminal já aberto e seus comandos continuam em execução.",
-    "如果还没执行，就不会再提交或推送；已经完成的不会撤销。建议先在「变更」里看一下结果。": "Se ainda não começou, nenhum commit ou push será feito. As operações concluídas não serão desfeitas. Confira primeiro a página Alterações.",
+    "只是不再在手机上等待结果。电脑上已经完成的操作会保留。":
+        "Apenas para de esperar neste celular. As operações concluídas no computador são mantidas.",
+    "只是不再在手机上等待结果。如果电脑已经收到，任务仍会停下。":
+        "Apenas para de esperar neste celular. Se o computador já recebeu a solicitação, a tarefa ainda vai parar.",
+    "只是不再在手机上等待结果。如果电脑已经收到，终端仍会关闭。终端是否还在运行，请在终端页查看。":
+        "Apenas para de esperar neste celular. Se o computador já recebeu a solicitação, o terminal ainda será fechado. Veja na página Terminal se ele continua em execução.",
+    "如果终端还没启动，就不会再启动；已经启动的会保留，里面的命令照常运行。":
+        "Um terminal que ainda não iniciou não vai iniciar. Um terminal já aberto e seus comandos continuam em execução.",
+    "如果还没执行，就不会再提交或推送；已经完成的不会撤销。建议先在「变更」里看一下结果。":
+        "Se ainda não começou, nenhum commit ou push será feito. As operações concluídas não serão desfeitas. Confira primeiro a página Alterações.",
     "发送消息": "Enviar mensagem",
     "Fork 会话": "Fazer fork da conversa",
     "置顶或归档": "Fixar ou arquivar",
@@ -8769,16 +10572,21 @@ const messageCatalogs = <String, Map<String, String>>{
     "Agent 有一个问题": "Um Agent tem uma pergunta",
     "会话「{0}」需要你的回答。": "A conversa “{0}” precisa da sua resposta.",
     "会话「{0}」请求以下操作。": "A conversa “{0}” solicita a seguinte ação.",
-    "这个问题的格式暂不支持在手机上回答，请在电脑上回答，回答后这里会自动更新。": "Este formato de pergunta ainda não pode ser respondido no celular. Responda no computador; esta página será atualizada automaticamente.",
+    "这个问题的格式暂不支持在手机上回答，请在电脑上回答，回答后这里会自动更新。":
+        "Este formato de pergunta ainda não pode ser respondido no celular. Responda no computador; esta página será atualizada automaticamente.",
     "电脑离线，重新连接后再处理。": "Computador offline. Reconecte para responder.",
-    "这台电脑有一项操作结果待核实，请先核实。": "Uma operação neste computador precisa ser verificada. Verifique-a primeiro.",
+    "这台电脑有一项操作结果待核实，请先核实。":
+        "Uma operação neste computador precisa ser verificada. Verifique-a primeiro.",
     "其他授权范围": "Outros escopos de permissão",
     "工作区": "Espaço de trabalho",
     "还没有连接电脑": "Nenhum computador conectado ainda",
-    "连接电脑后，在这里查看项目及其会话。": "Conecte um computador para ver aqui os projetos e as conversas dele.",
+    "连接电脑后，在这里查看项目及其会话。":
+        "Conecte um computador para ver aqui os projetos e as conversas dele.",
     "去连接电脑": "Conectar um computador",
-    "{0} 尚未同步项目；电脑在线时会自动同步。": "{0} ainda não sincronizou os projetos. Eles serão sincronizados automaticamente quando estiver online.",
-    "{0} 上还没有项目，点右上角「添加项目」选择电脑上的已有目录。": "Ainda não há projetos em {0}. Toque em Adicionar projeto no canto superior direito para escolher um diretório existente no computador.",
+    "{0} 尚未同步项目；电脑在线时会自动同步。":
+        "{0} ainda não sincronizou os projetos. Eles serão sincronizados automaticamente quando estiver online.",
+    "{0} 上还没有项目，点右上角「添加项目」选择电脑上的已有目录。":
+        "Ainda não há projetos em {0}. Toque em Adicionar projeto no canto superior direito para escolher um diretório existente no computador.",
     "文件": "Arquivos",
     "浏览项目文件": "Navegar pelos arquivos do projeto",
     "查看代码变更": "Ver alterações de código",
@@ -8792,8 +10600,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "分离 HEAD": "HEAD desanexado",
     "工作区干净": "Árvore de trabalho limpa",
     "{0} 个文件待提交": "{0} arquivos para commit",
-    "项目已添加，列表尚未同步。请重新连接后刷新结果。": "Projeto adicionado. A lista ainda não foi sincronizada. Reconecte e atualize.",
-    "请先绑定电脑，再选择电脑上的项目目录。": "Pareie um computador primeiro e depois escolha nele um diretório de projeto.",
+    "项目已添加，列表尚未同步。请重新连接后刷新结果。":
+        "Projeto adicionado. A lista ainda não foi sincronizada. Reconecte e atualize.",
+    "请先绑定电脑，再选择电脑上的项目目录。":
+        "Pareie um computador primeiro e depois escolha nele um diretório de projeto.",
     "选择添加项目的电脑": "Escolher o computador do projeto",
     " · 离线": " · Offline",
     "选择这台电脑上已有的目录": "Escolha um diretório existente neste computador",
@@ -8804,15 +10614,20 @@ const messageCatalogs = <String, Map<String, String>>{
     "上一级": "Subir um nível",
     "不显示隐藏": "Ocultar arquivos ocultos",
     "显示隐藏": "Mostrar arquivos ocultos",
-    "电脑离线，请重新连接后浏览目录。": "Computador offline. Reconecte para navegar pelos diretórios.",
-    "目录路径已修改，请点箭头或回车确认后再添加。": "O caminho mudou. Toque na seta ou pressione Enter para confirmar antes de adicionar.",
+    "电脑离线，请重新连接后浏览目录。":
+        "Computador offline. Reconecte para navegar pelos diretórios.",
+    "目录路径已修改，请点箭头或回车确认后再添加。":
+        "O caminho mudou. Toque na seta ou pressione Enter para confirmar antes de adicionar.",
     "重试读取目录": "Recarregar diretório",
-    "当前目录没有子目录，可直接添加此目录。": "Não há subdiretórios. Você pode adicionar este diretório diretamente.",
+    "当前目录没有子目录，可直接添加此目录。":
+        "Não há subdiretórios. Você pode adicionar este diretório diretamente.",
     "加载中…": "Carregando…",
     "加载更多目录": "Carregar mais diretórios",
     "项目名称（可选）": "Nome do projeto (opcional)",
-    "留空使用目录名；已有项目会直接复用": "Deixe em branco para usar o nome do diretório. Projetos existentes serão reutilizados.",
-    "该目录已添加为「{0}」，将打开已有项目。": "Este diretório já foi adicionado como “{0}”. O projeto existente será aberto.",
+    "留空使用目录名；已有项目会直接复用":
+        "Deixe em branco para usar o nome do diretório. Projetos existentes serão reutilizados.",
+    "该目录已添加为「{0}」，将打开已有项目。":
+        "Este diretório já foi adicionado como “{0}”. O projeto existente será aberto.",
     "刷新添加结果": "Atualizar resultado",
     "正在添加…": "Adicionando…",
     "打开已有项目": "Abrir projeto existente",
@@ -8822,8 +10637,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "{0} 个会话 · 按当前电脑和项目范围": "{0} conversas · Computador e projeto atuais",
     "搜索已保存的消息正文": "Buscar nas mensagens salvas",
     "搜索历史正文": "Buscar no histórico de conversas",
-    "在电脑上检索已保存的对话正文，不包含思考过程或附件内容。": "Busca no texto das conversas salvas no computador. Não inclui raciocínio nem conteúdo de anexos.",
-    "{0} 离线，未搜索其中的会话；连接后重新搜索。": "{0} está offline e não foi incluído na busca. Reconecte e busque de novo.",
+    "在电脑上检索已保存的对话正文，不包含思考过程或附件内容。":
+        "Busca no texto das conversas salvas no computador. Não inclui raciocínio nem conteúdo de anexos.",
+    "{0} 离线，未搜索其中的会话；连接后重新搜索。":
+        "{0} está offline e não foi incluído na busca. Reconecte e busque de novo.",
     "输入关键词开始搜索": "Digite uma palavra-chave para buscar",
     "没有找到匹配的历史记录": "Nenhum histórico correspondente",
     "你": "Você",
@@ -8833,11 +10650,14 @@ const messageCatalogs = <String, Map<String, String>>{
     "重试此会话": "Tentar esta conversa novamente",
     "继续搜索更早的 {0} 个会话": "Buscar em {0} conversas anteriores",
     "请等待当前任务结束后再 Fork。": "Aguarde a tarefa atual terminar antes de fazer fork.",
-    "从本轮结束时的历史创建独立会话。": "Cria uma conversa independente a partir do histórico no fim desta rodada.",
+    "从本轮结束时的历史创建独立会话。":
+        "Cria uma conversa independente a partir do histórico no fim desta rodada.",
     "当前工作区": "Espaço de trabalho atual",
-    "共享当前项目文件，仅复制对话历史。": "Compartilha os arquivos do projeto atual e copia só o histórico da conversa.",
+    "共享当前项目文件，仅复制对话历史。":
+        "Compartilha os arquivos do projeto atual e copia só o histórico da conversa.",
     "新 Worktree": "Novo worktree",
-    "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照；非 Git 项目只继承对话。": "Cria um espaço de trabalho separado no computador e restaura o snapshot de arquivos desta rodada. Rodadas antigas podem não ter snapshot. Projetos sem Git herdam só a conversa.",
+    "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照；非 Git 项目只继承对话。":
+        "Cria um espaço de trabalho separado no computador e restaura o snapshot de arquivos desta rodada. Rodadas antigas podem não ter snapshot. Projetos sem Git herdam só a conversa.",
     "正在创建…": "Criando…",
     "创建 Fork": "Criar fork",
     "取消置顶": "Desafixar",
@@ -8847,7 +10667,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "归档会话": "Arquivar conversa",
     "会话操作": "Ações da conversa",
     "会话将从电脑同步": "As conversas são sincronizadas do seu computador",
-    "连接自己的电脑后，在这里查看和续接各项目的会话。网络中断时，电脑上的任务会继续执行。": "Conecte seu computador para ver e retomar aqui as conversas dos projetos. As tarefas continuam no computador mesmo se a rede cair.",
+    "连接自己的电脑后，在这里查看和续接各项目的会话。网络中断时，电脑上的任务会继续执行。":
+        "Conecte seu computador para ver e retomar aqui as conversas dos projetos. As tarefas continuam no computador mesmo se a rede cair.",
     "搜索会话": "Buscar conversas",
     "{0} 项等待处理": "{0} itens pendentes",
     "{0} 连接中…": "{0} conectando…",
@@ -8855,7 +10676,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "{0} 离线 · 显示 {1} 同步的内容": "{0} offline · Conteúdo sincronizado {1}",
     "没有匹配的会话": "Nenhuma conversa correspondente",
     "没有未归档的会话": "Nenhuma conversa não arquivada",
-    "还没有会话，点右上角 + 开始新任务": "Ainda não há conversas. Toque em + no canto superior direito para iniciar uma tarefa.",
+    "还没有会话，点右上角 + 开始新任务":
+        "Ainda não há conversas. Toque em + no canto superior direito para iniciar uma tarefa.",
     "正在从电脑同步会话…": "Sincronizando conversas do computador…",
     "置顶": "Fixadas",
     "已归档 ({0})": "Arquivadas ({0})",
@@ -8864,58 +10686,77 @@ const messageCatalogs = <String, Map<String, String>>{
     "已归档": "Arquivada",
     "正在核实原配对…": "Verificando o pareamento original…",
     "移除本机配对记录？": "Remover o registro de pareamento local?",
-    "之后需要重新扫码。电脑上可能已允许这台手机；如需撤销授权，请在电脑的「连接手机」中操作。": "Será preciso escanear de novo. O computador talvez já tenha autorizado este celular. Se necessário, revogue o acesso em Conectar celular no computador.",
+    "之后需要重新扫码。电脑上可能已允许这台手机；如需撤销授权，请在电脑的「连接手机」中操作。":
+        "Será preciso escanear de novo. O computador talvez já tenha autorizado este celular. Se necessário, revogue o acesso em Conectar celular no computador.",
     "保留记录": "Manter registro",
     "移除本机记录": "Remover registro local",
     "正在验证电脑身份并建立配对…": "Verificando a identidade do computador e pareando…",
     "加密组件尚未准备好。": "A criptografia ainda não está pronta.",
-    "在电脑端打开「连接手机」，扫描配对二维码。": "Abra Conectar celular no computador e escaneie o QR code de pareamento.",
-    "配对后可操作这台电脑的 Agent、项目、Git 和终端，并查看、控制电脑屏幕。你可以随时在电脑上撤销授权。": "Depois de parear, use os Agents, projetos, Git e terminal do computador, e veja e controle a tela dele. Revogue o acesso pelo computador a qualquer momento.",
+    "在电脑端打开「连接手机」，扫描配对二维码。":
+        "Abra Conectar celular no computador e escaneie o QR code de pareamento.",
+    "配对后可操作这台电脑的 Agent、项目、Git 和终端，并查看、控制电脑屏幕。你可以随时在电脑上撤销授权。":
+        "Depois de parear, use os Agents, projetos, Git e terminal do computador, e veja e controle a tela dele. Revogue o acesso pelo computador a qualquer momento.",
     "配对结果待核实": "Resultado do pareamento não confirmado",
-    "保留了原配对信息，可以继续核实电脑是否已允许连接。": "As informações do pareamento original foram mantidas. Continue verificando se o computador autorizou a conexão.",
-    "恢复期限已过，请在电脑核实授权后重新扫码。": "O prazo de recuperação expirou. Verifique o acesso no computador e escaneie de novo.",
+    "保留了原配对信息，可以继续核实电脑是否已允许连接。":
+        "As informações do pareamento original foram mantidas. Continue verificando se o computador autorizou a conexão.",
+    "恢复期限已过，请在电脑核实授权后重新扫码。":
+        "O prazo de recuperação expirou. Verifique o acesso no computador e escaneie de novo.",
     "核实原配对": "Verificar o pareamento original",
-    "无法使用相机，请检查相机权限，或在下方粘贴配对链接。": "Câmera indisponível. Verifique a permissão da câmera ou cole abaixo um link de pareamento.",
+    "无法使用相机，请检查相机权限，或在下方粘贴配对链接。":
+        "Câmera indisponível. Verifique a permissão da câmera ou cole abaixo um link de pareamento.",
     "扫描二维码": "Escanear QR code",
     "或粘贴配对链接": "Ou cole um link de pareamento",
     "粘贴从电脑获取的配对链接": "Cole o link de pareamento obtido no computador",
-    "二维码使用了本机地址，手机无法访问。请在电脑端使用手机可访问的服务地址并重新生成二维码。": "Este QR code usa um endereço local que o celular não consegue acessar. Gere um novo código com um endereço de serviço acessível pelo celular.",
-    "无法连接接入服务，请确认手机与电脑的网络、服务地址及端口。局域网调试时需连接同一 Wi-Fi。": "Não foi possível conectar ao serviço de conexão. Verifique as redes, o endereço e a porta do serviço. Para desenvolvimento local, conecte os dois dispositivos à mesma rede Wi-Fi.",
-    "无法验证服务证书，请检查接入服务配置。": "Não foi possível verificar o certificado do serviço. Verifique a configuração do serviço de conexão.",
-    "配对未完成，请检查电脑与接入服务后重试。": "Pareamento incompleto. Verifique o computador e o serviço de conexão e tente novamente.",
-    "DogCodes 手机端连接你自己的电脑：查看会话、继续交给 Agent、处理权限请求。无需注册账号。": "O DogCodes se conecta ao seu próprio computador. Veja conversas, passe tarefas aos Agents e responda a solicitações de permissão. Não é preciso criar conta.",
+    "二维码使用了本机地址，手机无法访问。请在电脑端使用手机可访问的服务地址并重新生成二维码。":
+        "Este QR code usa um endereço local que o celular não consegue acessar. Gere um novo código com um endereço de serviço acessível pelo celular.",
+    "无法连接接入服务，请确认手机与电脑的网络、服务地址及端口。局域网调试时需连接同一 Wi-Fi。":
+        "Não foi possível conectar ao serviço de conexão. Verifique as redes, o endereço e a porta do serviço. Para desenvolvimento local, conecte os dois dispositivos à mesma rede Wi-Fi.",
+    "无法验证服务证书，请检查接入服务配置。":
+        "Não foi possível verificar o certificado do serviço. Verifique a configuração do serviço de conexão.",
+    "配对未完成，请检查电脑与接入服务后重试。":
+        "Pareamento incompleto. Verifique o computador e o serviço de conexão e tente novamente.",
+    "DogCodes 手机端连接你自己的电脑：查看会话、继续交给 Agent、处理权限请求。无需注册账号。":
+        "O DogCodes se conecta ao seu próprio computador. Veja conversas, passe tarefas aos Agents e responda a solicitações de permissão. Não é preciso criar conta.",
     "在电脑上打开 DogCodes": "Abra o DogCodes no computador",
     "点击「连接手机」，屏幕上会显示二维码": "Clique em Conectar celular para exibir um QR code",
     "用这部手机扫码，或粘贴配对链接": "Escaneie com este celular ou cole o link de pareamento",
     "扫码连接电脑": "Escanear para conectar o computador",
     "粘贴配对链接": "Colar link de pareamento",
-    "连接经过端到端加密，手机只能访问你在电脑上授权的内容。": "Criptografia de ponta a ponta. O celular só acessa o que você autorizar no computador.",
+    "连接经过端到端加密，手机只能访问你在电脑上授权的内容。":
+        "Criptografia de ponta a ponta. O celular só acessa o que você autorizar no computador.",
     "正在连接{0}": "Conectando a {0}",
     "暂时连接不上{0}": "Não é possível conectar a {0}",
     "连接时间比平时长，仍在尝试。": "Está demorando mais que o normal. Ainda tentando.",
-    "电脑上的任务不受影响，连接恢复后可继续操作。": "As tarefas no computador não são afetadas. Continue quando a conexão voltar.",
+    "电脑上的任务不受影响，连接恢复后可继续操作。":
+        "As tarefas no computador não são afetadas. Continue quando a conexão voltar.",
     "请检查": "Verifique o seguinte",
     "电脑已开机，没有进入睡眠": "O computador está ligado e não está em suspensão",
     "电脑上的 DogCodes 正在运行": "O DogCodes está em execução no computador",
-    "手机网络可用；同一局域网下连接更快": "O celular está online. Na mesma rede local a conexão é mais rápida.",
+    "手机网络可用；同一局域网下连接更快":
+        "O celular está online. Na mesma rede local a conexão é mais rápida.",
     "管理电脑": "Gerenciar computadores",
     "连接其他电脑": "Conectar outro computador",
     "查看离线记录": "Ver histórico offline",
     "查看离线记录（{0} 同步）": "Ver histórico offline (sincronizado {0})",
     "附件": "Anexo",
-    "电脑离线。已缓存附件信息，原文需连接电脑后查看。": "Computador offline. As informações do anexo estão em cache. Reconecte para ver o original.",
-    "电脑端暂不支持附件预览。": "O app para desktop ainda não oferece suporte à visualização de anexos.",
+    "电脑离线。已缓存附件信息，原文需连接电脑后查看。":
+        "Computador offline. As informações do anexo estão em cache. Reconecte para ver o original.",
+    "电脑端暂不支持附件预览。":
+        "O app para desktop ainda não oferece suporte à visualização de anexos.",
     "附件读取位置未确认。": "Posição de leitura do anexo não confirmada.",
     "附件过大，请在电脑上查看。": "Anexo grande demais. Veja-o no computador.",
-    "附件内容校验失败，未展示变化后的文件。": "Falha na verificação de integridade do anexo. O arquivo alterado não foi exibido.",
+    "附件内容校验失败，未展示变化后的文件。":
+        "Falha na verificação de integridade do anexo. O arquivo alterado não foi exibido.",
     "任务附件 · 只读": "Anexo da tarefa · Somente leitura",
     "重试读取": "Recarregar",
-    "图片无法解码，请在电脑上查看。": "Não foi possível decodificar a imagem. Veja-a no computador.",
+    "图片无法解码，请在电脑上查看。":
+        "Não foi possível decodificar a imagem. Veja-a no computador.",
     "该附件格式请在电脑上查看。": "Veja este formato de anexo no computador.",
     "默认模型": "Modelo padrão",
     "默认": "Padrão",
     "选择 Agent": "Escolher Agent",
-    "这台电脑上没有已就绪并启用的 Agent。安装或登录需在电脑上完成。": "Não há nenhum Agent pronto e ativado neste computador. Instale ou faça login primeiro no computador.",
+    "这台电脑上没有已就绪并启用的 Agent。安装或登录需在电脑上完成。":
+        "Não há nenhum Agent pronto e ativado neste computador. Instale ou faça login primeiro no computador.",
     "模型": "Modelo",
     "选择模型": "Escolher modelo",
     "完成": "Concluído",
@@ -8927,17 +10768,21 @@ const messageCatalogs = <String, Map<String, String>>{
     "默认 · {0}": "Padrão · {0}",
     "恢复默认": "Restaurar padrão",
     "电脑离线，连接后才能 Fork": "Computador offline. Reconecte para fazer fork.",
-    "会话正在运行，结束后才能从本轮 Fork": "A conversa está em execução. Aguarde terminar para fazer fork desta rodada.",
+    "会话正在运行，结束后才能从本轮 Fork":
+        "A conversa está em execução. Aguarde terminar para fazer fork desta rodada.",
     "复制本轮回复": "Copiar resposta da rodada",
     "已复制本轮回复": "Resposta da rodada copiada",
     "复制失败，请重试": "Falha ao copiar. Tente novamente.",
     "本轮消耗": "Consumo da rodada",
     "从本轮 Fork": "Fazer fork desta rodada",
-    "电脑未受理这项任务，内容已保留。": "O computador não aceitou esta tarefa. Seu conteúdo foi mantido.",
+    "电脑未受理这项任务，内容已保留。":
+        "O computador não aceitou esta tarefa. Seu conteúdo foi mantido.",
     "没有已绑定的电脑": "Nenhum computador pareado",
-    "这台电脑还没有项目，点右上角「添加项目」选择电脑上的已有目录。": "Ainda não há projetos neste computador. Toque em Adicionar projeto no canto superior direito para escolher um diretório existente.",
+    "这台电脑还没有项目，点右上角「添加项目」选择电脑上的已有目录。":
+        "Ainda não há projetos neste computador. Toque em Adicionar projeto no canto superior direito para escolher um diretório existente.",
     "你想完成什么？": "O que você quer fazer?",
-    "电脑离线，任务和附件会保留为本机草稿。重连后请点击发送。": "Computador offline. Tarefas e anexos são salvos como rascunhos locais. Toque em Enviar após reconectar.",
+    "电脑离线，任务和附件会保留为本机草稿。重连后请点击发送。":
+        "Computador offline. Tarefas e anexos são salvos como rascunhos locais. Toque em Enviar após reconectar.",
     "描述你的任务…": "Descreva sua tarefa…",
     "没有已就绪的 Agent": "Nenhum Agent pronto",
     "开始任务": "Iniciar tarefa",
@@ -8951,9 +10796,11 @@ const messageCatalogs = <String, Map<String, String>>{
     "无法核实修复状态：{0}": "Não foi possível verificar o status da correção: {0}",
     "审查代码证据": "Evidências de código da revisão",
     "{0} · {1}–{2} 行": "{0} · Linhas {1}–{2}",
-    "这是审查时保存的版本，当前文件可能已变化。": "Esta é a versão salva durante a revisão. O arquivo atual pode ter mudado.",
+    "这是审查时保存的版本，当前文件可能已变化。":
+        "Esta é a versão salva durante a revisão. O arquivo atual pode ter mudado.",
     "读取审查代码失败：{0}": "Não foi possível carregar o código da revisão: {0}",
-    "审查连接中断，本次审查未完成。请检查网络后重新检查。": "Conexão da revisão perdida. Revisão incompleta. Verifique sua rede e execute novamente.",
+    "审查连接中断，本次审查未完成。请检查网络后重新检查。":
+        "Conexão da revisão perdida. Revisão incompleta. Verifique sua rede e execute novamente.",
     "错误详情": "Detalhes do erro",
     "审查连接中断，本次审查未完成。": "Conexão da revisão perdida. Revisão incompleta.",
     "文件覆盖情况": "Cobertura de arquivos",
@@ -8962,7 +10809,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "未报告检查": "Não informado como verificado",
     "原文不可用": "Original indisponível",
     "本次审查未报告问题。": "Nenhum problema informado nesta revisão.",
-    "审查尚未形成完整问题报告，不能据此判断是否存在问题。": "Esta revisão não gerou um relatório completo. Não é possível saber se há problemas.",
+    "审查尚未形成完整问题报告，不能据此判断是否存在问题。":
+        "Esta revisão não gerou um relatório completo. Não é possível saber se há problemas.",
     "潜在{0}风险": "Possível risco de {0}",
     "{0}{1} · {2}{3}–{4} 行": "{0}{1} · {2}Linhas {3}–{4}",
     "改动前 · ": "Antes da alteração ·",
@@ -8973,8 +10821,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "全选问题": "Selecionar todos os problemas",
     "已选 {0} 项": "{0} selecionados",
     "开始修复": "Iniciar correção",
-    "主对话正在回复，结束后可提交修复。": "A conversa principal está respondendo. Envie as correções quando terminar.",
-    "修复已提交给主 Agent，携带所选问题及原审查上下文。": "Correção enviada ao Agent principal com os problemas selecionados e o contexto da revisão original.",
+    "主对话正在回复，结束后可提交修复。":
+        "A conversa principal está respondendo. Envie as correções quando terminar.",
+    "修复已提交给主 Agent，携带所选问题及原审查上下文。":
+        "Correção enviada ao Agent principal com os problemas selecionados e o contexto da revisão original.",
     "有一项修复尚未提交。{0}": "Há uma correção ainda não enviada. {0}",
     "继续原修复": "Continuar a correção original",
     "放弃这次修复": "Descartar esta correção",
@@ -9003,12 +10853,17 @@ const messageCatalogs = <String, Map<String, String>>{
     "已取消": "Cancelado",
     "连接中断": "Desconectado",
     "电脑离线，请重新连接后查看审查。": "Computador offline. Reconecte para ver a revisão.",
-    "电脑端暂不支持本轮审查，请更新电脑端后重试。": "Atualize o app para desktop para usar revisões da rodada.",
-    "无法读取可用的审查 Agent。": "Não foi possível carregar os Agents de revisão disponíveis.",
-    "已发起复审，可在修复轮次底部查看。": "Nova revisão iniciada. Veja abaixo da rodada de correção.",
+    "电脑端暂不支持本轮审查，请更新电脑端后重试。":
+        "Atualize o app para desktop para usar revisões da rodada.",
+    "无法读取可用的审查 Agent。":
+        "Não foi possível carregar os Agents de revisão disponíveis.",
+    "已发起复审，可在修复轮次底部查看。":
+        "Nova revisão iniciada. Veja abaixo da rodada de correção.",
     "刷新审查": "Atualizar revisões",
-    "电脑离线，审查会继续在电脑上运行。": "Computador offline. A revisão continua em execução no computador.",
-    "暂无可用的审查 Agent，请在电脑上连接或重新检测 Agent。": "Nenhum Agent de revisão disponível. Conecte ou detecte novamente os Agents no computador.",
+    "电脑离线，审查会继续在电脑上运行。":
+        "Computador offline. A revisão continua em execução no computador.",
+    "暂无可用的审查 Agent，请在电脑上连接或重新检测 Agent。":
+        "Nenhum Agent de revisão disponível. Conecte ou detecte novamente os Agents no computador.",
     "审查使用的 Agent": "Agent de revisão",
     "本轮尚未发起审查。": "Nenhuma revisão iniciada nesta rodada.",
     "历史审查": "Revisões anteriores",
@@ -9036,20 +10891,25 @@ const messageCatalogs = <String, Map<String, String>>{
     "本轮变更加载失败：{0}": "Não foi possível carregar as alterações da rodada: {0}",
     "本轮变更加载失败": "Não foi possível carregar as alterações da rodada",
     "{0} 个文件已更改": "{0} arquivos alterados",
-    "连接中断后的恢复快照 · 仅反映检查时的文件变化，外部工具可能仍在写入": "Snapshot de recuperação após desconexão. Reflete as alterações no momento da verificação; ferramentas externas podem ainda estar gravando.",
+    "连接中断后的恢复快照 · 仅反映检查时的文件变化，外部工具可能仍在写入":
+        "Snapshot de recuperação após desconexão. Reflete as alterações no momento da verificação; ferramentas externas podem ainda estar gravando.",
     "二进制": "Binário",
     "本轮保存的历史 Diff": "Diff histórico salvo para esta rodada",
     "这一轮未保存该文件的内容": "O conteúdo deste arquivo não foi salvo nesta rodada",
-    "没有可用于生成提交说明的 Agent": "Nenhum Agent disponível para gerar uma mensagem de commit",
+    "没有可用于生成提交说明的 Agent":
+        "Nenhum Agent disponível para gerar uma mensagem de commit",
     "已提交": "Commit feito",
-    "提交结果待核实，请到待处理页面核实原操作": "Resultado do commit não confirmado. Verifique a operação original em Pendentes.",
+    "提交结果待核实，请到待处理页面核实原操作":
+        "Resultado do commit não confirmado. Verifique a operação original em Pendentes.",
     "正在暂存本轮文件…": "Preparando os arquivos da rodada…",
     "正在生成提交说明…": "Gerando a mensagem de commit…",
     "正在提交…": "Fazendo commit…",
     "提交本轮修改": "Fazer commit das alterações da rodada",
-    "本轮修改已没有未提交的内容（可能已提交或已撤销）。": "Não restam alterações sem commit nesta rodada (talvez já tenham sido incluídas em commit ou revertidas).",
+    "本轮修改已没有未提交的内容（可能已提交或已撤销）。":
+        "Não restam alterações sem commit nesta rodada (talvez já tenham sido incluídas em commit ou revertidas).",
     "将提交 {0} 个文件{1}。": "{0} arquivos serão incluídos no commit{1}.",
-    "，其中 {0} 个是此前已暂存的其他更改": ", incluindo {0} alterações preparadas antes por outro trabalho",
+    "，其中 {0} 个是此前已暂存的其他更改":
+        ", incluindo {0} alterações preparadas antes por outro trabalho",
     "重新生成": "Gerar novamente",
     "编写提交说明的 Agent": "Agent da mensagem de commit",
     "子智能体": "Subagente",
@@ -9071,7 +10931,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "电脑项目文件": "Arquivos do projeto no computador",
     "需先在此项目创建一个会话": "Crie primeiro uma conversa neste projeto",
     "最多 16 个附件，总大小不超过 25 MB。": "Até 16 anexos, 25 MB no total.",
-    "草稿目标已变化，请回到原项目重新选择附件。": "O destino do rascunho mudou. Volte ao projeto original e escolha os anexos novamente.",
+    "草稿目标已变化，请回到原项目重新选择附件。":
+        "O destino do rascunho mudou. Volte ao projeto original e escolha os anexos novamente.",
     "无法添加附件：{0}": "Não foi possível adicionar o anexo: {0}",
     "未能移除附件：{0}": "Não foi possível remover o anexo: {0}",
     "添加附件": "Adicionar anexo",
@@ -9087,7 +10948,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "过程": "Processo",
     "{0} 个步骤": "{0} etapas",
     "用时 {0}": "Duração: {0}",
-    "内容较长已截断，显示完整内容{0}": "Conteúdo longo truncado. Mostrar conteúdo completo{0}",
+    "内容较长已截断，显示完整内容{0}":
+        "Conteúdo longo truncado. Mostrar conteúdo completo{0}",
     "{0} 个附件": "{0} anexos",
     "思考中": "Pensando",
     "思考已中断": "Raciocínio interrompido",
@@ -9099,29 +10961,40 @@ const messageCatalogs = <String, Map<String, String>>{
     "委派任务": "Tarefa delegada",
     "暂无子任务结论": "Ainda não há resultado da subtarefa",
     "执行过程请在电脑上查看": "Veja o processo de execução no computador",
-    "共 {0} 步，执行过程请在电脑上查看": "{0} etapas. Veja o processo de execução no computador.",
-    "改动内容见本轮文件变更，或在电脑上查看": "Veja as alterações nos arquivos desta rodada ou no computador",
+    "共 {0} 步，执行过程请在电脑上查看":
+        "{0} etapas. Veja o processo de execução no computador.",
+    "改动内容见本轮文件变更，或在电脑上查看":
+        "Veja as alterações nos arquivos desta rodada ou no computador",
     "完整输出请在电脑上查看": "Veja a saída completa no computador",
     "{0}\n… 内容过长，已截断": "{0}\n… Conteúdo truncado",
     "分叉": "Fork",
     "分叉上下文暂不可显示": "Contexto do fork indisponível",
-    "请先恢复原草稿，未覆盖本机记录。": "Restaure primeiro o rascunho original. Os registros locais não foram substituídos.",
+    "请先恢复原草稿，未覆盖本机记录。":
+        "Restaure primeiro o rascunho original. Os registros locais não foram substituídos.",
     "草稿未能保存：{0}": "Não foi possível salvar o rascunho: {0}",
     "无法恢复草稿：{0}": "Não foi possível restaurar o rascunho: {0}",
-    "暂时无法读取模型，可保留草稿后重试：{0}": "Não foi possível carregar os modelos. Mantenha o rascunho e tente novamente: {0}",
+    "暂时无法读取模型，可保留草稿后重试：{0}":
+        "Não foi possível carregar os modelos. Mantenha o rascunho e tente novamente: {0}",
     "附件仍在上传。": "Os anexos ainda estão sendo enviados.",
-    "电脑离线，附件及任务已保留为草稿。": "Computador offline. Anexos e tarefa salvos como rascunho.",
+    "电脑离线，附件及任务已保留为草稿。":
+        "Computador offline. Anexos e tarefa salvos como rascunho.",
     "离线会话未能保存：{0}": "Não foi possível salvar a conversa offline: {0}",
-    "没有找到要打开的这一轮，它可能已被删除。": "Esta rodada não foi encontrada. Talvez tenha sido excluída.",
-    "电脑离线，连接后再查看完整内容。": "Computador offline. Reconecte para ver o conteúdo completo.",
+    "没有找到要打开的这一轮，它可能已被删除。":
+        "Esta rodada não foi encontrada. Talvez tenha sido excluída.",
+    "电脑离线，连接后再查看完整内容。":
+        "Computador offline. Reconecte para ver o conteúdo completo.",
     "删除这个会话？": "Excluir esta conversa?",
-    "将在「{0}」上永久删除「{1}」及其记录，无法恢复。项目文件不会被删除。": "Exclui permanentemente “{1}” e o histórico dela de “{0}”. Não é possível desfazer. Os arquivos do projeto são mantidos.",
+    "将在「{0}」上永久删除「{1}」及其记录，无法恢复。项目文件不会被删除。":
+        "Exclui permanentemente “{1}” e o histórico dela de “{0}”. Não é possível desfazer. Os arquivos do projeto são mantidos.",
     "删除": "Excluir",
-    "停止请求未确认：{0}。请刷新核实任务状态。": "Solicitação de parada não confirmada: {0}. Atualize para verificar o status da tarefa.",
-    "电脑未受理这次发送，内容已保留。": "O computador não aceitou esta mensagem. Seu conteúdo foi mantido.",
+    "停止请求未确认：{0}。请刷新核实任务状态。":
+        "Solicitação de parada não confirmada: {0}. Atualize para verificar o status da tarefa.",
+    "电脑未受理这次发送，内容已保留。":
+        "O computador não aceitou esta mensagem. Seu conteúdo foi mantido.",
     "这台电脑已不在列表中": "Este computador não está mais na lista",
     "可能已在电脑上撤销配对。": "O pareamento pode ter sido revogado no computador.",
-    "{0} · 内容同步于 {1}{2}。附件原文需电脑在线。": "{0} · Sincronizado {1}{2}. Reconecte para ver os anexos originais.",
+    "{0} · 内容同步于 {1}{2}。附件原文需电脑在线。":
+        "{0} · Sincronizado {1}{2}. Reconecte para ver os anexos originais.",
     "正在同步，先显示本机缓存": "Sincronizando. Mostrando primeiro o cache local.",
     "离线缓存": "Cache offline",
     "未知时间": "Hora desconhecida",
@@ -9132,27 +11005,40 @@ const messageCatalogs = <String, Map<String, String>>{
     "加载更早的消息": "Carregar mensagens anteriores",
     "Agent 正在电脑上工作…": "O Agent está trabalhando no computador…",
     "正在连接电脑…": "Conectando ao computador…",
-    "电脑离线{0}。任务不会因此停止。": "Computador offline{0}. As tarefas continuam em execução.",
+    "电脑离线{0}。任务不会因此停止。":
+        "Computador offline{0}. As tarefas continuam em execução.",
     " · 最后同步 {0}": " · Última sincronização {0}",
     "继续交给 Agent…": "Escreva para seu Agent…",
-    "这台电脑已移除，请核实电脑列表中的绑定。": "Este computador foi removido. Verifique o pareamento na lista de computadores.",
-    "电脑绑定已改变，请从电脑列表重新打开。": "O pareamento do computador mudou. Abra novamente pela lista de computadores.",
-    "暂时无法读取电脑绑定，请稍后重试。": "Não foi possível ler o pareamento do computador. Tente mais tarde.",
+    "这台电脑已移除，请核实电脑列表中的绑定。":
+        "Este computador foi removido. Verifique o pareamento na lista de computadores.",
+    "电脑绑定已改变，请从电脑列表重新打开。":
+        "O pareamento do computador mudou. Abra novamente pela lista de computadores.",
+    "暂时无法读取电脑绑定，请稍后重试。":
+        "Não foi possível ler o pareamento do computador. Tente mais tarde.",
     "直连协商响应无效。": "Resposta de negociação da conexão direta inválida.",
-    "本轮变更记录过大，请在电脑上查看": "Registro de alterações da rodada grande demais. Veja-o no computador.",
+    "本轮变更记录过大，请在电脑上查看":
+        "Registro de alterações da rodada grande demais. Veja-o no computador.",
     "本轮变更记录读取不一致": "Leitura inconsistente do registro de alterações da rodada.",
-    "本轮变更记录校验失败": "Falha na verificação de integridade do registro de alterações da rodada.",
+    "本轮变更记录校验失败":
+        "Falha na verificação de integridade do registro de alterações da rodada.",
     "本轮变更记录格式不可用": "Formato do registro de alterações da rodada indisponível.",
-    "电脑暂时离线，请稍后重连。": "Computador temporariamente offline. Reconecte mais tarde.",
-    "连接请求未被接受，请核实设备授权。": "Solicitação de conexão recusada. Verifique a autorização do dispositivo.",
+    "电脑暂时离线，请稍后重连。":
+        "Computador temporariamente offline. Reconecte mais tarde.",
+    "连接请求未被接受，请核实设备授权。":
+        "Solicitação de conexão recusada. Verifique a autorização do dispositivo.",
     "连接响应过大。": "Resposta de conexão grande demais.",
-    "连接中断，操作结果待核实；请勿重复发送。": "Conexão perdida. Resultado da operação não confirmado. Não envie de novo.",
+    "连接中断，操作结果待核实；请勿重复发送。":
+        "Conexão perdida. Resultado da operação não confirmado. Não envie de novo.",
     "请在电脑上生成新版配对二维码。": "Gere um novo QR code de pareamento no computador.",
     "电脑连接身份不一致。": "A identidade de conexão do computador não confere.",
-    "手机身份与原配对不一致，未重新申请授权。": "A identidade do celular difere do pareamento original. A autorização não foi solicitada novamente.",
-    "原配对恢复期限已过，请在电脑核实授权后重新扫码。": "O prazo de recuperação do pareamento expirou. Verifique o acesso no computador e escaneie de novo.",
-    "电脑连接身份与原配对不一致。": "A identidade de conexão do computador difere do pareamento original.",
-    "电脑未返回原配对回执。": "O computador não devolveu o comprovante do pareamento original.",
+    "手机身份与原配对不一致，未重新申请授权。":
+        "A identidade do celular difere do pareamento original. A autorização não foi solicitada novamente.",
+    "原配对恢复期限已过，请在电脑核实授权后重新扫码。":
+        "O prazo de recuperação do pareamento expirou. Verifique o acesso no computador e escaneie de novo.",
+    "电脑连接身份与原配对不一致。":
+        "A identidade de conexão do computador difere do pareamento original.",
+    "电脑未返回原配对回执。":
+        "O computador não devolveu o comprovante do pareamento original.",
     "直连身份验证失败。": "Falha na autenticação da conexão direta.",
     "加密数据格式无效。": "Formato de dados criptografados inválido.",
     "请求较多，请稍后重试。": "Solicitações demais. Tente mais tarde.",
@@ -9161,192 +11047,321 @@ const messageCatalogs = <String, Map<String, String>>{
     "关键词过长，请缩短后再搜索。": "Palavra-chave longa demais. Encurte e tente novamente.",
     "电脑离线，连接后重试搜索。": "Computador offline. Reconecte para buscar.",
     "连接已更换，请重试本次搜索。": "A conexão mudou. Repita esta busca.",
-    "电脑未返回可用的历史搜索结果。": "O computador não devolveu resultados de busca utilizáveis.",
+    "电脑未返回可用的历史搜索结果。":
+        "O computador não devolveu resultados de busca utilizáveis.",
     "历史搜索游标没有前进，请重新搜索。": "O cursor da busca não avançou. Busque de novo.",
     "历史搜索范围发生变化，请重新搜索。": "O escopo da busca mudou. Busque de novo.",
-    "写操作必须保留原始操作标识。": "Operações de gravação devem manter o ID de operação original.",
-    "请先确认上一条消息或审批的结果。": "Confirme primeiro o resultado da mensagem ou aprovação anterior.",
-    "请先确认上一项设置或工作区操作的结果。": "Confirme primeiro o resultado da configuração ou operação de espaço de trabalho anterior.",
-    "Fork 正在电脑上执行，请等待并核实。": "Fork em execução no computador. Aguarde e verifique o resultado.",
+    "写操作必须保留原始操作标识。":
+        "Operações de gravação devem manter o ID de operação original.",
+    "请先确认上一条消息或审批的结果。":
+        "Confirme primeiro o resultado da mensagem ou aprovação anterior.",
+    "请先确认上一项设置或工作区操作的结果。":
+        "Confirme primeiro o resultado da configuração ou operação de espaço de trabalho anterior.",
+    "Fork 正在电脑上执行，请等待并核实。":
+        "Fork em execução no computador. Aguarde e verifique o resultado.",
     "原决定已受理，正在核实交付结果。": "Decisão original aceita. Verificando a entrega.",
     "请先核实原审批决定。": "Verifique primeiro a decisão de aprovação original.",
-    "配对恢复记录无法读取，请先核实手机安全存储。": "Não foi possível ler os registros de recuperação do pareamento. Verifique o armazenamento seguro do celular.",
-    "配对恢复信息未能安全保存。": "Não foi possível salvar com segurança as informações de recuperação do pareamento.",
-    "待核实电脑的身份发生变化，请先核实原配对。": "A identidade do computador mudou. Verifique primeiro o pareamento original.",
-    "待核实配对过多，请先核实原记录。": "Pareamentos não verificados demais. Verifique primeiro os registros existentes.",
-    "本机设备身份无法读取，请先恢复安全存储。": "Não foi possível ler a identidade deste dispositivo. Restaure primeiro o armazenamento seguro.",
-    "设备身份未能安全保存，尚未开始配对。": "Não foi possível salvar com segurança a identidade do dispositivo. O pareamento não começou.",
-    "已保存的电脑身份无法读取，请先核实配对。": "Não foi possível ler a identidade salva do computador. Verifique primeiro o pareamento.",
-    "配对回执与当前连接不一致。": "O comprovante de pareamento não corresponde à conexão atual.",
-    "这项配对已因移除电脑而失效，请重新扫码。": "Este pareamento expirou quando o computador foi removido. Escaneie de novo.",
+    "配对恢复记录无法读取，请先核实手机安全存储。":
+        "Não foi possível ler os registros de recuperação do pareamento. Verifique o armazenamento seguro do celular.",
+    "配对恢复信息未能安全保存。":
+        "Não foi possível salvar com segurança as informações de recuperação do pareamento.",
+    "待核实电脑的身份发生变化，请先核实原配对。":
+        "A identidade do computador mudou. Verifique primeiro o pareamento original.",
+    "待核实配对过多，请先核实原记录。":
+        "Pareamentos não verificados demais. Verifique primeiro os registros existentes.",
+    "本机设备身份无法读取，请先恢复安全存储。":
+        "Não foi possível ler a identidade deste dispositivo. Restaure primeiro o armazenamento seguro.",
+    "设备身份未能安全保存，尚未开始配对。":
+        "Não foi possível salvar com segurança a identidade do dispositivo. O pareamento não começou.",
+    "已保存的电脑身份无法读取，请先核实配对。":
+        "Não foi possível ler a identidade salva do computador. Verifique primeiro o pareamento.",
+    "配对回执与当前连接不一致。":
+        "O comprovante de pareamento não corresponde à conexão atual.",
+    "这项配对已因移除电脑而失效，请重新扫码。":
+        "Este pareamento expirou quando o computador foi removido. Escaneie de novo.",
     "电脑绑定已变化，请重新扫码。": "O pareamento do computador mudou. Escaneie de novo.",
-    "电脑身份已发生变化，需要先解除旧配对。": "A identidade do computador mudou. Remova primeiro o pareamento antigo.",
-    "电脑绑定已变化，未移除新的绑定，请刷新后确认。": "O pareamento do computador mudou. O novo pareamento não foi removido. Atualize e confirme.",
-    "设备密钥格式无效，不能继续连接。": "Formato da chave do dispositivo inválido. Não é possível continuar a conexão.",
+    "电脑身份已发生变化，需要先解除旧配对。":
+        "A identidade do computador mudou. Remova primeiro o pareamento antigo.",
+    "电脑绑定已变化，未移除新的绑定，请刷新后确认。":
+        "O pareamento do computador mudou. O novo pareamento não foi removido. Atualize e confirme.",
+    "设备密钥格式无效，不能继续连接。":
+        "Formato da chave do dispositivo inválido. Não é possível continuar a conexão.",
     "加密组件暂时不可用。": "Criptografia temporariamente indisponível.",
-    "设备身份验证或加密状态校验失败，请重新连接。": "Falha na autenticação do dispositivo ou na verificação da criptografia. Reconecte.",
+    "设备身份验证或加密状态校验失败，请重新连接。":
+        "Falha na autenticação do dispositivo ou na verificação da criptografia. Reconecte.",
     "加密连接已关闭。": "Conexão criptografada fechada.",
-    "电脑绑定状态无法读取，请先检查系统安全存储。": "Não foi possível ler o estado do pareamento do computador. Verifique o armazenamento seguro do sistema.",
-    "电脑绑定状态未能安全保存，请核实原操作。": "Não foi possível salvar com segurança o estado do pareamento do computador. Verifique a operação original.",
+    "电脑绑定状态无法读取，请先检查系统安全存储。":
+        "Não foi possível ler o estado do pareamento do computador. Verifique o armazenamento seguro do sistema.",
+    "电脑绑定状态未能安全保存，请核实原操作。":
+        "Não foi possível salvar com segurança o estado do pareamento do computador. Verifique a operação original.",
     "请先选择电脑上的目录。": "Escolha primeiro um diretório no computador.",
-    "原项目目录已变化，请核实原结果后重新选择。": "O diretório do projeto original mudou. Verifique o resultado original e escolha novamente.",
-    "添加项目结果尚未确认，请核实原操作。": "Resultado da adição do projeto não confirmado. Verifique a operação original.",
-    "无法核实电脑上的项目，请重新连接后再试。": "Não foi possível verificar o projeto no computador. Reconecte e tente novamente.",
-    "请更新电脑端后再操作，尚未启动或修改配置。": "Atualize primeiro o app para desktop. Nenhuma configuração foi iniciada ou alterada.",
+    "原项目目录已变化，请核实原结果后重新选择。":
+        "O diretório do projeto original mudou. Verifique o resultado original e escolha novamente.",
+    "添加项目结果尚未确认，请核实原操作。":
+        "Resultado da adição do projeto não confirmado. Verifique a operação original.",
+    "无法核实电脑上的项目，请重新连接后再试。":
+        "Não foi possível verificar o projeto no computador. Reconecte e tente novamente.",
+    "请更新电脑端后再操作，尚未启动或修改配置。":
+        "Atualize primeiro o app para desktop. Nenhuma configuração foi iniciada ou alterada.",
     "原启动回执不匹配。": "O comprovante da inicialização original não confere.",
-    "原启动记录与项目或运行配置不匹配，未重新执行。": "O registro da inicialização original não corresponde ao projeto ou à configuração. Ele não foi executado de novo.",
-    "运行配置回执与原操作不匹配，请更新电脑端后核实。": "O comprovante da configuração de execução não corresponde à operação original. Atualize o app para desktop e verifique.",
-    "电脑没有返回可确认的运行配置结果，请核实原操作。": "O computador não devolveu um resultado verificável da configuração de execução. Verifique a operação original.",
-    "运行配置操作未完成，请核实。": "Operação na configuração de execução incompleta. Verifique-a.",
+    "原启动记录与项目或运行配置不匹配，未重新执行。":
+        "O registro da inicialização original não corresponde ao projeto ou à configuração. Ele não foi executado de novo.",
+    "运行配置回执与原操作不匹配，请更新电脑端后核实。":
+        "O comprovante da configuração de execução não corresponde à operação original. Atualize o app para desktop e verifique.",
+    "电脑没有返回可确认的运行配置结果，请核实原操作。":
+        "O computador não devolveu um resultado verificável da configuração de execução. Verifique a operação original.",
+    "运行配置操作未完成，请核实。":
+        "Operação na configuração de execução incompleta. Verifique-a.",
     "没有待核实的启动操作。": "Nenhuma inicialização aguardando verificação.",
-    "电脑未确认原启动已关闭，记录仍保留。": "O computador não confirmou que a inicialização original foi fechada. O registro foi mantido.",
-    "原启动结果尚未确认，记录仍保留。": "Resultado da inicialização original não confirmado. O registro foi mantido.",
-    "服务地址必须使用 HTTPS；调试版本可使用本机或局域网 IP。": "O endereço do serviço deve usar HTTPS. Versões de depuração podem usar um IP local ou da LAN.",
+    "电脑未确认原启动已关闭，记录仍保留。":
+        "O computador não confirmou que a inicialização original foi fechada. O registro foi mantido.",
+    "原启动结果尚未确认，记录仍保留。":
+        "Resultado da inicialização original não confirmado. O registro foi mantido.",
+    "服务地址必须使用 HTTPS；调试版本可使用本机或局域网 IP。":
+        "O endereço do serviço deve usar HTTPS. Versões de depuração podem usar um IP local ou da LAN.",
     "服务暂时不可用，请稍后重试。": "Serviço temporariamente indisponível. Tente mais tarde.",
     "服务返回了无法识别的响应。": "O serviço devolveu uma resposta não reconhecida.",
-    "无法连接服务，请检查网络和服务地址。": "Não foi possível conectar ao serviço. Verifique sua rede e o endereço do serviço.",
-    "无法验证服务证书，请检查服务配置。": "Não foi possível verificar o certificado do serviço. Verifique a configuração do serviço.",
-    "服务响应无效或连接已中断，请重试。": "Resposta do serviço inválida ou conexão perdida. Tente novamente.",
-    "服务版本不兼容，请更新 App 或服务端。": "Versão do serviço incompatível. Atualize o app ou o servidor.",
+    "无法连接服务，请检查网络和服务地址。":
+        "Não foi possível conectar ao serviço. Verifique sua rede e o endereço do serviço.",
+    "无法验证服务证书，请检查服务配置。":
+        "Não foi possível verificar o certificado do serviço. Verifique a configuração do serviço.",
+    "服务响应无效或连接已中断，请重试。":
+        "Resposta do serviço inválida ou conexão perdida. Tente novamente.",
+    "服务版本不兼容，请更新 App 或服务端。":
+        "Versão do serviço incompatível. Atualize o app ou o servidor.",
     "二维码内容过长。": "Conteúdo do QR code longo demais.",
     "不是 DogCodes 配对二维码。": "Não é um QR code de pareamento do DogCodes.",
-    "配对二维码无效，或来自未配置的服务。": "QR code de pareamento inválido ou de um serviço não configurado.",
-    "配对二维码已过期，请在电脑上重新生成。": "O QR code de pareamento expirou. Gere um novo no computador.",
-    "设备时间不一致，请校准手机和电脑时间后重试。": "Os relógios dos dispositivos não conferem. Ajuste a hora nos dois e tente novamente.",
+    "配对二维码无效，或来自未配置的服务。":
+        "QR code de pareamento inválido ou de um serviço não configurado.",
+    "配对二维码已过期，请在电脑上重新生成。":
+        "O QR code de pareamento expirou. Gere um novo no computador.",
+    "设备时间不一致，请校准手机和电脑时间后重试。":
+        "Os relógios dos dispositivos não conferem. Ajuste a hora nos dois e tente novamente.",
     "无法读取配对二维码。": "Não foi possível ler o QR code de pareamento.",
     "事件游标格式无效。": "Formato do cursor de eventos inválido.",
     "事件游标超出范围。": "Cursor de eventos fora do intervalo.",
-    "电脑离线，重新连接后再浏览目录。": "Computador offline. Reconecte para navegar pelos diretórios.",
+    "电脑离线，重新连接后再浏览目录。":
+        "Computador offline. Reconecte para navegar pelos diretórios.",
     "连接已更换，请重新读取目录。": "A conexão mudou. Recarregue o diretório.",
-    "电脑未返回有效的目录列表，请更新电脑端后重试。": "Nenhuma lista de diretórios válida foi devolvida. Atualize o app para desktop e tente novamente.",
-    "目录分页没有前进，请刷新目录。": "A paginação dos diretórios não avançou. Atualize o diretório.",
-    "电脑端暂不支持目录选择，请更新电脑端后重试。": "Atualize o app para desktop para escolher diretórios.",
+    "电脑未返回有效的目录列表，请更新电脑端后重试。":
+        "Nenhuma lista de diretórios válida foi devolvida. Atualize o app para desktop e tente novamente.",
+    "目录分页没有前进，请刷新目录。":
+        "A paginação dos diretórios não avançou. Atualize o diretório.",
+    "电脑端暂不支持目录选择，请更新电脑端后重试。":
+        "Atualize o app para desktop para escolher diretórios.",
     "剪贴板传输响应无效": "Resposta de transferência da área de transferência inválida",
-    "剪贴板传输身份不匹配": "A identidade da transferência da área de transferência não confere",
-    "剪贴板传输校验信息不匹配": "As informações de integridade da transferência da área de transferência não conferem",
-    "图片需小于 16 MB，请缩小图片后重试": "A imagem deve ter menos de 16 MB. Reduza-a e tente novamente.",
-    "剪贴板文字为空或超过 1 MB": "O texto da área de transferência está vazio ou passa de 1 MB",
+    "剪贴板传输身份不匹配":
+        "A identidade da transferência da área de transferência não confere",
+    "剪贴板传输校验信息不匹配":
+        "As informações de integridade da transferência da área de transferência não conferem",
+    "图片需小于 16 MB，请缩小图片后重试":
+        "A imagem deve ter menos de 16 MB. Reduza-a e tente novamente.",
+    "剪贴板文字为空或超过 1 MB":
+        "O texto da área de transferência está vazio ou passa de 1 MB",
     "图片传输起始位置无效": "Posição inicial da transferência de imagem inválida",
     "剪贴板上传位置不匹配": "A posição de envio da área de transferência não confere",
-    "尚未确认电脑剪贴板是否更新，请从电脑获取核实；不会自动重发": "Atualização da área de transferência do computador não confirmada. Obtenha-a para verificar. Ela não será reenviada automaticamente.",
-    "未确认电脑剪贴板已更新，请从电脑获取核实；不会自动重发": "Atualização da área de transferência do computador não confirmada. Obtenha-a para verificar. Ela não será reenviada automaticamente.",
-    "剪贴板写入回执不完整，请从电脑获取核实": "Comprovante de gravação da área de transferência incompleto. Obtenha a área de transferência do computador para verificar.",
+    "尚未确认电脑剪贴板是否更新，请从电脑获取核实；不会自动重发":
+        "Atualização da área de transferência do computador não confirmada. Obtenha-a para verificar. Ela não será reenviada automaticamente.",
+    "未确认电脑剪贴板已更新，请从电脑获取核实；不会自动重发":
+        "Atualização da área de transferência do computador não confirmada. Obtenha-a para verificar. Ela não será reenviada automaticamente.",
+    "剪贴板写入回执不完整，请从电脑获取核实":
+        "Comprovante de gravação da área de transferência incompleto. Obtenha a área de transferência do computador para verificar.",
     "剪贴板下载数据块过大": "Bloco de download da área de transferência grande demais",
     "剪贴板下载位置不匹配": "A posição de download da área de transferência não confere",
-    "剪贴板内容校验失败，未写入手机剪贴板": "Falha na verificação de integridade da área de transferência. A área de transferência do celular não foi alterada.",
+    "剪贴板内容校验失败，未写入手机剪贴板":
+        "Falha na verificação de integridade da área de transferência. A área de transferência do celular não foi alterada.",
     "通知服务初始化失败。": "Falha ao inicializar o serviço de notificações.",
-    "此版本未配置备用通知服务。": "Serviço de notificações reserva não configurado nesta versão.",
+    "此版本未配置备用通知服务。":
+        "Serviço de notificações reserva não configurado nesta versão.",
     "系统通知权限尚未开启。": "Permissão de notificações do sistema não concedida.",
     "任务提醒": "Alertas de tarefas",
     "待审批、待回答、完成和失败提醒": "Alertas de aprovações, perguntas, conclusão e falhas",
-    "未获取到通知设备身份。": "Não foi possível obter a identidade de notificação do dispositivo.",
-    "这台电脑已移除，未发送停止请求。": "Este computador foi removido. A solicitação de parada não foi enviada.",
-    "这个任务已经有一个停止请求在等待确认。": "Já existe uma solicitação de parada desta tarefa aguardando confirmação.",
-    "等待确认的停止请求太多，请先处理待处理页里的卡片。": "Solicitações de parada demais aguardando confirmação. Resolva primeiro os cartões em Pendentes.",
+    "未获取到通知设备身份。":
+        "Não foi possível obter a identidade de notificação do dispositivo.",
+    "这台电脑已移除，未发送停止请求。":
+        "Este computador foi removido. A solicitação de parada não foi enviada.",
+    "这个任务已经有一个停止请求在等待确认。":
+        "Já existe uma solicitação de parada desta tarefa aguardando confirmação.",
+    "等待确认的停止请求太多，请先处理待处理页里的卡片。":
+        "Solicitações de parada demais aguardando confirmação. Resolva primeiro os cartões em Pendentes.",
     "任务当前没有可停止的运行。": "Esta tarefa não tem nenhuma execução ativa para parar.",
-    "暂时无法读取任务状态，请稍后再确认。": "Não foi possível ler o status da tarefa. Verifique de novo mais tarde.",
-    "这台电脑已移除，未重新发送停止请求。": "Este computador foi removido. A solicitação de parada não foi reenviada.",
+    "暂时无法读取任务状态，请稍后再确认。":
+        "Não foi possível ler o status da tarefa. Verifique de novo mais tarde.",
+    "这台电脑已移除，未重新发送停止请求。":
+        "Este computador foi removido. A solicitação de parada não foi reenviada.",
     "原停止请求已改变，请刷新。": "A solicitação de parada original mudou. Atualize.",
     "没有待确认的停止请求。": "Nenhuma solicitação de parada aguardando confirmação.",
-    "电脑已收到停止请求，任务会在停下后更新状态。": "O computador recebeu a solicitação de parada. O status será atualizado quando a tarefa parar.",
-    "这次运行已经结束，不需要再停止。": "Esta execução já terminou. Não é preciso pará-la de novo.",
-    "已不再等待。如果电脑收到了这个停止请求，任务仍会停下。": "Parou de esperar. Se o computador recebeu a solicitação de parada, a tarefa ainda vai parar.",
-    "还不确定是否已停止，可以再发一次停止。": "Resultado da parada não confirmado. Você pode enviar outra solicitação de parada.",
+    "电脑已收到停止请求，任务会在停下后更新状态。":
+        "O computador recebeu a solicitação de parada. O status será atualizado quando a tarefa parar.",
+    "这次运行已经结束，不需要再停止。":
+        "Esta execução já terminou. Não é preciso pará-la de novo.",
+    "已不再等待。如果电脑收到了这个停止请求，任务仍会停下。":
+        "Parou de esperar. Se o computador recebeu a solicitação de parada, a tarefa ainda vai parar.",
+    "还不确定是否已停止，可以再发一次停止。":
+        "Resultado da parada não confirmado. Você pode enviar outra solicitação de parada.",
     "附件总大小不能超过 25 MB。": "Os anexos não podem passar de 25 MB no total.",
     "附件文件名过长或无效。": "Nome do arquivo do anexo longo demais ou inválido.",
     "图片请使用 PNG、JPEG、GIF 或 WebP 格式。": "Use imagens PNG, JPEG, GIF ou WebP.",
     "一次最多发送 16 个附件。": "Até 16 anexos por mensagem.",
     "附件上传已暂停，可继续原上传。": "Envio do anexo pausado. Retome o envio original.",
-    "附件回执与原文件不一致，未发送任务。": "O comprovante do anexo não corresponde ao arquivo original. A tarefa não foi enviada.",
-    "本机附件内容已变化，请重新添加；未上传变化后的文件。": "O anexo local mudou. Adicione-o novamente. O arquivo alterado não foi enviado.",
+    "附件回执与原文件不一致，未发送任务。":
+        "O comprovante do anexo não corresponde ao arquivo original. A tarefa não foi enviada.",
+    "本机附件内容已变化，请重新添加；未上传变化后的文件。":
+        "O anexo local mudou. Adicione-o novamente. O arquivo alterado não foi enviado.",
     "电脑端暂不支持附件上传，请更新电脑端。": "Atualize o app para desktop para enviar anexos.",
     "电脑返回的附件位置无效。": "O computador devolveu uma posição de anexo inválida.",
-    "附件分块位置未确认，请继续原上传。": "Posição do fragmento do anexo não confirmada. Retome o envio original.",
-    "原草稿不可读取，请重新选择附件。": "Não é possível ler o rascunho original. Escolha os anexos novamente.",
-    "上次附件选择未完成，请重新选择。": "A seleção anterior de anexos não foi concluída. Escolha novamente.",
-    "已恢复系统文件选择器返回的附件，请核对后发送。": "Anexos recuperados do seletor de arquivos do sistema. Revise-os antes de enviar.",
-    "附件选择未完成：{0}，请重新选择。": "Seleção de anexos incompleta: {0}. Escolha novamente.",
-    "上次附件选择未能恢复：{0}": "Não foi possível recuperar a seleção anterior de anexos: {0}",
-    "正在处理这台电脑的原配对，请稍后核实。": "O pareamento original deste computador está sendo processado. Verifique mais tarde.",
-    "原配对恢复记录已改变，请刷新后核实。": "O registro de recuperação do pareamento original mudou. Atualize e verifique.",
-    "电脑绑定已移除或变化，请重新配对后连接。": "O pareamento do computador foi removido ou alterado. Pareie novamente para conectar.",
+    "附件分块位置未确认，请继续原上传。":
+        "Posição do fragmento do anexo não confirmada. Retome o envio original.",
+    "原草稿不可读取，请重新选择附件。":
+        "Não é possível ler o rascunho original. Escolha os anexos novamente.",
+    "上次附件选择未完成，请重新选择。":
+        "A seleção anterior de anexos não foi concluída. Escolha novamente.",
+    "已恢复系统文件选择器返回的附件，请核对后发送。":
+        "Anexos recuperados do seletor de arquivos do sistema. Revise-os antes de enviar.",
+    "附件选择未完成：{0}，请重新选择。":
+        "Seleção de anexos incompleta: {0}. Escolha novamente.",
+    "上次附件选择未能恢复：{0}":
+        "Não foi possível recuperar a seleção anterior de anexos: {0}",
+    "正在处理这台电脑的原配对，请稍后核实。":
+        "O pareamento original deste computador está sendo processado. Verifique mais tarde.",
+    "原配对恢复记录已改变，请刷新后核实。":
+        "O registro de recuperação do pareamento original mudou. Atualize e verifique.",
+    "电脑绑定已移除或变化，请重新配对后连接。":
+        "O pareamento do computador foi removido ou alterado. Pareie novamente para conectar.",
     "未命名会话": "Conversa sem título",
     "离线模式": "Modo offline",
     "离线协作": "Colaboração offline",
-    "部分离线数据暂时无法读取，联网后可重新同步。": "Não foi possível ler alguns dados offline. Reconecte para sincronizar de novo.",
-    "停止请求暂时无法读取，请检查系统安全存储。": "Não foi possível ler as solicitações de parada. Verifique o armazenamento seguro do sistema.",
-    "终端关闭记录暂时无法读取，请检查系统安全存储。": "Não foi possível ler os registros de fechamento dos terminais. Verifique o armazenamento seguro do sistema.",
-    "已配对电脑暂时无法读取，请检查系统安全存储。": "Não foi possível ler os computadores pareados. Verifique o armazenamento seguro do sistema.",
-    "电脑绑定已变化，未使用旧页面接管新的连接。": "O pareamento do computador mudou. A página antiga não assumiu a nova conexão.",
-    "连接中断，正在重新连接。已发送操作不会重复执行。": "Conexão perdida. Reconectando. As operações enviadas não serão executadas duas vezes.",
-    "连接已断开。电脑上的任务不会因此停止。": "Desconectado. As tarefas continuam em execução no computador.",
-    "移除未完成，连接已关闭；请重试移除或核实安全存储。": "Remoção incompleta. Conexão fechada. Repita a remoção ou verifique o armazenamento seguro.",
+    "部分离线数据暂时无法读取，联网后可重新同步。":
+        "Não foi possível ler alguns dados offline. Reconecte para sincronizar de novo.",
+    "停止请求暂时无法读取，请检查系统安全存储。":
+        "Não foi possível ler as solicitações de parada. Verifique o armazenamento seguro do sistema.",
+    "终端关闭记录暂时无法读取，请检查系统安全存储。":
+        "Não foi possível ler os registros de fechamento dos terminais. Verifique o armazenamento seguro do sistema.",
+    "已配对电脑暂时无法读取，请检查系统安全存储。":
+        "Não foi possível ler os computadores pareados. Verifique o armazenamento seguro do sistema.",
+    "电脑绑定已变化，未使用旧页面接管新的连接。":
+        "O pareamento do computador mudou. A página antiga não assumiu a nova conexão.",
+    "连接中断，正在重新连接。已发送操作不会重复执行。":
+        "Conexão perdida. Reconectando. As operações enviadas não serão executadas duas vezes.",
+    "连接已断开。电脑上的任务不会因此停止。":
+        "Desconectado. As tarefas continuam em execução no computador.",
+    "移除未完成，连接已关闭；请重试移除或核实安全存储。":
+        "Remoção incompleta. Conexão fechada. Repita a remoção ou verifique o armazenamento seguro.",
     "离线缓存未能保存：{0}": "Não foi possível salvar o cache offline: {0}",
-    "待确认的操作暂时无法读取，请检查系统安全存储。": "Não foi possível ler as operações não confirmadas. Verifique o armazenamento seguro do sistema.",
-    "无法读取后台提醒设置，请检查系统安全存储后重试。": "Não foi possível ler as configurações de alertas em segundo plano. Verifique o armazenamento seguro do sistema e tente novamente.",
-    "部分电脑的通知尚未登记，请检查网络后重新检测。": "As notificações não foram registradas para alguns computadores. Verifique sua rede e tente novamente.",
-    "后台提醒尚未启用，请核实系统通知权限和通知服务配置后重试。": "Os alertas em segundo plano não estão ativados. Verifique a permissão de notificações do sistema e a configuração do serviço.",
+    "待确认的操作暂时无法读取，请检查系统安全存储。":
+        "Não foi possível ler as operações não confirmadas. Verifique o armazenamento seguro do sistema.",
+    "无法读取后台提醒设置，请检查系统安全存储后重试。":
+        "Não foi possível ler as configurações de alertas em segundo plano. Verifique o armazenamento seguro do sistema e tente novamente.",
+    "部分电脑的通知尚未登记，请检查网络后重新检测。":
+        "As notificações não foram registradas para alguns computadores. Verifique sua rede e tente novamente.",
+    "后台提醒尚未启用，请核实系统通知权限和通知服务配置后重试。":
+        "Os alertas em segundo plano não estão ativados. Verifique a permissão de notificações do sistema e a configuração do serviço.",
     "Git 操作已完成": "Operação Git concluída",
-    "已经提交，还不确定是否推送成功，可以重新发送推送。": "Commit feito. Resultado do push não confirmado. Você pode reenviar o push.",
+    "已经提交，还不确定是否推送成功，可以重新发送推送。":
+        "Commit feito. Resultado do push não confirmado. Você pode reenviar o push.",
     "提交已完成，推送失败：{0}": "Commit concluído. Falha no push: {0}",
     "Git 操作失败：{0}": "Falha na operação Git: {0}",
-    "电脑正在执行 Git 操作，稍后再确认。": "Operação Git em execução no computador. Verifique mais tarde.",
-    "Git 操作中途中断了，请在「变更」里看一下仓库现在的状态。": "Operação Git interrompida. Verifique o estado do repositório em Alterações.",
-    "Git 操作只完成了一部分，请先在「变更」里看一下再继续。": "A operação Git foi concluída só em parte. Confira Alterações antes de continuar.",
+    "电脑正在执行 Git 操作，稍后再确认。":
+        "Operação Git em execução no computador. Verifique mais tarde.",
+    "Git 操作中途中断了，请在「变更」里看一下仓库现在的状态。":
+        "Operação Git interrompida. Verifique o estado do repositório em Alterações.",
+    "Git 操作只完成了一部分，请先在「变更」里看一下再继续。":
+        "A operação Git foi concluída só em parte. Confira Alterações antes de continuar.",
     "已不再等待这次 Git 操作。": "Parou de esperar por esta operação Git.",
-    "电脑上还查不到这次 Git 操作，可能没收到，可以重新发送。": "O computador ainda não tem registro desta operação Git. Talvez ela não tenha chegado. Você pode reenviá-la.",
-    "还不确定文件是否已暂存，所以没有继续提交。": "Preparação não confirmada. O commit não continuou.",
-    "暂存回执与原文件选择不一致，未重新执行。": "O comprovante de preparação não corresponde à seleção de arquivos original. Ela não foi executada de novo.",
+    "电脑上还查不到这次 Git 操作，可能没收到，可以重新发送。":
+        "O computador ainda não tem registro desta operação Git. Talvez ela não tenha chegado. Você pode reenviá-la.",
+    "还不确定文件是否已暂存，所以没有继续提交。":
+        "Preparação não confirmada. O commit não continuou.",
+    "暂存回执与原文件选择不一致，未重新执行。":
+        "O comprovante de preparação não corresponde à seleção de arquivos original. Ela não foi executada de novo.",
     "Git 操作无效。": "Operação Git inválida.",
-    "电脑未返回有效的 Git 操作回执。": "O computador não devolveu um comprovante válido da operação Git.",
-    "Git 回执与原请求不一致，未继续操作。": "O comprovante do Git não corresponde à solicitação original. A operação não continuou.",
-    "Git 接续记录过长或存在循环，请在电脑上核实。": "A cadeia de continuação do Git é longa demais ou tem um loop. Verifique no computador.",
-    "电脑尚未确认结束原 Git 跟踪。": "O computador não confirmou o fim do acompanhamento Git original.",
+    "电脑未返回有效的 Git 操作回执。":
+        "O computador não devolveu um comprovante válido da operação Git.",
+    "Git 回执与原请求不一致，未继续操作。":
+        "O comprovante do Git não corresponde à solicitação original. A operação não continuou.",
+    "Git 接续记录过长或存在循环，请在电脑上核实。":
+        "A cadeia de continuação do Git é longa demais ou tem um loop. Verifique no computador.",
+    "电脑尚未确认结束原 Git 跟踪。":
+        "O computador não confirmou o fim do acompanhamento Git original.",
     "待审批": "Aprovação solicitada",
     "待回答": "Resposta solicitada",
     "任务完成": "Tarefa concluída",
     "执行失败": "Falha na execução",
-    "通知设置响应无效，请重新读取。": "Resposta das configurações de notificação inválida. Recarregue.",
-    "设备授权已失效，请核实电脑绑定。": "A autorização do dispositivo expirou. Verifique o pareamento do computador.",
-    "通知设置已改变，请重新读取后修改。": "As configurações de notificação mudaram. Recarregue antes de editar.",
+    "通知设置响应无效，请重新读取。":
+        "Resposta das configurações de notificação inválida. Recarregue.",
+    "设备授权已失效，请核实电脑绑定。":
+        "A autorização do dispositivo expirou. Verifique o pareamento do computador.",
+    "通知设置已改变，请重新读取后修改。":
+        "As configurações de notificação mudaram. Recarregue antes de editar.",
     "操作过于频繁，请稍后重试。": "Operações demais. Tente mais tarde.",
-    "通知服务暂时不可用，请稍后重试。": "Serviço de notificações temporariamente indisponível. Tente mais tarde.",
-    "无法确认通知设置，请检查网络后重新读取。": "Não foi possível confirmar as configurações de notificação. Verifique sua rede e recarregue.",
-    "电脑没有收到这次设置，请再试一次。": "O computador não recebeu esta configuração. Tente novamente.",
-    "电脑返回的保持唤醒状态无效。": "Estado de manter ativo devolvido pelo computador inválido.",
-    "待发送的输入过多，本次未发送，请缩短输入后再试。": "Entrada demais na fila. Nada foi enviado. Encurte a entrada e tente novamente.",
-    "终端页面已离开，未继续发送输入。": "A página Terminal foi fechada. Nenhuma outra entrada foi enviada.",
+    "通知服务暂时不可用，请稍后重试。":
+        "Serviço de notificações temporariamente indisponível. Tente mais tarde.",
+    "无法确认通知设置，请检查网络后重新读取。":
+        "Não foi possível confirmar as configurações de notificação. Verifique sua rede e recarregue.",
+    "电脑没有收到这次设置，请再试一次。":
+        "O computador não recebeu esta configuração. Tente novamente.",
+    "电脑返回的保持唤醒状态无效。":
+        "Estado de manter ativo devolvido pelo computador inválido.",
+    "待发送的输入过多，本次未发送，请缩短输入后再试。":
+        "Entrada demais na fila. Nada foi enviado. Encurte a entrada e tente novamente.",
+    "终端页面已离开，未继续发送输入。":
+        "A página Terminal foi fechada. Nenhuma outra entrada foi enviada.",
     "终端输入回执不匹配": "O comprovante de entrada do terminal não confere",
-    "请更新电脑端后输入；终端输出仍可查看。": "Atualize o app para desktop para digitar. A saída do terminal continua disponível.",
+    "请更新电脑端后输入；终端输出仍可查看。":
+        "Atualize o app para desktop para digitar. A saída do terminal continua disponível.",
     "终端正在启动，请稍后继续输入。": "Iniciando o terminal. Continue digitando mais tarde.",
-    "原终端当前不可输入，请刷新查看状态。": "O terminal original não aceita entrada. Atualize para ver o status.",
-    "终端输入连接已改变，请检查后继续。": "A conexão de entrada do terminal mudou. Verifique antes de continuar.",
-    "输入连接仍在切换，请稍后检查并继续。": "A conexão de entrada ainda está mudando. Verifique de novo mais tarde.",
-    "上次输入结果待核实，请检查终端输出后再继续。": "Resultado da entrada anterior não confirmado. Verifique a saída do terminal antes de continuar.",
-    "输入结果尚未确认，请核实或检查终端后继续；不会重发原输入。": "Resultado da entrada não confirmado. Verifique-o ou confira o terminal antes de continuar. A entrada original não será reenviada.",
-    "终端连接中断，输入结果待核实；未发送的队列已丢弃，不会自动重发。": "Terminal desconectado. Resultado da entrada não confirmado. A fila não enviada foi descartada e não será enviada automaticamente.",
-    "原输入仍未确认或通道已改变，请检查终端输出后继续；不会重发。": "Entrada original não confirmada ou canal alterado. Verifique a saída do terminal antes de continuar. A entrada não será reenviada.",
-    "暂时无法核实输入，请连接后再试；不会重发原输入。": "Não foi possível verificar a entrada. Reconecte e tente novamente. A entrada original não será reenviada.",
-    "输入连接尚未恢复，请稍后再试。": "A conexão de entrada ainda não foi restaurada. Tente mais tarde.",
-    "这台电脑已移除，未发送关闭请求。": "Este computador foi removido. A solicitação de fechamento não foi enviada.",
-    "这个终端已经有一个关闭请求在等待确认。": "Já existe uma solicitação de fechamento deste terminal aguardando confirmação.",
-    "等待确认的关闭请求太多，请先处理待处理页里的卡片。": "Solicitações de fechamento demais aguardando confirmação. Resolva primeiro os cartões em Pendentes.",
-    "原终端关闭结果尚未确认，请核实结束后再启动这个运行配置。": "Resultado do fechamento do terminal original não confirmado. Verifique antes de iniciar esta configuração de execução.",
-    "请更新电脑端后再关闭终端，当前版本无法核实原终端身份。": "Atualize o app para desktop para fechar terminais. Esta versão não consegue verificar a identidade do terminal original.",
-    "终端身份不完整，请刷新后再关闭。": "Identidade do terminal incompleta. Atualize antes de fechar.",
-    "终端已经重新启动过，没有关闭新的终端。": "O terminal foi reiniciado. O novo terminal não foi fechado.",
+    "原终端当前不可输入，请刷新查看状态。":
+        "O terminal original não aceita entrada. Atualize para ver o status.",
+    "终端输入连接已改变，请检查后继续。":
+        "A conexão de entrada do terminal mudou. Verifique antes de continuar.",
+    "输入连接仍在切换，请稍后检查并继续。":
+        "A conexão de entrada ainda está mudando. Verifique de novo mais tarde.",
+    "上次输入结果待核实，请检查终端输出后再继续。":
+        "Resultado da entrada anterior não confirmado. Verifique a saída do terminal antes de continuar.",
+    "输入结果尚未确认，请核实或检查终端后继续；不会重发原输入。":
+        "Resultado da entrada não confirmado. Verifique-o ou confira o terminal antes de continuar. A entrada original não será reenviada.",
+    "终端连接中断，输入结果待核实；未发送的队列已丢弃，不会自动重发。":
+        "Terminal desconectado. Resultado da entrada não confirmado. A fila não enviada foi descartada e não será enviada automaticamente.",
+    "原输入仍未确认或通道已改变，请检查终端输出后继续；不会重发。":
+        "Entrada original não confirmada ou canal alterado. Verifique a saída do terminal antes de continuar. A entrada não será reenviada.",
+    "暂时无法核实输入，请连接后再试；不会重发原输入。":
+        "Não foi possível verificar a entrada. Reconecte e tente novamente. A entrada original não será reenviada.",
+    "输入连接尚未恢复，请稍后再试。":
+        "A conexão de entrada ainda não foi restaurada. Tente mais tarde.",
+    "这台电脑已移除，未发送关闭请求。":
+        "Este computador foi removido. A solicitação de fechamento não foi enviada.",
+    "这个终端已经有一个关闭请求在等待确认。":
+        "Já existe uma solicitação de fechamento deste terminal aguardando confirmação.",
+    "等待确认的关闭请求太多，请先处理待处理页里的卡片。":
+        "Solicitações de fechamento demais aguardando confirmação. Resolva primeiro os cartões em Pendentes.",
+    "原终端关闭结果尚未确认，请核实结束后再启动这个运行配置。":
+        "Resultado do fechamento do terminal original não confirmado. Verifique antes de iniciar esta configuração de execução.",
+    "请更新电脑端后再关闭终端，当前版本无法核实原终端身份。":
+        "Atualize o app para desktop para fechar terminais. Esta versão não consegue verificar a identidade do terminal original.",
+    "终端身份不完整，请刷新后再关闭。":
+        "Identidade do terminal incompleta. Atualize antes de fechar.",
+    "终端已经重新启动过，没有关闭新的终端。":
+        "O terminal foi reiniciado. O novo terminal não foi fechado.",
     "终端不存在": "O terminal não existe",
     "没有待确认的终端关闭操作。": "Nenhum fechamento de terminal aguardando confirmação.",
     "终端已经关闭。": "Terminal fechado.",
-    "已不再等待。如果电脑收到了关闭请求，终端仍会关闭。": "Parou de esperar. Se o computador recebeu a solicitação de fechamento, o terminal ainda será fechado.",
-    "终端已改变，关闭请求未执行。": "O terminal mudou. A solicitação de fechamento não foi executada.",
-    "电脑已收到关闭请求，正在等终端结束。": "O computador recebeu a solicitação de fechamento. Aguardando o terminal terminar.",
-    "还不确定终端是否已关闭，可以稍后再确认。": "Resultado do fechamento do terminal não confirmado. Verifique mais tarde.",
+    "已不再等待。如果电脑收到了关闭请求，终端仍会关闭。":
+        "Parou de esperar. Se o computador recebeu a solicitação de fechamento, o terminal ainda será fechado.",
+    "终端已改变，关闭请求未执行。":
+        "O terminal mudou. A solicitação de fechamento não foi executada.",
+    "电脑已收到关闭请求，正在等终端结束。":
+        "O computador recebeu a solicitação de fechamento. Aguardando o terminal terminar.",
+    "还不确定终端是否已关闭，可以稍后再确认。":
+        "Resultado do fechamento do terminal não confirmado. Verifique mais tarde.",
     "请选择有效的审查问题。": "Escolha problemas de revisão válidos.",
-    "审查回执与原请求不匹配，请保留原操作并核实。": "O comprovante da revisão não corresponde à solicitação original. Mantenha a operação e verifique-a.",
-    "修复回执与原请求不匹配，请先核实电脑上的原修复。": "O comprovante da correção não corresponde à solicitação original. Verifique primeiro a correção original no computador.",
-    "无法读取审查记录，请更新电脑端后重试。": "Não foi possível ler as revisões. Atualize o app para desktop e tente novamente.",
-    "消息分片取消标识无效。": "Sinalizador de cancelamento de fragmento de mensagem inválido.",
+    "审查回执与原请求不匹配，请保留原操作并核实。":
+        "O comprovante da revisão não corresponde à solicitação original. Mantenha a operação e verifique-a.",
+    "修复回执与原请求不匹配，请先核实电脑上的原修复。":
+        "O comprovante da correção não corresponde à solicitação original. Verifique primeiro a correção original no computador.",
+    "无法读取审查记录，请更新电脑端后重试。":
+        "Não foi possível ler as revisões. Atualize o app para desktop e tente novamente.",
+    "消息分片取消标识无效。":
+        "Sinalizador de cancelamento de fragmento de mensagem inválido.",
     "消息大小超出范围。": "Tamanho da mensagem fora do intervalo.",
     "二进制消息格式无效。": "Formato de mensagem binária inválido.",
     "消息分片格式无效。": "Formato de fragmento de mensagem inválido.",
@@ -9354,42 +11369,59 @@ const messageCatalogs = <String, Map<String, String>>{
     "消息分片不连续。": "Os fragmentos de mensagem não são contíguos.",
     "消息分片长度无效。": "Comprimento de fragmento de mensagem inválido.",
     "不允许嵌套消息分片。": "Fragmentos de mensagem aninhados não são permitidos.",
-    "会话版本不可用，请刷新后重试。": "Versão da conversa indisponível. Atualize e tente novamente.",
-    "会话名称需为 1–120 个字符，且不能包含控制字符。": "O nome da conversa deve ter de 1 a 120 caracteres, sem caracteres de controle.",
+    "会话版本不可用，请刷新后重试。":
+        "Versão da conversa indisponível. Atualize e tente novamente.",
+    "会话名称需为 1–120 个字符，且不能包含控制字符。":
+        "O nome da conversa deve ter de 1 a 120 caracteres, sem caracteres de controle.",
     "会话状态无效。": "Estado da conversa inválido.",
-    "无法读取电脑的会话设置，请更新电脑端后重试。": "Não foi possível ler as configurações das conversas. Atualize o app para desktop e tente novamente.",
+    "无法读取电脑的会话设置，请更新电脑端后重试。":
+        "Não foi possível ler as configurações das conversas. Atualize o app para desktop e tente novamente.",
     "Fork 环境无效。": "Ambiente de fork inválido.",
-    "Fork 返回的会话身份不一致，请核实原操作。": "O fork devolveu uma identidade de conversa diferente. Verifique a operação original.",
+    "Fork 返回的会话身份不一致，请核实原操作。":
+        "O fork devolveu uma identidade de conversa diferente. Verifique a operação original.",
     "没有待确认的会话操作。": "Nenhuma operação de conversa aguardando confirmação.",
     "原操作已变化，请刷新。": "A operação original mudou. Atualize.",
-    "Fork 回执与原请求不一致。": "O comprovante do fork não corresponde à solicitação original.",
+    "Fork 回执与原请求不一致。":
+        "O comprovante do fork não corresponde à solicitação original.",
     "这项操作需要先核实结果。": "Verifique primeiro o resultado desta operação.",
-    "这台电脑已移除，未再发送请求。": "Este computador foi removido. A solicitação não foi reenviada.",
-    "原电脑记录尚未清理完成，请重试移除电脑后再连接。": "Os registros do computador original não foram totalmente apagados. Repita a remoção antes de reconectar.",
-    "电脑绑定已变化，未发送原操作；请重新连接后确认。": "O pareamento do computador mudou. A operação original não foi enviada. Reconecte e confirme.",
-    "原操作已结束或已更新，请刷新后操作。": "A operação original terminou ou foi atualizada. Atualize antes de continuar.",
-    "中继连接中断，操作结果需要核实。": "Relay desconectado. Verifique o resultado da operação.",
+    "这台电脑已移除，未再发送请求。":
+        "Este computador foi removido. A solicitação não foi reenviada.",
+    "原电脑记录尚未清理完成，请重试移除电脑后再连接。":
+        "Os registros do computador original não foram totalmente apagados. Repita a remoção antes de reconectar.",
+    "电脑绑定已变化，未发送原操作；请重新连接后确认。":
+        "O pareamento do computador mudou. A operação original não foi enviada. Reconecte e confirme.",
+    "原操作已结束或已更新，请刷新后操作。":
+        "A operação original terminou ou foi atualizada. Atualize antes de continuar.",
+    "中继连接中断，操作结果需要核实。":
+        "Relay desconectado. Verifique o resultado da operação.",
     "中继探针仅供本地开发使用。": "A sonda de relay é só para desenvolvimento local.",
     "数据帧大小超出范围。": "Tamanho do quadro de dados fora do intervalo.",
     "连接已关闭；操作结果需要核实。": "Conexão fechada. Verifique o resultado da operação.",
-    "暂时无法连接可用的通知服务，请稍后重试。": "Não foi possível conectar a nenhum serviço de notificações. Tente mais tarde.",
-    "电脑已结束屏幕共享，请重新连接并授权": "O compartilhamento de tela foi encerrado no computador. Reconecte e autorize novamente.",
+    "暂时无法连接可用的通知服务，请稍后重试。":
+        "Não foi possível conectar a nenhum serviço de notificações. Tente mais tarde.",
+    "电脑已结束屏幕共享，请重新连接并授权":
+        "O compartilhamento de tela foi encerrado no computador. Reconecte e autorize novamente.",
     "加密中继": "Relay criptografado",
     "P2P 直连": "Conexão direta P2P",
     "TURN 中继": "Relay TURN",
     "WebRTC · 路径待确认": "WebRTC · Caminho não confirmado",
     "连接的电脑身份不一致。": "A identidade do computador conectado não confere.",
     "草稿归属不可读取": "Não foi possível ler a propriedade do rascunho",
-    "工作区已属于另一份设备存储": "O espaço de trabalho pertence a outro armazenamento de dispositivo",
-    "工作区设备存储尚未初始化": "Armazenamento de dispositivo do espaço de trabalho não inicializado",
+    "工作区已属于另一份设备存储":
+        "O espaço de trabalho pertence a outro armazenamento de dispositivo",
+    "工作区设备存储尚未初始化":
+        "Armazenamento de dispositivo do espaço de trabalho não inicializado",
     "本机数据归属不一致": "A propriedade dos dados locais não confere",
     "本地绑定记录不可读取": "Não foi possível ler o registro de pareamento local",
-    "电脑绑定已变化，未覆盖原草稿。": "O pareamento do computador mudou. O rascunho original não foi substituído.",
+    "电脑绑定已变化，未覆盖原草稿。":
+        "O pareamento do computador mudou. O rascunho original não foi substituído.",
     "本机保存的数据不可读取": "Não foi possível ler os dados salvos localmente",
     "附件大小或标识无效": "Tamanho ou identidade do anexo inválidos",
-    "手机未发送附件已超过 256 MB，请先发送或移除其他草稿中的附件。": "Os anexos não enviados passam de 256 MB. Envie ou remova primeiro os anexos de outros rascunhos.",
+    "手机未发送附件已超过 256 MB，请先发送或移除其他草稿中的附件。":
+        "Os anexos não enviados passam de 256 MB. Envie ou remova primeiro os anexos de outros rascunhos.",
     "附件标识无效": "Identidade do anexo inválida",
-    "本机附件已不可读取，请重新添加。": "Não é possível ler o anexo local. Adicione-o novamente.",
+    "本机附件已不可读取，请重新添加。":
+        "Não é possível ler o anexo local. Adicione-o novamente.",
     "本机附件大小已变化。": "O tamanho do anexo local mudou.",
     "拒绝": "Negar",
     "允许一次": "Permitir uma vez",
@@ -9397,14 +11429,18 @@ const messageCatalogs = <String, Map<String, String>>{
     "始终允许": "Sempre permitir",
     "取消操作": "Cancelar ação",
     "{0} · {1} 个目录": "{0} · {1} diretórios",
-    "{0} 上还没有项目。新建项目时选择电脑上的已有目录。": "Ainda não há projetos em {0}. Crie um a partir de um diretório existente no computador.",
+    "{0} 上还没有项目。新建项目时选择电脑上的已有目录。":
+        "Ainda não há projetos em {0}. Crie um a partir de um diretório existente no computador.",
     "{0} 个会话运行中": "{0} conversas em execução",
     "不在项目中工作": "Trabalhar fora de um projeto",
     "主目录": "Diretório principal",
-    "主目录是会话默认的工作目录；附加目录同样对 Agent 可见。从项目中移除目录不会删除电脑上的文件。": "As conversas começam no diretório principal; os diretórios adicionais também ficam visíveis para os Agents. Remover um diretório do projeto não exclui nenhum arquivo do computador.",
+    "主目录是会话默认的工作目录；附加目录同样对 Agent 可见。从项目中移除目录不会删除电脑上的文件。":
+        "As conversas começam no diretório principal; os diretórios adicionais também ficam visíveis para os Agents. Remover um diretório do projeto não exclui nenhum arquivo do computador.",
     "从项目中移除": "Remover do projeto",
-    "保存结果待核实，请刷新后查看项目，不要重复保存。": "Resultado do salvamento não confirmado. Atualize e confira o projeto antes de salvar de novo.",
-    "保留会话和电脑上的文件，可随时恢复": "Mantém as conversas e os arquivos no computador; pode ser restaurado a qualquer momento",
+    "保存结果待核实，请刷新后查看项目，不要重复保存。":
+        "Resultado do salvamento não confirmado. Atualize e confira o projeto antes de salvar de novo.",
+    "保留会话和电脑上的文件，可随时恢复":
+        "Mantém as conversas e os arquivos no computador; pode ser restaurado a qualquer momento",
     "名称和目录": "Nome e diretórios",
     "已移除项目（{0}）": "Projetos removidos ({0})",
     "恢复": "Restaurar",
@@ -9430,12 +11466,15 @@ const messageCatalogs = <String, Map<String, String>>{
     "选择此目录": "Escolher este diretório",
     "选择目录": "Escolher diretório",
     "项目不存在": "Projeto não encontrado",
-    "项目会从列表中隐藏。会话和电脑上的文件都会保留，可在「已移除项目」中恢复。": "O projeto fica oculto na lista. As conversas e os arquivos no computador são mantidos, e você pode restaurá-lo em Projetos removidos.",
+    "项目会从列表中隐藏。会话和电脑上的文件都会保留，可在「已移除项目」中恢复。":
+        "O projeto fica oculto na lista. As conversas e os arquivos no computador são mantidos, e você pode restaurá-lo em Projetos removidos.",
     "项目名称": "Nome do projeto",
     "项目操作": "Ações do projeto",
     "项目状态无效。": "Estado do projeto inválido.",
-    "会话、项目和待处理都在电脑上，连接后即可使用。": "Conversas, projetos e pendentes ficam no seu computador. Conecte-se para usá-los.",
-    "项目已在电脑上添加，可在「项目」中查看。": "Projeto adicionado no computador. Encontre-o em Projetos.",
+    "会话、项目和待处理都在电脑上，连接后即可使用。":
+        "Conversas, projetos e pendentes ficam no seu computador. Conecte-se para usá-los.",
+    "项目已在电脑上添加，可在「项目」中查看。":
+        "Projeto adicionado no computador. Encontre-o em Projetos.",
     "正在连接电脑": "Conectando ao seu computador",
     "暂时连接不上电脑": "Não é possível conectar ao seu computador",
     "@one:{0} 分钟": "{0} minuto",
@@ -9456,7 +11495,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "发送文字到电脑": "Enviar texto ao computador",
     "从电脑获取文字": "Obter texto do computador",
     "编辑后发送到电脑剪贴板": "Editar e enviar para a área de transferência do computador",
-    "读取电脑剪贴板，复制到这部手机": "Ler a área de transferência do computador e copiar para este celular",
+    "读取电脑剪贴板，复制到这部手机":
+        "Ler a área de transferência do computador e copiar para este celular",
     "粘贴或输入要发送到电脑的文字": "Cole ou digite o texto a enviar ao computador",
     "文字超过 1 MB，无法发送": "O texto passa de 1 MB e não pode ser enviado",
     "{0} 个字符": "{0} caracteres",
@@ -9464,9 +11504,12 @@ const messageCatalogs = <String, Map<String, String>>{
     "仅发送": "Só enviar",
     "发送并粘贴": "Enviar e colar",
     "已粘贴到电脑": "Colado no computador",
-    "已发送到电脑剪贴板。更新电脑端后可自动粘贴": "Enviado para a área de transferência do computador. Atualize o app de desktop para colar automaticamente",
-    "已发送到电脑剪贴板，可在电脑上粘贴": "Enviado para a área de transferência do computador. Cole no computador",
-    "电脑剪贴板里没有文字，先在电脑上复制后再试": "A área de transferência do computador não tem texto. Copie algo no computador e tente de novo",
+    "已发送到电脑剪贴板。更新电脑端后可自动粘贴":
+        "Enviado para a área de transferência do computador. Atualize o app de desktop para colar automaticamente",
+    "已发送到电脑剪贴板，可在电脑上粘贴":
+        "Enviado para a área de transferência do computador. Cole no computador",
+    "电脑剪贴板里没有文字，先在电脑上复制后再试":
+        "A área de transferência do computador não tem texto. Copie algo no computador e tente de novo",
     "正在发送到电脑…": "Enviando ao computador…",
     "正在从电脑获取…": "Obtendo do computador…",
     "@one:{0} 个字符": "{0} caractere",
@@ -9493,13 +11536,18 @@ const messageCatalogs = <String, Map<String, String>>{
     "文件内容": "Conteúdo do arquivo",
     "搜索内容": "Pesquisar",
     "请求的工具": "Ferramenta solicitada",
-    "审批详情格式不完整，请让 Agent 重新发起审批。": "Os detalhes da aprovação estão incompletos. Peça ao agente para solicitar de novo.",
-    "操作详情过长，下方仅展示部分内容。请让 Agent 拆分操作后重新发起审批，以查看完整范围。": "Os detalhes são longos demais; só parte aparece abaixo. Peça ao agente para dividir a ação e solicitar de novo para ver o escopo completo.",
-    "Agent 未提供文件修改范围，请让 Agent 补充文件路径和修改内容。": "O agente não informou quais arquivos vão mudar. Peça os caminhos e as alterações.",
-    "未能从审批请求中读取文件路径、命令或修改内容，请让 Agent 补充详情后重新发起审批。": "Não foi possível ler um caminho, comando ou alteração nesta solicitação. Peça ao agente para adicionar detalhes e solicitar de novo.",
+    "审批详情格式不完整，请让 Agent 重新发起审批。":
+        "Os detalhes da aprovação estão incompletos. Peça ao agente para solicitar de novo.",
+    "操作详情过长，下方仅展示部分内容。请让 Agent 拆分操作后重新发起审批，以查看完整范围。":
+        "Os detalhes são longos demais; só parte aparece abaixo. Peça ao agente para dividir a ação e solicitar de novo para ver o escopo completo.",
+    "Agent 未提供文件修改范围，请让 Agent 补充文件路径和修改内容。":
+        "O agente não informou quais arquivos vão mudar. Peça os caminhos e as alterações.",
+    "未能从审批请求中读取文件路径、命令或修改内容，请让 Agent 补充详情后重新发起审批。":
+        "Não foi possível ler um caminho, comando ou alteração nesta solicitação. Peça ao agente para adicionar detalhes e solicitar de novo.",
     "收起": "Mostrar menos",
     "展开全部": "Mostrar tudo",
-    "电脑已记录你的决定，但 Agent 已不在等待，请在会话中查看。": "O computador registrou sua decisão, mas o agente não está mais esperando. Confira o chat.",
+    "电脑已记录你的决定，但 Agent 已不在等待，请在会话中查看。":
+        "O computador registrou sua decisão, mas o agente não está mais esperando. Confira o chat.",
     "已取消回答": "Resposta cancelada",
     "已处理": "Resolvido",
     "你的选择：{0}": "Você escolheu: {0}",
@@ -9507,13 +11555,17 @@ const messageCatalogs = <String, Map<String, String>>{
     "已在电脑上处理，或请求已失效": "Resolvido no computador ou a solicitação expirou",
     "清空已处理记录": "Limpar histórico resolvido",
     "清空已处理记录？": "Limpar o histórico resolvido?",
-    "只从这部手机删除，等待处理的请求不受影响。": "Removido só deste telefone. Solicitações pendentes são mantidas.",
+    "只从这部手机删除，等待处理的请求不受影响。":
+        "Removido só deste telefone. Solicitações pendentes são mantidas.",
     "没有权限请求": "Nenhuma solicitação de permissão",
-    "Agent 需要运行命令或修改文件时，会在这里请你确认。": "Quando um agente precisar executar um comando ou alterar arquivos, ele vai pedir aqui.",
+    "Agent 需要运行命令或修改文件时，会在这里请你确认。":
+        "Quando um agente precisar executar um comando ou alterar arquivos, ele vai pedir aqui.",
     "没有待回答的问题": "Nenhuma pergunta",
-    "Agent 需要你做选择或补充信息时，问题会出现在这里。": "Quando um agente precisar que você escolha ou complemente, a pergunta aparece aqui.",
+    "Agent 需要你做选择或补充信息时，问题会出现在这里。":
+        "Quando um agente precisar que você escolha ou complemente, a pergunta aparece aqui.",
     "收件箱是空的": "Sua caixa está vazia",
-    "Agent 请求权限或向你提问时会出现在这里，处理过的记录也会保留，方便回看。": "Solicitações de permissão e perguntas dos agentes aparecem aqui. As resolvidas ficam para você rever.",
+    "Agent 请求权限或向你提问时会出现在这里，处理过的记录也会保留，方便回看。":
+        "Solicitações de permissão e perguntas dos agentes aparecem aqui. As resolvidas ficam para você rever.",
     "等待你回答": "Aguardando sua resposta",
     "等待你确认": "Aguardando sua aprovação",
     "权限请求": "Solicitação de permissão",
@@ -9521,68 +11573,104 @@ const messageCatalogs = <String, Map<String, String>>{
     "可以返回收件箱查看其它事项。": "Volte à caixa para ver outros itens.",
     "跳过所有权限确认。": "Ignora todos os pedidos de permissão.",
     "减少确认次数。": "Reduz as confirmações.",
-    "仅自动读取；其他操作均需先征得你的批准。": "Lê automaticamente; todo o resto precisa primeiro da sua aprovação.",
-    "不中断任务；所有操作和决策均自动进行。": "Nunca interrompe; todas as ações e decisões são automáticas.",
-    "受保护的工具操作前请求审批。": "Pede aprovação antes de ações protegidas de ferramentas.",
+    "仅自动读取；其他操作均需先征得你的批准。":
+        "Lê automaticamente; todo o resto precisa primeiro da sua aprovação.",
+    "不中断任务；所有操作和决策均自动进行。":
+        "Nunca interrompe; todas as ações e decisões são automáticas.",
+    "受保护的工具操作前请求审批。":
+        "Pede aprovação antes de ações protegidas de ferramentas.",
     "关闭沙箱并跳过审批。": "Desativa o sandbox e ignora as aprovações.",
-    "每次工具执行前在此审批；审批桥不可用时拒绝执行。": "Aprove cada execução de ferramenta aqui; as execuções são recusadas quando a ponte de aprovação está indisponível.",
-    "OpenCode 默认 Agent；工具按你配置的权限执行。": "Agente padrão do OpenCode; as ferramentas seguem as permissões que você configurou.",
-    "编辑文件和其他受保护操作前请求审批。": "Pede aprovação antes de editar arquivos ou realizar outras ações protegidas.",
+    "每次工具执行前在此审批；审批桥不可用时拒绝执行。":
+        "Aprove cada execução de ferramenta aqui; as execuções são recusadas quando a ponte de aprovação está indisponível.",
+    "OpenCode 默认 Agent；工具按你配置的权限执行。":
+        "Agente padrão do OpenCode; as ferramentas seguem as permissões que você configurou.",
+    "编辑文件和其他受保护操作前请求审批。":
+        "Pede aprovação antes de editar arquivos ou realizar outras ações protegidas.",
     "只分析，不修改文件或执行命令。": "Analisa sem modificar arquivos nem executar comandos.",
     "改文件前先问我。": "Pergunta antes de alterar arquivos.",
-    "只读沙箱；需要扩大权限时请求审批。": "Sandbox somente leitura; pede aprovação quando é preciso mais acesso.",
+    "只读沙箱；需要扩大权限时请求审批。":
+        "Sandbox somente leitura; pede aprovação quando é preciso mais acesso.",
     "按需确认": "Perguntar quando necessário",
     "只读模式": "Somente leitura",
     "所选策略在下一轮执行时生效": "A política selecionada entra em vigor no próximo turno",
-    "从不弹出确认；只运行预先允许和安全的只读操作，其余一律拒绝。": "Nunca pergunta; executa ações pré-aprovadas e de leitura seguras e nega todo o resto.",
-    "Pi 不内置逐工具审批或沙箱；工具直接执行，扩展发起的询问会显示在对话中。": "O Pi não tem aprovações por ferramenta nem sandbox; as ferramentas são executadas diretamente e as perguntas de extensões aparecem na conversa.",
+    "从不弹出确认；只运行预先允许和安全的只读操作，其余一律拒绝。":
+        "Nunca pergunta; executa ações pré-aprovadas e de leitura seguras e nega todo o resto.",
+    "Pi 不内置逐工具审批或沙箱；工具直接执行，扩展发起的询问会显示在对话中。":
+        "O Pi não tem aprovações por ferramenta nem sandbox; as ferramentas são executadas diretamente e as perguntas de extensões aparecem na conversa.",
     "跳过审批": "Pular aprovações",
     "仅限预先允许": "Somente pré-aprovado",
     "自动判断": "Auto",
-    "监督模式：工具操作前请求审批。": "Supervisionado: pede aprovação antes de ações de ferramentas.",
-    "由 ZCode 判断哪些操作可直接执行。": "O ZCode decide quais ações podem ser executadas diretamente.",
-    "只运行预先允许的工具，其余直接拒绝，不请求审批。": "Executa apenas ferramentas já permitidas e recusa o restante sem perguntar.",
-    "由 AI 审查员批准或拒绝原本需要询问的操作；审查失败只阻止该操作。": "Um revisor de IA aprova ou nega cada ação que, de outra forma, perguntaria; uma revisão com falha bloqueia apenas essa ação.",
-    "由 Claude 自动分类权限请求。": "Permite que o Claude classifique automaticamente os pedidos de permissão.",
+    "监督模式：工具操作前请求审批。":
+        "Supervisionado: pede aprovação antes de ações de ferramentas.",
+    "由 ZCode 判断哪些操作可直接执行。":
+        "O ZCode decide quais ações podem ser executadas diretamente.",
+    "只运行预先允许的工具，其余直接拒绝，不请求审批。":
+        "Executa apenas ferramentas já permitidas e recusa o restante sem perguntar.",
+    "由 AI 审查员批准或拒绝原本需要询问的操作；审查失败只阻止该操作。":
+        "Um revisor de IA aprova ou nega cada ação que, de outra forma, perguntaria; uma revisão com falha bloqueia apenas essa ação.",
+    "由 Claude 自动分类权限请求。":
+        "Permite que o Claude classifique automaticamente os pedidos de permissão.",
     "完全访问": "Acesso total",
     "编辑前先出计划。": "Faz um plano antes de editar.",
     "默认权限": "Permissões padrão",
-    "允许文件编辑；其他受保护操作仍需审批。": "Permite edições de arquivos; outras ações protegidas ainda precisam de aprovação.",
+    "允许文件编辑；其他受保护操作仍需审批。":
+        "Permite edições de arquivos; outras ações protegidas ainda precisam de aprovação.",
     "权限策略": "Política de permissões",
     "原生规则": "Regras nativas",
-    "先制定计划；需要批准的操作仍会询问。": "Faz um plano primeiro; ações que precisam de aprovação ainda perguntam.",
+    "先制定计划；需要批准的操作仍会询问。":
+        "Faz um plano primeiro; ações que precisam de aprovação ainda perguntam.",
     "操作前确认": "Perguntar antes de agir",
-    "按 Cursor 权限规则执行；需要审批的操作在此确认。": "Segue as regras de permissão do Cursor; ações que precisam de aprovação são confirmadas aqui.",
+    "按 Cursor 权限规则执行；需要审批的操作在此确认。":
+        "Segue as regras de permissão do Cursor; ações que precisam de aprovação são confirmadas aqui.",
     "计划模式": "Modo de plano",
-    "对所有 Agent 跳过全部权限检查，包括危险命令。": "Ignora todas as verificações de permissão, incluindo comandos perigosos, para todos os agentes.",
-    "此 Agent 未报告可切换的权限模式；审批请求仍会显示在对话中。": "Este agente não informa modos de permissão alternáveis; os pedidos de aprovação continuam aparecendo na conversa.",
-    "原 Agent、模型、思考强度或权限策略当前不可用，请重新选择后发送。": "O agente, modelo, nível de raciocínio ou política de permissão original não está mais disponível. Escolha novamente antes de enviar.",
-    "计划模式；禁用所有编辑工具。": "Modo plano; todas as ferramentas de edição ficam desativadas.",
-    "每个工具首次使用时请求授权。": "Pede permissão na primeira vez que cada ferramenta é usada.",
+    "对所有 Agent 跳过全部权限检查，包括危险命令。":
+        "Ignora todas as verificações de permissão, incluindo comandos perigosos, para todos os agentes.",
+    "此 Agent 未报告可切换的权限模式；审批请求仍会显示在对话中。":
+        "Este agente não informa modos de permissão alternáveis; os pedidos de aprovação continuam aparecendo na conversa.",
+    "原 Agent、模型、思考强度或权限策略当前不可用，请重新选择后发送。":
+        "O agente, modelo, nível de raciocínio ou política de permissão original não está mais disponível. Escolha novamente antes de enviar.",
+    "计划模式；禁用所有编辑工具。":
+        "Modo plano; todas as ferramentas de edição ficam desativadas.",
+    "每个工具首次使用时请求授权。":
+        "Pede permissão na primeira vez que cada ferramenta é usada.",
     "本会话内自动接受文件编辑。": "Aceita automaticamente edições de arquivos nesta sessão.",
     "自动编辑文件。": "Edita arquivos automaticamente.",
-    "自动驾驶：工具操作无需询问直接执行。": "Piloto automático: executa ações de ferramentas sem perguntar.",
-    "由 Grok 判断哪些工具操作可自动执行。": "O Grok decide quais ações de ferramentas podem ser executadas automaticamente.",
-    "跳过 Claude Code 工具权限检查。": "Ignora as verificações de permissão de ferramentas do Claude Code.",
-    "自动允许 Antigravity 工具操作。": "Permite automaticamente as ações de ferramentas do Antigravity.",
+    "自动驾驶：工具操作无需询问直接执行。":
+        "Piloto automático: executa ações de ferramentas sem perguntar.",
+    "由 Grok 判断哪些工具操作可自动执行。":
+        "O Grok decide quais ações de ferramentas podem ser executadas automaticamente.",
+    "跳过 Claude Code 工具权限检查。":
+        "Ignora as verificações de permissão de ferramentas do Claude Code.",
+    "自动允许 Antigravity 工具操作。":
+        "Permite automaticamente as ações de ferramentas do Antigravity.",
     "接受编辑": "Aceitar edições",
-    "工作区写入沙箱；需要越出沙箱时请求审批。": "Sandbox com gravação no workspace; pede aprovação apenas para sair do sandbox.",
+    "工作区写入沙箱；需要越出沙箱时请求审批。":
+        "Sandbox com gravação no workspace; pede aprovação apenas para sair do sandbox.",
     "允许所有工具操作，无需审批。": "Permite todas as ações de ferramentas sem aprovação.",
-    "探索并制定计划；使用 Claude 原生计划模式。": "Explore e faça um plano usando o modo de plano nativo do Claude.",
-    "使用 Antigravity 原生计划模式；工具执行仍在此审批。": "Usa o modo de plano nativo do Antigravity; as execuções de ferramentas ainda são aprovadas aqui.",
-    "自动批准操作；明确禁止的操作和团队限制仍然生效。": "Aprova ações automaticamente; ações proibidas explicitamente e restrições da equipe continuam valendo.",
-    "常规编辑和命令自动执行；高风险操作、提问和计划仍会询问。": "Edições e comandos comuns são executados automaticamente; ações arriscadas, perguntas e planos ainda perguntam.",
+    "探索并制定计划；使用 Claude 原生计划模式。":
+        "Explore e faça um plano usando o modo de plano nativo do Claude.",
+    "使用 Antigravity 原生计划模式；工具执行仍在此审批。":
+        "Usa o modo de plano nativo do Antigravity; as execuções de ferramentas ainda são aprovadas aqui.",
+    "自动批准操作；明确禁止的操作和团队限制仍然生效。":
+        "Aprova ações automaticamente; ações proibidas explicitamente e restrições da equipe continuam valendo.",
+    "常规编辑和命令自动执行；高风险操作、提问和计划仍会询问。":
+        "Edições e comandos comuns são executados automaticamente; ações arriscadas, perguntas e planos ainda perguntam.",
     "正在响应": "Respondendo",
     "分叉 · {0}": "Fork · {0}",
     "分叉自较早的会话": "Fork de uma conversa anterior",
     "分叉自": "Fork de",
-    "已恢复所选轮次结束时的文件，未提交的成果可在“变更”中查看。": "Os arquivos foram restaurados ao fim da rodada escolhida; o trabalho não commitado está em Alterações.",
-    "此项目不是 Git 仓库，分叉只继承对话上下文，并沿用同一项目目录。": "Este projeto não é um repositório Git; o fork mantém só a conversa e continua na mesma pasta.",
-    "此会话由旧版分叉创建，未恢复历史轮次的文件。": "Esta conversa foi criada por um fork antigo e não restaurou os arquivos da rodada.",
-    "沿用同一项目目录；分叉不会还原文件。": "Usa a mesma pasta do projeto; o fork não restaura arquivos.",
+    "已恢复所选轮次结束时的文件，未提交的成果可在“变更”中查看。":
+        "Os arquivos foram restaurados ao fim da rodada escolhida; o trabalho não commitado está em Alterações.",
+    "此项目不是 Git 仓库，分叉只继承对话上下文，并沿用同一项目目录。":
+        "Este projeto não é um repositório Git; o fork mantém só a conversa e continua na mesma pasta.",
+    "此会话由旧版分叉创建，未恢复历史轮次的文件。":
+        "Esta conversa foi criada por um fork antigo e não restaurou os arquivos da rodada.",
+    "沿用同一项目目录；分叉不会还原文件。":
+        "Usa a mesma pasta do projeto; o fork não restaura arquivos.",
     "收起继承的上下文": "Ocultar o contexto herdado",
     "查看继承的上下文（{0} 轮）": "Ver o contexto herdado ({0})",
-    "Agent 已获得以上上下文，在下方发送消息即可从这里继续。": "O agente já tem este contexto. Envie uma mensagem abaixo para continuar daqui.",
+    "Agent 已获得以上上下文，在下方发送消息即可从这里继续。":
+        "O agente já tem este contexto. Envie uma mensagem abaixo para continuar daqui.",
   },
   "ru": {
     "返回": "Назад",
@@ -9617,34 +11705,44 @@ const messageCatalogs = <String, Map<String, String>>{
     "连接中": "Подключение",
     "离线": "Не в сети",
     "终端": "Терминал",
-    "连接超时，请检查网络后重试。": "Время подключения истекло. Проверьте сеть и повторите попытку.",
+    "连接超时，请检查网络后重试。":
+        "Время подключения истекло. Проверьте сеть и повторите попытку.",
     "电脑 {0}": "Компьютер {0}",
     "电脑离线": "Компьютер не в сети",
     "已提交并推送": "Коммит и push выполнены",
-    "电脑绑定已改变，请返回设备列表。": "Сопряжение компьютера изменилось. Вернитесь к списку устройств.",
+    "电脑绑定已改变，请返回设备列表。":
+        "Сопряжение компьютера изменилось. Вернитесь к списку устройств.",
     "任务或远控期间保持唤醒": "Не засыпать во время задач и удалённого управления",
-    "电脑离线，重连后刷新设置": "Компьютер не в сети. Переподключитесь, чтобы обновить настройки.",
-    "阻止空闲睡眠，仍可锁屏或手动睡眠": "Предотвращает переход в сон при бездействии. Блокировать экран или усыплять вручную по-прежнему можно.",
+    "电脑离线，重连后刷新设置":
+        "Компьютер не в сети. Переподключитесь, чтобы обновить настройки.",
+    "阻止空闲睡眠，仍可锁屏或手动睡眠":
+        "Предотвращает переход в сон при бездействии. Блокировать экран или усыплять вручную по-прежнему можно.",
     "电脑暂未能保持唤醒：{0}": "Не удалось запретить сон компьютера: {0}",
     "刷新保持唤醒设置": "Обновить настройку запрета сна",
     "电脑": "Компьютеры",
     "扫码连接": "Сканировать для подключения",
     "偏好设置": "Настройки",
     "把电脑上的工作带在身边": "Ваша работа всегда с вами",
-    "连接自己的电脑，查看会话、发送任务并处理 Agent 的权限请求。无需注册账号。": "Подключите свой компьютер, чтобы просматривать чаты, отправлять задачи и отвечать на запросы разрешений от Agents. Учётная запись не нужна.",
+    "连接自己的电脑，查看会话、发送任务并处理 Agent 的权限请求。无需注册账号。":
+        "Подключите свой компьютер, чтобы просматривать чаты, отправлять задачи и отвечать на запросы разрешений от Agents. Учётная запись не нужна.",
     "连接电脑": "Подключить компьютер",
     "当前内测版本尚未配置接入服务。": "В этой бета-версии не настроен сервис подключения.",
-    "在电脑端打开「连接手机」，扫描二维码。": "Откройте «Подключить телефон» на компьютере и отсканируйте QR-код.",
-    "扫描电脑上的二维码，或粘贴配对链接": "Отсканируйте QR-код на компьютере или вставьте ссылку для сопряжения.",
+    "在电脑端打开「连接手机」，扫描二维码。":
+        "Откройте «Подключить телефон» на компьютере и отсканируйте QR-код.",
+    "扫描电脑上的二维码，或粘贴配对链接":
+        "Отсканируйте QR-код на компьютере или вставьте ссылку для сопряжения.",
     "当前内测版本尚未配置接入服务": "В этой бета-версии не настроен сервис подключения",
     "更多": "Ещё",
     "从这部手机移除「{0}」？": "Удалить «{0}» с этого телефона?",
-    "手机会删除这台电脑的配对凭证，之后需重新扫码才能连接。电脑上的任务不受影响；如需让电脑也拒绝这部手机，请在电脑的设备列表中撤销。": "Данные сопряжения с этим компьютером будут удалены с телефона. Для повторного подключения нужно будет снова отсканировать код. Задачи на компьютере не затронуты. Чтобы компьютер тоже отклонял этот телефон, отзовите его в списке устройств компьютера.",
+    "手机会删除这台电脑的配对凭证，之后需重新扫码才能连接。电脑上的任务不受影响；如需让电脑也拒绝这部手机，请在电脑的设备列表中撤销。":
+        "Данные сопряжения с этим компьютером будут удалены с телефона. Для повторного подключения нужно будет снова отсканировать код. Задачи на компьютере не затронуты. Чтобы компьютер тоже отклонял этот телефон, отзовите его в списке устройств компьютера.",
     "取消": "Отмена",
-    "移除未完成，连接已关闭，请重试或核实安全存储。": "Удаление не завершено. Соединение закрыто. Повторите попытку или проверьте защищённое хранилище.",
+    "移除未完成，连接已关闭，请重试或核实安全存储。":
+        "Удаление не завершено. Соединение закрыто. Повторите попытку или проверьте защищённое хранилище.",
     "移除": "Удалить",
     "撤销绑定": "Отозвать сопряжение",
-    "请在「{0}」的设备列表中撤销这部手机。撤销后这部手机将无法再连接该电脑；电脑上正在执行的任务不受影响。": "Отзовите этот телефон в списке устройств «{0}». После этого он не сможет подключаться к этому компьютеру. Выполняющиеся на компьютере задачи не затронуты.",
+    "请在「{0}」的设备列表中撤销这部手机。撤销后这部手机将无法再连接该电脑；电脑上正在执行的任务不受影响。":
+        "Отзовите этот телефон в списке устройств «{0}». После этого он не сможет подключаться к этому компьютеру. Выполняющиеся на компьютере задачи не затронуты.",
     "知道了": "Понятно",
     "通知设置": "Уведомления",
     "重新连接": "Переподключиться",
@@ -9653,33 +11751,44 @@ const messageCatalogs = <String, Map<String, String>>{
     "最后同步 {0}": "Последняя синхронизация {0}",
     "远程桌面": "Удалённый рабочий стол",
     "远程桌面 · 电脑离线": "Удалённый рабочий стол · Компьютер не в сети",
-    "这台电脑上还没有检测到 Agent。": "На этом компьютере пока не обнаружено ни одного Agent.",
+    "这台电脑上还没有检测到 Agent。":
+        "На этом компьютере пока не обнаружено ни одного Agent.",
     "已就绪": "Готов",
     "已安装 · 未就绪": "Установлен · Не готов",
     "需要在电脑上配置": "Требуется настройка на компьютере",
     "版本不支持": "Версия не поддерживается",
     "异常": "Ошибка",
     "不可用": "Недоступно",
-    "直连未建立，使用加密中继": "Прямое подключение невозможно. Используется зашифрованный ретранслятор.",
-    "连接已变化，正在恢复远程桌面": "Соединение изменилось. Восстановление удалённого рабочего стола.",
-    "连接中断，正在恢复远程桌面": "Соединение потеряно. Восстановление удалённого рабочего стола.",
+    "直连未建立，使用加密中继":
+        "Прямое подключение невозможно. Используется зашифрованный ретранслятор.",
+    "连接已变化，正在恢复远程桌面":
+        "Соединение изменилось. Восстановление удалённого рабочего стола.",
+    "连接中断，正在恢复远程桌面":
+        "Соединение потеряно. Восстановление удалённого рабочего стола.",
     "无法准备新解码器": "Не удалось подготовить новый декодер",
     "新画面解码不可用": "Новый видеодекодер недоступен",
     "换路后画面不可用": "Видео недоступно после смены соединения",
     "正在核实并恢复远程桌面连接": "Проверка и восстановление удалённого рабочего стола",
-    "连接归属暂时无法核实，正在恢复远程桌面": "Не удалось проверить принадлежность соединения. Восстановление удалённого рабочего стола.",
-    "连接暂时无法恢复，请点击重新连接。": "Не удалось восстановить соединение. Нажмите «Переподключиться».",
-    "电脑离线，连接后再打开远程桌面": "Компьютер не в сети. Переподключитесь, чтобы открыть удалённый рабочий стол.",
+    "连接归属暂时无法核实，正在恢复远程桌面":
+        "Не удалось проверить принадлежность соединения. Восстановление удалённого рабочего стола.",
+    "连接暂时无法恢复，请点击重新连接。":
+        "Не удалось восстановить соединение. Нажмите «Переподключиться».",
+    "电脑离线，连接后再打开远程桌面":
+        "Компьютер не в сети. Переподключитесь, чтобы открыть удалённый рабочий стол.",
     "电脑没有可用的显示器": "На этом компьютере нет доступных экранов",
     "手机解码器不可用": "Декодер телефона недоступен",
     "手机视频画面不可用": "Видео на телефоне недоступно",
     "视频画面不可用，使用图片模式": "Видео недоступно. Используется режим изображений.",
     "暂时无法连接：{0}": "Не удалось подключиться: {0}",
     "{0}，已切换图片模式": "{0}. Включён режим изображений.",
-    "请在电脑上允许共享屏幕和键鼠控制": "Разрешите на компьютере демонстрацию экрана и управление клавиатурой и мышью.",
-    "电脑授权回复无效，请重新连接": "Недопустимый ответ на запрос авторизации. Переподключитесь.",
-    "电脑未能准备屏幕共享，请重新连接并授权": "Компьютер не смог подготовить демонстрацию экрана. Переподключитесь и снова дайте разрешение.",
-    "等待电脑授权超时，请重新连接后再试": "Истекло время ожидания разрешения. Переподключитесь и повторите попытку.",
+    "请在电脑上允许共享屏幕和键鼠控制":
+        "Разрешите на компьютере демонстрацию экрана и управление клавиатурой и мышью.",
+    "电脑授权回复无效，请重新连接":
+        "Недопустимый ответ на запрос авторизации. Переподключитесь.",
+    "电脑未能准备屏幕共享，请重新连接并授权":
+        "Компьютер не смог подготовить демонстрацию экрана. Переподключитесь и снова дайте разрешение.",
+    "等待电脑授权超时，请重新连接后再试":
+        "Истекло время ожидания разрешения. Переподключитесь и повторите попытку.",
     "画面正在恢复": "Восстановление видео",
     "电脑未确认当前画面的就绪状态": "Компьютер не подтвердил готовность текущего видео.",
     "电脑视频编码异常": "Ошибка видеокодера компьютера",
@@ -9700,13 +11809,17 @@ const messageCatalogs = <String, Map<String, String>>{
     "发送{0}到电脑": "Отправить {0} на компьютер",
     "文字": "текст",
     "图片": "изображение",
-    "读取手机剪贴板，按系统提示允许粘贴": "Прочитать буфер обмена телефона. Разрешите вставку, когда появится запрос.",
+    "读取手机剪贴板，按系统提示允许粘贴":
+        "Прочитать буфер обмена телефона. Разрешите вставку, когда появится запрос.",
     "从电脑获取{0}": "Получить {0} с компьютера",
     "复制到手机剪贴板": "Скопировать в буфер обмена телефона",
-    "当前连接不支持独立剪贴板传输，请更新电脑和 App 后重试": "Это соединение не поддерживает отдельную передачу буфера обмена. Обновите приложение для компьютера и мобильное приложение.",
-    "手机剪贴板没有图片，或尚未允许粘贴": "В буфере обмена телефона нет изображения, или вставка не разрешена.",
+    "当前连接不支持独立剪贴板传输，请更新电脑和 App 后重试":
+        "Это соединение не поддерживает отдельную передачу буфера обмена. Обновите приложение для компьютера и мобильное приложение.",
+    "手机剪贴板没有图片，或尚未允许粘贴":
+        "В буфере обмена телефона нет изображения, или вставка не разрешена.",
     "手机剪贴板没有文字": "В буфере обмена телефона нет текста",
-    "电脑尚不支持分块剪贴板传输，请更新电脑客户端": "Обновите приложение для компьютера, чтобы передавать буфер обмена частями.",
+    "电脑尚不支持分块剪贴板传输，请更新电脑客户端":
+        "Обновите приложение для компьютера, чтобы передавать буфер обмена частями.",
     "已发送到电脑剪贴板": "Отправлено в буфер обмена компьютера",
     "已复制到手机剪贴板": "Скопировано в буфер обмена телефона",
     "剪贴板操作未完成": "Операция с буфером обмена не завершена",
@@ -9718,29 +11831,37 @@ const messageCatalogs = <String, Map<String, String>>{
     "重新选择共享屏幕": "Снова выбрать экран для демонстрации",
     "正在准备剪贴板传输…": "Подготовка передачи буфера обмена…",
     "剪贴板传输 {0}%": "Передача буфера обмена {0}%",
-    "已停止等待，复制操作可能已完成，请核实剪贴板": "Ожидание остановлено. Копирование могло завершиться. Проверьте буфер обмена.",
+    "已停止等待，复制操作可能已完成，请核实剪贴板":
+        "Ожидание остановлено. Копирование могло завершиться. Проверьте буфер обмена.",
     "键盘": "Клавиатура",
     "移动画面": "Перемещать вид",
     "操作电脑": "Управлять компьютером",
     "适应屏幕": "По размеру экрана",
     "剪贴板": "Буфер обмена",
-    "电脑已锁定，Agent 操作仍可用。\n解锁电脑后点「重新连接」。": "Компьютер заблокирован. Действия Agent по-прежнему доступны.\nРазблокируйте компьютер и нажмите «Переподключиться».",
+    "电脑已锁定，Agent 操作仍可用。\n解锁电脑后点「重新连接」。":
+        "Компьютер заблокирован. Действия Agent по-прежнему доступны.\nРазблокируйте компьютер и нажмите «Переподключиться».",
     "服务连接正常": "Сервис подключён",
     "连接失败，请重试。": "Не удалось подключиться. Повторите попытку.",
-    "接入服务只转发加密数据，会话和任务保存在你的电脑上。": "Сервис подключения только передаёт зашифрованные данные. Чаты и задачи остаются на вашем компьютере.",
+    "接入服务只转发加密数据，会话和任务保存在你的电脑上。":
+        "Сервис подключения только передаёт зашифрованные данные. Чаты и задачи остаются на вашем компьютере.",
     "尚未配置服务地址": "Адрес сервиса не настроен",
     "此服务尚未开放电脑配对。": "Сопряжение компьютеров на этом сервисе не включено.",
     "正在检查": "Проверка",
     "检查连接": "Проверить подключение",
-    "后台提醒暂未启用，静音设置可提前保存。仅影响这部手机，不影响电脑任务和 Agent 审批。": "Фоновые уведомления не включены. Настройки без звука можно сохранить уже сейчас. Они действуют только на этом телефоне и не влияют на задачи компьютера и подтверждения Agents.",
-    "通知通道已连接。提醒只影响这部手机，不会直接批准操作。": "Уведомления подключены. Они действуют только на этом телефоне и никогда не подтверждают действия автоматически.",
-    "后台提醒暂未启用，可在这里授权系统通知。": "Фоновые уведомления не включены. Разрешите системные уведомления здесь.",
-    "此版本未配置后台提醒，静音设置可提前保存。": "В этой сборке фоновые уведомления не настроены. Настройки без звука можно сохранить уже сейчас.",
+    "后台提醒暂未启用，静音设置可提前保存。仅影响这部手机，不影响电脑任务和 Agent 审批。":
+        "Фоновые уведомления не включены. Настройки без звука можно сохранить уже сейчас. Они действуют только на этом телефоне и не влияют на задачи компьютера и подтверждения Agents.",
+    "通知通道已连接。提醒只影响这部手机，不会直接批准操作。":
+        "Уведомления подключены. Они действуют только на этом телефоне и никогда не подтверждают действия автоматически.",
+    "后台提醒暂未启用，可在这里授权系统通知。":
+        "Фоновые уведомления не включены. Разрешите системные уведомления здесь.",
+    "此版本未配置后台提醒，静音设置可提前保存。":
+        "В этой сборке фоновые уведомления не настроены. Настройки без звука можно сохранить уже сейчас.",
     "正在连接通知服务": "Подключение к сервису уведомлений",
     "重新检测后台提醒": "Снова проверить фоновые уведомления",
     "启用后台提醒": "Включить фоновые уведомления",
     "通知设置暂不可用。": "Настройки уведомлений недоступны.",
-    "保存结果未确认，请检查网络后重新读取。": "Сохранение не подтверждено. Проверьте сеть и перезагрузите.",
+    "保存结果未确认，请检查网络后重新读取。":
+        "Сохранение не подтверждено. Проверьте сеть и перезагрузите.",
     "会话": "Чаты",
     "重新读取": "Перезагрузить",
     "静音这台电脑": "Отключить уведомления этого компьютера",
@@ -9748,14 +11869,17 @@ const messageCatalogs = <String, Map<String, String>>{
     "已静音会话": "Чаты без звука",
     "未加载的会话": "Чат не загружен",
     "取消会话静音": "Включить уведомления чата",
-    "这台电脑已静音，取消会话静音后仍不会收到提醒。": "Уведомления этого компьютера отключены. Включение уведомлений чата не включит оповещения.",
+    "这台电脑已静音，取消会话静音后仍不会收到提醒。":
+        "Уведомления этого компьютера отключены. Включение уведомлений чата не включит оповещения.",
     "静音此会话": "Отключить уведомления этого чата",
     "清除离线缓存？": "Очистить офлайн-кэш?",
-    "只清除此手机保存的会话缓存，保留草稿、未发送附件和电脑配对。电脑上的会话不受影响，联网后会重新缓存。": "Очищает только чаты, сохранённые в кэше на этом телефоне. Черновики, неотправленные вложения и сопряжения сохраняются. Чаты на компьютере не затронуты и снова попадут в кэш при подключении.",
+    "只清除此手机保存的会话缓存，保留草稿、未发送附件和电脑配对。电脑上的会话不受影响，联网后会重新缓存。":
+        "Очищает только чаты, сохранённые в кэше на этом телефоне. Черновики, неотправленные вложения и сопряжения сохраняются. Чаты на компьютере не затронуты и снова попадут в кэш при подключении.",
     "清除": "Очистить",
     "未能清除缓存：{0}": "Не удалось очистить кэш: {0}",
     "最近会话离线缓存": "Офлайн-кэш недавних чатов",
-    "{0} 个会话 · {1} MB\n最多 30 个会话、32 MB；保存文字和附件信息。": "Чатов: {0} · {1} МБ\nДо 30 чатов и 32 МБ. Хранится текст и сведения о вложениях.",
+    "{0} 个会话 · {1} MB\n最多 30 个会话、32 MB；保存文字和附件信息。":
+        "Чатов: {0} · {1} МБ\nДо 30 чатов и 32 МБ. Хранится текст и сведения о вложениях.",
     "正在读取缓存大小…": "Чтение размера кэша…",
     "正在清除…": "Очистка…",
     "清除缓存": "Очистить кэш",
@@ -9769,15 +11893,21 @@ const messageCatalogs = <String, Map<String, String>>{
     "管理已绑定设备": "Управление сопряжёнными устройствами",
     "{0} 台": "Компьютеров: {0}",
     "本机数据": "На этом телефоне",
-    "无需注册账号：通过电脑上的配对二维码建立信任，可随时在电脑上撤销。草稿和离线缓存保存在这部手机；提醒偏好可在电脑或会话菜单中设置。": "Учётная запись не нужна. Отсканируйте QR-код на компьютере для сопряжения и отзывайте доступ там в любой момент. Черновики и офлайн-кэш остаются на этом телефоне. Уведомления настраиваются на компьютере или в меню чата.",
-    "项目目录不可用，请刷新项目后重试。": "Каталог проекта недоступен. Обновите проект и повторите попытку.",
+    "无需注册账号：通过电脑上的配对二维码建立信任，可随时在电脑上撤销。草稿和离线缓存保存在这部手机；提醒偏好可在电脑或会话菜单中设置。":
+        "Учётная запись не нужна. Отсканируйте QR-код на компьютере для сопряжения и отзывайте доступ там в любой момент. Черновики и офлайн-кэш остаются на этом телефоне. Уведомления настраиваются на компьютере или в меню чата.",
+    "项目目录不可用，请刷新项目后重试。":
+        "Каталог проекта недоступен. Обновите проект и повторите попытку.",
     "选择终端目录": "Выбрать каталог терминала",
-    "连接或项目目录已改变，请重新选择终端目录。": "Изменилось соединение или каталог проекта. Снова выберите каталог терминала.",
-    "启动结果待核实，请使用原操作恢复。": "Результат запуска не подтверждён. Восстановите исходную операцию.",
+    "连接或项目目录已改变，请重新选择终端目录。":
+        "Изменилось соединение или каталог проекта. Снова выберите каталог терминала.",
+    "启动结果待核实，请使用原操作恢复。":
+        "Результат запуска не подтверждён. Восстановите исходную операцию.",
     "关闭这个终端？": "Закрыть этот терминал?",
-    "将在电脑上结束该终端及其中运行的命令。离开页面不会关闭终端。": "Завершает этот терминал и выполняющиеся в нём команды на компьютере. Если просто уйти со страницы, терминал продолжит работу.",
+    "将在电脑上结束该终端及其中运行的命令。离开页面不会关闭终端。":
+        "Завершает этот терминал и выполняющиеся в нём команды на компьютере. Если просто уйти со страницы, терминал продолжит работу.",
     "关闭终端": "Закрыть терминал",
-    "连接已改变，请刷新后重新确认关闭。": "Соединение изменилось. Обновите и снова подтвердите закрытие.",
+    "连接已改变，请刷新后重新确认关闭。":
+        "Соединение изменилось. Обновите и снова подтвердите закрытие.",
     "终端 {0}": "Терминал {0}",
     "新建终端": "Новый терминал",
     "关闭当前终端": "Закрыть текущий терминал",
@@ -9787,13 +11917,16 @@ const messageCatalogs = <String, Map<String, String>>{
     "历史提交": "Коммиты",
     "分支比较": "Сравнить ветки",
     "目录": "Каталог",
-    "连接或目录已改变，请重新选择比较目标。": "Изменилось соединение или каталог. Снова выберите цель сравнения.",
+    "连接或目录已改变，请重新选择比较目标。":
+        "Изменилось соединение или каталог. Снова выберите цель сравнения.",
     "请填写提交说明": "Введите сообщение коммита",
     "暂存全部并提交？": "Добавить всё в индекс и закоммитить?",
-    "{0}当前没有已暂存的文件，将暂存全部 {1} 个变更后提交。": "{0}В индексе нет файлов. Все изменения ({1}) будут добавлены в индекс и закоммичены.",
+    "{0}当前没有已暂存的文件，将暂存全部 {1} 个变更后提交。":
+        "{0}В индексе нет файлов. Все изменения ({1}) будут добавлены в индекс и закоммичены.",
     "目录：{0}。": "Каталог: {0}.",
     "暂存并提交": "Добавить в индекс и закоммитить",
-    "连接或变更已更新，请核对后重新提交。": "Соединение или изменения обновились. Проверьте их перед повторным коммитом.",
+    "连接或变更已更新，请核对后重新提交。":
+        "Соединение или изменения обновились. Проверьте их перед повторным коммитом.",
     "Git 操作结果待核实": "Результат операции Git не подтверждён",
     "变更": "Изменения",
     "更多 Git 操作": "Другие действия Git",
@@ -9807,8 +11940,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "选择父提交": "Выбрать родительский коммит",
     "父提交 {0} · {1}": "Родитель {0} · {1}",
     "父提交 {0} ▾": "Родитель {0} ▾",
-    "只读 · 当前 HEAD 相对所选分支共同祖先的变更": "Только чтение · Текущий HEAD относительно общего предка выбранной ветки",
-    "只读 · 首次提交相对空目录的变更": "Только чтение · Первый коммит относительно пустого каталога",
+    "只读 · 当前 HEAD 相对所选分支共同祖先的变更":
+        "Только чтение · Текущий HEAD относительно общего предка выбранной ветки",
+    "只读 · 首次提交相对空目录的变更":
+        "Только чтение · Первый коммит относительно пустого каталога",
     "只读 · 此提交相对父提交的变更": "Только чтение · Этот коммит относительно родителя",
     "{0} 个文件": "Файлов: {0}",
     "{0} 个文件 · 已暂存 {1}": "Файлов: {0} · в индексе: {1}",
@@ -9820,16 +11955,19 @@ const messageCatalogs = <String, Map<String, String>>{
     "提交": "Закоммитить",
     "提交并推送": "Закоммитить и отправить",
     "二进制文件，无法显示差异": "Двоичный файл. Diff недоступен.",
-    "内容无差异（可能仅权限或换行变化）": "Нет изменений содержимого (возможно, изменились только права или окончания строк)",
+    "内容无差异（可能仅权限或换行变化）":
+        "Нет изменений содержимого (возможно, изменились только права или окончания строк)",
     "… 差异过长，已截断": "… Diff обрезан",
     "切换目录": "Сменить каталог",
     "选择项目目录": "Выбрать каталог проекта",
     "目录 · {0}": "Каталог · {0}",
     "选择项目文件": "Выбрать файл проекта",
     "搜索当前目录内的文件": "Искать файлы в этом каталоге",
-    "搜索结果未全部返回，请输入更具体的文件名或路径。": "Часть результатов пропущена. Введите более точное имя файла или путь.",
+    "搜索结果未全部返回，请输入更具体的文件名或路径。":
+        "Часть результатов пропущена. Введите более точное имя файла или путь.",
     "没有匹配的文件": "Нет подходящих файлов",
-    "此文件无法预览（二进制或过大）": "Предпросмотр недоступен (двоичный или слишком большой файл)",
+    "此文件无法预览（二进制或过大）":
+        "Предпросмотр недоступен (двоичный или слишком большой файл)",
     "{0} · 只读": "{0} · Только чтение",
     "选择历史提交": "Выбрать коммит",
     "选择比较分支": "Выбрать ветку для сравнения",
@@ -9839,10 +11977,13 @@ const messageCatalogs = <String, Map<String, String>>{
     "没有提交记录": "Нет коммитов",
     "没有可比较的分支": "Нет веток для сравнения",
     "预览已关闭": "Предпросмотр закрыт",
-    "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">预览请求失败：{0}</p>": "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">Ошибка запроса предпросмотра: {0}</p>",
+    "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">预览请求失败：{0}</p>":
+        "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">Ошибка запроса предпросмотра: {0}</p>",
     "项目 WebSocket 写入未获确认": "Запись WebSocket проекта не подтверждена",
-    "\u001b[2m（较早的输出已被电脑释放）\u001b[0m\r\n": "\u001b[2m(Более ранний вывод освобождён компьютером)\u001b[0m\r\n",
-    "\r\n\u001b[2m… 部分较早的输出已被电脑丢弃 …\u001b[0m\r\n": "\r\n\u001b[2m… Часть более раннего вывода отброшена компьютером …\u001b[0m\r\n",
+    "\u001b[2m（较早的输出已被电脑释放）\u001b[0m\r\n":
+        "\u001b[2m(Более ранний вывод освобождён компьютером)\u001b[0m\r\n",
+    "\r\n\u001b[2m… 部分较早的输出已被电脑丢弃 …\u001b[0m\r\n":
+        "\r\n\u001b[2m… Часть более раннего вывода отброшена компьютером …\u001b[0m\r\n",
     "启动中": "Запуск",
     "运行中": "Выполняется",
     "停止中": "Остановка",
@@ -9852,21 +11993,26 @@ const messageCatalogs = <String, Map<String, String>>{
     "状态未知": "Состояние неизвестно",
     "核实输入结果": "Проверить результат ввода",
     "继续输入？": "Продолжить ввод?",
-    "请先检查终端当前状态；未确认的输入可能已部分生效。继续会清空当前输入框并丢弃未发送内容，不会重新发送原输入。": "Сначала проверьте терминал. Неподтверждённый ввод мог частично выполниться. При продолжении поле ввода очистится, а неотправленное содержимое будет удалено. Исходный ввод не будет отправлен повторно.",
+    "请先检查终端当前状态；未确认的输入可能已部分生效。继续会清空当前输入框并丢弃未发送内容，不会重新发送原输入。":
+        "Сначала проверьте терминал. Неподтверждённый ввод мог частично выполниться. При продолжении поле ввода очистится, а неотправленное содержимое будет удалено. Исходный ввод не будет отправлен повторно.",
     "已检查，继续": "Проверено, продолжить",
     "继续输入": "Продолжить ввод",
     "输入命令，回车发送": "Введите команду, Enter для отправки",
     "发送": "Отправить",
-    "运行配置已改变，请确认后再启动。": "Конфигурация запуска изменилась. Проверьте её перед запуском.",
+    "运行配置已改变，请确认后再启动。":
+        "Конфигурация запуска изменилась. Проверьте её перед запуском.",
     "继续": "Продолжить",
     "重命名运行配置": "Переименовать конфигурацию запуска",
     "保存": "Сохранить",
     "删除运行配置？": "Удалить конфигурацию запуска?",
-    "移除“{0}”的启动配置，已运行的进程不会停止。": "Удаляет конфигурацию запуска «{0}». Запущенные процессы продолжат работу.",
+    "移除“{0}”的启动配置，已运行的进程不会停止。":
+        "Удаляет конфигурацию запуска «{0}». Запущенные процессы продолжат работу.",
     "重新分析项目？": "Проанализировать проект заново?",
-    "将重新生成运行配置，覆盖未固定的自定义修改，固定项会保留。": "Заново создаёт конфигурации запуска и заменяет незакреплённые пользовательские изменения. Закреплённые конфигурации сохраняются.",
+    "将重新生成运行配置，覆盖未固定的自定义修改，固定项会保留。":
+        "Заново создаёт конфигурации запуска и заменяет незакреплённые пользовательские изменения. Закреплённые конфигурации сохраняются.",
     "选择分析项目的 Agent": "Выбрать Agent для анализа проекта",
-    "没有可用 Agent，请先在电脑上连接。": "Нет доступных Agents. Сначала подключите Agent на компьютере.",
+    "没有可用 Agent，请先在电脑上连接。":
+        "Нет доступных Agents. Сначала подключите Agent на компьютере.",
     "预览端口": "Порт предпросмотра",
     "例如 5173": "например, 5173",
     "打开": "Открыть",
@@ -9874,9 +12020,11 @@ const messageCatalogs = <String, Map<String, String>>{
     "选择运行目录": "Выбрать каталог запуска",
     "分析项目": "Проанализировать проект",
     "刷新运行配置": "Обновить конфигурации запуска",
-    "Agent 正在分析项目，可稍后刷新查看。": "Agent анализирует проект. Обновите позже, чтобы увидеть результат.",
+    "Agent 正在分析项目，可稍后刷新查看。":
+        "Agent анализирует проект. Обновите позже, чтобы увидеть результат.",
     "这个项目尚未关联目录。": "С этим проектом не связан ни один каталог.",
-    "当前目录还没有运行配置，点击「分析项目」生成启动方式。": "В этом каталоге нет конфигураций запуска. Нажмите «Проанализировать проект», чтобы создать её.",
+    "当前目录还没有运行配置，点击「分析项目」生成启动方式。":
+        "В этом каталоге нет конфигураций запуска. Нажмите «Проанализировать проект», чтобы создать её.",
     "选择运行配置": "Выбрать конфигурацию запуска",
     "选择配置": "Выбрать конфигурацию",
     "未运行": "Не запущено",
@@ -9899,56 +12047,79 @@ const messageCatalogs = <String, Map<String, String>>{
     "预览": "Предпросмотр",
     "后退": "Назад",
     "刷新": "Обновить",
-    "电脑离线，重新连接后再试。": "Компьютер не в сети. Переподключитесь и повторите попытку.",
-    "这个项目还没有会话。电脑以会话为单位授权工作区访问，请先在项目中开始一个会话。": "В этом проекте пока нет чатов. Доступ к рабочему пространству выдаётся для каждого чата. Сначала начните чат в этом проекте.",
+    "电脑离线，重新连接后再试。":
+        "Компьютер не в сети. Переподключитесь и повторите попытку.",
+    "这个项目还没有会话。电脑以会话为单位授权工作区访问，请先在项目中开始一个会话。":
+        "В этом проекте пока нет чатов. Доступ к рабочему пространству выдаётся для каждого чата. Сначала начните чат в этом проекте.",
     "全部": "Все",
     "权限": "Разрешения",
     "问题": "Вопросы",
     "待处理": "Ожидают",
     "没有需要你处理的事项": "Ничего не требует вашего внимания",
     "{0} 项需要你处理": "Требуют внимания: {0}",
-    "{0} 台电脑离线，其待处理事项将在重新连接后显示。": "Компьютеров не в сети: {0}. Их ожидающие элементы появятся после переподключения.",
+    "{0} 台电脑离线，其待处理事项将在重新连接后显示。":
+        "Компьютеров не в сети: {0}. Их ожидающие элементы появятся после переподключения.",
     "查看会话": "Открыть чат",
-    "已不再等待。如果电脑收到了这项操作，它仍会生效。": "Ожидание остановлено. Если компьютер получил эту операцию, она всё равно будет выполнена.",
+    "已不再等待。如果电脑收到了这项操作，它仍会生效。":
+        "Ожидание остановлено. Если компьютер получил эту операцию, она всё равно будет выполнена.",
     "会话已经删除。": "Чат удалён.",
     "新名称已经生效。": "Новое имя применено.",
-    "已找到电脑上的原终端，可在终端或运行页面继续查看；未重新运行命令。": "Исходный терминал найден. Продолжите в разделе «Терминал» или «Запуск». Команда не выполнялась повторно.",
-    "分析已经开始，可在运行页面查看进度。": "Анализ запущен. Следите за ходом на странице «Запуск».",
+    "已找到电脑上的原终端，可在终端或运行页面继续查看；未重新运行命令。":
+        "Исходный терминал найден. Продолжите в разделе «Терминал» или «Запуск». Команда не выполнялась повторно.",
+    "分析已经开始，可在运行页面查看进度。":
+        "Анализ запущен. Следите за ходом на странице «Запуск».",
     "原运行配置操作已完成。": "Исходная операция с конфигурацией запуска завершена.",
-    "原运行配置操作已结束：{0}": "Исходная операция с конфигурацией запуска завершилась: {0}",
-    "原启动已取消，未重新运行命令。": "Исходный запуск отменён. Команда не выполнялась повторно.",
+    "原运行配置操作已结束：{0}":
+        "Исходная операция с конфигурацией запуска завершилась: {0}",
+    "原启动已取消，未重新运行命令。":
+        "Исходный запуск отменён. Команда не выполнялась повторно.",
     "修复已提交给主 Agent。": "Исправление отправлено основному Agent.",
     "原修复已放弃。": "Исходное исправление отменено.",
-    "修复尚未提交，可继续原操作。{0}": "Исправление ещё не отправлено. Продолжите исходную операцию. {0}",
-    "已找到原审查，可在对应轮次的「本轮审查」中查看。": "Исходная проверка найдена. Она есть в разделе «Проверки раунда» соответствующего раунда.",
-    "电脑上还查不到这项操作，可能没收到。可以重新发送，不会重复执行。": "У компьютера пока нет записи об этой операции. Возможно, она не дошла. Повторная отправка не выполнит её дважды.",
+    "修复尚未提交，可继续原操作。{0}":
+        "Исправление ещё не отправлено. Продолжите исходную операцию. {0}",
+    "已找到原审查，可在对应轮次的「本轮审查」中查看。":
+        "Исходная проверка найдена. Она есть в разделе «Проверки раунда» соответствующего раунда.",
+    "电脑上还查不到这项操作，可能没收到。可以重新发送，不会重复执行。":
+        "У компьютера пока нет записи об этой операции. Возможно, она не дошла. Повторная отправка не выполнит её дважды.",
     "Fork 正在后台执行。": "Fork выполняется в фоне.",
     "Fork 尚未完成。": "Fork ещё не завершён.",
     "{0}：还没收到电脑确认": "{0}: компьютер ещё не подтвердил",
     "待确认": "Ожидает подтверждения",
-    "{0} · 正在确认「不再等待」。重试仅确认原操作的结束状态，已经执行的内容不会撤销。": "{0} · Подтверждается «Не ждать». Повторная попытка лишь подтверждает итоговое состояние исходной операции и не отменяет уже сделанное.",
-    "{0} · 网络中断时手机没收到电脑的回复。点「重新确认」查看结果；重新发送也不会重复执行。": "{0} · Ответ потерян при обрыве соединения. Нажмите «Проверить снова», чтобы узнать результат. Повторная отправка не выполнит операцию дважды.",
-    "{0} · 网络中断时手机没收到电脑的回复。连上电脑后会自动确认。": "{0} · Ответ потерян при обрыве соединения. Проверка выполнится автоматически после переподключения.",
+    "{0} · 正在确认「不再等待」。重试仅确认原操作的结束状态，已经执行的内容不会撤销。":
+        "{0} · Подтверждается «Не ждать». Повторная попытка лишь подтверждает итоговое состояние исходной операции и не отменяет уже сделанное.",
+    "{0} · 网络中断时手机没收到电脑的回复。点「重新确认」查看结果；重新发送也不会重复执行。":
+        "{0} · Ответ потерян при обрыве соединения. Нажмите «Проверить снова», чтобы узнать результат. Повторная отправка не выполнит операцию дважды.",
+    "{0} · 网络中断时手机没收到电脑的回复。连上电脑后会自动确认。":
+        "{0} · Ответ потерян при обрыве соединения. Проверка выполнится автоматически после переподключения.",
     "新名称：{0}": "Новое имя: {0}",
-    "重新发送会继续你之前确认过的删除。": "Повторная отправка продолжит удаление, которое вы подтвердили ранее.",
+    "重新发送会继续你之前确认过的删除。":
+        "Повторная отправка продолжит удаление, которое вы подтвердили ранее.",
     "原终端": "Исходный терминал",
     "原任务": "Исходная задача",
-    "只会停止当时那次运行，不影响之后新开始的任务。": "Останавливает только тот конкретный запуск. Более поздние задачи не затронуты.",
-    "电脑离线，连上后会自动确认。": "Компьютер не в сети. Проверка выполнится автоматически после переподключения.",
+    "只会停止当时那次运行，不影响之后新开始的任务。":
+        "Останавливает только тот конкретный запуск. Более поздние задачи не затронуты.",
+    "电脑离线，连上后会自动确认。":
+        "Компьютер не в сети. Проверка выполнится автоматически после переподключения.",
     "重新确认": "Проверить снова",
     "继续确认结束": "Продолжить подтверждение завершения",
     "重新发送": "Отправить снова",
     "不再发送": "Не отправлять снова",
     "不再等待这项操作？": "Перестать ждать эту операцию?",
-    "只是不再在手机上等待结果。如果电脑已经收到，改名或删除仍会生效。": "Только прекращает ожидание на этом телефоне. Если компьютер уже получил запрос, переименование или удаление всё равно будет выполнено.",
+    "只是不再在手机上等待结果。如果电脑已经收到，改名或删除仍会生效。":
+        "Только прекращает ожидание на этом телефоне. Если компьютер уже получил запрос, переименование или удаление всё равно будет выполнено.",
     "继续等待": "Продолжить ждать",
     "确定": "Подтвердить",
     "不再等待": "Не ждать",
-    "只是不再在手机上等待结果。电脑上已经完成的操作会保留。": "Только прекращает ожидание на этом телефоне. Завершённые на компьютере операции сохраняются.",
-    "只是不再在手机上等待结果。如果电脑已经收到，任务仍会停下。": "Только прекращает ожидание на этом телефоне. Если компьютер уже получил запрос, задача всё равно остановится.",
-    "只是不再在手机上等待结果。如果电脑已经收到，终端仍会关闭。终端是否还在运行，请在终端页查看。": "Только прекращает ожидание на этом телефоне. Если компьютер уже получил запрос, терминал всё равно закроется. Работает ли он, можно проверить на странице «Терминал».",
-    "如果终端还没启动，就不会再启动；已经启动的会保留，里面的命令照常运行。": "Не запущенный терминал не запустится. Уже открытый терминал и его команды продолжат работу.",
-    "如果还没执行，就不会再提交或推送；已经完成的不会撤销。建议先在「变更」里看一下结果。": "Если операция ещё не началась, коммита и push не будет. Завершённые операции не отменяются. Сначала проверьте страницу «Изменения».",
+    "只是不再在手机上等待结果。电脑上已经完成的操作会保留。":
+        "Только прекращает ожидание на этом телефоне. Завершённые на компьютере операции сохраняются.",
+    "只是不再在手机上等待结果。如果电脑已经收到，任务仍会停下。":
+        "Только прекращает ожидание на этом телефоне. Если компьютер уже получил запрос, задача всё равно остановится.",
+    "只是不再在手机上等待结果。如果电脑已经收到，终端仍会关闭。终端是否还在运行，请在终端页查看。":
+        "Только прекращает ожидание на этом телефоне. Если компьютер уже получил запрос, терминал всё равно закроется. Работает ли он, можно проверить на странице «Терминал».",
+    "如果终端还没启动，就不会再启动；已经启动的会保留，里面的命令照常运行。":
+        "Не запущенный терминал не запустится. Уже открытый терминал и его команды продолжат работу.",
+    "如果还没执行，就不会再提交或推送；已经完成的不会撤销。建议先在「变更」里看一下结果。":
+        "Если операция ещё не началась, коммита и push не будет. Завершённые операции не отменяются. Сначала проверьте страницу «Изменения».",
     "发送消息": "Отправить сообщение",
     "Fork 会话": "Сделать fork чата",
     "置顶或归档": "Закрепить или архивировать",
@@ -9973,16 +12144,21 @@ const messageCatalogs = <String, Map<String, String>>{
     "Agent 有一个问题": "У Agent есть вопрос",
     "会话「{0}」需要你的回答。": "Чат «{0}» ждёт вашего ответа.",
     "会话「{0}」请求以下操作。": "Чат «{0}» запрашивает следующее действие.",
-    "这个问题的格式暂不支持在手机上回答，请在电脑上回答，回答后这里会自动更新。": "На такой вопрос пока нельзя ответить с телефона. Ответьте на компьютере — эта страница обновится автоматически.",
+    "这个问题的格式暂不支持在手机上回答，请在电脑上回答，回答后这里会自动更新。":
+        "На такой вопрос пока нельзя ответить с телефона. Ответьте на компьютере — эта страница обновится автоматически.",
     "电脑离线，重新连接后再处理。": "Компьютер не в сети. Переподключитесь, чтобы ответить.",
-    "这台电脑有一项操作结果待核实，请先核实。": "Операцию на этом компьютере нужно проверить. Сначала проверьте её.",
+    "这台电脑有一项操作结果待核实，请先核实。":
+        "Операцию на этом компьютере нужно проверить. Сначала проверьте её.",
     "其他授权范围": "Другие области разрешений",
     "工作区": "Рабочее пространство",
     "还没有连接电脑": "Компьютер ещё не подключён",
-    "连接电脑后，在这里查看项目及其会话。": "Подключите компьютер, чтобы видеть здесь его проекты и чаты.",
+    "连接电脑后，在这里查看项目及其会话。":
+        "Подключите компьютер, чтобы видеть здесь его проекты и чаты.",
     "去连接电脑": "Подключить компьютер",
-    "{0} 尚未同步项目；电脑在线时会自动同步。": "{0} ещё не синхронизировал проекты. Они синхронизируются автоматически, когда компьютер будет в сети.",
-    "{0} 上还没有项目，点右上角「添加项目」选择电脑上的已有目录。": "На {0} пока нет проектов. Нажмите «Добавить проект» в правом верхнем углу, чтобы выбрать существующий каталог на компьютере.",
+    "{0} 尚未同步项目；电脑在线时会自动同步。":
+        "{0} ещё не синхронизировал проекты. Они синхронизируются автоматически, когда компьютер будет в сети.",
+    "{0} 上还没有项目，点右上角「添加项目」选择电脑上的已有目录。":
+        "На {0} пока нет проектов. Нажмите «Добавить проект» в правом верхнем углу, чтобы выбрать существующий каталог на компьютере.",
     "文件": "Файлы",
     "浏览项目文件": "Просмотр файлов проекта",
     "查看代码变更": "Просмотр изменений кода",
@@ -9996,8 +12172,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "分离 HEAD": "Отсоединённый HEAD",
     "工作区干净": "Рабочее дерево чистое",
     "{0} 个文件待提交": "Файлов к коммиту: {0}",
-    "项目已添加，列表尚未同步。请重新连接后刷新结果。": "Проект добавлен. Список ещё не синхронизирован. Переподключитесь и обновите.",
-    "请先绑定电脑，再选择电脑上的项目目录。": "Сначала выполните сопряжение с компьютером, затем выберите на нём каталог проекта.",
+    "项目已添加，列表尚未同步。请重新连接后刷新结果。":
+        "Проект добавлен. Список ещё не синхронизирован. Переподключитесь и обновите.",
+    "请先绑定电脑，再选择电脑上的项目目录。":
+        "Сначала выполните сопряжение с компьютером, затем выберите на нём каталог проекта.",
     "选择添加项目的电脑": "Выбрать компьютер для проекта",
     " · 离线": " · Не в сети",
     "选择这台电脑上已有的目录": "Выберите существующий каталог на этом компьютере",
@@ -10008,15 +12186,20 @@ const messageCatalogs = <String, Map<String, String>>{
     "上一级": "На уровень выше",
     "不显示隐藏": "Скрыть скрытые файлы",
     "显示隐藏": "Показать скрытые файлы",
-    "电脑离线，请重新连接后浏览目录。": "Компьютер не в сети. Переподключитесь, чтобы просматривать каталоги.",
-    "目录路径已修改，请点箭头或回车确认后再添加。": "Путь изменён. Подтвердите стрелкой или клавишей Enter перед добавлением.",
+    "电脑离线，请重新连接后浏览目录。":
+        "Компьютер не в сети. Переподключитесь, чтобы просматривать каталоги.",
+    "目录路径已修改，请点箭头或回车确认后再添加。":
+        "Путь изменён. Подтвердите стрелкой или клавишей Enter перед добавлением.",
     "重试读取目录": "Повторить загрузку каталога",
-    "当前目录没有子目录，可直接添加此目录。": "Нет подкаталогов. Можно сразу добавить этот каталог.",
+    "当前目录没有子目录，可直接添加此目录。":
+        "Нет подкаталогов. Можно сразу добавить этот каталог.",
     "加载中…": "Загрузка…",
     "加载更多目录": "Загрузить ещё каталоги",
     "项目名称（可选）": "Название проекта (необязательно)",
-    "留空使用目录名；已有项目会直接复用": "Оставьте пустым, чтобы использовать имя каталога. Существующие проекты будут использованы повторно.",
-    "该目录已添加为「{0}」，将打开已有项目。": "Этот каталог уже добавлен как «{0}». Будет открыт существующий проект.",
+    "留空使用目录名；已有项目会直接复用":
+        "Оставьте пустым, чтобы использовать имя каталога. Существующие проекты будут использованы повторно.",
+    "该目录已添加为「{0}」，将打开已有项目。":
+        "Этот каталог уже добавлен как «{0}». Будет открыт существующий проект.",
     "刷新添加结果": "Обновить результат",
     "正在添加…": "Добавление…",
     "打开已有项目": "Открыть существующий проект",
@@ -10026,8 +12209,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "{0} 个会话 · 按当前电脑和项目范围": "Чатов: {0} · Текущие компьютер и проект",
     "搜索已保存的消息正文": "Искать в сохранённых сообщениях",
     "搜索历史正文": "Поиск по истории чатов",
-    "在电脑上检索已保存的对话正文，不包含思考过程或附件内容。": "Поиск по сохранённому тексту чатов на компьютере. Ход рассуждений и содержимое вложений не учитываются.",
-    "{0} 离线，未搜索其中的会话；连接后重新搜索。": "{0} не в сети и не был включён в поиск. Переподключитесь и повторите поиск.",
+    "在电脑上检索已保存的对话正文，不包含思考过程或附件内容。":
+        "Поиск по сохранённому тексту чатов на компьютере. Ход рассуждений и содержимое вложений не учитываются.",
+    "{0} 离线，未搜索其中的会话；连接后重新搜索。":
+        "{0} не в сети и не был включён в поиск. Переподключитесь и повторите поиск.",
     "输入关键词开始搜索": "Введите ключевое слово для поиска",
     "没有找到匹配的历史记录": "Ничего не найдено в истории",
     "你": "Вы",
@@ -10036,12 +12221,16 @@ const messageCatalogs = <String, Map<String, String>>{
     "加载更多记录": "Загрузить ещё результаты",
     "重试此会话": "Повторить этот чат",
     "继续搜索更早的 {0} 个会话": "Искать в более ранних чатах ({0})",
-    "请等待当前任务结束后再 Fork。": "Дождитесь завершения текущей задачи, прежде чем делать fork.",
-    "从本轮结束时的历史创建独立会话。": "Создаёт независимый чат из истории на конец этого раунда.",
+    "请等待当前任务结束后再 Fork。":
+        "Дождитесь завершения текущей задачи, прежде чем делать fork.",
+    "从本轮结束时的历史创建独立会话。":
+        "Создаёт независимый чат из истории на конец этого раунда.",
     "当前工作区": "Текущее рабочее пространство",
-    "共享当前项目文件，仅复制对话历史。": "Использует текущие файлы проекта и копирует только историю чата.",
+    "共享当前项目文件，仅复制对话历史。":
+        "Использует текущие файлы проекта и копирует только историю чата.",
     "新 Worktree": "Новый worktree",
-    "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照；非 Git 项目只继承对话。": "Создаёт отдельное рабочее пространство на компьютере и восстанавливает снимок файлов этого раунда. У старых раундов снимка может не быть. В проектах без Git переносится только разговор.",
+    "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照；非 Git 项目只继承对话。":
+        "Создаёт отдельное рабочее пространство на компьютере и восстанавливает снимок файлов этого раунда. У старых раундов снимка может не быть. В проектах без Git переносится только разговор.",
     "正在创建…": "Создание…",
     "创建 Fork": "Создать fork",
     "取消置顶": "Открепить",
@@ -10051,15 +12240,18 @@ const messageCatalogs = <String, Map<String, String>>{
     "归档会话": "Архивировать чат",
     "会话操作": "Действия с чатом",
     "会话将从电脑同步": "Чаты синхронизируются с вашего компьютера",
-    "连接自己的电脑后，在这里查看和续接各项目的会话。网络中断时，电脑上的任务会继续执行。": "Подключите компьютер, чтобы просматривать и продолжать здесь чаты проектов. Задачи продолжают выполняться на компьютере, даже если пропадёт сеть.",
+    "连接自己的电脑后，在这里查看和续接各项目的会话。网络中断时，电脑上的任务会继续执行。":
+        "Подключите компьютер, чтобы просматривать и продолжать здесь чаты проектов. Задачи продолжают выполняться на компьютере, даже если пропадёт сеть.",
     "搜索会话": "Поиск чатов",
     "{0} 项等待处理": "Ожидают: {0}",
     "{0} 连接中…": "{0} подключается…",
     "{0} 离线": "{0} не в сети",
-    "{0} 离线 · 显示 {1} 同步的内容": "{0} не в сети · Показаны данные, синхронизированные {1}",
+    "{0} 离线 · 显示 {1} 同步的内容":
+        "{0} не в сети · Показаны данные, синхронизированные {1}",
     "没有匹配的会话": "Нет подходящих чатов",
     "没有未归档的会话": "Нет неархивированных чатов",
-    "还没有会话，点右上角 + 开始新任务": "Чатов пока нет. Нажмите + в правом верхнем углу, чтобы начать задачу.",
+    "还没有会话，点右上角 + 开始新任务":
+        "Чатов пока нет. Нажмите + в правом верхнем углу, чтобы начать задачу.",
     "正在从电脑同步会话…": "Синхронизация чатов с компьютера…",
     "置顶": "Закреплённые",
     "已归档 ({0})": "Архив ({0})",
@@ -10068,58 +12260,79 @@ const messageCatalogs = <String, Map<String, String>>{
     "已归档": "В архиве",
     "正在核实原配对…": "Проверка исходного сопряжения…",
     "移除本机配对记录？": "Удалить локальную запись сопряжения?",
-    "之后需要重新扫码。电脑上可能已允许这台手机；如需撤销授权，请在电脑的「连接手机」中操作。": "Нужно будет снова отсканировать код. Возможно, компьютер уже разрешил доступ этому телефону. При необходимости отзовите доступ в разделе «Подключить телефон» на компьютере.",
+    "之后需要重新扫码。电脑上可能已允许这台手机；如需撤销授权，请在电脑的「连接手机」中操作。":
+        "Нужно будет снова отсканировать код. Возможно, компьютер уже разрешил доступ этому телефону. При необходимости отзовите доступ в разделе «Подключить телефон» на компьютере.",
     "保留记录": "Оставить запись",
     "移除本机记录": "Удалить локальную запись",
     "正在验证电脑身份并建立配对…": "Проверка подлинности компьютера и сопряжение…",
     "加密组件尚未准备好。": "Шифрование ещё не готово.",
-    "在电脑端打开「连接手机」，扫描配对二维码。": "Откройте «Подключить телефон» на компьютере и отсканируйте QR-код для сопряжения.",
-    "配对后可操作这台电脑的 Agent、项目、Git 和终端，并查看、控制电脑屏幕。你可以随时在电脑上撤销授权。": "После сопряжения вы сможете работать с Agents, проектами, Git и терминалом компьютера, а также видеть его экран и управлять им. Доступ можно отозвать на компьютере в любой момент.",
+    "在电脑端打开「连接手机」，扫描配对二维码。":
+        "Откройте «Подключить телефон» на компьютере и отсканируйте QR-код для сопряжения.",
+    "配对后可操作这台电脑的 Agent、项目、Git 和终端，并查看、控制电脑屏幕。你可以随时在电脑上撤销授权。":
+        "После сопряжения вы сможете работать с Agents, проектами, Git и терминалом компьютера, а также видеть его экран и управлять им. Доступ можно отозвать на компьютере в любой момент.",
     "配对结果待核实": "Результат сопряжения не подтверждён",
-    "保留了原配对信息，可以继续核实电脑是否已允许连接。": "Исходные данные сопряжения сохранены. Продолжайте проверять, разрешил ли компьютер подключение.",
-    "恢复期限已过，请在电脑核实授权后重新扫码。": "Срок восстановления истёк. Проверьте доступ на компьютере и отсканируйте код снова.",
+    "保留了原配对信息，可以继续核实电脑是否已允许连接。":
+        "Исходные данные сопряжения сохранены. Продолжайте проверять, разрешил ли компьютер подключение.",
+    "恢复期限已过，请在电脑核实授权后重新扫码。":
+        "Срок восстановления истёк. Проверьте доступ на компьютере и отсканируйте код снова.",
     "核实原配对": "Проверить исходное сопряжение",
-    "无法使用相机，请检查相机权限，或在下方粘贴配对链接。": "Камера недоступна. Проверьте разрешение на использование камеры или вставьте ссылку для сопряжения ниже.",
+    "无法使用相机，请检查相机权限，或在下方粘贴配对链接。":
+        "Камера недоступна. Проверьте разрешение на использование камеры или вставьте ссылку для сопряжения ниже.",
     "扫描二维码": "Сканировать QR-код",
     "或粘贴配对链接": "Или вставьте ссылку для сопряжения",
     "粘贴从电脑获取的配对链接": "Вставьте ссылку для сопряжения, полученную на компьютере",
-    "二维码使用了本机地址，手机无法访问。请在电脑端使用手机可访问的服务地址并重新生成二维码。": "В этом QR-коде указан локальный адрес, недоступный с телефона. Создайте новый код с адресом сервиса, доступным с телефона.",
-    "无法连接接入服务，请确认手机与电脑的网络、服务地址及端口。局域网调试时需连接同一 Wi-Fi。": "Не удалось подключиться к сервису подключения. Проверьте сети, адрес и порт сервиса. Для локальной разработки подключите оба устройства к одной сети Wi-Fi.",
-    "无法验证服务证书，请检查接入服务配置。": "Не удалось проверить сертификат сервиса. Проверьте настройки сервиса подключения.",
-    "配对未完成，请检查电脑与接入服务后重试。": "Сопряжение не завершено. Проверьте компьютер и сервис подключения и повторите попытку.",
-    "DogCodes 手机端连接你自己的电脑：查看会话、继续交给 Agent、处理权限请求。无需注册账号。": "DogCodes подключается к вашему собственному компьютеру. Просматривайте чаты, давайте задачи Agents и отвечайте на запросы разрешений. Учётная запись не нужна.",
+    "二维码使用了本机地址，手机无法访问。请在电脑端使用手机可访问的服务地址并重新生成二维码。":
+        "В этом QR-коде указан локальный адрес, недоступный с телефона. Создайте новый код с адресом сервиса, доступным с телефона.",
+    "无法连接接入服务，请确认手机与电脑的网络、服务地址及端口。局域网调试时需连接同一 Wi-Fi。":
+        "Не удалось подключиться к сервису подключения. Проверьте сети, адрес и порт сервиса. Для локальной разработки подключите оба устройства к одной сети Wi-Fi.",
+    "无法验证服务证书，请检查接入服务配置。":
+        "Не удалось проверить сертификат сервиса. Проверьте настройки сервиса подключения.",
+    "配对未完成，请检查电脑与接入服务后重试。":
+        "Сопряжение не завершено. Проверьте компьютер и сервис подключения и повторите попытку.",
+    "DogCodes 手机端连接你自己的电脑：查看会话、继续交给 Agent、处理权限请求。无需注册账号。":
+        "DogCodes подключается к вашему собственному компьютеру. Просматривайте чаты, давайте задачи Agents и отвечайте на запросы разрешений. Учётная запись не нужна.",
     "在电脑上打开 DogCodes": "Откройте DogCodes на компьютере",
     "点击「连接手机」，屏幕上会显示二维码": "Нажмите «Подключить телефон», чтобы показать QR-код",
-    "用这部手机扫码，或粘贴配对链接": "Отсканируйте его этим телефоном или вставьте ссылку для сопряжения",
+    "用这部手机扫码，或粘贴配对链接":
+        "Отсканируйте его этим телефоном или вставьте ссылку для сопряжения",
     "扫码连接电脑": "Сканировать для подключения компьютера",
     "粘贴配对链接": "Вставить ссылку для сопряжения",
-    "连接经过端到端加密，手机只能访问你在电脑上授权的内容。": "Сквозное шифрование. Телефон получает доступ только к тому, что вы разрешили на компьютере.",
+    "连接经过端到端加密，手机只能访问你在电脑上授权的内容。":
+        "Сквозное шифрование. Телефон получает доступ только к тому, что вы разрешили на компьютере.",
     "正在连接{0}": "Подключение к {0}",
     "暂时连接不上{0}": "Не удаётся подключиться к {0}",
-    "连接时间比平时长，仍在尝试。": "Это занимает больше времени, чем обычно. Попытки продолжаются.",
-    "电脑上的任务不受影响，连接恢复后可继续操作。": "Задачи на компьютере не затронуты. Продолжите, когда соединение восстановится.",
+    "连接时间比平时长，仍在尝试。":
+        "Это занимает больше времени, чем обычно. Попытки продолжаются.",
+    "电脑上的任务不受影响，连接恢复后可继续操作。":
+        "Задачи на компьютере не затронуты. Продолжите, когда соединение восстановится.",
     "请检查": "Проверьте следующее",
     "电脑已开机，没有进入睡眠": "Компьютер включён и не в спящем режиме",
     "电脑上的 DogCodes 正在运行": "DogCodes запущен на компьютере",
-    "手机网络可用；同一局域网下连接更快": "Телефон подключён к сети. В одной локальной сети подключение быстрее.",
+    "手机网络可用；同一局域网下连接更快":
+        "Телефон подключён к сети. В одной локальной сети подключение быстрее.",
     "管理电脑": "Управление компьютерами",
     "连接其他电脑": "Подключить другой компьютер",
     "查看离线记录": "Офлайн-история",
     "查看离线记录（{0} 同步）": "Офлайн-история (синхронизировано {0})",
     "附件": "Вложение",
-    "电脑离线。已缓存附件信息，原文需连接电脑后查看。": "Компьютер не в сети. Сведения о вложении сохранены в кэше. Переподключитесь, чтобы открыть оригинал.",
-    "电脑端暂不支持附件预览。": "Приложение для компьютера пока не поддерживает предпросмотр вложений.",
+    "电脑离线。已缓存附件信息，原文需连接电脑后查看。":
+        "Компьютер не в сети. Сведения о вложении сохранены в кэше. Переподключитесь, чтобы открыть оригинал.",
+    "电脑端暂不支持附件预览。":
+        "Приложение для компьютера пока не поддерживает предпросмотр вложений.",
     "附件读取位置未确认。": "Позиция чтения вложения не подтверждена.",
     "附件过大，请在电脑上查看。": "Вложение слишком большое. Откройте его на компьютере.",
-    "附件内容校验失败，未展示变化后的文件。": "Проверка целостности вложения не пройдена. Изменённый файл не показан.",
+    "附件内容校验失败，未展示变化后的文件。":
+        "Проверка целостности вложения не пройдена. Изменённый файл не показан.",
     "任务附件 · 只读": "Вложение задачи · Только чтение",
     "重试读取": "Повторить загрузку",
-    "图片无法解码，请在电脑上查看。": "Не удалось декодировать изображение. Откройте его на компьютере.",
+    "图片无法解码，请在电脑上查看。":
+        "Не удалось декодировать изображение. Откройте его на компьютере.",
     "该附件格式请在电脑上查看。": "Откройте вложение этого формата на компьютере.",
     "默认模型": "Модель по умолчанию",
     "默认": "По умолчанию",
     "选择 Agent": "Выбрать Agent",
-    "这台电脑上没有已就绪并启用的 Agent。安装或登录需在电脑上完成。": "На этом компьютере нет готовых и включённых Agents. Установите его или войдите в систему на компьютере.",
+    "这台电脑上没有已就绪并启用的 Agent。安装或登录需在电脑上完成。":
+        "На этом компьютере нет готовых и включённых Agents. Установите его или войдите в систему на компьютере.",
     "模型": "Модель",
     "选择模型": "Выбрать модель",
     "完成": "Готово",
@@ -10130,8 +12343,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "思考强度": "Уровень рассуждения",
     "默认 · {0}": "По умолчанию · {0}",
     "恢复默认": "Сбросить",
-    "电脑离线，连接后才能 Fork": "Компьютер не в сети. Переподключитесь, чтобы сделать fork.",
-    "会话正在运行，结束后才能从本轮 Fork": "Чат выполняется. Дождитесь завершения, чтобы сделать fork этого раунда.",
+    "电脑离线，连接后才能 Fork":
+        "Компьютер не в сети. Переподключитесь, чтобы сделать fork.",
+    "会话正在运行，结束后才能从本轮 Fork":
+        "Чат выполняется. Дождитесь завершения, чтобы сделать fork этого раунда.",
     "复制本轮回复": "Скопировать ответ раунда",
     "已复制本轮回复": "Ответ раунда скопирован",
     "复制失败，请重试": "Не удалось скопировать. Повторите попытку.",
@@ -10139,9 +12354,11 @@ const messageCatalogs = <String, Map<String, String>>{
     "从本轮 Fork": "Fork от этого раунда",
     "电脑未受理这项任务，内容已保留。": "Компьютер не принял эту задачу. Ваш текст сохранён.",
     "没有已绑定的电脑": "Нет сопряжённых компьютеров",
-    "这台电脑还没有项目，点右上角「添加项目」选择电脑上的已有目录。": "На этом компьютере пока нет проектов. Нажмите «Добавить проект» в правом верхнем углу, чтобы выбрать существующий каталог.",
+    "这台电脑还没有项目，点右上角「添加项目」选择电脑上的已有目录。":
+        "На этом компьютере пока нет проектов. Нажмите «Добавить проект» в правом верхнем углу, чтобы выбрать существующий каталог.",
     "你想完成什么？": "Что вы хотите сделать?",
-    "电脑离线，任务和附件会保留为本机草稿。重连后请点击发送。": "Компьютер не в сети. Задачи и вложения сохраняются как локальные черновики. После переподключения нажмите «Отправить».",
+    "电脑离线，任务和附件会保留为本机草稿。重连后请点击发送。":
+        "Компьютер не в сети. Задачи и вложения сохраняются как локальные черновики. После переподключения нажмите «Отправить».",
     "描述你的任务…": "Опишите задачу…",
     "没有已就绪的 Agent": "Нет готовых Agents",
     "开始任务": "Начать задачу",
@@ -10155,9 +12372,11 @@ const messageCatalogs = <String, Map<String, String>>{
     "无法核实修复状态：{0}": "Не удалось проверить состояние исправления: {0}",
     "审查代码证据": "Фрагменты кода из проверки",
     "{0} · {1}–{2} 行": "{0} · Строки {1}–{2}",
-    "这是审查时保存的版本，当前文件可能已变化。": "Это версия, сохранённая во время проверки. Текущий файл мог измениться.",
+    "这是审查时保存的版本，当前文件可能已变化。":
+        "Это версия, сохранённая во время проверки. Текущий файл мог измениться.",
     "读取审查代码失败：{0}": "Не удалось загрузить код проверки: {0}",
-    "审查连接中断，本次审查未完成。请检查网络后重新检查。": "Соединение проверки потеряно. Проверка не завершена. Проверьте сеть и запустите её снова.",
+    "审查连接中断，本次审查未完成。请检查网络后重新检查。":
+        "Соединение проверки потеряно. Проверка не завершена. Проверьте сеть и запустите её снова.",
     "错误详情": "Подробности ошибки",
     "审查连接中断，本次审查未完成。": "Соединение проверки потеряно. Проверка не завершена.",
     "文件覆盖情况": "Охват файлов",
@@ -10166,7 +12385,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "未报告检查": "Не отмечено как проверенное",
     "原文不可用": "Исходный текст недоступен",
     "本次审查未报告问题。": "В этой проверке проблем не найдено.",
-    "审查尚未形成完整问题报告，不能据此判断是否存在问题。": "Проверка не сформировала полный отчёт. По ней нельзя судить, есть ли проблемы.",
+    "审查尚未形成完整问题报告，不能据此判断是否存在问题。":
+        "Проверка не сформировала полный отчёт. По ней нельзя судить, есть ли проблемы.",
     "潜在{0}风险": "Возможный риск: {0}",
     "{0}{1} · {2}{3}–{4} 行": "{0}{1} · {2}Строки {3}–{4}",
     "改动前 · ": "До изменения ·",
@@ -10177,8 +12397,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "全选问题": "Выбрать все проблемы",
     "已选 {0} 项": "Выбрано: {0}",
     "开始修复": "Начать исправление",
-    "主对话正在回复，结束后可提交修复。": "Основной чат отвечает. Отправьте исправления после завершения.",
-    "修复已提交给主 Agent，携带所选问题及原审查上下文。": "Исправление отправлено основному Agent вместе с выбранными проблемами и контекстом исходной проверки.",
+    "主对话正在回复，结束后可提交修复。":
+        "Основной чат отвечает. Отправьте исправления после завершения.",
+    "修复已提交给主 Agent，携带所选问题及原审查上下文。":
+        "Исправление отправлено основному Agent вместе с выбранными проблемами и контекстом исходной проверки.",
     "有一项修复尚未提交。{0}": "Одно исправление ещё не отправлено. {0}",
     "继续原修复": "Продолжить исходное исправление",
     "放弃这次修复": "Отменить это исправление",
@@ -10206,13 +12428,18 @@ const messageCatalogs = <String, Map<String, String>>{
     "失败": "Ошибка",
     "已取消": "Отменено",
     "连接中断": "Соединение потеряно",
-    "电脑离线，请重新连接后查看审查。": "Компьютер не в сети. Переподключитесь, чтобы открыть проверку.",
-    "电脑端暂不支持本轮审查，请更新电脑端后重试。": "Обновите приложение для компьютера, чтобы пользоваться проверками раунда.",
+    "电脑离线，请重新连接后查看审查。":
+        "Компьютер не в сети. Переподключитесь, чтобы открыть проверку.",
+    "电脑端暂不支持本轮审查，请更新电脑端后重试。":
+        "Обновите приложение для компьютера, чтобы пользоваться проверками раунда.",
     "无法读取可用的审查 Agent。": "Не удалось загрузить доступных для проверки Agents.",
-    "已发起复审，可在修复轮次底部查看。": "Новая проверка запущена. Она появится под раундом исправления.",
+    "已发起复审，可在修复轮次底部查看。":
+        "Новая проверка запущена. Она появится под раундом исправления.",
     "刷新审查": "Обновить проверки",
-    "电脑离线，审查会继续在电脑上运行。": "Компьютер не в сети. Проверка продолжается на компьютере.",
-    "暂无可用的审查 Agent，请在电脑上连接或重新检测 Agent。": "Нет доступных для проверки Agents. Подключите или заново найдите Agents на компьютере.",
+    "电脑离线，审查会继续在电脑上运行。":
+        "Компьютер не в сети. Проверка продолжается на компьютере.",
+    "暂无可用的审查 Agent，请在电脑上连接或重新检测 Agent。":
+        "Нет доступных для проверки Agents. Подключите или заново найдите Agents на компьютере.",
     "审查使用的 Agent": "Agent для проверки",
     "本轮尚未发起审查。": "Для этого раунда проверка ещё не запускалась.",
     "历史审查": "Предыдущие проверки",
@@ -10240,20 +12467,24 @@ const messageCatalogs = <String, Map<String, String>>{
     "本轮变更加载失败：{0}": "Не удалось загрузить изменения раунда: {0}",
     "本轮变更加载失败": "Не удалось загрузить изменения раунда",
     "{0} 个文件已更改": "Изменено файлов: {0}",
-    "连接中断后的恢复快照 · 仅反映检查时的文件变化，外部工具可能仍在写入": "Снимок восстановления после обрыва соединения. Отражает изменения на момент проверки; внешние инструменты могут ещё вести запись.",
+    "连接中断后的恢复快照 · 仅反映检查时的文件变化，外部工具可能仍在写入":
+        "Снимок восстановления после обрыва соединения. Отражает изменения на момент проверки; внешние инструменты могут ещё вести запись.",
     "二进制": "Двоичный",
     "本轮保存的历史 Diff": "Diff, сохранённый для этого раунда",
     "这一轮未保存该文件的内容": "Содержимое этого файла не сохранено для этого раунда",
     "没有可用于生成提交说明的 Agent": "Нет Agent для создания сообщения коммита",
     "已提交": "Закоммичено",
-    "提交结果待核实，请到待处理页面核实原操作": "Результат коммита не подтверждён. Проверьте исходную операцию в разделе «Ожидают».",
+    "提交结果待核实，请到待处理页面核实原操作":
+        "Результат коммита не подтверждён. Проверьте исходную операцию в разделе «Ожидают».",
     "正在暂存本轮文件…": "Добавление файлов раунда в индекс…",
     "正在生成提交说明…": "Создание сообщения коммита…",
     "正在提交…": "Выполняется коммит…",
     "提交本轮修改": "Закоммитить изменения раунда",
-    "本轮修改已没有未提交的内容（可能已提交或已撤销）。": "Для этого раунда не осталось незакоммиченных изменений (возможно, они уже закоммичены или отменены).",
+    "本轮修改已没有未提交的内容（可能已提交或已撤销）。":
+        "Для этого раунда не осталось незакоммиченных изменений (возможно, они уже закоммичены или отменены).",
     "将提交 {0} 个文件{1}。": "Будет закоммичено файлов: {0}{1}.",
-    "，其中 {0} 个是此前已暂存的其他更改": ", включая ранее добавленные в индекс изменения из другой работы: {0}",
+    "，其中 {0} 个是此前已暂存的其他更改":
+        ", включая ранее добавленные в индекс изменения из другой работы: {0}",
     "重新生成": "Сгенерировать снова",
     "编写提交说明的 Agent": "Agent для сообщения коммита",
     "子智能体": "Субагент",
@@ -10275,7 +12506,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "电脑项目文件": "Файлы проекта на компьютере",
     "需先在此项目创建一个会话": "Сначала создайте чат в этом проекте",
     "最多 16 个附件，总大小不超过 25 MB。": "До 16 вложений, всего до 25 МБ.",
-    "草稿目标已变化，请回到原项目重新选择附件。": "Назначение черновика изменилось. Вернитесь в исходный проект и выберите вложения снова.",
+    "草稿目标已变化，请回到原项目重新选择附件。":
+        "Назначение черновика изменилось. Вернитесь в исходный проект и выберите вложения снова.",
     "无法添加附件：{0}": "Не удалось добавить вложение: {0}",
     "未能移除附件：{0}": "Не удалось удалить вложение: {0}",
     "添加附件": "Добавить вложение",
@@ -10303,29 +12535,39 @@ const messageCatalogs = <String, Map<String, String>>{
     "委派任务": "Делегированная задача",
     "暂无子任务结论": "Результата подзадачи пока нет",
     "执行过程请在电脑上查看": "Ход выполнения можно посмотреть на компьютере",
-    "共 {0} 步，执行过程请在电脑上查看": "Шагов: {0}. Ход выполнения можно посмотреть на компьютере.",
-    "改动内容见本轮文件变更，或在电脑上查看": "Изменения смотрите в файлах этого раунда или на компьютере",
+    "共 {0} 步，执行过程请在电脑上查看":
+        "Шагов: {0}. Ход выполнения можно посмотреть на компьютере.",
+    "改动内容见本轮文件变更，或在电脑上查看":
+        "Изменения смотрите в файлах этого раунда или на компьютере",
     "完整输出请在电脑上查看": "Полный вывод можно посмотреть на компьютере",
     "{0}\n… 内容过长，已截断": "{0}\n… Текст обрезан",
     "分叉": "Fork",
     "分叉上下文暂不可显示": "Контекст fork недоступен",
-    "请先恢复原草稿，未覆盖本机记录。": "Сначала восстановите исходный черновик. Локальные записи не перезаписаны.",
+    "请先恢复原草稿，未覆盖本机记录。":
+        "Сначала восстановите исходный черновик. Локальные записи не перезаписаны.",
     "草稿未能保存：{0}": "Не удалось сохранить черновик: {0}",
     "无法恢复草稿：{0}": "Не удалось восстановить черновик: {0}",
-    "暂时无法读取模型，可保留草稿后重试：{0}": "Не удалось загрузить модели. Сохраните черновик и повторите попытку: {0}",
+    "暂时无法读取模型，可保留草稿后重试：{0}":
+        "Не удалось загрузить модели. Сохраните черновик и повторите попытку: {0}",
     "附件仍在上传。": "Вложения ещё загружаются.",
-    "电脑离线，附件及任务已保留为草稿。": "Компьютер не в сети. Вложения и задача сохранены как черновик.",
+    "电脑离线，附件及任务已保留为草稿。":
+        "Компьютер не в сети. Вложения и задача сохранены как черновик.",
     "离线会话未能保存：{0}": "Не удалось сохранить офлайн-чат: {0}",
     "没有找到要打开的这一轮，它可能已被删除。": "Этот раунд не найден. Возможно, он был удалён.",
-    "电脑离线，连接后再查看完整内容。": "Компьютер не в сети. Переподключитесь, чтобы увидеть полный текст.",
+    "电脑离线，连接后再查看完整内容。":
+        "Компьютер не в сети. Переподключитесь, чтобы увидеть полный текст.",
     "删除这个会话？": "Удалить этот чат?",
-    "将在「{0}」上永久删除「{1}」及其记录，无法恢复。项目文件不会被删除。": "Безвозвратно удаляет «{1}» и его историю с «{0}». Это действие нельзя отменить. Файлы проекта сохраняются.",
+    "将在「{0}」上永久删除「{1}」及其记录，无法恢复。项目文件不会被删除。":
+        "Безвозвратно удаляет «{1}» и его историю с «{0}». Это действие нельзя отменить. Файлы проекта сохраняются.",
     "删除": "Удалить",
-    "停止请求未确认：{0}。请刷新核实任务状态。": "Запрос на остановку не подтверждён: {0}. Обновите, чтобы проверить состояние задачи.",
-    "电脑未受理这次发送，内容已保留。": "Компьютер не принял это сообщение. Ваш текст сохранён.",
+    "停止请求未确认：{0}。请刷新核实任务状态。":
+        "Запрос на остановку не подтверждён: {0}. Обновите, чтобы проверить состояние задачи.",
+    "电脑未受理这次发送，内容已保留。":
+        "Компьютер не принял это сообщение. Ваш текст сохранён.",
     "这台电脑已不在列表中": "Этого компьютера больше нет в списке",
     "可能已在电脑上撤销配对。": "Возможно, сопряжение было отозвано на компьютере.",
-    "{0} · 内容同步于 {1}{2}。附件原文需电脑在线。": "{0} · Синхронизировано {1}{2}. Переподключитесь, чтобы открыть исходные вложения.",
+    "{0} · 内容同步于 {1}{2}。附件原文需电脑在线。":
+        "{0} · Синхронизировано {1}{2}. Переподключитесь, чтобы открыть исходные вложения.",
     "正在同步，先显示本机缓存": "Синхронизация. Пока показан локальный кэш.",
     "离线缓存": "Офлайн-кэш",
     "未知时间": "Время неизвестно",
@@ -10336,220 +12578,357 @@ const messageCatalogs = <String, Map<String, String>>{
     "加载更早的消息": "Загрузить более ранние сообщения",
     "Agent 正在电脑上工作…": "Agent работает на компьютере…",
     "正在连接电脑…": "Подключение к компьютеру…",
-    "电脑离线{0}。任务不会因此停止。": "Компьютер не в сети{0}. Задачи продолжают выполняться.",
+    "电脑离线{0}。任务不会因此停止。":
+        "Компьютер не в сети{0}. Задачи продолжают выполняться.",
     " · 最后同步 {0}": " · Последняя синхронизация {0}",
     "继续交给 Agent…": "Напишите своему Agent…",
-    "这台电脑已移除，请核实电脑列表中的绑定。": "Этот компьютер удалён. Проверьте сопряжение в списке компьютеров.",
-    "电脑绑定已改变，请从电脑列表重新打开。": "Сопряжение компьютера изменилось. Откройте его заново из списка компьютеров.",
-    "暂时无法读取电脑绑定，请稍后重试。": "Не удалось прочитать сопряжение компьютера. Повторите попытку позже.",
+    "这台电脑已移除，请核实电脑列表中的绑定。":
+        "Этот компьютер удалён. Проверьте сопряжение в списке компьютеров.",
+    "电脑绑定已改变，请从电脑列表重新打开。":
+        "Сопряжение компьютера изменилось. Откройте его заново из списка компьютеров.",
+    "暂时无法读取电脑绑定，请稍后重试。":
+        "Не удалось прочитать сопряжение компьютера. Повторите попытку позже.",
     "直连协商响应无效。": "Недопустимый ответ при согласовании прямого подключения.",
-    "本轮变更记录过大，请在电脑上查看": "Журнал изменений раунда слишком большой. Откройте его на компьютере.",
+    "本轮变更记录过大，请在电脑上查看":
+        "Журнал изменений раунда слишком большой. Откройте его на компьютере.",
     "本轮变更记录读取不一致": "Журнал изменений раунда прочитан несогласованно.",
     "本轮变更记录校验失败": "Проверка целостности журнала изменений раунда не пройдена.",
     "本轮变更记录格式不可用": "Формат журнала изменений раунда недоступен.",
     "电脑暂时离线，请稍后重连。": "Компьютер временно не в сети. Переподключитесь позже.",
-    "连接请求未被接受，请核实设备授权。": "Запрос на подключение отклонён. Проверьте разрешение устройства.",
+    "连接请求未被接受，请核实设备授权。":
+        "Запрос на подключение отклонён. Проверьте разрешение устройства.",
     "连接响应过大。": "Ответ на подключение слишком большой.",
-    "连接中断，操作结果待核实；请勿重复发送。": "Соединение потеряно. Результат операции не подтверждён. Не отправляйте её снова.",
+    "连接中断，操作结果待核实；请勿重复发送。":
+        "Соединение потеряно. Результат операции не подтверждён. Не отправляйте её снова.",
     "请在电脑上生成新版配对二维码。": "Создайте на компьютере новый QR-код для сопряжения.",
     "电脑连接身份不一致。": "Идентификатор подключения компьютера не совпадает.",
-    "手机身份与原配对不一致，未重新申请授权。": "Идентификатор телефона отличается от исходного сопряжения. Разрешение не запрашивалось повторно.",
-    "原配对恢复期限已过，请在电脑核实授权后重新扫码。": "Срок восстановления сопряжения истёк. Проверьте доступ на компьютере и отсканируйте код снова.",
-    "电脑连接身份与原配对不一致。": "Идентификатор подключения компьютера отличается от исходного сопряжения.",
+    "手机身份与原配对不一致，未重新申请授权。":
+        "Идентификатор телефона отличается от исходного сопряжения. Разрешение не запрашивалось повторно.",
+    "原配对恢复期限已过，请在电脑核实授权后重新扫码。":
+        "Срок восстановления сопряжения истёк. Проверьте доступ на компьютере и отсканируйте код снова.",
+    "电脑连接身份与原配对不一致。":
+        "Идентификатор подключения компьютера отличается от исходного сопряжения.",
     "电脑未返回原配对回执。": "Компьютер не вернул подтверждение исходного сопряжения.",
     "直连身份验证失败。": "Ошибка проверки подлинности прямого подключения.",
     "加密数据格式无效。": "Недопустимый формат зашифрованных данных.",
     "请求较多，请稍后重试。": "Слишком много запросов. Повторите попытку позже.",
     "请求过大。": "Запрос слишком большой.",
-    "配对连接中断，结果需要核实。": "Соединение для сопряжения потеряно. Проверьте результат.",
-    "关键词过长，请缩短后再搜索。": "Ключевое слово слишком длинное. Сократите его и повторите попытку.",
+    "配对连接中断，结果需要核实。":
+        "Соединение для сопряжения потеряно. Проверьте результат.",
+    "关键词过长，请缩短后再搜索。":
+        "Ключевое слово слишком длинное. Сократите его и повторите попытку.",
     "电脑离线，连接后重试搜索。": "Компьютер не в сети. Переподключитесь для поиска.",
     "连接已更换，请重试本次搜索。": "Соединение изменилось. Повторите этот поиск.",
     "电脑未返回可用的历史搜索结果。": "Компьютер не вернул пригодных результатов поиска.",
     "历史搜索游标没有前进，请重新搜索。": "Курсор поиска не продвинулся. Выполните поиск снова.",
     "历史搜索范围发生变化，请重新搜索。": "Область поиска изменилась. Выполните поиск снова.",
-    "写操作必须保留原始操作标识。": "Операции записи должны сохранять исходный идентификатор операции.",
-    "请先确认上一条消息或审批的结果。": "Сначала подтвердите результат предыдущего сообщения или подтверждения.",
-    "请先确认上一项设置或工作区操作的结果。": "Сначала подтвердите результат предыдущей настройки или операции с рабочим пространством.",
-    "Fork 正在电脑上执行，请等待并核实。": "Fork выполняется на компьютере. Дождитесь и проверьте результат.",
+    "写操作必须保留原始操作标识。":
+        "Операции записи должны сохранять исходный идентификатор операции.",
+    "请先确认上一条消息或审批的结果。":
+        "Сначала подтвердите результат предыдущего сообщения или подтверждения.",
+    "请先确认上一项设置或工作区操作的结果。":
+        "Сначала подтвердите результат предыдущей настройки или операции с рабочим пространством.",
+    "Fork 正在电脑上执行，请等待并核实。":
+        "Fork выполняется на компьютере. Дождитесь и проверьте результат.",
     "原决定已受理，正在核实交付结果。": "Исходное решение принято. Проверяется доставка.",
     "请先核实原审批决定。": "Сначала проверьте исходное решение о подтверждении.",
-    "配对恢复记录无法读取，请先核实手机安全存储。": "Не удалось прочитать данные восстановления сопряжения. Проверьте защищённое хранилище телефона.",
-    "配对恢复信息未能安全保存。": "Не удалось безопасно сохранить данные восстановления сопряжения.",
-    "待核实电脑的身份发生变化，请先核实原配对。": "Идентификатор компьютера изменился. Сначала проверьте исходное сопряжение.",
-    "待核实配对过多，请先核实原记录。": "Слишком много непроверенных сопряжений. Сначала проверьте существующие записи.",
-    "本机设备身份无法读取，请先恢复安全存储。": "Не удалось прочитать идентификатор этого устройства. Сначала восстановите защищённое хранилище.",
-    "设备身份未能安全保存，尚未开始配对。": "Не удалось безопасно сохранить идентификатор устройства. Сопряжение не начато.",
-    "已保存的电脑身份无法读取，请先核实配对。": "Не удалось прочитать сохранённый идентификатор компьютера. Сначала проверьте сопряжение.",
-    "配对回执与当前连接不一致。": "Подтверждение сопряжения не соответствует текущему соединению.",
-    "这项配对已因移除电脑而失效，请重新扫码。": "Это сопряжение стало недействительным после удаления компьютера. Отсканируйте код снова.",
-    "电脑绑定已变化，请重新扫码。": "Сопряжение компьютера изменилось. Отсканируйте код снова.",
-    "电脑身份已发生变化，需要先解除旧配对。": "Идентификатор компьютера изменился. Сначала удалите старое сопряжение.",
-    "电脑绑定已变化，未移除新的绑定，请刷新后确认。": "Сопряжение компьютера изменилось. Новое сопряжение не удалено. Обновите и подтвердите.",
-    "设备密钥格式无效，不能继续连接。": "Недопустимый формат ключа устройства. Продолжить подключение нельзя.",
+    "配对恢复记录无法读取，请先核实手机安全存储。":
+        "Не удалось прочитать данные восстановления сопряжения. Проверьте защищённое хранилище телефона.",
+    "配对恢复信息未能安全保存。":
+        "Не удалось безопасно сохранить данные восстановления сопряжения.",
+    "待核实电脑的身份发生变化，请先核实原配对。":
+        "Идентификатор компьютера изменился. Сначала проверьте исходное сопряжение.",
+    "待核实配对过多，请先核实原记录。":
+        "Слишком много непроверенных сопряжений. Сначала проверьте существующие записи.",
+    "本机设备身份无法读取，请先恢复安全存储。":
+        "Не удалось прочитать идентификатор этого устройства. Сначала восстановите защищённое хранилище.",
+    "设备身份未能安全保存，尚未开始配对。":
+        "Не удалось безопасно сохранить идентификатор устройства. Сопряжение не начато.",
+    "已保存的电脑身份无法读取，请先核实配对。":
+        "Не удалось прочитать сохранённый идентификатор компьютера. Сначала проверьте сопряжение.",
+    "配对回执与当前连接不一致。":
+        "Подтверждение сопряжения не соответствует текущему соединению.",
+    "这项配对已因移除电脑而失效，请重新扫码。":
+        "Это сопряжение стало недействительным после удаления компьютера. Отсканируйте код снова.",
+    "电脑绑定已变化，请重新扫码。":
+        "Сопряжение компьютера изменилось. Отсканируйте код снова.",
+    "电脑身份已发生变化，需要先解除旧配对。":
+        "Идентификатор компьютера изменился. Сначала удалите старое сопряжение.",
+    "电脑绑定已变化，未移除新的绑定，请刷新后确认。":
+        "Сопряжение компьютера изменилось. Новое сопряжение не удалено. Обновите и подтвердите.",
+    "设备密钥格式无效，不能继续连接。":
+        "Недопустимый формат ключа устройства. Продолжить подключение нельзя.",
     "加密组件暂时不可用。": "Шифрование временно недоступно.",
-    "设备身份验证或加密状态校验失败，请重新连接。": "Ошибка проверки подлинности устройства или состояния шифрования. Переподключитесь.",
+    "设备身份验证或加密状态校验失败，请重新连接。":
+        "Ошибка проверки подлинности устройства или состояния шифрования. Переподключитесь.",
     "加密连接已关闭。": "Зашифрованное соединение закрыто.",
-    "电脑绑定状态无法读取，请先检查系统安全存储。": "Не удалось прочитать состояние сопряжения компьютера. Проверьте защищённое хранилище системы.",
-    "电脑绑定状态未能安全保存，请核实原操作。": "Не удалось безопасно сохранить состояние сопряжения компьютера. Проверьте исходную операцию.",
+    "电脑绑定状态无法读取，请先检查系统安全存储。":
+        "Не удалось прочитать состояние сопряжения компьютера. Проверьте защищённое хранилище системы.",
+    "电脑绑定状态未能安全保存，请核实原操作。":
+        "Не удалось безопасно сохранить состояние сопряжения компьютера. Проверьте исходную операцию.",
     "请先选择电脑上的目录。": "Сначала выберите каталог на компьютере.",
-    "原项目目录已变化，请核实原结果后重新选择。": "Исходный каталог проекта изменился. Проверьте исходный результат и выберите снова.",
-    "添加项目结果尚未确认，请核实原操作。": "Результат добавления проекта не подтверждён. Проверьте исходную операцию.",
-    "无法核实电脑上的项目，请重新连接后再试。": "Не удалось проверить проект на компьютере. Переподключитесь и повторите попытку.",
-    "请更新电脑端后再操作，尚未启动或修改配置。": "Сначала обновите приложение для компьютера. Ни одна конфигурация не была запущена или изменена.",
+    "原项目目录已变化，请核实原结果后重新选择。":
+        "Исходный каталог проекта изменился. Проверьте исходный результат и выберите снова.",
+    "添加项目结果尚未确认，请核实原操作。":
+        "Результат добавления проекта не подтверждён. Проверьте исходную операцию.",
+    "无法核实电脑上的项目，请重新连接后再试。":
+        "Не удалось проверить проект на компьютере. Переподключитесь и повторите попытку.",
+    "请更新电脑端后再操作，尚未启动或修改配置。":
+        "Сначала обновите приложение для компьютера. Ни одна конфигурация не была запущена или изменена.",
     "原启动回执不匹配。": "Подтверждение исходного запуска не совпадает.",
-    "原启动记录与项目或运行配置不匹配，未重新执行。": "Запись исходного запуска не соответствует проекту или конфигурации. Повторно не выполнялась.",
-    "运行配置回执与原操作不匹配，请更新电脑端后核实。": "Подтверждение конфигурации запуска не соответствует исходной операции. Обновите приложение для компьютера и проверьте.",
-    "电脑没有返回可确认的运行配置结果，请核实原操作。": "Компьютер не вернул проверяемого результата для конфигурации запуска. Проверьте исходную операцию.",
-    "运行配置操作未完成，请核实。": "Операция с конфигурацией запуска не завершена. Проверьте её.",
+    "原启动记录与项目或运行配置不匹配，未重新执行。":
+        "Запись исходного запуска не соответствует проекту или конфигурации. Повторно не выполнялась.",
+    "运行配置回执与原操作不匹配，请更新电脑端后核实。":
+        "Подтверждение конфигурации запуска не соответствует исходной операции. Обновите приложение для компьютера и проверьте.",
+    "电脑没有返回可确认的运行配置结果，请核实原操作。":
+        "Компьютер не вернул проверяемого результата для конфигурации запуска. Проверьте исходную операцию.",
+    "运行配置操作未完成，请核实。":
+        "Операция с конфигурацией запуска не завершена. Проверьте её.",
     "没有待核实的启动操作。": "Нет запусков, ожидающих проверки.",
-    "电脑未确认原启动已关闭，记录仍保留。": "Компьютер не подтвердил закрытие исходного запуска. Запись сохранена.",
-    "原启动结果尚未确认，记录仍保留。": "Результат исходного запуска не подтверждён. Запись сохранена.",
-    "服务地址必须使用 HTTPS；调试版本可使用本机或局域网 IP。": "Адрес сервиса должен использовать HTTPS. В отладочных сборках можно использовать локальный IP или IP в локальной сети.",
+    "电脑未确认原启动已关闭，记录仍保留。":
+        "Компьютер не подтвердил закрытие исходного запуска. Запись сохранена.",
+    "原启动结果尚未确认，记录仍保留。":
+        "Результат исходного запуска не подтверждён. Запись сохранена.",
+    "服务地址必须使用 HTTPS；调试版本可使用本机或局域网 IP。":
+        "Адрес сервиса должен использовать HTTPS. В отладочных сборках можно использовать локальный IP или IP в локальной сети.",
     "服务暂时不可用，请稍后重试。": "Сервис временно недоступен. Повторите попытку позже.",
     "服务返回了无法识别的响应。": "Сервис вернул нераспознанный ответ.",
-    "无法连接服务，请检查网络和服务地址。": "Не удалось подключиться к сервису. Проверьте сеть и адрес сервиса.",
-    "无法验证服务证书，请检查服务配置。": "Не удалось проверить сертификат сервиса. Проверьте настройки сервиса.",
-    "服务响应无效或连接已中断，请重试。": "Недопустимый ответ сервиса или соединение потеряно. Повторите попытку.",
-    "服务版本不兼容，请更新 App 或服务端。": "Несовместимая версия сервиса. Обновите приложение или сервер.",
+    "无法连接服务，请检查网络和服务地址。":
+        "Не удалось подключиться к сервису. Проверьте сеть и адрес сервиса.",
+    "无法验证服务证书，请检查服务配置。":
+        "Не удалось проверить сертификат сервиса. Проверьте настройки сервиса.",
+    "服务响应无效或连接已中断，请重试。":
+        "Недопустимый ответ сервиса или соединение потеряно. Повторите попытку.",
+    "服务版本不兼容，请更新 App 或服务端。":
+        "Несовместимая версия сервиса. Обновите приложение или сервер.",
     "二维码内容过长。": "Содержимое QR-кода слишком длинное.",
     "不是 DogCodes 配对二维码。": "Это не QR-код для сопряжения DogCodes.",
-    "配对二维码无效，或来自未配置的服务。": "QR-код для сопряжения недействителен или относится к ненастроенному сервису.",
-    "配对二维码已过期，请在电脑上重新生成。": "Срок действия QR-кода истёк. Создайте новый на компьютере.",
-    "设备时间不一致，请校准手机和电脑时间后重试。": "Время на устройствах не совпадает. Исправьте время на обоих устройствах и повторите попытку.",
+    "配对二维码无效，或来自未配置的服务。":
+        "QR-код для сопряжения недействителен или относится к ненастроенному сервису.",
+    "配对二维码已过期，请在电脑上重新生成。":
+        "Срок действия QR-кода истёк. Создайте новый на компьютере.",
+    "设备时间不一致，请校准手机和电脑时间后重试。":
+        "Время на устройствах не совпадает. Исправьте время на обоих устройствах и повторите попытку.",
     "无法读取配对二维码。": "Не удалось прочитать QR-код для сопряжения.",
     "事件游标格式无效。": "Недопустимый формат курсора событий.",
     "事件游标超出范围。": "Курсор событий вне допустимого диапазона.",
-    "电脑离线，重新连接后再浏览目录。": "Компьютер не в сети. Переподключитесь, чтобы просматривать каталоги.",
+    "电脑离线，重新连接后再浏览目录。":
+        "Компьютер не в сети. Переподключитесь, чтобы просматривать каталоги.",
     "连接已更换，请重新读取目录。": "Соединение изменилось. Перезагрузите каталог.",
-    "电脑未返回有效的目录列表，请更新电脑端后重试。": "Не получен корректный список каталогов. Обновите приложение для компьютера и повторите попытку.",
-    "目录分页没有前进，请刷新目录。": "Постраничная загрузка каталогов не продвинулась. Обновите каталог.",
-    "电脑端暂不支持目录选择，请更新电脑端后重试。": "Обновите приложение для компьютера, чтобы выбирать каталоги.",
+    "电脑未返回有效的目录列表，请更新电脑端后重试。":
+        "Не получен корректный список каталогов. Обновите приложение для компьютера и повторите попытку.",
+    "目录分页没有前进，请刷新目录。":
+        "Постраничная загрузка каталогов не продвинулась. Обновите каталог.",
+    "电脑端暂不支持目录选择，请更新电脑端后重试。":
+        "Обновите приложение для компьютера, чтобы выбирать каталоги.",
     "剪贴板传输响应无效": "Недопустимый ответ при передаче буфера обмена",
     "剪贴板传输身份不匹配": "Идентификатор передачи буфера обмена не совпадает",
     "剪贴板传输校验信息不匹配": "Данные целостности передачи буфера обмена не совпадают",
-    "图片需小于 16 MB，请缩小图片后重试": "Изображение должно быть меньше 16 МБ. Уменьшите его и повторите попытку.",
+    "图片需小于 16 MB，请缩小图片后重试":
+        "Изображение должно быть меньше 16 МБ. Уменьшите его и повторите попытку.",
     "剪贴板文字为空或超过 1 MB": "Текст в буфере обмена пуст или больше 1 МБ",
     "图片传输起始位置无效": "Недопустимая начальная позиция передачи изображения",
     "剪贴板上传位置不匹配": "Позиция загрузки буфера обмена не совпадает",
-    "尚未确认电脑剪贴板是否更新，请从电脑获取核实；不会自动重发": "Обновление буфера обмена компьютера не подтверждено. Получите его для проверки. Автоматической повторной отправки не будет.",
-    "未确认电脑剪贴板已更新，请从电脑获取核实；不会自动重发": "Обновление буфера обмена компьютера не подтверждено. Получите его для проверки. Автоматической повторной отправки не будет.",
-    "剪贴板写入回执不完整，请从电脑获取核实": "Подтверждение записи буфера обмена неполное. Получите буфер обмена компьютера для проверки.",
+    "尚未确认电脑剪贴板是否更新，请从电脑获取核实；不会自动重发":
+        "Обновление буфера обмена компьютера не подтверждено. Получите его для проверки. Автоматической повторной отправки не будет.",
+    "未确认电脑剪贴板已更新，请从电脑获取核实；不会自动重发":
+        "Обновление буфера обмена компьютера не подтверждено. Получите его для проверки. Автоматической повторной отправки не будет.",
+    "剪贴板写入回执不完整，请从电脑获取核实":
+        "Подтверждение записи буфера обмена неполное. Получите буфер обмена компьютера для проверки.",
     "剪贴板下载数据块过大": "Блок загрузки буфера обмена слишком большой",
     "剪贴板下载位置不匹配": "Позиция скачивания буфера обмена не совпадает",
-    "剪贴板内容校验失败，未写入手机剪贴板": "Проверка целостности буфера обмена не пройдена. Буфер обмена телефона не изменён.",
+    "剪贴板内容校验失败，未写入手机剪贴板":
+        "Проверка целостности буфера обмена не пройдена. Буфер обмена телефона не изменён.",
     "通知服务初始化失败。": "Не удалось инициализировать сервис уведомлений.",
     "此版本未配置备用通知服务。": "Резервный сервис уведомлений в этой сборке не настроен.",
     "系统通知权限尚未开启。": "Системное разрешение на уведомления не предоставлено.",
     "任务提醒": "Уведомления о задачах",
-    "待审批、待回答、完成和失败提醒": "Уведомления о подтверждениях, вопросах, завершении и ошибках",
-    "未获取到通知设备身份。": "Не удалось получить идентификатор устройства для уведомлений.",
-    "这台电脑已移除，未发送停止请求。": "Этот компьютер удалён. Запрос на остановку не отправлен.",
-    "这个任务已经有一个停止请求在等待确认。": "Для этой задачи уже есть запрос на остановку, ожидающий подтверждения.",
-    "等待确认的停止请求太多，请先处理待处理页里的卡片。": "Слишком много запросов на остановку ожидают подтверждения. Сначала обработайте карточки в разделе «Ожидают».",
-    "任务当前没有可停止的运行。": "У этой задачи нет активного запуска, который можно остановить.",
-    "暂时无法读取任务状态，请稍后再确认。": "Не удалось прочитать состояние задачи. Проверьте позже.",
-    "这台电脑已移除，未重新发送停止请求。": "Этот компьютер удалён. Запрос на остановку не отправлен повторно.",
+    "待审批、待回答、完成和失败提醒":
+        "Уведомления о подтверждениях, вопросах, завершении и ошибках",
+    "未获取到通知设备身份。":
+        "Не удалось получить идентификатор устройства для уведомлений.",
+    "这台电脑已移除，未发送停止请求。":
+        "Этот компьютер удалён. Запрос на остановку не отправлен.",
+    "这个任务已经有一个停止请求在等待确认。":
+        "Для этой задачи уже есть запрос на остановку, ожидающий подтверждения.",
+    "等待确认的停止请求太多，请先处理待处理页里的卡片。":
+        "Слишком много запросов на остановку ожидают подтверждения. Сначала обработайте карточки в разделе «Ожидают».",
+    "任务当前没有可停止的运行。":
+        "У этой задачи нет активного запуска, который можно остановить.",
+    "暂时无法读取任务状态，请稍后再确认。":
+        "Не удалось прочитать состояние задачи. Проверьте позже.",
+    "这台电脑已移除，未重新发送停止请求。":
+        "Этот компьютер удалён. Запрос на остановку не отправлен повторно.",
     "原停止请求已改变，请刷新。": "Исходный запрос на остановку изменился. Обновите.",
     "没有待确认的停止请求。": "Нет запросов на остановку, ожидающих подтверждения.",
-    "电脑已收到停止请求，任务会在停下后更新状态。": "Компьютер получил запрос на остановку. Состояние обновится, когда задача остановится.",
-    "这次运行已经结束，不需要再停止。": "Этот запуск уже завершён. Останавливать его снова не нужно.",
-    "已不再等待。如果电脑收到了这个停止请求，任务仍会停下。": "Ожидание остановлено. Если компьютер получил запрос на остановку, задача всё равно остановится.",
-    "还不确定是否已停止，可以再发一次停止。": "Результат остановки не подтверждён. Можно отправить ещё один запрос на остановку.",
+    "电脑已收到停止请求，任务会在停下后更新状态。":
+        "Компьютер получил запрос на остановку. Состояние обновится, когда задача остановится.",
+    "这次运行已经结束，不需要再停止。":
+        "Этот запуск уже завершён. Останавливать его снова не нужно.",
+    "已不再等待。如果电脑收到了这个停止请求，任务仍会停下。":
+        "Ожидание остановлено. Если компьютер получил запрос на остановку, задача всё равно остановится.",
+    "还不确定是否已停止，可以再发一次停止。":
+        "Результат остановки не подтверждён. Можно отправить ещё один запрос на остановку.",
     "附件总大小不能超过 25 MB。": "Общий размер вложений не может превышать 25 МБ.",
     "附件文件名过长或无效。": "Имя файла вложения слишком длинное или недопустимое.",
-    "图片请使用 PNG、JPEG、GIF 或 WebP 格式。": "Используйте изображения в формате PNG, JPEG, GIF или WebP.",
+    "图片请使用 PNG、JPEG、GIF 或 WebP 格式。":
+        "Используйте изображения в формате PNG, JPEG, GIF или WebP.",
     "一次最多发送 16 个附件。": "Не более 16 вложений в одном сообщении.",
-    "附件上传已暂停，可继续原上传。": "Загрузка вложения приостановлена. Продолжите исходную загрузку.",
-    "附件回执与原文件不一致，未发送任务。": "Подтверждение вложения не соответствует исходному файлу. Задача не отправлена.",
-    "本机附件内容已变化，请重新添加；未上传变化后的文件。": "Локальное вложение изменилось. Добавьте его снова. Изменённый файл не загружен.",
-    "电脑端暂不支持附件上传，请更新电脑端。": "Обновите приложение для компьютера, чтобы загружать вложения.",
+    "附件上传已暂停，可继续原上传。":
+        "Загрузка вложения приостановлена. Продолжите исходную загрузку.",
+    "附件回执与原文件不一致，未发送任务。":
+        "Подтверждение вложения не соответствует исходному файлу. Задача не отправлена.",
+    "本机附件内容已变化，请重新添加；未上传变化后的文件。":
+        "Локальное вложение изменилось. Добавьте его снова. Изменённый файл не загружен.",
+    "电脑端暂不支持附件上传，请更新电脑端。":
+        "Обновите приложение для компьютера, чтобы загружать вложения.",
     "电脑返回的附件位置无效。": "Компьютер вернул недопустимую позицию вложения.",
-    "附件分块位置未确认，请继续原上传。": "Позиция фрагмента вложения не подтверждена. Продолжите исходную загрузку.",
-    "原草稿不可读取，请重新选择附件。": "Не удалось прочитать исходный черновик. Выберите вложения снова.",
-    "上次附件选择未完成，请重新选择。": "Предыдущий выбор вложений не завершён. Выберите снова.",
-    "已恢复系统文件选择器返回的附件，请核对后发送。": "Вложения восстановлены из системного окна выбора файлов. Проверьте их перед отправкой.",
+    "附件分块位置未确认，请继续原上传。":
+        "Позиция фрагмента вложения не подтверждена. Продолжите исходную загрузку.",
+    "原草稿不可读取，请重新选择附件。":
+        "Не удалось прочитать исходный черновик. Выберите вложения снова.",
+    "上次附件选择未完成，请重新选择。":
+        "Предыдущий выбор вложений не завершён. Выберите снова.",
+    "已恢复系统文件选择器返回的附件，请核对后发送。":
+        "Вложения восстановлены из системного окна выбора файлов. Проверьте их перед отправкой.",
     "附件选择未完成：{0}，请重新选择。": "Выбор вложений не завершён: {0}. Выберите снова.",
     "上次附件选择未能恢复：{0}": "Не удалось восстановить предыдущий выбор вложений: {0}",
-    "正在处理这台电脑的原配对，请稍后核实。": "Исходное сопряжение этого компьютера обрабатывается. Проверьте позже.",
-    "原配对恢复记录已改变，请刷新后核实。": "Запись восстановления исходного сопряжения изменилась. Обновите и проверьте.",
-    "电脑绑定已移除或变化，请重新配对后连接。": "Сопряжение компьютера удалено или изменено. Выполните сопряжение снова, чтобы подключиться.",
+    "正在处理这台电脑的原配对，请稍后核实。":
+        "Исходное сопряжение этого компьютера обрабатывается. Проверьте позже.",
+    "原配对恢复记录已改变，请刷新后核实。":
+        "Запись восстановления исходного сопряжения изменилась. Обновите и проверьте.",
+    "电脑绑定已移除或变化，请重新配对后连接。":
+        "Сопряжение компьютера удалено или изменено. Выполните сопряжение снова, чтобы подключиться.",
     "未命名会话": "Чат без названия",
     "离线模式": "Офлайн-режим",
     "离线协作": "Офлайн-совместная работа",
-    "部分离线数据暂时无法读取，联网后可重新同步。": "Не удалось прочитать часть офлайн-данных. Переподключитесь, чтобы синхронизировать снова.",
-    "停止请求暂时无法读取，请检查系统安全存储。": "Не удалось прочитать запросы на остановку. Проверьте защищённое хранилище системы.",
-    "终端关闭记录暂时无法读取，请检查系统安全存储。": "Не удалось прочитать записи о закрытии терминалов. Проверьте защищённое хранилище системы.",
-    "已配对电脑暂时无法读取，请检查系统安全存储。": "Не удалось прочитать сопряжённые компьютеры. Проверьте защищённое хранилище системы.",
-    "电脑绑定已变化，未使用旧页面接管新的连接。": "Сопряжение компьютера изменилось. Старая страница не приняла новое соединение.",
-    "连接中断，正在重新连接。已发送操作不会重复执行。": "Соединение потеряно. Переподключение. Отправленные операции не будут выполнены дважды.",
-    "连接已断开。电脑上的任务不会因此停止。": "Отключено. Задачи на компьютере продолжают выполняться.",
-    "移除未完成，连接已关闭；请重试移除或核实安全存储。": "Удаление не завершено. Соединение закрыто. Повторите удаление или проверьте защищённое хранилище.",
+    "部分离线数据暂时无法读取，联网后可重新同步。":
+        "Не удалось прочитать часть офлайн-данных. Переподключитесь, чтобы синхронизировать снова.",
+    "停止请求暂时无法读取，请检查系统安全存储。":
+        "Не удалось прочитать запросы на остановку. Проверьте защищённое хранилище системы.",
+    "终端关闭记录暂时无法读取，请检查系统安全存储。":
+        "Не удалось прочитать записи о закрытии терминалов. Проверьте защищённое хранилище системы.",
+    "已配对电脑暂时无法读取，请检查系统安全存储。":
+        "Не удалось прочитать сопряжённые компьютеры. Проверьте защищённое хранилище системы.",
+    "电脑绑定已变化，未使用旧页面接管新的连接。":
+        "Сопряжение компьютера изменилось. Старая страница не приняла новое соединение.",
+    "连接中断，正在重新连接。已发送操作不会重复执行。":
+        "Соединение потеряно. Переподключение. Отправленные операции не будут выполнены дважды.",
+    "连接已断开。电脑上的任务不会因此停止。":
+        "Отключено. Задачи на компьютере продолжают выполняться.",
+    "移除未完成，连接已关闭；请重试移除或核实安全存储。":
+        "Удаление не завершено. Соединение закрыто. Повторите удаление или проверьте защищённое хранилище.",
     "离线缓存未能保存：{0}": "Не удалось сохранить офлайн-кэш: {0}",
-    "待确认的操作暂时无法读取，请检查系统安全存储。": "Не удалось прочитать неподтверждённые операции. Проверьте защищённое хранилище системы.",
-    "无法读取后台提醒设置，请检查系统安全存储后重试。": "Не удалось прочитать настройки фоновых уведомлений. Проверьте защищённое хранилище системы и повторите попытку.",
-    "部分电脑的通知尚未登记，请检查网络后重新检测。": "Уведомления не зарегистрированы для некоторых компьютеров. Проверьте сеть и повторите попытку.",
-    "后台提醒尚未启用，请核实系统通知权限和通知服务配置后重试。": "Фоновые уведомления не включены. Проверьте системное разрешение на уведомления и настройки сервиса.",
+    "待确认的操作暂时无法读取，请检查系统安全存储。":
+        "Не удалось прочитать неподтверждённые операции. Проверьте защищённое хранилище системы.",
+    "无法读取后台提醒设置，请检查系统安全存储后重试。":
+        "Не удалось прочитать настройки фоновых уведомлений. Проверьте защищённое хранилище системы и повторите попытку.",
+    "部分电脑的通知尚未登记，请检查网络后重新检测。":
+        "Уведомления не зарегистрированы для некоторых компьютеров. Проверьте сеть и повторите попытку.",
+    "后台提醒尚未启用，请核实系统通知权限和通知服务配置后重试。":
+        "Фоновые уведомления не включены. Проверьте системное разрешение на уведомления и настройки сервиса.",
     "Git 操作已完成": "Операция Git завершена",
-    "已经提交，还不确定是否推送成功，可以重新发送推送。": "Коммит выполнен. Результат push не подтверждён. Можно отправить push снова.",
+    "已经提交，还不确定是否推送成功，可以重新发送推送。":
+        "Коммит выполнен. Результат push не подтверждён. Можно отправить push снова.",
     "提交已完成，推送失败：{0}": "Коммит выполнен. Ошибка push: {0}",
     "Git 操作失败：{0}": "Ошибка операции Git: {0}",
-    "电脑正在执行 Git 操作，稍后再确认。": "Операция Git выполняется на компьютере. Проверьте позже.",
-    "Git 操作中途中断了，请在「变更」里看一下仓库现在的状态。": "Операция Git прервана. Проверьте состояние репозитория на странице «Изменения».",
-    "Git 操作只完成了一部分，请先在「变更」里看一下再继续。": "Операция Git выполнена лишь частично. Проверьте «Изменения», прежде чем продолжать.",
+    "电脑正在执行 Git 操作，稍后再确认。":
+        "Операция Git выполняется на компьютере. Проверьте позже.",
+    "Git 操作中途中断了，请在「变更」里看一下仓库现在的状态。":
+        "Операция Git прервана. Проверьте состояние репозитория на странице «Изменения».",
+    "Git 操作只完成了一部分，请先在「变更」里看一下再继续。":
+        "Операция Git выполнена лишь частично. Проверьте «Изменения», прежде чем продолжать.",
     "已不再等待这次 Git 操作。": "Ожидание этой операции Git остановлено.",
-    "电脑上还查不到这次 Git 操作，可能没收到，可以重新发送。": "У компьютера пока нет записи об этой операции Git. Возможно, она не дошла. Её можно отправить снова.",
-    "还不确定文件是否已暂存，所以没有继续提交。": "Добавление в индекс не подтверждено. Коммит не продолжен.",
-    "暂存回执与原文件选择不一致，未重新执行。": "Подтверждение добавления в индекс не соответствует исходному выбору файлов. Повторно не выполнялось.",
+    "电脑上还查不到这次 Git 操作，可能没收到，可以重新发送。":
+        "У компьютера пока нет записи об этой операции Git. Возможно, она не дошла. Её можно отправить снова.",
+    "还不确定文件是否已暂存，所以没有继续提交。":
+        "Добавление в индекс не подтверждено. Коммит не продолжен.",
+    "暂存回执与原文件选择不一致，未重新执行。":
+        "Подтверждение добавления в индекс не соответствует исходному выбору файлов. Повторно не выполнялось.",
     "Git 操作无效。": "Недопустимая операция Git.",
-    "电脑未返回有效的 Git 操作回执。": "Компьютер не вернул корректного подтверждения операции Git.",
-    "Git 回执与原请求不一致，未继续操作。": "Подтверждение Git не соответствует исходному запросу. Операция не продолжена.",
-    "Git 接续记录过长或存在循环，请在电脑上核实。": "Цепочка продолжения Git слишком длинная или содержит цикл. Проверьте на компьютере.",
-    "电脑尚未确认结束原 Git 跟踪。": "Компьютер не подтвердил окончание исходного отслеживания Git.",
+    "电脑未返回有效的 Git 操作回执。":
+        "Компьютер не вернул корректного подтверждения операции Git.",
+    "Git 回执与原请求不一致，未继续操作。":
+        "Подтверждение Git не соответствует исходному запросу. Операция не продолжена.",
+    "Git 接续记录过长或存在循环，请在电脑上核实。":
+        "Цепочка продолжения Git слишком длинная или содержит цикл. Проверьте на компьютере.",
+    "电脑尚未确认结束原 Git 跟踪。":
+        "Компьютер не подтвердил окончание исходного отслеживания Git.",
     "待审批": "Требуется подтверждение",
     "待回答": "Требуется ответ",
     "任务完成": "Задача завершена",
     "执行失败": "Ошибка выполнения",
-    "通知设置响应无效，请重新读取。": "Недопустимый ответ настроек уведомлений. Перезагрузите.",
-    "设备授权已失效，请核实电脑绑定。": "Разрешение устройства истекло. Проверьте сопряжение компьютера.",
-    "通知设置已改变，请重新读取后修改。": "Настройки уведомлений изменились. Перезагрузите перед изменением.",
+    "通知设置响应无效，请重新读取。":
+        "Недопустимый ответ настроек уведомлений. Перезагрузите.",
+    "设备授权已失效，请核实电脑绑定。":
+        "Разрешение устройства истекло. Проверьте сопряжение компьютера.",
+    "通知设置已改变，请重新读取后修改。":
+        "Настройки уведомлений изменились. Перезагрузите перед изменением.",
     "操作过于频繁，请稍后重试。": "Слишком много операций. Повторите попытку позже.",
-    "通知服务暂时不可用，请稍后重试。": "Сервис уведомлений временно недоступен. Повторите попытку позже.",
-    "无法确认通知设置，请检查网络后重新读取。": "Не удалось подтвердить настройки уведомлений. Проверьте сеть и перезагрузите.",
-    "电脑没有收到这次设置，请再试一次。": "Компьютер не получил эту настройку. Повторите попытку.",
+    "通知服务暂时不可用，请稍后重试。":
+        "Сервис уведомлений временно недоступен. Повторите попытку позже.",
+    "无法确认通知设置，请检查网络后重新读取。":
+        "Не удалось подтвердить настройки уведомлений. Проверьте сеть и перезагрузите.",
+    "电脑没有收到这次设置，请再试一次。":
+        "Компьютер не получил эту настройку. Повторите попытку.",
     "电脑返回的保持唤醒状态无效。": "Компьютер вернул недопустимое состояние запрета сна.",
-    "待发送的输入过多，本次未发送，请缩短输入后再试。": "В очереди слишком много ввода. Ничего не отправлено. Сократите ввод и повторите попытку.",
-    "终端页面已离开，未继续发送输入。": "Страница терминала закрыта. Ввод больше не отправляется.",
+    "待发送的输入过多，本次未发送，请缩短输入后再试。":
+        "В очереди слишком много ввода. Ничего не отправлено. Сократите ввод и повторите попытку.",
+    "终端页面已离开，未继续发送输入。":
+        "Страница терминала закрыта. Ввод больше не отправляется.",
     "终端输入回执不匹配": "Подтверждение ввода в терминал не совпадает",
-    "请更新电脑端后输入；终端输出仍可查看。": "Обновите приложение для компьютера, чтобы вводить текст. Вывод терминала по-прежнему доступен.",
+    "请更新电脑端后输入；终端输出仍可查看。":
+        "Обновите приложение для компьютера, чтобы вводить текст. Вывод терминала по-прежнему доступен.",
     "终端正在启动，请稍后继续输入。": "Терминал запускается. Продолжите ввод позже.",
-    "原终端当前不可输入，请刷新查看状态。": "Исходный терминал не принимает ввод. Обновите, чтобы проверить его состояние.",
-    "终端输入连接已改变，请检查后继续。": "Соединение для ввода в терминал изменилось. Проверьте его, прежде чем продолжать.",
-    "输入连接仍在切换，请稍后检查并继续。": "Соединение для ввода ещё переключается. Проверьте позже.",
-    "上次输入结果待核实，请检查终端输出后再继续。": "Результат предыдущего ввода не подтверждён. Проверьте вывод терминала, прежде чем продолжать.",
-    "输入结果尚未确认，请核实或检查终端后继续；不会重发原输入。": "Результат ввода не подтверждён. Проверьте его или терминал, прежде чем продолжать. Исходный ввод не будет отправлен повторно.",
-    "终端连接中断，输入结果待核实；未发送的队列已丢弃，不会自动重发。": "Терминал отключён. Результат ввода не подтверждён. Неотправленная очередь удалена и не будет отправлена автоматически.",
-    "原输入仍未确认或通道已改变，请检查终端输出后继续；不会重发。": "Исходный ввод не подтверждён или канал изменился. Проверьте вывод терминала, прежде чем продолжать. Ввод не будет отправлен повторно.",
-    "暂时无法核实输入，请连接后再试；不会重发原输入。": "Не удалось проверить ввод. Переподключитесь и повторите попытку. Исходный ввод не будет отправлен повторно.",
-    "输入连接尚未恢复，请稍后再试。": "Соединение для ввода ещё не восстановлено. Повторите попытку позже.",
-    "这台电脑已移除，未发送关闭请求。": "Этот компьютер удалён. Запрос на закрытие не отправлен.",
-    "这个终端已经有一个关闭请求在等待确认。": "Для этого терминала уже есть запрос на закрытие, ожидающий подтверждения.",
-    "等待确认的关闭请求太多，请先处理待处理页里的卡片。": "Слишком много запросов на закрытие ожидают подтверждения. Сначала обработайте карточки в разделе «Ожидают».",
-    "原终端关闭结果尚未确认，请核实结束后再启动这个运行配置。": "Результат закрытия исходного терминала не подтверждён. Проверьте его, прежде чем запускать эту конфигурацию.",
-    "请更新电脑端后再关闭终端，当前版本无法核实原终端身份。": "Обновите приложение для компьютера, чтобы закрывать терминалы. Эта версия не может проверить идентификатор исходного терминала.",
-    "终端身份不完整，请刷新后再关闭。": "Идентификатор терминала неполный. Обновите перед закрытием.",
-    "终端已经重新启动过，没有关闭新的终端。": "Терминал был перезапущен. Новый терминал не закрыт.",
+    "原终端当前不可输入，请刷新查看状态。":
+        "Исходный терминал не принимает ввод. Обновите, чтобы проверить его состояние.",
+    "终端输入连接已改变，请检查后继续。":
+        "Соединение для ввода в терминал изменилось. Проверьте его, прежде чем продолжать.",
+    "输入连接仍在切换，请稍后检查并继续。":
+        "Соединение для ввода ещё переключается. Проверьте позже.",
+    "上次输入结果待核实，请检查终端输出后再继续。":
+        "Результат предыдущего ввода не подтверждён. Проверьте вывод терминала, прежде чем продолжать.",
+    "输入结果尚未确认，请核实或检查终端后继续；不会重发原输入。":
+        "Результат ввода не подтверждён. Проверьте его или терминал, прежде чем продолжать. Исходный ввод не будет отправлен повторно.",
+    "终端连接中断，输入结果待核实；未发送的队列已丢弃，不会自动重发。":
+        "Терминал отключён. Результат ввода не подтверждён. Неотправленная очередь удалена и не будет отправлена автоматически.",
+    "原输入仍未确认或通道已改变，请检查终端输出后继续；不会重发。":
+        "Исходный ввод не подтверждён или канал изменился. Проверьте вывод терминала, прежде чем продолжать. Ввод не будет отправлен повторно.",
+    "暂时无法核实输入，请连接后再试；不会重发原输入。":
+        "Не удалось проверить ввод. Переподключитесь и повторите попытку. Исходный ввод не будет отправлен повторно.",
+    "输入连接尚未恢复，请稍后再试。":
+        "Соединение для ввода ещё не восстановлено. Повторите попытку позже.",
+    "这台电脑已移除，未发送关闭请求。":
+        "Этот компьютер удалён. Запрос на закрытие не отправлен.",
+    "这个终端已经有一个关闭请求在等待确认。":
+        "Для этого терминала уже есть запрос на закрытие, ожидающий подтверждения.",
+    "等待确认的关闭请求太多，请先处理待处理页里的卡片。":
+        "Слишком много запросов на закрытие ожидают подтверждения. Сначала обработайте карточки в разделе «Ожидают».",
+    "原终端关闭结果尚未确认，请核实结束后再启动这个运行配置。":
+        "Результат закрытия исходного терминала не подтверждён. Проверьте его, прежде чем запускать эту конфигурацию.",
+    "请更新电脑端后再关闭终端，当前版本无法核实原终端身份。":
+        "Обновите приложение для компьютера, чтобы закрывать терминалы. Эта версия не может проверить идентификатор исходного терминала.",
+    "终端身份不完整，请刷新后再关闭。":
+        "Идентификатор терминала неполный. Обновите перед закрытием.",
+    "终端已经重新启动过，没有关闭新的终端。":
+        "Терминал был перезапущен. Новый терминал не закрыт.",
     "终端不存在": "Терминал не существует",
     "没有待确认的终端关闭操作。": "Нет закрытий терминала, ожидающих подтверждения.",
     "终端已经关闭。": "Терминал закрыт.",
-    "已不再等待。如果电脑收到了关闭请求，终端仍会关闭。": "Ожидание остановлено. Если компьютер получил запрос на закрытие, терминал всё равно закроется.",
+    "已不再等待。如果电脑收到了关闭请求，终端仍会关闭。":
+        "Ожидание остановлено. Если компьютер получил запрос на закрытие, терминал всё равно закроется.",
     "终端已改变，关闭请求未执行。": "Терминал изменился. Запрос на закрытие не выполнен.",
-    "电脑已收到关闭请求，正在等终端结束。": "Компьютер получил запрос на закрытие. Ожидание завершения терминала.",
-    "还不确定终端是否已关闭，可以稍后再确认。": "Результат закрытия терминала не подтверждён. Проверьте позже.",
+    "电脑已收到关闭请求，正在等终端结束。":
+        "Компьютер получил запрос на закрытие. Ожидание завершения терминала.",
+    "还不确定终端是否已关闭，可以稍后再确认。":
+        "Результат закрытия терминала не подтверждён. Проверьте позже.",
     "请选择有效的审查问题。": "Выберите допустимые проблемы проверки.",
-    "审查回执与原请求不匹配，请保留原操作并核实。": "Подтверждение проверки не соответствует исходному запросу. Сохраните операцию и проверьте её.",
-    "修复回执与原请求不匹配，请先核实电脑上的原修复。": "Подтверждение исправления не соответствует исходному запросу. Сначала проверьте исходное исправление на компьютере.",
-    "无法读取审查记录，请更新电脑端后重试。": "Не удалось прочитать записи проверок. Обновите приложение для компьютера и повторите попытку.",
+    "审查回执与原请求不匹配，请保留原操作并核实。":
+        "Подтверждение проверки не соответствует исходному запросу. Сохраните операцию и проверьте её.",
+    "修复回执与原请求不匹配，请先核实电脑上的原修复。":
+        "Подтверждение исправления не соответствует исходному запросу. Сначала проверьте исходное исправление на компьютере.",
+    "无法读取审查记录，请更新电脑端后重试。":
+        "Не удалось прочитать записи проверок. Обновите приложение для компьютера и повторите попытку.",
     "消息分片取消标识无效。": "Недопустимый флаг отмены фрагмента сообщения.",
     "消息大小超出范围。": "Размер сообщения вне допустимого диапазона.",
     "二进制消息格式无效。": "Недопустимый формат двоичного сообщения.",
@@ -10559,41 +12938,55 @@ const messageCatalogs = <String, Map<String, String>>{
     "消息分片长度无效。": "Недопустимая длина фрагмента сообщения.",
     "不允许嵌套消息分片。": "Вложенные фрагменты сообщения не допускаются.",
     "会话版本不可用，请刷新后重试。": "Версия чата недоступна. Обновите и повторите попытку.",
-    "会话名称需为 1–120 个字符，且不能包含控制字符。": "Название чата должно содержать от 1 до 120 символов без управляющих символов.",
+    "会话名称需为 1–120 个字符，且不能包含控制字符。":
+        "Название чата должно содержать от 1 до 120 символов без управляющих символов.",
     "会话状态无效。": "Недопустимое состояние чата.",
-    "无法读取电脑的会话设置，请更新电脑端后重试。": "Не удалось прочитать настройки чатов. Обновите приложение для компьютера и повторите попытку.",
+    "无法读取电脑的会话设置，请更新电脑端后重试。":
+        "Не удалось прочитать настройки чатов. Обновите приложение для компьютера и повторите попытку.",
     "Fork 环境无效。": "Недопустимая среда fork.",
-    "Fork 返回的会话身份不一致，请核实原操作。": "Fork вернул другой идентификатор чата. Проверьте исходную операцию.",
+    "Fork 返回的会话身份不一致，请核实原操作。":
+        "Fork вернул другой идентификатор чата. Проверьте исходную операцию.",
     "没有待确认的会话操作。": "Нет операций с чатами, ожидающих подтверждения.",
     "原操作已变化，请刷新。": "Исходная операция изменилась. Обновите.",
     "Fork 回执与原请求不一致。": "Подтверждение fork не соответствует исходному запросу.",
     "这项操作需要先核实结果。": "Сначала проверьте результат этой операции.",
     "这台电脑已移除，未再发送请求。": "Этот компьютер удалён. Запрос не отправлен повторно.",
-    "原电脑记录尚未清理完成，请重试移除电脑后再连接。": "Данные исходного компьютера удалены не полностью. Повторите удаление, прежде чем подключаться снова.",
-    "电脑绑定已变化，未发送原操作；请重新连接后确认。": "Сопряжение компьютера изменилось. Исходная операция не отправлена. Переподключитесь и подтвердите.",
-    "原操作已结束或已更新，请刷新后操作。": "Исходная операция завершена или обновлена. Обновите, прежде чем продолжать.",
+    "原电脑记录尚未清理完成，请重试移除电脑后再连接。":
+        "Данные исходного компьютера удалены не полностью. Повторите удаление, прежде чем подключаться снова.",
+    "电脑绑定已变化，未发送原操作；请重新连接后确认。":
+        "Сопряжение компьютера изменилось. Исходная операция не отправлена. Переподключитесь и подтвердите.",
+    "原操作已结束或已更新，请刷新后操作。":
+        "Исходная операция завершена или обновлена. Обновите, прежде чем продолжать.",
     "中继连接中断，操作结果需要核实。": "Ретранслятор отключён. Проверьте результат операции.",
-    "中继探针仅供本地开发使用。": "Проба ретранслятора предназначена только для локальной разработки.",
+    "中继探针仅供本地开发使用。":
+        "Проба ретранслятора предназначена только для локальной разработки.",
     "数据帧大小超出范围。": "Размер кадра данных вне допустимого диапазона.",
     "连接已关闭；操作结果需要核实。": "Соединение закрыто. Проверьте результат операции.",
-    "暂时无法连接可用的通知服务，请稍后重试。": "Не удалось связаться ни с одним сервисом уведомлений. Повторите попытку позже.",
-    "电脑已结束屏幕共享，请重新连接并授权": "Демонстрация экрана на компьютере завершена. Переподключитесь и снова дайте разрешение.",
+    "暂时无法连接可用的通知服务，请稍后重试。":
+        "Не удалось связаться ни с одним сервисом уведомлений. Повторите попытку позже.",
+    "电脑已结束屏幕共享，请重新连接并授权":
+        "Демонстрация экрана на компьютере завершена. Переподключитесь и снова дайте разрешение.",
     "加密中继": "Зашифрованный ретранслятор",
     "P2P 直连": "Прямое P2P-подключение",
     "TURN 中继": "Ретранслятор TURN",
     "WebRTC · 路径待确认": "WebRTC · Путь не подтверждён",
     "连接的电脑身份不一致。": "Идентификатор подключённого компьютера не совпадает.",
     "草稿归属不可读取": "Не удалось прочитать принадлежность черновика",
-    "工作区已属于另一份设备存储": "Рабочее пространство принадлежит другому хранилищу устройства",
-    "工作区设备存储尚未初始化": "Хранилище устройства для рабочего пространства не инициализировано",
+    "工作区已属于另一份设备存储":
+        "Рабочее пространство принадлежит другому хранилищу устройства",
+    "工作区设备存储尚未初始化":
+        "Хранилище устройства для рабочего пространства не инициализировано",
     "本机数据归属不一致": "Принадлежность локальных данных не совпадает",
     "本地绑定记录不可读取": "Не удалось прочитать локальную запись сопряжения",
-    "电脑绑定已变化，未覆盖原草稿。": "Сопряжение компьютера изменилось. Исходный черновик не перезаписан.",
+    "电脑绑定已变化，未覆盖原草稿。":
+        "Сопряжение компьютера изменилось. Исходный черновик не перезаписан.",
     "本机保存的数据不可读取": "Не удалось прочитать локально сохранённые данные",
     "附件大小或标识无效": "Недопустимый размер или идентификатор вложения",
-    "手机未发送附件已超过 256 MB，请先发送或移除其他草稿中的附件。": "Неотправленные вложения превышают 256 МБ. Сначала отправьте или удалите вложения из других черновиков.",
+    "手机未发送附件已超过 256 MB，请先发送或移除其他草稿中的附件。":
+        "Неотправленные вложения превышают 256 МБ. Сначала отправьте или удалите вложения из других черновиков.",
     "附件标识无效": "Недопустимый идентификатор вложения",
-    "本机附件已不可读取，请重新添加。": "Не удалось прочитать локальное вложение. Добавьте его снова.",
+    "本机附件已不可读取，请重新添加。":
+        "Не удалось прочитать локальное вложение. Добавьте его снова.",
     "本机附件大小已变化。": "Размер локального вложения изменился.",
     "拒绝": "Отклонить",
     "允许一次": "Разрешить один раз",
@@ -10601,14 +12994,18 @@ const messageCatalogs = <String, Map<String, String>>{
     "始终允许": "Всегда разрешать",
     "取消操作": "Отменить действие",
     "{0} · {1} 个目录": "{0} · Каталогов: {1}",
-    "{0} 上还没有项目。新建项目时选择电脑上的已有目录。": "На {0} пока нет проектов. Создайте проект из существующего каталога на компьютере.",
+    "{0} 上还没有项目。新建项目时选择电脑上的已有目录。":
+        "На {0} пока нет проектов. Создайте проект из существующего каталога на компьютере.",
     "{0} 个会话运行中": "Выполняется чатов: {0}",
     "不在项目中工作": "Работать вне проекта",
     "主目录": "Основной каталог",
-    "主目录是会话默认的工作目录；附加目录同样对 Agent 可见。从项目中移除目录不会删除电脑上的文件。": "Чаты начинаются в основном каталоге; дополнительные каталоги тоже видны Agents. Удаление каталога из проекта не удаляет файлы на компьютере.",
+    "主目录是会话默认的工作目录；附加目录同样对 Agent 可见。从项目中移除目录不会删除电脑上的文件。":
+        "Чаты начинаются в основном каталоге; дополнительные каталоги тоже видны Agents. Удаление каталога из проекта не удаляет файлы на компьютере.",
     "从项目中移除": "Убрать из проекта",
-    "保存结果待核实，请刷新后查看项目，不要重复保存。": "Результат сохранения не подтверждён. Обновите и проверьте проект, прежде чем сохранять снова.",
-    "保留会话和电脑上的文件，可随时恢复": "Чаты и файлы на компьютере сохраняются; восстановить можно в любой момент",
+    "保存结果待核实，请刷新后查看项目，不要重复保存。":
+        "Результат сохранения не подтверждён. Обновите и проверьте проект, прежде чем сохранять снова.",
+    "保留会话和电脑上的文件，可随时恢复":
+        "Чаты и файлы на компьютере сохраняются; восстановить можно в любой момент",
     "名称和目录": "Название и каталоги",
     "已移除项目（{0}）": "Удалённые проекты ({0})",
     "恢复": "Восстановить",
@@ -10620,7 +13017,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "没有匹配的项目": "Нет подходящих проектов",
     "没有未提交的更改": "Нет незакоммиченных изменений",
     "添加目录": "Добавить каталог",
-    "电脑离线，重新连接后才能保存。": "Компьютер не в сети. Переподключитесь, чтобы сохранить.",
+    "电脑离线，重新连接后才能保存。":
+        "Компьютер не в сети. Переподключитесь, чтобы сохранить.",
     "目录操作": "Действия с каталогом",
     "移除「{0}」？": "Удалить «{0}»?",
     "移除项目": "Удалить проект",
@@ -10634,19 +13032,23 @@ const messageCatalogs = <String, Map<String, String>>{
     "选择此目录": "Выбрать этот каталог",
     "选择目录": "Выбрать каталог",
     "项目不存在": "Проект не найден",
-    "项目会从列表中隐藏。会话和电脑上的文件都会保留，可在「已移除项目」中恢复。": "Проект скрывается из списка. Его чаты и файлы на компьютере сохраняются, а сам проект можно восстановить в разделе «Удалённые проекты».",
+    "项目会从列表中隐藏。会话和电脑上的文件都会保留，可在「已移除项目」中恢复。":
+        "Проект скрывается из списка. Его чаты и файлы на компьютере сохраняются, а сам проект можно восстановить в разделе «Удалённые проекты».",
     "项目名称": "Название проекта",
     "项目操作": "Действия с проектом",
     "项目状态无效。": "Недопустимое состояние проекта.",
-    "会话、项目和待处理都在电脑上，连接后即可使用。": "Чаты, проекты и ожидающие элементы хранятся на вашем компьютере. Подключитесь, чтобы ими пользоваться.",
-    "项目已在电脑上添加，可在「项目」中查看。": "Проект добавлен на компьютере. Он появится в разделе «Проекты».",
+    "会话、项目和待处理都在电脑上，连接后即可使用。":
+        "Чаты, проекты и ожидающие элементы хранятся на вашем компьютере. Подключитесь, чтобы ими пользоваться.",
+    "项目已在电脑上添加，可在「项目」中查看。":
+        "Проект добавлен на компьютере. Он появится в разделе «Проекты».",
     "正在连接电脑": "Подключение к вашему компьютеру",
     "暂时连接不上电脑": "Не удаётся подключиться к вашему компьютеру",
     "语言": "Язык",
     "发送文字到电脑": "Отправить текст на компьютер",
     "从电脑获取文字": "Получить текст с компьютера",
     "编辑后发送到电脑剪贴板": "Отредактировать и отправить в буфер обмена компьютера",
-    "读取电脑剪贴板，复制到这部手机": "Прочитать буфер обмена компьютера и скопировать на этот телефон",
+    "读取电脑剪贴板，复制到这部手机":
+        "Прочитать буфер обмена компьютера и скопировать на этот телефон",
     "粘贴或输入要发送到电脑的文字": "Вставьте или введите текст для отправки на компьютер",
     "文字超过 1 MB，无法发送": "Текст больше 1 МБ, отправить нельзя",
     "{0} 个字符": "Символов: {0}",
@@ -10654,9 +13056,12 @@ const messageCatalogs = <String, Map<String, String>>{
     "仅发送": "Только отправить",
     "发送并粘贴": "Отправить и вставить",
     "已粘贴到电脑": "Вставлено на компьютере",
-    "已发送到电脑剪贴板。更新电脑端后可自动粘贴": "Отправлено в буфер обмена компьютера. Обновите приложение для компьютера, чтобы вставлять автоматически",
-    "已发送到电脑剪贴板，可在电脑上粘贴": "Отправлено в буфер обмена компьютера. Вставьте его на компьютере",
-    "电脑剪贴板里没有文字，先在电脑上复制后再试": "В буфере обмена компьютера нет текста. Скопируйте что-нибудь на компьютере и повторите",
+    "已发送到电脑剪贴板。更新电脑端后可自动粘贴":
+        "Отправлено в буфер обмена компьютера. Обновите приложение для компьютера, чтобы вставлять автоматически",
+    "已发送到电脑剪贴板，可在电脑上粘贴":
+        "Отправлено в буфер обмена компьютера. Вставьте его на компьютере",
+    "电脑剪贴板里没有文字，先在电脑上复制后再试":
+        "В буфере обмена компьютера нет текста. Скопируйте что-нибудь на компьютере и повторите",
     "正在发送到电脑…": "Отправка на компьютер…",
     "正在从电脑获取…": "Получение с компьютера…",
     "是否允许运行以下命令？": "Разрешить выполнить эту команду?",
@@ -10682,13 +13087,18 @@ const messageCatalogs = <String, Map<String, String>>{
     "文件内容": "Содержимое файла",
     "搜索内容": "Поиск",
     "请求的工具": "Запрошенный инструмент",
-    "审批详情格式不完整，请让 Agent 重新发起审批。": "Сведения о запросе неполные. Попросите агента запросить разрешение снова.",
-    "操作详情过长，下方仅展示部分内容。请让 Agent 拆分操作后重新发起审批，以查看完整范围。": "Сведения слишком длинные, ниже показана только часть. Попросите агента разделить действие и запросить разрешение снова, чтобы увидеть всё.",
-    "Agent 未提供文件修改范围，请让 Agent 补充文件路径和修改内容。": "Агент не указал, какие файлы изменятся. Попросите его указать пути и изменения.",
-    "未能从审批请求中读取文件路径、命令或修改内容，请让 Agent 补充详情后重新发起审批。": "Не удалось прочитать путь, команду или изменения из запроса. Попросите агента добавить подробности и запросить разрешение снова.",
+    "审批详情格式不完整，请让 Agent 重新发起审批。":
+        "Сведения о запросе неполные. Попросите агента запросить разрешение снова.",
+    "操作详情过长，下方仅展示部分内容。请让 Agent 拆分操作后重新发起审批，以查看完整范围。":
+        "Сведения слишком длинные, ниже показана только часть. Попросите агента разделить действие и запросить разрешение снова, чтобы увидеть всё.",
+    "Agent 未提供文件修改范围，请让 Agent 补充文件路径和修改内容。":
+        "Агент не указал, какие файлы изменятся. Попросите его указать пути и изменения.",
+    "未能从审批请求中读取文件路径、命令或修改内容，请让 Agent 补充详情后重新发起审批。":
+        "Не удалось прочитать путь, команду или изменения из запроса. Попросите агента добавить подробности и запросить разрешение снова.",
     "收起": "Свернуть",
     "展开全部": "Показать всё",
-    "电脑已记录你的决定，但 Agent 已不在等待，请在会话中查看。": "Компьютер записал ваше решение, но агент больше не ждёт. Проверьте чат.",
+    "电脑已记录你的决定，但 Agent 已不在等待，请在会话中查看。":
+        "Компьютер записал ваше решение, но агент больше не ждёт. Проверьте чат.",
     "已取消回答": "Ответ отменён",
     "已处理": "Обработано",
     "你的选择：{0}": "Ваш выбор: {0}",
@@ -10696,13 +13106,17 @@ const messageCatalogs = <String, Map<String, String>>{
     "已在电脑上处理，或请求已失效": "Обработано на компьютере или запрос устарел",
     "清空已处理记录": "Очистить обработанное",
     "清空已处理记录？": "Очистить обработанное?",
-    "只从这部手机删除，等待处理的请求不受影响。": "Удаляется только с этого телефона. Ожидающие запросы останутся.",
+    "只从这部手机删除，等待处理的请求不受影响。":
+        "Удаляется только с этого телефона. Ожидающие запросы останутся.",
     "没有权限请求": "Нет запросов разрешений",
-    "Agent 需要运行命令或修改文件时，会在这里请你确认。": "Когда агенту нужно выполнить команду или изменить файлы, он спросит здесь.",
+    "Agent 需要运行命令或修改文件时，会在这里请你确认。":
+        "Когда агенту нужно выполнить команду или изменить файлы, он спросит здесь.",
     "没有待回答的问题": "Нет вопросов",
-    "Agent 需要你做选择或补充信息时，问题会出现在这里。": "Когда агенту нужен ваш выбор или уточнение, вопрос появится здесь.",
+    "Agent 需要你做选择或补充信息时，问题会出现在这里。":
+        "Когда агенту нужен ваш выбор или уточнение, вопрос появится здесь.",
     "收件箱是空的": "Входящие пусты",
-    "Agent 请求权限或向你提问时会出现在这里，处理过的记录也会保留，方便回看。": "Здесь появляются запросы разрешений и вопросы агентов. Обработанные тоже остаются, чтобы их можно было пересмотреть.",
+    "Agent 请求权限或向你提问时会出现在这里，处理过的记录也会保留，方便回看。":
+        "Здесь появляются запросы разрешений и вопросы агентов. Обработанные тоже остаются, чтобы их можно было пересмотреть.",
     "等待你回答": "Ждёт вашего ответа",
     "等待你确认": "Ждёт вашего подтверждения",
     "权限请求": "Запрос разрешения",
@@ -10710,68 +13124,103 @@ const messageCatalogs = <String, Map<String, String>>{
     "可以返回收件箱查看其它事项。": "Вернитесь во входящие, чтобы увидеть остальное.",
     "跳过所有权限确认。": "Пропускает все запросы разрешений.",
     "减少确认次数。": "Уменьшает число подтверждений.",
-    "仅自动读取；其他操作均需先征得你的批准。": "Автоматически только читает; всё остальное сначала требует вашего одобрения.",
-    "不中断任务；所有操作和决策均自动进行。": "Не прерывает работу; все действия и решения выполняются автоматически.",
-    "受保护的工具操作前请求审批。": "Запрашивает одобрение перед защищёнными действиями инструментов.",
+    "仅自动读取；其他操作均需先征得你的批准。":
+        "Автоматически только читает; всё остальное сначала требует вашего одобрения.",
+    "不中断任务；所有操作和决策均自动进行。":
+        "Не прерывает работу; все действия и решения выполняются автоматически.",
+    "受保护的工具操作前请求审批。":
+        "Запрашивает одобрение перед защищёнными действиями инструментов.",
     "关闭沙箱并跳过审批。": "Отключает песочницу и пропускает подтверждения.",
-    "每次工具执行前在此审批；审批桥不可用时拒绝执行。": "Подтверждайте каждый запуск инструмента здесь; запуски отклоняются, если мост подтверждений недоступен.",
-    "OpenCode 默认 Agent；工具按你配置的权限执行。": "Агент OpenCode по умолчанию; инструменты следуют настроенным разрешениям.",
-    "编辑文件和其他受保护操作前请求审批。": "Запрашивает подтверждение перед правкой файлов и другими защищёнными действиями.",
+    "每次工具执行前在此审批；审批桥不可用时拒绝执行。":
+        "Подтверждайте каждый запуск инструмента здесь; запуски отклоняются, если мост подтверждений недоступен.",
+    "OpenCode 默认 Agent；工具按你配置的权限执行。":
+        "Агент OpenCode по умолчанию; инструменты следуют настроенным разрешениям.",
+    "编辑文件和其他受保护操作前请求审批。":
+        "Запрашивает подтверждение перед правкой файлов и другими защищёнными действиями.",
     "只分析，不修改文件或执行命令。": "Анализирует, не изменяя файлы и не выполняя команды.",
     "改文件前先问我。": "Спрашивает перед изменением файлов.",
-    "只读沙箱；需要扩大权限时请求审批。": "Песочница только для чтения; при необходимости большего доступа запрашивает подтверждение.",
+    "只读沙箱；需要扩大权限时请求审批。":
+        "Песочница только для чтения; при необходимости большего доступа запрашивает подтверждение.",
     "按需确认": "Спрашивать при необходимости",
     "只读模式": "Только чтение",
     "所选策略在下一轮执行时生效": "Выбранная политика вступит в силу со следующего хода",
-    "从不弹出确认；只运行预先允许和安全的只读操作，其余一律拒绝。": "Никогда не спрашивает; выполняет заранее разрешённые и безопасные действия чтения, остальное отклоняет.",
-    "Pi 不内置逐工具审批或沙箱；工具直接执行，扩展发起的询问会显示在对话中。": "У Pi нет одобрений для отдельных инструментов и песочницы; инструменты выполняются сразу, а вопросы расширений появляются в диалоге.",
+    "从不弹出确认；只运行预先允许和安全的只读操作，其余一律拒绝。":
+        "Никогда не спрашивает; выполняет заранее разрешённые и безопасные действия чтения, остальное отклоняет.",
+    "Pi 不内置逐工具审批或沙箱；工具直接执行，扩展发起的询问会显示在对话中。":
+        "У Pi нет одобрений для отдельных инструментов и песочницы; инструменты выполняются сразу, а вопросы расширений появляются в диалоге.",
     "跳过审批": "Без подтверждений",
     "仅限预先允许": "Только разрешённое заранее",
     "自动判断": "Авто",
-    "监督模式：工具操作前请求审批。": "Под контролем: запрашивает одобрение перед действиями инструментов.",
-    "由 ZCode 判断哪些操作可直接执行。": "ZCode решает, какие действия можно выполнять сразу.",
-    "只运行预先允许的工具，其余直接拒绝，不请求审批。": "Запускает только заранее разрешённые инструменты и отклоняет остальные без запроса.",
-    "由 AI 审查员批准或拒绝原本需要询问的操作；审查失败只阻止该操作。": "ИИ-проверяющий одобряет или отклоняет каждое действие, которое иначе потребовало бы подтверждения; неудачная проверка блокирует только это действие.",
-    "由 Claude 自动分类权限请求。": "Позволяет Claude автоматически классифицировать запросы разрешений.",
+    "监督模式：工具操作前请求审批。":
+        "Под контролем: запрашивает одобрение перед действиями инструментов.",
+    "由 ZCode 判断哪些操作可直接执行。":
+        "ZCode решает, какие действия можно выполнять сразу.",
+    "只运行预先允许的工具，其余直接拒绝，不请求审批。":
+        "Запускает только заранее разрешённые инструменты и отклоняет остальные без запроса.",
+    "由 AI 审查员批准或拒绝原本需要询问的操作；审查失败只阻止该操作。":
+        "ИИ-проверяющий одобряет или отклоняет каждое действие, которое иначе потребовало бы подтверждения; неудачная проверка блокирует только это действие.",
+    "由 Claude 自动分类权限请求。":
+        "Позволяет Claude автоматически классифицировать запросы разрешений.",
     "完全访问": "Полный доступ",
     "编辑前先出计划。": "Составляет план перед правками.",
     "默认权限": "Разрешения по умолчанию",
-    "允许文件编辑；其他受保护操作仍需审批。": "Разрешает правку файлов; остальные защищённые действия требуют подтверждения.",
+    "允许文件编辑；其他受保护操作仍需审批。":
+        "Разрешает правку файлов; остальные защищённые действия требуют подтверждения.",
     "权限策略": "Политика разрешений",
     "原生规则": "Нативные правила",
-    "先制定计划；需要批准的操作仍会询问。": "Сначала составляет план; действия, требующие одобрения, по-прежнему запрашиваются.",
+    "先制定计划；需要批准的操作仍会询问。":
+        "Сначала составляет план; действия, требующие одобрения, по-прежнему запрашиваются.",
     "操作前确认": "Спрашивать перед действием",
-    "按 Cursor 权限规则执行；需要审批的操作在此确认。": "Следует правилам разрешений Cursor; действия, требующие одобрения, подтверждаются здесь.",
+    "按 Cursor 权限规则执行；需要审批的操作在此确认。":
+        "Следует правилам разрешений Cursor; действия, требующие одобрения, подтверждаются здесь.",
     "计划模式": "Режим плана",
-    "对所有 Agent 跳过全部权限检查，包括危险命令。": "Пропускает все проверки разрешений, включая опасные команды, для всех агентов.",
-    "此 Agent 未报告可切换的权限模式；审批请求仍会显示在对话中。": "Этот агент не сообщает переключаемые режимы разрешений; запросы на одобрение по-прежнему появляются в диалоге.",
-    "原 Agent、模型、思考强度或权限策略当前不可用，请重新选择后发送。": "Исходный агент, модель, уровень рассуждений или политика разрешений больше недоступны. Выберите снова перед отправкой.",
+    "对所有 Agent 跳过全部权限检查，包括危险命令。":
+        "Пропускает все проверки разрешений, включая опасные команды, для всех агентов.",
+    "此 Agent 未报告可切换的权限模式；审批请求仍会显示在对话中。":
+        "Этот агент не сообщает переключаемые режимы разрешений; запросы на одобрение по-прежнему появляются в диалоге.",
+    "原 Agent、模型、思考强度或权限策略当前不可用，请重新选择后发送。":
+        "Исходный агент, модель, уровень рассуждений или политика разрешений больше недоступны. Выберите снова перед отправкой.",
     "计划模式；禁用所有编辑工具。": "Режим плана; все инструменты редактирования отключены.",
-    "每个工具首次使用时请求授权。": "Запрашивает разрешение при первом использовании каждого инструмента.",
+    "每个工具首次使用时请求授权。":
+        "Запрашивает разрешение при первом использовании каждого инструмента.",
     "本会话内自动接受文件编辑。": "Автоматически принимает правки файлов в этом сеансе.",
     "自动编辑文件。": "Редактирует файлы автоматически.",
-    "自动驾驶：工具操作无需询问直接执行。": "Автопилот: выполняет действия инструментов без вопросов.",
-    "由 Grok 判断哪些工具操作可自动执行。": "Grok решает, какие действия инструментов можно выполнять автоматически.",
-    "跳过 Claude Code 工具权限检查。": "Пропускает проверки разрешений инструментов Claude Code.",
-    "自动允许 Antigravity 工具操作。": "Автоматически разрешает действия инструментов Antigravity.",
+    "自动驾驶：工具操作无需询问直接执行。":
+        "Автопилот: выполняет действия инструментов без вопросов.",
+    "由 Grok 判断哪些工具操作可自动执行。":
+        "Grok решает, какие действия инструментов можно выполнять автоматически.",
+    "跳过 Claude Code 工具权限检查。":
+        "Пропускает проверки разрешений инструментов Claude Code.",
+    "自动允许 Antigravity 工具操作。":
+        "Автоматически разрешает действия инструментов Antigravity.",
     "接受编辑": "Принимать правки",
-    "工作区写入沙箱；需要越出沙箱时请求审批。": "Песочница с записью в рабочую область; подтверждение запрашивается только при выходе из песочницы.",
+    "工作区写入沙箱；需要越出沙箱时请求审批。":
+        "Песочница с записью в рабочую область; подтверждение запрашивается только при выходе из песочницы.",
     "允许所有工具操作，无需审批。": "Разрешает все действия инструментов без одобрения.",
-    "探索并制定计划；使用 Claude 原生计划模式。": "Исследование и составление плана в нативном режиме плана Claude.",
-    "使用 Antigravity 原生计划模式；工具执行仍在此审批。": "Использует нативный режим плана Antigravity; запуски инструментов по-прежнему подтверждаются здесь.",
-    "自动批准操作；明确禁止的操作和团队限制仍然生效。": "Одобряет действия автоматически; явно запрещённые действия и ограничения команды продолжают действовать.",
-    "常规编辑和命令自动执行；高风险操作、提问和计划仍会询问。": "Обычные правки и команды выполняются автоматически; рискованные действия, вопросы и планы по-прежнему требуют подтверждения.",
+    "探索并制定计划；使用 Claude 原生计划模式。":
+        "Исследование и составление плана в нативном режиме плана Claude.",
+    "使用 Antigravity 原生计划模式；工具执行仍在此审批。":
+        "Использует нативный режим плана Antigravity; запуски инструментов по-прежнему подтверждаются здесь.",
+    "自动批准操作；明确禁止的操作和团队限制仍然生效。":
+        "Одобряет действия автоматически; явно запрещённые действия и ограничения команды продолжают действовать.",
+    "常规编辑和命令自动执行；高风险操作、提问和计划仍会询问。":
+        "Обычные правки и команды выполняются автоматически; рискованные действия, вопросы и планы по-прежнему требуют подтверждения.",
     "正在响应": "Отвечает",
     "分叉 · {0}": "Fork · {0}",
     "分叉自较早的会话": "Ответвление от более раннего разговора",
     "分叉自": "Ответвление от",
-    "已恢复所选轮次结束时的文件，未提交的成果可在“变更”中查看。": "Файлы восстановлены на конец выбранного раунда; незафиксированная работа находится в разделе «Изменения».",
-    "此项目不是 Git 仓库，分叉只继承对话上下文，并沿用同一项目目录。": "Этот проект не является Git-репозиторием, поэтому fork сохраняет только разговор и продолжает в той же папке.",
-    "此会话由旧版分叉创建，未恢复历史轮次的文件。": "Этот разговор создан старой версией fork и не восстановил файлы раунда.",
-    "沿用同一项目目录；分叉不会还原文件。": "Используется та же папка проекта; fork не восстанавливает файлы.",
+    "已恢复所选轮次结束时的文件，未提交的成果可在“变更”中查看。":
+        "Файлы восстановлены на конец выбранного раунда; незафиксированная работа находится в разделе «Изменения».",
+    "此项目不是 Git 仓库，分叉只继承对话上下文，并沿用同一项目目录。":
+        "Этот проект не является Git-репозиторием, поэтому fork сохраняет только разговор и продолжает в той же папке.",
+    "此会话由旧版分叉创建，未恢复历史轮次的文件。":
+        "Этот разговор создан старой версией fork и не восстановил файлы раунда.",
+    "沿用同一项目目录；分叉不会还原文件。":
+        "Используется та же папка проекта; fork не восстанавливает файлы.",
     "收起继承的上下文": "Скрыть унаследованный контекст",
     "查看继承的上下文（{0} 轮）": "Показать унаследованный контекст ({0})",
-    "Agent 已获得以上上下文，在下方发送消息即可从这里继续。": "Агент уже знает этот контекст. Отправьте сообщение ниже, чтобы продолжить отсюда.",
+    "Agent 已获得以上上下文，在下方发送消息即可从这里继续。":
+        "Агент уже знает этот контекст. Отправьте сообщение ниже, чтобы продолжить отсюда.",
   },
   "it": {
     "返回": "Indietro",
@@ -10810,30 +13259,41 @@ const messageCatalogs = <String, Map<String, String>>{
     "电脑 {0}": "Computer {0}",
     "电脑离线": "Computer offline",
     "已提交并推送": "Commit e push eseguiti",
-    "电脑绑定已改变，请返回设备列表。": "L’associazione del computer è cambiata. Torna all’elenco dei dispositivi.",
+    "电脑绑定已改变，请返回设备列表。":
+        "L’associazione del computer è cambiata. Torna all’elenco dei dispositivi.",
     "任务或远控期间保持唤醒": "Resta attivo durante attività o controllo remoto",
-    "电脑离线，重连后刷新设置": "Computer offline. Riconnettiti per aggiornare le impostazioni.",
-    "阻止空闲睡眠，仍可锁屏或手动睡眠": "Impedisce la sospensione per inattività. Puoi comunque bloccare o sospendere manualmente.",
+    "电脑离线，重连后刷新设置":
+        "Computer offline. Riconnettiti per aggiornare le impostazioni.",
+    "阻止空闲睡眠，仍可锁屏或手动睡眠":
+        "Impedisce la sospensione per inattività. Puoi comunque bloccare o sospendere manualmente.",
     "电脑暂未能保持唤醒：{0}": "Impossibile mantenere attivo il computer: {0}",
     "刷新保持唤醒设置": "Aggiorna l’impostazione per restare attivo",
     "电脑": "Computer",
     "扫码连接": "Scansiona per connetterti",
     "偏好设置": "Preferenze",
     "把电脑上的工作带在身边": "Porta il tuo lavoro sempre con te",
-    "连接自己的电脑，查看会话、发送任务并处理 Agent 的权限请求。无需注册账号。": "Connetti il tuo computer per vedere le conversazioni, inviare attività e rispondere alle richieste di autorizzazione degli Agent. Nessun account necessario.",
+    "连接自己的电脑，查看会话、发送任务并处理 Agent 的权限请求。无需注册账号。":
+        "Connetti il tuo computer per vedere le conversazioni, inviare attività e rispondere alle richieste di autorizzazione degli Agent. Nessun account necessario.",
     "连接电脑": "Connetti computer",
-    "当前内测版本尚未配置接入服务。": "Il servizio di connessione non è configurato in questa versione beta.",
-    "在电脑端打开「连接手机」，扫描二维码。": "Apri «Connetti telefono» sul computer e scansiona il codice QR.",
-    "扫描电脑上的二维码，或粘贴配对链接": "Scansiona il codice QR sul computer o incolla un link di associazione.",
-    "当前内测版本尚未配置接入服务": "Il servizio di connessione non è configurato in questa versione beta",
+    "当前内测版本尚未配置接入服务。":
+        "Il servizio di connessione non è configurato in questa versione beta.",
+    "在电脑端打开「连接手机」，扫描二维码。":
+        "Apri «Connetti telefono» sul computer e scansiona il codice QR.",
+    "扫描电脑上的二维码，或粘贴配对链接":
+        "Scansiona il codice QR sul computer o incolla un link di associazione.",
+    "当前内测版本尚未配置接入服务":
+        "Il servizio di connessione non è configurato in questa versione beta",
     "更多": "Altro",
     "从这部手机移除「{0}」？": "Rimuovere «{0}» da questo telefono?",
-    "手机会删除这台电脑的配对凭证，之后需重新扫码才能连接。电脑上的任务不受影响；如需让电脑也拒绝这部手机，请在电脑的设备列表中撤销。": "Le credenziali di associazione di questo computer verranno eliminate dal telefono. Per riconnetterti dovrai scansionare di nuovo. Le attività sul computer non sono interessate. Per far sì che anche il computer rifiuti questo telefono, revocalo nell’elenco dei dispositivi del computer.",
+    "手机会删除这台电脑的配对凭证，之后需重新扫码才能连接。电脑上的任务不受影响；如需让电脑也拒绝这部手机，请在电脑的设备列表中撤销。":
+        "Le credenziali di associazione di questo computer verranno eliminate dal telefono. Per riconnetterti dovrai scansionare di nuovo. Le attività sul computer non sono interessate. Per far sì che anche il computer rifiuti questo telefono, revocalo nell’elenco dei dispositivi del computer.",
     "取消": "Annulla",
-    "移除未完成，连接已关闭，请重试或核实安全存储。": "Rimozione incompleta. La connessione è chiusa. Riprova o controlla l’archiviazione sicura.",
+    "移除未完成，连接已关闭，请重试或核实安全存储。":
+        "Rimozione incompleta. La connessione è chiusa. Riprova o controlla l’archiviazione sicura.",
     "移除": "Rimuovi",
     "撤销绑定": "Revoca associazione",
-    "请在「{0}」的设备列表中撤销这部手机。撤销后这部手机将无法再连接该电脑；电脑上正在执行的任务不受影响。": "Revoca questo telefono nell’elenco dei dispositivi di «{0}». Non potrà più connettersi a quel computer. Le attività in esecuzione sul computer non sono interessate.",
+    "请在「{0}」的设备列表中撤销这部手机。撤销后这部手机将无法再连接该电脑；电脑上正在执行的任务不受影响。":
+        "Revoca questo telefono nell’elenco dei dispositivi di «{0}». Non potrà più connettersi a quel computer. Le attività in esecuzione sul computer non sono interessate.",
     "知道了": "Ho capito",
     "通知设置": "Notifiche",
     "重新连接": "Riconnetti",
@@ -10849,28 +13309,38 @@ const messageCatalogs = <String, Map<String, String>>{
     "版本不支持": "Versione non supportata",
     "异常": "Errore",
     "不可用": "Non disponibile",
-    "直连未建立，使用加密中继": "Connessione diretta non disponibile. Viene usato un relay cifrato.",
-    "连接已变化，正在恢复远程桌面": "La connessione è cambiata. Ripristino del desktop remoto.",
+    "直连未建立，使用加密中继":
+        "Connessione diretta non disponibile. Viene usato un relay cifrato.",
+    "连接已变化，正在恢复远程桌面":
+        "La connessione è cambiata. Ripristino del desktop remoto.",
     "连接中断，正在恢复远程桌面": "Connessione persa. Ripristino del desktop remoto.",
     "无法准备新解码器": "Impossibile preparare un nuovo decoder",
     "新画面解码不可用": "Nuovo decoder video non disponibile",
     "换路后画面不可用": "Video non disponibile dopo il cambio di connessione",
     "正在核实并恢复远程桌面连接": "Verifica e ripristino del desktop remoto",
-    "连接归属暂时无法核实，正在恢复远程桌面": "Impossibile verificare a chi appartiene la connessione. Ripristino del desktop remoto.",
-    "连接暂时无法恢复，请点击重新连接。": "Impossibile ripristinare la connessione. Tocca Riconnetti.",
-    "电脑离线，连接后再打开远程桌面": "Computer offline. Riconnettiti per aprire il desktop remoto.",
+    "连接归属暂时无法核实，正在恢复远程桌面":
+        "Impossibile verificare a chi appartiene la connessione. Ripristino del desktop remoto.",
+    "连接暂时无法恢复，请点击重新连接。":
+        "Impossibile ripristinare la connessione. Tocca Riconnetti.",
+    "电脑离线，连接后再打开远程桌面":
+        "Computer offline. Riconnettiti per aprire il desktop remoto.",
     "电脑没有可用的显示器": "Nessuno schermo disponibile su questo computer",
     "手机解码器不可用": "Decoder del telefono non disponibile",
     "手机视频画面不可用": "Video non disponibile sul telefono",
-    "视频画面不可用，使用图片模式": "Video non disponibile. Viene usata la modalità immagine.",
+    "视频画面不可用，使用图片模式":
+        "Video non disponibile. Viene usata la modalità immagine.",
     "暂时无法连接：{0}": "Impossibile connettersi: {0}",
     "{0}，已切换图片模式": "{0}. Passaggio alla modalità immagine.",
-    "请在电脑上允许共享屏幕和键鼠控制": "Consenti la condivisione dello schermo e il controllo di tastiera e mouse sul computer.",
+    "请在电脑上允许共享屏幕和键鼠控制":
+        "Consenti la condivisione dello schermo e il controllo di tastiera e mouse sul computer.",
     "电脑授权回复无效，请重新连接": "Risposta di autorizzazione non valida. Riconnettiti.",
-    "电脑未能准备屏幕共享，请重新连接并授权": "Il computer non è riuscito a preparare la condivisione dello schermo. Riconnettiti e autorizza di nuovo.",
-    "等待电脑授权超时，请重新连接后再试": "Tempo di attesa dell’autorizzazione scaduto. Riconnettiti e riprova.",
+    "电脑未能准备屏幕共享，请重新连接并授权":
+        "Il computer non è riuscito a preparare la condivisione dello schermo. Riconnettiti e autorizza di nuovo.",
+    "等待电脑授权超时，请重新连接后再试":
+        "Tempo di attesa dell’autorizzazione scaduto. Riconnettiti e riprova.",
     "画面正在恢复": "Ripristino del video",
-    "电脑未确认当前画面的就绪状态": "Il computer non ha confermato che il video attuale è pronto.",
+    "电脑未确认当前画面的就绪状态":
+        "Il computer non ha confermato che il video attuale è pronto.",
     "电脑视频编码异常": "Errore del codificatore video del computer",
     "电脑画面恢复超时": "Tempo di ripristino del video del computer scaduto",
     "电脑画面正在恢复": "Ripristino del video del computer",
@@ -10885,17 +13355,22 @@ const messageCatalogs = <String, Map<String, String>>{
     "过于频繁": "Troppe richieste",
     "画面连接中断，正在重新连接": "Video disconnesso. Riconnessione in corso.",
     "切屏后解码器不可用": "Decoder non disponibile dopo il cambio di schermo",
-    "切换屏幕失败，正在恢复连接": "Impossibile cambiare schermo. Ripristino della connessione.",
+    "切换屏幕失败，正在恢复连接":
+        "Impossibile cambiare schermo. Ripristino della connessione.",
     "发送{0}到电脑": "Invia {0} al computer",
     "文字": "testo",
     "图片": "immagine",
-    "读取手机剪贴板，按系统提示允许粘贴": "Leggi gli appunti del telefono. Consenti di incollare quando richiesto.",
+    "读取手机剪贴板，按系统提示允许粘贴":
+        "Leggi gli appunti del telefono. Consenti di incollare quando richiesto.",
     "从电脑获取{0}": "Ottieni {0} dal computer",
     "复制到手机剪贴板": "Copia negli appunti del telefono",
-    "当前连接不支持独立剪贴板传输，请更新电脑和 App 后重试": "Questa connessione non supporta trasferimenti separati degli appunti. Aggiorna l’app desktop e l’app per telefono.",
-    "手机剪贴板没有图片，或尚未允许粘贴": "Nessuna immagine negli appunti del telefono, oppure non è stato concesso il permesso di incollare.",
+    "当前连接不支持独立剪贴板传输，请更新电脑和 App 后重试":
+        "Questa connessione non supporta trasferimenti separati degli appunti. Aggiorna l’app desktop e l’app per telefono.",
+    "手机剪贴板没有图片，或尚未允许粘贴":
+        "Nessuna immagine negli appunti del telefono, oppure non è stato concesso il permesso di incollare.",
     "手机剪贴板没有文字": "Nessun testo negli appunti del telefono",
-    "电脑尚不支持分块剪贴板传输，请更新电脑客户端": "Aggiorna l’app desktop per trasferire gli appunti a blocchi.",
+    "电脑尚不支持分块剪贴板传输，请更新电脑客户端":
+        "Aggiorna l’app desktop per trasferire gli appunti a blocchi.",
     "已发送到电脑剪贴板": "Inviato agli appunti del computer",
     "已复制到手机剪贴板": "Copiato negli appunti del telefono",
     "剪贴板操作未完成": "Operazione sugli appunti incompleta",
@@ -10907,29 +13382,38 @@ const messageCatalogs = <String, Map<String, String>>{
     "重新选择共享屏幕": "Scegli di nuovo lo schermo da condividere",
     "正在准备剪贴板传输…": "Preparazione del trasferimento degli appunti…",
     "剪贴板传输 {0}%": "Trasferimento degli appunti {0}%",
-    "已停止等待，复制操作可能已完成，请核实剪贴板": "Attesa interrotta. La copia potrebbe essere stata completata. Controlla gli appunti.",
+    "已停止等待，复制操作可能已完成，请核实剪贴板":
+        "Attesa interrotta. La copia potrebbe essere stata completata. Controlla gli appunti.",
     "键盘": "Tastiera",
     "移动画面": "Sposta vista",
     "操作电脑": "Controlla il computer",
     "适应屏幕": "Adatta allo schermo",
     "剪贴板": "Appunti",
-    "电脑已锁定，Agent 操作仍可用。\n解锁电脑后点「重新连接」。": "Computer bloccato. Le azioni degli Agent sono ancora disponibili.\nSblocca il computer, poi tocca Riconnetti.",
+    "电脑已锁定，Agent 操作仍可用。\n解锁电脑后点「重新连接」。":
+        "Computer bloccato. Le azioni degli Agent sono ancora disponibili.\nSblocca il computer, poi tocca Riconnetti.",
     "服务连接正常": "Servizio connesso",
     "连接失败，请重试。": "Connessione non riuscita. Riprova.",
-    "接入服务只转发加密数据，会话和任务保存在你的电脑上。": "Il servizio di connessione inoltra solo dati cifrati. Conversazioni e attività restano sul tuo computer.",
+    "接入服务只转发加密数据，会话和任务保存在你的电脑上。":
+        "Il servizio di connessione inoltra solo dati cifrati. Conversazioni e attività restano sul tuo computer.",
     "尚未配置服务地址": "Indirizzo del servizio non configurato",
-    "此服务尚未开放电脑配对。": "L’associazione dei computer non è attiva su questo servizio.",
+    "此服务尚未开放电脑配对。":
+        "L’associazione dei computer non è attiva su questo servizio.",
     "正在检查": "Verifica in corso",
     "检查连接": "Verifica connessione",
-    "后台提醒暂未启用，静音设置可提前保存。仅影响这部手机，不影响电脑任务和 Agent 审批。": "Gli avvisi in background non sono attivi. Puoi già salvare le preferenze di silenzio. Valgono solo per questo telefono e non influiscono sulle attività del computer né sulle approvazioni degli Agent.",
-    "通知通道已连接。提醒只影响这部手机，不会直接批准操作。": "Notifiche connesse. Gli avvisi riguardano solo questo telefono e non approvano mai azioni automaticamente.",
-    "后台提醒暂未启用，可在这里授权系统通知。": "Gli avvisi in background non sono attivi. Concedi qui il permesso per le notifiche.",
-    "此版本未配置后台提醒，静音设置可提前保存。": "Gli avvisi in background non sono configurati in questa build. Puoi già salvare le preferenze di silenzio.",
+    "后台提醒暂未启用，静音设置可提前保存。仅影响这部手机，不影响电脑任务和 Agent 审批。":
+        "Gli avvisi in background non sono attivi. Puoi già salvare le preferenze di silenzio. Valgono solo per questo telefono e non influiscono sulle attività del computer né sulle approvazioni degli Agent.",
+    "通知通道已连接。提醒只影响这部手机，不会直接批准操作。":
+        "Notifiche connesse. Gli avvisi riguardano solo questo telefono e non approvano mai azioni automaticamente.",
+    "后台提醒暂未启用，可在这里授权系统通知。":
+        "Gli avvisi in background non sono attivi. Concedi qui il permesso per le notifiche.",
+    "此版本未配置后台提醒，静音设置可提前保存。":
+        "Gli avvisi in background non sono configurati in questa build. Puoi già salvare le preferenze di silenzio.",
     "正在连接通知服务": "Connessione al servizio di notifiche",
     "重新检测后台提醒": "Ricontrolla gli avvisi in background",
     "启用后台提醒": "Attiva gli avvisi in background",
     "通知设置暂不可用。": "Impostazioni delle notifiche non disponibili.",
-    "保存结果未确认，请检查网络后重新读取。": "Salvataggio non confermato. Controlla la rete e ricarica.",
+    "保存结果未确认，请检查网络后重新读取。":
+        "Salvataggio non confermato. Controlla la rete e ricarica.",
     "会话": "Conversazioni",
     "重新读取": "Ricarica",
     "静音这台电脑": "Silenzia questo computer",
@@ -10937,14 +13421,17 @@ const messageCatalogs = <String, Map<String, String>>{
     "已静音会话": "Conversazioni silenziate",
     "未加载的会话": "Conversazione non caricata",
     "取消会话静音": "Riattiva l’audio della conversazione",
-    "这台电脑已静音，取消会话静音后仍不会收到提醒。": "Questo computer è silenziato. Riattivare l’audio della conversazione non attiverà gli avvisi.",
+    "这台电脑已静音，取消会话静音后仍不会收到提醒。":
+        "Questo computer è silenziato. Riattivare l’audio della conversazione non attiverà gli avvisi.",
     "静音此会话": "Silenzia questa conversazione",
     "清除离线缓存？": "Svuotare la cache offline?",
-    "只清除此手机保存的会话缓存，保留草稿、未发送附件和电脑配对。电脑上的会话不受影响，联网后会重新缓存。": "Svuota solo le conversazioni in cache su questo telefono. Bozze, allegati non inviati e associazioni vengono mantenuti. Le conversazioni sul computer non sono interessate e torneranno in cache quando sarai online.",
+    "只清除此手机保存的会话缓存，保留草稿、未发送附件和电脑配对。电脑上的会话不受影响，联网后会重新缓存。":
+        "Svuota solo le conversazioni in cache su questo telefono. Bozze, allegati non inviati e associazioni vengono mantenuti. Le conversazioni sul computer non sono interessate e torneranno in cache quando sarai online.",
     "清除": "Svuota",
     "未能清除缓存：{0}": "Impossibile svuotare la cache: {0}",
     "最近会话离线缓存": "Cache offline delle conversazioni recenti",
-    "{0} 个会话 · {1} MB\n最多 30 个会话、32 MB；保存文字和附件信息。": "{0} conversazioni · {1} MB\nFino a 30 conversazioni e 32 MB. Salva il testo e le informazioni sugli allegati.",
+    "{0} 个会话 · {1} MB\n最多 30 个会话、32 MB；保存文字和附件信息。":
+        "{0} conversazioni · {1} MB\nFino a 30 conversazioni e 32 MB. Salva il testo e le informazioni sugli allegati.",
     "正在读取缓存大小…": "Lettura delle dimensioni della cache…",
     "正在清除…": "Svuotamento…",
     "清除缓存": "Svuota cache",
@@ -10958,15 +13445,21 @@ const messageCatalogs = <String, Map<String, String>>{
     "管理已绑定设备": "Gestisci dispositivi associati",
     "{0} 台": "{0} computer",
     "本机数据": "Su questo telefono",
-    "无需注册账号：通过电脑上的配对二维码建立信任，可随时在电脑上撤销。草稿和离线缓存保存在这部手机；提醒偏好可在电脑或会话菜单中设置。": "Nessun account necessario. Scansiona il codice QR sul computer per associarlo e revoca l’accesso da lì in qualsiasi momento. Bozze e cache offline restano su questo telefono. Configura gli avvisi sul computer o dal menu di una conversazione.",
-    "项目目录不可用，请刷新项目后重试。": "Cartella del progetto non disponibile. Aggiorna il progetto e riprova.",
+    "无需注册账号：通过电脑上的配对二维码建立信任，可随时在电脑上撤销。草稿和离线缓存保存在这部手机；提醒偏好可在电脑或会话菜单中设置。":
+        "Nessun account necessario. Scansiona il codice QR sul computer per associarlo e revoca l’accesso da lì in qualsiasi momento. Bozze e cache offline restano su questo telefono. Configura gli avvisi sul computer o dal menu di una conversazione.",
+    "项目目录不可用，请刷新项目后重试。":
+        "Cartella del progetto non disponibile. Aggiorna il progetto e riprova.",
     "选择终端目录": "Scegli la cartella del terminale",
-    "连接或项目目录已改变，请重新选择终端目录。": "La connessione o la cartella del progetto è cambiata. Scegli di nuovo la cartella del terminale.",
-    "启动结果待核实，请使用原操作恢复。": "Risultato dell’avvio non confermato. Recupera l’operazione originale.",
+    "连接或项目目录已改变，请重新选择终端目录。":
+        "La connessione o la cartella del progetto è cambiata. Scegli di nuovo la cartella del terminale.",
+    "启动结果待核实，请使用原操作恢复。":
+        "Risultato dell’avvio non confermato. Recupera l’operazione originale.",
     "关闭这个终端？": "Chiudere questo terminale?",
-    "将在电脑上结束该终端及其中运行的命令。离开页面不会关闭终端。": "Termina questo terminale e i comandi in esecuzione sul computer. Uscire da questa pagina non chiude il terminale.",
+    "将在电脑上结束该终端及其中运行的命令。离开页面不会关闭终端。":
+        "Termina questo terminale e i comandi in esecuzione sul computer. Uscire da questa pagina non chiude il terminale.",
     "关闭终端": "Chiudi terminale",
-    "连接已改变，请刷新后重新确认关闭。": "La connessione è cambiata. Aggiorna e conferma di nuovo la chiusura.",
+    "连接已改变，请刷新后重新确认关闭。":
+        "La connessione è cambiata. Aggiorna e conferma di nuovo la chiusura.",
     "终端 {0}": "Terminale {0}",
     "新建终端": "Nuovo terminale",
     "关闭当前终端": "Chiudi il terminale attuale",
@@ -10976,13 +13469,16 @@ const messageCatalogs = <String, Map<String, String>>{
     "历史提交": "Commit",
     "分支比较": "Confronta branch",
     "目录": "Cartella",
-    "连接或目录已改变，请重新选择比较目标。": "La connessione o la cartella è cambiata. Scegli di nuovo la destinazione del confronto.",
+    "连接或目录已改变，请重新选择比较目标。":
+        "La connessione o la cartella è cambiata. Scegli di nuovo la destinazione del confronto.",
     "请填写提交说明": "Inserisci un messaggio di commit",
     "暂存全部并提交？": "Mettere tutto in stage ed eseguire il commit?",
-    "{0}当前没有已暂存的文件，将暂存全部 {1} 个变更后提交。": "{0}Nessun file in stage. Tutte le {1} modifiche verranno messe in stage e incluse nel commit.",
+    "{0}当前没有已暂存的文件，将暂存全部 {1} 个变更后提交。":
+        "{0}Nessun file in stage. Tutte le {1} modifiche verranno messe in stage e incluse nel commit.",
     "目录：{0}。": "Cartella: {0}.",
     "暂存并提交": "Metti in stage ed esegui commit",
-    "连接或变更已更新，请核对后重新提交。": "La connessione o le modifiche sono state aggiornate. Controllale prima di eseguire di nuovo il commit.",
+    "连接或变更已更新，请核对后重新提交。":
+        "La connessione o le modifiche sono state aggiornate. Controllale prima di eseguire di nuovo il commit.",
     "Git 操作结果待核实": "Risultato dell’operazione Git non confermato",
     "变更": "Modifiche",
     "更多 Git 操作": "Altre azioni Git",
@@ -10996,8 +13492,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "选择父提交": "Scegli commit padre",
     "父提交 {0} · {1}": "Padre {0} · {1}",
     "父提交 {0} ▾": "Padre {0} ▾",
-    "只读 · 当前 HEAD 相对所选分支共同祖先的变更": "Sola lettura · HEAD attuale confrontato con l’antenato comune del branch selezionato",
-    "只读 · 首次提交相对空目录的变更": "Sola lettura · Primo commit confrontato con una cartella vuota",
+    "只读 · 当前 HEAD 相对所选分支共同祖先的变更":
+        "Sola lettura · HEAD attuale confrontato con l’antenato comune del branch selezionato",
+    "只读 · 首次提交相对空目录的变更":
+        "Sola lettura · Primo commit confrontato con una cartella vuota",
     "只读 · 此提交相对父提交的变更": "Sola lettura · Questo commit confrontato con il padre",
     "{0} 个文件": "{0} file",
     "{0} 个文件 · 已暂存 {1}": "{0} file · {1} in stage",
@@ -11009,14 +13507,16 @@ const messageCatalogs = <String, Map<String, String>>{
     "提交": "Esegui commit",
     "提交并推送": "Commit e push",
     "二进制文件，无法显示差异": "File binario. Diff non disponibile.",
-    "内容无差异（可能仅权限或换行变化）": "Nessuna modifica al contenuto (forse solo permessi o fine riga)",
+    "内容无差异（可能仅权限或换行变化）":
+        "Nessuna modifica al contenuto (forse solo permessi o fine riga)",
     "… 差异过长，已截断": "… Diff troncato",
     "切换目录": "Cambia cartella",
     "选择项目目录": "Scegli la cartella del progetto",
     "目录 · {0}": "Cartella · {0}",
     "选择项目文件": "Scegli un file del progetto",
     "搜索当前目录内的文件": "Cerca file in questa cartella",
-    "搜索结果未全部返回，请输入更具体的文件名或路径。": "Alcuni risultati sono stati omessi. Inserisci un nome file o un percorso più specifico.",
+    "搜索结果未全部返回，请输入更具体的文件名或路径。":
+        "Alcuni risultati sono stati omessi. Inserisci un nome file o un percorso più specifico.",
     "没有匹配的文件": "Nessun file corrispondente",
     "此文件无法预览（二进制或过大）": "Anteprima non disponibile (binario o troppo grande)",
     "{0} · 只读": "{0} · Sola lettura",
@@ -11028,10 +13528,13 @@ const messageCatalogs = <String, Map<String, String>>{
     "没有提交记录": "Nessun commit",
     "没有可比较的分支": "Nessun branch da confrontare",
     "预览已关闭": "Anteprima chiusa",
-    "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">预览请求失败：{0}</p>": "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">Richiesta di anteprima non riuscita: {0}</p>",
+    "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">预览请求失败：{0}</p>":
+        "<meta name=\"viewport\" content=\"width=device-width\"><p style=\"font-family:sans-serif;padding:16px\">Richiesta di anteprima non riuscita: {0}</p>",
     "项目 WebSocket 写入未获确认": "Scrittura WebSocket del progetto non confermata",
-    "\u001b[2m（较早的输出已被电脑释放）\u001b[0m\r\n": "\u001b[2m(L’output precedente è stato rilasciato dal computer)\u001b[0m\r\n",
-    "\r\n\u001b[2m… 部分较早的输出已被电脑丢弃 …\u001b[0m\r\n": "\r\n\u001b[2m… Parte dell’output precedente è stata scartata dal computer …\u001b[0m\r\n",
+    "\u001b[2m（较早的输出已被电脑释放）\u001b[0m\r\n":
+        "\u001b[2m(L’output precedente è stato rilasciato dal computer)\u001b[0m\r\n",
+    "\r\n\u001b[2m… 部分较早的输出已被电脑丢弃 …\u001b[0m\r\n":
+        "\r\n\u001b[2m… Parte dell’output precedente è stata scartata dal computer …\u001b[0m\r\n",
     "启动中": "Avvio",
     "运行中": "In esecuzione",
     "停止中": "Arresto",
@@ -11041,21 +13544,26 @@ const messageCatalogs = <String, Map<String, String>>{
     "状态未知": "Stato sconosciuto",
     "核实输入结果": "Verifica il risultato dell’input",
     "继续输入？": "Continuare a digitare?",
-    "请先检查终端当前状态；未确认的输入可能已部分生效。继续会清空当前输入框并丢弃未发送内容，不会重新发送原输入。": "Controlla prima il terminale. Un input non confermato potrebbe essere stato applicato in parte. Continuando, il campo di input viene svuotato e il contenuto non inviato viene scartato. L’input originale non verrà reinviato.",
+    "请先检查终端当前状态；未确认的输入可能已部分生效。继续会清空当前输入框并丢弃未发送内容，不会重新发送原输入。":
+        "Controlla prima il terminale. Un input non confermato potrebbe essere stato applicato in parte. Continuando, il campo di input viene svuotato e il contenuto non inviato viene scartato. L’input originale non verrà reinviato.",
     "已检查，继续": "Controllato, continua",
     "继续输入": "Continua a digitare",
     "输入命令，回车发送": "Digita un comando, Invio per inviare",
     "发送": "Invia",
-    "运行配置已改变，请确认后再启动。": "La configurazione di esecuzione è cambiata. Controllala prima di avviare.",
+    "运行配置已改变，请确认后再启动。":
+        "La configurazione di esecuzione è cambiata. Controllala prima di avviare.",
     "继续": "Continua",
     "重命名运行配置": "Rinomina configurazione di esecuzione",
     "保存": "Salva",
     "删除运行配置？": "Eliminare la configurazione di esecuzione?",
-    "移除“{0}”的启动配置，已运行的进程不会停止。": "Rimuove la configurazione di avvio di «{0}». I processi in esecuzione continuano.",
+    "移除“{0}”的启动配置，已运行的进程不会停止。":
+        "Rimuove la configurazione di avvio di «{0}». I processi in esecuzione continuano.",
     "重新分析项目？": "Analizzare di nuovo il progetto?",
-    "将重新生成运行配置，覆盖未固定的自定义修改，固定项会保留。": "Rigenera le configurazioni di esecuzione e sostituisce le modifiche personalizzate non fissate. Le configurazioni fissate vengono mantenute.",
+    "将重新生成运行配置，覆盖未固定的自定义修改，固定项会保留。":
+        "Rigenera le configurazioni di esecuzione e sostituisce le modifiche personalizzate non fissate. Le configurazioni fissate vengono mantenute.",
     "选择分析项目的 Agent": "Scegli l’Agent che analizzerà il progetto",
-    "没有可用 Agent，请先在电脑上连接。": "Nessun Agent disponibile. Connetti prima un Agent sul computer.",
+    "没有可用 Agent，请先在电脑上连接。":
+        "Nessun Agent disponibile. Connetti prima un Agent sul computer.",
     "预览端口": "Porta di anteprima",
     "例如 5173": "es. 5173",
     "打开": "Apri",
@@ -11063,9 +13571,11 @@ const messageCatalogs = <String, Map<String, String>>{
     "选择运行目录": "Scegli la cartella di esecuzione",
     "分析项目": "Analizza progetto",
     "刷新运行配置": "Aggiorna configurazioni di esecuzione",
-    "Agent 正在分析项目，可稍后刷新查看。": "Un Agent sta analizzando il progetto. Aggiorna più tardi per vedere il risultato.",
+    "Agent 正在分析项目，可稍后刷新查看。":
+        "Un Agent sta analizzando il progetto. Aggiorna più tardi per vedere il risultato.",
     "这个项目尚未关联目录。": "Nessuna cartella collegata a questo progetto.",
-    "当前目录还没有运行配置，点击「分析项目」生成启动方式。": "Nessuna configurazione di esecuzione in questa cartella. Tocca Analizza progetto per generarne una.",
+    "当前目录还没有运行配置，点击「分析项目」生成启动方式。":
+        "Nessuna configurazione di esecuzione in questa cartella. Tocca Analizza progetto per generarne una.",
     "选择运行配置": "Scegli configurazione di esecuzione",
     "选择配置": "Scegli configurazione",
     "未运行": "Non avviato",
@@ -11089,55 +13599,78 @@ const messageCatalogs = <String, Map<String, String>>{
     "后退": "Indietro",
     "刷新": "Aggiorna",
     "电脑离线，重新连接后再试。": "Computer offline. Riconnettiti e riprova.",
-    "这个项目还没有会话。电脑以会话为单位授权工作区访问，请先在项目中开始一个会话。": "Questo progetto non ha ancora conversazioni. L’accesso allo spazio di lavoro è autorizzato per conversazione. Avvia prima una conversazione in questo progetto.",
+    "这个项目还没有会话。电脑以会话为单位授权工作区访问，请先在项目中开始一个会话。":
+        "Questo progetto non ha ancora conversazioni. L’accesso allo spazio di lavoro è autorizzato per conversazione. Avvia prima una conversazione in questo progetto.",
     "全部": "Tutto",
     "权限": "Autorizzazioni",
     "问题": "Domande",
     "待处理": "In attesa",
     "没有需要你处理的事项": "Nulla richiede la tua attenzione",
     "{0} 项需要你处理": "{0} elementi richiedono la tua attenzione",
-    "{0} 台电脑离线，其待处理事项将在重新连接后显示。": "{0} computer offline. I loro elementi in attesa compariranno dopo la riconnessione.",
+    "{0} 台电脑离线，其待处理事项将在重新连接后显示。":
+        "{0} computer offline. I loro elementi in attesa compariranno dopo la riconnessione.",
     "查看会话": "Vedi conversazione",
-    "已不再等待。如果电脑收到了这项操作，它仍会生效。": "Attesa interrotta. Se il computer ha ricevuto questa operazione, verrà comunque applicata.",
+    "已不再等待。如果电脑收到了这项操作，它仍会生效。":
+        "Attesa interrotta. Se il computer ha ricevuto questa operazione, verrà comunque applicata.",
     "会话已经删除。": "Conversazione eliminata.",
     "新名称已经生效。": "Nuovo nome applicato.",
-    "已找到电脑上的原终端，可在终端或运行页面继续查看；未重新运行命令。": "Terminale originale trovato. Continua in Terminale o Esegui. Il comando non è stato rieseguito.",
-    "分析已经开始，可在运行页面查看进度。": "Analisi avviata. Segui l’avanzamento nella pagina Esegui.",
-    "原运行配置操作已完成。": "L’operazione originale sulla configurazione di esecuzione è stata completata.",
-    "原运行配置操作已结束：{0}": "L’operazione originale sulla configurazione di esecuzione è terminata: {0}",
-    "原启动已取消，未重新运行命令。": "Avvio originale annullato. Il comando non è stato rieseguito.",
+    "已找到电脑上的原终端，可在终端或运行页面继续查看；未重新运行命令。":
+        "Terminale originale trovato. Continua in Terminale o Esegui. Il comando non è stato rieseguito.",
+    "分析已经开始，可在运行页面查看进度。":
+        "Analisi avviata. Segui l’avanzamento nella pagina Esegui.",
+    "原运行配置操作已完成。":
+        "L’operazione originale sulla configurazione di esecuzione è stata completata.",
+    "原运行配置操作已结束：{0}":
+        "L’operazione originale sulla configurazione di esecuzione è terminata: {0}",
+    "原启动已取消，未重新运行命令。":
+        "Avvio originale annullato. Il comando non è stato rieseguito.",
     "修复已提交给主 Agent。": "Correzione inviata all’Agent principale.",
     "原修复已放弃。": "Correzione originale scartata.",
-    "修复尚未提交，可继续原操作。{0}": "La correzione non è ancora stata inviata. Continua l’operazione originale. {0}",
-    "已找到原审查，可在对应轮次的「本轮审查」中查看。": "Revisione originale trovata. La trovi in Revisioni del turno del turno corrispondente.",
-    "电脑上还查不到这项操作，可能没收到。可以重新发送，不会重复执行。": "Il computer non ha ancora traccia di questa operazione. Potrebbe non essere arrivata. Reinviarla non la eseguirà due volte.",
+    "修复尚未提交，可继续原操作。{0}":
+        "La correzione non è ancora stata inviata. Continua l’operazione originale. {0}",
+    "已找到原审查，可在对应轮次的「本轮审查」中查看。":
+        "Revisione originale trovata. La trovi in Revisioni del turno del turno corrispondente.",
+    "电脑上还查不到这项操作，可能没收到。可以重新发送，不会重复执行。":
+        "Il computer non ha ancora traccia di questa operazione. Potrebbe non essere arrivata. Reinviarla non la eseguirà due volte.",
     "Fork 正在后台执行。": "Fork in esecuzione in background.",
     "Fork 尚未完成。": "Fork non ancora completato.",
     "{0}：还没收到电脑确认": "{0}: nessuna conferma dal computer per ora",
     "待确认": "In attesa di conferma",
-    "{0} · 正在确认「不再等待」。重试仅确认原操作的结束状态，已经执行的内容不会撤销。": "{0} · Conferma di «Smetti di attendere» in corso. Riprovare conferma solo lo stato finale dell’operazione originale e non annulla il lavoro svolto.",
-    "{0} · 网络中断时手机没收到电脑的回复。点「重新确认」查看结果；重新发送也不会重复执行。": "{0} · La risposta è andata persa quando la connessione è caduta. Tocca Verifica di nuovo per vedere il risultato. Reinviarla non la eseguirà due volte.",
-    "{0} · 网络中断时手机没收到电脑的回复。连上电脑后会自动确认。": "{0} · La risposta è andata persa quando la connessione è caduta. La verifica avverrà automaticamente dopo la riconnessione.",
+    "{0} · 正在确认「不再等待」。重试仅确认原操作的结束状态，已经执行的内容不会撤销。":
+        "{0} · Conferma di «Smetti di attendere» in corso. Riprovare conferma solo lo stato finale dell’operazione originale e non annulla il lavoro svolto.",
+    "{0} · 网络中断时手机没收到电脑的回复。点「重新确认」查看结果；重新发送也不会重复执行。":
+        "{0} · La risposta è andata persa quando la connessione è caduta. Tocca Verifica di nuovo per vedere il risultato. Reinviarla non la eseguirà due volte.",
+    "{0} · 网络中断时手机没收到电脑的回复。连上电脑后会自动确认。":
+        "{0} · La risposta è andata persa quando la connessione è caduta. La verifica avverrà automaticamente dopo la riconnessione.",
     "新名称：{0}": "Nuovo nome: {0}",
-    "重新发送会继续你之前确认过的删除。": "Il reinvio prosegue l’eliminazione che hai confermato in precedenza.",
+    "重新发送会继续你之前确认过的删除。":
+        "Il reinvio prosegue l’eliminazione che hai confermato in precedenza.",
     "原终端": "Terminale originale",
     "原任务": "Attività originale",
-    "只会停止当时那次运行，不影响之后新开始的任务。": "Arresta solo quell’esecuzione specifica. Le attività successive non sono interessate.",
-    "电脑离线，连上后会自动确认。": "Computer offline. La verifica avverrà automaticamente dopo la riconnessione.",
+    "只会停止当时那次运行，不影响之后新开始的任务。":
+        "Arresta solo quell’esecuzione specifica. Le attività successive non sono interessate.",
+    "电脑离线，连上后会自动确认。":
+        "Computer offline. La verifica avverrà automaticamente dopo la riconnessione.",
     "重新确认": "Verifica di nuovo",
     "继续确认结束": "Continua a confermare il completamento",
     "重新发送": "Reinvia",
     "不再发送": "Non reinviare",
     "不再等待这项操作？": "Smettere di attendere questa operazione?",
-    "只是不再在手机上等待结果。如果电脑已经收到，改名或删除仍会生效。": "Interrompe solo l’attesa su questo telefono. Se il computer ha già ricevuto la richiesta, la ridenominazione o l’eliminazione verranno comunque applicate.",
+    "只是不再在手机上等待结果。如果电脑已经收到，改名或删除仍会生效。":
+        "Interrompe solo l’attesa su questo telefono. Se il computer ha già ricevuto la richiesta, la ridenominazione o l’eliminazione verranno comunque applicate.",
     "继续等待": "Continua ad attendere",
     "确定": "Conferma",
     "不再等待": "Smetti di attendere",
-    "只是不再在手机上等待结果。电脑上已经完成的操作会保留。": "Interrompe solo l’attesa su questo telefono. Le operazioni completate sul computer vengono mantenute.",
-    "只是不再在手机上等待结果。如果电脑已经收到，任务仍会停下。": "Interrompe solo l’attesa su questo telefono. Se il computer ha già ricevuto la richiesta, l’attività si arresterà comunque.",
-    "只是不再在手机上等待结果。如果电脑已经收到，终端仍会关闭。终端是否还在运行，请在终端页查看。": "Interrompe solo l’attesa su questo telefono. Se il computer ha già ricevuto la richiesta, il terminale verrà comunque chiuso. Controlla nella pagina Terminale se è ancora in esecuzione.",
-    "如果终端还没启动，就不会再启动；已经启动的会保留，里面的命令照常运行。": "Un terminale non ancora avviato non verrà avviato. Un terminale già aperto e i suoi comandi continuano a funzionare.",
-    "如果还没执行，就不会再提交或推送；已经完成的不会撤销。建议先在「变更」里看一下结果。": "Se non è ancora iniziato, non verrà eseguito né commit né push. Le operazioni completate non verranno annullate. Controlla prima la pagina Modifiche.",
+    "只是不再在手机上等待结果。电脑上已经完成的操作会保留。":
+        "Interrompe solo l’attesa su questo telefono. Le operazioni completate sul computer vengono mantenute.",
+    "只是不再在手机上等待结果。如果电脑已经收到，任务仍会停下。":
+        "Interrompe solo l’attesa su questo telefono. Se il computer ha già ricevuto la richiesta, l’attività si arresterà comunque.",
+    "只是不再在手机上等待结果。如果电脑已经收到，终端仍会关闭。终端是否还在运行，请在终端页查看。":
+        "Interrompe solo l’attesa su questo telefono. Se il computer ha già ricevuto la richiesta, il terminale verrà comunque chiuso. Controlla nella pagina Terminale se è ancora in esecuzione.",
+    "如果终端还没启动，就不会再启动；已经启动的会保留，里面的命令照常运行。":
+        "Un terminale non ancora avviato non verrà avviato. Un terminale già aperto e i suoi comandi continuano a funzionare.",
+    "如果还没执行，就不会再提交或推送；已经完成的不会撤销。建议先在「变更」里看一下结果。":
+        "Se non è ancora iniziato, non verrà eseguito né commit né push. Le operazioni completate non verranno annullate. Controlla prima la pagina Modifiche.",
     "发送消息": "Invia messaggio",
     "Fork 会话": "Esegui fork della conversazione",
     "置顶或归档": "Fissa o archivia",
@@ -11162,16 +13695,21 @@ const messageCatalogs = <String, Map<String, String>>{
     "Agent 有一个问题": "Un Agent ha una domanda",
     "会话「{0}」需要你的回答。": "La conversazione «{0}» attende la tua risposta.",
     "会话「{0}」请求以下操作。": "La conversazione «{0}» richiede la seguente azione.",
-    "这个问题的格式暂不支持在手机上回答，请在电脑上回答，回答后这里会自动更新。": "Questo formato di domanda non si può ancora rispondere dal telefono. Rispondi sul computer: questa pagina si aggiornerà automaticamente.",
+    "这个问题的格式暂不支持在手机上回答，请在电脑上回答，回答后这里会自动更新。":
+        "Questo formato di domanda non si può ancora rispondere dal telefono. Rispondi sul computer: questa pagina si aggiornerà automaticamente.",
     "电脑离线，重新连接后再处理。": "Computer offline. Riconnettiti per rispondere.",
-    "这台电脑有一项操作结果待核实，请先核实。": "Un’operazione su questo computer deve essere verificata. Verificala prima.",
+    "这台电脑有一项操作结果待核实，请先核实。":
+        "Un’operazione su questo computer deve essere verificata. Verificala prima.",
     "其他授权范围": "Altri ambiti di autorizzazione",
     "工作区": "Spazio di lavoro",
     "还没有连接电脑": "Nessun computer connesso",
-    "连接电脑后，在这里查看项目及其会话。": "Connetti un computer per vedere qui i suoi progetti e le relative conversazioni.",
+    "连接电脑后，在这里查看项目及其会话。":
+        "Connetti un computer per vedere qui i suoi progetti e le relative conversazioni.",
     "去连接电脑": "Connetti un computer",
-    "{0} 尚未同步项目；电脑在线时会自动同步。": "{0} non ha ancora sincronizzato i progetti. Verranno sincronizzati automaticamente quando sarà online.",
-    "{0} 上还没有项目，点右上角「添加项目」选择电脑上的已有目录。": "Nessun progetto su {0}. Tocca Aggiungi progetto in alto a destra per scegliere una cartella esistente sul computer.",
+    "{0} 尚未同步项目；电脑在线时会自动同步。":
+        "{0} non ha ancora sincronizzato i progetti. Verranno sincronizzati automaticamente quando sarà online.",
+    "{0} 上还没有项目，点右上角「添加项目」选择电脑上的已有目录。":
+        "Nessun progetto su {0}. Tocca Aggiungi progetto in alto a destra per scegliere una cartella esistente sul computer.",
     "文件": "File",
     "浏览项目文件": "Sfoglia i file del progetto",
     "查看代码变更": "Vedi le modifiche al codice",
@@ -11185,8 +13723,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "分离 HEAD": "HEAD scollegato",
     "工作区干净": "Albero di lavoro pulito",
     "{0} 个文件待提交": "{0} file da includere nel commit",
-    "项目已添加，列表尚未同步。请重新连接后刷新结果。": "Progetto aggiunto. L’elenco non è ancora sincronizzato. Riconnettiti e aggiorna.",
-    "请先绑定电脑，再选择电脑上的项目目录。": "Associa prima un computer, poi scegli una cartella di progetto su di esso.",
+    "项目已添加，列表尚未同步。请重新连接后刷新结果。":
+        "Progetto aggiunto. L’elenco non è ancora sincronizzato. Riconnettiti e aggiorna.",
+    "请先绑定电脑，再选择电脑上的项目目录。":
+        "Associa prima un computer, poi scegli una cartella di progetto su di esso.",
     "选择添加项目的电脑": "Scegli il computer del progetto",
     " · 离线": " · Offline",
     "选择这台电脑上已有的目录": "Scegli una cartella esistente su questo computer",
@@ -11197,15 +13737,20 @@ const messageCatalogs = <String, Map<String, String>>{
     "上一级": "Livello superiore",
     "不显示隐藏": "Nascondi i file nascosti",
     "显示隐藏": "Mostra i file nascosti",
-    "电脑离线，请重新连接后浏览目录。": "Computer offline. Riconnettiti per sfogliare le cartelle.",
-    "目录路径已修改，请点箭头或回车确认后再添加。": "Percorso modificato. Premi la freccia o Invio per confermare prima di aggiungere.",
+    "电脑离线，请重新连接后浏览目录。":
+        "Computer offline. Riconnettiti per sfogliare le cartelle.",
+    "目录路径已修改，请点箭头或回车确认后再添加。":
+        "Percorso modificato. Premi la freccia o Invio per confermare prima di aggiungere.",
     "重试读取目录": "Ricarica la cartella",
-    "当前目录没有子目录，可直接添加此目录。": "Nessuna sottocartella. Puoi aggiungere direttamente questa cartella.",
+    "当前目录没有子目录，可直接添加此目录。":
+        "Nessuna sottocartella. Puoi aggiungere direttamente questa cartella.",
     "加载中…": "Caricamento…",
     "加载更多目录": "Carica altre cartelle",
     "项目名称（可选）": "Nome del progetto (facoltativo)",
-    "留空使用目录名；已有项目会直接复用": "Lascia vuoto per usare il nome della cartella. I progetti esistenti verranno riutilizzati.",
-    "该目录已添加为「{0}」，将打开已有项目。": "Questa cartella è già stata aggiunta come «{0}». Verrà aperto il progetto esistente.",
+    "留空使用目录名；已有项目会直接复用":
+        "Lascia vuoto per usare il nome della cartella. I progetti esistenti verranno riutilizzati.",
+    "该目录已添加为「{0}」，将打开已有项目。":
+        "Questa cartella è già stata aggiunta come «{0}». Verrà aperto il progetto esistente.",
     "刷新添加结果": "Aggiorna il risultato",
     "正在添加…": "Aggiunta…",
     "打开已有项目": "Apri progetto esistente",
@@ -11215,8 +13760,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "{0} 个会话 · 按当前电脑和项目范围": "{0} conversazioni · Computer e progetto attuali",
     "搜索已保存的消息正文": "Cerca nei messaggi salvati",
     "搜索历史正文": "Cerca nella cronologia delle conversazioni",
-    "在电脑上检索已保存的对话正文，不包含思考过程或附件内容。": "Cerca nel testo delle conversazioni salvate sul computer. Esclude il ragionamento e il contenuto degli allegati.",
-    "{0} 离线，未搜索其中的会话；连接后重新搜索。": "{0} è offline e non è stato incluso nella ricerca. Riconnettiti e cerca di nuovo.",
+    "在电脑上检索已保存的对话正文，不包含思考过程或附件内容。":
+        "Cerca nel testo delle conversazioni salvate sul computer. Esclude il ragionamento e il contenuto degli allegati.",
+    "{0} 离线，未搜索其中的会话；连接后重新搜索。":
+        "{0} è offline e non è stato incluso nella ricerca. Riconnettiti e cerca di nuovo.",
     "输入关键词开始搜索": "Inserisci una parola chiave per cercare",
     "没有找到匹配的历史记录": "Nessuna cronologia corrispondente",
     "你": "Tu",
@@ -11225,12 +13772,16 @@ const messageCatalogs = <String, Map<String, String>>{
     "加载更多记录": "Carica altri risultati",
     "重试此会话": "Riprova questa conversazione",
     "继续搜索更早的 {0} 个会话": "Cerca in {0} conversazioni precedenti",
-    "请等待当前任务结束后再 Fork。": "Attendi il termine dell’attività corrente prima di eseguire il fork.",
-    "从本轮结束时的历史创建独立会话。": "Crea una conversazione indipendente dalla cronologia alla fine di questo turno.",
+    "请等待当前任务结束后再 Fork。":
+        "Attendi il termine dell’attività corrente prima di eseguire il fork.",
+    "从本轮结束时的历史创建独立会话。":
+        "Crea una conversazione indipendente dalla cronologia alla fine di questo turno.",
     "当前工作区": "Spazio di lavoro attuale",
-    "共享当前项目文件，仅复制对话历史。": "Condivide i file del progetto attuale e copia solo la cronologia della conversazione.",
+    "共享当前项目文件，仅复制对话历史。":
+        "Condivide i file del progetto attuale e copia solo la cronologia della conversazione.",
     "新 Worktree": "Nuovo worktree",
-    "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照；非 Git 项目只继承对话。": "Crea uno spazio di lavoro separato sul computer e ripristina lo snapshot dei file di questo turno. I turni meno recenti potrebbero non avere snapshot. I progetti non Git ereditano solo la conversazione.",
+    "在电脑上创建独立工作区，并恢复选中轮次的文件快照。旧轮次可能没有快照；非 Git 项目只继承对话。":
+        "Crea uno spazio di lavoro separato sul computer e ripristina lo snapshot dei file di questo turno. I turni meno recenti potrebbero non avere snapshot. I progetti non Git ereditano solo la conversazione.",
     "正在创建…": "Creazione…",
     "创建 Fork": "Crea fork",
     "取消置顶": "Sblocca",
@@ -11240,7 +13791,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "归档会话": "Archivia conversazione",
     "会话操作": "Azioni della conversazione",
     "会话将从电脑同步": "Le conversazioni si sincronizzano dal tuo computer",
-    "连接自己的电脑后，在这里查看和续接各项目的会话。网络中断时，电脑上的任务会继续执行。": "Connetti il tuo computer per vedere e riprendere qui le conversazioni dei progetti. Le attività continuano sul computer anche se la rete cade.",
+    "连接自己的电脑后，在这里查看和续接各项目的会话。网络中断时，电脑上的任务会继续执行。":
+        "Connetti il tuo computer per vedere e riprendere qui le conversazioni dei progetti. Le attività continuano sul computer anche se la rete cade.",
     "搜索会话": "Cerca conversazioni",
     "{0} 项等待处理": "{0} elementi in attesa",
     "{0} 连接中…": "{0} in connessione…",
@@ -11248,7 +13800,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "{0} 离线 · 显示 {1} 同步的内容": "{0} offline · Contenuto sincronizzato {1}",
     "没有匹配的会话": "Nessuna conversazione corrispondente",
     "没有未归档的会话": "Nessuna conversazione non archiviata",
-    "还没有会话，点右上角 + 开始新任务": "Ancora nessuna conversazione. Tocca + in alto a destra per avviare un’attività.",
+    "还没有会话，点右上角 + 开始新任务":
+        "Ancora nessuna conversazione. Tocca + in alto a destra per avviare un’attività.",
     "正在从电脑同步会话…": "Sincronizzazione delle conversazioni dal computer…",
     "置顶": "Fissate",
     "已归档 ({0})": "Archiviate ({0})",
@@ -11257,58 +13810,79 @@ const messageCatalogs = <String, Map<String, String>>{
     "已归档": "Archiviata",
     "正在核实原配对…": "Verifica dell’associazione originale…",
     "移除本机配对记录？": "Rimuovere il record di associazione locale?",
-    "之后需要重新扫码。电脑上可能已允许这台手机；如需撤销授权，请在电脑的「连接手机」中操作。": "Dovrai scansionare di nuovo. Il computer potrebbe aver già autorizzato questo telefono. Se necessario, revoca l’accesso da Connetti telefono sul computer.",
+    "之后需要重新扫码。电脑上可能已允许这台手机；如需撤销授权，请在电脑的「连接手机」中操作。":
+        "Dovrai scansionare di nuovo. Il computer potrebbe aver già autorizzato questo telefono. Se necessario, revoca l’accesso da Connetti telefono sul computer.",
     "保留记录": "Mantieni",
     "移除本机记录": "Rimuovi record locale",
     "正在验证电脑身份并建立配对…": "Verifica dell’identità del computer e associazione…",
     "加密组件尚未准备好。": "La crittografia non è ancora pronta.",
-    "在电脑端打开「连接手机」，扫描配对二维码。": "Apri Connetti telefono sul computer e scansiona il codice QR di associazione.",
-    "配对后可操作这台电脑的 Agent、项目、Git 和终端，并查看、控制电脑屏幕。你可以随时在电脑上撤销授权。": "Dopo l’associazione, usa Agent, progetti, Git e terminale del computer, e vedi e controlla il suo schermo. Revoca l’accesso dal computer in qualsiasi momento.",
+    "在电脑端打开「连接手机」，扫描配对二维码。":
+        "Apri Connetti telefono sul computer e scansiona il codice QR di associazione.",
+    "配对后可操作这台电脑的 Agent、项目、Git 和终端，并查看、控制电脑屏幕。你可以随时在电脑上撤销授权。":
+        "Dopo l’associazione, usa Agent, progetti, Git e terminale del computer, e vedi e controlla il suo schermo. Revoca l’accesso dal computer in qualsiasi momento.",
     "配对结果待核实": "Risultato dell’associazione non confermato",
-    "保留了原配对信息，可以继续核实电脑是否已允许连接。": "Le informazioni dell’associazione originale sono state mantenute. Continua a verificare se il computer ha autorizzato la connessione.",
-    "恢复期限已过，请在电脑核实授权后重新扫码。": "Il periodo di recupero è scaduto. Verifica l’accesso sul computer e scansiona di nuovo.",
+    "保留了原配对信息，可以继续核实电脑是否已允许连接。":
+        "Le informazioni dell’associazione originale sono state mantenute. Continua a verificare se il computer ha autorizzato la connessione.",
+    "恢复期限已过，请在电脑核实授权后重新扫码。":
+        "Il periodo di recupero è scaduto. Verifica l’accesso sul computer e scansiona di nuovo.",
     "核实原配对": "Verifica l’associazione originale",
-    "无法使用相机，请检查相机权限，或在下方粘贴配对链接。": "Fotocamera non disponibile. Controlla il permesso della fotocamera o incolla qui sotto un link di associazione.",
+    "无法使用相机，请检查相机权限，或在下方粘贴配对链接。":
+        "Fotocamera non disponibile. Controlla il permesso della fotocamera o incolla qui sotto un link di associazione.",
     "扫描二维码": "Scansiona codice QR",
     "或粘贴配对链接": "Oppure incolla un link di associazione",
     "粘贴从电脑获取的配对链接": "Incolla il link di associazione ottenuto sul computer",
-    "二维码使用了本机地址，手机无法访问。请在电脑端使用手机可访问的服务地址并重新生成二维码。": "Questo codice QR usa un indirizzo locale che il telefono non può raggiungere. Genera un nuovo codice con un indirizzo del servizio raggiungibile dal telefono.",
-    "无法连接接入服务，请确认手机与电脑的网络、服务地址及端口。局域网调试时需连接同一 Wi-Fi。": "Impossibile raggiungere il servizio di connessione. Controlla le reti, l’indirizzo e la porta del servizio. Per lo sviluppo locale, connetti entrambi i dispositivi alla stessa rete Wi-Fi.",
-    "无法验证服务证书，请检查接入服务配置。": "Impossibile verificare il certificato del servizio. Controlla la configurazione del servizio di connessione.",
-    "配对未完成，请检查电脑与接入服务后重试。": "Associazione incompleta. Controlla il computer e il servizio di connessione, poi riprova.",
-    "DogCodes 手机端连接你自己的电脑：查看会话、继续交给 Agent、处理权限请求。无需注册账号。": "DogCodes si connette al tuo computer. Consulta le conversazioni, affida attività agli Agent e rispondi alle richieste di autorizzazione. Nessun account necessario.",
+    "二维码使用了本机地址，手机无法访问。请在电脑端使用手机可访问的服务地址并重新生成二维码。":
+        "Questo codice QR usa un indirizzo locale che il telefono non può raggiungere. Genera un nuovo codice con un indirizzo del servizio raggiungibile dal telefono.",
+    "无法连接接入服务，请确认手机与电脑的网络、服务地址及端口。局域网调试时需连接同一 Wi-Fi。":
+        "Impossibile raggiungere il servizio di connessione. Controlla le reti, l’indirizzo e la porta del servizio. Per lo sviluppo locale, connetti entrambi i dispositivi alla stessa rete Wi-Fi.",
+    "无法验证服务证书，请检查接入服务配置。":
+        "Impossibile verificare il certificato del servizio. Controlla la configurazione del servizio di connessione.",
+    "配对未完成，请检查电脑与接入服务后重试。":
+        "Associazione incompleta. Controlla il computer e il servizio di connessione, poi riprova.",
+    "DogCodes 手机端连接你自己的电脑：查看会话、继续交给 Agent、处理权限请求。无需注册账号。":
+        "DogCodes si connette al tuo computer. Consulta le conversazioni, affida attività agli Agent e rispondi alle richieste di autorizzazione. Nessun account necessario.",
     "在电脑上打开 DogCodes": "Apri DogCodes sul computer",
-    "点击「连接手机」，屏幕上会显示二维码": "Fai clic su Connetti telefono per mostrare un codice QR",
-    "用这部手机扫码，或粘贴配对链接": "Scansionalo con questo telefono o incolla il link di associazione",
+    "点击「连接手机」，屏幕上会显示二维码":
+        "Fai clic su Connetti telefono per mostrare un codice QR",
+    "用这部手机扫码，或粘贴配对链接":
+        "Scansionalo con questo telefono o incolla il link di associazione",
     "扫码连接电脑": "Scansiona per connettere il computer",
     "粘贴配对链接": "Incolla link di associazione",
-    "连接经过端到端加密，手机只能访问你在电脑上授权的内容。": "Crittografia end-to-end. Il telefono accede solo a ciò che autorizzi sul computer.",
+    "连接经过端到端加密，手机只能访问你在电脑上授权的内容。":
+        "Crittografia end-to-end. Il telefono accede solo a ciò che autorizzi sul computer.",
     "正在连接{0}": "Connessione a {0}",
     "暂时连接不上{0}": "Impossibile raggiungere {0}",
     "连接时间比平时长，仍在尝试。": "Ci vuole più del solito. Tentativi in corso.",
-    "电脑上的任务不受影响，连接恢复后可继续操作。": "Le attività sul computer non sono interessate. Continua quando torna la connessione.",
+    "电脑上的任务不受影响，连接恢复后可继续操作。":
+        "Le attività sul computer non sono interessate. Continua quando torna la connessione.",
     "请检查": "Controlla quanto segue",
     "电脑已开机，没有进入睡眠": "Il computer è acceso e non in sospensione",
     "电脑上的 DogCodes 正在运行": "DogCodes è in esecuzione sul computer",
-    "手机网络可用；同一局域网下连接更快": "Il telefono è online. Sulla stessa rete locale la connessione è più veloce.",
+    "手机网络可用；同一局域网下连接更快":
+        "Il telefono è online. Sulla stessa rete locale la connessione è più veloce.",
     "管理电脑": "Gestisci computer",
     "连接其他电脑": "Connetti un altro computer",
     "查看离线记录": "Vedi cronologia offline",
     "查看离线记录（{0} 同步）": "Vedi cronologia offline (sincronizzata {0})",
     "附件": "Allegato",
-    "电脑离线。已缓存附件信息，原文需连接电脑后查看。": "Computer offline. Le informazioni sull’allegato sono in cache. Riconnettiti per vedere l’originale.",
-    "电脑端暂不支持附件预览。": "L’app desktop non supporta ancora l’anteprima degli allegati.",
+    "电脑离线。已缓存附件信息，原文需连接电脑后查看。":
+        "Computer offline. Le informazioni sull’allegato sono in cache. Riconnettiti per vedere l’originale.",
+    "电脑端暂不支持附件预览。":
+        "L’app desktop non supporta ancora l’anteprima degli allegati.",
     "附件读取位置未确认。": "Posizione di lettura dell’allegato non confermata.",
     "附件过大，请在电脑上查看。": "Allegato troppo grande. Aprilo sul computer.",
-    "附件内容校验失败，未展示变化后的文件。": "Controllo di integrità dell’allegato non riuscito. Il file modificato non è stato mostrato.",
+    "附件内容校验失败，未展示变化后的文件。":
+        "Controllo di integrità dell’allegato non riuscito. Il file modificato non è stato mostrato.",
     "任务附件 · 只读": "Allegato dell’attività · Sola lettura",
     "重试读取": "Ricarica",
-    "图片无法解码，请在电脑上查看。": "Impossibile decodificare l’immagine. Aprila sul computer.",
+    "图片无法解码，请在电脑上查看。":
+        "Impossibile decodificare l’immagine. Aprila sul computer.",
     "该附件格式请在电脑上查看。": "Apri questo formato di allegato sul computer.",
     "默认模型": "Modello predefinito",
     "默认": "Predefinito",
     "选择 Agent": "Scegli Agent",
-    "这台电脑上没有已就绪并启用的 Agent。安装或登录需在电脑上完成。": "Su questo computer non c’è alcun Agent pronto e attivo. Installalo o accedi prima sul computer.",
+    "这台电脑上没有已就绪并启用的 Agent。安装或登录需在电脑上完成。":
+        "Su questo computer non c’è alcun Agent pronto e attivo. Installalo o accedi prima sul computer.",
     "模型": "Modello",
     "选择模型": "Scegli modello",
     "完成": "Fine",
@@ -11320,17 +13894,21 @@ const messageCatalogs = <String, Map<String, String>>{
     "默认 · {0}": "Predefinito · {0}",
     "恢复默认": "Ripristina predefinito",
     "电脑离线，连接后才能 Fork": "Computer offline. Riconnettiti per eseguire il fork.",
-    "会话正在运行，结束后才能从本轮 Fork": "La conversazione è in esecuzione. Attendi la fine per eseguire il fork da questo turno.",
+    "会话正在运行，结束后才能从本轮 Fork":
+        "La conversazione è in esecuzione. Attendi la fine per eseguire il fork da questo turno.",
     "复制本轮回复": "Copia la risposta del turno",
     "已复制本轮回复": "Risposta del turno copiata",
     "复制失败，请重试": "Copia non riuscita. Riprova.",
     "本轮消耗": "Consumo del turno",
     "从本轮 Fork": "Esegui fork da questo turno",
-    "电脑未受理这项任务，内容已保留。": "Il computer non ha accettato questa attività. Il tuo contenuto è stato mantenuto.",
+    "电脑未受理这项任务，内容已保留。":
+        "Il computer non ha accettato questa attività. Il tuo contenuto è stato mantenuto.",
     "没有已绑定的电脑": "Nessun computer associato",
-    "这台电脑还没有项目，点右上角「添加项目」选择电脑上的已有目录。": "Nessun progetto su questo computer. Tocca Aggiungi progetto in alto a destra per scegliere una cartella esistente.",
+    "这台电脑还没有项目，点右上角「添加项目」选择电脑上的已有目录。":
+        "Nessun progetto su questo computer. Tocca Aggiungi progetto in alto a destra per scegliere una cartella esistente.",
     "你想完成什么？": "Cosa vuoi fare?",
-    "电脑离线，任务和附件会保留为本机草稿。重连后请点击发送。": "Computer offline. Attività e allegati vengono salvati come bozze locali. Tocca Invia dopo la riconnessione.",
+    "电脑离线，任务和附件会保留为本机草稿。重连后请点击发送。":
+        "Computer offline. Attività e allegati vengono salvati come bozze locali. Tocca Invia dopo la riconnessione.",
     "描述你的任务…": "Descrivi la tua attività…",
     "没有已就绪的 Agent": "Nessun Agent pronto",
     "开始任务": "Avvia attività",
@@ -11344,18 +13922,22 @@ const messageCatalogs = <String, Map<String, String>>{
     "无法核实修复状态：{0}": "Impossibile verificare lo stato della correzione: {0}",
     "审查代码证据": "Evidenze di codice della revisione",
     "{0} · {1}–{2} 行": "{0} · Righe {1}–{2}",
-    "这是审查时保存的版本，当前文件可能已变化。": "Questa è la versione salvata durante la revisione. Il file attuale potrebbe essere cambiato.",
+    "这是审查时保存的版本，当前文件可能已变化。":
+        "Questa è la versione salvata durante la revisione. Il file attuale potrebbe essere cambiato.",
     "读取审查代码失败：{0}": "Impossibile caricare il codice della revisione: {0}",
-    "审查连接中断，本次审查未完成。请检查网络后重新检查。": "Connessione della revisione persa. Revisione incompleta. Controlla la rete ed eseguila di nuovo.",
+    "审查连接中断，本次审查未完成。请检查网络后重新检查。":
+        "Connessione della revisione persa. Revisione incompleta. Controlla la rete ed eseguila di nuovo.",
     "错误详情": "Dettagli dell’errore",
-    "审查连接中断，本次审查未完成。": "Connessione della revisione persa. Revisione incompleta.",
+    "审查连接中断，本次审查未完成。":
+        "Connessione della revisione persa. Revisione incompleta.",
     "文件覆盖情况": "Copertura dei file",
     "已检查": "Controllato",
     "部分原文缺失": "Parte dell’originale mancante",
     "未报告检查": "Non segnalato come controllato",
     "原文不可用": "Originale non disponibile",
     "本次审查未报告问题。": "Nessun problema segnalato in questa revisione.",
-    "审查尚未形成完整问题报告，不能据此判断是否存在问题。": "Questa revisione non ha prodotto un report completo. Non è possibile stabilire se ci sono problemi.",
+    "审查尚未形成完整问题报告，不能据此判断是否存在问题。":
+        "Questa revisione non ha prodotto un report completo. Non è possibile stabilire se ci sono problemi.",
     "潜在{0}风险": "Possibile rischio di {0}",
     "{0}{1} · {2}{3}–{4} 行": "{0}{1} · {2}Righe {3}–{4}",
     "改动前 · ": "Prima della modifica ·",
@@ -11366,8 +13948,10 @@ const messageCatalogs = <String, Map<String, String>>{
     "全选问题": "Seleziona tutti i problemi",
     "已选 {0} 项": "{0} selezionati",
     "开始修复": "Avvia correzione",
-    "主对话正在回复，结束后可提交修复。": "La conversazione principale sta rispondendo. Invia le correzioni quando ha finito.",
-    "修复已提交给主 Agent，携带所选问题及原审查上下文。": "Correzione inviata all’Agent principale con i problemi selezionati e il contesto della revisione originale.",
+    "主对话正在回复，结束后可提交修复。":
+        "La conversazione principale sta rispondendo. Invia le correzioni quando ha finito.",
+    "修复已提交给主 Agent，携带所选问题及原审查上下文。":
+        "Correzione inviata all’Agent principale con i problemi selezionati e il contesto della revisione originale.",
     "有一项修复尚未提交。{0}": "C’è una correzione non ancora inviata. {0}",
     "继续原修复": "Continua la correzione originale",
     "放弃这次修复": "Scarta questa correzione",
@@ -11395,13 +13979,19 @@ const messageCatalogs = <String, Map<String, String>>{
     "失败": "Non riuscito",
     "已取消": "Annullato",
     "连接中断": "Disconnesso",
-    "电脑离线，请重新连接后查看审查。": "Computer offline. Riconnettiti per vedere la revisione.",
-    "电脑端暂不支持本轮审查，请更新电脑端后重试。": "Aggiorna l’app desktop per usare le revisioni del turno.",
-    "无法读取可用的审查 Agent。": "Impossibile caricare gli Agent di revisione disponibili.",
-    "已发起复审，可在修复轮次底部查看。": "Nuova revisione avviata. La trovi sotto il turno di correzione.",
+    "电脑离线，请重新连接后查看审查。":
+        "Computer offline. Riconnettiti per vedere la revisione.",
+    "电脑端暂不支持本轮审查，请更新电脑端后重试。":
+        "Aggiorna l’app desktop per usare le revisioni del turno.",
+    "无法读取可用的审查 Agent。":
+        "Impossibile caricare gli Agent di revisione disponibili.",
+    "已发起复审，可在修复轮次底部查看。":
+        "Nuova revisione avviata. La trovi sotto il turno di correzione.",
     "刷新审查": "Aggiorna revisioni",
-    "电脑离线，审查会继续在电脑上运行。": "Computer offline. La revisione continua sul computer.",
-    "暂无可用的审查 Agent，请在电脑上连接或重新检测 Agent。": "Nessun Agent di revisione disponibile. Connetti o rileva di nuovo gli Agent sul computer.",
+    "电脑离线，审查会继续在电脑上运行。":
+        "Computer offline. La revisione continua sul computer.",
+    "暂无可用的审查 Agent，请在电脑上连接或重新检测 Agent。":
+        "Nessun Agent di revisione disponibile. Connetti o rileva di nuovo gli Agent sul computer.",
     "审查使用的 Agent": "Agent di revisione",
     "本轮尚未发起审查。": "Nessuna revisione avviata per questo turno.",
     "历史审查": "Revisioni precedenti",
@@ -11429,20 +14019,26 @@ const messageCatalogs = <String, Map<String, String>>{
     "本轮变更加载失败：{0}": "Impossibile caricare le modifiche del turno: {0}",
     "本轮变更加载失败": "Impossibile caricare le modifiche del turno",
     "{0} 个文件已更改": "{0} file modificati",
-    "连接中断后的恢复快照 · 仅反映检查时的文件变化，外部工具可能仍在写入": "Snapshot di ripristino dopo la disconnessione. Riflette le modifiche al momento del controllo; strumenti esterni potrebbero essere ancora in scrittura.",
+    "连接中断后的恢复快照 · 仅反映检查时的文件变化，外部工具可能仍在写入":
+        "Snapshot di ripristino dopo la disconnessione. Riflette le modifiche al momento del controllo; strumenti esterni potrebbero essere ancora in scrittura.",
     "二进制": "Binario",
     "本轮保存的历史 Diff": "Diff storico salvato per questo turno",
-    "这一轮未保存该文件的内容": "Il contenuto di questo file non è stato salvato in questo turno",
-    "没有可用于生成提交说明的 Agent": "Nessun Agent disponibile per generare un messaggio di commit",
+    "这一轮未保存该文件的内容":
+        "Il contenuto di questo file non è stato salvato in questo turno",
+    "没有可用于生成提交说明的 Agent":
+        "Nessun Agent disponibile per generare un messaggio di commit",
     "已提交": "Commit eseguito",
-    "提交结果待核实，请到待处理页面核实原操作": "Risultato del commit non confermato. Verifica l’operazione originale in In attesa.",
+    "提交结果待核实，请到待处理页面核实原操作":
+        "Risultato del commit non confermato. Verifica l’operazione originale in In attesa.",
     "正在暂存本轮文件…": "Messa in stage dei file del turno…",
     "正在生成提交说明…": "Generazione del messaggio di commit…",
     "正在提交…": "Commit in corso…",
     "提交本轮修改": "Esegui il commit delle modifiche del turno",
-    "本轮修改已没有未提交的内容（可能已提交或已撤销）。": "Non restano modifiche non incluse in commit per questo turno (forse già incluse in commit o annullate).",
+    "本轮修改已没有未提交的内容（可能已提交或已撤销）。":
+        "Non restano modifiche non incluse in commit per questo turno (forse già incluse in commit o annullate).",
     "将提交 {0} 个文件{1}。": "Verranno inclusi nel commit {0} file{1}.",
-    "，其中 {0} 个是此前已暂存的其他更改": ", di cui {0} modifiche messe in stage in precedenza da altro lavoro",
+    "，其中 {0} 个是此前已暂存的其他更改":
+        ", di cui {0} modifiche messe in stage in precedenza da altro lavoro",
     "重新生成": "Rigenera",
     "编写提交说明的 Agent": "Agent del messaggio di commit",
     "子智能体": "Sub-agent",
@@ -11464,7 +14060,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "电脑项目文件": "File del progetto sul computer",
     "需先在此项目创建一个会话": "Crea prima una conversazione in questo progetto",
     "最多 16 个附件，总大小不超过 25 MB。": "Fino a 16 allegati, 25 MB in totale.",
-    "草稿目标已变化，请回到原项目重新选择附件。": "La destinazione della bozza è cambiata. Torna al progetto originale e scegli di nuovo gli allegati.",
+    "草稿目标已变化，请回到原项目重新选择附件。":
+        "La destinazione della bozza è cambiata. Torna al progetto originale e scegli di nuovo gli allegati.",
     "无法添加附件：{0}": "Impossibile aggiungere l’allegato: {0}",
     "未能移除附件：{0}": "Impossibile rimuovere l’allegato: {0}",
     "添加附件": "Aggiungi allegato",
@@ -11480,7 +14077,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "过程": "Svolgimento",
     "{0} 个步骤": "{0} passaggi",
     "用时 {0}": "Durata: {0}",
-    "内容较长已截断，显示完整内容{0}": "Contenuto lungo troncato. Mostra tutto il contenuto{0}",
+    "内容较长已截断，显示完整内容{0}":
+        "Contenuto lungo troncato. Mostra tutto il contenuto{0}",
     "{0} 个附件": "{0} allegati",
     "思考中": "Sta pensando",
     "思考已中断": "Ragionamento interrotto",
@@ -11492,30 +14090,43 @@ const messageCatalogs = <String, Map<String, String>>{
     "委派任务": "Attività delegata",
     "暂无子任务结论": "Nessun risultato della sotto-attività per ora",
     "执行过程请在电脑上查看": "Consulta lo svolgimento sul computer",
-    "共 {0} 步，执行过程请在电脑上查看": "{0} passaggi. Consulta lo svolgimento sul computer.",
-    "改动内容见本轮文件变更，或在电脑上查看": "Consulta le modifiche nei file di questo turno o sul computer",
+    "共 {0} 步，执行过程请在电脑上查看":
+        "{0} passaggi. Consulta lo svolgimento sul computer.",
+    "改动内容见本轮文件变更，或在电脑上查看":
+        "Consulta le modifiche nei file di questo turno o sul computer",
     "完整输出请在电脑上查看": "Consulta l’output completo sul computer",
     "{0}\n… 内容过长，已截断": "{0}\n… Contenuto troncato",
     "分叉": "Fork",
     "分叉上下文暂不可显示": "Contesto del fork non disponibile",
-    "请先恢复原草稿，未覆盖本机记录。": "Ripristina prima la bozza originale. I record locali non sono stati sovrascritti.",
+    "请先恢复原草稿，未覆盖本机记录。":
+        "Ripristina prima la bozza originale. I record locali non sono stati sovrascritti.",
     "草稿未能保存：{0}": "Impossibile salvare la bozza: {0}",
     "无法恢复草稿：{0}": "Impossibile ripristinare la bozza: {0}",
-    "暂时无法读取模型，可保留草稿后重试：{0}": "Impossibile caricare i modelli. Mantieni la bozza e riprova: {0}",
+    "暂时无法读取模型，可保留草稿后重试：{0}":
+        "Impossibile caricare i modelli. Mantieni la bozza e riprova: {0}",
     "附件仍在上传。": "Gli allegati sono ancora in caricamento.",
-    "电脑离线，附件及任务已保留为草稿。": "Computer offline. Allegati e attività salvati come bozza.",
+    "电脑离线，附件及任务已保留为草稿。":
+        "Computer offline. Allegati e attività salvati come bozza.",
     "离线会话未能保存：{0}": "Impossibile salvare la conversazione offline: {0}",
-    "没有找到要打开的这一轮，它可能已被删除。": "Questo turno non è stato trovato. Potrebbe essere stato eliminato.",
-    "电脑离线，连接后再查看完整内容。": "Computer offline. Riconnettiti per vedere il contenuto completo.",
+    "没有找到要打开的这一轮，它可能已被删除。":
+        "Questo turno non è stato trovato. Potrebbe essere stato eliminato.",
+    "电脑离线，连接后再查看完整内容。":
+        "Computer offline. Riconnettiti per vedere il contenuto completo.",
     "删除这个会话？": "Eliminare questa conversazione?",
-    "将在「{0}」上永久删除「{1}」及其记录，无法恢复。项目文件不会被删除。": "Elimina definitivamente «{1}» e la sua cronologia da «{0}». L’operazione non può essere annullata. I file del progetto vengono mantenuti.",
+    "将在「{0}」上永久删除「{1}」及其记录，无法恢复。项目文件不会被删除。":
+        "Elimina definitivamente «{1}» e la sua cronologia da «{0}». L’operazione non può essere annullata. I file del progetto vengono mantenuti.",
     "删除": "Elimina",
-    "停止请求未确认：{0}。请刷新核实任务状态。": "Richiesta di arresto non confermata: {0}. Aggiorna per verificare lo stato dell’attività.",
-    "电脑未受理这次发送，内容已保留。": "Il computer non ha accettato questo messaggio. Il tuo contenuto è stato mantenuto.",
+    "停止请求未确认：{0}。请刷新核实任务状态。":
+        "Richiesta di arresto non confermata: {0}. Aggiorna per verificare lo stato dell’attività.",
+    "电脑未受理这次发送，内容已保留。":
+        "Il computer non ha accettato questo messaggio. Il tuo contenuto è stato mantenuto.",
     "这台电脑已不在列表中": "Questo computer non è più nell’elenco",
-    "可能已在电脑上撤销配对。": "L’associazione potrebbe essere stata revocata sul computer.",
-    "{0} · 内容同步于 {1}{2}。附件原文需电脑在线。": "{0} · Sincronizzato {1}{2}. Riconnettiti per vedere gli allegati originali.",
-    "正在同步，先显示本机缓存": "Sincronizzazione in corso. Intanto viene mostrata la cache locale.",
+    "可能已在电脑上撤销配对。":
+        "L’associazione potrebbe essere stata revocata sul computer.",
+    "{0} · 内容同步于 {1}{2}。附件原文需电脑在线。":
+        "{0} · Sincronizzato {1}{2}. Riconnettiti per vedere gli allegati originali.",
+    "正在同步，先显示本机缓存":
+        "Sincronizzazione in corso. Intanto viene mostrata la cache locale.",
     "离线缓存": "Cache offline",
     "未知时间": "Ora sconosciuta",
     " · 仅缓存最近部分内容": " · In cache solo i contenuti recenti",
@@ -11528,218 +14139,367 @@ const messageCatalogs = <String, Map<String, String>>{
     "电脑离线{0}。任务不会因此停止。": "Computer offline{0}. Le attività continuano.",
     " · 最后同步 {0}": " · Ultima sincronizzazione {0}",
     "继续交给 Agent…": "Scrivi al tuo Agent…",
-    "这台电脑已移除，请核实电脑列表中的绑定。": "Questo computer è stato rimosso. Controlla l’associazione nell’elenco dei computer.",
-    "电脑绑定已改变，请从电脑列表重新打开。": "L’associazione del computer è cambiata. Riaprilo dall’elenco dei computer.",
-    "暂时无法读取电脑绑定，请稍后重试。": "Impossibile leggere l’associazione del computer. Riprova più tardi.",
-    "直连协商响应无效。": "Risposta di negoziazione della connessione diretta non valida.",
-    "本轮变更记录过大，请在电脑上查看": "Registro delle modifiche del turno troppo grande. Aprilo sul computer.",
+    "这台电脑已移除，请核实电脑列表中的绑定。":
+        "Questo computer è stato rimosso. Controlla l’associazione nell’elenco dei computer.",
+    "电脑绑定已改变，请从电脑列表重新打开。":
+        "L’associazione del computer è cambiata. Riaprilo dall’elenco dei computer.",
+    "暂时无法读取电脑绑定，请稍后重试。":
+        "Impossibile leggere l’associazione del computer. Riprova più tardi.",
+    "直连协商响应无效。":
+        "Risposta di negoziazione della connessione diretta non valida.",
+    "本轮变更记录过大，请在电脑上查看":
+        "Registro delle modifiche del turno troppo grande. Aprilo sul computer.",
     "本轮变更记录读取不一致": "Lettura incoerente del registro delle modifiche del turno.",
-    "本轮变更记录校验失败": "Controllo di integrità del registro delle modifiche del turno non riuscito.",
-    "本轮变更记录格式不可用": "Formato del registro delle modifiche del turno non disponibile.",
-    "电脑暂时离线，请稍后重连。": "Computer temporaneamente offline. Riconnettiti più tardi.",
-    "连接请求未被接受，请核实设备授权。": "Richiesta di connessione rifiutata. Controlla l’autorizzazione del dispositivo.",
+    "本轮变更记录校验失败":
+        "Controllo di integrità del registro delle modifiche del turno non riuscito.",
+    "本轮变更记录格式不可用":
+        "Formato del registro delle modifiche del turno non disponibile.",
+    "电脑暂时离线，请稍后重连。":
+        "Computer temporaneamente offline. Riconnettiti più tardi.",
+    "连接请求未被接受，请核实设备授权。":
+        "Richiesta di connessione rifiutata. Controlla l’autorizzazione del dispositivo.",
     "连接响应过大。": "Risposta di connessione troppo grande.",
-    "连接中断，操作结果待核实；请勿重复发送。": "Connessione persa. Risultato dell’operazione non confermato. Non reinviarla.",
-    "请在电脑上生成新版配对二维码。": "Genera un nuovo codice QR di associazione sul computer.",
+    "连接中断，操作结果待核实；请勿重复发送。":
+        "Connessione persa. Risultato dell’operazione non confermato. Non reinviarla.",
+    "请在电脑上生成新版配对二维码。":
+        "Genera un nuovo codice QR di associazione sul computer.",
     "电脑连接身份不一致。": "L’identità di connessione del computer non corrisponde.",
-    "手机身份与原配对不一致，未重新申请授权。": "L’identità del telefono è diversa dall’associazione originale. L’autorizzazione non è stata richiesta di nuovo.",
-    "原配对恢复期限已过，请在电脑核实授权后重新扫码。": "Il periodo di recupero dell’associazione è scaduto. Verifica l’accesso sul computer e scansiona di nuovo.",
-    "电脑连接身份与原配对不一致。": "L’identità di connessione del computer è diversa dall’associazione originale.",
-    "电脑未返回原配对回执。": "Il computer non ha restituito la ricevuta dell’associazione originale.",
+    "手机身份与原配对不一致，未重新申请授权。":
+        "L’identità del telefono è diversa dall’associazione originale. L’autorizzazione non è stata richiesta di nuovo.",
+    "原配对恢复期限已过，请在电脑核实授权后重新扫码。":
+        "Il periodo di recupero dell’associazione è scaduto. Verifica l’accesso sul computer e scansiona di nuovo.",
+    "电脑连接身份与原配对不一致。":
+        "L’identità di connessione del computer è diversa dall’associazione originale.",
+    "电脑未返回原配对回执。":
+        "Il computer non ha restituito la ricevuta dell’associazione originale.",
     "直连身份验证失败。": "Autenticazione della connessione diretta non riuscita.",
     "加密数据格式无效。": "Formato dei dati cifrati non valido.",
     "请求较多，请稍后重试。": "Troppe richieste. Riprova più tardi.",
     "请求过大。": "Richiesta troppo grande.",
-    "配对连接中断，结果需要核实。": "Connessione di associazione persa. Verifica il risultato.",
+    "配对连接中断，结果需要核实。":
+        "Connessione di associazione persa. Verifica il risultato.",
     "关键词过长，请缩短后再搜索。": "Parola chiave troppo lunga. Accorciala e riprova.",
     "电脑离线，连接后重试搜索。": "Computer offline. Riconnettiti per cercare.",
     "连接已更换，请重试本次搜索。": "La connessione è cambiata. Ripeti questa ricerca.",
-    "电脑未返回可用的历史搜索结果。": "Il computer non ha restituito risultati di ricerca utilizzabili.",
-    "历史搜索游标没有前进，请重新搜索。": "Il cursore di ricerca non è avanzato. Cerca di nuovo.",
+    "电脑未返回可用的历史搜索结果。":
+        "Il computer non ha restituito risultati di ricerca utilizzabili.",
+    "历史搜索游标没有前进，请重新搜索。":
+        "Il cursore di ricerca non è avanzato. Cerca di nuovo.",
     "历史搜索范围发生变化，请重新搜索。": "L’ambito della ricerca è cambiato. Cerca di nuovo.",
-    "写操作必须保留原始操作标识。": "Le operazioni di scrittura devono mantenere l’ID dell’operazione originale.",
-    "请先确认上一条消息或审批的结果。": "Conferma prima il risultato del messaggio o dell’approvazione precedente.",
-    "请先确认上一项设置或工作区操作的结果。": "Conferma prima il risultato dell’impostazione o dell’operazione sullo spazio di lavoro precedente.",
-    "Fork 正在电脑上执行，请等待并核实。": "Fork in esecuzione sul computer. Attendi e verifica il risultato.",
-    "原决定已受理，正在核实交付结果。": "Decisione originale accettata. Verifica della consegna in corso.",
+    "写操作必须保留原始操作标识。":
+        "Le operazioni di scrittura devono mantenere l’ID dell’operazione originale.",
+    "请先确认上一条消息或审批的结果。":
+        "Conferma prima il risultato del messaggio o dell’approvazione precedente.",
+    "请先确认上一项设置或工作区操作的结果。":
+        "Conferma prima il risultato dell’impostazione o dell’operazione sullo spazio di lavoro precedente.",
+    "Fork 正在电脑上执行，请等待并核实。":
+        "Fork in esecuzione sul computer. Attendi e verifica il risultato.",
+    "原决定已受理，正在核实交付结果。":
+        "Decisione originale accettata. Verifica della consegna in corso.",
     "请先核实原审批决定。": "Verifica prima la decisione di approvazione originale.",
-    "配对恢复记录无法读取，请先核实手机安全存储。": "Impossibile leggere i record di recupero dell’associazione. Controlla l’archiviazione sicura del telefono.",
-    "配对恢复信息未能安全保存。": "Impossibile salvare in modo sicuro le informazioni di recupero dell’associazione.",
-    "待核实电脑的身份发生变化，请先核实原配对。": "L’identità del computer è cambiata. Verifica prima l’associazione originale.",
-    "待核实配对过多，请先核实原记录。": "Troppe associazioni non verificate. Controlla prima i record esistenti.",
-    "本机设备身份无法读取，请先恢复安全存储。": "Impossibile leggere l’identità di questo dispositivo. Ripristina prima l’archiviazione sicura.",
-    "设备身份未能安全保存，尚未开始配对。": "Impossibile salvare in modo sicuro l’identità del dispositivo. L’associazione non è iniziata.",
-    "已保存的电脑身份无法读取，请先核实配对。": "Impossibile leggere l’identità salvata del computer. Verifica prima l’associazione.",
-    "配对回执与当前连接不一致。": "La ricevuta di associazione non corrisponde alla connessione attuale.",
-    "这项配对已因移除电脑而失效，请重新扫码。": "Questa associazione è scaduta quando il computer è stato rimosso. Scansiona di nuovo.",
-    "电脑绑定已变化，请重新扫码。": "L’associazione del computer è cambiata. Scansiona di nuovo.",
-    "电脑身份已发生变化，需要先解除旧配对。": "L’identità del computer è cambiata. Rimuovi prima la vecchia associazione.",
-    "电脑绑定已变化，未移除新的绑定，请刷新后确认。": "L’associazione del computer è cambiata. La nuova associazione non è stata rimossa. Aggiorna e conferma.",
-    "设备密钥格式无效，不能继续连接。": "Formato della chiave del dispositivo non valido. Impossibile continuare la connessione.",
+    "配对恢复记录无法读取，请先核实手机安全存储。":
+        "Impossibile leggere i record di recupero dell’associazione. Controlla l’archiviazione sicura del telefono.",
+    "配对恢复信息未能安全保存。":
+        "Impossibile salvare in modo sicuro le informazioni di recupero dell’associazione.",
+    "待核实电脑的身份发生变化，请先核实原配对。":
+        "L’identità del computer è cambiata. Verifica prima l’associazione originale.",
+    "待核实配对过多，请先核实原记录。":
+        "Troppe associazioni non verificate. Controlla prima i record esistenti.",
+    "本机设备身份无法读取，请先恢复安全存储。":
+        "Impossibile leggere l’identità di questo dispositivo. Ripristina prima l’archiviazione sicura.",
+    "设备身份未能安全保存，尚未开始配对。":
+        "Impossibile salvare in modo sicuro l’identità del dispositivo. L’associazione non è iniziata.",
+    "已保存的电脑身份无法读取，请先核实配对。":
+        "Impossibile leggere l’identità salvata del computer. Verifica prima l’associazione.",
+    "配对回执与当前连接不一致。":
+        "La ricevuta di associazione non corrisponde alla connessione attuale.",
+    "这项配对已因移除电脑而失效，请重新扫码。":
+        "Questa associazione è scaduta quando il computer è stato rimosso. Scansiona di nuovo.",
+    "电脑绑定已变化，请重新扫码。":
+        "L’associazione del computer è cambiata. Scansiona di nuovo.",
+    "电脑身份已发生变化，需要先解除旧配对。":
+        "L’identità del computer è cambiata. Rimuovi prima la vecchia associazione.",
+    "电脑绑定已变化，未移除新的绑定，请刷新后确认。":
+        "L’associazione del computer è cambiata. La nuova associazione non è stata rimossa. Aggiorna e conferma.",
+    "设备密钥格式无效，不能继续连接。":
+        "Formato della chiave del dispositivo non valido. Impossibile continuare la connessione.",
     "加密组件暂时不可用。": "Crittografia temporaneamente non disponibile.",
-    "设备身份验证或加密状态校验失败，请重新连接。": "Autenticazione del dispositivo o verifica della crittografia non riuscita. Riconnettiti.",
+    "设备身份验证或加密状态校验失败，请重新连接。":
+        "Autenticazione del dispositivo o verifica della crittografia non riuscita. Riconnettiti.",
     "加密连接已关闭。": "Connessione cifrata chiusa.",
-    "电脑绑定状态无法读取，请先检查系统安全存储。": "Impossibile leggere lo stato di associazione del computer. Controlla l’archiviazione sicura del sistema.",
-    "电脑绑定状态未能安全保存，请核实原操作。": "Impossibile salvare in modo sicuro lo stato di associazione del computer. Verifica l’operazione originale.",
+    "电脑绑定状态无法读取，请先检查系统安全存储。":
+        "Impossibile leggere lo stato di associazione del computer. Controlla l’archiviazione sicura del sistema.",
+    "电脑绑定状态未能安全保存，请核实原操作。":
+        "Impossibile salvare in modo sicuro lo stato di associazione del computer. Verifica l’operazione originale.",
     "请先选择电脑上的目录。": "Scegli prima una cartella sul computer.",
-    "原项目目录已变化，请核实原结果后重新选择。": "La cartella del progetto originale è cambiata. Verifica il risultato originale e scegli di nuovo.",
-    "添加项目结果尚未确认，请核实原操作。": "Risultato dell’aggiunta del progetto non confermato. Verifica l’operazione originale.",
-    "无法核实电脑上的项目，请重新连接后再试。": "Impossibile verificare il progetto sul computer. Riconnettiti e riprova.",
-    "请更新电脑端后再操作，尚未启动或修改配置。": "Aggiorna prima l’app desktop. Nessuna configurazione è stata avviata o modificata.",
+    "原项目目录已变化，请核实原结果后重新选择。":
+        "La cartella del progetto originale è cambiata. Verifica il risultato originale e scegli di nuovo.",
+    "添加项目结果尚未确认，请核实原操作。":
+        "Risultato dell’aggiunta del progetto non confermato. Verifica l’operazione originale.",
+    "无法核实电脑上的项目，请重新连接后再试。":
+        "Impossibile verificare il progetto sul computer. Riconnettiti e riprova.",
+    "请更新电脑端后再操作，尚未启动或修改配置。":
+        "Aggiorna prima l’app desktop. Nessuna configurazione è stata avviata o modificata.",
     "原启动回执不匹配。": "La ricevuta dell’avvio originale non corrisponde.",
-    "原启动记录与项目或运行配置不匹配，未重新执行。": "Il record dell’avvio originale non corrisponde al progetto o alla configurazione. Non è stato rieseguito.",
-    "运行配置回执与原操作不匹配，请更新电脑端后核实。": "La ricevuta della configurazione di esecuzione non corrisponde all’operazione originale. Aggiorna l’app desktop e verifica.",
-    "电脑没有返回可确认的运行配置结果，请核实原操作。": "Il computer non ha restituito un risultato verificabile per la configurazione di esecuzione. Controlla l’operazione originale.",
-    "运行配置操作未完成，请核实。": "Operazione sulla configurazione di esecuzione incompleta. Verificala.",
+    "原启动记录与项目或运行配置不匹配，未重新执行。":
+        "Il record dell’avvio originale non corrisponde al progetto o alla configurazione. Non è stato rieseguito.",
+    "运行配置回执与原操作不匹配，请更新电脑端后核实。":
+        "La ricevuta della configurazione di esecuzione non corrisponde all’operazione originale. Aggiorna l’app desktop e verifica.",
+    "电脑没有返回可确认的运行配置结果，请核实原操作。":
+        "Il computer non ha restituito un risultato verificabile per la configurazione di esecuzione. Controlla l’operazione originale.",
+    "运行配置操作未完成，请核实。":
+        "Operazione sulla configurazione di esecuzione incompleta. Verificala.",
     "没有待核实的启动操作。": "Nessun avvio in attesa di verifica.",
-    "电脑未确认原启动已关闭，记录仍保留。": "Il computer non ha confermato la chiusura dell’avvio originale. Il record viene mantenuto.",
-    "原启动结果尚未确认，记录仍保留。": "Risultato dell’avvio originale non confermato. Il record viene mantenuto.",
-    "服务地址必须使用 HTTPS；调试版本可使用本机或局域网 IP。": "L’indirizzo del servizio deve usare HTTPS. Le build di debug possono usare un IP locale o della LAN.",
-    "服务暂时不可用，请稍后重试。": "Servizio temporaneamente non disponibile. Riprova più tardi.",
+    "电脑未确认原启动已关闭，记录仍保留。":
+        "Il computer non ha confermato la chiusura dell’avvio originale. Il record viene mantenuto.",
+    "原启动结果尚未确认，记录仍保留。":
+        "Risultato dell’avvio originale non confermato. Il record viene mantenuto.",
+    "服务地址必须使用 HTTPS；调试版本可使用本机或局域网 IP。":
+        "L’indirizzo del servizio deve usare HTTPS. Le build di debug possono usare un IP locale o della LAN.",
+    "服务暂时不可用，请稍后重试。":
+        "Servizio temporaneamente non disponibile. Riprova più tardi.",
     "服务返回了无法识别的响应。": "Il servizio ha restituito una risposta non riconosciuta.",
-    "无法连接服务，请检查网络和服务地址。": "Impossibile raggiungere il servizio. Controlla la rete e l’indirizzo del servizio.",
-    "无法验证服务证书，请检查服务配置。": "Impossibile verificare il certificato del servizio. Controlla la configurazione del servizio.",
-    "服务响应无效或连接已中断，请重试。": "Risposta del servizio non valida o connessione persa. Riprova.",
-    "服务版本不兼容，请更新 App 或服务端。": "Versione del servizio non compatibile. Aggiorna l’app o il server.",
+    "无法连接服务，请检查网络和服务地址。":
+        "Impossibile raggiungere il servizio. Controlla la rete e l’indirizzo del servizio.",
+    "无法验证服务证书，请检查服务配置。":
+        "Impossibile verificare il certificato del servizio. Controlla la configurazione del servizio.",
+    "服务响应无效或连接已中断，请重试。":
+        "Risposta del servizio non valida o connessione persa. Riprova.",
+    "服务版本不兼容，请更新 App 或服务端。":
+        "Versione del servizio non compatibile. Aggiorna l’app o il server.",
     "二维码内容过长。": "Contenuto del codice QR troppo lungo.",
     "不是 DogCodes 配对二维码。": "Non è un codice QR di associazione DogCodes.",
-    "配对二维码无效，或来自未配置的服务。": "Codice QR di associazione non valido o di un servizio non configurato.",
-    "配对二维码已过期，请在电脑上重新生成。": "Codice QR di associazione scaduto. Generane uno nuovo sul computer.",
-    "设备时间不一致，请校准手机和电脑时间后重试。": "Gli orologi dei dispositivi non corrispondono. Correggi l’ora su entrambi e riprova.",
+    "配对二维码无效，或来自未配置的服务。":
+        "Codice QR di associazione non valido o di un servizio non configurato.",
+    "配对二维码已过期，请在电脑上重新生成。":
+        "Codice QR di associazione scaduto. Generane uno nuovo sul computer.",
+    "设备时间不一致，请校准手机和电脑时间后重试。":
+        "Gli orologi dei dispositivi non corrispondono. Correggi l’ora su entrambi e riprova.",
     "无法读取配对二维码。": "Impossibile leggere il codice QR di associazione.",
     "事件游标格式无效。": "Formato del cursore degli eventi non valido.",
     "事件游标超出范围。": "Cursore degli eventi fuori intervallo.",
-    "电脑离线，重新连接后再浏览目录。": "Computer offline. Riconnettiti per sfogliare le cartelle.",
+    "电脑离线，重新连接后再浏览目录。":
+        "Computer offline. Riconnettiti per sfogliare le cartelle.",
     "连接已更换，请重新读取目录。": "La connessione è cambiata. Ricarica la cartella.",
-    "电脑未返回有效的目录列表，请更新电脑端后重试。": "Nessun elenco di cartelle valido restituito. Aggiorna l’app desktop e riprova.",
-    "目录分页没有前进，请刷新目录。": "La paginazione delle cartelle non è avanzata. Aggiorna la cartella.",
-    "电脑端暂不支持目录选择，请更新电脑端后重试。": "Aggiorna l’app desktop per scegliere le cartelle.",
+    "电脑未返回有效的目录列表，请更新电脑端后重试。":
+        "Nessun elenco di cartelle valido restituito. Aggiorna l’app desktop e riprova.",
+    "目录分页没有前进，请刷新目录。":
+        "La paginazione delle cartelle non è avanzata. Aggiorna la cartella.",
+    "电脑端暂不支持目录选择，请更新电脑端后重试。":
+        "Aggiorna l’app desktop per scegliere le cartelle.",
     "剪贴板传输响应无效": "Risposta del trasferimento degli appunti non valida",
     "剪贴板传输身份不匹配": "L’identità del trasferimento degli appunti non corrisponde",
-    "剪贴板传输校验信息不匹配": "Le informazioni di integrità del trasferimento degli appunti non corrispondono",
-    "图片需小于 16 MB，请缩小图片后重试": "L’immagine deve essere inferiore a 16 MB. Riducila e riprova.",
+    "剪贴板传输校验信息不匹配":
+        "Le informazioni di integrità del trasferimento degli appunti non corrispondono",
+    "图片需小于 16 MB，请缩小图片后重试":
+        "L’immagine deve essere inferiore a 16 MB. Riducila e riprova.",
     "剪贴板文字为空或超过 1 MB": "Il testo degli appunti è vuoto o supera 1 MB",
-    "图片传输起始位置无效": "Posizione iniziale del trasferimento dell’immagine non valida",
+    "图片传输起始位置无效":
+        "Posizione iniziale del trasferimento dell’immagine non valida",
     "剪贴板上传位置不匹配": "La posizione di caricamento degli appunti non corrisponde",
-    "尚未确认电脑剪贴板是否更新，请从电脑获取核实；不会自动重发": "Aggiornamento degli appunti del computer non confermato. Recuperali per verificare. Non verranno reinviati automaticamente.",
-    "未确认电脑剪贴板已更新，请从电脑获取核实；不会自动重发": "Aggiornamento degli appunti del computer non confermato. Recuperali per verificare. Non verranno reinviati automaticamente.",
-    "剪贴板写入回执不完整，请从电脑获取核实": "Ricevuta di scrittura degli appunti incompleta. Recupera gli appunti del computer per verificare.",
+    "尚未确认电脑剪贴板是否更新，请从电脑获取核实；不会自动重发":
+        "Aggiornamento degli appunti del computer non confermato. Recuperali per verificare. Non verranno reinviati automaticamente.",
+    "未确认电脑剪贴板已更新，请从电脑获取核实；不会自动重发":
+        "Aggiornamento degli appunti del computer non confermato. Recuperali per verificare. Non verranno reinviati automaticamente.",
+    "剪贴板写入回执不完整，请从电脑获取核实":
+        "Ricevuta di scrittura degli appunti incompleta. Recupera gli appunti del computer per verificare.",
     "剪贴板下载数据块过大": "Blocco di download degli appunti troppo grande",
     "剪贴板下载位置不匹配": "La posizione di download degli appunti non corrisponde",
-    "剪贴板内容校验失败，未写入手机剪贴板": "Controllo di integrità degli appunti non riuscito. Gli appunti del telefono non sono stati modificati.",
+    "剪贴板内容校验失败，未写入手机剪贴板":
+        "Controllo di integrità degli appunti non riuscito. Gli appunti del telefono non sono stati modificati.",
     "通知服务初始化失败。": "Inizializzazione del servizio di notifiche non riuscita.",
-    "此版本未配置备用通知服务。": "Servizio di notifiche di riserva non configurato in questa build.",
+    "此版本未配置备用通知服务。":
+        "Servizio di notifiche di riserva non configurato in questa build.",
     "系统通知权限尚未开启。": "Permesso di notifica del sistema non concesso.",
     "任务提醒": "Avvisi delle attività",
-    "待审批、待回答、完成和失败提醒": "Avvisi di approvazione, domande, completamento ed errori",
-    "未获取到通知设备身份。": "Impossibile ottenere l’identità di notifica del dispositivo.",
-    "这台电脑已移除，未发送停止请求。": "Questo computer è stato rimosso. Richiesta di arresto non inviata.",
-    "这个任务已经有一个停止请求在等待确认。": "Per questa attività c’è già una richiesta di arresto in attesa di conferma.",
-    "等待确认的停止请求太多，请先处理待处理页里的卡片。": "Troppe richieste di arresto in attesa di conferma. Gestisci prima le schede in In attesa.",
+    "待审批、待回答、完成和失败提醒":
+        "Avvisi di approvazione, domande, completamento ed errori",
+    "未获取到通知设备身份。":
+        "Impossibile ottenere l’identità di notifica del dispositivo.",
+    "这台电脑已移除，未发送停止请求。":
+        "Questo computer è stato rimosso. Richiesta di arresto non inviata.",
+    "这个任务已经有一个停止请求在等待确认。":
+        "Per questa attività c’è già una richiesta di arresto in attesa di conferma.",
+    "等待确认的停止请求太多，请先处理待处理页里的卡片。":
+        "Troppe richieste di arresto in attesa di conferma. Gestisci prima le schede in In attesa.",
     "任务当前没有可停止的运行。": "Questa attività non ha esecuzioni attive da arrestare.",
-    "暂时无法读取任务状态，请稍后再确认。": "Impossibile leggere lo stato dell’attività. Ricontrolla più tardi.",
-    "这台电脑已移除，未重新发送停止请求。": "Questo computer è stato rimosso. Richiesta di arresto non reinviata.",
+    "暂时无法读取任务状态，请稍后再确认。":
+        "Impossibile leggere lo stato dell’attività. Ricontrolla più tardi.",
+    "这台电脑已移除，未重新发送停止请求。":
+        "Questo computer è stato rimosso. Richiesta di arresto non reinviata.",
     "原停止请求已改变，请刷新。": "La richiesta di arresto originale è cambiata. Aggiorna.",
     "没有待确认的停止请求。": "Nessuna richiesta di arresto in attesa di conferma.",
-    "电脑已收到停止请求，任务会在停下后更新状态。": "Il computer ha ricevuto la richiesta di arresto. Lo stato verrà aggiornato quando l’attività si arresterà.",
-    "这次运行已经结束，不需要再停止。": "Questa esecuzione è già terminata. Non serve arrestarla di nuovo.",
-    "已不再等待。如果电脑收到了这个停止请求，任务仍会停下。": "Attesa interrotta. Se il computer ha ricevuto la richiesta di arresto, l’attività si arresterà comunque.",
-    "还不确定是否已停止，可以再发一次停止。": "Risultato dell’arresto non confermato. Puoi inviare un’altra richiesta di arresto.",
+    "电脑已收到停止请求，任务会在停下后更新状态。":
+        "Il computer ha ricevuto la richiesta di arresto. Lo stato verrà aggiornato quando l’attività si arresterà.",
+    "这次运行已经结束，不需要再停止。":
+        "Questa esecuzione è già terminata. Non serve arrestarla di nuovo.",
+    "已不再等待。如果电脑收到了这个停止请求，任务仍会停下。":
+        "Attesa interrotta. Se il computer ha ricevuto la richiesta di arresto, l’attività si arresterà comunque.",
+    "还不确定是否已停止，可以再发一次停止。":
+        "Risultato dell’arresto non confermato. Puoi inviare un’altra richiesta di arresto.",
     "附件总大小不能超过 25 MB。": "Gli allegati non possono superare 25 MB in totale.",
     "附件文件名过长或无效。": "Nome file dell’allegato troppo lungo o non valido.",
     "图片请使用 PNG、JPEG、GIF 或 WebP 格式。": "Usa immagini PNG, JPEG, GIF o WebP.",
     "一次最多发送 16 个附件。": "Fino a 16 allegati per messaggio.",
-    "附件上传已暂停，可继续原上传。": "Caricamento dell’allegato sospeso. Riprendi il caricamento originale.",
-    "附件回执与原文件不一致，未发送任务。": "La ricevuta dell’allegato non corrisponde al file originale. Attività non inviata.",
-    "本机附件内容已变化，请重新添加；未上传变化后的文件。": "L’allegato locale è cambiato. Aggiungilo di nuovo. Il file modificato non è stato caricato.",
+    "附件上传已暂停，可继续原上传。":
+        "Caricamento dell’allegato sospeso. Riprendi il caricamento originale.",
+    "附件回执与原文件不一致，未发送任务。":
+        "La ricevuta dell’allegato non corrisponde al file originale. Attività non inviata.",
+    "本机附件内容已变化，请重新添加；未上传变化后的文件。":
+        "L’allegato locale è cambiato. Aggiungilo di nuovo. Il file modificato non è stato caricato.",
     "电脑端暂不支持附件上传，请更新电脑端。": "Aggiorna l’app desktop per caricare allegati.",
-    "电脑返回的附件位置无效。": "Il computer ha restituito una posizione dell’allegato non valida.",
-    "附件分块位置未确认，请继续原上传。": "Posizione del blocco dell’allegato non confermata. Riprendi il caricamento originale.",
-    "原草稿不可读取，请重新选择附件。": "Impossibile leggere la bozza originale. Scegli di nuovo gli allegati.",
-    "上次附件选择未完成，请重新选择。": "La selezione precedente degli allegati non è stata completata. Scegli di nuovo.",
-    "已恢复系统文件选择器返回的附件，请核对后发送。": "Allegati recuperati dal selettore di file del sistema. Controllali prima di inviare.",
-    "附件选择未完成：{0}，请重新选择。": "Selezione degli allegati incompleta: {0}. Scegli di nuovo.",
-    "上次附件选择未能恢复：{0}": "Impossibile recuperare la selezione precedente degli allegati: {0}",
-    "正在处理这台电脑的原配对，请稍后核实。": "L’associazione originale di questo computer è in elaborazione. Ricontrolla più tardi.",
-    "原配对恢复记录已改变，请刷新后核实。": "Il record di recupero dell’associazione originale è cambiato. Aggiorna e verifica.",
-    "电脑绑定已移除或变化，请重新配对后连接。": "L’associazione del computer è stata rimossa o modificata. Associalo di nuovo per connetterti.",
+    "电脑返回的附件位置无效。":
+        "Il computer ha restituito una posizione dell’allegato non valida.",
+    "附件分块位置未确认，请继续原上传。":
+        "Posizione del blocco dell’allegato non confermata. Riprendi il caricamento originale.",
+    "原草稿不可读取，请重新选择附件。":
+        "Impossibile leggere la bozza originale. Scegli di nuovo gli allegati.",
+    "上次附件选择未完成，请重新选择。":
+        "La selezione precedente degli allegati non è stata completata. Scegli di nuovo.",
+    "已恢复系统文件选择器返回的附件，请核对后发送。":
+        "Allegati recuperati dal selettore di file del sistema. Controllali prima di inviare.",
+    "附件选择未完成：{0}，请重新选择。":
+        "Selezione degli allegati incompleta: {0}. Scegli di nuovo.",
+    "上次附件选择未能恢复：{0}":
+        "Impossibile recuperare la selezione precedente degli allegati: {0}",
+    "正在处理这台电脑的原配对，请稍后核实。":
+        "L’associazione originale di questo computer è in elaborazione. Ricontrolla più tardi.",
+    "原配对恢复记录已改变，请刷新后核实。":
+        "Il record di recupero dell’associazione originale è cambiato. Aggiorna e verifica.",
+    "电脑绑定已移除或变化，请重新配对后连接。":
+        "L’associazione del computer è stata rimossa o modificata. Associalo di nuovo per connetterti.",
     "未命名会话": "Conversazione senza titolo",
     "离线模式": "Modalità offline",
     "离线协作": "Collaborazione offline",
-    "部分离线数据暂时无法读取，联网后可重新同步。": "Impossibile leggere alcuni dati offline. Riconnettiti per sincronizzare di nuovo.",
-    "停止请求暂时无法读取，请检查系统安全存储。": "Impossibile leggere le richieste di arresto. Controlla l’archiviazione sicura del sistema.",
-    "终端关闭记录暂时无法读取，请检查系统安全存储。": "Impossibile leggere i record di chiusura dei terminali. Controlla l’archiviazione sicura del sistema.",
-    "已配对电脑暂时无法读取，请检查系统安全存储。": "Impossibile leggere i computer associati. Controlla l’archiviazione sicura del sistema.",
-    "电脑绑定已变化，未使用旧页面接管新的连接。": "L’associazione del computer è cambiata. La vecchia pagina non ha preso in carico la nuova connessione.",
-    "连接中断，正在重新连接。已发送操作不会重复执行。": "Connessione persa. Riconnessione in corso. Le operazioni inviate non verranno eseguite due volte.",
+    "部分离线数据暂时无法读取，联网后可重新同步。":
+        "Impossibile leggere alcuni dati offline. Riconnettiti per sincronizzare di nuovo.",
+    "停止请求暂时无法读取，请检查系统安全存储。":
+        "Impossibile leggere le richieste di arresto. Controlla l’archiviazione sicura del sistema.",
+    "终端关闭记录暂时无法读取，请检查系统安全存储。":
+        "Impossibile leggere i record di chiusura dei terminali. Controlla l’archiviazione sicura del sistema.",
+    "已配对电脑暂时无法读取，请检查系统安全存储。":
+        "Impossibile leggere i computer associati. Controlla l’archiviazione sicura del sistema.",
+    "电脑绑定已变化，未使用旧页面接管新的连接。":
+        "L’associazione del computer è cambiata. La vecchia pagina non ha preso in carico la nuova connessione.",
+    "连接中断，正在重新连接。已发送操作不会重复执行。":
+        "Connessione persa. Riconnessione in corso. Le operazioni inviate non verranno eseguite due volte.",
     "连接已断开。电脑上的任务不会因此停止。": "Disconnesso. Le attività continuano sul computer.",
-    "移除未完成，连接已关闭；请重试移除或核实安全存储。": "Rimozione incompleta. Connessione chiusa. Ripeti la rimozione o controlla l’archiviazione sicura.",
+    "移除未完成，连接已关闭；请重试移除或核实安全存储。":
+        "Rimozione incompleta. Connessione chiusa. Ripeti la rimozione o controlla l’archiviazione sicura.",
     "离线缓存未能保存：{0}": "Impossibile salvare la cache offline: {0}",
-    "待确认的操作暂时无法读取，请检查系统安全存储。": "Impossibile leggere le operazioni non confermate. Controlla l’archiviazione sicura del sistema.",
-    "无法读取后台提醒设置，请检查系统安全存储后重试。": "Impossibile leggere le impostazioni degli avvisi in background. Controlla l’archiviazione sicura del sistema e riprova.",
-    "部分电脑的通知尚未登记，请检查网络后重新检测。": "Notifiche non registrate per alcuni computer. Controlla la rete e riprova.",
-    "后台提醒尚未启用，请核实系统通知权限和通知服务配置后重试。": "Gli avvisi in background non sono attivi. Controlla il permesso di notifica del sistema e la configurazione del servizio.",
+    "待确认的操作暂时无法读取，请检查系统安全存储。":
+        "Impossibile leggere le operazioni non confermate. Controlla l’archiviazione sicura del sistema.",
+    "无法读取后台提醒设置，请检查系统安全存储后重试。":
+        "Impossibile leggere le impostazioni degli avvisi in background. Controlla l’archiviazione sicura del sistema e riprova.",
+    "部分电脑的通知尚未登记，请检查网络后重新检测。":
+        "Notifiche non registrate per alcuni computer. Controlla la rete e riprova.",
+    "后台提醒尚未启用，请核实系统通知权限和通知服务配置后重试。":
+        "Gli avvisi in background non sono attivi. Controlla il permesso di notifica del sistema e la configurazione del servizio.",
     "Git 操作已完成": "Operazione Git completata",
-    "已经提交，还不确定是否推送成功，可以重新发送推送。": "Commit eseguito. Risultato del push non confermato. Puoi reinviare il push.",
+    "已经提交，还不确定是否推送成功，可以重新发送推送。":
+        "Commit eseguito. Risultato del push non confermato. Puoi reinviare il push.",
     "提交已完成，推送失败：{0}": "Commit completato. Push non riuscito: {0}",
     "Git 操作失败：{0}": "Operazione Git non riuscita: {0}",
-    "电脑正在执行 Git 操作，稍后再确认。": "Operazione Git in esecuzione sul computer. Ricontrolla più tardi.",
-    "Git 操作中途中断了，请在「变更」里看一下仓库现在的状态。": "Operazione Git interrotta. Controlla lo stato del repository in Modifiche.",
-    "Git 操作只完成了一部分，请先在「变更」里看一下再继续。": "L’operazione Git è stata completata solo in parte. Controlla Modifiche prima di continuare.",
+    "电脑正在执行 Git 操作，稍后再确认。":
+        "Operazione Git in esecuzione sul computer. Ricontrolla più tardi.",
+    "Git 操作中途中断了，请在「变更」里看一下仓库现在的状态。":
+        "Operazione Git interrotta. Controlla lo stato del repository in Modifiche.",
+    "Git 操作只完成了一部分，请先在「变更」里看一下再继续。":
+        "L’operazione Git è stata completata solo in parte. Controlla Modifiche prima di continuare.",
     "已不再等待这次 Git 操作。": "Attesa di questa operazione Git interrotta.",
-    "电脑上还查不到这次 Git 操作，可能没收到，可以重新发送。": "Il computer non ha ancora traccia di questa operazione Git. Potrebbe non essere arrivata. Puoi reinviarla.",
-    "还不确定文件是否已暂存，所以没有继续提交。": "Messa in stage non confermata. Il commit non è proseguito.",
-    "暂存回执与原文件选择不一致，未重新执行。": "La ricevuta della messa in stage non corrisponde alla selezione di file originale. Non è stata rieseguita.",
+    "电脑上还查不到这次 Git 操作，可能没收到，可以重新发送。":
+        "Il computer non ha ancora traccia di questa operazione Git. Potrebbe non essere arrivata. Puoi reinviarla.",
+    "还不确定文件是否已暂存，所以没有继续提交。":
+        "Messa in stage non confermata. Il commit non è proseguito.",
+    "暂存回执与原文件选择不一致，未重新执行。":
+        "La ricevuta della messa in stage non corrisponde alla selezione di file originale. Non è stata rieseguita.",
     "Git 操作无效。": "Operazione Git non valida.",
-    "电脑未返回有效的 Git 操作回执。": "Il computer non ha restituito una ricevuta valida dell’operazione Git.",
-    "Git 回执与原请求不一致，未继续操作。": "La ricevuta Git non corrisponde alla richiesta originale. L’operazione non è proseguita.",
-    "Git 接续记录过长或存在循环，请在电脑上核实。": "La catena di prosecuzione Git è troppo lunga o contiene un ciclo. Verifica sul computer.",
-    "电脑尚未确认结束原 Git 跟踪。": "Il computer non ha confermato la fine del tracciamento Git originale.",
+    "电脑未返回有效的 Git 操作回执。":
+        "Il computer non ha restituito una ricevuta valida dell’operazione Git.",
+    "Git 回执与原请求不一致，未继续操作。":
+        "La ricevuta Git non corrisponde alla richiesta originale. L’operazione non è proseguita.",
+    "Git 接续记录过长或存在循环，请在电脑上核实。":
+        "La catena di prosecuzione Git è troppo lunga o contiene un ciclo. Verifica sul computer.",
+    "电脑尚未确认结束原 Git 跟踪。":
+        "Il computer non ha confermato la fine del tracciamento Git originale.",
     "待审批": "Approvazione richiesta",
     "待回答": "Risposta richiesta",
     "任务完成": "Attività completata",
     "执行失败": "Esecuzione non riuscita",
-    "通知设置响应无效，请重新读取。": "Risposta delle impostazioni di notifica non valida. Ricarica.",
-    "设备授权已失效，请核实电脑绑定。": "Autorizzazione del dispositivo scaduta. Verifica l’associazione del computer.",
-    "通知设置已改变，请重新读取后修改。": "Le impostazioni di notifica sono cambiate. Ricarica prima di modificare.",
+    "通知设置响应无效，请重新读取。":
+        "Risposta delle impostazioni di notifica non valida. Ricarica.",
+    "设备授权已失效，请核实电脑绑定。":
+        "Autorizzazione del dispositivo scaduta. Verifica l’associazione del computer.",
+    "通知设置已改变，请重新读取后修改。":
+        "Le impostazioni di notifica sono cambiate. Ricarica prima di modificare.",
     "操作过于频繁，请稍后重试。": "Troppe operazioni. Riprova più tardi.",
-    "通知服务暂时不可用，请稍后重试。": "Servizio di notifiche temporaneamente non disponibile. Riprova più tardi.",
-    "无法确认通知设置，请检查网络后重新读取。": "Impossibile confermare le impostazioni di notifica. Controlla la rete e ricarica.",
-    "电脑没有收到这次设置，请再试一次。": "Il computer non ha ricevuto questa impostazione. Riprova.",
+    "通知服务暂时不可用，请稍后重试。":
+        "Servizio di notifiche temporaneamente non disponibile. Riprova più tardi.",
+    "无法确认通知设置，请检查网络后重新读取。":
+        "Impossibile confermare le impostazioni di notifica. Controlla la rete e ricarica.",
+    "电脑没有收到这次设置，请再试一次。":
+        "Il computer non ha ricevuto questa impostazione. Riprova.",
     "电脑返回的保持唤醒状态无效。": "Stato di attività restituito dal computer non valido.",
-    "待发送的输入过多，本次未发送，请缩短输入后再试。": "Troppo input in coda. Non è stato inviato nulla. Accorcia l’input e riprova.",
-    "终端页面已离开，未继续发送输入。": "Pagina del terminale chiusa. Nessun altro input inviato.",
+    "待发送的输入过多，本次未发送，请缩短输入后再试。":
+        "Troppo input in coda. Non è stato inviato nulla. Accorcia l’input e riprova.",
+    "终端页面已离开，未继续发送输入。":
+        "Pagina del terminale chiusa. Nessun altro input inviato.",
     "终端输入回执不匹配": "La ricevuta dell’input del terminale non corrisponde",
-    "请更新电脑端后输入；终端输出仍可查看。": "Aggiorna l’app desktop per digitare. L’output del terminale resta disponibile.",
+    "请更新电脑端后输入；终端输出仍可查看。":
+        "Aggiorna l’app desktop per digitare. L’output del terminale resta disponibile.",
     "终端正在启动，请稍后继续输入。": "Avvio del terminale. Continua a digitare più tardi.",
-    "原终端当前不可输入，请刷新查看状态。": "Il terminale originale non accetta input. Aggiorna per controllarne lo stato.",
-    "终端输入连接已改变，请检查后继续。": "La connessione di input del terminale è cambiata. Controllala prima di continuare.",
-    "输入连接仍在切换，请稍后检查并继续。": "La connessione di input sta ancora cambiando. Ricontrolla più tardi.",
-    "上次输入结果待核实，请检查终端输出后再继续。": "Risultato dell’input precedente non confermato. Controlla l’output del terminale prima di continuare.",
-    "输入结果尚未确认，请核实或检查终端后继续；不会重发原输入。": "Risultato dell’input non confermato. Verificalo o controlla il terminale prima di continuare. L’input originale non verrà reinviato.",
-    "终端连接中断，输入结果待核实；未发送的队列已丢弃，不会自动重发。": "Terminale disconnesso. Risultato dell’input non confermato. La coda non inviata è stata scartata e non verrà inviata automaticamente.",
-    "原输入仍未确认或通道已改变，请检查终端输出后继续；不会重发。": "Input originale non confermato o canale cambiato. Controlla l’output del terminale prima di continuare. L’input non verrà reinviato.",
-    "暂时无法核实输入，请连接后再试；不会重发原输入。": "Impossibile verificare l’input. Riconnettiti e riprova. L’input originale non verrà reinviato.",
-    "输入连接尚未恢复，请稍后再试。": "La connessione di input non è ancora ripristinata. Riprova più tardi.",
-    "这台电脑已移除，未发送关闭请求。": "Questo computer è stato rimosso. Richiesta di chiusura non inviata.",
-    "这个终端已经有一个关闭请求在等待确认。": "Per questo terminale c’è già una richiesta di chiusura in attesa di conferma.",
-    "等待确认的关闭请求太多，请先处理待处理页里的卡片。": "Troppe richieste di chiusura in attesa di conferma. Gestisci prima le schede in In attesa.",
-    "原终端关闭结果尚未确认，请核实结束后再启动这个运行配置。": "Risultato della chiusura del terminale originale non confermato. Verificalo prima di avviare questa configurazione di esecuzione.",
-    "请更新电脑端后再关闭终端，当前版本无法核实原终端身份。": "Aggiorna l’app desktop per chiudere i terminali. Questa versione non può verificare l’identità del terminale originale.",
-    "终端身份不完整，请刷新后再关闭。": "Identità del terminale incompleta. Aggiorna prima di chiudere.",
-    "终端已经重新启动过，没有关闭新的终端。": "Il terminale è stato riavviato. Il nuovo terminale non è stato chiuso.",
+    "原终端当前不可输入，请刷新查看状态。":
+        "Il terminale originale non accetta input. Aggiorna per controllarne lo stato.",
+    "终端输入连接已改变，请检查后继续。":
+        "La connessione di input del terminale è cambiata. Controllala prima di continuare.",
+    "输入连接仍在切换，请稍后检查并继续。":
+        "La connessione di input sta ancora cambiando. Ricontrolla più tardi.",
+    "上次输入结果待核实，请检查终端输出后再继续。":
+        "Risultato dell’input precedente non confermato. Controlla l’output del terminale prima di continuare.",
+    "输入结果尚未确认，请核实或检查终端后继续；不会重发原输入。":
+        "Risultato dell’input non confermato. Verificalo o controlla il terminale prima di continuare. L’input originale non verrà reinviato.",
+    "终端连接中断，输入结果待核实；未发送的队列已丢弃，不会自动重发。":
+        "Terminale disconnesso. Risultato dell’input non confermato. La coda non inviata è stata scartata e non verrà inviata automaticamente.",
+    "原输入仍未确认或通道已改变，请检查终端输出后继续；不会重发。":
+        "Input originale non confermato o canale cambiato. Controlla l’output del terminale prima di continuare. L’input non verrà reinviato.",
+    "暂时无法核实输入，请连接后再试；不会重发原输入。":
+        "Impossibile verificare l’input. Riconnettiti e riprova. L’input originale non verrà reinviato.",
+    "输入连接尚未恢复，请稍后再试。":
+        "La connessione di input non è ancora ripristinata. Riprova più tardi.",
+    "这台电脑已移除，未发送关闭请求。":
+        "Questo computer è stato rimosso. Richiesta di chiusura non inviata.",
+    "这个终端已经有一个关闭请求在等待确认。":
+        "Per questo terminale c’è già una richiesta di chiusura in attesa di conferma.",
+    "等待确认的关闭请求太多，请先处理待处理页里的卡片。":
+        "Troppe richieste di chiusura in attesa di conferma. Gestisci prima le schede in In attesa.",
+    "原终端关闭结果尚未确认，请核实结束后再启动这个运行配置。":
+        "Risultato della chiusura del terminale originale non confermato. Verificalo prima di avviare questa configurazione di esecuzione.",
+    "请更新电脑端后再关闭终端，当前版本无法核实原终端身份。":
+        "Aggiorna l’app desktop per chiudere i terminali. Questa versione non può verificare l’identità del terminale originale.",
+    "终端身份不完整，请刷新后再关闭。":
+        "Identità del terminale incompleta. Aggiorna prima di chiudere.",
+    "终端已经重新启动过，没有关闭新的终端。":
+        "Il terminale è stato riavviato. Il nuovo terminale non è stato chiuso.",
     "终端不存在": "Il terminale non esiste",
     "没有待确认的终端关闭操作。": "Nessuna chiusura del terminale in attesa di conferma.",
     "终端已经关闭。": "Terminale chiuso.",
-    "已不再等待。如果电脑收到了关闭请求，终端仍会关闭。": "Attesa interrotta. Se il computer ha ricevuto la richiesta di chiusura, il terminale verrà comunque chiuso.",
-    "终端已改变，关闭请求未执行。": "Il terminale è cambiato. La richiesta di chiusura non è stata eseguita.",
-    "电脑已收到关闭请求，正在等终端结束。": "Il computer ha ricevuto la richiesta di chiusura. In attesa che il terminale termini.",
-    "还不确定终端是否已关闭，可以稍后再确认。": "Risultato della chiusura del terminale non confermato. Ricontrolla più tardi.",
+    "已不再等待。如果电脑收到了关闭请求，终端仍会关闭。":
+        "Attesa interrotta. Se il computer ha ricevuto la richiesta di chiusura, il terminale verrà comunque chiuso.",
+    "终端已改变，关闭请求未执行。":
+        "Il terminale è cambiato. La richiesta di chiusura non è stata eseguita.",
+    "电脑已收到关闭请求，正在等终端结束。":
+        "Il computer ha ricevuto la richiesta di chiusura. In attesa che il terminale termini.",
+    "还不确定终端是否已关闭，可以稍后再确认。":
+        "Risultato della chiusura del terminale non confermato. Ricontrolla più tardi.",
     "请选择有效的审查问题。": "Scegli problemi di revisione validi.",
-    "审查回执与原请求不匹配，请保留原操作并核实。": "La ricevuta della revisione non corrisponde alla richiesta originale. Mantieni l’operazione e verificala.",
-    "修复回执与原请求不匹配，请先核实电脑上的原修复。": "La ricevuta della correzione non corrisponde alla richiesta originale. Verifica prima la correzione originale sul computer.",
-    "无法读取审查记录，请更新电脑端后重试。": "Impossibile leggere le revisioni. Aggiorna l’app desktop e riprova.",
-    "消息分片取消标识无效。": "Indicatore di annullamento del frammento di messaggio non valido.",
+    "审查回执与原请求不匹配，请保留原操作并核实。":
+        "La ricevuta della revisione non corrisponde alla richiesta originale. Mantieni l’operazione e verificala.",
+    "修复回执与原请求不匹配，请先核实电脑上的原修复。":
+        "La ricevuta della correzione non corrisponde alla richiesta originale. Verifica prima la correzione originale sul computer.",
+    "无法读取审查记录，请更新电脑端后重试。":
+        "Impossibile leggere le revisioni. Aggiorna l’app desktop e riprova.",
+    "消息分片取消标识无效。":
+        "Indicatore di annullamento del frammento di messaggio non valido.",
     "消息大小超出范围。": "Dimensione del messaggio fuori intervallo.",
     "二进制消息格式无效。": "Formato del messaggio binario non valido.",
     "消息分片格式无效。": "Formato del frammento di messaggio non valido.",
@@ -11747,42 +14507,61 @@ const messageCatalogs = <String, Map<String, String>>{
     "消息分片不连续。": "I frammenti di messaggio non sono contigui.",
     "消息分片长度无效。": "Lunghezza del frammento di messaggio non valida.",
     "不允许嵌套消息分片。": "I frammenti di messaggio annidati non sono consentiti.",
-    "会话版本不可用，请刷新后重试。": "Versione della conversazione non disponibile. Aggiorna e riprova.",
-    "会话名称需为 1–120 个字符，且不能包含控制字符。": "Il nome della conversazione deve avere da 1 a 120 caratteri, senza caratteri di controllo.",
+    "会话版本不可用，请刷新后重试。":
+        "Versione della conversazione non disponibile. Aggiorna e riprova.",
+    "会话名称需为 1–120 个字符，且不能包含控制字符。":
+        "Il nome della conversazione deve avere da 1 a 120 caratteri, senza caratteri di controllo.",
     "会话状态无效。": "Stato della conversazione non valido.",
-    "无法读取电脑的会话设置，请更新电脑端后重试。": "Impossibile leggere le impostazioni delle conversazioni. Aggiorna l’app desktop e riprova.",
+    "无法读取电脑的会话设置，请更新电脑端后重试。":
+        "Impossibile leggere le impostazioni delle conversazioni. Aggiorna l’app desktop e riprova.",
     "Fork 环境无效。": "Ambiente di fork non valido.",
-    "Fork 返回的会话身份不一致，请核实原操作。": "Il fork ha restituito un’identità di conversazione diversa. Verifica l’operazione originale.",
-    "没有待确认的会话操作。": "Nessuna operazione sulle conversazioni in attesa di conferma.",
+    "Fork 返回的会话身份不一致，请核实原操作。":
+        "Il fork ha restituito un’identità di conversazione diversa. Verifica l’operazione originale.",
+    "没有待确认的会话操作。":
+        "Nessuna operazione sulle conversazioni in attesa di conferma.",
     "原操作已变化，请刷新。": "L’operazione originale è cambiata. Aggiorna.",
-    "Fork 回执与原请求不一致。": "La ricevuta del fork non corrisponde alla richiesta originale.",
+    "Fork 回执与原请求不一致。":
+        "La ricevuta del fork non corrisponde alla richiesta originale.",
     "这项操作需要先核实结果。": "Verifica prima il risultato di questa operazione.",
-    "这台电脑已移除，未再发送请求。": "Questo computer è stato rimosso. Richiesta non reinviata.",
-    "原电脑记录尚未清理完成，请重试移除电脑后再连接。": "I dati del computer originale non sono stati cancellati del tutto. Ripeti la rimozione prima di riconnetterti.",
-    "电脑绑定已变化，未发送原操作；请重新连接后确认。": "L’associazione del computer è cambiata. Operazione originale non inviata. Riconnettiti e conferma.",
-    "原操作已结束或已更新，请刷新后操作。": "L’operazione originale è terminata o è stata aggiornata. Aggiorna prima di continuare.",
-    "中继连接中断，操作结果需要核实。": "Relay disconnesso. Verifica il risultato dell’operazione.",
+    "这台电脑已移除，未再发送请求。":
+        "Questo computer è stato rimosso. Richiesta non reinviata.",
+    "原电脑记录尚未清理完成，请重试移除电脑后再连接。":
+        "I dati del computer originale non sono stati cancellati del tutto. Ripeti la rimozione prima di riconnetterti.",
+    "电脑绑定已变化，未发送原操作；请重新连接后确认。":
+        "L’associazione del computer è cambiata. Operazione originale non inviata. Riconnettiti e conferma.",
+    "原操作已结束或已更新，请刷新后操作。":
+        "L’operazione originale è terminata o è stata aggiornata. Aggiorna prima di continuare.",
+    "中继连接中断，操作结果需要核实。":
+        "Relay disconnesso. Verifica il risultato dell’operazione.",
     "中继探针仅供本地开发使用。": "La sonda del relay è solo per lo sviluppo locale.",
     "数据帧大小超出范围。": "Dimensione del frame di dati fuori intervallo.",
-    "连接已关闭；操作结果需要核实。": "Connessione chiusa. Verifica il risultato dell’operazione.",
-    "暂时无法连接可用的通知服务，请稍后重试。": "Impossibile raggiungere un servizio di notifiche. Riprova più tardi.",
-    "电脑已结束屏幕共享，请重新连接并授权": "La condivisione dello schermo è terminata sul computer. Riconnettiti e autorizza di nuovo.",
+    "连接已关闭；操作结果需要核实。":
+        "Connessione chiusa. Verifica il risultato dell’operazione.",
+    "暂时无法连接可用的通知服务，请稍后重试。":
+        "Impossibile raggiungere un servizio di notifiche. Riprova più tardi.",
+    "电脑已结束屏幕共享，请重新连接并授权":
+        "La condivisione dello schermo è terminata sul computer. Riconnettiti e autorizza di nuovo.",
     "加密中继": "Relay cifrato",
     "P2P 直连": "Connessione diretta P2P",
     "TURN 中继": "Relay TURN",
     "WebRTC · 路径待确认": "WebRTC · Percorso non confermato",
     "连接的电脑身份不一致。": "L’identità del computer connesso non corrisponde.",
     "草稿归属不可读取": "Impossibile leggere la proprietà della bozza",
-    "工作区已属于另一份设备存储": "Lo spazio di lavoro appartiene a un altro archivio del dispositivo",
-    "工作区设备存储尚未初始化": "Archivio del dispositivo dello spazio di lavoro non inizializzato",
+    "工作区已属于另一份设备存储":
+        "Lo spazio di lavoro appartiene a un altro archivio del dispositivo",
+    "工作区设备存储尚未初始化":
+        "Archivio del dispositivo dello spazio di lavoro non inizializzato",
     "本机数据归属不一致": "La proprietà dei dati locali non corrisponde",
     "本地绑定记录不可读取": "Impossibile leggere il record di associazione locale",
-    "电脑绑定已变化，未覆盖原草稿。": "L’associazione del computer è cambiata. La bozza originale non è stata sovrascritta.",
+    "电脑绑定已变化，未覆盖原草稿。":
+        "L’associazione del computer è cambiata. La bozza originale non è stata sovrascritta.",
     "本机保存的数据不可读取": "Impossibile leggere i dati salvati in locale",
     "附件大小或标识无效": "Dimensione o identità dell’allegato non valide",
-    "手机未发送附件已超过 256 MB，请先发送或移除其他草稿中的附件。": "Gli allegati non inviati superano 256 MB. Invia o rimuovi prima gli allegati di altre bozze.",
+    "手机未发送附件已超过 256 MB，请先发送或移除其他草稿中的附件。":
+        "Gli allegati non inviati superano 256 MB. Invia o rimuovi prima gli allegati di altre bozze.",
     "附件标识无效": "Identità dell’allegato non valida",
-    "本机附件已不可读取，请重新添加。": "Impossibile leggere l’allegato locale. Aggiungilo di nuovo.",
+    "本机附件已不可读取，请重新添加。":
+        "Impossibile leggere l’allegato locale. Aggiungilo di nuovo.",
     "本机附件大小已变化。": "La dimensione dell’allegato locale è cambiata.",
     "拒绝": "Nega",
     "允许一次": "Consenti una volta",
@@ -11790,14 +14569,18 @@ const messageCatalogs = <String, Map<String, String>>{
     "始终允许": "Consenti sempre",
     "取消操作": "Annulla azione",
     "{0} · {1} 个目录": "{0} · {1} cartelle",
-    "{0} 上还没有项目。新建项目时选择电脑上的已有目录。": "Nessun progetto su {0}. Creane uno da una cartella esistente sul computer.",
+    "{0} 上还没有项目。新建项目时选择电脑上的已有目录。":
+        "Nessun progetto su {0}. Creane uno da una cartella esistente sul computer.",
     "{0} 个会话运行中": "{0} conversazioni in esecuzione",
     "不在项目中工作": "Lavora fuori da un progetto",
     "主目录": "Cartella principale",
-    "主目录是会话默认的工作目录；附加目录同样对 Agent 可见。从项目中移除目录不会删除电脑上的文件。": "Le conversazioni iniziano nella cartella principale; le cartelle aggiuntive sono visibili anche agli Agent. Rimuovere una cartella dal progetto non elimina alcun file sul computer.",
+    "主目录是会话默认的工作目录；附加目录同样对 Agent 可见。从项目中移除目录不会删除电脑上的文件。":
+        "Le conversazioni iniziano nella cartella principale; le cartelle aggiuntive sono visibili anche agli Agent. Rimuovere una cartella dal progetto non elimina alcun file sul computer.",
     "从项目中移除": "Rimuovi dal progetto",
-    "保存结果待核实，请刷新后查看项目，不要重复保存。": "Risultato del salvataggio non confermato. Aggiorna e controlla il progetto prima di salvare di nuovo.",
-    "保留会话和电脑上的文件，可随时恢复": "Mantiene conversazioni e file sul computer; ripristinabile in qualsiasi momento",
+    "保存结果待核实，请刷新后查看项目，不要重复保存。":
+        "Risultato del salvataggio non confermato. Aggiorna e controlla il progetto prima di salvare di nuovo.",
+    "保留会话和电脑上的文件，可随时恢复":
+        "Mantiene conversazioni e file sul computer; ripristinabile in qualsiasi momento",
     "名称和目录": "Nome e cartelle",
     "已移除项目（{0}）": "Progetti rimossi ({0})",
     "恢复": "Ripristina",
@@ -11818,22 +14601,27 @@ const messageCatalogs = <String, Map<String, String>>{
     "设为主目录": "Imposta come cartella principale",
     "请填写项目名称。": "Inserisci un nome per il progetto.",
     "这个目录已经在项目中。": "Questa cartella fa già parte del progetto.",
-    "这个项目可能已在电脑上被移除。": "Questo progetto potrebbe essere stato rimosso sul computer.",
+    "这个项目可能已在电脑上被移除。":
+        "Questo progetto potrebbe essere stato rimosso sul computer.",
     "这台电脑上还没有项目。": "Nessun progetto su questo computer.",
     "选择此目录": "Scegli questa cartella",
     "选择目录": "Scegli cartella",
     "项目不存在": "Progetto non trovato",
-    "项目会从列表中隐藏。会话和电脑上的文件都会保留，可在「已移除项目」中恢复。": "Il progetto viene nascosto dall’elenco. Le sue conversazioni e i file sul computer vengono mantenuti e puoi ripristinarlo in Progetti rimossi.",
+    "项目会从列表中隐藏。会话和电脑上的文件都会保留，可在「已移除项目」中恢复。":
+        "Il progetto viene nascosto dall’elenco. Le sue conversazioni e i file sul computer vengono mantenuti e puoi ripristinarlo in Progetti rimossi.",
     "项目名称": "Nome del progetto",
     "项目操作": "Azioni del progetto",
     "项目状态无效。": "Stato del progetto non valido.",
-    "会话、项目和待处理都在电脑上，连接后即可使用。": "Conversazioni, progetti ed elementi in attesa si trovano sul tuo computer. Connettiti per usarli.",
-    "项目已在电脑上添加，可在「项目」中查看。": "Progetto aggiunto sul computer. Lo trovi in Progetti.",
+    "会话、项目和待处理都在电脑上，连接后即可使用。":
+        "Conversazioni, progetti ed elementi in attesa si trovano sul tuo computer. Connettiti per usarli.",
+    "项目已在电脑上添加，可在「项目」中查看。":
+        "Progetto aggiunto sul computer. Lo trovi in Progetti.",
     "正在连接电脑": "Connessione al tuo computer",
     "暂时连接不上电脑": "Impossibile raggiungere il tuo computer",
     "@one:{0} 分钟": "{0} minuto",
     "@one:{0} 项需要你处理": "{0} elemento richiede la tua attenzione",
-    "@one:{0} 个会话 · 按当前电脑和项目范围": "{0} conversazione · Computer e progetto attuali",
+    "@one:{0} 个会话 · 按当前电脑和项目范围":
+        "{0} conversazione · Computer e progetto attuali",
     "@one:{0} 项等待处理": "{0} elemento in attesa",
     "@one:已选 {0} 项": "{0} selezionato",
     "@one:{0} 秒": "{0} secondo",
@@ -11845,7 +14633,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "发送文字到电脑": "Invia testo al computer",
     "从电脑获取文字": "Ottieni testo dal computer",
     "编辑后发送到电脑剪贴板": "Modifica e invia agli appunti del computer",
-    "读取电脑剪贴板，复制到这部手机": "Leggi gli appunti del computer e copiali su questo telefono",
+    "读取电脑剪贴板，复制到这部手机":
+        "Leggi gli appunti del computer e copiali su questo telefono",
     "粘贴或输入要发送到电脑的文字": "Incolla o digita il testo da inviare al computer",
     "文字超过 1 MB，无法发送": "Il testo supera 1 MB e non può essere inviato",
     "{0} 个字符": "{0} caratteri",
@@ -11853,9 +14642,12 @@ const messageCatalogs = <String, Map<String, String>>{
     "仅发送": "Solo invio",
     "发送并粘贴": "Invia e incolla",
     "已粘贴到电脑": "Incollato sul computer",
-    "已发送到电脑剪贴板。更新电脑端后可自动粘贴": "Inviato agli appunti del computer. Aggiorna l’app desktop per incollare automaticamente",
-    "已发送到电脑剪贴板，可在电脑上粘贴": "Inviato agli appunti del computer. Incollalo sul computer",
-    "电脑剪贴板里没有文字，先在电脑上复制后再试": "Gli appunti del computer non contengono testo. Copia qualcosa sul computer e riprova",
+    "已发送到电脑剪贴板。更新电脑端后可自动粘贴":
+        "Inviato agli appunti del computer. Aggiorna l’app desktop per incollare automaticamente",
+    "已发送到电脑剪贴板，可在电脑上粘贴":
+        "Inviato agli appunti del computer. Incollalo sul computer",
+    "电脑剪贴板里没有文字，先在电脑上复制后再试":
+        "Gli appunti del computer non contengono testo. Copia qualcosa sul computer e riprova",
     "正在发送到电脑…": "Invio al computer…",
     "正在从电脑获取…": "Recupero dal computer…",
     "@one:{0} 个字符": "{0} carattere",
@@ -11882,13 +14674,18 @@ const messageCatalogs = <String, Map<String, String>>{
     "文件内容": "Contenuto del file",
     "搜索内容": "Cerca",
     "请求的工具": "Strumento richiesto",
-    "审批详情格式不完整，请让 Agent 重新发起审批。": "I dettagli dell’approvazione sono incompleti. Chiedi all’agente di richiederla di nuovo.",
-    "操作详情过长，下方仅展示部分内容。请让 Agent 拆分操作后重新发起审批，以查看完整范围。": "I dettagli sono troppo lunghi, quindi ne è mostrata solo una parte. Chiedi all’agente di suddividere l’azione e richiedere di nuovo l’approvazione.",
-    "Agent 未提供文件修改范围，请让 Agent 补充文件路径和修改内容。": "L’agente non ha indicato quali file cambieranno. Chiedigli percorsi e modifiche.",
-    "未能从审批请求中读取文件路径、命令或修改内容，请让 Agent 补充详情后重新发起审批。": "Impossibile leggere percorso, comando o modifiche da questa richiesta. Chiedi all’agente di aggiungere dettagli e richiedere di nuovo l’approvazione.",
+    "审批详情格式不完整，请让 Agent 重新发起审批。":
+        "I dettagli dell’approvazione sono incompleti. Chiedi all’agente di richiederla di nuovo.",
+    "操作详情过长，下方仅展示部分内容。请让 Agent 拆分操作后重新发起审批，以查看完整范围。":
+        "I dettagli sono troppo lunghi, quindi ne è mostrata solo una parte. Chiedi all’agente di suddividere l’azione e richiedere di nuovo l’approvazione.",
+    "Agent 未提供文件修改范围，请让 Agent 补充文件路径和修改内容。":
+        "L’agente non ha indicato quali file cambieranno. Chiedigli percorsi e modifiche.",
+    "未能从审批请求中读取文件路径、命令或修改内容，请让 Agent 补充详情后重新发起审批。":
+        "Impossibile leggere percorso, comando o modifiche da questa richiesta. Chiedi all’agente di aggiungere dettagli e richiedere di nuovo l’approvazione.",
     "收起": "Mostra meno",
     "展开全部": "Mostra tutto",
-    "电脑已记录你的决定，但 Agent 已不在等待，请在会话中查看。": "Il computer ha registrato la decisione, ma l’agente non è più in attesa. Controlla la chat.",
+    "电脑已记录你的决定，但 Agent 已不在等待，请在会话中查看。":
+        "Il computer ha registrato la decisione, ma l’agente non è più in attesa. Controlla la chat.",
     "已取消回答": "Risposta annullata",
     "已处理": "Gestito",
     "你的选择：{0}": "Hai scelto: {0}",
@@ -11896,13 +14693,17 @@ const messageCatalogs = <String, Map<String, String>>{
     "已在电脑上处理，或请求已失效": "Gestito sul computer o la richiesta è scaduta",
     "清空已处理记录": "Cancella cronologia gestita",
     "清空已处理记录？": "Cancellare la cronologia gestita?",
-    "只从这部手机删除，等待处理的请求不受影响。": "Rimosso solo da questo telefono. Le richieste in attesa restano.",
+    "只从这部手机删除，等待处理的请求不受影响。":
+        "Rimosso solo da questo telefono. Le richieste in attesa restano.",
     "没有权限请求": "Nessuna richiesta di autorizzazione",
-    "Agent 需要运行命令或修改文件时，会在这里请你确认。": "Quando un agente deve eseguire un comando o modificare file, te lo chiederà qui.",
+    "Agent 需要运行命令或修改文件时，会在这里请你确认。":
+        "Quando un agente deve eseguire un comando o modificare file, te lo chiederà qui.",
     "没有待回答的问题": "Nessuna domanda",
-    "Agent 需要你做选择或补充信息时，问题会出现在这里。": "Quando un agente ha bisogno di una scelta o di dettagli, la domanda appare qui.",
+    "Agent 需要你做选择或补充信息时，问题会出现在这里。":
+        "Quando un agente ha bisogno di una scelta o di dettagli, la domanda appare qui.",
     "收件箱是空的": "La posta in arrivo è vuota",
-    "Agent 请求权限或向你提问时会出现在这里，处理过的记录也会保留，方便回看。": "Qui arrivano richieste di autorizzazione e domande degli agenti. Quelle gestite restano, così puoi rivederle.",
+    "Agent 请求权限或向你提问时会出现在这里，处理过的记录也会保留，方便回看。":
+        "Qui arrivano richieste di autorizzazione e domande degli agenti. Quelle gestite restano, così puoi rivederle.",
     "等待你回答": "In attesa della tua risposta",
     "等待你确认": "In attesa della tua approvazione",
     "权限请求": "Richiesta di autorizzazione",
@@ -11910,68 +14711,106 @@ const messageCatalogs = <String, Map<String, String>>{
     "可以返回收件箱查看其它事项。": "Torna alla posta in arrivo per vedere altri elementi.",
     "跳过所有权限确认。": "Salta tutte le richieste di autorizzazione.",
     "减少确认次数。": "Riduce le conferme.",
-    "仅自动读取；其他操作均需先征得你的批准。": "Legge automaticamente; tutto il resto richiede prima la tua approvazione.",
-    "不中断任务；所有操作和决策均自动进行。": "Non interrompe mai; tutte le azioni e le decisioni sono automatiche.",
-    "受保护的工具操作前请求审批。": "Chiede l'approvazione prima delle azioni protette degli strumenti.",
+    "仅自动读取；其他操作均需先征得你的批准。":
+        "Legge automaticamente; tutto il resto richiede prima la tua approvazione.",
+    "不中断任务；所有操作和决策均自动进行。":
+        "Non interrompe mai; tutte le azioni e le decisioni sono automatiche.",
+    "受保护的工具操作前请求审批。":
+        "Chiede l'approvazione prima delle azioni protette degli strumenti.",
     "关闭沙箱并跳过审批。": "Disattiva la sandbox e salta le approvazioni.",
-    "每次工具执行前在此审批；审批桥不可用时拒绝执行。": "Approva qui ogni esecuzione di strumenti; le esecuzioni vengono rifiutate se il bridge di approvazione non è disponibile.",
-    "OpenCode 默认 Agent；工具按你配置的权限执行。": "Agente predefinito di OpenCode; gli strumenti seguono le autorizzazioni configurate.",
-    "编辑文件和其他受保护操作前请求审批。": "Chiede approvazione prima di modificare file o eseguire altre azioni protette.",
+    "每次工具执行前在此审批；审批桥不可用时拒绝执行。":
+        "Approva qui ogni esecuzione di strumenti; le esecuzioni vengono rifiutate se il bridge di approvazione non è disponibile.",
+    "OpenCode 默认 Agent；工具按你配置的权限执行。":
+        "Agente predefinito di OpenCode; gli strumenti seguono le autorizzazioni configurate.",
+    "编辑文件和其他受保护操作前请求审批。":
+        "Chiede approvazione prima di modificare file o eseguire altre azioni protette.",
     "只分析，不修改文件或执行命令。": "Analizza senza modificare file né eseguire comandi.",
     "改文件前先问我。": "Chiede prima di modificare i file.",
-    "只读沙箱；需要扩大权限时请求审批。": "Sandbox in sola lettura; chiede approvazione quando serve più accesso.",
+    "只读沙箱；需要扩大权限时请求审批。":
+        "Sandbox in sola lettura; chiede approvazione quando serve più accesso.",
     "按需确认": "Chiedi se necessario",
     "只读模式": "Sola lettura",
     "所选策略在下一轮执行时生效": "Il criterio selezionato ha effetto dal turno successivo",
-    "从不弹出确认；只运行预先允许和安全的只读操作，其余一律拒绝。": "Non chiede mai; esegue le azioni pre-approvate e di sola lettura sicure e nega tutto il resto.",
-    "Pi 不内置逐工具审批或沙箱；工具直接执行，扩展发起的询问会显示在对话中。": "Pi non ha approvazioni per strumento né sandbox; gli strumenti vengono eseguiti direttamente e le domande delle estensioni compaiono nella conversazione.",
+    "从不弹出确认；只运行预先允许和安全的只读操作，其余一律拒绝。":
+        "Non chiede mai; esegue le azioni pre-approvate e di sola lettura sicure e nega tutto il resto.",
+    "Pi 不内置逐工具审批或沙箱；工具直接执行，扩展发起的询问会显示在对话中。":
+        "Pi non ha approvazioni per strumento né sandbox; gli strumenti vengono eseguiti direttamente e le domande delle estensioni compaiono nella conversazione.",
     "跳过审批": "Salta approvazioni",
     "仅限预先允许": "Solo pre-approvato",
     "自动判断": "Auto",
-    "监督模式：工具操作前请求审批。": "Supervisionato: chiede l'approvazione prima delle azioni degli strumenti.",
-    "由 ZCode 判断哪些操作可直接执行。": "Lascia decidere a ZCode quali azioni possono essere eseguite direttamente.",
-    "只运行预先允许的工具，其余直接拒绝，不请求审批。": "Esegue solo gli strumenti già consentiti e rifiuta gli altri senza chiedere.",
-    "由 AI 审查员批准或拒绝原本需要询问的操作；审查失败只阻止该操作。": "Un revisore IA approva o nega ogni azione che altrimenti chiederebbe; una revisione non riuscita blocca solo quell'azione.",
-    "由 Claude 自动分类权限请求。": "Consente a Claude di classificare automaticamente le richieste di permesso.",
+    "监督模式：工具操作前请求审批。":
+        "Supervisionato: chiede l'approvazione prima delle azioni degli strumenti.",
+    "由 ZCode 判断哪些操作可直接执行。":
+        "Lascia decidere a ZCode quali azioni possono essere eseguite direttamente.",
+    "只运行预先允许的工具，其余直接拒绝，不请求审批。":
+        "Esegue solo gli strumenti già consentiti e rifiuta gli altri senza chiedere.",
+    "由 AI 审查员批准或拒绝原本需要询问的操作；审查失败只阻止该操作。":
+        "Un revisore IA approva o nega ogni azione che altrimenti chiederebbe; una revisione non riuscita blocca solo quell'azione.",
+    "由 Claude 自动分类权限请求。":
+        "Consente a Claude di classificare automaticamente le richieste di permesso.",
     "完全访问": "Accesso completo",
     "编辑前先出计划。": "Prepara un piano prima di modificare.",
     "默认权限": "Permessi predefiniti",
-    "允许文件编辑；其他受保护操作仍需审批。": "Consente le modifiche ai file; le altre azioni protette richiedono comunque approvazione.",
+    "允许文件编辑；其他受保护操作仍需审批。":
+        "Consente le modifiche ai file; le altre azioni protette richiedono comunque approvazione.",
     "权限策略": "Criterio dei permessi",
     "原生规则": "Regole native",
-    "先制定计划；需要批准的操作仍会询问。": "Prepara prima un piano; le azioni che richiedono approvazione chiedono ancora.",
+    "先制定计划；需要批准的操作仍会询问。":
+        "Prepara prima un piano; le azioni che richiedono approvazione chiedono ancora.",
     "操作前确认": "Chiedi prima di agire",
-    "按 Cursor 权限规则执行；需要审批的操作在此确认。": "Segue le regole di autorizzazione di Cursor; le azioni che richiedono approvazione vengono confermate qui.",
+    "按 Cursor 权限规则执行；需要审批的操作在此确认。":
+        "Segue le regole di autorizzazione di Cursor; le azioni che richiedono approvazione vengono confermate qui.",
     "计划模式": "Modalità piano",
-    "对所有 Agent 跳过全部权限检查，包括危险命令。": "Salta tutti i controlli di autorizzazione, compresi i comandi pericolosi, per tutti gli agenti.",
-    "此 Agent 未报告可切换的权限模式；审批请求仍会显示在对话中。": "Questo agente non segnala modalità di autorizzazione selezionabili; le richieste di approvazione compaiono comunque nella conversazione.",
-    "原 Agent、模型、思考强度或权限策略当前不可用，请重新选择后发送。": "L’agente, il modello, il livello di ragionamento o la politica di autorizzazione originale non è più disponibile. Scegli di nuovo prima di inviare.",
-    "计划模式；禁用所有编辑工具。": "Modalità piano; tutti gli strumenti di modifica sono disattivati.",
-    "每个工具首次使用时请求授权。": "Chiede l'autorizzazione al primo utilizzo di ogni strumento.",
-    "本会话内自动接受文件编辑。": "Accetta automaticamente le modifiche ai file in questa sessione.",
+    "对所有 Agent 跳过全部权限检查，包括危险命令。":
+        "Salta tutti i controlli di autorizzazione, compresi i comandi pericolosi, per tutti gli agenti.",
+    "此 Agent 未报告可切换的权限模式；审批请求仍会显示在对话中。":
+        "Questo agente non segnala modalità di autorizzazione selezionabili; le richieste di approvazione compaiono comunque nella conversazione.",
+    "原 Agent、模型、思考强度或权限策略当前不可用，请重新选择后发送。":
+        "L’agente, il modello, il livello di ragionamento o la politica di autorizzazione originale non è più disponibile. Scegli di nuovo prima di inviare.",
+    "计划模式；禁用所有编辑工具。":
+        "Modalità piano; tutti gli strumenti di modifica sono disattivati.",
+    "每个工具首次使用时请求授权。":
+        "Chiede l'autorizzazione al primo utilizzo di ogni strumento.",
+    "本会话内自动接受文件编辑。":
+        "Accetta automaticamente le modifiche ai file in questa sessione.",
     "自动编辑文件。": "Modifica i file automaticamente.",
-    "自动驾驶：工具操作无需询问直接执行。": "Pilota automatico: esegue le azioni degli strumenti senza chiedere.",
-    "由 Grok 判断哪些工具操作可自动执行。": "Lascia decidere a Grok quali azioni degli strumenti possono essere eseguite automaticamente.",
-    "跳过 Claude Code 工具权限检查。": "Salta i controlli dei permessi degli strumenti di Claude Code.",
-    "自动允许 Antigravity 工具操作。": "Consente automaticamente le azioni degli strumenti di Antigravity.",
+    "自动驾驶：工具操作无需询问直接执行。":
+        "Pilota automatico: esegue le azioni degli strumenti senza chiedere.",
+    "由 Grok 判断哪些工具操作可自动执行。":
+        "Lascia decidere a Grok quali azioni degli strumenti possono essere eseguite automaticamente.",
+    "跳过 Claude Code 工具权限检查。":
+        "Salta i controlli dei permessi degli strumenti di Claude Code.",
+    "自动允许 Antigravity 工具操作。":
+        "Consente automaticamente le azioni degli strumenti di Antigravity.",
     "接受编辑": "Accetta modifiche",
-    "工作区写入沙箱；需要越出沙箱时请求审批。": "Sandbox con scrittura nell’area di lavoro; chiede approvazione solo per uscire dalla sandbox.",
-    "允许所有工具操作，无需审批。": "Consente tutte le azioni degli strumenti senza approvazione.",
-    "探索并制定计划；使用 Claude 原生计划模式。": "Esplora e crea un piano con la modalità piano nativa di Claude.",
-    "使用 Antigravity 原生计划模式；工具执行仍在此审批。": "Usa la modalità piano nativa di Antigravity; le esecuzioni degli strumenti vengono comunque approvate qui.",
-    "自动批准操作；明确禁止的操作和团队限制仍然生效。": "Approva le azioni automaticamente; le azioni vietate esplicitamente e le restrizioni del team restano valide.",
-    "常规编辑和命令自动执行；高风险操作、提问和计划仍会询问。": "Modifiche e comandi abituali vengono eseguiti automaticamente; azioni rischiose, domande e piani chiedono ancora.",
+    "工作区写入沙箱；需要越出沙箱时请求审批。":
+        "Sandbox con scrittura nell’area di lavoro; chiede approvazione solo per uscire dalla sandbox.",
+    "允许所有工具操作，无需审批。":
+        "Consente tutte le azioni degli strumenti senza approvazione.",
+    "探索并制定计划；使用 Claude 原生计划模式。":
+        "Esplora e crea un piano con la modalità piano nativa di Claude.",
+    "使用 Antigravity 原生计划模式；工具执行仍在此审批。":
+        "Usa la modalità piano nativa di Antigravity; le esecuzioni degli strumenti vengono comunque approvate qui.",
+    "自动批准操作；明确禁止的操作和团队限制仍然生效。":
+        "Approva le azioni automaticamente; le azioni vietate esplicitamente e le restrizioni del team restano valide.",
+    "常规编辑和命令自动执行；高风险操作、提问和计划仍会询问。":
+        "Modifiche e comandi abituali vengono eseguiti automaticamente; azioni rischiose, domande e piani chiedono ancora.",
     "正在响应": "Risposta in corso",
     "分叉 · {0}": "Fork · {0}",
     "分叉自较早的会话": "Fork di una conversazione precedente",
     "分叉自": "Fork di",
-    "已恢复所选轮次结束时的文件，未提交的成果可在“变更”中查看。": "I file sono stati ripristinati alla fine del turno scelto; il lavoro non committato è in Modifiche.",
-    "此项目不是 Git 仓库，分叉只继承对话上下文，并沿用同一项目目录。": "Questo progetto non è un repository Git; il fork conserva solo la conversazione e continua nella stessa cartella.",
-    "此会话由旧版分叉创建，未恢复历史轮次的文件。": "Questa conversazione è stata creata da un fork precedente e non ha ripristinato i file del turno.",
-    "沿用同一项目目录；分叉不会还原文件。": "Usa la stessa cartella del progetto; il fork non ripristina i file.",
+    "已恢复所选轮次结束时的文件，未提交的成果可在“变更”中查看。":
+        "I file sono stati ripristinati alla fine del turno scelto; il lavoro non committato è in Modifiche.",
+    "此项目不是 Git 仓库，分叉只继承对话上下文，并沿用同一项目目录。":
+        "Questo progetto non è un repository Git; il fork conserva solo la conversazione e continua nella stessa cartella.",
+    "此会话由旧版分叉创建，未恢复历史轮次的文件。":
+        "Questa conversazione è stata creata da un fork precedente e non ha ripristinato i file del turno.",
+    "沿用同一项目目录；分叉不会还原文件。":
+        "Usa la stessa cartella del progetto; il fork non ripristina i file.",
     "收起继承的上下文": "Nascondi il contesto ereditato",
     "查看继承的上下文（{0} 轮）": "Mostra il contesto ereditato ({0})",
-    "Agent 已获得以上上下文，在下方发送消息即可从这里继续。": "L’agente ha già questo contesto. Invia un messaggio qui sotto per continuare da qui.",
+    "Agent 已获得以上上下文，在下方发送消息即可从这里继续。":
+        "L’agente ha già questo contesto. Invia un messaggio qui sotto per continuare da qui.",
   },
 };
 

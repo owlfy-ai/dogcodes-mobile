@@ -982,8 +982,9 @@ class HostHub extends ChangeNotifier {
   Future<void> _syncAgentOrder(HostApi link, HostState h) async {
     try {
       final value = await link.call('agent_preferences', null);
-      if (value is Map)
+      if (value is Map) {
         h.applyAgentPreferences(Map<String, dynamic>.from(value));
+      }
     } catch (_) {
       // Older computers may not share Agent order; the default order still applies.
     }

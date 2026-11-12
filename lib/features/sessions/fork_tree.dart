@@ -34,8 +34,11 @@ class ForkTree {
   }
 
   static String _key(String host, String task) => '$host/$task';
-  static String _section(SessionRef s) =>
-      s.pinned ? 'pinned' : s.archived ? 'archived' : 'listed';
+  static String _section(SessionRef s) => s.pinned
+      ? 'pinned'
+      : s.archived
+      ? 'archived'
+      : 'listed';
   static bool _cyclic(SessionRef s, Map<String, SessionRef> byKey) {
     final seen = {s.taskId};
     for (var next = s.forkedFrom; next != null;) {

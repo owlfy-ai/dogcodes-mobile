@@ -6,6 +6,7 @@ of a counted label. English is the fallback for anything missing at runtime,
 but every catalog is expected to be complete (checked here and in tests).
 """
 import json
+import subprocess
 import re
 from pathlib import Path
 
@@ -54,5 +55,8 @@ for language, catalog in catalogs.items():
     lines.append('  },\n')
 lines.append('};\n\n')
 lines.append("final Map<String, String> englishMessages = messageCatalogs['en']!;\n")
-(root / 'lib/l10n/catalog.dart').write_text(''.join(lines))
+catalog_path = root / 'lib/l10n/catalog.dart'
+catalog_path.write_text(''.join(lines))
+# CI checks formatting, and long messages would otherwise break it on every regeneration.
+subprocess.run(['dart', 'format', str(catalog_path)], check=True, capture_output=True)
 print(f'Validated {len(keys)} messages in {len(catalogs)} languages.')

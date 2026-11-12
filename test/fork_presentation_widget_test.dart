@@ -18,7 +18,8 @@ class ForkedLink extends FakeLink {
         'path': '/Users/dev/dogcodes-web/.git/dogcodes-worktrees/tsk_FORK',
         'taskCount': 1,
       });
-      (value['tasks'] as List).addAll([
+      // Typed like the fake's own list: a `List<dynamic>` would fail its runtime check.
+      (value['tasks'] as List).addAll(<Map<String, Object?>>[
         {
           'taskId': 'tsk_FORK',
           'projectId': 'prj_FORK',
@@ -71,7 +72,9 @@ void main() {
     await tester.pumpWidget(DogCodesApp(hub: hub));
     await tester.pumpAndSettle();
 
-    final rows = tester.widgetList<SessionRow>(find.byType(SessionRow)).toList();
+    final rows = tester
+        .widgetList<SessionRow>(find.byType(SessionRow))
+        .toList();
     final order = [for (final r in rows) (r.session.taskId, r.depth)];
     final source = order.indexOf(('t2', 0));
     expect(source, isNot(-1));

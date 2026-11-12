@@ -800,10 +800,7 @@ class _ForkOriginState extends State<ForkOrigin> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     if (sourceTitle == null)
-                      Text(
-                        tr("分叉自较早的会话"),
-                        style: theme.textTheme.titleSmall,
-                      )
+                      Text(tr("分叉自较早的会话"), style: theme.textTheme.titleSmall)
                     else
                       InkWell(
                         key: const ValueKey('fork-source'),
@@ -850,9 +847,7 @@ class _ForkOriginState extends State<ForkOrigin> {
                     size: 18,
                   ),
                   label: Text(
-                    open
-                        ? tr("收起继承的上下文")
-                        : tr("查看继承的上下文（{0} 轮）", [turns]),
+                    open ? tr("收起继承的上下文") : tr("查看继承的上下文（{0} 轮）", [turns]),
                   ),
                 ),
               ),
@@ -886,10 +881,7 @@ class _ForkOriginState extends State<ForkOrigin> {
           if (alone)
             Padding(
               padding: const EdgeInsets.only(left: 44, top: 10),
-              child: Text(
-                tr("Agent 已获得以上上下文，在下方发送消息即可从这里继续。"),
-                style: small,
-              ),
+              child: Text(tr("Agent 已获得以上上下文，在下方发送消息即可从这里继续。"), style: small),
             ),
         ],
       ),

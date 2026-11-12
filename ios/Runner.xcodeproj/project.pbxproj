@@ -391,6 +391,7 @@
 			);
 			name = "Build endpoint";
 			outputPaths = (
+				"$(PROJECT_DIR)/Endpoint/libdogcodes_endpoint.a",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
