@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
+import '../../app.dart';
 import '../../core/adaptive_host_link.dart';
 import '../../core/clipboard_transfer.dart';
 import '../../core/host_hub.dart';
@@ -949,7 +950,12 @@ class _RemoteDesktopPageState extends State<RemoteDesktopPage>
         if (_current(session)) unawaited(_videoLoop(session));
       } else {
         if (!_current(session)) return;
-        if (wantVideo) _videoNote = tr("视频画面不可用，使用图片模式");
+        // The example computer only ever sends a still picture.
+        if (wantVideo &&
+            mounted &&
+            context.findAncestorWidgetOfExactType<AppScope>()?.demo != true) {
+          _videoNote = tr("视频画面不可用，使用图片模式");
+        }
         setState(() => busy = false);
         unawaited(_frames(session));
         return;

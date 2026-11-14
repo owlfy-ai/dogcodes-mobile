@@ -1627,6 +1627,7 @@ const messageCatalogs = <String, Map<String, String>>{
     "连接超时": "Connection timed out",
     "服务器断开了连接": "Server closed the connection",
     "连接失败": "Connection failed",
+    "退出示例后，即可连接你自己的电脑": "Exit the example to connect your own computer",
   },
   "zh-Hant": {
     "返回": "返回",
@@ -2958,6 +2959,7 @@ const messageCatalogs = <String, Map<String, String>>{
     "连接超时": "連線逾時",
     "服务器断开了连接": "伺服器中斷了連線",
     "连接失败": "連線失敗",
+    "退出示例后，即可连接你自己的电脑": "退出示例後，即可連線你自己的電腦",
   },
   "ja": {
     "返回": "戻る",
@@ -4353,6 +4355,7 @@ const messageCatalogs = <String, Map<String, String>>{
     "连接超时": "接続がタイムアウトしました",
     "服务器断开了连接": "サーバーが接続を切断しました",
     "连接失败": "接続に失敗しました",
+    "退出示例后，即可连接你自己的电脑": "サンプルを終了すると、ご自身のコンピュータに接続できます",
   },
   "ko": {
     "返回": "뒤로",
@@ -5773,6 +5776,7 @@ const messageCatalogs = <String, Map<String, String>>{
     "连接超时": "연결 시간 초과",
     "服务器断开了连接": "서버가 연결을 끊었습니다",
     "连接失败": "연결 실패",
+    "退出示例后，即可连接你自己的电脑": "예시를 나가면 내 컴퓨터를 연결할 수 있습니다",
   },
   "fr": {
     "返回": "Retour",
@@ -7493,6 +7497,7 @@ const messageCatalogs = <String, Map<String, String>>{
     "连接超时": "Délai de connexion dépassé",
     "服务器断开了连接": "Le serveur a fermé la connexion",
     "连接失败": "Échec de connexion",
+    "退出示例后，即可连接你自己的电脑": "Quittez l’exemple pour connecter votre ordinateur",
   },
   "de": {
     "返回": "Zurück",
@@ -9206,6 +9211,8 @@ const messageCatalogs = <String, Map<String, String>>{
     "连接超时": "Zeitüberschreitung",
     "服务器断开了连接": "Server hat die Verbindung getrennt",
     "连接失败": "Verbindung fehlgeschlagen",
+    "退出示例后，即可连接你自己的电脑":
+        "Beende das Beispiel, um deinen eigenen Computer zu verbinden",
   },
   "es": {
     "返回": "Atrás",
@@ -10932,6 +10939,7 @@ const messageCatalogs = <String, Map<String, String>>{
     "连接超时": "Tiempo de conexión agotado",
     "服务器断开了连接": "El servidor cerró la conexión",
     "连接失败": "Error de conexión",
+    "退出示例后，即可连接你自己的电脑": "Sal del ejemplo para conectar tu propio ordenador",
   },
   "pt-BR": {
     "返回": "Voltar",
@@ -12628,6 +12636,7 @@ const messageCatalogs = <String, Map<String, String>>{
     "连接超时": "Tempo de conexão esgotado",
     "服务器断开了连接": "O servidor encerrou a conexão",
     "连接失败": "Falha na conexão",
+    "退出示例后，即可连接你自己的电脑": "Saia do exemplo para conectar seu próprio computador",
   },
   "ru": {
     "返回": "Назад",
@@ -14303,6 +14312,7 @@ const messageCatalogs = <String, Map<String, String>>{
     "连接超时": "Время подключения истекло",
     "服务器断开了连接": "Сервер разорвал соединение",
     "连接失败": "Ошибка подключения",
+    "退出示例后，即可连接你自己的电脑": "Выйдите из примера, чтобы подключить свой компьютер",
   },
   "it": {
     "返回": "Indietro",
@@ -16021,6 +16031,7 @@ const messageCatalogs = <String, Map<String, String>>{
     "连接超时": "Connessione scaduta",
     "服务器断开了连接": "Il server ha chiuso la connessione",
     "连接失败": "Connessione non riuscita",
+    "退出示例后，即可连接你自己的电脑": "Esci dall’esempio per collegare il tuo computer",
   },
 };
 

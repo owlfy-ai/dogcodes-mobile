@@ -1296,5 +1296,6 @@
   "无法访问服务器": "Server nicht erreichbar",
   "连接超时": "Zeitüberschreitung",
   "服务器断开了连接": "Server hat die Verbindung getrennt",
-  "连接失败": "Verbindung fehlgeschlagen"
+  "连接失败": "Verbindung fehlgeschlagen",
+  "退出示例后，即可连接你自己的电脑": "Beende das Beispiel, um deinen eigenen Computer zu verbinden"
 }

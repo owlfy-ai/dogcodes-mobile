@@ -1295,5 +1295,6 @@
   "无法访问服务器": "Server non raggiungibile",
   "连接超时": "Connessione scaduta",
   "服务器断开了连接": "Il server ha chiuso la connessione",
-  "连接失败": "Connessione non riuscita"
+  "连接失败": "Connessione non riuscita",
+  "退出示例后，即可连接你自己的电脑": "Esci dall’esempio per collegare il tuo computer"
 }

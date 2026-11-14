@@ -1299,5 +1299,6 @@
   "无法访问服务器": "Server unreachable",
   "连接超时": "Connection timed out",
   "服务器断开了连接": "Server closed the connection",
-  "连接失败": "Connection failed"
+  "连接失败": "Connection failed",
+  "退出示例后，即可连接你自己的电脑": "Exit the example to connect your own computer"
 }

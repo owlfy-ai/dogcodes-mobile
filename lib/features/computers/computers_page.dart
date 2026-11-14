@@ -95,7 +95,12 @@ class ComputersPage extends StatelessWidget {
                       const SizedBox(height: 8),
                       Panel(
                         outlined: true,
-                        onTap: canPair ? () => pair(context) : null,
+                        // In the example, connecting starts by leaving it.
+                        onTap: scope.demo
+                            ? () => DogCodesApp.exitDemo(context)
+                            : canPair
+                            ? () => pair(context)
+                            : null,
                         child: Row(
                           children: [
                             const Icon(Icons.add, size: 22),
@@ -106,7 +111,9 @@ class ComputersPage extends StatelessWidget {
                                 children: [
                                   Text(tr("连接电脑")),
                                   Text(
-                                    canPair
+                                    scope.demo
+                                        ? tr("退出示例后，即可连接你自己的电脑")
+                                        : canPair
                                         ? tr("扫描电脑上的二维码，或粘贴配对链接")
                                         : tr("当前内测版本尚未配置接入服务"),
                                     style: Theme.of(

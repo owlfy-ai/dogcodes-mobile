@@ -686,7 +686,12 @@ class DemoLink implements HostLink {
     }
     if (op == 'workspaces') {
       return [
-        {'current': true, 'git': true, 'branch': 'feature/search'},
+        {
+          'current': true,
+          'git': true,
+          'branch': 'feature/search',
+          'changedFiles': 3,
+        },
       ];
     }
     if (op == 'file') {

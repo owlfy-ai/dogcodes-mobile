@@ -635,22 +635,32 @@ class _RunPageState extends State<RunPage> with WorkspaceConnection<RunPage> {
                   ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(DcSpace.page, 10, 12, 4),
-                  child: Row(
+                  // Narrow phones and long translations put the buttons on
+                  // their own line instead of overflowing.
+                  child: Wrap(
+                    alignment: WrapAlignment.spaceBetween,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    spacing: 8,
+                    runSpacing: 4,
                     children: [
                       Text(
                         tr("项目预览"),
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
-                      const Spacer(),
-                      if (port != null)
-                        FilledButton.icon(
-                          onPressed: () => _preview(port!),
-                          icon: const Icon(Icons.open_in_browser, size: 18),
-                          label: Text(tr("打开 localhost:{0}", [port])),
-                        ),
-                      TextButton(
-                        onPressed: _askPort,
-                        child: Text(port == null ? tr("指定端口") : tr("其他端口")),
+                      Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          if (port != null)
+                            FilledButton.icon(
+                              onPressed: () => _preview(port!),
+                              icon: const Icon(Icons.open_in_browser, size: 18),
+                              label: Text(tr("打开 localhost:{0}", [port])),
+                            ),
+                          TextButton(
+                            onPressed: _askPort,
+                            child: Text(port == null ? tr("指定端口") : tr("其他端口")),
+                          ),
+                        ],
                       ),
                     ],
                   ),

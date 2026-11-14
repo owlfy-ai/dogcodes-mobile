@@ -1299,5 +1299,6 @@
   "无法访问服务器": "Servidor inacessível",
   "连接超时": "Tempo de conexão esgotado",
   "服务器断开了连接": "O servidor encerrou a conexão",
-  "连接失败": "Falha na conexão"
+  "连接失败": "Falha na conexão",
+  "退出示例后，即可连接你自己的电脑": "Saia do exemplo para conectar seu próprio computador"
 }
